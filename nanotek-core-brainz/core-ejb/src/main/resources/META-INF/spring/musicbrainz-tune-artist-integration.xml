@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:ws="http://www.springframework.org/schema/integration/ws"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.1.xsd
+			http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.1.xsd
+			http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.1.xsd
+			http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.1.xsd
+			http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-4.1.xsd">
+
+<import resource="classpath:application-tunes-context.xml"/>
+
+<import resource="classpath:META-INF/spring/integracao-ws-jaxb-config.xml" />
+
+<import resource="classpath:META-INF/spring/active-mq-connection-factory.xml" />
+
+<context:component-scan base-package="org.nanotek.integration.tune"></context:component-scan>
+
+<tx:annotation-driven/>
+
+<int:publish-subscribe-channel id="artistFilteredChannel"  />
+
+<!-- <jms:inbound-gateway id="artistFilteredInboundGateway"
+    request-destination="ARTIST_QUEUE"
+    request-channel="artistFilteredChannel"
+    /> -->
+<jms:inbound-channel-adapter id="jmsIn" destination="ARTIST_QUEUE" channel="artistFilteredChannel">
+    <int:poller fixed-rate="1000"/>
+</jms:inbound-channel-adapter>
+    
+<int:publish-subscribe-channel id="artistTuneChannel"  />
+
+<int:chain  input-channel="artistFilteredChannel" output-channel="httpRequestArtistNameChannel">
+	<int:transformer ref="unmarshallingTransformer" ></int:transformer>
+	<!-- <int:transformer ref="tuneTransformer" method="nameEncoder" ></int:transformer> -->
+</int:chain>
+
+<int:publish-subscribe-channel id="httpRequestArtistNameChannel"  />
+
+<int-http:outbound-gateway id="ituneArtistNameRequest"
+    url="https://itunes.apple.com/search?term={artistName}&amp;entity=allArtist&amp;attribute=allArtistTerm"
+    http-method="GET"
+    request-channel="httpRequestArtistNameChannel"
+    charset="UTF-8"
+    expected-response-type="java.lang.String"
+    request-factory="requestFactory"
+    reply-channel="iTunesAlbumResponseChannel"
+    mapped-request-headers="requestHeaders"
+    mapped-response-headers="responseHeaders">
+    	<int-http:uri-variable name="artistName" expression="payload.getName()"/>
+    </int-http:outbound-gateway>
+
+<bean id="requestFactory"
+      class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+    <property name="connectTimeout" value="120000"/>
+    <property name="readTimeout"    value="120000"/>
+</bean>    
+
+<int:chain  input-channel="iTunesAlbumResponseChannel" output-channel="iTunesAlbumJsonObject">
+	<int:transformer ref="tuneTransformer" method="convertItunesResponseJson" ></int:transformer>
+</int:chain>
+
+<int:publish-subscribe-channel id="iTunesAlbumResponseChannel"  />
+
+<int:service-activator input-channel="httpRequestArtistNameChannel" ref="responseHeaderService" method="handleMessage" />
+		
+<stream:stdout-channel-adapter id="httpStreamResponseChannel"  channel="iTunesAlbumJsonObject"></stream:stdout-channel-adapter>   
+
+<int:publish-subscribe-channel id="iTunesAlbumJsonObject"  />
+
+</beans>

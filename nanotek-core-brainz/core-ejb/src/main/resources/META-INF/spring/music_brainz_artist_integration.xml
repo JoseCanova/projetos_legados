@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:ws="http://www.springframework.org/schema/integration/ws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.1.xsd
+			http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.1.xsd
+			http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.1.xsd
+			http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.1.xsd">
+
+<import resource="classpath:application-context.xml"/>
+
+<import resource="classpath:META-INF/spring/integracao-ws-jaxb-config.xml" />
+
+<import resource="classpath:META-INF/spring/active-mq-connection-factory.xml" />
+
+<context:component-scan base-package="org.nanotek.integration" ></context:component-scan>
+
+<tx:annotation-driven/>
+
+<int:publish-subscribe-channel id="bootChannel"  />
+
+<int:inbound-channel-adapter ref="artistService" method="processArtistRequest" channel="bootChannel">
+	    <int:poller fixed-rate="10000"/>
+</int:inbound-channel-adapter>
+	
+<int:chain input-channel="bootChannel" output-channel="artistNameInputChannel">
+		<int:splitter id="artistService" ref="artistService" method="processResultPage" />
+		<int:filter ref="artistCreditSelector" />
+</int:chain>
+
+<!-- <bean name="artistService" class="org.nanotek.integration.ArtistService"/> -->
+
+<int:publish-subscribe-channel id="artistNameInputChannel"  />
+
+<!-- <int:chain input-channel="artistOutputChannel" output-channel="artist" >
+		<int:transformer id="artistNameArtistTransformer" ref="artistNameArtistTransformer" method="transform" ></int:transformer>
+</int:chain>
+ -->
+<int:publish-subscribe-channel id="artistOutputChannel"  />
+
+<int:publish-subscribe-channel id="artistReleaseOutputChannel"  />
+
+<int:chain input-channel="artistOutputChannel" output-channel="artistReleaseOutputChannel">
+		<int:service-activator ref="releaseService" method="findReleases"></int:service-activator>
+		<int:filter ref="releaseSelector" />
+</int:chain>
+<!-- <stream:stdout-channel-adapter id="systemOutChannel" channel="artistOutputChannel" /> -->
+
+<int:publish-subscribe-channel id="artistRecordingChannel"  />
+
+<int:publish-subscribe-channel id="artistRecordFilteredChannel"  /> 
+
+<int:publish-subscribe-channel id="artistTrackFilteredChannel"  />
+
+<int:chain  input-channel="artistRecordFilteredChannel" output-channel="artistTrackFilteredChannel">
+	<int:service-activator ref="trackService" method="findTracks"></int:service-activator>
+	<int:filter ref="trackSelector"></int:filter>
+</int:chain>
+
+<int:chain  input-channel="artistTrackFilteredChannel" output-channel="artistXmlOutputChannel">
+	<int:transformer ref="marshallingTransformer" ></int:transformer>
+	<int:object-to-string-transformer></int:object-to-string-transformer>
+</int:chain>
+
+<int:publish-subscribe-channel id="artistXmlOutputChannel"  />
+
+	<jms:outbound-channel-adapter id="jmsout" channel="artistXmlOutputChannel" destination="ARTIST_QUEUE">
+		<jms:request-handler-advice-chain>
+		</jms:request-handler-advice-chain>
+	</jms:outbound-channel-adapter>
+    
+<stream:stdout-channel-adapter id="artistRecordsOutChannel" channel="artistTrackFilteredChannel" />
+
+<jms:inbound-gateway id="artistFilteredInboundGateway"
+    request-destination="ARTIST_QUEUE"
+    request-channel="artistFilteredChannel"
+    />
+    
+<int:publish-subscribe-channel id="artistFilteredChannel"  />
+
+<int:publish-subscribe-channel id="artistTuneChannel"  />
+
+<int:chain  input-channel="artistFilteredChannel" output-channel="artistTuneChannel">
+	<int:transformer ref="unmarshallingTransformer" ></int:transformer>
+	<int:transformer ref="tuneTransformer" method="transform" ></int:transformer>
+</int:chain>
+
+<stream:stdout-channel-adapter id="outChannel"  channel="artistTuneChannel"></stream:stdout-channel-adapter>
+
+</beans>

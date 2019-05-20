@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+
+	<deployment>
+		<dependencies>
+			<module name="org.jboss.as.jpa.hibernate" slot="4" />
+			<module name="javax.faces.api" slot="main" />
+			<module name="com.sun.jsf-impl" slot="main" />
+			<module name="org.apache.log4j" slot="main" />
+		</dependencies>
+	</deployment>
+	<sub-deployment name="core-ejb.jar">
+		<dependencies>
+			<module name="org.jboss.as.jpa.hibernate" slot="4" />
+			<module name="org.apache.log4j" slot="main" />
+		</dependencies>
+	</sub-deployment>
+
+	<sub-deployment name="spring-core-war.war">
+
+		<dependencies>
+			<module name="javax.faces.api" slot="main" />
+			<module name="com.sun.jsf-impl" slot="main" />
+			<module name="org.apache.log4j" slot="main" />
+		</dependencies>
+	</sub-deployment>
+
+</jboss-deployment-structure>

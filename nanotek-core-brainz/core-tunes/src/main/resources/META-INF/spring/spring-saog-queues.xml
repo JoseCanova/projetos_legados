@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:jee="http://www.springframework.org/schema/jee"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+        
+        
+    <!--  Connection Factories -->     
+	 	
+	<jee:jndi-lookup id="acmeOutgoingConnFactory" jndi-name="jms/AcmeOutgoingConnFactory"/>      	
+   	  
+   	<jee:jndi-lookup id="cepConnFactory" jndi-name="jms/CepConnFactory"/>    
+   	
+   	<jee:jndi-lookup id="conectividadeConnFactory" jndi-name="jms/ConectividadeConnFactory"/>	
+	    
+	<jee:jndi-lookup id="faturamentoConnFactory" jndi-name="jms/FaturamentoConnFactory"/>	
+	
+	<jee:jndi-lookup id="incidentesConnFactory" jndi-name="jms/IncidentesConnFactory"/>	
+	
+	<jee:jndi-lookup id="orgaoConnFactory" jndi-name="jms/OrgaoConnFactory"/>	
+	
+	<jee:jndi-lookup id="qualidadeConnFactory" jndi-name="jms/QualidadeConnFactory"/>
+	
+	<jee:jndi-lookup id="solicitacaoConnFactory" jndi-name="jms/SolicitacaoConnFactory"/>
+	
+	<!--  End Connection Factories -->
+	
+	<!--  WebSphere SAOG SAO Queues -->
+	
+	<jee:jndi-lookup id="acmeOutgoingQueue" jndi-name="jms/AcmeOutgoingQueue"/>
+	
+	<jee:jndi-lookup id="SaoSaogReciboQueue"  jndi-name="jms/SaoSaogReciboQueue" />
+	
+	<jee:jndi-lookup id="SaogSaoReciboQueue"  jndi-name="jms/SaogSaoReciboQueue" />
+	
+	<!-- SAOG SOLICITACAO QUEUES -->
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0000QUEUE" jndi-name="jms/SAOGSAOMSGSOL0000QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0001QUEUE" jndi-name="jms/SAOGSAOMSGSOL0001QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0002QUEUE" jndi-name="jms/SAOGSAOMSGSOL0002QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0003QUEUE" jndi-name="jms/SAOGSAOMSGSOL0003QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0004QUEUE" jndi-name="jms/SAOGSAOMSGSOL0004QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0005QUEUE" jndi-name="jms/SAOSAOGMSGSOL0005QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0006QUEUE" jndi-name="jms/SAOSAOGMSGSOL0006QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0007QUEUE" jndi-name="jms/SAOSAOGMSGSOL0007QUEUE" lazy-init="true"/>
+		
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0008QUEUE" jndi-name="jms/SAOSAOGMSGSOL0008QUEUE" lazy-init="true"/>	
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0009QUEUE" jndi-name="jms/SAOSAOGMSGSOL0009QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0010QUEUE" jndi-name="jms/SAOSAOGMSGSOL0010QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0011QUEUE" jndi-name="jms/SAOSAOGMSGSOL0011QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0012QUEUE" jndi-name="jms/SAOSAOGMSGSOL0012QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0013QUEUE" jndi-name="jms/SAOSAOGMSGSOL0013QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0100QUEUE" jndi-name="jms/SAOGSAOMSGSOL0100QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0101QUEUE" jndi-name="jms/SAOGSAOMSGSOL0101QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0102QUEUE" jndi-name="jms/SAOGSAOMSGSOL0102QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0103QUEUE" jndi-name="jms/SAOGSAOMSGSOL0103QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0104QUEUE" jndi-name="jms/SAOGSAOMSGSOL0104QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0105QUEUE" jndi-name="jms/SAOGSAOMSGSOL0105QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0106QUEUE" jndi-name="jms/SAOGSAOMSGSOL0106QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0107QUEUE" jndi-name="jms/SAOGSAOMSGSOL0107QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0108QUEUE" jndi-name="jms/SAOGSAOMSGSOL0108QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0109QUEUE" jndi-name="jms/SAOGSAOMSGSOL0109QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0110QUEUE" jndi-name="jms/SAOGSAOMSGSOL0110QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0111QUEUE" jndi-name="jms/SAOGSAOMSGSOL0111QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0112QUEUE" jndi-name="jms/SAOGSAOMSGSOL0112QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0113QUEUE" jndi-name="jms/SAOGSAOMSGSOL0113QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0200QUEUE" jndi-name="jms/SAOGSAOMSGSOL0200QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0201QUEUE" jndi-name="jms/SAOGSAOMSGSOL0201QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0202QUEUE" jndi-name="jms/SAOGSAOMSGSOL0202QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0203QUEUE" jndi-name="jms/SAOGSAOMSGSOL0203QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0204QUEUE" jndi-name="jms/SAOGSAOMSGSOL0204QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0205QUEUE" jndi-name="jms/SAOGSAOMSGSOL0205QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0206QUEUE" jndi-name="jms/SAOGSAOMSGSOL0206QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0207QUEUE" jndi-name="jms/SAOGSAOMSGSOL0207QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0208QUEUE" jndi-name="jms/SAOGSAOMSGSOL0208QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0209QUEUE" jndi-name="jms/SAOGSAOMSGSOL0209QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0210QUEUE" jndi-name="jms/SAOGSAOMSGSOL0210QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0211QUEUE" jndi-name="jms/SAOGSAOMSGSOL0211QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0212QUEUE" jndi-name="jms/SAOGSAOMSGSOL0212QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0213QUEUE" jndi-name="jms/SAOGSAOMSGSOL0213QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0300QUEUE" jndi-name="jms/SAOGSAOMSGSOL0300QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0301QUEUE" jndi-name="jms/SAOGSAOMSGSOL0301QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0302QUEUE" jndi-name="jms/SAOGSAOMSGSOL0302QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0303QUEUE" jndi-name="jms/SAOGSAOMSGSOL0303QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0304QUEUE" jndi-name="jms/SAOGSAOMSGSOL0304QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0305QUEUE" jndi-name="jms/SAOGSAOMSGSOL0305QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0306QUEUE" jndi-name="jms/SAOGSAOMSGSOL0306QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0307QUEUE" jndi-name="jms/SAOGSAOMSGSOL0307QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0308QUEUE" jndi-name="jms/SAOGSAOMSGSOL0308QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0309QUEUE" jndi-name="jms/SAOGSAOMSGSOL0309QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0310QUEUE" jndi-name="jms/SAOGSAOMSGSOL0310QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0311QUEUE" jndi-name="jms/SAOGSAOMSGSOL0311QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0312QUEUE" jndi-name="jms/SAOGSAOMSGSOL0312QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0313QUEUE" jndi-name="jms/SAOGSAOMSGSOL0313QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0400QUEUE" jndi-name="jms/SAOGSAOMSGSOL0400QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0401QUEUE" jndi-name="jms/SAOGSAOMSGSOL0401QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0402QUEUE" jndi-name="jms/SAOGSAOMSGSOL0402QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0403QUEUE" jndi-name="jms/SAOGSAOMSGSOL0403QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0404QUEUE" jndi-name="jms/SAOGSAOMSGSOL0404QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0405QUEUE" jndi-name="jms/SAOGSAOMSGSOL0405QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0406QUEUE" jndi-name="jms/SAOGSAOMSGSOL0406QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0407QUEUE" jndi-name="jms/SAOGSAOMSGSOL0407QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0408QUEUE" jndi-name="jms/SAOGSAOMSGSOL0408QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0409QUEUE" jndi-name="jms/SAOGSAOMSGSOL0409QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0410QUEUE" jndi-name="jms/SAOGSAOMSGSOL0410QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0411QUEUE" jndi-name="jms/SAOGSAOMSGSOL0411QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0412QUEUE" jndi-name="jms/SAOGSAOMSGSOL0412QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0413QUEUE" jndi-name="jms/SAOGSAOMSGSOL0413QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0500QUEUE" jndi-name="jms/SAOGSAOMSGSOL0500QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0501QUEUE" jndi-name="jms/SAOGSAOMSGSOL0501QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0502QUEUE" jndi-name="jms/SAOGSAOMSGSOL0502QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0503QUEUE" jndi-name="jms/SAOGSAOMSGSOL0503QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0504QUEUE" jndi-name="jms/SAOGSAOMSGSOL0504QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0505QUEUE" jndi-name="jms/SAOGSAOMSGSOL0505QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0506QUEUE" jndi-name="jms/SAOGSAOMSGSOL0506QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0507QUEUE" jndi-name="jms/SAOGSAOMSGSOL0507QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0508QUEUE" jndi-name="jms/SAOGSAOMSGSOL0508QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0509QUEUE" jndi-name="jms/SAOGSAOMSGSOL0509QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0510QUEUE" jndi-name="jms/SAOGSAOMSGSOL0510QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0511QUEUE" jndi-name="jms/SAOGSAOMSGSOL0511QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0512QUEUE" jndi-name="jms/SAOGSAOMSGSOL0512QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0513QUEUE" jndi-name="jms/SAOGSAOMSGSOL0513QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0600QUEUE" jndi-name="jms/SAOGSAOMSGSOL0600QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0601QUEUE" jndi-name="jms/SAOGSAOMSGSOL0601QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0602QUEUE" jndi-name="jms/SAOGSAOMSGSOL0602QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0603QUEUE" jndi-name="jms/SAOGSAOMSGSOL0603QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0604QUEUE" jndi-name="jms/SAOGSAOMSGSOL0604QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0605QUEUE" jndi-name="jms/SAOGSAOMSGSOL0605QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0606QUEUE" jndi-name="jms/SAOGSAOMSGSOL0606QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0607QUEUE" jndi-name="jms/SAOGSAOMSGSOL0607QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0608QUEUE" jndi-name="jms/SAOGSAOMSGSOL0608QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0609QUEUE" jndi-name="jms/SAOGSAOMSGSOL0609QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0610QUEUE" jndi-name="jms/SAOGSAOMSGSOL0610QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0611QUEUE" jndi-name="jms/SAOGSAOMSGSOL0611QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0612QUEUE" jndi-name="jms/SAOGSAOMSGSOL0612QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0613QUEUE" jndi-name="jms/SAOGSAOMSGSOL0613QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0700QUEUE" jndi-name="jms/SAOGSAOMSGSOL0700QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0701QUEUE" jndi-name="jms/SAOGSAOMSGSOL0701QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0702QUEUE" jndi-name="jms/SAOGSAOMSGSOL0702QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0703QUEUE" jndi-name="jms/SAOGSAOMSGSOL0703QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0704QUEUE" jndi-name="jms/SAOGSAOMSGSOL0704QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0705QUEUE" jndi-name="jms/SAOGSAOMSGSOL0705QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0706QUEUE" jndi-name="jms/SAOGSAOMSGSOL0706QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0707QUEUE" jndi-name="jms/SAOGSAOMSGSOL0707QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0708QUEUE" jndi-name="jms/SAOGSAOMSGSOL0708QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0709QUEUE" jndi-name="jms/SAOGSAOMSGSOL0709QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0710QUEUE" jndi-name="jms/SAOGSAOMSGSOL0710QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0711QUEUE" jndi-name="jms/SAOGSAOMSGSOL0711QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0712QUEUE" jndi-name="jms/SAOGSAOMSGSOL0712QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0713QUEUE" jndi-name="jms/SAOGSAOMSGSOL0713QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0800QUEUE" jndi-name="jms/SAOGSAOMSGSOL0800QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0801QUEUE" jndi-name="jms/SAOGSAOMSGSOL0801QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0802QUEUE" jndi-name="jms/SAOGSAOMSGSOL0802QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0803QUEUE" jndi-name="jms/SAOGSAOMSGSOL0803QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0804QUEUE" jndi-name="jms/SAOGSAOMSGSOL0804QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0805QUEUE" jndi-name="jms/SAOGSAOMSGSOL0805QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0806QUEUE" jndi-name="jms/SAOGSAOMSGSOL0806QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0807QUEUE" jndi-name="jms/SAOGSAOMSGSOL0807QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0808QUEUE" jndi-name="jms/SAOGSAOMSGSOL0808QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0809QUEUE" jndi-name="jms/SAOGSAOMSGSOL0809QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0810QUEUE" jndi-name="jms/SAOGSAOMSGSOL0810QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOMSGSOL0811QUEUE" jndi-name="jms/SAOGSAOMSGSOL0811QUEUE" lazy-init="true"/>
+	
+	<!-- END SAOG SOLICITACAO QUEUES -->
+	
+	<!--  SAOG INCIDENTE QUEUES -->
+	
+	<jee:jndi-lookup id="SAOGSAORI01002QUEUE" jndi-name="jms/SAOGSAORI01002QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01004QUEUE" jndi-name="jms/SAOSAOGRI01004QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01009QUEUE" jndi-name="jms/SAOSAOGRI01009QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01010QUEUE" jndi-name="jms/SAOGSAORI01010QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01016QUEUE" jndi-name="jms/SAOGSAORI01016QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01017QUEUE" jndi-name="jms/SAOSAOGRI01017QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01026QUEUE" jndi-name="jms/SAOGSAORI01026QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01027QUEUE" jndi-name="jms/SAOSAOGRI01027QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01031QUEUE" jndi-name="jms/SAOSAOGRI01031QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01032QUEUE" jndi-name="jms/SAOSAOGRI01032QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01037QUEUE" jndi-name="jms/SAOSAOGRI01037QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOSAOGRI01038QUEUE" jndi-name="jms/SAOSAOGRI01038QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01040QUEUE" jndi-name="jms/SAOGSAORI01040QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01042QUEUE" jndi-name="jms/SAOGSAORI01042QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01044QUEUE" jndi-name="jms/SAOGSAORI01044QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAORI01046QUEUE" jndi-name="jms/SAOGSAORI01046QUEUE" lazy-init="true"/>
+	
+	<!-- END SAOG INCIDENTE  QUEUES -->
+	
+	<!--  SAOG ORGAO QUEUES -->
+	
+	<jee:jndi-lookup id="SAOGSAOORG02001QUEUE" jndi-name="jms/SAOGSAOORG02001QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOORG02002QUEUE" jndi-name="jms/SAOGSAOORG02002QUEUE" lazy-init="true"/>
+	
+	<jee:jndi-lookup id="SAOGSAOORG02003QUEUE" jndi-name="jms/SAOGSAOORG02003QUEUE" lazy-init="true"/>
+	
+	<!-- END SAOG ORGAO QUEUES -->
+	
+	<!--  End WebSphere SAOG SAO Queues -->
+	
+	<!-- Spring Connection Factories -->
+	<bean id="jmsExceptionListener" class="br.gov.sp.prodesp.saog.integracao.JmsExceptionListener" />
+	
+	<bean id="solicitacaoCacheConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg ref="solicitacaoConnFactory" />
+        <property name="exceptionListener" ref="jmsExceptionListener" />
+        <property name="sessionCacheSize" value="100" />
+   </bean>
+	<!-- Message Listeners -->
+	
+	<!-- End Task Executor for messagelistener pooling @see DefaultMessageListenerContainer -->  
+	<bean id="msgListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+      <property name="connectionFactory" ref="solicitacaoCacheConnectionFactory" />
+      <property name="destination" ref="SAOGSAOMSGSOL0000QUEUE" />
+      <property name="messageListener" ref="saog0000Listener" />
+      <property name="transactionManager" ref="webSphereTransactionManager" />
+      <property name="taskExecutor" ref="msgListenerTaskExecutor" />
+   </bean>
+   
+	<!--  -->
+	
+</beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+<!-- 
+    <context:annotation-config/>
+     -->
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+ 	<bean id="jpaVendorAdapter"  class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+ 		<property name="showSql" value="true" />
+ 	</bean>
+ 	
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- <jee:jndi-lookup id="mysic-brainz-ds" jndi-name="java:/jboss/datasources/MB"/> -->
+	
+	<bean id="pum" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+	    <property name="persistenceXmlLocations">
+	        <list>
+	            <value>classpath*:META-INF/persistence_tunes_local.xml</value>
+	        </list>
+	    </property>
+	    <!-- <property name="defaultDataSource" ref="mysic-brainz-ds"/> -->
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="persistenceUnitManager" ref="pum"/>
+	    <property name="persistenceUnitName" value="spring-core-tune-music-brainz"/>
+	</bean>
+	
+ 	<jpa:repositories base-package="org.nanotek.repository.tune" />
+	<!-- <context:component-scan base-package="org.nanotek.service.impl"  /> -->
+
+	<bean id="persistenceLayerTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+			<property name="corePoolSize" value="10"/>
+			<property name="daemon" value="false"/>
+	</bean>
+	
+	<bean id="bootChannelTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+			<property name="corePoolSize" value="10"/>
+			<property name="daemon" value="false"/>
+	</bean>
+	
+</beans>
+ 

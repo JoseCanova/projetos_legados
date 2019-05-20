@@ -1,0 +1,17 @@
+alter table TuneArtist_TuneCredit drop constraint FK_cv1v4gd2rwo47buetx30mh1rg
+alter table TuneArtist_TuneCredit drop constraint FK_5a2f12mdk17c9v3mmyegblkfq
+alter table TuneArtist_TuneRecord drop constraint FK_s8byig78fxka3b4n4b5r6atj1
+alter table TuneArtist_TuneRecord drop constraint FK_1vkyft5u7s2xm3ywo2ng9qtew
+alter table TuneArtist_TuneRelease drop constraint FK_er44g8rtl53am6c7i58opa0t0
+alter table TuneArtist_TuneRelease drop constraint FK_62ygqc3c5neb3j3428gimkpqs
+alter table TuneRecord_TuneTrack drop constraint FK_892eeqvfn3s9fmhovswjmqm0m
+alter table TuneRecord_TuneTrack drop constraint FK_qo8k4xxxxohfcip17l8u2m0dl
+drop table if exists TuneArtist cascade
+drop table if exists TuneArtist_TuneCredit cascade
+drop table if exists TuneArtist_TuneRecord cascade
+drop table if exists TuneArtist_TuneRelease cascade
+drop table if exists TuneCredit cascade
+drop table if exists TuneRecord cascade
+drop table if exists TuneRecord_TuneTrack cascade
+drop table if exists TuneRelease cascade
+drop table if exists TuneTrack cascade
