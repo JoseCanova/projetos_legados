@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xmlns:util="http://www.springframework.org/schema/util">
+
+	<int:annotation-config/>
+	
+<bean id="requestFactory"
+    class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+    <property name="proxy">
+        <bean id="proxy" class="java.net.Proxy">
+            <constructor-arg>
+                <util:constant static-field="java.net.Proxy.Type.HTTP"/>
+            </constructor-arg>
+            <constructor-arg>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="127.0.0.1"/>
+                    <constructor-arg value="8888"/>
+                </bean>
+            </constructor-arg>
+        </bean>
+    </property>
+</bean>
+
+</beans>

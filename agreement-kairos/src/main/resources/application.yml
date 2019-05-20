@@ -1,0 +1,59 @@
+server:
+  port: 8080
+  
+spring: 
+  data:
+    mongodb:
+      database: documentDB
+      uri: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/   
+      
+kairos:
+      mapping-enroll: /kairos/enroll
+      mapping-recognize: /kairos/recognize
+      enroll-url: https://api.kairos.com/enroll
+      recognize-url: https://api.kairos.com/recognize
+      verify-url: https://api.kairos.com/verify
+      app_id: 731f7ca6
+      app_key: 99d196adb56c677866dce035c610595f
+      channels:
+        main-channel: kairosMainChannel
+        enroll-channel: kairosEnrollChannel
+        recognize-channel: kairosRecognizeChannel
+        verify-channel: kairosVerifyChannel
+        http-enroll-channel: kairosHttpEnrollChannel
+        http-recognize-channel:  kairosHttpRecognizeChannel
+        http-verify-channel:  kairosHttpVerifyChannel
+        response-channel: kairosResponseChannel
+
+channels: 
+      main-channel: mainChannel
+      main-response-channel: mainResponseChannel
+      agreement-aggregator-channel: agreementAggregatorChannel
+      enroll-channel: mainEnrollChannel
+      verify-channel: mainVerifyChannel
+      recognize-channel: mainRecognizeChannel
+      agreement-channel: agreementChannel
+      error-handler-output-channel: errorHandlerOutputChannel
+      
+rabbit: 
+      rabbit-mq-host: rabbitmq
+      agreement-queue-name: agreement
+      default-reply-queue-name: defaultReplyTo
+      
+mongo:
+    #uri: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/
+    uri: localhost
+    port: 27017
+    database-name: agreementDb
+    channels: 
+      input-channel: mongoInputChannel
+      output-channel: mongoOuputChannel
+      message-retrieve-input-channel: messageRetrieveInputChannel
+      message-retrieve-output-channel: messageRetrieveOutputChannel
+      error-message-handler-channel: errorMessageHandlerChannel
+      
+cache:
+    scheme: http
+    uri: 35.199.76.32   
+    port: 8090
+    endpoint: /cache/agreements

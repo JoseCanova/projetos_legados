@@ -1,0 +1,15 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: agreement
+spec:
+  template:
+    metadata:
+      labels:
+       app: agreement
+    spec:
+      containers:
+        - name: agreement
+          image: gcr.io/valid-bio/agreement:C-8c60d6fb6c9259b01bdc0de5852c412f6fc1e09b_B-39
+          ports:
+            - containerPort: 8080

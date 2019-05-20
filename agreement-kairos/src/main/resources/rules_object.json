@@ -1,0 +1,65 @@
+{
+    "id": {
+        "contract": "12123",
+        "product": "PROD1P1FACE"
+    },
+    "agreements": [
+        {
+            "id": 1,
+            "name": "SERASA",
+            "required": true,
+            "scoreWeight": 9,
+            "webServiceInfo": {
+                "type": "REST",
+                "endpoint": "https://api.serasa.com.br/consulta",
+                "timeout": 20000,
+                "numberOfAttempts": 3
+            },
+            "cache": {
+                "readEnabled": false,
+                "saveEnabled": true,
+                "endpoint": "https://localhost:9999/cache",
+                "timeToLive": 60000
+            }
+        },
+        {
+            "id": 2,
+            "name": "BOA_VISTA",
+            "required": false,
+            "scoreWeight": 5,
+            "webServiceInfo": {
+                "type": "SOAP",
+                "endpoint": "https://api.bv.com.br/consulta",
+                "timeout": 20000,
+                "numberOfAttempts": 1
+            },
+            "cache": {
+                "readEnabled": false,
+                "saveEnabled": false,
+                "endpoint": "https://localhost:9999/cache",
+                "timeToLive": 60000
+            }
+        }
+    ],
+    "biometricServices": [
+        {
+            "id": "A01",
+            "type": "main",
+            "shared": false
+        },
+        {
+            "id": "B01",
+            "type": "blackList",
+            "shared": true
+        }
+    ],
+    "config": {
+        "operation": "1:1",
+        "biometricType": "FACE",
+        "minimalImageQuality": {
+            "size": "800x600",
+            "dpi": "300",
+            "colorDepth": "24bits"
+        }
+    }
+}

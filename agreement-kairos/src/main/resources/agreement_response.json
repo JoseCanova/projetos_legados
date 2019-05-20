@@ -1,0 +1,57 @@
+{
+  "callbackURI": "string",
+  "contract": "string",
+  "data": {
+    "agreementResponses": [
+      {
+        "agreementId": 0,
+        "rule": {
+          "agreements": [
+            {
+              "cache": {
+                "endpoint": "string",
+                "readEnabled": true,
+                "saveEnabled": true,
+                "timeToLive": 0
+              },
+              "id": 0,
+              "name": "string",
+              "required": true,
+              "score": 0,
+              "scoreWeight": 0,
+              "webServiceInfo": {
+                "endpoint": "string",
+                "numberOfAttempts": 0,
+                "timeout": 0,
+                "type": "string"
+              }
+            }
+          ],
+          "biometricServices": [
+            {
+              "accuracy": 0,
+              "id": "string",
+              "result": "string",
+              "shared": true,
+              "subjectId": "string",
+              "type": "string"
+            }
+          ],
+          "config": {
+            "biometricType": "string",
+            "operation": "string"
+          },
+          "id": {
+            "contract": "string",
+            "product": "string"
+          }
+        }
+      }
+    ]
+  },
+  "dateTime": "2018-06-29T18:05:50.255Z",
+  "hashSearch": "string",
+  "product": 0,
+  "token": "string",
+  "transactionId": 0
+}
