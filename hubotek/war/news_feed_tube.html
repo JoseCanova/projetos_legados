@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<style>
+    body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #111;font-size: 13px;line-height: 17px !important;}
+    .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
+    ul{width: 300px !important;}
+</style>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  rel="stylesheet"/>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"  rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<script src="https://npmcdn.com/masonry-layout@4.1/dist/masonry.pkgd.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script src="https://hubotek.appspot.com/js/moment.js" type="text/javascript" ></script>
+<script src="https://hubotek.appspot.com/js/FeedEk.js" ></script>
+</head> 
+<body style="background-color:#111">
+    <div class="container-fluid" stye="width:100%">
+    <div class="row rssDiv">
+    <div class="col-xs-6 col-md-4" style="float:left">
+        <div id="divRss"  style="float:left"></div>
+     </div>   
+        <div  class="col-xs-6 col-md-4">
+        <iframe 
+					style="background-color: black; border-color: red; margin-top: 10px;"
+					width="420" height="315"
+					src="https://www.youtube.com/embed/s3nEAmt5AZ8?spfreload=10&autoplay=1&repeat=1"
+					frameborder="0" allowfullscreen>
+					</iframe>
+		</div>			
+    <div class="col-xs-6 col-md-4" style="float:right" >
+        <div id="divRss2" style="float:right"></div>
+    </div>
+    </div>
+</div>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/FeedEk.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divRss').FeedEk({
+            FeedUrl: 'https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'https://hubotek.appspot.com/s_content/googleNews'
+        });
+        $('#divRss2').FeedEk({
+            FeedUrl: 'https://news.google.com/news?cf=all&hl=pt-BR&pz=1&ned=pt-BR_br&output=rss',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'https://hubotek.appspot.com/s_content/googleNews'
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<style>
+    body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #141414;font-size: 13px;line-height: 17px !important;}
+    .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
+    ul{width: 300px !important;}
+</style>
+<script src="https://www.google.com/jsapi/?key=AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ"
+      type="text/javascript"></script>
+<script src='js/jquery-3.1.0.min.js'> </script>  
+</head>
+<body style="background-color:#141414">
+   <div class="container-fluid" style="text-align:center;background-color:#141414">
+     <div class="row" style="text-align:center;background-color:#141414">
+	    <div class="rssDiv row" style="background-color:#141414">
+		  		<div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        		<div id="divRss"></div>
+		        </div>
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        	<div id="divRss2"></div>
+		        </div>
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414">
+		        	<div id="divRss3"></div>
+		        </div>
+	    </div>
+	  </div>  
+    </div>
+<script src="js/bootstrap.js"></script>    
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/FeedEk.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divRss').FeedEk({
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8080/s_content/news'
+        });
+        $('#divRss2').FeedEk({
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8080/s_content/news?topic=tc'
+        });
+        $('#divRss3').FeedEk({
+            FeedUrl: 'http://localhost:8080/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8080/s_content/news?topic=e'
+        });
+    });
+/*     var options = {
+    	    numResults : 6,
+    	    displayTime : 5000,
+    	    fadeOutTime : 500,
+    	    linkTarget : '1-',
+    	    pauseOnHover : false
+    	  } */
+</script>
+</body>
+</html>

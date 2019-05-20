@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+http://www.youtube.com/apiplayer?UVab41Zn7Yc&enablejsapi=1&playerapiid=player2&version=3
+https://www.google.com.br/search?q=red+sox&client=google-csbe&cx=partner-pub-6996754678263425:6706236868&gws_rd=cr&ei=wtS6V9fMHMOcwASa4Z_IBQ
+https://cse.google.com.br/cse?q=red+sox&client=google-csbe&cx=partner-pub-6996754678263425:6706236868&gws_rd=cr&ei=wtS6V9fMHMOcwASa4Z_IBQ#gsc.tab=0&gsc.q=red%20sox&gsc.page=1
+<script>
+  (function() {
+    var cx = 'partner-pub-6996754678263425:6706236868';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <title>jquery.rss example</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/moment.js"></script>
+  <script src="js/jquery.rss.min.js"></script>
+  <script>
+    jQuery(function($) {
+      $("#rss-feeds").rss("http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss",
+      {
+        entryTemplate:'<li><a href="{url}">[{date}] {title}</a><br/>{teaserImage}{shortBodyPlain}</li>'
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <div id="rss-feeds"></div>
+</body>
+
+</html>

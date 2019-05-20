@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <title>jquery.rss example</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/moment.js"></script>
+  <script src="js/jquery.rss.min.js"></script>
+  <script>
+      jQuery(function($) {
+        $("#rss-feeds")
+          .hide()
+          .rss("http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss", {
+            limit: 15,
+            effect: 'slideFastSynced',
+            layoutTemplate: '{entries}',
+            entryTemplate: '<li><a href="{url}">[{date}] {title}</a><br/>{teaserImage}{shortBodyPlain}</li>'
+          }, function() {
+            $("#rss-feeds")
+              .show()
+              .find('> div')
+              .accordion({ heightStyle: 'content' })
+          })
+      })
+    </script>
+
+    <style>
+      body {
+        font-size: 62.5%;
+      }
+    </style>
+</head>
+
+<body>
+  <div id="rss-feeds"></div>
+</body>
+
+</html>

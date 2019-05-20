@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/FeedEk.js"></script>
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+    body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #111;font-size: 13px;line-height: 17px !important;}
+    .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
+    ul{width: 300px !important;}
+</style>
+</head>
+<body style="background-color:#111">
+	<main class="bs-docs-masthead" id="content">
+	<div class=".container" style="margin-top: 5px;width:100%;margin-left:5px">
+		<form>
+			<div class="row" style="background-color: #111; border: none">
+			 <div class="col-xs-6 col-md-3" style="width:100%">
+			 	<label for="search_box">Search :</label>
+			  	<input id="search_text" type="text" maxlength="1000" style="width:45%" tabindex="0"></input>
+			  	<input id="search_button" type="button" value="Search" tabindex="1"></input>
+			 </div> 
+			</div>		
+		</form>
+	</div>
+	<div class="row" style="margin-top:1em">
+	    <div class="rssDiv">
+	        <div id="divRss" style="float:left"></div>
+	        <div id="divRss2" style="float:right"></div>
+	    </div>
+    </div>
+    </main>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search_button").click(function(){
+        	var feed_left = {
+        	    FeedUrl: 'http://localhost:8888/s_content/googleNews',
+        	    MaxCount: 6,
+        	    ShowDesc: false,
+        	    ShowPubDate: true,
+        	    DescCharacterLimit: 100,
+        	    DateFormat: 'MM/DD/YYYY hh:mm:ss',
+        	    DateFormatLang:'en',
+        	    RssHost:'http://localhost:8888/s_content/googleNews?pz=1&cf=all&ned=us&hl=en&scoring=n&q=spring&output=rss'
+        	};
+        	var feed_right = {
+        	    FeedUrl: 'http://localhost:8888/s_content/googleNews',
+        	    MaxCount: 6,
+        	    ShowDesc: false,
+        	    ShowPubDate: true,
+        	    DescCharacterLimit: 100,
+        	    DateFormat: 'MM/DD/YYYY hh:mm:ss',
+        	    DateFormatLang:'en',
+        	    RssHost:'http://localhost:8888/s_content/googleNews?pz=1&cf=all&ned=us&hl=en&scoring=n&q=spring&output=rss'
+        	};
+        	$('#divRss').FeedEk(feed_left);
+        	$('#divRss2').FeedEk(feed_right);
+        	alert('teste');
+        });
+        search_text.focus();
+    });
+</script>
+</body>
+</html>

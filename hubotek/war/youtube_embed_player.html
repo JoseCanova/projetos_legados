@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<style>
+    body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #141414;font-size: 13px;line-height: 17px !important;}
+    .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
+    ul{width: 300px !important;}
+</style>
+<script src="https://www.youtube.com/iframe_api" id="youtube_api" type="text/javascript"></script>
+<script src="https://www.google.com/jsapi/?key=AIzaSyDh0Bmqa-9RQIpASA1tNATVsD_PZF3CJRQ"
+      type="text/javascript"></script>
+<script src="http://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.js"
+      type="text/javascript"></script>
+<script src='https://code.jquery.com/jquery-1.11.3.js'> </script>  
+</head>
+<body style="background-color:#141414">
+   <div class="container-fluid">
+     <div class="row">
+	    <div class="rssDiv">
+				<div class="col-xs-6 col-md-4" style="background-color: #141414;style:relative;width:50%">
+							<div id="player" style="text-align:center"></div>
+				</div>	
+		        <div class="col-xs-6 col-md-4" style="background-color: #141414;text-align:justify;width:50%">
+		        	<div id="feedControl">Loading...</div>
+		        </div>
+	    </div>
+	  </div>  
+    </div>
+<script src="js/bootstrap.js"></script>    
+<script type="text/javascript" src="js/moment.js"></script>
+ <script>
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '200',
+          width: '320',
+          videoId: 'Xg9aQvjMS60',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+       /*  if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        } */
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divRss').FeedEk({
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'https://hubotek.appspot.com/s_content/googleNews'
+        });
+        $('#divRss2').FeedEk({
+            FeedUrl: 'http://localhost:8888/s_content/googleNews',
+            MaxCount: 5,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'https://hubotek.appspot.com/s_content/googleNews'
+        });
+    });
+    function loadFeedControl() {
+      /* var feed  = "http://rss.people.com/web/people/rss/topheadlines/index.xml"; */
+      var feed = "http://news.google.com/news/section?cf=all&pz=1&topic=tc&output=rss"
+      var fg = new GFdynamicFeedControl(feed, "feedControl");
+    }
+    /**
+     * Use google.load() to load the AJAX Feeds API
+     * Use google.setOnLoadCallback() to call loadFeedControl once the page loads
+     */
+    google.load("feeds", "1");
+    var options = {
+    	    numResults : 6,
+    	    displayTime : 5000,
+    	    fadeOutTime : 500,
+    	    linkTarget : '1-',
+    	    pauseOnHover : false
+    	  }
+    google.setOnLoadCallback(loadFeedControl,options);
+</script>
+</body>
+</html>

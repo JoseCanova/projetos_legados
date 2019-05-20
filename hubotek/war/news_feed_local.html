@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="en" />
+<title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
+<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+<style>
+    body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #111;font-size: 13px;line-height: 17px !important;}
+    .rssDiv{float: left;padding-right: 35px;background-color: #111;width:100%;text-align:center}
+    ul{width: 300px !important;}
+</style>
+</head>
+<body style="background-color:#111">
+    <div class="rssDiv">
+        <div id="divRss" style="float:left"></div>
+        <div id="divRss2" style="float:right"></div>
+    </div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/FeedEk.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divRss').FeedEk({
+            FeedUrl: 'https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&output=rss',
+            MaxCount: 6,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8888/s_content/googleNews'
+        });
+        $('#divRss2').FeedEk({
+            FeedUrl: 'https://news.google.com/news?cf=all&hl=pt-BR&pz=1&ned=pt-BR_br&output=rss',
+            MaxCount: 6,
+            ShowDesc: false,
+            ShowPubDate: true,
+            DescCharacterLimit: 100,
+            DateFormat: 'MM/DD/YYYY hh:mm:ss',
+            DateFormatLang:'en',
+            RssHost:'http://localhost:8888/s_content/googleNews'
+        });
+    });
+</script>
+</body>
+</html>

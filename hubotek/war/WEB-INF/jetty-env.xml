@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+	<New id="ds_hubotek_pool" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg></Arg>
+		<Arg>jdbc/Hubotek</Arg>
+		<Arg>
+			<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<Set name="driverClass">org.postgresql.Driver</Set>
+				<Set name="jdbcUrl">jdbc:postgresql://localhost:5432/hubotek_db</Set>
+				<Set name="user">postgres</Set>
+				<Set name="password">postgresql123</Set>
+			</New>
+		</Arg>
+	</New>
+	<New id="ds_pg_hubotek" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg></Arg>
+		<Arg>jdbc/HubotekPg</Arg>
+		<Arg>
+			<New class="org.postgresql.ds.PGConnectionPoolDataSource">
+				<Set name="User">postgres</Set>
+				<Set name="Password">postgresql123</Set>
+				<Set name="DatabaseName">hubotek_db</Set>
+				<Set name="ServerName">localhost</Set>
+				<Set name="PortNumber">5432</Set>
+
+			</New>
+		</Arg>
+	</New>
+</Configure>
