@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+			 http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="hubotek-orm"
+		transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>java:/hubotek</jta-data-source>
+		<class>org.hubotek.model.cse.CseBase</class>
+		<class>org.hubotek.model.feed.FeedUrl</class>
+		<class>org.hubotek.model.project.api.ApiKey</class>
+		<class>org.hubotek.model.project.api.GoogleApiKey</class>
+		<class>org.hubotek.model.lob.LobBase</class>
+		<class>org.hubotek.model.lob.GoogleResultItem</class>
+		<class>org.hubotek.model.lob.AtomDocumentContent</class>
+		<class>org.hubotek.model.lob.RssItemDescription</class>
+		<class>org.hubotek.model.lob.HubotekDocumentContent</class>
+		<class>org.hubotek.model.atom.AtomBase</class>
+		<class>org.hubotek.model.atom.AtomBody</class>
+		<class>org.hubotek.model.atom.AtomDocument</class>
+		<class>org.hubotek.model.atom.AtomEntry</class>
+		<class>org.hubotek.model.atom.Author</class>
+		<!-- <class>org.hubotek.model.document.DocumentBase</class> -->
+		<class>org.hubotek.model.document.LegacyDocument</class>
+		<class>org.hubotek.model.document.DocumentEntry</class>
+		<class>org.hubotek.model.document.HubotekDocument</class>
+		<class>org.hubotek.model.document.HubotekDocumentEntry</class>
+		<class>org.hubotek.model.document.LegacyDocument</class>
+		<class>org.hubotek.model.google.GoogleBase</class>
+		<class>org.hubotek.model.google.cse.GoogleCseSite</class>
+		<class>org.hubotek.model.google.cse.GoogleSearchEngine</class>
+		<class>org.hubotek.model.google.news.NewsTopic</class>
+		<class>org.hubotek.model.rss.RssBase</class>
+		<class>org.hubotek.model.rss.RssBody</class>
+		<class>org.hubotek.model.rss.RssDocument</class>
+		<class>org.hubotek.model.rss.RssImage</class>
+		<class>org.hubotek.model.rss.RssItem</class>
+		<class>org.hubotek.model.url.BaseUrl</class>
+		<class>org.hubotek.model.url.NamedUrl</class>
+		<class>org.hubotek.model.search.ResultBase</class>
+		<class>org.hubotek.model.search.GoogleSearchResult</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+		</properties>
+	</persistence-unit>
+</persistence>

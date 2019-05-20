@@ -1,0 +1,758 @@
+{
+ "kind": "customsearch#search",
+ "url": {
+  "type": "application/json",
+  "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+ },
+ "queries": {
+  "request": [
+   {
+    "title": "Google Custom Search - animal farm",
+    "totalResults": "24600000",
+    "searchTerms": "animal farm",
+    "count": 10,
+    "startIndex": 1,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "partner-pub-6996754678263425:6706236868"
+   }
+  ],
+  "nextPage": [
+   {
+    "title": "Google Custom Search - animal farm",
+    "totalResults": "24600000",
+    "searchTerms": "animal farm",
+    "count": 10,
+    "startIndex": 11,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "partner-pub-6996754678263425:6706236868"
+   }
+  ]
+ },
+ "context": {
+  "title": "Image Search"
+ },
+ "searchInformation": {
+  "searchTime": 0.449809,
+  "formattedSearchTime": "0.45",
+  "totalResults": "24600000",
+  "formattedTotalResults": "24,600,000"
+ },
+ "items": [
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm - Wikipedia, the free encyclopedia",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e - Wikipedia, the free encyclopedia",
+   "link": "https://en.wikipedia.org/wiki/Animal_Farm",
+   "displayLink": "en.wikipedia.org",
+   "snippet": "Animal Farm is an allegorical and dystopian novella by George Orwell, first \npublished in England on 17 August 1945. According to Orwell, the book reflects ...",
+   "htmlSnippet": "\u003cb\u003eAnimal Farm\u003c/b\u003e is an allegorical and dystopian novella by George Orwell, first \u003cbr\u003e\npublished in England on 17 August 1945. According to Orwell, the book reflects&nbsp;...",
+   "cacheId": "6ulP8a6VAEUJ",
+   "formattedUrl": "https://en.wikipedia.org/wiki/Animal_Farm",
+   "htmlFormattedUrl": "https://en.wikipedia.org/wiki/\u003cb\u003eAnimal\u003c/b\u003e_\u003cb\u003eFarm\u003c/b\u003e",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "176",
+      "height": "259",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTj8sMqXZgX9tBIKHyvIHzMsCVmHkce6fY9TWc6K8G8qvR7qvf5sGUnQx9c"
+     }
+    ],
+    "metatags": [
+     {
+      "referrer": "origin-when-cross-origin"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Animal_Farm_-_1st_edition.jpg/220px-Animal_Farm_-_1st_edition.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "SparkNotes: Animal Farm",
+   "htmlTitle": "SparkNotes: \u003cb\u003eAnimal Farm\u003c/b\u003e",
+   "link": "http://www.sparknotes.com/lit/animalfarm/",
+   "displayLink": "www.sparknotes.com",
+   "snippet": "From a general summary to chapter summaries to explanations of famous quotes\n, the SparkNotes Animal Farm Study Guide has everything you need to ace ...",
+   "htmlSnippet": "From a general summary to chapter summaries to explanations of famous quotes\u003cbr\u003e\n, the SparkNotes \u003cb\u003eAnimal Farm\u003c/b\u003e Study Guide has everything you need to ace&nbsp;...",
+   "cacheId": "20ofvW22v60J",
+   "formattedUrl": "www.sparknotes.com/lit/animalfarm/",
+   "htmlFormattedUrl": "www.sparknotes.com/lit/\u003cb\u003eanimalfarm\u003c/b\u003e/"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm, 50th Anniversary Edition: George Orwell: Amazon.com ...",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e, 50th Anniversary Edition: George Orwell: Amazon.com ...",
+   "link": "https://www.amazon.com/Animal-Farm-Anniversary-George-Orwell/dp/0451526341",
+   "displayLink": "www.amazon.com",
+   "snippet": "Editorial Reviews. Amazon.com Review. Since its publication in 1946, George \nOrwell's fable of a workers' revolution gone wrong has rivaled Hemingway's The\n ...",
+   "htmlSnippet": "Editorial Reviews. Amazon.com Review. Since its publication in 1946, George \u003cbr\u003e\nOrwell&#39;s fable of a workers&#39; revolution gone wrong has rivaled Hemingway&#39;s The\u003cbr\u003e\n&nbsp;...",
+   "cacheId": "lo-F47ox3sIJ",
+   "formattedUrl": "https://www.amazon.com/Animal-Farm-Anniversary.../0451526341",
+   "htmlFormattedUrl": "https://www.amazon.com/\u003cb\u003eAnimal\u003c/b\u003e-\u003cb\u003eFarm\u003c/b\u003e-Anniversary.../0451526341",
+   "pagemap": {
+    "scraped": [
+     {
+      "image_link": "https://images-na.ssl-images-amazon.com/images/I/314agQyvEQL.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "175",
+      "height": "288",
+      "src": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRZd0HMML1RdBkgxuxJcYqDVZThuPyEld30WO18cyRSApfFNYO7eojqlx2t"
+     }
+    ],
+    "metatags": [
+     {
+      "title": "Animal Farm, 50th Anniversary Edition: George Orwell: Amazon.com: Books"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "https://images-na.ssl-images-amazon.com/images/I/314agQyvEQL.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm by George Orwell — Reviews, Discussion, Bookclubs ...",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e by George Orwell — Reviews, Discussion, Bookclubs ...",
+   "link": "http://www.goodreads.com/book/show/7613.Animal_Farm",
+   "displayLink": "www.goodreads.com",
+   "snippet": "Animal Farm has 1820290 ratings and 30167 reviews. Shannon (Giraffe Days) \nsaid: This is a book I've been meaning to read for ages but never got around...",
+   "htmlSnippet": "\u003cb\u003eAnimal Farm\u003c/b\u003e has 1820290 ratings and 30167 reviews. Shannon (Giraffe Days) \u003cbr\u003e\nsaid: This is a book I&#39;ve been meaning to read for ages but never got around...",
+   "cacheId": "PcasK9WABLkJ",
+   "formattedUrl": "www.goodreads.com/book/show/7613.Animal_Farm",
+   "htmlFormattedUrl": "www.goodreads.com/book/show/7613.\u003cb\u003eAnimal\u003c/b\u003e_\u003cb\u003eFarm\u003c/b\u003e",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "225",
+      "height": "225",
+      "src": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQFUjNBzhYF-_RewJPaPptaeR_sZF-CDa0Z1QmOasXzDeCPYvegQ2_7oPnx"
+     }
+    ],
+    "review": [
+     {
+      "ratingstars": "4.0",
+      "ratingcount": "30167"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/37177600",
+      "publishdate": "Nov 16, 2008"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/24420479",
+      "publishdate": "May 05, 2015"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/649950478",
+      "publishdate": "Sep 18, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/282527483",
+      "publishdate": "Feb 23, 2012"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/5126843",
+      "publishdate": "Aug 26, 2007"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1403070639",
+      "publishdate": "Oct 11, 2015"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/38209771",
+      "publishdate": "Nov 20, 2008"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/825426406",
+      "publishdate": "Jul 26, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1397717871",
+      "publishdate": "Oct 28, 2015"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/524134785",
+      "publishdate": "Feb 15, 2013"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1008139719",
+      "publishdate": "Aug 04, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/14321275",
+      "publishdate": "Feb 10, 2008"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1511461637",
+      "publishdate": "Mar 17, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/952827598",
+      "publishdate": "Apr 24, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1651649888",
+      "publishdate": "Jul 21, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/293356201",
+      "publishdate": "Aug 29, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/39428310",
+      "publishdate": "Apr 27, 2015"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/149356294",
+      "publishdate": "Jun 16, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/101822960",
+      "publishdate": "Nov 05, 2011"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/201586933",
+      "publishdate": "Oct 07, 2011"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/686890616",
+      "publishdate": "Apr 10, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1474048611",
+      "publishdate": "Jan 05, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1547002475",
+      "publishdate": "Mar 19, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/216895383",
+      "publishdate": "Mar 07, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1619940495",
+      "publishdate": "May 27, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/41934927",
+      "publishdate": "Jan 05, 2009"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/930428654",
+      "publishdate": "Aug 05, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1496070516",
+      "publishdate": "Jan 05, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/1713629136",
+      "publishdate": "Sep 10, 2016"
+     },
+     {
+      "url": "http://www.goodreads.com/review/show/650888764",
+      "publishdate": "Jan 15, 2016"
+     }
+    ],
+    "person": [
+     {
+      "url": "George Orwell",
+      "name": "George Orwell"
+     }
+    ],
+    "hreviewaggregate": [
+     {
+      "count": "30167",
+      "votes": "1820290",
+      "link_urls": "http://www.goodreads.com/book/show/7613.Animal_Farm#other_reviews"
+     }
+    ],
+    "book": [
+     {
+      "image": "http://www.goodreads.com/book/photo/7613.Animal_Farm",
+      "name": "Animal Farm",
+      "bookformattype": "Paperback",
+      "numberofpages": "102 pages",
+      "isbn": "9780452284241",
+      "inlanguage": "English",
+      "awards": "Hugo Award for Best Novella (1946), Prometheus Hall of Fame Award (2011)"
+     }
+    ],
+    "aggregaterating": [
+     {
+      "ratingvalue": "3.85",
+      "ratingcount": "1,820,290 Ratings"
+     }
+    ],
+    "metatags": [
+     {
+      "csrf-param": "authenticity_token",
+      "csrf-token": "q7/1crXVXc+Wj4T5w+LIwC4gTsge1XLCqdj2zkfvYv6dyE4MtFjqX0bvHiFcnEenGR26VQVeUSlg52vaLD3SWA==",
+      "request-id": "0Q7DEKG61AR7R8GMZD39",
+      "twitter:card": "summary",
+      "twitter:site": "@goodreads",
+      "twitter:title": "Animal Farm by George Orwell — Reviews, Discussion, Bookclubs, Lists",
+      "twitter:description": "Animal Farm has 1,820,290 ratings and 30,167 reviews. Shannon (Giraffe Days) said: This is a book I've been meaning to read for ages but never got around...",
+      "twitter:image": "http://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424037542i/7613._UY400_SS400_.jpg",
+      "twitter:image:alt": "Animal Farm",
+      "apple-itunes-app": "app-id=355833469",
+      "og:title": "Animal Farm",
+      "og:type": "good_reads:book",
+      "og:url": "http://www.goodreads.com/work/best_book/2207778-animal-farm-a-fairy-story",
+      "og:site_name": "Goodreads",
+      "og:image": "http://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424037542i/7613._UY400_SS400_.jpg",
+      "fb:app_id": "2415071772",
+      "og:description": "\"All animals are equal but some animals are more equal than others.\"  Revolution is in the air at Manor Farm after old Major, a prize boa...",
+      "good_reads:isbn": "0452284244",
+      "good_reads:page_num": "102",
+      "good_reads:author": "http://www.goodreads.com/author/show/3706.George_Orwell",
+      "al:ios:url": "com.goodreads.https://book/show/7613",
+      "al:ios:app_store_id": "355833469",
+      "al:ios:app_name": "Goodreads"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "http://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1424037542i/7613._UY400_SS400_.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm (1954) - IMDb",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e (1954) - IMDb",
+   "link": "http://www.imdb.com/title/tt0047834/",
+   "displayLink": "www.imdb.com",
+   "snippet": "Animation ...",
+   "htmlSnippet": "Animation&nbsp;...",
+   "cacheId": "JHemKOBXrtIJ",
+   "formattedUrl": "www.imdb.com/title/tt0047834/",
+   "htmlFormattedUrl": "www.imdb.com/title/tt0047834/",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "145",
+      "height": "214",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKFryrDMk84ATEyLAolwBkt5lcrTKhwQJDPn3w9jsgwY2zEJ1SLZTM9BU"
+     }
+    ],
+    "audience": [
+     {
+      "url": "View content advisory"
+     }
+    ],
+    "movie": [
+     {
+      "name": "Animal Farm (1954)",
+      "contentrating": "UNRATED",
+      "duration": "PT72M",
+      "genre": "Animation",
+      "datepublished": "1956-02-13",
+      "image": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI3NzI2OTA2OF5BMl5BanBnXkFtZTcwNjM0MDcyMQ@@._V1_UY268_CR3,0,182,268_AL_.jpg",
+      "description": "A successful farmyard revolution by the resident animals vs. the farmer goes horribly wrong as the victors create a new tyranny among themselves.",
+      "headline": "Wayward Pines Season 2 Episode 9 Review: Walcott Prep",
+      "provider": "TVfanatic",
+      "url": "Show HTML",
+      "awards": "Nominated for 1 BAFTA Film Award.",
+      "thumbnailurl": "http://www.imdb.com/title/tt0047834/mediaviewer/rm2553874432?context=default&ref_=tt_pv_md_1",
+      "keywords": "Plot Keywords: revolution | pig | farm | revolt | hypocrisy | See All (76) »"
+     }
+    ],
+    "person": [
+     {
+      "url": "Joy Batchelor",
+      "name": "Joy Batchelor"
+     },
+     {
+      "url": "John Halas",
+      "name": "John Halas"
+     },
+     {
+      "url": "George Orwell",
+      "name": "George Orwell"
+     },
+     {
+      "url": "Lothar Wolff",
+      "name": "Lothar Wolff"
+     },
+     {
+      "url": "Gordon Heath",
+      "name": "Gordon Heath"
+     },
+     {
+      "url": "Maurice Denham",
+      "name": "Maurice Denham"
+     },
+     {
+      "url": "Gordon Heath",
+      "name": "Gordon Heath"
+     },
+     {
+      "url": "Maurice Denham",
+      "name": "Maurice Denham"
+     }
+    ],
+    "review": [
+     {
+      "name": "Disappointing rethinking of the Orwell classic.",
+      "author": "Miyagis_Sweaty_wifebeater (sirjosephu@aol.com)",
+      "datepublished": "2004-09-15",
+      "reviewbody": "Animal Farm (1954) was a very good read about the dangers of totalitarianism. How good ideals can be changed and distorted by those who are ignorant or rule with an iron fist and an empty head...."
+     }
+    ],
+    "aggregaterating": [
+     {
+      "ratingvalue": "7.2",
+      "bestrating": "10",
+      "ratingcount": "10,442",
+      "reviewcount": "64 user"
+     }
+    ],
+    "organization": [
+     {
+      "url": "Halas & Batchelor",
+      "name": "Halas & Batchelor"
+     },
+     {
+      "url": "Office of Policy Coordination of Department of State and Defence",
+      "name": "Office of Policy Coordination of Department of State and Defence"
+     },
+     {
+      "url": "RD-DR",
+      "name": "RD-DR"
+     }
+    ],
+    "rating": [
+     {
+      "worstrating": "1",
+      "ratingvalue": "3",
+      "bestrating": "10"
+     }
+    ],
+    "metatags": [
+     {
+      "apple-itunes-app": "app-id=342792525, app-argument=imdb:///title/tt0047834?src=mdot",
+      "og:url": "http://www.imdb.com/title/tt0047834/",
+      "theme-color": "#000000",
+      "pageid": "tt0047834",
+      "pagetype": "title",
+      "subpagetype": "main",
+      "og:image": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI3NzI2OTA2OF5BMl5BanBnXkFtZTcwNjM0MDcyMQ@@._V1_UY1200_CR108,0,630,1200_AL_.jpg",
+      "og:type": "video.movie",
+      "fb:app_id": "115109575169727",
+      "og:title": "Animal Farm (1954)",
+      "og:site_name": "IMDb",
+      "title": "Animal Farm (1954) - IMDb",
+      "og:description": "Directed by Joy Batchelor, John Halas.  With Gordon Heath, Maurice Denham. A successful farmyard revolution by the resident animals vs. the farmer goes horribly wrong as the victors create a new tyranny among themselves.",
+      "request_id": "19SCKGA64SBMCZTVMJ66"
+     }
+    ],
+    "videoobject": [
+     {
+      "duration": "T69M0S",
+      "url": "http://www.imdb.com/offsite/?page-action=watch-aiv&token=BCYq9F57JbTGDZsn0dnGlOJ5_lH6IGt3Qmi7BMso-nzyq_MTxfTXN7jOL5xeFXZQSxHCnn-1m6jW%0D%0AxQJuyNPfaDMZgwIOS82RowUek8IBLqg2C5x3i6CyGUeaGH-8uIkkjJ9b7AYoCPTontrLqCQEoqvu%0D%0AoCCbWwKaNfxaxpT7pdzv9hoH8-JaTkyPQ3aaOYWzw_-mMFJJiin_nQw6jxKs6NB5ZYlAO7Hr51UJ%0D%0AgxH0EhdhZqkpmr0NDWZmHAZn-GFYJLMt1Km32ViZujJTpcSIY-OwhEXG7PfKwAQbRNMKLNxn_DI%0D%0A&ref_=tt_pv_vi_aiv_1",
+      "image": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI3NzI2OTA2OF5BMl5BanBnXkFtZTcwNjM0MDcyMQ@@._V1_BR-65_CT-15_SP229,229,0,C,0,0,0_CR45,62,139,105_PIimdb-blackband-204-14,TopLeft,0,0_PIimdb-blackband-204-28,BottomLeft,0,1_CR0,0,139,105_PIimdb-goldbutton-big,BottomRight,-1,-1_ZAFull%2520Movie,2,76,16,137,verdenab,8,255,255,255,1_ZAat%2520Amazon%2520%25BB,2,1,14,137,verdenab,7,255,255,255,1_ZA69:00,103,1,14,36,verdenab,7,255,255,255,1_.jpg"
+     }
+    ],
+    "moviereview": [
+     {
+      "ratingstars": "3.5",
+      "best": "10",
+      "originalrating": "7.2",
+      "votes": "10,442",
+      "ratingcount": "64 user",
+      "image_href": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTg5MjMwMjAxNV5BMl5BanBnXkFtZTYwNjIyMTM5._V1_UX105_CR0,0,105,105_AL_.jpg",
+      "name": "Animal Farm (1954)",
+      "release_date": "1956-02-13",
+      "release_year": "1956",
+      "runtime": "PT72M",
+      "genre": "Animation/Drama",
+      "directed_by": "Joy Batchelor",
+      "starring": "Gordon Heath, Maurice Denham, Gordon Heath",
+      "summary": "Britain's second animated feature, which, despite the title and Disney-esque animal animation, is in fact a no-holds-barred adaptation of George Orwell's..."
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI3NzI2OTA2OF5BMl5BanBnXkFtZTcwNjM0MDcyMQ@@._V1_UY268_CR3,0,182,268_AL_.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm as pdf",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e as pdf",
+   "link": "http://msxnet.org/orwell/animal_farm.pdf",
+   "displayLink": "msxnet.org",
+   "snippet": "oldest animal on the farm, and the worst tempered. He seldom talked, and when \nhe did, it was usually to make some cynical remark — for instance, he would say\n ...",
+   "htmlSnippet": "oldest \u003cb\u003eanimal\u003c/b\u003e on the \u003cb\u003efarm\u003c/b\u003e, and the worst tempered. He seldom talked, and when \u003cbr\u003e\nhe did, it was usually to make some cynical remark — for instance, he would say\u003cbr\u003e\n&nbsp;...",
+   "cacheId": "xOhYJF96O1QJ",
+   "mime": "application/pdf",
+   "fileFormat": "PDF/Adobe Acrobat",
+   "formattedUrl": "msxnet.org/orwell/animal_farm.pdf",
+   "htmlFormattedUrl": "msxnet.org/orwell/\u003cb\u003eanimal\u003c/b\u003e_\u003cb\u003efarm\u003c/b\u003e.pdf",
+   "pagemap": {
+    "metatags": [
+     {
+      "producer": "pdfTeX-1.40.3",
+      "creator": "TeX",
+      "creationdate": "D:20100307123511Z",
+      "moddate": "D:20100307123511Z",
+      "fullbanner": "This is pdfTeX using libpoppler, Version 3.141592-1.40.3-2.2 (Web2C 7.5.6) kpathsea version 3.5.6"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm by George Orwell. Search eText, Read Online, Study ...",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e by George Orwell. Search eText, Read Online, Study ...",
+   "link": "http://www.online-literature.com/orwell/animalfarm/",
+   "displayLink": "www.online-literature.com",
+   "snippet": "Animal Farm by George Orwell. Searchable etext. Discuss with other readers.",
+   "htmlSnippet": "\u003cb\u003eAnimal Farm\u003c/b\u003e by George Orwell. Searchable etext. Discuss with other readers.",
+   "cacheId": "Sp8GZ1uOXs8J",
+   "formattedUrl": "www.online-literature.com/orwell/animalfarm/",
+   "htmlFormattedUrl": "www.online-literature.com/orwell/\u003cb\u003eanimalfarm\u003c/b\u003e/",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "128",
+      "height": "184",
+      "src": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQXclQzZo2LSAIO14H74fwJ6kOxH95naJEvKuWVLw0JpFmOLiUkOHgBx-I"
+     }
+    ],
+    "book": [
+     {
+      "name": "Animal Farm",
+      "bookformat": "http://schema.org/Ebook",
+      "comment": "Hello everyone, I am here because I need help on my essay. The problem I have is that I can't see where I am going and feel like my writing is horrible due to a result of it. Any feedback is...",
+      "discussionurl": "Post a New Comment/Question on Animal Farm",
+      "image": "http://www.online-literature.com/authorpics/orwell.jpg",
+      "author": "George Orwell"
+     }
+    ],
+    "metatags": [
+     {
+      "viewport": "width=device-width, initial-scale=1"
+     }
+    ],
+    "webpage": [
+     {
+      "breadcrumb": "Literature Network » George Orwell » Animal Farm"
+     }
+    ],
+    "creativework": [
+     {
+      "url": "Summary Chp. 1",
+      "name": "Summary Chp. 1"
+     },
+     {
+      "url": "Summary Chp. 2",
+      "name": "Summary Chp. 2"
+     },
+     {
+      "url": "Summary Chp. 3",
+      "name": "Summary Chp. 3"
+     },
+     {
+      "url": "Summary Chp. 4",
+      "name": "Summary Chp. 4"
+     },
+     {
+      "url": "Summary Chp. 5",
+      "name": "Summary Chp. 5"
+     },
+     {
+      "url": "Summary Chp. 6",
+      "name": "Summary Chp. 6"
+     },
+     {
+      "url": "Summary Chp. 7",
+      "name": "Summary Chp. 7"
+     },
+     {
+      "url": "Summary Chp. 8",
+      "name": "Summary Chp. 8"
+     },
+     {
+      "url": "Summary Chp. 9",
+      "name": "Summary Chp. 9"
+     },
+     {
+      "url": "Summary Chp. 10",
+      "name": "Summary Chp. 10"
+     },
+     {
+      "url": "Character Summary",
+      "name": "Character Summary"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "http://www.online-literature.com/authorpics/orwell.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm 1954 Halas & Batchelor - YouTube",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e 1954 Halas &amp; Batchelor - YouTube",
+   "link": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+   "displayLink": "www.youtube.com",
+   "snippet": "Oct 28, 2014 ... Animal Farm is a 1955 British animated film by Halas and Batchelor, based on \nthe book Animal Farm by George Orwell. It was the first British ...",
+   "htmlSnippet": "Oct 28, 2014 \u003cb\u003e...\u003c/b\u003e \u003cb\u003eAnimal Farm\u003c/b\u003e is a 1955 British animated film by Halas and Batchelor, based on \u003cbr\u003e\nthe book \u003cb\u003eAnimal Farm\u003c/b\u003e by George Orwell. It was the first British&nbsp;...",
+   "cacheId": "bHjeVMG_dv0J",
+   "formattedUrl": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+   "htmlFormattedUrl": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "285",
+      "height": "177",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBguqCdi2IddPRQCcEZJAmvryzY6eLw6tkGaDxGIJMruHUyDYATTfa14VJ"
+     }
+    ],
+    "imageobject": [
+     {
+      "url": "https://i.ytimg.com/vi/Wss6vvFOoeY/maxresdefault.jpg",
+      "width": "1280",
+      "height": "720"
+     }
+    ],
+    "person": [
+     {
+      "url": "http://www.youtube.com/user/Canberra666"
+     },
+     {
+      "url": "https://plus.google.com/115938562394342680455"
+     }
+    ],
+    "metatags": [
+     {
+      "title": "Animal Farm 1954 Halas & Batchelor",
+      "theme-color": "#e62117",
+      "og:site_name": "YouTube",
+      "og:url": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+      "og:title": "Animal Farm 1954 Halas & Batchelor",
+      "og:image": "https://i.ytimg.com/vi/Wss6vvFOoeY/maxresdefault.jpg",
+      "og:description": "Animal Farm is a 1955 British animated film by Halas and Batchelor, based on the book Animal Farm by George Orwell. It was the first British animated feature...",
+      "al:ios:app_store_id": "544007664",
+      "al:ios:app_name": "YouTube",
+      "al:ios:url": "vnd.youtube://www.youtube.com/watch?v=Wss6vvFOoeY&feature=applinks",
+      "al:android:url": "vnd.youtube://www.youtube.com/watch?v=Wss6vvFOoeY&feature=applinks",
+      "al:android:app_name": "YouTube",
+      "al:android:package": "com.google.android.youtube",
+      "al:web:url": "https://www.youtube.com/watch?v=Wss6vvFOoeY&feature=applinks",
+      "og:type": "video",
+      "og:video:url": "https://www.youtube.com/embed/Wss6vvFOoeY",
+      "og:video:secure_url": "https://www.youtube.com/embed/Wss6vvFOoeY",
+      "og:video:type": "text/html",
+      "og:video:width": "480",
+      "og:video:height": "360",
+      "og:video:tag": "Film (Media Genre)",
+      "fb:app_id": "87741124305",
+      "twitter:card": "player",
+      "twitter:site": "@youtube",
+      "twitter:url": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+      "twitter:title": "Animal Farm 1954 Halas & Batchelor",
+      "twitter:description": "Animal Farm is a 1955 British animated film by Halas and Batchelor, based on the book Animal Farm by George Orwell. It was the first British animated feature...",
+      "twitter:image": "https://i.ytimg.com/vi/Wss6vvFOoeY/maxresdefault.jpg",
+      "twitter:app:name:iphone": "YouTube",
+      "twitter:app:id:iphone": "544007664",
+      "twitter:app:name:ipad": "YouTube",
+      "twitter:app:id:ipad": "544007664",
+      "twitter:app:url:iphone": "vnd.youtube://www.youtube.com/watch?v=Wss6vvFOoeY&feature=applinks"
+     }
+    ],
+    "videoobject": [
+     {
+      "url": "https://www.youtube.com/watch?v=Wss6vvFOoeY",
+      "name": "Animal Farm 1954 Halas & Batchelor",
+      "description": "Animal Farm is a 1955 British animated film by Halas and Batchelor, based on the book Animal Farm by George Orwell. It was the first British animated feature...",
+      "paid": "False",
+      "channelid": "UCcN6hrrvc8I3TaIcPnduxLQ",
+      "videoid": "Wss6vvFOoeY",
+      "duration": "PT72M7S",
+      "unlisted": "False",
+      "thumbnailurl": "https://i.ytimg.com/vi/Wss6vvFOoeY/maxresdefault.jpg",
+      "embedurl": "https://www.youtube.com/embed/Wss6vvFOoeY",
+      "playertype": "HTML5 Flash",
+      "width": "480",
+      "height": "360",
+      "isfamilyfriendly": "True",
+      "regionsallowed": "AD,AE,AF,AG,AI,AL,AM,AO,AQ,AR,AS,AT,AU,AW,AX,AZ,BA,BB,BD,BE,BF,BG,BH,BI,BJ,BL,BM,BN,BO,BQ,BR,BS,BT,BV,BW,BY,BZ,CA,CC,CD,CF,CG,CH,CI,CK,CL,CM,CN,CO,CR,CU,CV,CW,CX,CY,CZ,DE,DJ,DK,DM,DO,DZ,EC,EE,EG,EH...",
+      "interactioncount": "382761",
+      "datepublished": "2014-10-28",
+      "genre": "Nonprofits & Activism"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "https://i.ytimg.com/vi/Wss6vvFOoeY/maxresdefault.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm: Book Summary | CliffsNotes",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e: Book Summary | CliffsNotes",
+   "link": "https://www.cliffsnotes.com/literature/a/animal-farm/book-summary",
+   "displayLink": "www.cliffsnotes.com",
+   "snippet": "Get free homework help on George Orwell's Animal Farm: book summary, \nchapter summary and analysis, quotes, essays, and character analysis courtesy \nof ...",
+   "htmlSnippet": "Get free homework help on George Orwell&#39;s \u003cb\u003eAnimal Farm\u003c/b\u003e: book summary, \u003cbr\u003e\nchapter summary and analysis, quotes, essays, and character analysis courtesy \u003cbr\u003e\nof&nbsp;...",
+   "cacheId": "dYJC3HWOdPIJ",
+   "formattedUrl": "https://www.cliffsnotes.com/literature/a/animal-farm/book-summary",
+   "htmlFormattedUrl": "https://www.cliffsnotes.com/literature/a/\u003cb\u003eanimal\u003c/b\u003e-\u003cb\u003efarm\u003c/b\u003e/book-summary",
+   "pagemap": {
+    "metatags": [
+     {
+      "viewport": "width=device-width, initial-scale=1.0"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Animal Farm Orwell, Vermont",
+   "htmlTitle": "\u003cb\u003eAnimal Farm\u003c/b\u003e Orwell, Vermont",
+   "link": "http://www.animalfarmvt.com/",
+   "displayLink": "www.animalfarmvt.com",
+   "snippet": "Diane St. Clair. Animal Farm Cows. Animal Farm. thumbnail. Photographs by \nGareth McConnell. Be first to comment ». Animal Farm Orwell, Vermont © 2016 \nAll ...",
+   "htmlSnippet": "Diane St. Clair. \u003cb\u003eAnimal Farm\u003c/b\u003e Cows. \u003cb\u003eAnimal Farm\u003c/b\u003e. thumbnail. Photographs by \u003cbr\u003e\nGareth McConnell. Be first to comment ». \u003cb\u003eAnimal Farm\u003c/b\u003e Orwell, Vermont © 2016 \u003cbr\u003e\nAll&nbsp;...",
+   "cacheId": "4toSjRnN1goJ",
+   "formattedUrl": "www.animalfarmvt.com/",
+   "htmlFormattedUrl": "www.\u003cb\u003eanimalfarm\u003c/b\u003evt.com/",
+   "pagemap": {
+    "cse_thumbnail": [
+     {
+      "width": "249",
+      "height": "202",
+      "src": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTM6qZI96rWOBFkMHQpF_pTa-cGrKnno1Ly4dt__zHtWqz5Rfi5lJR2pdc"
+     }
+    ],
+    "cse_image": [
+     {
+      "src": "http://www.animalfarmvt.com/wp-content/plugins/portfolio-slideshow-pro/inc/timthumb.php?w=822&h=658&zc=3&q=95&src=http://www.animalfarmvt.com/wp-content/uploads/2011/08/a4fr8.jpg"
+     }
+    ]
+   }
+  }
+ ]
+}
