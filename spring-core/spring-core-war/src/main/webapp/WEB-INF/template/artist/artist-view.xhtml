@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="body">
+		<style type="text/css">
+p {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+	padding-left: 5px !important;
+}
+</style>
+		<ui:debug hotkey="0" rendered="true"></ui:debug>
+			<rich:panel style="border:none;">
+				<h:form id="frmPrincipal">
+					<h:panelGrid columns="2">
+						<h:inputText id="artistNameValue"
+							value="#{artistController.artistName}"></h:inputText>
+						<h:selectOneRadio value="#{artistController.queryChoice}">
+				   			<f:selectItems value="#{artistController.queryChoices}"  />
+				   		</h:selectOneRadio>	
+						<a4j:commandButton action="#{artistController.find()}"
+							value="Find Artist" render="artistDetail"></a4j:commandButton>
+					</h:panelGrid>		
+				</h:form>
+			</rich:panel>	
+			<h:form>
+				<rich:panel id="artistDetail" style="border:none;">		
+					<rich:panel id="artistsResults" style="width:810px" >
+						<rich:dataTable style="width:800px" id="artists" var="artist" rows="20"
+							value="#{artistController.artists}"
+							onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+							onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+							rendered="#{not empty artistController.artists}" rowKeyVar="rowId">
+							<rich:column>
+								<f:facet name="header">Artist Name</f:facet>
+								<h:outputLink value="https://www.google.com.br/search"
+									target="_blank">
+									<f:param name="q" value="#{artist.name}" />
+									<h:outputText value="#{artist.name}" />
+								</h:outputLink>
+							</rich:column>
+						</rich:dataTable>
+						<div style="width:20px;margin-top: 5px;padding-top: 5px">
+						<rich:dataScroller align="center" for="artists" maxPages="20"
+							page="1" id="sc2" style="width:800px" />
+					    </div>
+					</rich:panel>
+				</rich:panel>
+			</h:form>	
+	</ui:define>
+</ui:composition>

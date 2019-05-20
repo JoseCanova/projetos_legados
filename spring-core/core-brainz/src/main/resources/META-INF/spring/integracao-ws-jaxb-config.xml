@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	 	<property name="contextPath" value="org.nanotek.ws.xml"/>
+	</bean>
+	
+	<bean id="marshallingTransformer" class="org.springframework.integration.xml.transformer.MarshallingTransformer">
+    	<constructor-arg>
+        	<ref bean="marshaller"/>
+	    </constructor-arg>
+	    <property name="resultFactory">
+	    	<bean class="org.springframework.integration.xml.result.StringResultFactory"></bean>
+	    </property>
+	</bean>
+
+	<bean id="unmarshallingTransformer" class="org.springframework.integration.xml.transformer.UnmarshallingTransformer">
+	    <constructor-arg>
+	        <ref bean="marshaller"/>
+	    </constructor-arg>
+	</bean>
+
+	
+<!-- 	<bean id="saog-legado-marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	 	<property name="contextPath" value="br.gov.sp.prodesp.saog.layer.schema.jaxb.solicitacao"/>
+	</bean>
+	
+		org.springframework.integration.xml.transformer.ResultToStringTransformer
+		
+	<bean id="saogMarshallingTransformer" class="org.springframework.integration.xml.transformer.MarshallingTransformer">
+    	<constructor-arg>
+        	<ref bean="saog-legado-marshaller"/>
+	    </constructor-arg>
+	    <property name="resultFactory">
+	    	<bean class="org.springframework.integration.xml.result.StringResultFactory"></bean>
+	    </property>
+	</bean>
+
+	<bean id="saogUnmarshallingTransformer" class="org.springframework.integration.xml.transformer.UnmarshallingTransformer">
+	    <constructor-arg>
+	        <ref bean="saog-legado-marshaller"/>
+	    </constructor-arg>
+	</bean> -->
+	
+</beans>

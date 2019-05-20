@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="body">
+		<t:div id="releases">
+			<t:div id="releaseFind"
+				rendered="#{not empty artistCreditBean.artistCredits}">
+				<a4j:commandLink action="#{releaseBean.findReleases()}"
+					render="releaseSearchResult" value="Find Releases">
+					<a4j:param value="#{artistCreditBean.getJsonIds()}"
+						assignTo="#{releaseBean.artistCredits}"></a4j:param>
+				</a4j:commandLink>
+			</t:div>
+		</t:div>
+		<t:div id="releaseSearchResult">
+			<rich:dataTable id="releaseList" var="release" rows="20"
+				value="#{releaseBean.releases}"
+				rendered="#{not empty releaseBean.releases}">
+				<rich:column>
+					<f:facet name="header">Release Name</f:facet>
+					<h:outputLink value="https://www.google.com.br/search"
+						target="_blank">
+						<f:param name="q" value="#{release.name}" />
+						<h:outputText value="#{release.name}" />
+					</h:outputLink>
+				</rich:column>
+			</rich:dataTable>
+			<rich:dataScroller align="left" for="releaseList" maxPages="20"
+				page="1" id="sc3" rendered="#{not empty releaseBean.releases}" />
+		</t:div>
+	</ui:define>
+</ui:composition>

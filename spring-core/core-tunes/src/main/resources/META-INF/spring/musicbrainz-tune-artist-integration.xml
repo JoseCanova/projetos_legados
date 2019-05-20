@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:ws="http://www.springframework.org/schema/integration/ws"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+			http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.1.xsd
+			http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.1.xsd
+			http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.1.xsd
+			http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.1.xsd
+			http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-4.1.xsd">
+
+	<import resource="classpath:application-tunes-context.xml" />
+
+	<import resource="classpath:META-INF/spring/integracao-ws-jaxb-config.xml" />
+
+	<import resource="classpath:META-INF/spring/active-mq-connection-factory.xml" />
+
+	<context:component-scan base-package="org.nanotek.integration.tune"></context:component-scan>
+
+	<tx:annotation-driven />
+
+	<bean id="jsonArtistWrapperTransformer" class="org.nanotek.integration.JsonBaseTransformationAdapter" scope="prototype"> 
+		<constructor-arg><value>org.nanotek.integration.tune.model.TuneArtistWrapperType</value></constructor-arg>
+	</bean>
+	
+	<bean id="taskScheduler"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">
+		<property name="poolSize" value="120000"></property>
+	</bean>
+
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="15" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="2500" />
+	</bean>
+
+	<bean id="jmsExecutorListenerExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="2500" />
+	</bean>
+
+
+	<int:publish-subscribe-channel id="artistJmsChannel"
+		task-executor="jmsExecutorListenerExecutor" />
+
+	<jms:inbound-gateway id="artistFilteredInboundGateway"
+		request-destination="ARTIST_QUEUE" request-channel="artistJmsChannel"
+		auto-startup="true" error-channel="errorChannel"></jms:inbound-gateway>
+
+	<int:publish-subscribe-channel id="artistTuneChannel" />
+
+	<int:chain input-channel="artistJmsChannel" output-channel="httpRequestArtistNameChannel">
+		<int:transformer ref="unmarshallingTransformer"></int:transformer>
+	</int:chain>
+
+	<int:publish-subscribe-channel id="httpRequestArtistNameChannel" />
+
+	<!-- https://itunes.apple.com/search?term={artistName}&amp;entity=allArtist&amp;attribute=allArtistTerm&amp;limit=1 -->
+	<int-http:outbound-gateway id="ituneArtistNameRequest"
+		url="https://itunes.apple.com/search?term={artistName}&amp;entity=allArtist&amp;attribute=allArtistTerm&amp;limit=1"
+		http-method="GET" request-channel="httpRequestArtistNameChannel"
+		charset="UTF-8" expected-response-type="java.lang.String"
+		request-factory="requestFactory" reply-channel="iTunesAlbumResponseChannel"
+		mapped-request-headers="requestHeaders" mapped-response-headers="responseHeaders">
+		<int-http:uri-variable name="artistName"
+			expression="payload.getName()" />
+	</int-http:outbound-gateway>
+
+	<bean id="requestFactory"
+		class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+		<property name="connectTimeout" value="120000" />
+		<property name="readTimeout" value="120000" />
+	</bean>
+
+	<int:chain input-channel="iTunesAlbumResponseChannel"
+		output-channel="iTunesAlbumJsonObjectChannel">
+		<int:transformer ref="tuneService" method="convertItunesResponseJson"></int:transformer>
+		<int:filter ref="tuneService" method="filterJSONBjectMessageResult" />
+		<int:filter ref="tuneService" method="filterByTuneArtistId" />
+		<int:splitter ref="tuneService" method="splitItunesSearch" />
+	</int:chain>
+
+	<int:chain input-channel="iTunesAlbumJsonObjectChannel">
+		<int:service-activator ref="tuneService"
+			method="transformJSONtoTuneArtist"></int:service-activator>
+		<int:filter ref="tuneService" method="selectArtistBeforeUpdate"></int:filter>
+		<int:service-activator ref="tuneService" method="saveArtistRecord"></int:service-activator>
+	</int:chain>
+
+	<!-- <int:chain input-channel="iTunesAlbumJsonObject"> <int:json-to-object-transformer 
+		></int:json-to-object-transformer> </int:chain> -->
+	<int:publish-subscribe-channel id="iTunesAlbumJsonObjectChannel" />
+
+	<int:publish-subscribe-channel id="iTunesAlbumResponseChannel" />
+
+	<int:publish-subscribe-channel id="errorChannel" />
+
+	<stream:stderr-channel-adapter channel="errorChannel"></stream:stderr-channel-adapter>
+
+	<stream:stderr-channel-adapter channel="iTunesAlbumJsonObject"></stream:stderr-channel-adapter>
+
+	<stream:stderr-channel-adapter channel="iTunesAlbumResponseChannel"></stream:stderr-channel-adapter>
+
+	<int:service-activator input-channel="httpRequestArtistNameChannel"
+		ref="responseHeaderService" method="handleMessage" />
+
+	<stream:stdout-channel-adapter id="httpStreamResponseChannel"
+		channel="iTunesAlbumJsonObject"></stream:stdout-channel-adapter>
+
+
+
+</beans>
