@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  
+spring: 
+  data:
+    mongodb:
+      database: abisDB
+      uri: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/   
+      
+mongo:
+    uri: localhost
+    port: 27017
+    database-name: agreementDb
+    channels: 
+      input-channel: mongoInputChannel
+      output-channel: mongoOuputChannel
+      message-retrieve-input-channel: messageRetrieveInputChannel
+      message-retrieve-output-channel: messageRetrieveOutputChannel
+      mongo-error-handler-channel: mongoErrorHandlerChannel      
+
+http:
+    end-point: /abis
+    enroll-end-point: /facial/enrollment/{transactionKey}
+    
+channel:
+    main-input-channel: mainInputChannel
+    main-output-channel: mainOutputChannel    
