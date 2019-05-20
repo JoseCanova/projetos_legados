@@ -1,0 +1,17 @@
+{content-length=1345, 
+errorChannel=org.springframework.messaging.core.GenericMessagingTemplate$TemporaryReplyChannel@529b83c3, 
+Server=Kestrel, 
+document_id=5b69e07401e1821a9c88e41c,
+ http_statusCode=200, 
+ Authorization=Basic ZTIwMjg1NzEtZGM1Ni00YWU5LTk5OTYtODk5MTY1MWRkY2IxOmZyaWVuZA==, 
+ host=localhost:8090, Set-Cookie=AWSALB=Q5LXkVuw+zptAeM4ob2UfzQ0qifUvrPGNNkrbeVDe503mkuSPxYE20f4DRIe2YKiLjS5XV8pBys5QlraOx87txUuwWqfKIQZYH+ZHt2QTOjKJ93bMy22p0AOl7RJ; Expires=Tue, 14 Aug 2018 18:09:59 GMT; 
+ Path=/, connection=Keep-Alive, id=93d6dba9-ea0a-1073-3485-e0862cf3fe81, contentType=application/json;charset=UTF-8, 
+ Content-Type=application/x-www-form-urlencoded, timestamp=1533665400091, Transfer-Encoding=chunked,
+  http_requestMethod=PUT, 
+ method=PUT, Connection=keep-alive, Pragma=no-cache, Date=1533665399000,
+  transactionId=br.com.valid.bio.conveniadas.abis.service.KeyParameter@6a546686, 
+  endPoint=http://abis.dev.valididcloud.com/abis/facial/enrollment/{transactionKey}, 
+  replyChannel=org.springframework.messaging.core.GenericMessagingTemplate$TemporaryReplyChannel@529b83c3, 
+  Cache-Control=no-store, no-cache, max-age=0, service=ENROLL, 
+  http_requestUrl=http://localhost:8090/facial/enrollment/2345678, 
+  accept-encoding=gzip,deflate, user-agent=Apache-HttpClient/4.1.1 (java 1.5)}

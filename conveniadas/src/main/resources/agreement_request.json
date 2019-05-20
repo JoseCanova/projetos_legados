@@ -1,0 +1,54 @@
+{
+	"id": "the_id",
+	"jsonMessageId": "the_id",
+	"eventId": "2345678",
+	"document": "16468987881",
+	"gallery": "a_gallery",
+	"endPoint": "the_endpoint",
+	"method": "PUT",
+	"imageBase": "",
+	"imageMd5": "",
+	"service":"ENROLL",
+	"agreement": {
+				"id": "krsXX3",
+				"name": "KAIROS",
+				"type": "BIOMETRIC",
+				"gallery": "whitelist",
+				"shared": false,
+				"required": true,
+				"scoreWeight": 8,
+				"services": [
+					{
+						"type": "REST",
+						"endpoint": "conveniada-kairos-service:8080/enroll",
+						"timeout": 20000,
+						"numberOfAttempts": 3,
+						"operation": "ENROLL",
+						"method": "PUT"
+					},
+					{
+						"type": "REST",
+						"endpoint": "conveniada-kairos-service:8080/verify",
+						"timeout": 20000,
+						"numberOfAttempts": 3,
+						"operation": "VERIFY",
+						"method": "PUT"
+					},
+					{
+						"type": "REST",
+						"endpoint": "conveniada-kairos-service:8080/recognize",
+						"timeout": 20000,
+						"numberOfAttempts": 3,
+						"operation": "RECOGNIZE",
+						"method": "PUT"
+					}
+				],
+				"cache": {
+					"readEnabled": false,
+					"saveEnabled": false,
+					"endpoint": "https://localhost:9999/cache",
+					"timeToLive": 60000
+				}
+			},
+	"personData": null
+}

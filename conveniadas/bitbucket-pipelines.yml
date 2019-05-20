@@ -1,0 +1,71 @@
+image: maven:3.3.9
+
+pipelines:
+  branches:
+    default:
+      - step:
+          name: Build & Test
+          services:
+            - docker
+          caches:
+            - maven
+            - docker
+          script:
+            - docker login -u _json_key -p "$GCLOUD_API_KEYFILE" https://gcr.io
+            - mvn -B verify -DbuildNumber=C-"$BITBUCKET_COMMIT"_B-"$BITBUCKET_BUILD_NUMBER"
+      - step:
+          name: Deploy to Test
+          deployment: test
+          trigger: manual
+          image: atlassian/pipelines-kubectl
+          script:
+            # Set IMAGE_NAME variable used throughout step
+            - export IMAGE_NAME=$IMAGE_NAME_LOCATION/$CLOUDSDK_CORE_PROJECT/$IMAGE_NAME_APP:C-"$BITBUCKET_COMMIT"_B-"$BITBUCKET_BUILD_NUMBER"
+            - echo $KUBE_TOKEN_TEST | base64 -d > ./kube_token_test
+            - echo $KUBE_CA_TEST | base64 -d > ./kube_ca_test
+            # Configure kubectl
+            #
+            # This assumes your Docker image is already pushed to DockerHub with a version of BITBUCKET_BUILD_NUMBER
+            # and is running on the Kubernetes cluster. Use the following command locally to run the image before setting the deployment:
+            # kubectl run |app-name> --image=|my.dockerhub.username>/|image-name:latest>
+            #
+            - kubectl config set-cluster $GCLOUD_SERVER_CLUSTER_NAME_TEST --server=$GCLOUD_SERVER_CLUSTER_TEST --certificate-authority="$(pwd)/kube_ca_test"
+            - kubectl config set-credentials $KUBE_USER_TEST --token="$(cat ./kube_token_test)"
+            - kubectl config set-context development --cluster=$GCLOUD_SERVER_CLUSTER_NAME_TEST --user=$KUBE_USER_TEST
+            - kubectl config use-context development
+            # Update the deployment to use the new Docker image
+            - kubectl set image deployment/$IMAGE_NAME_APP $IMAGE_NAME_APP=$IMAGE_NAME
+      - step:
+          name: Deploy to Homolog
+          deployment: staging
+          trigger: manual
+          image: atlassian/pipelines-kubectl
+          script:
+            # Set IMAGE_NAME variable used throughout step
+            - export IMAGE_NAME=$IMAGE_NAME_LOCATION/$CLOUDSDK_CORE_PROJECT/$IMAGE_NAME_APP:C-"$BITBUCKET_COMMIT"_B-"$BITBUCKET_BUILD_NUMBER"
+            - echo $KUBE_TOKEN_HOMOLOG | base64 -d > ./kube_token_homolog
+            - echo $KUBE_CA_HOMOLOG | base64 -d > ./kube_ca_homolog
+            # Configure kubectl
+            - kubectl config set-cluster $GCLOUD_SERVER_CLUSTER_NAME_HOMOLOG --server=$GCLOUD_SERVER_CLUSTER_HOMOLOG --certificate-authority="$(pwd)/kube_ca_homolog"
+            - kubectl config set-credentials $KUBE_USER_HOMOLOG --token="$(cat ./kube_token_homolog)"
+            - kubectl config set-context development --cluster=$GCLOUD_SERVER_CLUSTER_NAME_HOMOLOG --user=$KUBE_USER_HOMOLOG
+            - kubectl config use-context development
+            # Update the deployment to use the new Docker image
+            - kubectl set image deployment/$IMAGE_NAME_APP $IMAGE_NAME_APP=$IMAGE_NAME
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          image: atlassian/pipelines-kubectl
+          script:
+            # Set IMAGE_NAME variable used throughout step
+            - export IMAGE_NAME=$IMAGE_NAME_LOCATION/$CLOUDSDK_CORE_PROJECT/$IMAGE_NAME_APP:C-"$BITBUCKET_COMMIT"_B-"$BITBUCKET_BUILD_NUMBER"
+            - echo $KUBE_TOKEN | base64 -d > ./kube_token
+            - echo $KUBE_CA | base64 -d > ./kube_ca
+            # Configure kubectl
+            - kubectl config set-cluster $GCLOUD_SERVER_CLUSTER_NAME --server=$GCLOUD_SERVER_CLUSTER --certificate-authority="$(pwd)/kube_ca"
+            - kubectl config set-credentials $KUBE_USER --token="$(cat ./kube_token)"
+            - kubectl config set-context development --cluster=$GCLOUD_SERVER_CLUSTER_NAME --user=$KUBE_USER
+            - kubectl config use-context development
+            # Update the deployment to use the new Docker image
+            - kubectl set image deployment/$IMAGE_NAME_APP $IMAGE_NAME_APP=$IMAGE_NAME

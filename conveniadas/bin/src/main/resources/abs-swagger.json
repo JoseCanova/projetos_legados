@@ -1,0 +1,1703 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Valid Identity Cloud ABIS API"
+	},
+	"paths": {
+		"/accounts/{accountId}": {
+			"put": {
+				"tags": [
+					"Accounts"
+				],
+				"summary": "Updates an ABIS account",
+				"operationId": "AccountsByAccountIdPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "accountId",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "accountRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/UpdateAccountRequest"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Account updated succesfully"
+					},
+					"400": {
+						"description": "Bad request data",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"404": {
+						"description": "Account not found",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Unexpected exception",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"Accounts"
+				],
+				"summary": "Setup a new ABIS account",
+				"operationId": "AccountsByAccountIdPost",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "accountId",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "accountRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/CreateAccountRequest"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Account added succesfully"
+					},
+					"400": {
+						"description": "Bad request data",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"409": {
+						"description": "Account already exists",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Unexpected exception",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/enrollment/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Returns an enrollment transaction info",
+				"operationId": "FacialEnrollmentByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "imageData",
+						"in": "query",
+						"description": "Return image data?",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Enrollment transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialEnrollmentResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Enrolls a new facial image",
+				"operationId": "FacialEnrollmentByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "enrollRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialEnrollmentRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Enroll Transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialEnrollmentResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialEnrollmentResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/features/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Detection and Extraction"
+				],
+				"summary": "Returns a feature extraction transaction info",
+				"operationId": "FacialFeaturesByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Feature extraction transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialFeaturesResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Detection and Extraction"
+				],
+				"summary": "Returns features for a photo",
+				"operationId": "FacialFeaturesByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "featuresRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialFeaturesRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Transaction created successfully",
+						"schema": {
+							"$ref": "#/definitions/FacialFeaturesResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialFeaturesResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/identify/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Returns an identify transaction info",
+				"operationId": "FacialIdentifyByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Identify transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialIdentifyResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Perform a facial 1:N search",
+				"operationId": "FacialIdentifyByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "identifyRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialIdentifyRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Identify Transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialIdentifyResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialIdentifyResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/match/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Returns a match transaction info",
+				"operationId": "FacialMatchByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Match transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialMatchResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Match two facial images",
+				"operationId": "FacialMatchByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "matchRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialMatchRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Transaction created successfully",
+						"schema": {
+							"$ref": "#/definitions/FacialMatchResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialMatchResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/recordverification/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Returns a record verification transaction info",
+				"operationId": "FacialRecordverificationByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "imageData",
+						"in": "query",
+						"description": "Return image data?",
+						"required": false,
+						"type": "boolean"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Enrollment transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialRecordVerificationResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Performs a facial 1:R verification",
+				"operationId": "FacialRecordverificationByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "recordVerificationRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialRecordVerificationRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Transaction created successfully",
+						"schema": {
+							"$ref": "#/definitions/FacialRecordVerificationResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialRecordVerificationResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/subjects/{subjectKey}": {
+			"get": {
+				"tags": [
+					"Subjects"
+				],
+				"summary": "Returns a subject by its unique key",
+				"operationId": "SubjectsBySubjectKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "subjectKey",
+						"in": "path",
+						"description": "Subject unique key",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "data",
+						"in": "query",
+						"description": "Use 'faces' to return facial source data and/or 'fingerprints' to return fingerprint source data",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Subject details",
+						"schema": {
+							"$ref": "#/definitions/Subject"
+						}
+					},
+					"404": {
+						"description": "Subject not found",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Subjects"
+				],
+				"summary": "Deletes a subject by its unique key",
+				"operationId": "SubjectsBySubjectKeyDelete",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "subjectKey",
+						"in": "path",
+						"description": "Subject unique key",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Subject deleted"
+					},
+					"404": {
+						"description": "Subject not found",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/subjects": {
+			"get": {
+				"tags": [
+					"Subjects"
+				],
+				"summary": "Returns a list of active subjects",
+				"operationId": "SubjectsGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "data",
+						"in": "query",
+						"description": "Use 'faces' to return facial source data and/or 'fingerprints' to return fingerprint source data",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "count",
+						"in": "query",
+						"description": "Number of records per page",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"description": "Page offset",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "List of subjects",
+						"schema": {
+							"$ref": "#/definitions/ListModel[Subject]"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		},
+		"/facial/verify/{transactionKey}": {
+			"get": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Returns a verify transaction info",
+				"operationId": "FacialVerifyByTransactionKeyGet",
+				"consumes": [],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "Transaction Key",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "stateHistory",
+						"in": "query",
+						"description": "Return state history?",
+						"required": false,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Verify transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialVerifyResponse"
+						}
+					},
+					"404": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Facial Recognition"
+				],
+				"summary": "Match a facial image against a previously enrolled facial image",
+				"operationId": "FacialVerifyByTransactionKeyPut",
+				"consumes": [
+					"application/json-patch+json",
+					"application/json",
+					"text/json",
+					"application/*+json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "transactionKey",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "verifyRequest",
+						"in": "body",
+						"description": "",
+						"required": false,
+						"schema": {
+							"$ref": "#/definitions/FacialVerifyRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Verify Transaction details",
+						"schema": {
+							"$ref": "#/definitions/FacialVerifyResponse"
+						}
+					},
+					"409": {
+						"description": "Transaction key already exists",
+						"schema": {
+							"$ref": "#/definitions/FacialVerifyResponse"
+						}
+					},
+					"400": {
+						"description": "Request data is invalid",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"CreateAccountRequest": {
+			"type": "object",
+			"properties": {
+				"configurationName": {
+					"type": "string"
+				}
+			}
+		},
+		"Error": {
+			"type": "object",
+			"properties": {
+				"controlId": {
+					"type": "string"
+				},
+				"errorCode": {
+					"type": "string"
+				},
+				"errorMessage": {
+					"type": "string"
+				},
+				"errorDetails": {
+					"type": "string"
+				}
+			}
+		},
+		"UpdateAccountRequest": {
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean"
+				}
+			}
+		},
+		"FacialEnrollmentRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"subjectBehavior": {
+					"enum": [
+						"validate",
+						"create"
+					],
+					"type": "string"
+				},
+				"subjectKey": {
+					"type": "string"
+				},
+				"imageKey": {
+					"type": "string"
+				},
+				"imageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"imageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"imageBehaviour": {
+					"enum": [
+						"appendKeep",
+						"appendDisable",
+						"replace"
+					],
+					"type": "string"
+				}
+			}
+		},
+		"FacialEnrollmentResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"subjectExisted": {
+					"type": "boolean"
+				},
+				"subjectKey": {
+					"type": "string"
+				},
+				"imageKey": {
+					"type": "string"
+				},
+				"imageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"imageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"imageHash": {
+					"format": "byte",
+					"type": "string"
+				},
+				"imageBehavior": {
+					"enum": [
+						"appendKeep",
+						"appendDisable",
+						"replace"
+					],
+					"type": "string"
+				},
+				"data": {
+					"$ref": "#/definitions/FacialEnrollmentData"
+				}
+			}
+		},
+		"FaceTransactionState": {
+			"type": "object",
+			"properties": {
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				}
+			}
+		},
+		"FacialEnrollmentData": {
+			"type": "object",
+			"properties": {
+				
+			}
+		},
+		"FacialFeaturesRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"tokenExpiration": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"maximumFaces": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"imageData": {
+					"format": "byte",
+					"type": "string"
+				}
+			}
+		},
+		"FacialFeaturesResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"tokenExpiration": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"maximumFaces": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"data": {
+					"$ref": "#/definitions/FacialFeaturesData"
+				}
+			}
+		},
+		"FacialFeaturesData": {
+			"type": "object",
+			"properties": {
+				"token": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"expiresAt": {
+					"format": "date-time",
+					"type": "string"
+				}
+			}
+		},
+		"FacialIdentifyRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"referenceImageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"referenceImageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"listSize": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"threshold": {
+					"format": "double",
+					"type": "number"
+				}
+			}
+		},
+		"FacialIdentifyResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"matches": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IdentifyMatch"
+					}
+				}
+			}
+		},
+		"IdentifyMatch": {
+			"type": "object",
+			"properties": {
+				"imageKey": {
+					"type": "string"
+				},
+				"score": {
+					"type": "string"
+				}
+			}
+		},
+		"FacialMatchRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"referenceImageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"referenceImageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"probeImageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"probeImageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"threshold": {
+					"format": "double",
+					"type": "number"
+				}
+			}
+		},
+		"FacialMatchResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"score": {
+					"format": "double",
+					"type": "number"
+				},
+				"threshold": {
+					"format": "double",
+					"type": "number"
+				},
+				"match": {
+					"type": "boolean"
+				}
+			}
+		},
+		"FacialRecordVerificationRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"referenceImageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"referenceImageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"subjectKey": {
+					"type": "string"
+				}
+			}
+		},
+		"FacialRecordVerificationResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"matches": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RecordVerificationMatch"
+					}
+				}
+			}
+		},
+		"RecordVerificationMatch": {
+			"type": "object",
+			"properties": {
+				"imageKey": {
+					"type": "string"
+				},
+				"resultScore": {
+					"type": "string"
+				}
+			}
+		},
+		"Subject": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"faces": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Face"
+					}
+				},
+				"fingerprints": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Fingerprint"
+					}
+				}
+			}
+		},
+		"Face": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"created": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updated": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"status": {
+					"enum": [
+						"unregistered",
+						"registered"
+					],
+					"type": "string"
+				},
+				"data": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceData"
+					}
+				}
+			}
+		},
+		"Fingerprint": {
+			"type": "object",
+			"properties": {
+				"hand": {
+					"enum": [
+						"left",
+						"right"
+					],
+					"type": "string"
+				},
+				"finger": {
+					"enum": [
+						"thumb",
+						"index",
+						"middle",
+						"ring",
+						"little"
+					],
+					"type": "string"
+				},
+				"created": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updated": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"status": {
+					"enum": [
+						"unregistered",
+						"registered",
+						"amputated",
+						"damaged"
+					],
+					"type": "string"
+				},
+				"quality": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FingerprintQuality"
+					}
+				},
+				"data": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FingerprintData"
+					}
+				}
+			}
+		},
+		"FaceData": {
+			"type": "object",
+			"properties": {
+				"format": {
+					"enum": [
+						"jpeg"
+					],
+					"type": "string"
+				},
+				"source": {
+					"format": "byte",
+					"type": "string"
+				}
+			}
+		},
+		"FingerprintQuality": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"enum": [
+						"nfiq"
+					],
+					"type": "string"
+				},
+				"value": {
+					"format": "double",
+					"type": "number"
+				}
+			}
+		},
+		"FingerprintData": {
+			"type": "object",
+			"properties": {
+				"format": {
+					"enum": [
+						"wsq"
+					],
+					"type": "string"
+				},
+				"source": {
+					"format": "byte",
+					"type": "string"
+				}
+			}
+		},
+		"ListModel[Subject]": {
+			"type": "object",
+			"properties": {
+				"data": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Subject"
+					}
+				},
+				"count": {
+					"format": "int64",
+					"type": "integer",
+					"readOnly": true
+				},
+				"offset": {
+					"format": "int64",
+					"type": "integer"
+				},
+				"total": {
+					"format": "int64",
+					"type": "integer"
+				}
+			}
+		},
+		"FacialVerifyRequest": {
+			"type": "object",
+			"properties": {
+				"waitTimeout": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"referenceImageData": {
+					"format": "byte",
+					"type": "string"
+				},
+				"referenceImageType": {
+					"enum": [
+						"reference",
+						"data"
+					],
+					"type": "string"
+				},
+				"imageKey": {
+					"type": "string"
+				}
+			}
+		},
+		"FacialVerifyResponse": {
+			"type": "object",
+			"properties": {
+				"transactionKey": {
+					"format": "uuid",
+					"type": "string"
+				},
+				"receivedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"updatedAt": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"transactionState": {
+					"enum": [
+						"received",
+						"queued",
+						"processing",
+						"done",
+						"error",
+						"canceled"
+					],
+					"type": "string"
+				},
+				"stateReason": {
+					"type": "string"
+				},
+				"stateHistory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FaceTransactionState"
+					}
+				},
+				"score": {
+					"format": "double",
+					"type": "number"
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"implicit": {
+			"flow": "implicit",
+			"authorizationUrl": "http://oauth.dev.valididcloud.com/connect/authorize",
+			"tokenUrl": "http://oauth.dev.valididcloud.com/connect/token",
+			"scopes": {
+				"cap": "Central Authentication Portal",
+				"abis": "Identity Cloud ABIS Full Access",
+				"abis:subjects": "Identity Cloud ABIS Subjects",
+				"abis:facial": "Identity Cloud ABIS Facial Recognition",
+				"abis:fingerprint": "Identity Cloud ABIS Fingerprint Recognition"
+			},
+			"type": "oauth2",
+			"description": "OAuth2 Implicit FLow using Valid Identity Cloud Authorization Portal."
+		}
+	},
+	"security": [
+		{
+			"implicit": [
+				"cap",
+				"abis",
+				"abis:facial",
+				"abis:fingerprint",
+				"abis:subjects"
+			]
+		}
+	]
+}

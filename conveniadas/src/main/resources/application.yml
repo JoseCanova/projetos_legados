@@ -1,0 +1,169 @@
+
+defaultRequestTimeout: 30000
+defaultResponseTimeout: 90000
+defaultTimeoutInterval: 1000
+transactionDefaultTimeout: 30000
+requestInterval: 200
+clientId: e2028571-dc56-4ae9-9996-8991651ddcb1
+clientSecret: friend
+tokenServerUrl: https://oauth.dev.valididcloud.com
+tokenUri: /connect/token
+
+
+dispatcher:
+   token-parameters:
+      -response_type: code
+      -grant_type: client_credentials
+      -code: e903ef0d5bb8b80b348f8cb81f54bb71ad7448afa9e54c0e2a97772f3d4d9688
+      -redirect_uri: http://localhost:8080/core
+      -client_id: e2028571-dc56-4ae9-9996-8991651ddcb1
+      -client_secret: friend
+      -scope: abis.dev.valididcloud.com.abis
+   filter-header-list:
+      -Authorization
+      -authorization
+      -accessToken
+      -Content-Type
+      -content-type
+      -contentType
+      -date
+      -Date
+      -http_statuscode
+      -transfer-encoding
+
+server:
+  port: 8080
+  
+spring: 
+  data:
+    mongodb:
+      database: abisDB
+      uri: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/   
+      
+mongo:
+    uri: localhost
+    port: 27017
+    database-name: abisDB
+    channels: 
+      input-channel: mongoInputChannel
+      output-channel: mongoOuputChannel
+      message-retrieve-input-channel: messageRetrieveInputChannel
+      message-retrieve-output-channel: messageRetrieveOutputChannel
+      mongo-error-handler-channel: mongoErrorHandlerChannel      
+
+http:
+    abis-client-scheme: https
+    abis-client-url: abis.dev.valididcloud.com
+    #abis-client-url: server-address-abis:8090
+    end-point: /abis
+    end-points:
+       - name: ACCOUNTS
+         uri: /accounts/{accountId}
+         methods:
+              - PUT
+              - POST
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse
+         response-code: 204
+         allow-pooling: false
+       - name: ENROLL
+         uri: /facial/enrollment/{transactionKey}
+         methods:
+              - GET
+              - PUT
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse   
+         response-code: 201 
+         request-class: br.com.valid.bio.conveniadas.abis.model.enroll.EnrollRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementEnrollRequestTransformer
+         allow-pooling: true
+       - name: IDENTIFY
+         uri: /facial/identify/{transactionKey}
+         methods:
+              - GET
+              - PUT      
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse  
+         response-code: 201    
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementIdentityRequestTransformer         
+         allow-pooling: true
+       - name: MATCH
+         uri: /facial/match/{transactionKey}
+         methods:
+              - GET
+              - PUT    
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse   
+         response-code: 201   
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementMatchRequestTransformer         
+         allow-pooling: true
+       - name: RECORD_VERIFICATION
+         uri: /facial/recordverification/{transactionKey}
+         methods:
+              - GET
+              - PUT 
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse  
+         response-code: 201    
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementRecordRequestTransformer         
+         allow-pooling: true
+       - name: VERIFY
+         uri: /facial/verify/{transactionKey}
+         methods:
+              - GET
+              - PUT 
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse   
+         response-code: 201
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementVerifyRequestTransformer            
+         allow-pooling: true
+       - name: FEATURES
+         uri: /facial/features/{transactionKey}
+         methods:
+              - GET
+              - PUT               
+         response-class: br.com.valid.bio.conveniadas.abis.model.response.BaseResponse
+         response-code: 201
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementBaseRequestTransformer
+         allow-pooling: true
+       - name: SUBJECTS
+         uri: /subjects/{subjectKey}
+         methods:
+              - GET
+              - PUT                                                 
+              - DELETE
+              - POST
+         response-class: br.com.valid.bio.conveniadas.abis.model.subject.SubjectResponse
+         response-code: 201 
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementSubjectRequestTransformer   
+         allow-pooling: false
+       - name: SUBJECTS_LIST
+         uri: /subjects
+         methods:
+              - GET
+         response-class: br.com.valid.bio.conveniadas.abis.model.subject.SubjectResponse
+         response-code: 201 
+         request-class: br.com.valid.bio.conveniadas.abis.model.request.BaseRequest
+         request-transformer: br.com.valid.bio.conveniadas.abis.service.transformers.AgreementSubjectRequestTransformer               
+         allow-pooling: false
+         
+channel:
+    main-input-channel: mainInputChannel
+    main-output-channel: mainOutputChannel    
+    main-http-reponse-channel: mainHttpResponseChannel
+    main-http-request-channel: mainHttpRequestChannel
+    message-enricher-input-channel: messageEnricherInputChannel
+    message-enricher-output-channel: messageEnricherOutputChannel
+    prepare-response-channel: prepareResponseChannel
+
+rabbit:
+    agreement-queue-name: agreementQueueName    
+    default-reply-queue-name: defaultReplyQueueName
+
+mq:
+   broker-url: tcp://127.0.0.1:61616   
+   cache-size: 100
+   
+messages:
+   bad-request: Bad Request on Gateway
+   request-expired: Request Expired   
