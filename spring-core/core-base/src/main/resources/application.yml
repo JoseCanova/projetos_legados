@@ -3,3 +3,17 @@ server:
   
 http:
     end-point: /core-base  
+
+
+spring.datasource.hikari.connectionTimeout: 20000
+spring.datasource.hikari.maximumPoolSize: 5
+
+    
+spring.datasource.url:  jdbc:postgresql://localhost:5432/springbootdb 
+spring.datasource.username: postgres 
+spring.datasource.password: Postgres123@   
+spring.jpa.hibernate.ddl-auto: create-drop
+
+spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+    
