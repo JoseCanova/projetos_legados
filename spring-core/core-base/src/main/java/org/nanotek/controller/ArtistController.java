@@ -13,8 +13,16 @@ public class ArtistController {
 	@Autowired 
 	ArtistBaseMap artistBaseMap; 
 	
+	
+	
     @RequestMapping("/map_config")
-    public ArtistBaseMap greeting(@RequestParam(value="count", defaultValue="1") Long count) {
+    public ArtistBaseMap mapConfig(@RequestParam(value="count", defaultValue="1") Long count) {
         return artistBaseMap;
     }
+    
+    @RequestMapping("/load")
+    public ArtistBaseMap load(@RequestParam(value="count", defaultValue="1") Long count) {
+        return artistBaseMap;
+    }
+    
 }

@@ -1,5 +1,6 @@
 package org.nanotek.service.parser;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 @Component
 @DependsOn(value = {"ArtistBaseMap"})
-public class ArtistParser extends CSVParser implements InitializingBean{
+public class ArtistParser extends CSVParser implements InitializingBean , Closeable{
 
 	public CSVReader csvReader;
 	
@@ -54,6 +55,11 @@ public class ArtistParser extends CSVParser implements InitializingBean{
 
 	public String[] readNext() throws IOException {
 		return csvReader.readNext();
+	}
+
+	@Override
+	public void close() throws IOException {
+		csvReader.close();
 	}
 	
 }
