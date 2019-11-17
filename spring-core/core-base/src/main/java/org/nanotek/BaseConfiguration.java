@@ -26,7 +26,8 @@ public class BaseConfiguration {
 
 	    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 	    factory.setJpaVendorAdapter(vendorAdapter);
-	    factory.setPackagesToScan("com.acme.domain");
+	    factory.setPackagesToScan("org.nanotek");
+	    factory.setPersistenceUnitName("spring-core-music-brainz");
 //	    factory.setDataSource(dataSource());
 	    return factory;
 	  }
