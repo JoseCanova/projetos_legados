@@ -26,16 +26,17 @@ artist:
     id: 0
     gid: 1
     name: 2
-    begin-date-year: 3
-    begin-date-month: 4
-    begin-date-day: 5
-    end-date-year: 6
-    end-date-month: 7
-    end-date-day: 8
-    type: 9
-    area: 10
-    gender: 11 
-    comment: 12
-    edits-pending: 13
-    last-updated: 14 
-    ended: 15
+    sortName: 3
+    begin-date-year: 4
+    begin-date-month: 5
+    begin-date-day: 6
+    end-date-year: 7
+    end-date-month: 8
+    end-date-day: 9
+    type: 10
+    area: 11
+    gender: 12 
+    comment: 13
+    edits-pending: 14
+    last-updated: 15
+    ended: 16
