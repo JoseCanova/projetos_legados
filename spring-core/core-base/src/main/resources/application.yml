@@ -21,6 +21,7 @@ artist:
   fileLocation: E:\\mbfile\\mbdump\\mbdump
   fileName: artist
   id: Artist
+  type: org.nanotek.beans.ArtistName
   baseMap:
     id: 0
     gid: 1
