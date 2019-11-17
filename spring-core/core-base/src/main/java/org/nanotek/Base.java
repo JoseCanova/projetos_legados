@@ -22,4 +22,8 @@ public interface Base<K extends Serializable> extends Identifiable <K>  {
 	{ 
 		return baseSupplier.get();
 	}
+
+	public default Base<?> newInstance() throws InstantiationException, IllegalAccessException{ 
+		return this.getClass().newInstance();
+	}
 }

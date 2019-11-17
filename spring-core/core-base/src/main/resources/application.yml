@@ -15,5 +15,29 @@ spring.datasource.password: Postgres123@
 spring.jpa.hibernate.ddl-auto: create-drop
 
 spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+entitymanager.packagesToScan: org.nanotek
+
+artist_map_component:
+  mappers:
+    fileLocation: E:\\mbfile\\mbdump\\mbdump\\artist
+    fileName: artist
+    id: Artist
+    baseMap:
+     id: 1
+     gid: 2
+     name: 3
+     begin_date_year: 4
+     begin_date_month: 5
+     begin_date_day: 6
+     end_date_year: 7 
+     end_date_month: 8
+     end_date_day: 9
+     type: 10
+     area: 11
+     gender: 12 
+     comment: 13
+     edits_pending: 14
+     last_updated: 15 
+     ended: 16
 
     

@@ -1,23 +1,19 @@
 package org.nanotek.opencsv;
 
-import javax.annotation.PostConstruct;
-
 import org.nanotek.Base;
+import org.springframework.beans.factory.InitializingBean;
 
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
-public class    MapColumnStrategy<T extends BaseMap<Class<Base<?>>>, I extends Base<?>> extends     ColumnPositionMappingStrategy<I>  {
+public class MapColumnStrategy<T extends BaseMap<I>, I extends Base<?>> extends  ColumnPositionMappingStrategy<I> implements InitializingBean {
 
-	private T baseMap; 
+	protected T baseMap; 
 	
-	public MapColumnStrategy(T baseMap) {
+	public MapColumnStrategy() {
 		super();
-		this.baseMap = baseMap;
 	}
 
-
-	@PostConstruct
-	public void buildMapping() {
+	public void afterPropertiesSet() {
 		assert (baseMap !=null && baseMap.size() >=1);
 		String [] csvColumns = new String[baseMap.getTargetSize()];
 		try {
