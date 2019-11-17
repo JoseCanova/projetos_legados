@@ -52,7 +52,6 @@ public class ArtistName implements Base<Long> {
 	@Column(name="gender", nullable=true)
     private Integer gender;
     
-
 	public ArtistName() {
 	}
 

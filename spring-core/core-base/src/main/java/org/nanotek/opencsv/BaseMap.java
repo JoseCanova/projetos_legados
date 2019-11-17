@@ -52,11 +52,6 @@ public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implemen
 	}
 
 	public Integer getTargetSize() {
-		return targetSize;
+		return size();
 	}
-
-	public void setTargetSize(Integer targetSize) {
-		this.targetSize = targetSize;
-	}
-
 }

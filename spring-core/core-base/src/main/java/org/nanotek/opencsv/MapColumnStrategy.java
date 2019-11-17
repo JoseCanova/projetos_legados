@@ -13,6 +13,14 @@ public class MapColumnStrategy<T extends BaseMap<I>, I extends Base<?>> extends 
 		super();
 	}
 
+	public T getBaseMap() {
+		return baseMap;
+	}
+
+	public void setBaseMap(T baseMap) {
+		this.baseMap = baseMap;
+	}
+
 	public void afterPropertiesSet() {
 		assert (baseMap !=null && baseMap.size() >=1);
 		String [] csvColumns = new String[baseMap.getTargetSize()];
