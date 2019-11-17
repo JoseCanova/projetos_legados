@@ -3,6 +3,7 @@ package org.nanotek;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.nanotek.base.maps.ArtistBaseMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -20,10 +21,8 @@ public class BaseConfiguration {
 
 	  @Bean
 	  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-
 	    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 	    vendorAdapter.setGenerateDdl(true);
-
 	    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 	    factory.setJpaVendorAdapter(vendorAdapter);
 	    factory.setPackagesToScan("org.nanotek");
@@ -34,9 +33,14 @@ public class BaseConfiguration {
 
 	  @Bean
 	  public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-
 	    JpaTransactionManager txManager = new JpaTransactionManager();
 	    txManager.setEntityManagerFactory(entityManagerFactory);
 	    return txManager;
 	  }
+	  
+	  @Bean
+	  public ArtistBaseMap artistBaseMap() { 
+		  return new ArtistBaseMap();
+	  }
+	  
 }
