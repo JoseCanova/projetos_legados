@@ -1,4 +1,4 @@
-package org.nanotek.base.reader;
+package org.nanotek.service.parser;
 
 import java.io.File;
 import java.io.FileReader;
