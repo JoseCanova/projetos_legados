@@ -9,6 +9,4 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 @Component
 @DependsOn(value = {"ArtistBaseMap"})
 public class ArtistCsvToBean extends CsvToBean<ArtistName>{
-	
-	
 }
