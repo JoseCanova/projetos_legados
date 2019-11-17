@@ -38,9 +38,4 @@ public class BaseConfiguration {
 	    return txManager;
 	  }
 	  
-	  @Bean
-	  public ArtistBaseMap artistBaseMap() { 
-		  return new ArtistBaseMap();
-	  }
-	  
 }
