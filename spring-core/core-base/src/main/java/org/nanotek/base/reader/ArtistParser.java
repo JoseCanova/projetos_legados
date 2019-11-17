@@ -2,6 +2,8 @@ package org.nanotek.base.reader;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.springframework.beans.factory.InitializingBean;
@@ -9,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import au.com.bytecode.opencsv.CSVParser;
 import au.com.bytecode.opencsv.CSVReader;
 
 @Component
 @DependsOn(value = {"ArtistBaseMap"})
-public class ArtistReader implements InitializingBean{
+public class ArtistParser extends CSVParser implements InitializingBean{
 
 	public CSVReader csvReader;
 	
@@ -40,9 +43,17 @@ public class ArtistReader implements InitializingBean{
 	public void afterPropertiesSet() throws Exception {
 		StringBuffer fileLocationStr = new StringBuffer();
 		fileLocationStr.append(artistBaseMap.getFileLocation())
-							.append(System.getProperty("file.separator"));
+							.append(System.getProperty("file.separator")).append(artistBaseMap.getFileName().toString());
 		FileReader fileReader = new FileReader(new File(fileLocationStr.toString()));
 		csvReader = new CSVReader(fileReader , '\t');
+	}
+
+	public List<String[]> readAll() throws IOException {
+		return csvReader.readAll();
+	}
+
+	public String[] readNext() throws IOException {
+		return csvReader.readNext();
 	}
 	
 }
