@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 
-@Component
+@Component(value = "ArtistBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "artist")
 public class ArtistBaseMap extends MapColumnStrategy<BaseMap<Artist>, Artist>{

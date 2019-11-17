@@ -17,27 +17,24 @@ spring.jpa.hibernate.ddl-auto: create-drop
 spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
 entitymanager.packagesToScan: org.nanotek
 
-artist_map_component:
-  mappers:
-    fileLocation: E:\\mbfile\\mbdump\\mbdump\\artist
-    fileName: artist
-    id: Artist
-    baseMap:
-     id: 1
-     gid: 2
-     name: 3
-     begin_date_year: 4
-     begin_date_month: 5
-     begin_date_day: 6
-     end_date_year: 7 
-     end_date_month: 8
-     end_date_day: 9
-     type: 10
-     area: 11
-     gender: 12 
-     comment: 13
-     edits_pending: 14
-     last_updated: 15 
-     ended: 16
-
-    
+artist:
+  fileLocation: E:\\mbfile\\mbdump\\mbdump\\artist
+  fileName: artist
+  id: Artist
+  baseMap:
+    id: 0
+    gid: 1
+    name: 2
+    begin-date-year: 3
+    begin-date-month: 4
+    begin-date-day: 5
+    end-date-year: 6
+    end-date-month: 7
+    end-date-day: 8
+    type: 9
+    area: 10
+    gender: 11 
+    comment: 12
+    edits-pending: 13
+    last-updated: 14 
+    ended: 15
