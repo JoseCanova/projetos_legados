@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.service.parser.ArtistCsvToBean;
@@ -46,5 +47,11 @@ public class ArtistController {
     	}
     	return artists;
     }
+    
+    /* here is spring integration */
+    public Result process() { 
+    	return null;
+    }
+    
     
 }
