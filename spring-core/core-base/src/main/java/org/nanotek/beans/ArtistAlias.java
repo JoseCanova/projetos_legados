@@ -42,11 +42,14 @@ public class ArtistAlias implements Base<Long> {
 	private Long artistId; 
 	@Column(name="name_key_id",insertable=true)
 	private Long nameId; 
+	@Column(name="alias",insertable=true)
+	private String alias;
+	@Column(name="sortAlias",insertable=true)
+	private String sortAlias;
 	@Column(name="locale",insertable=true)
 	private String locale;
-	@Column
-	@Temporal(TemporalType.DATE)
-	private Date lastUpdated;
+	@Column(name="lastUpdated",insertable=true)
+	private String lastUpdated;
 	
 	public ArtistAlias() {
 	}
@@ -83,5 +86,30 @@ public class ArtistAlias implements Base<Long> {
 	public void setLocale(String locale) {
 		this.locale = locale;
 	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public String getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(String lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public String getSortAlias() {
+		return sortAlias;
+	}
+
+	public void setSortAlias(String sortAlias) {
+		this.sortAlias = sortAlias;
+	}
+
 
 }

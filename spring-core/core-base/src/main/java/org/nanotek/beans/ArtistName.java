@@ -1,12 +1,10 @@
 package org.nanotek.beans;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +16,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.nanotek.Base;
-import org.nanotek.Transferable;
 
 @SuppressWarnings("serial")
 @Entity

@@ -42,25 +42,25 @@ artist:
     ended: 16
 
     
-artis_alias:
+artistalias:
   fileLocation: E:\\mbfile\\mbdump\\mbdump
   fileName: artist_alias
   id: ArtistAlias
   type: org.nanotek.beans.ArtistAlias
   baseMap:  
     id: 0
-    artist: 1
-    name: 2
+    artistId: 1
+    alias: 2
     locale: 3
-    edits_pending: 4
-    last_updated: 5
+    editsPending: 4
+    lastUpdated: 5
     type: 6
-    sort_name: 7
-    begin_date_year: 8
-    begin_date_month: 9
-    begin_date_day: 10
-    end_date_year: 11
-    end_date_month: 12
-    end_date_day: 13
-    primary_for_locale: 14
+    sortAlias: 7
+    beginDateYear: 8
+    beginDateMonth: 9
+    beginDateDay: 10
+    endDateYear: 11
+    endDateMonth: 12
+    endDateDay: 13
+    primaryForLocale: 14
     ended: 15

@@ -26,6 +26,7 @@ public class ArtistController {
 	private ArtistBaseMap artistBaseMap; 
 	
 	@Autowired
+	@Qualifier("ArtistParser")
 	private ArtistParser artistParser;
 	
 	@Autowired
