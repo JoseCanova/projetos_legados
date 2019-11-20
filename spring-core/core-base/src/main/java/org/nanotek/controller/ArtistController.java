@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import au.com.bytecode.opencsv.bean.CsvToBean;
+
 @RestController
 @RequestMapping("/artist")
 public class ArtistController {
@@ -27,7 +29,7 @@ public class ArtistController {
 	private ArtistParser artistParser;
 	
 	@Autowired
-	private ArtistCsvToBean artistCsvToBean;
+	private CsvToBean<ArtistName> csvToBean;
 	
 	
     @RequestMapping("/map_config")
@@ -41,7 +43,7 @@ public class ArtistController {
     	int i = 0;
     	while (i < count) { 
     		String[] instanceArray = artistParser.readNext();
-    		ArtistName artistName = artistCsvToBean.processLine(artistBaseMap, instanceArray);
+    		ArtistName artistName = csvToBean.processLine(artistBaseMap, instanceArray);
     		artists.add(artistName);
     		i++;
     	}
