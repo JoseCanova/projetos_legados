@@ -4,7 +4,6 @@ import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.service.parser.ArtistParser;
-import org.nanotek.service.parser.BaseParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +13,8 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist")
-public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName> {
+public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser> {
 
-	@Autowired 
-	private ArtistBaseMap artistBaseMap; 
-	
 	@Autowired
 	@Qualifier("ArtistParser")
 	private ArtistParser artistParser;
@@ -35,7 +31,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 
 	@Override
 	public ArtistBaseMap getBaseMap() {
-		return  artistBaseMap;
+		return  artistParser.getArtistBaseMap();
 	}
 
 	@Override
@@ -44,7 +40,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	}
 
 	@Override
-	public BaseParser getBaseParser() {
+	public ArtistParser getBaseParser() {
 		return artistParser;
 	}
     

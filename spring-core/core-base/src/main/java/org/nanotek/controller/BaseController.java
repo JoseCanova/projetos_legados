@@ -6,8 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
-
 import org.nanotek.Base;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.opencsv.MapColumnStrategy;
@@ -17,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I extends Base<?>> {
+public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I extends Base<?>, P extends BaseParser> {
 
 	public abstract T getBaseMap();
 
 	public abstract CsvToBean<I> getCsvToBean();
 
-	public abstract BaseParser getBaseParser();
+	public abstract  P getBaseParser();
 	
 	
 	@RequestMapping("/map_config")
