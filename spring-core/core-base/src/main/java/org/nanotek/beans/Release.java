@@ -1,6 +1,5 @@
 package org.nanotek.beans;
 
-import javax.enterprise.inject.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

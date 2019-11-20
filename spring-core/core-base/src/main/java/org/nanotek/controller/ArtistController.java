@@ -1,26 +1,20 @@
 package org.nanotek.controller;
 
-import java.beans.IntrospectionException;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.service.parser.ArtistParser;
+import org.nanotek.service.parser.BaseParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist")
-public class ArtistController {
+public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName> {
 
 	@Autowired 
 	private ArtistBaseMap artistBaseMap; 
@@ -34,28 +28,24 @@ public class ArtistController {
 	private CsvToBean<ArtistName> csvToBean;
 	
 	
-    @RequestMapping("/map_config")
-    public ArtistBaseMap mapConfig(@RequestParam(value="count", defaultValue="1") Long count) {
-        return artistBaseMap;
-    }
-    
-    @RequestMapping("/load")
-    public List<ArtistName> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
-    	List<ArtistName> artists = new  ArrayList<ArtistName>();
-    	int i = 0;
-    	while (i < count) { 
-    		String[] instanceArray = artistParser.readNext();
-    		ArtistName artistName = csvToBean.processLine(artistBaseMap, instanceArray);
-    		artists.add(artistName);
-    		i++;
-    	}
-    	return artists;
-    }
-    
     /* here is spring integration */
     public Result process() { 
     	return null;
     }
-    
+
+	@Override
+	public ArtistBaseMap getBaseMap() {
+		return  artistBaseMap;
+	}
+
+	@Override
+	public CsvToBean<ArtistName> getCsvToBean() {
+		return csvToBean;
+	}
+
+	@Override
+	public BaseParser getBaseParser() {
+		return artistParser;
+	}
     
 }

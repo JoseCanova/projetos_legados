@@ -33,8 +33,8 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
     public List<I> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
     	List<I> list = new  ArrayList<>();
     	int i = 0;
-    	while (i < count) { 
-    		String[] instanceArray = getBaseParser().readNext();
+    	String[] instanceArray = null;
+    	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) { 
     		I bean= getCsvToBean().processLine(getBaseMap(), instanceArray);
     		list.add(bean);
     		i++;
