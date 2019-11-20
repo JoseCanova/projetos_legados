@@ -78,4 +78,14 @@ artistcredit:
     created: 4
     editsPending: 5
 
-    
+artistcreditname:
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: artist_credit_name
+  id: ArtistCreditName
+  type: org.nanotek.beans.ArtistCreditName
+  baseMap:  
+    artistCredit: 0
+    position: 1            
+    artist: 2              
+    name: 3                
+    joinPhrase: 4         
