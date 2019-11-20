@@ -3,10 +3,10 @@ package org.nanotek;
 import javax.persistence.EntityManagerFactory;
 
 import org.nanotek.beans.ArtistName;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -39,8 +39,9 @@ public class BaseConfiguration {
 	    return txManager;
 	  }
 	  
-	  @Bean(name = "CsvToBean")
-	  public CsvToBean<Base<?>> artistCsvToBean(){ 
+	  @Bean
+	  @Qualifier(value = "ArtistCsvToBean")
+	  public CsvToBean<ArtistName> csvToBean(){ 
 		  return new CsvToBean<>();
 	  }
 	  

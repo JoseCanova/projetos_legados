@@ -9,9 +9,9 @@ import java.util.List;
 import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
-import org.nanotek.service.parser.ArtistCsvToBean;
 import org.nanotek.service.parser.ArtistParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +29,7 @@ public class ArtistController {
 	private ArtistParser artistParser;
 	
 	@Autowired
+	@Qualifier("ArtistCsvToBean")
 	private CsvToBean<ArtistName> csvToBean;
 	
 	
