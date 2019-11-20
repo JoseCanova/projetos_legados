@@ -6,14 +6,20 @@ public class Result implements Base<Boolean> {
 	
 	private Boolean id;
 
+	public Result() {}
+	
+	public Result(Boolean value) { 
+		this.id = value;
+	}
+	
 	@Override
 	public Boolean getId() {
-		return true;
+		return id;
 	}
 
 	@Override
 	public void setId(Boolean id) {
 		this.id = id;
 	}
-
+	
 }

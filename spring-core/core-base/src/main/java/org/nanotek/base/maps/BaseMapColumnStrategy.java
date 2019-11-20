@@ -1,12 +1,8 @@
 package org.nanotek.base.maps;
 
 import org.nanotek.Base;
-import org.nanotek.beans.ArtistName;
 import org.nanotek.opencsv.BaseMap;
 import org.nanotek.opencsv.MapColumnStrategy;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 
 public class BaseMapColumnStrategy<T extends Base<?>> extends MapColumnStrategy<BaseMap<T>, T>{

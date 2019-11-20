@@ -2,6 +2,7 @@ package org.nanotek;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistName;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -45,5 +46,9 @@ public class BaseConfiguration {
 		  return new CsvToBean<>();
 	  }
 	  
-	  
+	  @Bean
+	  @Qualifier(value = "ArtistAliasCsvToBean")
+	  public CsvToBean<ArtistAlias> csvAliasToBean(){ 
+		  return new CsvToBean<>();
+	  }
 }
