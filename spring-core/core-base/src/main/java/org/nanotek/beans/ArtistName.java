@@ -27,6 +27,8 @@ public class ArtistName implements Base<Long> {
 	@GeneratedValue(generator="artist_name_id_seq",strategy=GenerationType.IDENTITY)
 	@SequenceGenerator(name = "artist_name_id_seq", sequenceName = "artist_name_id_seq")
 	private Long id; 
+	@Column(name="artistId",length=1000,nullable=false)
+	private Long artistId; 
 	@Column(name="name",length=1000,nullable=false)
 	private String name;
 	@Column(name="SORT_NAME",length=1000,nullable=true)
@@ -57,6 +59,14 @@ public class ArtistName implements Base<Long> {
 		return id;
 	}
 
+	public Long getArtistId() {
+		return artistId;
+	}
+
+	public void setArtistId(Long artistId) {
+		this.artistId = artistId;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -172,5 +182,5 @@ public class ArtistName implements Base<Long> {
 		return "ArtistName [id=" + id + ", name=" + name + ", sortName="
 				+ sortName + ", mbid=" + mbid + ", gid=" + gid + "]";
 	}
-	/*"*/
+
 }

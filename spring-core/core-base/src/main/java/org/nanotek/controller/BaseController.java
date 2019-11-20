@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.Produces;
+
 import org.nanotek.Base;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.opencsv.MapColumnStrategy;
@@ -26,8 +28,20 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
 	
 	@RequestMapping("/map_config")
     public MapColumnStrategy<? , ?> mapConfig(@RequestParam(value="count", defaultValue="1") Long count) {
-        return getBaseMap();
+        return getBaseParser().getBaseMap();
     }
+
+	
+    @RequestMapping("/next")
+    public I next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
+    	String[] instanceArray = null;
+    	I bean = null;
+    	if ((instanceArray = getBaseParser().readNext()) !=null) { 
+    		bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
+    	}
+    	return bean;
+    }
+
 	
     @RequestMapping("/load")
     public List<I> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
@@ -35,7 +49,7 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
     	int i = 0;
     	String[] instanceArray = null;
     	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) { 
-    		I bean= getCsvToBean().processLine(getBaseMap(), instanceArray);
+    		I bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
     		list.add(bean);
     		i++;
     	}

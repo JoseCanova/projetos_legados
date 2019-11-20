@@ -23,7 +23,7 @@ artist:
   id: Artist
   type: org.nanotek.beans.ArtistName
   baseMap:
-    id: 0
+    artistId: 0
     gid: 1
     name: 2
     sortName: 3
