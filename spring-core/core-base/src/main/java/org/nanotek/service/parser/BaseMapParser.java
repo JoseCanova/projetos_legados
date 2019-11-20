@@ -3,6 +3,7 @@ package org.nanotek.service.parser;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.opencsv.BaseMap;
 
+@Deprecated
 public class BaseMapParser<T extends BaseMap<?>> extends BaseParser{
 	
 	private BaseMapColumnStrategy<T> baseMap;

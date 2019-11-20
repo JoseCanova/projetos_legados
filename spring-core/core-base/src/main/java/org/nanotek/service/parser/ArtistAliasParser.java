@@ -1,7 +1,6 @@
 package org.nanotek.service.parser;
 
 import org.nanotek.base.maps.ArtistAliasBaseMap;
-import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

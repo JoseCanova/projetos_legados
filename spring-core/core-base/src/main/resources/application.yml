@@ -64,3 +64,18 @@ artistalias:
     endDateDay: 13
     primaryForLocale: 14
     ended: 15
+    
+artistcredit:
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: artist_credit
+  id: ArtistCredit
+  type: org.nanotek.beans.ArtistCredit
+  baseMap:  
+    artistCreditId: 0
+    name: 1
+    artistCount: 2
+    refCount: 3
+    created: 4
+    editsPending: 5
+
+    

@@ -41,7 +41,6 @@ public class ArtistCredit implements Base<Long> {
 	private Long artistCount; 
 	@Column (name="ref_count")
 	private Long refCount;
-	//	private String created; ref_count
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
