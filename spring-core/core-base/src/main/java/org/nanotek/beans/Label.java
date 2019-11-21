@@ -1,6 +1,8 @@
 package org.nanotek.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.nanotek.Base;
@@ -10,21 +12,39 @@ import org.nanotek.Base;
 @Table(name="label")
 public class Label implements Base<Long> {
 	
+	@Id
 	private Long id; 
+	@Column
+	private Long labelId;
+	@Column
 	private String gid; 
+	@Column
 	private Long name; 
+	@Column
 	private Long sortName; 
+	@Column
 	private String type; 
+	@Column
 	private String labelCode; 
+	@Column
 	private String country;
+	@Column
 	private String beginDateYear; 
+	@Column
 	private String beginDateMonth; 
+	@Column
 	private String beginDateDay; 
+	@Column
 	private String endDateYear; 
+	@Column
 	private String endDateMonth; 
+	@Column
 	private String endDateDay; 
+	@Column
 	private String ipiCode;
 	
+	public Label() {
+	}
 	
 	public Long getId() {
 		return id;
@@ -136,6 +156,14 @@ public class Label implements Base<Long> {
 
 	public void setEndDateDay(String endDateDay) {
 		this.endDateDay = endDateDay;
+	}
+
+	public Long getLabelId() {
+		return labelId;
+	}
+
+	public void setLabelId(Long labelId) {
+		this.labelId = labelId;
 	} 
 
 }

@@ -12,10 +12,18 @@ spring.datasource.hikari.maximumPoolSize: 5
 spring.datasource.url:  jdbc:postgresql://localhost:5432/springbootdb 
 spring.datasource.username: postgres 
 spring.datasource.password: Postgres123@   
-spring.jpa.hibernate.ddl-auto: create-drop
 
-spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
-entitymanager.packagesToScan: org.nanotek
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+entitymanager:
+  packagesToScan: org.nanotek
 
 artist:
   fileLocation: E:\\mbfile\\mbdump\\mbdump

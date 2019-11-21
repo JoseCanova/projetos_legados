@@ -7,8 +7,6 @@ import org.nanotek.opencsv.MapColumnStrategy;
 
 public class BaseMapColumnStrategy<T extends Base<?>> extends MapColumnStrategy<BaseMap<T>, T>{
 
-	private static final long serialVersionUID = 2528373300321092539L;
-
 	public String fileLocation; 
 	
 	public String fileName;

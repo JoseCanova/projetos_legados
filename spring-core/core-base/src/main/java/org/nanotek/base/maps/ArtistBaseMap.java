@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "artist")
 public class ArtistBaseMap extends BaseMapColumnStrategy<ArtistName>{
 
-	private static final long serialVersionUID = 2528373300321092539L;
-
 	public ArtistBaseMap() {
 	}
 

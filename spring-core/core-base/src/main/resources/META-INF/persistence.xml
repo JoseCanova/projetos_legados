@@ -11,6 +11,7 @@
 		<class>org.nanotek.beans.ArtistCreditName</class>
 		<class>org.nanotek.beans.ArtistName</class>
 		<class>org.nanotek.beans.Isrc</class>
+		<class>org.nanotek.beans.Label</class>
 		<class>org.nanotek.beans.Medium</class>
 		<class>org.nanotek.beans.Recording</class>
 		<class>org.nanotek.beans.Release</class>

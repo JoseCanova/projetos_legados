@@ -95,14 +95,6 @@ public class ArtistName implements Base<Long> {
 		this.gid = gid;
 	}
 
-/*	public Long getMbid() {
-		return mbid;
-	}
-
-	public void setMbid(Long mbid) {
-		this.mbid = mbid;
-	}*/
-
 	public Integer getType() {
 		return type;
 	}
@@ -179,8 +171,9 @@ public class ArtistName implements Base<Long> {
 
 	@Override
 	public String toString() {
-		return "ArtistName [id=" + id + ", name=" + name + ", sortName="
-				+ sortName + ", mbid=" + mbid + ", gid=" + gid + "]";
+		return "ArtistName [id=" + id + ", artistId=" + artistId + ", name=" + name + ", sortName=" + sortName
+				+ ", artistCredits=" + artistCredits + ", mbid=" + mbid + ", gid=" + gid + ", type=" + type
+				+ ", country=" + country + ", gender=" + gender + "]";
 	}
 
 }

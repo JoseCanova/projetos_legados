@@ -1,5 +1,7 @@
 package org.nanotek;
 
+import java.util.concurrent.Executor;
+
 import javax.persistence.EntityManagerFactory;
 
 import org.nanotek.beans.ArtistAlias;
@@ -10,9 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
@@ -20,6 +24,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @Configuration
 @EnableConfigurationProperties
+@EnableJpaRepositories(basePackages = "org.nanotek.repository")
 public class BaseConfiguration {
 
 
@@ -41,6 +46,18 @@ public class BaseConfiguration {
 	    txManager.setEntityManagerFactory(entityManagerFactory);
 	    return txManager;
 	  }
+	  
+	  @Bean(name = "threadPoolTaskExecutor")
+	  public Executor getAsyncExecutor() {
+		    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		      executor.setCorePoolSize(10);
+		      executor.setMaxPoolSize(20);
+		      executor.setQueueCapacity(100000);
+		      executor.setThreadNamePrefix("AsyncThreadPoolExecutor");
+		      executor.initialize();
+		      return executor;    
+	  }
+
 	  
 	  @Bean
 	  @Qualifier(value = "ArtistCsvToBean")
