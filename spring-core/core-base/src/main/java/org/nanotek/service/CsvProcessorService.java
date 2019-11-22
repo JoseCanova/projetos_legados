@@ -3,7 +3,7 @@ package org.nanotek.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CsvProcessorService extends TextParser implements BaseService{
+public class CsvProcessorService extends TextParser{
 	
 	public CsvProcessorService() {} 
 	
@@ -12,4 +12,5 @@ public class CsvProcessorService extends TextParser implements BaseService{
 		this.fieldDelimiter = fieldDelimiter; 
 		this.tupleDelimiter = tupleDelimiter;
 	}
+
 }

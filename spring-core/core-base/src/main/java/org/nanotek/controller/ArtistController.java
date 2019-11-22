@@ -1,8 +1,12 @@
 package org.nanotek.controller;
 
+import java.util.Optional;
+
 import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
+import org.nanotek.service.BaseService;
+import org.nanotek.service.jpa.ArtistNameJpaService;
 import org.nanotek.service.parser.ArtistParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +17,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist")
-public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser> {
+public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser,BaseService<ArtistName>> {
 
 	@Autowired
 	@Qualifier("ArtistParser")
@@ -23,6 +27,8 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	@Qualifier("ArtistCsvToBean")
 	private CsvToBean<ArtistName> csvToBean;
 	
+	@Autowired
+	private ArtistNameJpaService baseService;
 	
     /* here is spring integration */
     public Result process() { 
@@ -42,6 +48,17 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	@Override
 	public ArtistParser getBaseParser() {
 		return artistParser;
+	}
+
+	@Override
+	public BaseService<ArtistName> getBaseService() {
+		return baseService;
+	}
+
+	@Override
+	public ArtistName findById(String  id) {
+		Optional<ArtistName> artistOpt = baseService.findById(Long.valueOf(id));
+		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
     
 }

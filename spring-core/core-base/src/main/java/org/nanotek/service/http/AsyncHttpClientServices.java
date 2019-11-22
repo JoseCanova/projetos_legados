@@ -1,7 +1,5 @@
 package org.nanotek.service.http;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Future;
 
 import org.nanotek.beans.ArtistName;
@@ -36,6 +34,7 @@ public class AsyncHttpClientServices {
 	    		valid = validateArtist(artist);
 	    		if (valid) {
 	    			artistNameJpaService.save(artist);
+	    			log.info(artist.toString());
 	    		}
 	    	}
 	    }while((artist != null));

@@ -3,6 +3,7 @@ package org.nanotek.controller;
 import org.nanotek.base.maps.ArtistCreditNameBaseMap;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
+import org.nanotek.service.BaseService;
 import org.nanotek.service.parser.ArtistCreditNameParser;
 import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 //ArtistCreditNameCsvToBean
 @RestController
 @RequestMapping(path = "artist_credit_name")
-public class ArtistCreditNameController  extends BaseController<ArtistCreditNameBaseMap , ArtistCreditName, ArtistCreditNameParser>{
+public class ArtistCreditNameController  extends BaseController<ArtistCreditNameBaseMap , ArtistCreditName, ArtistCreditNameParser,BaseService<ArtistCreditName>>{
 
 	@Autowired
 	@Qualifier("ArtistCreditNameParser")
@@ -38,6 +39,18 @@ public class ArtistCreditNameController  extends BaseController<ArtistCreditName
 	@Override
 	public ArtistCreditNameParser getBaseParser() {
 		return artistParser;
+	}
+
+	@Override
+	public BaseService<ArtistCreditName> getBaseService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArtistCreditName findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
