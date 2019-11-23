@@ -27,7 +27,7 @@ public class ArtistCreditAsyncHttpClientServices {
 	private ThreadPoolTaskExecutor taskExecutor;
 
 	//	@Async("threadPoolTaskExecutor")
-	public void process() throws InterruptedException {
+	public void process() {
 		log.info("started");
 		RestTemplate restTemplate = new RestTemplate();
 		ArtistCredit testValue;
