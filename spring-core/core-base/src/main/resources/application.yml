@@ -96,4 +96,16 @@ artistcreditname:
     position: 1            
     artist: 2              
     name: 3                
-    joinPhrase: 4         
+    joinPhrase: 4    
+ 
+artistcreditnamebean:
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: artist_credit_name
+  id: ArtistCreditNameBean
+  type: org.nanotek.beans.csv.ArtistCreditNameBean
+  baseMap:  
+    artistCreditId: 0
+    position: 1            
+    artistId: 2              
+    name: 3                
+    joinPhrase: 4            

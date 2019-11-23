@@ -39,7 +39,8 @@ public class ArtistNameJpaService extends BasePersistenceService<ArtistName,Long
 	}
 	
 	@Transactional
-	public  List<ArtistName> findByArtistId(Long artistId) {
+	public  Optional<ArtistName> findByArtistId(Long artistId) {
 		return artistNameRepository.findByArtistId(artistId);
 	}
+
 }

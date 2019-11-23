@@ -13,21 +13,26 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,Long> {
 
 	@Autowired
-	private ArtistCreditRepository ArtistCreditRepository;
+	private ArtistCreditRepository artistCreditRepository;
 
 	@Transactional
 	public ArtistCredit save(ArtistCredit ArtistCredit) { 
-		return ArtistCreditRepository.save(ArtistCredit);
+		return artistCreditRepository.save(ArtistCredit);
 	}
 	
 	@Transactional
 	public List<ArtistCredit> saveAll(List<ArtistCredit> list) { 
-		return ArtistCreditRepository.saveAll(list);
+		return artistCreditRepository.saveAll(list);
 	}
 
 	@Override
 	@Transactional
 	public  Optional<ArtistCredit> findById(Long k) {
-		return ArtistCreditRepository.findById(k);
+		return artistCreditRepository.findById(k);
 	}
+	
+	public Optional<ArtistCredit> findByArtistCreditId(Long id){ 
+		return artistCreditRepository.findByArtistCreditId(id);
+	}
+	
 }

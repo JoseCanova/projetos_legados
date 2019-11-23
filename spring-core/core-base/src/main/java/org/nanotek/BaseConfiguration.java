@@ -8,6 +8,7 @@ import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
+import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -90,7 +91,13 @@ public class BaseConfiguration {
 
 	  @Bean
 	  @Qualifier(value = "ArtistCreditNameCsvToBean")
-	  public CsvToBean<ArtistCreditName> csvArtistCreditNameToBean(){ 
+	  public CsvToBean<ArtistCreditName> csvArtistCreditName(){ 
+		  return new CsvToBean<>();
+	  }
+	  
+	  @Bean
+	  @Qualifier(value = "ArtistCreditNameBeanCsvToBean")
+	  public CsvToBean<ArtistCreditNameBean> csvArtistCreditNameBean(){ 
 		  return new CsvToBean<>();
 	  }
 }

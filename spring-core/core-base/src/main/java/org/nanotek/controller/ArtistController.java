@@ -65,7 +65,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	}
 	
 	@RequestMapping("/artistId/{id}")
-	public @ResponseBody  List<ArtistName> findByArtistId(@PathVariable(value="id") String  id) {
+	public @ResponseBody  Optional<ArtistName> findByArtistId(@PathVariable(value="id") String  id) {
 		return baseService.findByArtistId(Long.valueOf(id));
 	}
 

@@ -8,6 +8,7 @@ import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,6 +53,13 @@ public class ArtistCreditController extends BaseController<ArtistCreditBaseMap ,
 		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
 
+	@RequestMapping("/artist_credit_id/{id}")
+	public @ResponseBody  ArtistCredit findByArtistCreditId(@PathVariable(value="id") String  id) {
+		Optional<ArtistCredit> artistOpt = baseService.findByArtistCreditId(Long.valueOf(id));
+		return artistOpt.isPresent() ? artistOpt.get() : null;
+	}
+
+	
 	@Override
 	public ArtistCreditJpaService getBaseService() {
 		return baseService;

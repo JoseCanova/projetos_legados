@@ -25,7 +25,8 @@ import org.nanotek.Base;
 		@NamedQuery(name = "FindArtistCreditById", query ="Select a from ArtistCredit a where a.artistCreditId = :artistCreditId"),
 		@NamedQuery(name = "ArtistCreditLoadAll", query ="Select a from ArtistCredit a order by a.id asc"),
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.artistCreditId in (:ids)"),
-		@NamedQuery(name="FindArtistCreditsByArtistId" , query="Select a from ArtistCredit a inner join a.artistCreditNames n where n.artist = :artistId")
+		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.artistCreditId = :id")
+		//		@NamedQuery(name="FindArtistCreditsByArtistId" , query="Select a from ArtistCredit a inner join a.artistCreditNames n where n.artist = :artistId")
 })
 public class ArtistCredit implements Base<Long> {
 
@@ -42,10 +43,10 @@ public class ArtistCredit implements Base<Long> {
 	@Column (name="ref_count")
 	private Long refCount;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="artist_credit", referencedColumnName="artist_credit_id", unique=true)
 	private Set<ArtistCreditName> artistCreditNames;
 	
