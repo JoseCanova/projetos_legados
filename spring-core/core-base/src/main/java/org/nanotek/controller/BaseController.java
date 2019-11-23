@@ -61,6 +61,8 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
 
     public abstract I findById( String id) ;
     
-    public abstract I findByExample(String id , String attr) ;
+    public List<I> findByExample(String id , String attr) { 
+    	return null;
+    }
     
 }

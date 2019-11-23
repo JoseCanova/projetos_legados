@@ -1,11 +1,11 @@
 package org.nanotek.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.Result;
 import org.nanotek.base.maps.ArtistBaseMap;
 import org.nanotek.beans.ArtistName;
-import org.nanotek.service.BaseService;
 import org.nanotek.service.jpa.ArtistNameJpaService;
 import org.nanotek.service.parser.ArtistParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist")
-public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser,BaseService<ArtistName,Long>> {
+public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser,ArtistNameJpaService> {
 
 	@Autowired
 	@Qualifier("ArtistParser")
@@ -53,7 +53,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	}
 
 	@Override
-	public BaseService<ArtistName,Long> getBaseService() {
+	public ArtistNameJpaService getBaseService() {
 		return baseService;
 	}
 
@@ -62,6 +62,11 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	public @ResponseBody  ArtistName findById(@PathVariable(value="id") String  id) {
 		Optional<ArtistName> artistOpt = baseService.findById(Long.valueOf(id));
 		return artistOpt.isPresent() ? artistOpt.get() : null;
+	}
+	
+	@RequestMapping("/artistId/{id}")
+	public @ResponseBody  List<ArtistName> findByArtistId(@PathVariable(value="id") String  id) {
+		return baseService.findByArtistId(Long.valueOf(id));
 	}
 
 }

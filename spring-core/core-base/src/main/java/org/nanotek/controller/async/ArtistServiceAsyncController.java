@@ -1,4 +1,4 @@
-package org.nanotek.controller;
+package org.nanotek.controller.async;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/client")
-public class ServiceAsyncController {
+public class ArtistServiceAsyncController {
 
 	@Autowired
 	AsyncHttpClientServices asyncHttpClientServices;
 	
-	@RequestMapping("/run")
+	@RequestMapping("/artist/run")
 	public String run() throws InterruptedException, ExecutionException	{
 
 		StringBuffer log = new StringBuffer();

@@ -1,19 +1,23 @@
 package org.nanotek.controller;
 
+import java.util.Optional;
+
 import org.nanotek.base.maps.ArtistCreditBaseMap;
 import org.nanotek.beans.ArtistCredit;
-import org.nanotek.service.BaseService;
+import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist_credit")
-public class ArtistCreditController extends BaseController<ArtistCreditBaseMap , ArtistCredit, ArtistCreditParser, BaseService<ArtistCredit,Long>>{
+public class ArtistCreditController extends BaseController<ArtistCreditBaseMap , ArtistCredit, ArtistCreditParser, ArtistCreditJpaService>{
 
 	@Autowired
 	@Qualifier("ArtistCreditParser")
@@ -23,6 +27,8 @@ public class ArtistCreditController extends BaseController<ArtistCreditBaseMap ,
 	@Qualifier("ArtistCreditCsvToBean")
 	private CsvToBean<ArtistCredit> csvToBean;
 
+	@Autowired
+	ArtistCreditJpaService baseService;
 	
 	@Override
 	public ArtistCreditBaseMap getBaseMap() {
@@ -40,14 +46,15 @@ public class ArtistCreditController extends BaseController<ArtistCreditBaseMap ,
 	}
 
 	@Override
-	public BaseService<ArtistCredit,Long> getBaseService() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping("/{id}")
+	public @ResponseBody  ArtistCredit findById(@PathVariable(value="id") String  id) {
+		Optional<ArtistCredit> artistOpt = baseService.findById(Long.valueOf(id));
+		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
 
 	@Override
-	public ArtistCredit findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArtistCreditJpaService getBaseService() {
+		return baseService;
 	}
+
 }
