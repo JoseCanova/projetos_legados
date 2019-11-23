@@ -16,7 +16,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 //ArtistCreditNameCsvToBean
 @RestController
 @RequestMapping(path = "artist_credit_name")
-public class ArtistCreditNameController  extends BaseController<ArtistCreditNameBaseMap , ArtistCreditName, ArtistCreditNameParser,BaseService<ArtistCreditName>>{
+public class ArtistCreditNameController  extends BaseController<ArtistCreditNameBaseMap , ArtistCreditName, ArtistCreditNameParser,BaseService<ArtistCreditName,Long>>{
 
 	@Autowired
 	@Qualifier("ArtistCreditNameParser")
@@ -42,7 +42,7 @@ public class ArtistCreditNameController  extends BaseController<ArtistCreditName
 	}
 
 	@Override
-	public BaseService<ArtistCreditName> getBaseService() {
+	public BaseService<ArtistCreditName,Long> getBaseService() {
 		// TODO Auto-generated method stub
 		return null;
 	}

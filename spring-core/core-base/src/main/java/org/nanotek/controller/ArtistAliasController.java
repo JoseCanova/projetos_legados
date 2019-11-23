@@ -13,7 +13,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist_alias")
-public class ArtistAliasController extends BaseController<ArtistAliasBaseMap , ArtistAlias, ArtistAliasParser,BaseService<ArtistAlias>> {
+public class ArtistAliasController extends BaseController<ArtistAliasBaseMap , ArtistAlias, ArtistAliasParser,BaseService<ArtistAlias,Long>> {
 
 	@Autowired
 	@Qualifier("ArtistAliasParser")
@@ -36,8 +36,9 @@ public class ArtistAliasController extends BaseController<ArtistAliasBaseMap , A
 	public ArtistAliasBaseMap getBaseMap() {
 		return baseParser.getArtistBaseMap();
 	}
+	
 	@Override
-	public BaseService<ArtistAlias> getBaseService() {
+	public BaseService<ArtistAlias,Long> getBaseService() {
 		return null;
 	}
 

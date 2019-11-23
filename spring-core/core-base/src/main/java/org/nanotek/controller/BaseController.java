@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I extends Base<?>, P extends BaseParser , S extends BaseService<I>> {
+public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I extends Base<?>, P extends BaseParser , S extends BaseService<I,?>> {
 
 	public abstract T getBaseMap();
 
@@ -59,7 +59,6 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
     	return list;
     }
 
-    @RequestMapping("/{id}")
-    public abstract @ResponseBody I findById(@PathVariable(value="id") String id) ;
+    public abstract I findById( String id) ;
     
 }

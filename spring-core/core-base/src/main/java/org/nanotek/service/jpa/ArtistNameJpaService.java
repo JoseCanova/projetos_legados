@@ -7,9 +7,11 @@ import org.nanotek.beans.ArtistName;
 import org.nanotek.repository.ArtistNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 //TODO: Create support for ExampleMathcers
+@Service
 public class ArtistNameJpaService extends BasePersistenceService<ArtistName,Long> {
 
 	@Autowired

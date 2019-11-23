@@ -1,5 +1,7 @@
 package org.nanotek.service;
 
-public interface BaseService<O> {
-	
+import java.util.Optional;
+
+public interface BaseService<O  , K> {
+	 Optional<O> findById(K k );
 }

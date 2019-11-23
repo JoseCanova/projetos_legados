@@ -10,30 +10,32 @@ import org.nanotek.service.jpa.ArtistNameJpaService;
 import org.nanotek.service.parser.ArtistParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/artist")
-public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser,BaseService<ArtistName>> {
+public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName,ArtistParser,BaseService<ArtistName,Long>> {
 
 	@Autowired
 	@Qualifier("ArtistParser")
 	private ArtistParser artistParser;
-	
+
 	@Autowired
 	@Qualifier("ArtistCsvToBean")
 	private CsvToBean<ArtistName> csvToBean;
-	
+
 	@Autowired
 	private ArtistNameJpaService baseService;
-	
-    /* here is spring integration */
-    public Result process() { 
-    	return null;
-    }
+
+	/* here is spring integration */
+	public Result process() { 
+		return null;
+	}
 
 	@Override
 	public ArtistBaseMap getBaseMap() {
@@ -51,14 +53,15 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	}
 
 	@Override
-	public BaseService<ArtistName> getBaseService() {
+	public BaseService<ArtistName,Long> getBaseService() {
 		return baseService;
 	}
 
 	@Override
-	public ArtistName findById(String  id) {
+	@RequestMapping("/{id}")
+	public @ResponseBody  ArtistName findById(@PathVariable(value="id") String  id) {
 		Optional<ArtistName> artistOpt = baseService.findById(Long.valueOf(id));
 		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
-    
+
 }
