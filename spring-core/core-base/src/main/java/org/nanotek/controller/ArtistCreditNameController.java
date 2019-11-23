@@ -1,11 +1,9 @@
 package org.nanotek.controller;
 
 import org.nanotek.base.maps.ArtistCreditNameBaseMap;
-import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.service.BaseService;
 import org.nanotek.service.parser.ArtistCreditNameParser;
-import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;

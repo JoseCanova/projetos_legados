@@ -1,7 +1,8 @@
 package org.nanotek;
 
-import org.json.JSONObject;
 import javax.persistence.MappedSuperclass;
+
+import org.json.JSONObject;
 
 @MappedSuperclass
 public interface LongBase extends Base<Long>{

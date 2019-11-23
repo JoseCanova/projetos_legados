@@ -1,7 +1,6 @@
 package org.nanotek.beans.musicbrainz;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;

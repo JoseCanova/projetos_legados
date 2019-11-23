@@ -1,7 +1,6 @@
 package org.nanotek.controller.async;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import org.nanotek.service.http.ArtistCreditAsyncHttpClientServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class ArtistCreditServiceAsyncController {
 	public String run() throws InterruptedException, ExecutionException	{
 		StringBuffer log = new StringBuffer();
 		asyncHttpClientServices.process();
-	    log.append("Process Started");
+	    log.append("Started Request");
 		return log.toString();
 	}
 }

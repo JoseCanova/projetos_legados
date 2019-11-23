@@ -1,7 +1,7 @@
 package org.nanotek;
 
-import java.util.Optional;
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public interface Base<K extends Serializable> extends Identifiable <K>  {

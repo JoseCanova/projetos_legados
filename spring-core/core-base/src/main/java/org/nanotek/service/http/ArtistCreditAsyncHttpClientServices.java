@@ -1,7 +1,6 @@
 package org.nanotek.service.http;
 
 import java.util.Optional;
-import java.util.concurrent.Future;
 
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
@@ -9,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -29,36 +26,33 @@ public class ArtistCreditAsyncHttpClientServices {
 	@Qualifier("serviceTaskExecutor")
 	private ThreadPoolTaskExecutor taskExecutor;
 
-//	@Async("threadPoolTaskExecutor")
-	public Future<String> process() throws InterruptedException {
+	//	@Async("threadPoolTaskExecutor")
+	public void process() throws InterruptedException {
 		log.info("started");
-		taskExecutor.execute(new Runnable() {
-			@Override
-			public void run() {
-				boolean valid = false;
-				ArtistCredit testValue = null;
-				RestTemplate restTemplate = new RestTemplate();
-				do {
-					ArtistCredit artistCredit = restTemplate.getForObject(uri, ArtistCredit.class);
-					testValue = artistCredit;
+		RestTemplate restTemplate = new RestTemplate();
+		ArtistCredit testValue;
+		do {
+			ArtistCredit artistCredit;
+			artistCredit = restTemplate.getForObject(uri, ArtistCredit.class);
+			testValue = artistCredit;
+			taskExecutor.execute(new Runnable() {
+				public void run() {
 					if (artistCredit !=null) { 
-						valid = validateArtistCredit(artistCredit);
-						if (valid) {
+						if (validateArtistCredit(artistCredit)) {
 							jpaService.save(artistCredit);
 						}
-						log.info(artistCredit.toString());
 					}
-			}while((testValue != null));
-			}});
-			return new AsyncResult<>("started : " + Thread.currentThread().getId());
-		}
-
-		private boolean validateArtistCredit(ArtistCredit artist) {
-			return Optional.ofNullable(artist.getArtistCreditId()).orElse(0L) != 0 &&  notEmpty(artist.getName());
-		}
-
-		private boolean notEmpty(String value) {
-			return value !=null && !"".equals(value.trim());
-		}
+				}
+				private boolean validateArtistCredit(ArtistCredit artist) {
+					return Optional.ofNullable(artist.getArtistCreditId()).orElse(0L) != 0 &&  notEmpty(artist.getName());
+				}
+			});
+		}while((testValue != null));
 
 	}
+
+	private static boolean notEmpty(String value) {
+		return value !=null && !"".equals(value.trim());
+	}
+
+}
