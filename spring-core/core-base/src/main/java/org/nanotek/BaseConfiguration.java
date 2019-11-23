@@ -47,11 +47,22 @@ public class BaseConfiguration {
 	    return txManager;
 	  }
 	  
+	  @Bean(name = "serviceTaskExecutor")
+	  public ThreadPoolTaskExecutor getServiceTaskExecutor() {
+		    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		      executor.setCorePoolSize(10);
+		      executor.setMaxPoolSize(100);
+		      executor.setQueueCapacity(100000);
+		      executor.setThreadNamePrefix("AsyncThreadPoolExecutor");
+		      executor.initialize();
+		      return executor;    
+	  }
+	  
 	  @Bean(name = "threadPoolTaskExecutor")
 	  public Executor getAsyncExecutor() {
 		    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		      executor.setCorePoolSize(10);
-		      executor.setMaxPoolSize(20);
+		      executor.setMaxPoolSize(100);
 		      executor.setQueueCapacity(100000);
 		      executor.setThreadNamePrefix("AsyncThreadPoolExecutor");
 		      executor.initialize();

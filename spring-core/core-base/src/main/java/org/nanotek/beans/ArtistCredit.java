@@ -33,7 +33,7 @@ public class ArtistCredit implements Base<Long> {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
 	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
 	private Long id;
-	@Column(name="artist_credit_id")
+	@Column(name="artist_credit_id" , insertable=true,nullable=false,unique = true)
 	private Long artistCreditId;
 	@Column (name="artist_name" ,length=1000, insertable=true,nullable=false)
 	private String name; 
