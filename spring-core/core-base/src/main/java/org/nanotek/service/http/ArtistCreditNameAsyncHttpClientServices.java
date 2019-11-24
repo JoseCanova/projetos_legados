@@ -26,39 +26,50 @@ public class ArtistCreditNameAsyncHttpClientServices {
 
 	@Autowired
 	private ArtistCreditNameTransformer transformer;
-	
+
 	@Autowired
 	@Qualifier("serviceTaskExecutor")
 	private ThreadPoolTaskExecutor taskExecutor;
 
 	//	@Async("threadPoolTaskExecutor")
 	public void process() {
-		log.info("started");
-		RestTemplate restTemplate = new RestTemplate();
-		ArtistCreditNameBean testValue;
-		do {
-			ArtistCreditNameBean artistCreditName;
-			artistCreditName = restTemplate.getForObject(uri, ArtistCreditNameBean.class);
-			testValue = artistCreditName;
-			taskExecutor.execute(new Runnable() {
-				public void run() {
+		taskExecutor.execute(new Runnable() {
+			public void run() {
+				log.info("started");
+				RestTemplate restTemplate = new RestTemplate();
+				ArtistCreditNameBean testValue;
+				do {
+					ArtistCreditNameBean artistCreditName;
+					artistCreditName = restTemplate.getForObject(uri, ArtistCreditNameBean.class);
+					testValue = artistCreditName;
 					if (artistCreditName !=null) { 
 						if (validateArtistCreditName(artistCreditName)) {
-							ArtistCreditName acn = transformer.transform(artistCreditName);
-							if(acn != null)
-								jpaService.save(acn);
-								log.info("ArtistCreditName " + Optional.ofNullable(acn).orElse(ArtistCreditName.NULL_VALUE()));
+							ArtistCreditName acn  = null;
+							try { 
+								acn = transformer.transform(artistCreditName);
+							}catch (Exception ex) { 
+								log.info(ex.getMessage());
+							}
+							if(acn != null) { 
+								try { 
+									jpaService.save(acn);
+								}catch (Exception ex) { 
+									log.info(ex.getMessage());
+								}
+							}
+
+							log.info("ArtistCreditName " + Optional.ofNullable(acn).orElse(ArtistCreditName.NULL_VALUE()));
 						}
 					}
-				}
-				private boolean validateArtistCreditName(ArtistCreditNameBean artist) {
-					return Optional.ofNullable(artist.getArtistCreditId()).orElse(0L) != 0 
-								&&  notEmpty(artist.getName()) 
-								&& Optional.ofNullable(artist.getArtistId()).orElse(0L) !=0;
-				}
-			});
-		}while((testValue != null));
 
+				}while((testValue != null));
+			}
+			private boolean validateArtistCreditName(ArtistCreditNameBean artist) {
+				return Optional.ofNullable(artist.getArtistCreditId()).orElse(0L) != 0 
+						&&  notEmpty(artist.getName()) 
+						&& Optional.ofNullable(artist.getArtistId()).orElse(0L) !=0;
+			}
+		});
 	}
 
 	private static boolean notEmpty(String value) {

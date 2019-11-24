@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.nanotek.beans.ArtistCreditName;
+
 public interface Base<K extends Serializable> extends Identifiable <K>  {
 
 	public void setId(K id);
@@ -25,5 +27,14 @@ public interface Base<K extends Serializable> extends Identifiable <K>  {
 
 	public default Base<?> newInstance() throws InstantiationException, IllegalAccessException{ 
 		return this.getClass().newInstance();
+	}
+	
+	public static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
+		try {
+			return Optional.of(clazz.newInstance());
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return Optional.empty();
 	}
 }

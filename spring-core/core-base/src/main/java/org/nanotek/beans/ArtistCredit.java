@@ -1,6 +1,7 @@
 package org.nanotek.beans;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -46,10 +48,6 @@ public class ArtistCredit implements Base<Long> {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="artist_credit", referencedColumnName="artist_credit_id", unique=true)
-	private Set<ArtistCreditName> artistCreditNames;
-	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Recording> recordings; */
 	
@@ -118,14 +116,6 @@ public class ArtistCredit implements Base<Long> {
 		this.releases = releases;
 	}
 
-	public Set<ArtistCreditName> getArtistCreditNames() {
-		return  artistCreditNames != null ? artistCreditNames : (artistCreditNames = newAnyType(HashSet::new));  //ofNullable(HashSet::new, artistCredits); Optional.ofNullable(artistCreditNames).orElseGet(HashSet::new);
-	}
-
-	public void setArtistCreditNames(Set<ArtistCreditName> artistCreditNames) {
-		this.artistCreditNames = artistCreditNames;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

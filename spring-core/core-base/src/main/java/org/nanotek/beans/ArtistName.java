@@ -1,15 +1,19 @@
 package org.nanotek.beans;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -33,11 +37,12 @@ public class ArtistName implements Base<Long> {
 	private String name;
 	@Column(name="SORT_NAME",length=1000,nullable=true)
 	private String sortName;
-	@OneToMany
-	@JoinTable(name="ARTIST_CREDIT_NAME",
-	joinColumns={ @JoinColumn(name="artist_credit_artist_name", referencedColumnName="mbid") },
-	inverseJoinColumns={ @JoinColumn(name="artist_credit", referencedColumnName="artist_credit_id", unique=true) })
-	private Set<ArtistCredit> artistCredits;
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="artist_credit_name_rel",
+	joinColumns={@JoinColumn(name="artist_credit_artist_name", referencedColumnName="artistId") },
+	inverseJoinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="artist_credit_id") })
+	private List<ArtistCredit> artistCredits;
 
 	@Column(name="mbid", nullable=true)
 	private Long mbid; 
@@ -119,11 +124,11 @@ public class ArtistName implements Base<Long> {
 		this.gender = gender;
 	}
 	
-	public Set<ArtistCredit> getArtistCredits() {
-		return artistCredits != null ? artistCredits : (artistCredits = newAnyType(HashSet::new));  //ofNullable(HashSet::new, artistCredits); //Optional.ofNullable(artistCredits).orElseGet(HashSet::new);
+	public List<ArtistCredit> getArtistCredits() {
+		return artistCredits != null ? artistCredits : (artistCredits = newAnyType(ArrayList::new));  //ofNullable(HashSet::new, artistCredits); //Optional.ofNullable(artistCredits).orElseGet(HashSet::new);
 	}
 
-	public void setArtistCredits(Set<ArtistCredit> artistCredits) {
+	public void setArtistCredits(List<ArtistCredit> artistCredits) {
 		this.artistCredits = artistCredits;
 	}
 
