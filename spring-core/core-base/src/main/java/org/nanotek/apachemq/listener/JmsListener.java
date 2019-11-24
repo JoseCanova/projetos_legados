@@ -6,7 +6,10 @@ import javax.jms.Session;
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.apache.activemq.command.Message;
 import org.apache.activemq.util.ByteSequence;
+import org.nanotek.beans.Release;
 import org.nanotek.beans.csv.ReleaseBean;
+import org.nanotek.service.jpa.ReleaseJpaService;
+import org.nanotek.service.tranformer.ReleaseTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,12 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 
 	@Autowired
 	private Gson gson;
+	
+	@Autowired 
+	private ReleaseTransformer transformer;
+	
+	@Autowired
+	private ReleaseJpaService jpaService;
 
 	@Override
 	public void onMessage(ActiveMQBytesMessage message, Session session) throws JMSException {
@@ -28,6 +37,20 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 		String payLoad = new String (sequence.data);
 		ReleaseBean releaseBean = gson.fromJson(payLoad, ReleaseBean.class);
 		System.out.println("message " + releaseBean.toString());	
+		Release release = transformer.transform(releaseBean);
+		if (isValid(release)) {
+			System.out.println("result " + release.toString());	
+			jpaService.save(release);
+		}
+	}
+
+	private boolean isValid(Release release) {
+		
+		return release !=null 
+					&& release.getReleaseId() != null 
+					&& release.getReleaseGroup() !=null 
+					&& release.getName() !=null 
+					&& release.getArtistCreditReference() !=null;
 	}
 
 }

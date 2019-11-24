@@ -28,8 +28,8 @@ public class Release implements Base<Long> {
 	private String gid; 
 	@Column(name="RELEASE_GROUP" , insertable=true , nullable=false)
 	private Long releaseGroup; 
-	@Column(name="ARTIST_CREDIT" , insertable=true , nullable=false)
-	private Long artistCredit; 
+//	@Column(name="ARTIST_CREDIT" , insertable=true , nullable=false)
+//	private Long artistCredit; 
 	//TODO REFACTOR TABLE
 	@Column(name="NAME" , insertable=true , nullable=false , length=2500)
 	private String name; 
@@ -58,6 +58,9 @@ public class Release implements Base<Long> {
 	@JoinColumn(name="artist_credit" , referencedColumnName="artist_credit_id")
 	private ArtistCredit artistCreditReference;
 	
+	public Release() { 
+		super();
+	}
 	
 	@Override
 	public Long getId() {
@@ -87,14 +90,6 @@ public class Release implements Base<Long> {
 
 	public void setReleaseGroup(Long releaseGroup) {
 		this.releaseGroup = releaseGroup;
-	}
-
-	public Long getArtistCredit() {
-		return artistCredit;
-	}
-
-	public void setArtistCredit(Long artistCredit) {
-		this.artistCredit = artistCredit;
 	}
 
 	public String getName() {
@@ -218,16 +213,16 @@ public class Release implements Base<Long> {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Release [id=" + id + ", releaseId=" + releaseId + ", gid="
-				+ gid + ", releaseGroup=" + releaseGroup + ", artistCredit="
-				+ artistCredit + ", name=" + name + ", barCode=" + barCode
-				+ ", dateYear=" + dateYear + ", dateMonth=" + dateMonth
-				+ ", dateDay=" + dateDay + ", country=" + country + ", status="
-				+ status + ", packaging=" + packaging + ", language="
-				+ language + ", script=" + script + "]";
+		return "Release [id=" + id + ", releaseId=" + releaseId + ", gid=" + gid + ", releaseGroup=" + releaseGroup
+				+ ", name=" + name + ", barCode=" + barCode + ", dateYear=" + dateYear + ", dateMonth=" + dateMonth
+				+ ", dateDay=" + dateDay + ", country=" + country + ", status=" + status + ", packaging=" + packaging
+				+ ", language=" + language + ", script=" + script + ", artistCreditReference=" + artistCreditReference
+				+ "]";
 	}
+
+
+
 
 }
