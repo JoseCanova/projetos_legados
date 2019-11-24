@@ -25,18 +25,16 @@ public class ReleaseBeanServiceAsyncController {
 
 		StringBuffer log = new StringBuffer();
 
-		Future<ReleaseBean> process1 = asyncReleaseHttpClientService.process();
+		Future<ReleaseBean> process1 = null;
 		do{
+			process1 = asyncReleaseHttpClientService.process();
 			while(!process1.isDone()){
 				Thread.sleep(10);
 			}
-
-			log.append("Process is DONE!");
-			// Log results
 			if ( process1.get() !=null) { 
 				sender.send(process1.get());
 			}
-		}while (process1.get() != null);
+		}while (process1 !=null && process1.get() != null);
 		log.append("<br />Process 1 finished");
 		return log.toString();
 	}
