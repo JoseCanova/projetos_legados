@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import org.nanotek.beans.ArtistCreditName;
-
 public interface Base<K extends Serializable> extends Identifiable <K>  {
 
 	public void setId(K id);

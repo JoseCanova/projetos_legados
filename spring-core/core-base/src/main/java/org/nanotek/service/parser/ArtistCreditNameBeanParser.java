@@ -4,7 +4,6 @@ import org.nanotek.base.maps.ArtistCreditNameBeanBaseMap;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 @Component

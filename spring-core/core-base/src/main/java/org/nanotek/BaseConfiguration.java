@@ -9,6 +9,7 @@ import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
+import org.nanotek.beans.csv.ReleaseBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import com.google.gson.Gson;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
@@ -100,4 +103,16 @@ public class BaseConfiguration {
 	  public CsvToBean<ArtistCreditNameBean> csvArtistCreditNameBean(){ 
 		  return new CsvToBean<>();
 	  }
+	  
+	  @Bean
+	  @Qualifier(value = "ReleaseBeanCsvToBean")
+	  public CsvToBean<ReleaseBean> releaseBeanCsvToBean(){ 
+		  return new CsvToBean<>();
+	  }
+	  
+	  @Bean
+	  public Gson gson() { 
+		  return new Gson();
+	  }
+	  
 }

@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
-import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ArtistCreditNameJpaService;
 import org.nanotek.service.jpa.ArtistNameJpaService;
