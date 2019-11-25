@@ -1,6 +1,7 @@
 package org.nanotek.apachemq.listener;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.jms.JMSException;
 import javax.jms.Session;
@@ -8,10 +9,12 @@ import javax.jms.Session;
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.apache.activemq.command.Message;
 import org.apache.activemq.util.ByteSequence;
+import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.service.ArtistService;
+import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ArtistCreditNameJpaService;
 import org.nanotek.service.jpa.ArtistNameJpaService;
 import org.nanotek.service.tranformer.ArtistCreditNameTransformer;
@@ -43,6 +46,9 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 	
 	@Autowired 
 	private ArtistNameJpaService artistNameJpaService;
+	
+	@Autowired
+	private ArtistCreditJpaService artistCreditJpaService;
 
 	/*
 	 * @Autowired private ArtistCreditNameBeanValidator validator;
@@ -60,29 +66,41 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 		ArtistCreditName acn  = null;
 		try { 
 			acn = transformer.transform(artistCreditName);
+			log.info("ACN ");
+			log.info(acn != null ? acn.toString() : "NULL");
 		}catch (Exception ex) { 
+			ex.printStackTrace();
 			log.info(ex.getMessage());
 		}
 		if(acn != null) { 
 			try { 
+				log.info("SAVING ACN " + acn.toString());
 				jpaService.save(acn);
-				saveArtistNameCreditRel(acn);
+				saveArtistNameCreditRel(artistCreditName);
 			}catch (Exception ex) { 
+				ex.printStackTrace();
 				log.info(ex.getMessage());
 			}
 		}
 	}
 
 	@Transactional
-	private void saveArtistNameCreditRel(ArtistCreditName acn) {
-		if (acn.getArtistName() !=null) {
-			List<ArtistName> list = artistJpaService.findByArtistId(acn.getArtistName().getArtistId());
-			if(list.size()> 0) { 
+	private void saveArtistNameCreditRel(ArtistCreditNameBean artistCreditName) {
+		if (artistCreditName.getArtistId() !=null) {
+			List<ArtistName> list = artistJpaService.findByArtistId(artistCreditName.getArtistId());
+			if(list.size()> 0) {
+				log.info("FOUND_ARTIST_NAME");
 				ArtistName artistName  = list.stream().findFirst().get();
-				if (acn.getArtistCredit() !=null 
-							&& !artistName.getArtistCredits().contains(acn.getArtistCredit())) { 
-					artistName.getArtistCredits().add(acn.getArtistCredit());
-					artistNameJpaService.save(artistName);
+				if (artistCreditName.getArtistCreditId() !=null) { 
+					Optional<ArtistCredit> opt = artistCreditJpaService.findByArtistCreditId(artistCreditName.getArtistCreditId());
+					if(opt !=null && opt.isPresent()) { 
+						artistName.getArtistCredits().add(opt.get());
+						ArtistCredit ac = opt.get();
+						ac.getArtists().add(artistName);
+						log.info("ADDING ARTIST_CREDIT_NAME_REL");
+						artistCreditJpaService.save(opt.get());
+						artistNameJpaService.save(artistName);
+					}
 				}
 			}
 		}

@@ -53,7 +53,7 @@ public class ArtistCredit implements Base<Long> {
 	@JoinTable(name="artist_credit_name_rel",
 	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
 	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private List<ArtistName> artistName;
+	private List<ArtistName> artists;
 	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Recording> recordings; */
@@ -123,15 +123,6 @@ public class ArtistCredit implements Base<Long> {
 		this.releases = releases;
 	}
 	
-
-	public List<ArtistName> getArtistName() {
-		return artistName;
-	}
-
-	public void setArtistName(List<ArtistName> artistName) {
-		this.artistName = artistName;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -147,6 +138,14 @@ public class ArtistCredit implements Base<Long> {
 		} else if (!artistCreditId.equals(other.artistCreditId))
 			return false;
 		return true;
+	}
+
+	public List<ArtistName> getArtists() {
+		return artists;
+	}
+
+	public void setArtists(List<ArtistName> artists) {
+		this.artists = artists;
 	}
 
 }

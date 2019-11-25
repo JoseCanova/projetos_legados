@@ -47,9 +47,9 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 			Optional<ArtistCredit> artistCredit,
 			Optional<ArtistName> artistName) {
 		ArtistCreditName ac = new ArtistCreditName();
-		if (artistCredit.isPresent())
+		if (artistCredit !=null && artistCredit.isPresent())
 			ac.setArtistCredit(artistCredit.get());
-		if(artistName.isPresent()) {
+		if(artistName != null && artistName.isPresent()) {
 			ac.setArtistName(artistName.get());
 		}
 		ac.setName(i.getName());

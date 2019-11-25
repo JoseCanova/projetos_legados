@@ -36,7 +36,7 @@ public class ArtistName implements Base<Long> {
 	@Column(name="SORT_NAME",length=1000,nullable=true)
 	private String sortName;
 	
-	@ManyToMany(mappedBy = "artistName",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
 	private List<ArtistCredit> artistCredits;
 
 	@Column(name="mbid", nullable=true)
