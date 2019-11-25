@@ -4,17 +4,19 @@ import javax.jms.Queue;
 
 import org.nanotek.Base;
 import org.nanotek.Sender;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
 public abstract class JmsMessageSender <K extends Base<?>>  implements Sender<K>{
 
-	@Autowired
 	protected JmsMessagingTemplate jmsMessagingTemplate;
  
-	@Autowired
 	protected Queue queue;
  
+	public JmsMessageSender( JmsMessagingTemplate jmsMessagingTemplate , Queue queue ) { 
+		this.jmsMessagingTemplate = jmsMessagingTemplate; 
+		this.queue = queue;
+	}
+	
 	public K send(K message){
 		jmsMessagingTemplate.convertAndSend(this.queue, message);
 		return message;

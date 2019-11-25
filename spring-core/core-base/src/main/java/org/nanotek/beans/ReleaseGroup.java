@@ -19,13 +19,13 @@ public class ReleaseGroup implements Base<Long> {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="release_group_seq")
 	@SequenceGenerator(name="release_group_seq",sequenceName="release_group_id_seq")
 	private Long id; 
-	@Column(name="RELEASE_GROUP_ID" , nullable=false)
+	@Column(name="RELEASE_GROUP_ID" , nullable=false , unique=true)
 	private Long releaseGroupId; 
 	@Column (name="GID" , length=255 , nullable=true)
 	private String gid; 
-	@Column (name="NAME" , length=2500 , nullable=true)
+	@Column (name="NAME" , length=2500 , nullable=false)
 	private String name; 
-	@Column(name="ARTIST_CREDIT" , nullable=true)
+	@Column(name="ARTIST_CREDIT" , nullable=false)
 	private Long artistCredit; 
 	@Column(name="TYPE" , nullable=true)
 	private Integer type;

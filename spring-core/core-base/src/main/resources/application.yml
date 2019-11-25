@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   
 http:
     end-point: /core-base  
@@ -8,21 +8,20 @@ spring:
   activemq:
    broker-url: tcp://localhost:61616
   datasource:
-  url: jdbc:postgresql://127.0.0.1:5432/music-brainz
-  username: postgres 
-  password: Postgres123@   
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/music-brainz
+    url: jdbc:postgresql://127.0.0.1:5432/music-brainz
+    username: postgres 
+    password: Postgres123@   
   hikari:
     connectionTimeout: 20000
     maximumPoolSize: 100
-
-#spring:
-#  jpa:
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
-#        ddl-auto: update
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: update
 
 entitymanager:
   packagesToScan: org.nanotek
@@ -133,3 +132,18 @@ releasebean:
     editsPending: 11 
     quality: 12 
     lastUpdated: 13
+    
+releasegroup: 
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: release_group
+  id: ReleaseGroupBean
+  type: org.nanotek.beans.csv.ReleaseGroupBean 
+  baseMap:   
+    releaseGroupId: 0 
+    gid: 1 
+    name: 2 
+    artistCredit: 3 
+    type: 4
+    comment: 5 
+    editsPending: 6
+    lastUpdated: 7

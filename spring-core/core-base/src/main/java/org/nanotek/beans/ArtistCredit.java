@@ -1,6 +1,7 @@
 package org.nanotek.beans;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,6 +49,12 @@ public class ArtistCredit implements Base<Long> {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="artist_credit_name_rel",
+	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
+	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
+	private List<ArtistName> artistName;
+	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Recording> recordings; */
 	
@@ -111,6 +121,15 @@ public class ArtistCredit implements Base<Long> {
 
 	public void setReleases(Set<Release> releases) {
 		this.releases = releases;
+	}
+	
+
+	public List<ArtistName> getArtistName() {
+		return artistName;
+	}
+
+	public void setArtistName(List<ArtistName> artistName) {
+		this.artistName = artistName;
 	}
 
 	@Override

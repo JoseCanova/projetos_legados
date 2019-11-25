@@ -29,7 +29,7 @@ public class ReleaseBeanServiceAsyncController {
 		do{
 			process1 = asyncReleaseHttpClientService.process();
 			while(!process1.isDone()){
-				Thread.sleep(10);
+				Thread.sleep(5);
 			}
 			if ( process1.get() !=null) { 
 				sender.send(process1.get());

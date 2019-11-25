@@ -1,5 +1,6 @@
 package org.nanotek.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.beans.ArtistCredit;
@@ -9,6 +10,7 @@ import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ArtistCreditNameJpaService;
 import org.nanotek.service.jpa.ArtistNameJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +52,8 @@ public class ArtistService{
 		return artistCredit;
 	}
 
-	public Optional<ArtistName> findByArtistId(Long artistId) {
+	@Transactional 
+	public List<ArtistName> findByArtistId(Long artistId) {
 		return artistNameJpaService.findByArtistId(artistId);
 	}
 }

@@ -32,8 +32,11 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 		log.info("ArtistId " + i.getArtistId());
 		if (i.getArtistCreditId() !=null)
 			artistCredit = artistService.findByArtistCreditId(i.getArtistCreditId()); 
-		if(i.getArtistId() !=null)
-			artistName = artistService.findByArtistId(i.getArtistId());
+		if(i.getArtistId() !=null) {
+			List<ArtistName> list = artistService.findByArtistId(i.getArtistId());
+			Optional<ArtistName> opt = list.stream().findFirst();
+			artistName = opt.isPresent() ? opt : null;
+		}
 		ac = Optional.of(populate(i , artistCredit , artistName));
 		log.info("ArtistCreditName: " + (ac.isPresent() ? ac.toString() : ArtistCreditName.NULL_VALUE().toString()));
 		return ac.isPresent() ? ac.get() : null;
@@ -48,11 +51,6 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 			ac.setArtistCredit(artistCredit.get());
 		if(artistName.isPresent()) {
 			ac.setArtistName(artistName.get());
-			if (artistCredit.isPresent()) { 
-				List<ArtistCredit> credits = artistName.get().getArtistCredits();
-				if (!credits.contains(artistCredit.get()))
-					artistName.get().getArtistCredits().add(artistCredit.get());
-			}
 		}
 		ac.setName(i.getName());
 		ac.setJoinPhrase(i.getJoinPhrase());

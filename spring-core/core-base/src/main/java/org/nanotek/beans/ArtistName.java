@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -28,17 +29,14 @@ public class ArtistName implements Base<Long> {
 	@GeneratedValue(generator="artist_name_id_seq",strategy=GenerationType.IDENTITY)
 	@SequenceGenerator(name = "artist_name_id_seq", sequenceName = "artist_name_id_seq")
 	private Long id; 
-	@Column(name="artistId",length=1000,nullable=false)
+	@Column(name="artistId",length=1000,nullable=false,unique=true)
 	private Long artistId; 
 	@Column(name="name",length=1000,nullable=false)
 	private String name;
 	@Column(name="SORT_NAME",length=1000,nullable=true)
 	private String sortName;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="artist_credit_name_rel",
-	joinColumns={@JoinColumn(name="artist_credit_artist_name", referencedColumnName="artistId") },
-	inverseJoinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="artist_credit_id") })
+	@ManyToMany(mappedBy = "artistName",fetch=FetchType.LAZY)
 	private List<ArtistCredit> artistCredits;
 
 	@Column(name="mbid", nullable=true)
