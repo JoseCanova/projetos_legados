@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -78,7 +77,7 @@ public class BaseConfiguration {
 		executor.setCorePoolSize(10);
 		executor.setMaxPoolSize(100);
 		executor.setQueueCapacity(100000);
-		executor.setThreadNamePrefix("AsyncThreadPoolExecutor");
+		executor.setThreadNamePrefix("ServiceThreadPoolExecutor");
 		executor.initialize();
 		return executor;    
 	}

@@ -21,6 +21,13 @@ import javax.persistence.Table;
 
 import org.nanotek.Base;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 @SuppressWarnings("serial")
 @Entity
 @Table(name="artist_credit")
@@ -46,7 +53,8 @@ public class ArtistCredit implements Base<Long> {
 	@Column (name="ref_count")
 	private Long refCount;
 
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="artistCreditReference")
+	@JsonBackReference
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
 	@ManyToMany(fetch=FetchType.LAZY)

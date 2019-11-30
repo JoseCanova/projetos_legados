@@ -13,6 +13,13 @@ import javax.persistence.Table;
 
 import org.nanotek.Base;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class, 
+		property = "id")
 @SuppressWarnings("serial")
 @Entity
 @Table(name="RELEASE")
@@ -28,12 +35,12 @@ public class Release implements Base<Long> {
 	private String gid; 
 	@Column(name="RELEASE_GROUP" , insertable=true , nullable=false)
 	private Long releaseGroup; 
-//	@Column(name="ARTIST_CREDIT" , insertable=true , nullable=false)
-//	private Long artistCredit; 
+	//	@Column(name="ARTIST_CREDIT" , insertable=true , nullable=false)
+	//	private Long artistCredit; 
 	//TODO REFACTOR TABLE
 	@Column(name="NAME" , insertable=true , nullable=false , length=2500)
 	private String name; 
-	
+
 	@Column(name="BAR_CODE" , insertable=true , nullable=true)
 	private String barCode; 
 	@Column(name="DATE_YEAR" , insertable=true , nullable=true)
@@ -42,7 +49,7 @@ public class Release implements Base<Long> {
 	private String dateMonth; 
 	@Column(name="DATE_DAY" , insertable=true , nullable=true)
 	private String dateDay; 
-	
+
 	@Column(name="COUNTRY" , insertable=true , nullable=true)
 	private String country; 
 	@Column(name="STATUS" , insertable=true , nullable=true)
@@ -53,20 +60,21 @@ public class Release implements Base<Long> {
 	private String language; 
 	@Column(name="SCRIPT" , insertable=true , nullable=true)
 	private String script; 
-	
+
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_credit" , referencedColumnName="artist_credit_id")
 	private ArtistCredit artistCreditReference;
-	
+
 	public Release() { 
 		super();
 	}
-	
+
 	@Override
 	public Long getId() {
 		return id;
 	}
-	
+
 
 	public Long getReleaseId() {
 		return releaseId;
@@ -175,7 +183,7 @@ public class Release implements Base<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public ArtistCredit getArtistCreditReference() {
 		return artistCreditReference;
 	}

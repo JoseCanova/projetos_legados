@@ -9,16 +9,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.nanotek.Base;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 @SuppressWarnings("serial")
 @Entity
 @Table(name="artist_name")
@@ -36,6 +40,7 @@ public class ArtistName implements Base<Long> {
 	@Column(name="SORT_NAME",length=1000,nullable=true)
 	private String sortName;
 	
+
 	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
 	private List<ArtistCredit> artistCredits;
 
