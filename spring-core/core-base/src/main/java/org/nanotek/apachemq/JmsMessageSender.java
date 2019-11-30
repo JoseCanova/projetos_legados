@@ -12,7 +12,7 @@ public abstract class JmsMessageSender <K extends Base<?>>  implements Sender<K>
  
 	protected Queue queue;
  
-	public JmsMessageSender( JmsMessagingTemplate jmsMessagingTemplate , Queue queue ) { 
+	public JmsMessageSender(JmsMessagingTemplate jmsMessagingTemplate , Queue queue ) { 
 		this.jmsMessagingTemplate = jmsMessagingTemplate; 
 		this.queue = queue;
 	}

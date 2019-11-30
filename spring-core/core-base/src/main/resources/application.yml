@@ -147,3 +147,19 @@ releasegroup:
     comment: 5 
     editsPending: 6
     lastUpdated: 7
+ 
+recordingbean: 
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: recording
+  id: RecordingBean
+  type: org.nanotek.beans.csv.RecordingBean 
+  baseMap:   
+    id: 0
+    gid: 1
+    name: 2
+    artistCredit: 3
+    length: 4
+    comment: 5
+    editsPending: 6
+    lastUpdated: 7
+    video: 8

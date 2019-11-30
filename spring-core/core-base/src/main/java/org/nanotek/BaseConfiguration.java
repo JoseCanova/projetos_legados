@@ -10,7 +10,9 @@ import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
+import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
+import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -130,6 +132,18 @@ public class BaseConfiguration {
 		return new CsvToBean<>();
 	}
 
+	@Bean
+	@Qualifier(value = "ReleaseGroupCsvToBean")
+	public CsvToBean<ReleaseGroupBean> releaseGroupBeanCsvToBean(){ 
+		return new CsvToBean<>();
+	}
+	
+	@Bean
+	@Qualifier(value = "RercordingBeanCsvToBean")
+	public CsvToBean<RecordingBean> recordingBeanCsvToBean(){ 
+		return new CsvToBean<>();
+	}
+	
 	@Bean
 	public Gson gson() { 
 		return new Gson();
