@@ -163,3 +163,22 @@ recordingbean:
     editsPending: 6
     lastUpdated: 7
     video: 8
+
+trackbean: 
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: track
+  id: TrackBean
+  type: org.nanotek.beans.csv.TrackBean 
+  baseMap:    
+    id: 0 
+    gid: 1 
+    recordingId: 2 
+    medium: 3 
+    position: 4 
+    number: 5 
+    name: 6 
+    artistCreditId: 7 
+    length: 8 
+    editsPending: 8 
+    lastUpdate: 9
+    isDataTrack: 10

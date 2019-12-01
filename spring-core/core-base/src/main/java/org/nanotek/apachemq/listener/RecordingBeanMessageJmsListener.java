@@ -2,6 +2,7 @@ package org.nanotek.apachemq.listener;
 
 import javax.jms.JMSException;
 import javax.jms.Session;
+import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.nanotek.beans.Recording;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 
@@ -32,15 +34,18 @@ public class RecordingBeanMessageJmsListener implements SessionAwareMessageListe
 
 	@Override
 	public void onMessage(ActiveMQBytesMessage message, Session session) throws JMSException {
-		RecordingBean bean = MessageListenerHelper.processMessage(message, gson, RecordingBean.class);
-		if (valid(bean)) { 
-			Recording recording = transformer.transform(bean);
-			jpaService.save(recording);
+		try { 
+			RecordingBean bean = MessageListenerHelper.processMessage(message, gson, RecordingBean.class);
+			validateAndSave(bean);
+		}catch (Exception ex) { 
+			log.info(ex.getMessage());
 		}
 	}
 
-	private boolean valid(RecordingBean bean) {
-		return bean.getId() != null && bean.getName() !=null && bean.getArtistCredit() !=null;
+	@Transactional
+	private void validateAndSave(@Valid RecordingBean bean) {
+		Recording recording = transformer.transform(bean);
+		jpaService.save(recording);
 	}
 	
 }

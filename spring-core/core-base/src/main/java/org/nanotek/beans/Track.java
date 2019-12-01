@@ -30,7 +30,7 @@ public class Track implements Base<Long> {
 	@Column(name="POSITION")
 	private Integer position;
 	@Column(name="NUMBER")
-	private Integer number; 
+	private String number; 
 	@Column(name="NAME" , length=1000)
 	private String name; 
 	@Column(name="ARTIST_CREDIT")
@@ -84,10 +84,10 @@ public class Track implements Base<Long> {
 		this.position = position;
 	}
 	
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	

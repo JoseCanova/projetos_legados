@@ -1,15 +1,33 @@
 package org.nanotek.beans.csv;
 
+import javax.validation.constraints.NotNull;
+
 import org.nanotek.Base;
 
 public class RecordingBean  implements Base<Long>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	
+	/**
+	 *  id                  SERIAL,
+    gid                 UUID NOT NULL,
+    name                VARCHAR NOT NULL,
+    artist_credit       INTEGER NOT NULL, -- references artist_credit.id
+    length              INTEGER CHECK (length IS NULL OR length > 0),
+    comment             VARCHAR(255) NOT NULL DEFAULT '',
+    edits_pending       INTEGER NOT NULL DEFAULT 0 CHECK (edits_pending >= 0),
+    last_updated        TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    video               BOOLEAN NOT NULL DEFAULT FALSE
+	 */
+	
+	@NotNull
 	private Long id;
-    private String gid;
-    private String name;
-    private Long artistCredit;
+	@NotNull
+	private String gid;
+	@NotNull
+	private String name;
+	@NotNull
+	private Long artistCredit;
     private Long length;
     private String comment;
     private Long editsPending;
