@@ -15,7 +15,7 @@ public class ReleaseBeanHttpClientService {
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	  
-    final String uri = "http://localhost:8081/release_bean/next";
+    final String uri = "http://localhost:8080/release_bean/next";
 
     @Async("threadPoolTaskExecutor")
 	public Future<ReleaseBean> process(){ 

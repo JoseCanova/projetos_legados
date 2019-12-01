@@ -15,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.google.gson.Gson;
 
 @Service
+@Validated
 public class RecordingBeanMessageJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
