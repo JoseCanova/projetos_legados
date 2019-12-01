@@ -13,6 +13,7 @@ import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.beans.csv.ReleaseGroupBean;
+import org.nanotek.beans.csv.TrackBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -141,6 +142,12 @@ public class BaseConfiguration {
 	@Bean
 	@Qualifier(value = "RercordingBeanCsvToBean")
 	public CsvToBean<RecordingBean> recordingBeanCsvToBean(){ 
+		return new CsvToBean<>();
+	}
+	
+	@Bean
+	@Qualifier(value = "TrackBeanCsvToBean")
+	public CsvToBean<TrackBean> trackBeanCsvToBean(){ 
 		return new CsvToBean<>();
 	}
 	

@@ -20,7 +20,7 @@ public class ReleaseBeanMessageSender extends JmsMessageSender<ReleaseBean> {
 		super(jmsTemplate,queue);
 	}
 	
-	@Async
+	@Async("threadPoolTaskExecutor")
 	public Future<ReleaseBean> sendAsync(ReleaseBean rb) { 
 		return new AsyncResult<ReleaseBean> (send(rb));
 	}

@@ -18,7 +18,7 @@ public class ReleaseBeanDispatcherService implements DispatcherService<ReleaseBe
 
 	@Override
 	public void dispatch(ReleaseBean bean) {
-		sender.send(bean);
+		sender.sendAsync(bean);
 	}
 	
 }

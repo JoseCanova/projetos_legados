@@ -20,7 +20,7 @@ public class RecordingBeanMessageSender extends JmsMessageSender<RecordingBean> 
 		super(jmsTemplate,queue);
 	}
 	
-	@Async
+	@Async("threadPoolTaskExecutor")
 	public Future<RecordingBean> sendAsync(RecordingBean rb) { 
 		return new AsyncResult<RecordingBean> (send(rb));
 	}
