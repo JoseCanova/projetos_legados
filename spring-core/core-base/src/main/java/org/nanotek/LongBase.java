@@ -2,13 +2,13 @@ package org.nanotek;
 
 import javax.persistence.MappedSuperclass;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 @MappedSuperclass
 public interface LongBase extends Base<Long>{
 	
-		default JSONObject toJson () 
+		default String toJson () 
 		{ 
-			return new JSONObject(getId());
+			return new Gson().toJson(this);
 		}
 }
