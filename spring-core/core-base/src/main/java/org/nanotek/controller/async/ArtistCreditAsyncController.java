@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/client")
-public class ArtistCreditServiceAsyncController {
+public class ArtistCreditAsyncController {
 
 	@Autowired
 	ArtistCreditAsyncHttpClientServices asyncHttpClientServices;

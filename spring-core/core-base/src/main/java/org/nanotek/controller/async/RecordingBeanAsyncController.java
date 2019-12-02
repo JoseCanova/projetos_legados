@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/client")
-public class RecordingBeanServiceAsyncController {
+public class RecordingBeanAsyncController {
 
 	@Autowired
 	RecordingBeanHttpClientService httpService;
@@ -31,7 +31,7 @@ public class RecordingBeanServiceAsyncController {
 			while(!process1.isDone()){
 				Thread.sleep(5);
 			}
-			if ( process1.get() !=null) { 
+			if (process1.get() !=null) { 
 				dispatcher.dispatch(process1.get());
 			}
 		}while (process1 !=null && process1.get() != null);
