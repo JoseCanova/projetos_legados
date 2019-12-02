@@ -1,8 +1,8 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
-public class ReleaseGroupBean implements Base<Long> {
+public class ReleaseGroupBean implements LongBase {
 
 	/**
 	 * id                  SERIAL,

@@ -1,8 +1,8 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
-public class TrackBean implements Base<Long>{
+public class TrackBean implements LongBase{
 
 	private static final long serialVersionUID = 7327347644746001993L;
 	
