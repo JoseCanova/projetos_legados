@@ -1,7 +1,5 @@
 package org.nanotek;
 
-import org.json.JSONObject;
-
 @SuppressWarnings("serial")
 public class StringBase implements Base<String>{
 
