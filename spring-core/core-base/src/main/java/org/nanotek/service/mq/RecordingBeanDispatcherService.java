@@ -6,7 +6,9 @@ import org.nanotek.ReturnableDispatcher;
 import org.nanotek.apachemq.RecordingBeanMessageSender;
 import org.nanotek.beans.csv.RecordingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecordingBeanDispatcherService implements ReturnableDispatcher<RecordingBean>{ 
 
 	@Autowired

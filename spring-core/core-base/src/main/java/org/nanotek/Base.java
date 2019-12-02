@@ -36,7 +36,7 @@ public interface Base<K extends Serializable> extends Identifiable <K>  {
 		return this.getClass().newInstance();
 	}
 	
-	public static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
+	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
 		return Optional.empty();
 	}
 }
