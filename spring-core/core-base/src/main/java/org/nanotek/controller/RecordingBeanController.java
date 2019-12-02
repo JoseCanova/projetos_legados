@@ -24,7 +24,7 @@ public class RecordingBeanController extends BaseController<RecordingBeanBaseMap
 	private RecordingBeanParser recordingBeanParser;
 	
 	@Autowired
-	@Qualifier("RecordingBeanCsvToBean")
+	@Qualifier("RercordingBeanCsvToBean")
 	private CsvToBean<RecordingBean> csvToBean;
 
 	@Override

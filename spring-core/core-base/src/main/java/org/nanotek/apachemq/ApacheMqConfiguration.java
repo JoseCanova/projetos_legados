@@ -36,6 +36,13 @@ public class ApacheMqConfiguration {
 		return new ActiveMQQueue("musicbrainz.recording_queue");
 	}
 	
+
+	@Bean
+	@Qualifier(value="trackBeanQueue")
+	public Queue trackBeanQueue() {
+		return new ActiveMQQueue("musicbrainz.track_queue");
+	}
+	
 	
 	@Bean 
 	public MappingJackson2MessageConverter jsonConverter() { 
@@ -67,15 +74,16 @@ public class ApacheMqConfiguration {
 		return container;
 	}
 
-	@Bean
-	public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , @Autowired ArtistCreditNameBeanJmsListener jmsListener ) { 
-		DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
-		a.setMaxConcurrentConsumers(10);
-		a.setDestinationName("musicbrainz.basequeue");
-		a.setConnectionFactory(connectionFactory);
-		a.setMessageListener(jmsListener);
-		return a;
-	}
+	/*
+	 * @Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired
+	 * ConnectionFactory connectionFactory , @Autowired
+	 * ArtistCreditNameBeanJmsListener jmsListener ) {
+	 * DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
+	 * a.setMaxConcurrentConsumers(10);
+	 * a.setDestinationName("musicbrainz.basequeue");
+	 * a.setConnectionFactory(connectionFactory); a.setMessageListener(jmsListener);
+	 * return a; }
+	 */
 
 	@Bean
 	@Qualifier("RecordingBeanMessageListener")

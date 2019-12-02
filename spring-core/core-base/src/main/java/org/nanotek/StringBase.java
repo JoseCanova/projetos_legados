@@ -20,8 +20,4 @@ public class StringBase implements Base<String>{
 		return "StringBase [id=" + id + "]";
 	} 
 	
-	public String toJson () 
-	{ 
-		return new JSONObject(getId()).toString();
-	}
 }
