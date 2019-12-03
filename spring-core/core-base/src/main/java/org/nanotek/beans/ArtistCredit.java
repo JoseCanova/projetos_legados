@@ -21,8 +21,8 @@ import javax.persistence.Table;
 
 import org.nanotek.Base;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(
@@ -53,10 +53,11 @@ public class ArtistCredit implements Base<Long> {
 	@Column (name="ref_count")
 	private Long refCount;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
+	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
 	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },

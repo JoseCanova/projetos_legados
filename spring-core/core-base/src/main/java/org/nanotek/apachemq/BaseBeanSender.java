@@ -19,7 +19,7 @@ public class BaseBeanSender<K extends Base<?>> extends JmsMessageSender<K> {
 		super(jmsTemplate,queue);
 	}
 	
-	@Async
+	@Async("threadPoolTaskExecutor")
 	public Future<K> sendAsync(K rb) { 
 		return new AsyncResult<K> (send(rb));
 	}
