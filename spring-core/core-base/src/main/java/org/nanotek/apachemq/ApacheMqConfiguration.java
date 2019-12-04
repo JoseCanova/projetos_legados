@@ -4,7 +4,6 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
-import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
 import org.nanotek.apachemq.listener.RecordingBeanMessageJmsListener;
 import org.springframework.beans.factory.annotation.Autowired;
