@@ -182,3 +182,19 @@ trackbean:
     editsPending: 8 
     lastUpdate: 9
     isDataTrack: 10
+    
+mediumbean: 
+  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileName: medium
+  id: MediumBean
+  type: org.nanotek.beans.csv.MediumBean 
+  baseMap:     
+    id: 0
+    release: 1 
+    position: 2
+    format: 3 
+    name: 4 
+    editsPending: 5 
+    lastUpdated: 6 
+    trackCount: 7 
+    
