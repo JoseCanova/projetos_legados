@@ -1,49 +1,40 @@
 package org.nanotek.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.StringBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="medium_format")
-public class MediumFormat implements Base<String>{
+public class MediumFormat extends StringBase{
 
-	private String id; 
+	@Column(name = "NAME")
 	private String name; 
+	@Column(name = "YEAR")
 	private String year; 
 	
-	@Override
-	public String getId() {
-		return id;
+	public MediumFormat() { 
+		super();
 	}
-
-
+	
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getYear() {
 		return year;
 	}
-
 
 	public void setYear(String year) {
 		this.year = year;
 	}
 
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-
-
 }
+

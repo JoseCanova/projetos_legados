@@ -1,8 +1,13 @@
 package org.nanotek;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 @SuppressWarnings("serial")
 public class StringBase implements Base<String>{
 
+	@Id
 	protected String id;
 
 	public String getId() {

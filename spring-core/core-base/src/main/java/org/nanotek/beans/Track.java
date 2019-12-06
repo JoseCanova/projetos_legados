@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track")
-public class Track implements Base<Long> {
+public class Track implements LongBase {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="track_id_seq")

@@ -1,15 +1,26 @@
 package org.nanotek.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
+import org.nanotek.StringBaseIdListener;
 
 @SuppressWarnings("serial")
 @Entity
+@EntityListeners(value = {StringBaseIdListener.class})
 @Table(name="medium_cd_toc")
-public class MediumCdToc implements Base<Long>{
+public class MediumCdToc implements LongBase{
 
+
+	@Id
+	@GeneratedValue(generator="medium_toc_id_seq",strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="medium_toc_id_seq" , sequenceName="medium_toc_id_seq")
 	private Long id; 
 	private Long mediumCdTocId; 
 	private Long medium; 
