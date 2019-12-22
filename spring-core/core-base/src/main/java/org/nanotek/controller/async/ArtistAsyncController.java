@@ -14,22 +14,22 @@ public class ArtistAsyncController {
 
 	@Autowired
 	AsyncHttpClientServices asyncHttpClientServices;
-	
+
 	@RequestMapping("/artist/run")
 	public String run() throws InterruptedException, ExecutionException	{
 
 		StringBuffer log = new StringBuffer();
-		
+
 		Future<String> process1 = asyncHttpClientServices.process();
-	    
+
 	    while(!process1.isDone()){
-	        Thread.sleep(2000);
+	        Thread.sleep(20);
 	      }
-	    
+
 	    log.append("Process is DONE!");
 	    // Log results
 	    log.append("<br />Process 1: " + process1.get());
-	    
+
 		return log.toString();
 	}
 }

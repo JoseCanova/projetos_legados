@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   
 http:
     end-point: /core-base  
@@ -8,10 +8,10 @@ spring:
   activemq:
    broker-url: tcp://localhost:61616
   datasource:
-    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/music-brainz
-    url: jdbc:postgresql://127.0.0.1:5432/music-brainz
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/musicbrainz
+    url: jdbc:postgresql://127.0.0.1:5432/musicbrainz
     username: postgres 
-    password: Postgres123@   
+    password: postgres123@   
   hikari:
     connectionTimeout: 20000
     maximumPoolSize: 100
@@ -27,32 +27,32 @@ entitymanager:
   packagesToScan: org.nanotek
 
 artist:
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: artist
-  id: Artist
+  id: ArtistName
   type: org.nanotek.beans.ArtistName
   baseMap:
     artistId: 0
     gid: 1
     name: 2
     sortName: 3
-    begin-date-year: 4
-    begin-date-month: 5
-    begin-date-day: 6
-    end-date-year: 7
-    end-date-month: 8
-    end-date-day: 9
+    beginDateYear: 4
+    beginDateMonth: 5
+    beginDateDay: 6
+    endDateYear: 7
+    endDateMonth: 8
+    endDateDay: 9
     type: 10
     area: 11
     gender: 12 
     comment: 13
-    edits-pending: 14
-    last-updated: 15
+    editsPending: 14
+    lastUpdated: 15
     ended: 16
 
     
 artistalias:
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: artist_alias
   id: ArtistAlias
   type: org.nanotek.beans.ArtistAlias
@@ -75,7 +75,7 @@ artistalias:
     ended: 15
     
 artistcredit:
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: artist_credit
   id: ArtistCredit
   type: org.nanotek.beans.ArtistCredit
@@ -88,7 +88,7 @@ artistcredit:
     editsPending: 5
 
 artistcreditname:
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: artist_credit_name
   id: ArtistCreditName
   type: org.nanotek.beans.ArtistCreditName
@@ -100,7 +100,7 @@ artistcreditname:
     joinPhrase: 4    
  
 artistcreditnamebean:
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: artist_credit_name
   id: ArtistCreditNameBean
   type: org.nanotek.beans.csv.ArtistCreditNameBean
@@ -113,7 +113,7 @@ artistcreditnamebean:
     
     
 releasebean: 
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: release
   id: ReleaseBean
   type: org.nanotek.beans.csv.ReleaseBean 
@@ -134,7 +134,7 @@ releasebean:
     lastUpdated: 13
     
 releasegroup: 
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: release_group
   id: ReleaseGroupBean
   type: org.nanotek.beans.csv.ReleaseGroupBean 
@@ -149,7 +149,7 @@ releasegroup:
     lastUpdated: 7
  
 recordingbean: 
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: recording
   id: RecordingBean
   type: org.nanotek.beans.csv.RecordingBean 
@@ -165,7 +165,7 @@ recordingbean:
     video: 8
 
 trackbean: 
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: track
   id: TrackBean
   type: org.nanotek.beans.csv.TrackBean 
@@ -184,7 +184,7 @@ trackbean:
     isDataTrack: 10
     
 mediumbean: 
-  fileLocation: E:\\mbfile\\mbdump\\mbdump
+  fileLocation: /opt/mbdump
   fileName: medium
   id: MediumBean
   type: org.nanotek.beans.csv.MediumBean 

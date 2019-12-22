@@ -33,7 +33,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 	private ArtistNameJpaService baseService;
 
 	/* here is spring integration */
-	public Result process() { 
+	public Result process() {
 		return null;
 	}
 
@@ -63,7 +63,7 @@ public class ArtistController  extends BaseController<ArtistBaseMap , ArtistName
 		Optional<ArtistName> artistOpt = baseService.findById(Long.valueOf(id));
 		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
-	
+
 	@RequestMapping("/artistId/{id}")
 	public @ResponseBody  List<ArtistName> findByArtistId(@PathVariable(value="id") String  id) {
 		return baseService.findByArtistId(Long.valueOf(id));

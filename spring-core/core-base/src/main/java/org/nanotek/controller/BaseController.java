@@ -23,33 +23,33 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
 	public abstract CsvToBean<I> getCsvToBean();
 
 	public abstract  P getBaseParser();
-	
+
 	public abstract S getBaseService();
-	
-	
+
+
 	@RequestMapping("/map_config")
     public MapColumnStrategy<? , ?> mapConfig(@RequestParam(value="count", defaultValue="1") Long count) {
         return getBaseParser().getBaseMap();
     }
 
-	
+
     @RequestMapping("/next")
     public I next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
     	String[] instanceArray = null;
     	I bean = null;
-    	if ((instanceArray = getBaseParser().readNext()) !=null) { 
+    	if ((instanceArray = getBaseParser().readNext()) !=null) {
     		bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
     	}
     	return bean;
     }
 
-	
+
     @RequestMapping("/load")
     public List<I> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
     	List<I> list = new  ArrayList<>();
     	int i = 0;
     	String[] instanceArray = null;
-    	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) { 
+    	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) {
     		I bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
     		list.add(bean);
     		i++;
@@ -58,9 +58,9 @@ public abstract class BaseController<T extends BaseMapColumnStrategy<I> , I exte
     }
 
     public abstract I findById( String id) ;
-    
-    public List<I> findByExample(String id , String attr) { 
+
+    public List<I> findByExample(String id , String attr) {
     	return null;
     }
-    
+
 }

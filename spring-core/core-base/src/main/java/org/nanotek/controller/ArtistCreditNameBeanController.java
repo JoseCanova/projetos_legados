@@ -19,15 +19,15 @@ public class ArtistCreditNameBeanController  extends BaseController<ArtistCredit
 
 //	@Autowired
 	private BaseService<ArtistCreditNameBean, Long> baseService;
-	
+
 	@Autowired
 	@Qualifier("ArtistCreditNameBeanParser")
 	private ArtistCreditNameBeanParser artistParser;
-	
+
 	@Autowired
 	@Qualifier("ArtistCreditNameBeanCsvToBean")
 	private CsvToBean<ArtistCreditNameBean> csvToBean;
-	
+
 	@Override
 	public ArtistCreditNameBeanBaseMap getBaseMap() {
 		return artistParser.getArtistCreditNameBeanBaseMap();
