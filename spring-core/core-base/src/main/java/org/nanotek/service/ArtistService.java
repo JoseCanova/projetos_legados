@@ -3,6 +3,9 @@ package org.nanotek.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.ArtistName;
@@ -54,5 +57,10 @@ public class ArtistService{
 	@Transactional 
 	public List<ArtistName> findByArtistId(Long artistId) {
 		return artistNameJpaService.findByArtistId(artistId);
+	}
+	
+	@Transactional
+	public List<ArtistName> findByNameLike(@NotNull @NotEmpty  String name){ 
+		return artistNameJpaService.findByNameContaining(name);
 	}
 }

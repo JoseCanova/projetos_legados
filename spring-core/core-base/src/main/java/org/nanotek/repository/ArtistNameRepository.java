@@ -12,5 +12,7 @@ public interface ArtistNameRepository extends JpaRepository <ArtistName ,Long> {
 	
 	@Query("from ArtistName a left outer join fetch a.artistCredits where a.artistId = ?1")
 	List<ArtistName> findByArtistId(Long artistId);
+	
+	List<ArtistName> findByNameContainingIgnoreCase(String name);
 
 }

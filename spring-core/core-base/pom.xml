@@ -22,15 +22,12 @@
 		<org.springframework.integration.version>4.3.2.RELEASE</org.springframework.integration.version>
 		<org.hibernate.version>5.2.2.Final</org.hibernate.version>
 		<org.lucene.version>4.8.0</org.lucene.version>
-		<org.datanucleus.version>4.0.0-release</org.datanucleus.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<junit.platform.version>1.2.0</junit.platform.version>
 		<spring.boot.starter.version>2.2.1.RELEASE</spring.boot.starter.version>
 		<basedir>.</basedir>
 	</properties>
-	<!-- <repositories> <repository> <id>objectdb</id> <name>ObjectDB Repository</name> 
-		<url>http://m2.objectdb.com</url> </repository> </repositories> -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -45,7 +42,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.2.1.RELEASE</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
