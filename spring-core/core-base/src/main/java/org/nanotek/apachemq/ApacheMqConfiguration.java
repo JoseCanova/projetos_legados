@@ -4,6 +4,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
+import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
 import org.nanotek.apachemq.listener.ArtistNameBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
 import org.nanotek.apachemq.listener.RecordingBeanMessageJmsListener;
@@ -80,16 +81,13 @@ public class ApacheMqConfiguration {
 		return container;
 	}
 
-	/*
-	 * @Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired
-	 * ConnectionFactory connectionFactory , @Autowired
-	 * ArtistCreditNameBeanJmsListener jmsListener ) {
-	 * DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
-	 * a.setMaxConcurrentConsumers(10);
-	 * a.setDestinationName("musicbrainz.basequeue");
-	 * a.setConnectionFactory(connectionFactory); a.setMessageListener(jmsListener);
-	 * return a; }
-	 */
+	
+	  @Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , @Autowired ArtistCreditNameBeanJmsListener jmsListener ) {
+	  DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
+	  a.setMaxConcurrentConsumers(10);
+	  a.setDestinationName("musicbrainz.basequeue");
+	  a.setConnectionFactory(connectionFactory); a.setMessageListener(jmsListener);
+	  return a; }
 
 	@Bean
 	@Qualifier("RecordingBeanMessageListener")

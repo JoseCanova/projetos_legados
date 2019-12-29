@@ -1,7 +1,6 @@
 package org.nanotek;
 
 import javax.annotation.Resource;
-
 import org.nanotek.service.http.AsyncHttpClientServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +21,6 @@ public class App {
 
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
-
-
-	@Resource 
-	private AsyncHttpClientServices services;
 
 
 	public App() {

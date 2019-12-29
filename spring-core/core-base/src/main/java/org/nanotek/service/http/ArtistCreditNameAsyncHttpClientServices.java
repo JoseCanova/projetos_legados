@@ -54,7 +54,7 @@ public class ArtistCreditNameAsyncHttpClientServices {
 					if (artistCreditName !=null) { 
 						if (validator.test(artistCreditName)) {
 							sender.send(artistCreditName);
-							log.info("ArtistCreditName " + Optional.ofNullable(artistCreditName).orElse(Base.NULL_VALUE(ArtistCreditNameBean.class).get()));
+							log.info("ArtistCreditName " + artistCreditName);
 						}
 					}
 
