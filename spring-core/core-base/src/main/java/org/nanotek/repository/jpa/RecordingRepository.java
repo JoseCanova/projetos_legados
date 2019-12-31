@@ -1,4 +1,4 @@
-package org.nanotek.repository;
+package org.nanotek.repository.jpa;
 
 import org.nanotek.beans.Recording;
 import org.springframework.data.jpa.repository.JpaRepository;

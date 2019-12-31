@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.ArtistName;
-import org.nanotek.repository.ArtistNameRepository;
+import org.nanotek.repository.jpa.ArtistNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;

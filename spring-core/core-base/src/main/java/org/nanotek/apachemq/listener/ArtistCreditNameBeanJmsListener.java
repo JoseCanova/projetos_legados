@@ -58,8 +58,6 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 	@Override
 	@Async
 	public void onMessage(ActiveMQBytesMessage message, Session session) throws JMSException {
-		log.info("Received JMSTYPE: "+ message.getJMSType());		
-		log.info("Received JMSTYPE: "+ message.getJMSXMimeType());
 		Message innerMessage = message.getMessage();
 		ByteSequence sequence = innerMessage.getContent();
 		String payload = new String (sequence.data);
@@ -68,15 +66,12 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 		ArtistCreditName acn  = null;
 		try { 
 			acn = transformer.transform(artistCreditName);
-			log.info("ACN ");
-			log.info(acn != null ? acn.toString() : "NULL");
 		}catch (Exception ex) { 
 			ex.printStackTrace();
 			log.info(ex.getMessage());
 		}
 		if(acn != null) { 
 			try { 
-				log.info("SAVING ACN " + acn.toString());
 				jpaService.save(acn);
 				saveArtistNameCreditRel(artistCreditName);
 			}catch (Exception ex) { 

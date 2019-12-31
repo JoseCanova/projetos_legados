@@ -1,4 +1,4 @@
-package org.nanotek.repository;
+package org.nanotek.repository.jpa;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;

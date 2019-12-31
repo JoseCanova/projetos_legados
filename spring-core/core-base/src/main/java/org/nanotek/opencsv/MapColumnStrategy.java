@@ -2,7 +2,6 @@ package org.nanotek.opencsv;
 
 import org.nanotek.Base;
 import org.springframework.beans.factory.InitializingBean;
-
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
 public class MapColumnStrategy<T extends BaseMap<I>, I extends Base<?>> extends  ColumnPositionMappingStrategy<I> implements InitializingBean {

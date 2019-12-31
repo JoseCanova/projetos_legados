@@ -1,4 +1,4 @@
-package org.nanotek.repository;
+package org.nanotek.repository.jpa;
 
 import java.util.Optional;
 

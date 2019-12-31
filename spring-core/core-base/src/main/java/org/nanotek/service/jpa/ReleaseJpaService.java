@@ -1,7 +1,7 @@
 package org.nanotek.service.jpa;
 
 import org.nanotek.beans.Release;
-import org.nanotek.repository.ReleaseRepository;
+import org.nanotek.repository.jpa.ReleaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
