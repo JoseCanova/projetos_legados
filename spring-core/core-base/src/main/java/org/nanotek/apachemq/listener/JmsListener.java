@@ -11,12 +11,14 @@ import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.service.jpa.ReleaseJpaService;
 import org.nanotek.service.tranformer.ReleaseTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
 @Service
+@Qualifier(value = "JmsListener")
 public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
 
 	@Autowired

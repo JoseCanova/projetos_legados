@@ -23,7 +23,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -39,7 +38,6 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @Configuration
 @EnableConfigurationProperties
-@EnableJpaRepositories(basePackages = "org.nanotek.repository")
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class })
 public class BaseConfiguration {
 

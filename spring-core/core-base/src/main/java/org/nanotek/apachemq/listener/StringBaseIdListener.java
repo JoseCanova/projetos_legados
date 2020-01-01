@@ -1,8 +1,10 @@
-package org.nanotek;
+package org.nanotek.apachemq.listener;
 
 import java.util.Optional;
 
 import javax.persistence.PrePersist;
+
+import org.nanotek.StringBase;
 
 public class StringBaseIdListener {
 

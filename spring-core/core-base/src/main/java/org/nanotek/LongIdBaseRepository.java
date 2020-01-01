@@ -1,7 +1,6 @@
 package org.nanotek;
 
-public interface LongIdBaseRepository <T extends Base<Long>> {
+import org.springframework.data.repository.CrudRepository;
 
-	public T findById(Long id);
-	
+public interface LongIdBaseRepository <T extends Base<Long>> extends CrudRepository<T, Long> {
 }

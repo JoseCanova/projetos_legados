@@ -24,7 +24,6 @@ public class ArtistCreditName {
 		this.joinPhrase = joinPhrase;
 	}
 	
-	
 	static ArtistCreditName of(Long artistCredit, Integer position, Long artist, String name, String joinPhrase) { 
 	    return new ArtistCreditName(null, artistCredit, position, artist, name , joinPhrase);
 	}

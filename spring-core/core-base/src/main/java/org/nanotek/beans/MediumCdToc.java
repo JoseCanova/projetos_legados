@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.nanotek.LongBase;
-import org.nanotek.StringBaseIdListener;
+import org.nanotek.apachemq.listener.StringBaseIdListener;
 
 @SuppressWarnings("serial")
 @Entity
