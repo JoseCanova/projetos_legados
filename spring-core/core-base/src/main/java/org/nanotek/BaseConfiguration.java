@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -37,6 +38,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 
 @Configuration
+@ComponentScan("org.nanotek")
 @EnableConfigurationProperties
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class })
 public class BaseConfiguration {
