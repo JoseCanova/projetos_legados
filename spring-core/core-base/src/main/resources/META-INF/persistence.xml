@@ -10,6 +10,7 @@
 		<class>org.nanotek.beans.ArtistCredit</class>
 		<class>org.nanotek.beans.ArtistCreditName</class>
 		<class>org.nanotek.beans.flat.FlatArtistCreditName</class>
+		<class>org.nanotek.beans.flat.FlatArtistNameCreditRel</class> 
 		<class>org.nanotek.beans.ArtistName</class>
 		<class>org.nanotek.beans.Isrc</class>
 		<class>org.nanotek.beans.Label</class>

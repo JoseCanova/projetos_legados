@@ -3,7 +3,9 @@ package org.nanotek.controller;
 import org.nanotek.base.maps.ArtistCreditNameBeanBaseMap;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.beans.flat.FlatArtistCreditName;
+import org.nanotek.beans.flat.FlatArtistNameCreditRel;
 import org.nanotek.service.BaseService;
+import org.nanotek.service.jpa.ArtistNameCreditRelRepositoryService;
 import org.nanotek.service.jpa.FlatArtistCreditNameJpaService;
 import org.nanotek.service.parser.ArtistCreditNameBeanParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class ArtistCreditNameJdbcController  extends BaseController<ArtistCredit
 	
 	@Autowired
 	private FlatArtistCreditNameJpaService repositoryService;
+	
+	@Autowired
+	private ArtistNameCreditRelRepositoryService relService;
 
 	@Override
 	public ArtistCreditNameBeanBaseMap getBaseMap() {
@@ -63,6 +68,7 @@ public class ArtistCreditNameJdbcController  extends BaseController<ArtistCredit
 	public FlatArtistCreditName newArtistCreditName() throws Exception { 
 		ArtistCreditNameBean ab = next();
 		FlatArtistCreditName acn = repositoryService.save(new FlatArtistCreditName(ab.getId() , ab.getArtistCreditId() , ab.getPosition() , ab.getArtistId() , ab.getName() , ab.getJoinPhrase()));
+		relService.save(new FlatArtistNameCreditRel(ab.getArtistId() , ab.getArtistCreditId()));
 		return acn;
 	}
 }
