@@ -73,7 +73,7 @@ public class ApacheMqConfiguration {
 
 	@Bean
 	public DefaultMessageListenerContainer listenerContainer(@Autowired ConnectionFactory connectionFactory 
-			, @Autowired @Qualifier("JmsListener") JmsListener jmsListener ) {
+															, @Autowired @Qualifier("JmsListener") JmsListener jmsListener ) {
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		container.setMaxConcurrentConsumers(10);
@@ -83,12 +83,15 @@ public class ApacheMqConfiguration {
 	}
 
 
-	@Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , @Autowired ArtistCreditNameBeanJmsListener jmsListener ) {
-		DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
-		a.setMaxConcurrentConsumers(10);
-		a.setDestinationName("musicbrainz.basequeue");
-		a.setConnectionFactory(connectionFactory); a.setMessageListener(jmsListener);
-		return a; }
+	@Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , 
+														@Autowired ArtistCreditNameBeanJmsListener jmsListener ) {
+			DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
+			a.setMaxConcurrentConsumers(10);
+			a.setDestinationName("musicbrainz.basequeue");
+			a.setConnectionFactory(connectionFactory); 
+			a.setMessageListener(jmsListener);
+			return a; 
+		}
 
 	@Bean
 	@Qualifier("RecordingBeanMessageListener")

@@ -206,6 +206,11 @@
 			<artifactId>jackson-module-jsonSchema</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-client -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
