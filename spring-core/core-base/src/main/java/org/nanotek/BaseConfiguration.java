@@ -24,6 +24,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jdbc.core.convert.BasicJdbcConverter;
+import org.springframework.data.jdbc.core.convert.JdbcConverter;
+import org.springframework.data.jdbc.core.convert.RelationResolver;
+import org.springframework.data.mapping.context.MappingContext;
+import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
+import org.springframework.data.relational.core.mapping.RelationalPersistentProperty;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -36,11 +43,10 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-
 @Configuration
 @ComponentScan("org.nanotek")
 @EnableConfigurationProperties
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class BaseConfiguration {
 
 	@Bean
@@ -68,11 +74,12 @@ public class BaseConfiguration {
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
+	public PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) { 
 		JpaTransactionManager txManager = new JpaTransactionManager();
-		txManager.setEntityManagerFactory(entityManagerFactory);
-		return txManager;
+		txManager.setEntityManagerFactory(entityManagerFactory); 
+		return txManager; 
 	}
+
 
 	@Bean(name = "serviceTaskExecutor")
 	public ThreadPoolTaskExecutor getServiceTaskExecutor() {
@@ -82,7 +89,7 @@ public class BaseConfiguration {
 		executor.setQueueCapacity(100000);
 		executor.setThreadNamePrefix("ServiceThreadPoolExecutor");
 		executor.initialize();
-		return executor;    
+		return executor;
 	}
 
 	@Bean(name = "threadPoolTaskExecutor")
@@ -93,66 +100,65 @@ public class BaseConfiguration {
 		executor.setQueueCapacity(100000);
 		executor.setThreadNamePrefix("AsyncThreadPoolExecutor");
 		executor.initialize();
-		return executor;    
+		return executor;
 	}
-
 
 	@Bean
 	@Qualifier(value = "ArtistCsvToBean")
-	public CsvToBean<ArtistName> csvToBean(){ 
+	public CsvToBean<ArtistName> csvToBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ArtistAliasCsvToBean")
-	public CsvToBean<ArtistAlias> csvAliasToBean(){ 
+	public CsvToBean<ArtistAlias> csvAliasToBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ArtistCreditCsvToBean")
-	public CsvToBean<ArtistCredit> csvArtistCreditToBean(){ 
+	public CsvToBean<ArtistCredit> csvArtistCreditToBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ArtistCreditNameCsvToBean")
-	public CsvToBean<ArtistCreditName> csvArtistCreditName(){ 
+	public CsvToBean<ArtistCreditName> csvArtistCreditName() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ArtistCreditNameBeanCsvToBean")
-	public CsvToBean<ArtistCreditNameBean> csvArtistCreditNameBean(){ 
+	public CsvToBean<ArtistCreditNameBean> csvArtistCreditNameBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ReleaseBeanCsvToBean")
-	public CsvToBean<ReleaseBean> releaseBeanCsvToBean(){ 
+	public CsvToBean<ReleaseBean> releaseBeanCsvToBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value = "ReleaseGroupCsvToBean")
-	public CsvToBean<ReleaseGroupBean> releaseGroupBeanCsvToBean(){ 
+	public CsvToBean<ReleaseGroupBean> releaseGroupBeanCsvToBean() {
 		return new CsvToBean<>();
 	}
-	
+
 	@Bean
 	@Qualifier(value = "RercordingBeanCsvToBean")
-	public CsvToBean<RecordingBean> recordingBeanCsvToBean(){ 
+	public CsvToBean<RecordingBean> recordingBeanCsvToBean() {
 		return new CsvToBean<>();
 	}
-	
+
 	@Bean
 	@Qualifier(value = "TrackBeanCsvToBean")
-	public CsvToBean<TrackBean> trackBeanCsvToBean(){ 
+	public CsvToBean<TrackBean> trackBeanCsvToBean() {
 		return new CsvToBean<>();
 	}
-	
+
 	@Bean
-	public Gson gson() { 
+	public Gson gson() {
 		return new Gson();
 	}
 
