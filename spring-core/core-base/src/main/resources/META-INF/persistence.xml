@@ -12,6 +12,7 @@
 		<class>org.nanotek.beans.flat.FlatArtistCreditName</class>
 		<class>org.nanotek.beans.flat.FlatArtistNameCreditRel</class> 
 		<class>org.nanotek.beans.ArtistName</class>
+		<class>org.nanotek.beans.ArtistType</class>
 		<class>org.nanotek.beans.Isrc</class>
 		<class>org.nanotek.beans.Label</class>
 		<class>org.nanotek.beans.Medium</class>

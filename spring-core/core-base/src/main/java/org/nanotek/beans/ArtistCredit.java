@@ -60,8 +60,8 @@ public class ArtistCredit implements Base<Long> {
 	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
-	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
-	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
+	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="artistId") },
+	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="artist_credit_id") })
 	private List<ArtistName> artists;
 	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")

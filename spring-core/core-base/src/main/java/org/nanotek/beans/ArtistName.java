@@ -34,7 +34,7 @@ public class ArtistName implements Base<Long> {
 	@SequenceGenerator(name = "artist_name_id_seq", sequenceName = "artist_name_id_seq")
 	private Long id;
 	@NotNull
-	@Column(name="artistId",length=1000,nullable=false,unique=true)
+	@Column(name="artistId",nullable=false,unique=true)
 	private Long artistId;
 	@NotNull
 	@Column(name="name",length=1000,nullable=false)
