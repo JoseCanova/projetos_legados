@@ -59,6 +59,14 @@ public class ArtistName implements Base<Long> {
 	public ArtistName() {
 	}
 
+	public ArtistName(Long id , Long artistId , String name , String sortName , String gid) { 
+		this.id = id ; 
+		this.artistId = artistId; 
+		this.name = name; 
+		this.sortName = sortName; 
+		this.gid = gid;
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
