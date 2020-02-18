@@ -9,10 +9,6 @@
         </layout>
     </appender>
 
-<!--     <logger name="br.com.valid.bio" level="debug"
-            additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger> -->
 
     <logger name="reactor" level="info"
             additivity="false">
@@ -23,6 +19,12 @@
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
+
+    <logger name="org.nanotek" level="debug"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
     
 	<!-- <logger name="org.springframework.data" level="debug"
             additivity="false">

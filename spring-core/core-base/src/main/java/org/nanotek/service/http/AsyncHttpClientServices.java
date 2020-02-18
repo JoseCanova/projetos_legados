@@ -17,7 +17,7 @@ public class AsyncHttpClientServices {
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
-	final String uri = "http://localhost:8080/csv/artist/next";
+	final String uri = "http://localhost:8080/csv/artist_bean/next";
 
 	@Autowired
 	ArtistDispatcherService dispatcher;
@@ -31,7 +31,7 @@ public class AsyncHttpClientServices {
 			artist = restTemplate.getForObject(uri, ArtistBean.class);
 			if (artist !=null) {
 				dispatcher.dispatch(artist);
-				log.info(artist.toString());
+				//log.info(artist.toString());
 			}
 		}while((artist != null));
 		return new AsyncResult<>("finished : " + Thread.currentThread().getId());

@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.nanotek.LongBase;
 
 @Entity
@@ -34,10 +35,12 @@ public class Artist implements LongBase{
 	private Long id;
 	
 	@NotNull
+	@Length(min = 1 , max = 1000)
 	@Column(name="name",length=1000,nullable=false)
 	private String name;
 	
 	@NotNull
+	@Length(min = 1 , max = 1000)
 	@Column(name="sort_name",length=1000,nullable=false)
 	private String sortName;
 
@@ -45,6 +48,7 @@ public class Artist implements LongBase{
 	private List<ArtistCredit> artistCredits;
 
 	@NotNull
+	@Length(min = 1 , max = 40)
 	@Column(name="gid", nullable=false)
 	private String gid;
 	

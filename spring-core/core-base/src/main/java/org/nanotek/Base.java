@@ -40,6 +40,7 @@ public interface Base<K extends Serializable> extends Identifiable <K>  {
 		return baseSupplier.get();
 	}
 
+	@SuppressWarnings("deprecation")
 	default Base<?> newInstance() throws InstantiationException, IllegalAccessException{ 
 		return this.getClass().newInstance();
 	}

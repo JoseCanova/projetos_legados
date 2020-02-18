@@ -37,11 +37,10 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 		try {
 			validateAndSave(Artist);
 		}catch (Exception ex) {
-			log.info(ex.getMessage());
+			log.debug(ex.getMessage());
 		}
 	}
 
-	@Transactional
 	private void validateAndSave(@Valid Artist Artist) {
 		ArtistJpaService.save(Artist);
 	}
