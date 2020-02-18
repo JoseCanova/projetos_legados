@@ -1,4 +1,6 @@
 package org.nanotek;
 
-public interface LongBase extends Base<Long>{
+import java.io.Serializable;
+
+public interface LongBase extends Serializable , MutableBase<Long> , ImmutableBase<Long> , Base<Long>{
 }

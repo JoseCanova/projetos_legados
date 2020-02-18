@@ -3,12 +3,12 @@ package org.nanotek.beans;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="cd_toc")
-public class CdToc implements Base<Long> {
+public class CdToc implements LongBase {
 
 	private Long id;
 	private Long cdtocId;

@@ -5,7 +5,6 @@ import javax.persistence.Table;
 
 import org.nanotek.Base;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="url")
 public class Url implements Base<Long> {

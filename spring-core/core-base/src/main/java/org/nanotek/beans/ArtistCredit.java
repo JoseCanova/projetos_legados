@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.artistCreditId in (:ids)"),
 		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.artistCreditId = :id")
 })
-public class ArtistCredit implements Base<Long> {
+public class ArtistCredit implements LongBase {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")

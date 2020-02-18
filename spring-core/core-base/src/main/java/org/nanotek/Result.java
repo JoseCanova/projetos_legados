@@ -1,6 +1,6 @@
 package org.nanotek;
 
-public class Result implements Base<Boolean> {
+public class Result implements BooleanBase<Boolean> {
 
 	private static final long serialVersionUID = -307344888633306177L;
 	

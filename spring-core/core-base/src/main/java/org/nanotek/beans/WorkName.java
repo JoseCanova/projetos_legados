@@ -3,12 +3,12 @@ package org.nanotek.beans;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="work_name")
-public class WorkName implements Base<Long> {
+public class WorkName implements LongBase{
 	
 	private Long id; 
 	private String name; 

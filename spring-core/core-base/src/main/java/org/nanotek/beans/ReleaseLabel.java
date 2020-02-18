@@ -3,12 +3,11 @@ package org.nanotek.beans;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="release_label")
-public class ReleaseLabel implements Base<Long> {
+public class ReleaseLabel implements LongBase {
 
 	private Long id; 
 	private Long release; 

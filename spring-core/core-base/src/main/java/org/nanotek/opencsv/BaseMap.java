@@ -3,6 +3,7 @@ package org.nanotek.opencsv;
 import java.util.HashMap;
 
 import org.nanotek.Base;
+import org.nanotek.StringBase;
 
 /**
  * TODO: Change the class to "create a equivalence validator" on Target Class - and the Map class. 
@@ -13,7 +14,7 @@ import org.nanotek.Base;
  */
 //Avoiding the Usage of this. Type & AnnotatedElement & GenericDeclaration & Serializable & Base<?>
 @SuppressWarnings("serial")
-public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implements Base<String>{
+public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implements StringBase{
 
 	//works fine with the "Bean Name";
 	protected String id;

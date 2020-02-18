@@ -3,12 +3,12 @@ package org.nanotek.beans;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_list")
-public class TrackList implements Base<Long> {
+public class TrackList implements LongBase {
 
 	private Long id; 
 	private Long count; 

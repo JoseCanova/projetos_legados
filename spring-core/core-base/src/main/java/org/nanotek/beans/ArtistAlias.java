@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="artist_alias")
-public class ArtistAlias implements Base<Long> {
+public class ArtistAlias implements LongBase{
 
 	@Id
 	private Long id;

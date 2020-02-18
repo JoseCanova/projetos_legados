@@ -8,12 +8,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
 
-public interface Base<K extends Serializable> extends Identifiable <K>  {
+public interface Base<K extends Serializable> {
 
 	static String hash = "35454B055CC325EA1AF2126E27707052";
-
-
-	public void setId(K id);
 
 	default String md5Digest()  { 
 		return DigestUtils.md5Hex(toJson()).toUpperCase();

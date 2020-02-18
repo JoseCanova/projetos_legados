@@ -1,19 +1,18 @@
 package org.nanotek.beans;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
-public class ArtistGender implements Base<Artist>{
+@SuppressWarnings("serial")
+public class ArtistGender implements LongBase{
 
-	private Artist id;
+	private Long id;
 
-	public Artist getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Artist id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 	
 }

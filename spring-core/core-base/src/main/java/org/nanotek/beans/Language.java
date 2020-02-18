@@ -3,12 +3,12 @@ package org.nanotek.beans;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="language")
-public class Language implements Base<Long> {
+public class Language implements LongBase {
 
 	private Long id; 
 	private String isoCode3t; 

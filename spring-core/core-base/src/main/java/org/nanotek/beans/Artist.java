@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,8 @@ public class Artist implements LongBase{
 //	private Long id;
 	
 	@Id
+	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name = "artist_id_seq", sequenceName = "artist_id_seq")
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)
 	private Long id;
@@ -52,6 +55,8 @@ public class Artist implements LongBase{
 	@Column(name="gid", nullable=false)
 	private String gid;
 	
+	@OneToOne(mappedBy = "artist")
+	private ArtistComment artistComment;
 	/*
 	 * @Column(name="type", nullable=true) private Integer type;
 	 * 
@@ -113,6 +118,12 @@ public class Artist implements LongBase{
 		this.id = id;
 	}
 
-	
+	public ArtistComment getArtistComment() {
+		return artistComment;
+	}
+
+	public void setArtistComment(ArtistComment artistComment) {
+		this.artistComment = artistComment;
+	}
 	
 }

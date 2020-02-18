@@ -4,12 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.StringBase;
-
-@SuppressWarnings("serial")
 @Entity
 @Table(name="medium_format")
-public class MediumFormat extends StringBase{
+public class MediumFormat  {
 
 	@Column(name = "NAME")
 	private String name; 

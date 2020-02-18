@@ -9,11 +9,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 @Entity
 @Table(name="artist_type")
-public class ArtistType implements Base<Long>{
+public class ArtistType implements LongBase{
 
 	private static final long serialVersionUID = 962190613873549033L;
 	

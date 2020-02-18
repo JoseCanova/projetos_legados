@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="RELEASE")
-public class Release implements Base<Long> {
+public class Release implements LongBase {
 
 	@Id
 	@GeneratedValue(generator="release_seq" , strategy=GenerationType.SEQUENCE)
