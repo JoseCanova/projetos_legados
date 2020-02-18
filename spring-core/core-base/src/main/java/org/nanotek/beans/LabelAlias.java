@@ -8,7 +8,7 @@ import org.nanotek.Base;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="label_alias")
-public class LabelAlias implements Base<Long> {
+public class LabelAlias implements Base {
 	
 	private Long id; 
 	private Long label; 

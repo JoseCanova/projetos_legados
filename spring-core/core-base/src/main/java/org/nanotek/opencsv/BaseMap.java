@@ -14,7 +14,7 @@ import org.nanotek.StringBase;
  */
 //Avoiding the Usage of this. Type & AnnotatedElement & GenericDeclaration & Serializable & Base<?>
 @SuppressWarnings("serial")
-public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implements StringBase{
+public class BaseMap<T extends Base> extends HashMap<String,Integer> implements StringBase{
 
 	//works fine with the "Bean Name";
 	protected String id;
@@ -42,7 +42,7 @@ public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implemen
 		this.target = type;
 	}
 
-	public Base<?> newInstance() throws InstantiationException,
+	public Base newInstance() throws InstantiationException,
 			IllegalAccessException {
 		return target.newInstance();
 	}

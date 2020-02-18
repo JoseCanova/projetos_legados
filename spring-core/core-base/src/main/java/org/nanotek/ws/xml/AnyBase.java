@@ -16,13 +16,13 @@ import org.nanotek.ws.WsBase;
 public class AnyBase {
 
 	@XmlAnyElement
-	List<WsBase<?>> xmlMessage = new ArrayList<>();
+	List<WsBase> xmlMessage = new ArrayList<>();
 
-	public List<WsBase<?>> getXmlMessage() {
+	public List<WsBase> getXmlMessage() {
 		return Optional.ofNullable(xmlMessage).orElseGet(ArrayList::new);
 	}
 
-	public void setXmlMessage(List<WsBase<?>> xmlMessage) {
+	public void setXmlMessage(List<WsBase> xmlMessage) {
 		this.xmlMessage = xmlMessage;
 	}
 

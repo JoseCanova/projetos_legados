@@ -8,7 +8,7 @@ import org.nanotek.Base;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_name")
-public class TrackName implements Base<Long> {
+public class TrackName implements Base{
 
 	private Long id;
 	

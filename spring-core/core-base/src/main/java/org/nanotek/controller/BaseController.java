@@ -5,7 +5,7 @@ import java.util.List;
 import org.nanotek.Base;
 import org.nanotek.service.BaseService;
 
-public interface  BaseController<I extends Base<?>, S extends BaseService<I,?>> {
+public interface  BaseController<I extends Base, S extends BaseService<I,?>> {
 
     I findById( String id) ;
 

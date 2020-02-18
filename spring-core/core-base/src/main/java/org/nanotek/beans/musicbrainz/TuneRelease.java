@@ -9,7 +9,7 @@ import org.nanotek.ws.xml.ArtistRelease;
 
 @SuppressWarnings("serial")
 @Entity
-public class TuneRelease implements Base<Long>{
+public class TuneRelease implements Base{
 
 	@Id
 	private Long id; 

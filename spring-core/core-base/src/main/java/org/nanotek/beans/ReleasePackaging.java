@@ -8,7 +8,7 @@ import org.nanotek.Base;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="release_packaging")
-public class ReleasePackaging implements Base<String>{
+public class ReleasePackaging implements Base{
 
 	private String id; 
 	private String name; 

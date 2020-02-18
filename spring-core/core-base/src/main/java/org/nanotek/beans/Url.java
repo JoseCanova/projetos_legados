@@ -7,7 +7,7 @@ import org.nanotek.Base;
 
 @Entity
 @Table(name="url")
-public class Url implements Base<Long> {
+public class Url implements Base {
 
 	private Long id; 
 	private String gid; 

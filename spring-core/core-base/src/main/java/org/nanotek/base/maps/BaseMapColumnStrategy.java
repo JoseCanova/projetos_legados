@@ -5,7 +5,7 @@ import org.nanotek.opencsv.BaseMap;
 import org.nanotek.opencsv.MapColumnStrategy;
 
 
-public class BaseMapColumnStrategy<T extends Base<?>> extends MapColumnStrategy<BaseMap<T>, T>{
+public class BaseMapColumnStrategy<T extends Base> extends MapColumnStrategy<BaseMap<T>, T>{
 
 	public String fileLocation; 
 	

@@ -6,7 +6,7 @@ import org.nanotek.Base;
 import org.nanotek.Sender;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
-public abstract class JmsMessageSender <K extends Base<?>>  implements Sender<K>{
+public abstract class JmsMessageSender <K extends Base>  implements Sender<K>{
 
 	protected JmsMessagingTemplate jmsMessagingTemplate;
  

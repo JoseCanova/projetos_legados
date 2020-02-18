@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I extends Base<?>, P extends BaseParser > {
+public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I extends Base, P extends BaseParser > {
 
 
 	public abstract T getBaseMap();

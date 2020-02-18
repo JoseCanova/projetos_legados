@@ -10,7 +10,7 @@ import org.nanotek.ws.WsBase;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="credit", namespace="org.nanotek.ws.xml")
 @SuppressWarnings("serial")
-public class Credit implements WsBase<Long>{
+public class Credit implements WsBase{
 
 	@XmlElement(name="creditId")
 	private Long id;

@@ -8,7 +8,7 @@ import org.nanotek.Base;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="work_type")
-public class WorkType implements Base<String> {
+public class WorkType implements Base{
 
 	private String id; 
 	

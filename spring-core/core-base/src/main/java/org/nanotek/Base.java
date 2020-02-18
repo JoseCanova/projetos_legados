@@ -8,7 +8,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
 
-public interface Base<K extends Serializable> {
+public interface Base extends Serializable {
 
 	static String hash = "35454B055CC325EA1AF2126E27707052";
 
@@ -32,17 +32,17 @@ public interface Base<K extends Serializable> {
 		return Optional.ofNullable(dest).orElseGet(supplier); 
 	}
 
-	default <T extends Base<?>> T newType(Supplier<T> baseSupplier)
+	default <T extends Base> T newType(Supplier<T> baseSupplier)
 	{ 
 		return baseSupplier.get();
 	}
 
 	@SuppressWarnings("deprecation")
-	default Base<?> newInstance() throws InstantiationException, IllegalAccessException{ 
+	default Base newInstance() throws InstantiationException, IllegalAccessException{ 
 		return this.getClass().newInstance();
 	}
 
-	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
+	static <K extends Base> Optional<K> NULL_VALUE(Class<K> clazz) {
 		return Optional.empty();
 	}
 }

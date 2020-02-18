@@ -1,6 +1,6 @@
 package org.nanotek;
 
-public class BaseHolder<K extends Base<?>> implements ImmutableStringBase {
+public class BaseHolder<K extends Base> implements ImmutableStringBase {
 	
 	private K base;
 	

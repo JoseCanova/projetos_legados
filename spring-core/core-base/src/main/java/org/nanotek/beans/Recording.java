@@ -12,7 +12,7 @@ import org.nanotek.Base;
 
 @SuppressWarnings("serial")@Entity
 @Table(name="RECORDING")
-public class Recording implements Base<Long> {
+public class Recording implements Base {
 
 	@Id
 	@GeneratedValue(generator="recording_id_seq",strategy=GenerationType.SEQUENCE)

@@ -13,7 +13,7 @@ import org.nanotek.Base;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="RELEASE_GROUP")
-public class ReleaseGroup implements Base<Long> {
+public class ReleaseGroup implements Base {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="release_group_seq")

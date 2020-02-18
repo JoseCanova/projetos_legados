@@ -13,7 +13,7 @@ import org.nanotek.Base;
 
 @Entity
 @SuppressWarnings("serial")
-public class TuneArtist implements Base<Long>{
+public class TuneArtist implements Base{
 
 	@Id
 	private Long id; 
