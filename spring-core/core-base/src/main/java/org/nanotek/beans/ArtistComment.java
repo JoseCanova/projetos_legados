@@ -20,7 +20,7 @@ public class ArtistComment implements ImmutableLongBase {
 	private Long id;
 	
 	@NotNull
-	@Length(min = 1 , max = 1000)
+	@Length(min = 0 , max = 1000)
 	@Column(name="comment", length=1000, nullable = false , updatable = true )
 	private String comment;
 	
@@ -34,6 +34,7 @@ public class ArtistComment implements ImmutableLongBase {
 		super();
 		this.comment = comment;
 		this.artist = artist;
+		this.id = artist.getId();
 	}
 
 	public String getComment() {

@@ -21,6 +21,7 @@ public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 
 	@Autowired
 	private ArtistRepository ArtistRepository;
+	
 
 	@Transactional
 	public Artist save(Artist Artist) { 

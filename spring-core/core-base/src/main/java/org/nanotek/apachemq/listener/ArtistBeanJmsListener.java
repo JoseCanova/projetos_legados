@@ -1,11 +1,16 @@
 package org.nanotek.apachemq.listener;
 
+import java.util.Optional;
+
 import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.nanotek.beans.Artist;
+import org.nanotek.beans.ArtistComment;
+import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.service.jpa.ArtistCommentJpaService;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,20 +33,58 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 	private Gson gson;
 
 	@Autowired
-	private ArtistJpaService ArtistJpaService;
+	private ArtistJpaService artistJpaService;
+	
+	@Autowired
+	private ArtistCommentJpaService artistCommentJpaService;
 
 	@Override
 	@Async
 	public void onMessage(ActiveMQBytesMessage message, Session session) throws JMSException {
-		Artist Artist = MessageListenerHelper.processMessage(message, gson, Artist.class);
+		ArtistBean artistBean = MessageListenerHelper.processMessage(message, gson, ArtistBean.class);
 		try {
-			validateAndSave(Artist);
+			validateAndSave(artistBean);
 		}catch (Exception ex) {
-			log.debug(ex.getMessage());
+			log.error("error - on processing artist" , ex);
 		}
 	}
 
-	private void validateAndSave(@Valid Artist Artist) {
-		ArtistJpaService.save(Artist);
+	
+	private void validateAndSave(@Valid ArtistBean artistBean) { 
+		Optional<Artist> optArtist = artistJpaService.findById(artistBean.getId());
+		if (optArtist.isPresent()) { 
+			verifyArtistComment(optArtist.get() , artistBean);
+		}else { 
+			save (artistBean);
+		}
+	}
+
+	private void save(@Valid ArtistBean artistBean) {
+		Artist artist = new Artist(artistBean.getId() , artistBean.getGid() , artistBean.getName() , artistBean.getSortName());
+		save(artist);
+	}
+
+	@Transactional
+	private void verifyArtistComment(Artist artist , ArtistBean artistBean) {
+		if (artist.getArtistComment() == null) { 
+			if (!"".equals(artistBean.getComment()) && !isNull(artistBean.getComment()))
+			{ 
+				ArtistComment comment = new ArtistComment(artistBean.getComment() , artist);
+				artist.setArtistComment(comment);
+				saveArtistComment(comment);
+			}
+		}
+	}
+
+	private void saveArtistComment(ArtistComment comment) {
+		artistCommentJpaService.save(comment);
+	}
+
+	private boolean isNull(String comment) {
+		return comment == null || "\\N".equalsIgnoreCase(comment);
+	}
+
+	private Artist save(Artist artist) {
+		return artistJpaService.save(artist);
 	}
 }
