@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
-import org.nanotek.beans.ArtistName;
+import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
@@ -24,13 +24,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.jdbc.core.convert.BasicJdbcConverter;
-import org.springframework.data.jdbc.core.convert.JdbcConverter;
-import org.springframework.data.jdbc.core.convert.RelationResolver;
-import org.springframework.data.mapping.context.MappingContext;
-import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
-import org.springframework.data.relational.core.mapping.RelationalPersistentProperty;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -104,8 +97,8 @@ public class BaseConfiguration {
 	}
 
 	@Bean
-	@Qualifier(value = "ArtistCsvToBean")
-	public CsvToBean<ArtistName> csvToBean() {
+	@Qualifier(value = "ArtistBeanCsvToBean")
+	public CsvToBean<ArtistBean> csvToBean() {
 		return new CsvToBean<>();
 	}
 

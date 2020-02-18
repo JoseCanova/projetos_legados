@@ -9,10 +9,10 @@
         </layout>
     </appender>
 
-    <logger name="br.com.valid.bio" level="debug"
+<!--     <logger name="br.com.valid.bio" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
-    </logger>
+    </logger> -->
 
     <logger name="reactor" level="info"
             additivity="false">
@@ -24,21 +24,21 @@
         <appender-ref ref="STDOUT" />
     </logger>
     
-	<logger name="org.springframework.data" level="debug"
+	<!-- <logger name="org.springframework.data" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
-    </logger>
+    </logger> -->
     
 <!-- 	<logger name="org.apache.http" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger> -->
     
-    <logger name="org.springframework.integration" level="debug"
+<!--     <logger name="org.springframework.integration" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
-
+ -->
     <!-- <logger name="org.springframework.integration.core" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />

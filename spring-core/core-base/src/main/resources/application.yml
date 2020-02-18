@@ -29,10 +29,10 @@ entitymanager:
 artist:
   fileLocation: /opt/mbdump
   fileName: artist
-  id: ArtistName
-  type: org.nanotek.beans.ArtistName
+  id: ArtistBean
+  type: org.nanotek.beans.csv.ArtistBean
   baseMap:
-    artistId: 0
+    id: 0
     gid: 1
     name: 2
     sortName: 3
@@ -49,6 +49,8 @@ artist:
     editsPending: 14
     lastUpdated: 15
     ended: 16
+    beginArea: 17
+    endArea: 18
 
     
 artistalias:
