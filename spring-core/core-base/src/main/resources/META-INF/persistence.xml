@@ -22,7 +22,7 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<!-- <property name="javax.persistence.jdbc.url"
 				value="jdbc:postgresql://127.0.0.1:5432/music-brainz" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />

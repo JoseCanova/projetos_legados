@@ -31,8 +31,6 @@ public class Artist implements LongBase{
 //	private Long id;
 	
 	@Id
-	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)
-	@SequenceGenerator(name = "artist_id_seq", sequenceName = "artist_id_seq")
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)
 	private Long id;
