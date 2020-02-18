@@ -36,7 +36,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name = "ArtistCreditLoadAll", query ="Select a from ArtistCredit a order by a.id asc"),
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.artistCreditId in (:ids)"),
 		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.artistCreditId = :id")
-		//		@NamedQuery(name="FindArtistCreditsByArtistId" , query="Select a from ArtistCredit a inner join a.artistCreditNames n where n.artist = :artistId")
 })
 public class ArtistCredit implements Base<Long> {
 
@@ -60,9 +59,9 @@ public class ArtistCredit implements Base<Long> {
 	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
-	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="artistId") },
+	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
 	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="artist_credit_id") })
-	private List<ArtistName> artists;
+	private List<Artist> artists;
 	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Recording> recordings; */
@@ -149,11 +148,11 @@ public class ArtistCredit implements Base<Long> {
 		return true;
 	}
 
-	public List<ArtistName> getArtists() {
+	public List<Artist> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(List<ArtistName> artists) {
+	public void setArtists(List<Artist> artists) {
 		this.artists = artists;
 	}
 

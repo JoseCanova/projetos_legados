@@ -1,8 +1,10 @@
 package org.nanotek.apachemq;
 
 import java.util.concurrent.Future;
+
 import javax.jms.Queue;
-import org.nanotek.beans.ArtistName;
+
+import org.nanotek.beans.csv.ArtistBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsMessagingTemplate;
@@ -11,20 +13,20 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArtistNameBeanMessageSender extends JmsMessageSender<ArtistName> {
+public class ArtistBeanMessageSender extends JmsMessageSender<ArtistBean> {
 
-	public ArtistNameBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate ,
+	public ArtistBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate ,
 										@Autowired @Qualifier("artistNameQueue")Queue queue) {
 		super(jmsTemplate,queue);
 	}
 
 	@Async("threadPoolTaskExecutor")
-	public Future<ArtistName> sendAsync(ArtistName ab) {
-		return new AsyncResult<ArtistName> (send(ab));
+	public Future<ArtistBean> sendAsync(ArtistBean ab) {
+		return new AsyncResult<ArtistBean> (send(ab));
 	}
 
 	@Override
-	public ArtistName send (ArtistName message) {
+	public ArtistBean send (ArtistBean message) {
 		return super.send(message);
 	}
 

@@ -2,8 +2,8 @@ package org.nanotek.service.http;
 
 import java.util.concurrent.Future;
 
-import org.nanotek.beans.ArtistName;
-import org.nanotek.service.mq.ArtistNameDispatcherService;
+import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.service.mq.ArtistDispatcherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,18 @@ public class AsyncHttpClientServices {
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
-	final String uri = "http://localhost:8080/artist/next";
+	final String uri = "http://localhost:8080/csv/artist/next";
 
 	@Autowired
-	ArtistNameDispatcherService dispatcher;
+	ArtistDispatcherService dispatcher;
 
 	@Async("threadPoolTaskExecutor")
 	public Future<String> process() throws InterruptedException {
 		RestTemplate restTemplate = new RestTemplate();
-		ArtistName artist;
+		ArtistBean artist;
 		log.info("started");
-		boolean valid = false;
 		do {
-			artist = restTemplate.getForObject(uri, ArtistName.class);
+			artist = restTemplate.getForObject(uri, ArtistBean.class);
 			if (artist !=null) {
 				dispatcher.dispatch(artist);
 				log.info(artist.toString());

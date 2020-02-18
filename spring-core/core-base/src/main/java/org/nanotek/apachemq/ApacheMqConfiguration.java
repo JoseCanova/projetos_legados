@@ -4,15 +4,14 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
+import org.nanotek.apachemq.listener.ArtistBeanJmsListener;
 import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
-import org.nanotek.apachemq.listener.ArtistNameBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
 import org.nanotek.apachemq.listener.RecordingBeanMessageJmsListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
@@ -83,15 +82,15 @@ public class ApacheMqConfiguration {
 	}
 
 
-//	@Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , 
-//														@Autowired ArtistCreditNameBeanJmsListener jmsListener ) {
-//			DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
-//			a.setMaxConcurrentConsumers(10);
-//			a.setDestinationName("musicbrainz.basequeue");
-//			a.setConnectionFactory(connectionFactory); 
-//			a.setMessageListener(jmsListener);
-//			return a; 
-//		}
+	@Bean public DefaultMessageListenerContainer listenerContainer2(@Autowired ConnectionFactory connectionFactory , 
+														@Autowired ArtistCreditNameBeanJmsListener jmsListener ) {
+			DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
+			a.setMaxConcurrentConsumers(10);
+			a.setDestinationName("musicbrainz.basequeue");
+			a.setConnectionFactory(connectionFactory); 
+			a.setMessageListener(jmsListener);
+			return a; 
+		}
 
 	@Bean
 	@Qualifier("RecordingBeanMessageListener")
@@ -106,7 +105,7 @@ public class ApacheMqConfiguration {
 
 	@Bean
 	@Qualifier("ArtistNameBeanMessageListener")
-	public DefaultMessageListenerContainer listenerContainer4(@Autowired ConnectionFactory connectionFactory , @Autowired ArtistNameBeanJmsListener jmsListener ) {
+	public DefaultMessageListenerContainer listenerContainer4(@Autowired ConnectionFactory connectionFactory , @Autowired ArtistBeanJmsListener jmsListener ) {
 		DefaultMessageListenerContainer a = new DefaultMessageListenerContainer();
 		a.setMaxConcurrentConsumers(10);
 		a.setDestinationName("musicbrainz.artist_name_queue");

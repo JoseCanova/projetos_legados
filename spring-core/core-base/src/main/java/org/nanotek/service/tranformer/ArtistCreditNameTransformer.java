@@ -3,9 +3,9 @@ package org.nanotek.service.tranformer;
 import java.util.List;
 import java.util.Optional;
 
+import org.nanotek.beans.Artist;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
-import org.nanotek.beans.ArtistName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.service.ArtistService;
 import org.slf4j.Logger;
@@ -27,17 +27,17 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 	public ArtistCreditName transform(ArtistCreditNameBean i) {
 		Optional<ArtistCreditName> ac = Optional.empty();
 		Optional<ArtistCredit> artistCredit = Optional.empty();
-		Optional <ArtistName> artistName = Optional.empty();
+		Optional <Artist> Artist = Optional.empty();
 		log.info("ArtistCreditId " + i.getArtistCreditId());
 		log.info("ArtistId " + i.getArtistId());
 		if (i.getArtistCreditId() !=null)
 			artistCredit = artistService.findByArtistCreditId(i.getArtistCreditId()); 
 		if(i.getArtistId() !=null) {
-			List<ArtistName> list = artistService.findByArtistId(i.getArtistId());
-			Optional<ArtistName> opt = list.stream().findFirst();
-			artistName = opt.isPresent() ? opt : null;
+			List<Artist> list = artistService.findByArtistId(i.getArtistId());
+			Optional<Artist> opt = list.stream().findFirst();
+			Artist = opt.isPresent() ? opt : null;
 		}
-		ac = Optional.of(populate(i , artistCredit , artistName));
+		ac = Optional.of(populate(i , artistCredit , Artist));
 		log.info("ArtistCreditName: " + (ac.isPresent() ? ac.toString() : ArtistCreditName.NULL_VALUE().toString()));
 		return ac.isPresent() ? ac.get() : null;
 	}
@@ -45,12 +45,12 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 
 	private ArtistCreditName populate(ArtistCreditNameBean i, 
 			Optional<ArtistCredit> artistCredit,
-			Optional<ArtistName> artistName) {
+			Optional<Artist> Artist) {
 		ArtistCreditName ac = new ArtistCreditName();
 		if (artistCredit !=null && artistCredit.isPresent())
 			ac.setArtistCredit(artistCredit.get());
-		if(artistName != null && artistName.isPresent()) {
-			ac.setArtistName(artistName.get());
+		if(Artist != null && Artist.isPresent()) {
+			ac.setArtist(Artist.get());
 		}
 		ac.setName(i.getName());
 		ac.setJoinPhrase(i.getJoinPhrase());

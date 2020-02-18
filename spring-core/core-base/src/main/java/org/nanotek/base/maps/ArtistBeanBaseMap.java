@@ -1,17 +1,17 @@
 package org.nanotek.base.maps;
 
-import org.nanotek.beans.ArtistName;
+import org.nanotek.beans.csv.ArtistBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 
-@Component(value = "ArtistBaseMap")
+@Component(value = "ArtistBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "artist")
-public class ArtistBaseMap extends BaseMapColumnStrategy<ArtistName>{
+public class ArtistBeanBaseMap extends BaseMapColumnStrategy<ArtistBean>{
 
-	public ArtistBaseMap() {
+	public ArtistBeanBaseMap() {
 	}
 
 }

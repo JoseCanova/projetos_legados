@@ -1,21 +1,19 @@
 package org.nanotek.service.tranformer;
 
-import org.nanotek.beans.ArtistName;
-import org.nanotek.beans.csv.ArtistNameBean;
+import org.nanotek.beans.Artist;
+import org.nanotek.beans.csv.ArtistBean;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistNameTransformer implements Transformer<ArtistNameBean , ArtistName>{
+public class ArtistTransformer implements Transformer<ArtistBean , Artist>{
 
 	@Override
-	public ArtistName transform(ArtistNameBean i) {
-		ArtistName artistName = new ArtistName();
-		artistName.setArtistId(i.getId());
+	public Artist transform(ArtistBean i) {
+		Artist artistName = new Artist();
+		artistName.setId(i.getId());
 		artistName.setName(i.getName());
 		artistName.setGid(i.getGid());
 		artistName.setSortName(i.getSortName());
-		artistName.setType(i.getType());
-		artistName.setGender(i.getGender());
 		return artistName;
 	}
 

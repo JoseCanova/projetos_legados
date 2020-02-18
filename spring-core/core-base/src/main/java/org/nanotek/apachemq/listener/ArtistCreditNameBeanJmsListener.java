@@ -8,8 +8,6 @@ import org.apache.activemq.command.Message;
 import org.apache.activemq.util.ByteSequence;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
-import org.nanotek.beans.flat.FlatArtistCreditName;
-import org.nanotek.service.jpa.ArtistCreditNameJpaService;
 import org.nanotek.service.tranformer.ArtistCreditNameTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +30,8 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 	@Autowired 
 	private ArtistCreditNameTransformer transformer;
 
-	@Autowired 
-	private ArtistCreditNameJpaService jpaService;
+//	@Autowired 
+//	private ArtistCreditNameJpaService jpaService;
 
 	@Override
 	@Async
@@ -62,7 +60,7 @@ public class ArtistCreditNameBeanJmsListener implements SessionAwareMessageListe
 
 	@Transactional
 	private void saveArtistNameCreditRel(ArtistCreditNameBean ab) {
-		jpaService.saveFlatArtistCreditName(new FlatArtistCreditName(ab.getId() , ab.getArtistCreditId() , ab.getPosition() , ab.getArtistId() , ab.getName() , ab.getJoinPhrase()));
+//		jpaService.saveFlatArtistCreditName(new FlatArtistCreditName(ab.getId() , ab.getArtistCreditId() , ab.getPosition() , ab.getArtistId() , ab.getName() , ab.getJoinPhrase()));
 //		jpaService.saveFlatArtistNameCreditRel(new FlatArtistNameCreditRel(ab.getArtistId() , ab.getArtistCreditId()));
 	}
 

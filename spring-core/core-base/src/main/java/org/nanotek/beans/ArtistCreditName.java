@@ -31,8 +31,8 @@ public class ArtistCreditName implements Base<Long> {
 	@JoinColumn(name = "artist_credit_id" , insertable = true , nullable = true, referencedColumnName = "artist_credit_id")
 	private ArtistCredit artistCredit;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "artistid" , insertable = true , nullable = true, referencedColumnName = "artistid")
-	private ArtistName artistName;
+	@JoinColumn(name = "artistid" , insertable = true , nullable = true, referencedColumnName = "id")
+	private Artist artist;
 	@Column(name="ARTIST_CREDIT_NAME_POSITION",nullable = true , insertable=true)
 	private Long position; 
 	@Column(name="ARTIST_NAME" ,length=1000, nullable = true , insertable=true)
@@ -77,75 +77,13 @@ public class ArtistCreditName implements Base<Long> {
 		this.artistCredit = artistCredit;
 	}
 
-	public ArtistName getArtistName() {
-		return artistName;
+	public Artist getArtist() {
+		return artist;
 	}
-	public void setArtistName(ArtistName artistName) {
-		this.artistName = artistName;
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((artistCredit == null) ? 0 : artistCredit.hashCode());
-		result = prime * result + ((artistName == null) ? 0 : artistName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((joinPhrase == null) ? 0 : joinPhrase.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArtistCreditName other = (ArtistCreditName) obj;
-		if (artistCredit == null) {
-			if (other.artistCredit != null)
-				return false;
-		} else if (!artistCredit.equals(other.artistCredit))
-			return false;
-		if (artistName == null) {
-			if (other.artistName != null)
-				return false;
-		} else if (!artistName.equals(other.artistName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (joinPhrase == null) {
-			if (other.joinPhrase != null)
-				return false;
-		} else if (!joinPhrase.equals(other.joinPhrase))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (position == null) {
-			if (other.position != null)
-				return false;
-		} else if (!position.equals(other.position))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ArtistCreditName [id=" + id + ", artistCredit=" + artistCredit + ", artistName=" + artistName
-				+ ", position=" + position + ", name=" + name + ", joinPhrase=" + joinPhrase + "]";
-	}
-
+	
 	public static ArtistCreditName NULL_VALUE() {
 		Optional<ArtistCreditName> a = Base.NULL_VALUE(ArtistCreditName.class);
 		ArtistCreditName acn = null;
@@ -153,5 +91,5 @@ public class ArtistCreditName implements Base<Long> {
 		acn.setId(0l);
 		return Optional.of(acn).orElse(null);
 	}
-
+	
 }

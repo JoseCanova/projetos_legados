@@ -3,7 +3,7 @@ package org.nanotek.beans.csv;
 import javax.validation.constraints.NotNull;
 import org.nanotek.LongBase;
 
-public class ArtistNameBean implements LongBase{
+public class ArtistBean implements LongBase{
 
 	private static final long serialVersionUID = 2864330060600897052L;
 
@@ -21,6 +21,7 @@ public class ArtistNameBean implements LongBase{
 	private Integer beginDateDay;
 	private Integer endDateYear;
 	private Integer endDateMonth;
+	private Integer endDateDay;  
 	private Integer type;
 	private Integer area;
 	private Integer gender;
@@ -28,9 +29,11 @@ public class ArtistNameBean implements LongBase{
 	private Integer editsPending;
 	private String lastUpdated;
 	private String ended;
+	private Integer beginArea;
+	private Integer endArea;
 
 
-	public ArtistNameBean() {}
+	public ArtistBean() {}
 
 	public Long getId() {
 		return id;
@@ -127,6 +130,30 @@ public class ArtistNameBean implements LongBase{
 	}
 	public void setEnded(String ended) {
 		this.ended = ended;
+	}
+
+	public Integer getEndDateDay() {
+		return endDateDay;
+	}
+
+	public void setEndDateDay(Integer endDateDay) {
+		this.endDateDay = endDateDay;
+	}
+
+	public Integer getBeginArea() {
+		return beginArea;
+	}
+
+	public void setBeginArea(Integer beginArea) {
+		this.beginArea = beginArea;
+	}
+
+	public Integer getEndArea() {
+		return endArea;
+	}
+
+	public void setEndArea(Integer endArea) {
+		this.endArea = endArea;
 	}
 
 }

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.beans.ArtistCreditName;
-import org.nanotek.beans.flat.FlatArtistCreditName;
-import org.nanotek.beans.flat.FlatArtistNameCreditRel;
 import org.nanotek.repository.jpa.ArtistCreditNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +16,6 @@ public class ArtistCreditNameJpaService extends BasePersistenceService<ArtistCre
 	@Autowired
 	private ArtistCreditNameRepository repository;
 	
-	@Autowired 
-	private FlatArtistCreditNameJpaService flatService;
-	
-	@Autowired 
-	private ArtistNameCreditRelRepositoryService relService;
 	
 	@Transactional
 	public ArtistCreditName save(ArtistCreditName a) { 
@@ -39,12 +32,5 @@ public class ArtistCreditNameJpaService extends BasePersistenceService<ArtistCre
 		return repository.findByArtistCreditId(id);
 	}
 	
-	@Transactional
-	public FlatArtistCreditName saveFlatArtistCreditName(FlatArtistCreditName ab) { 
-		return flatService.save(ab);
-	}
-	
-	public FlatArtistNameCreditRel saveFlatArtistNameCreditRel(FlatArtistNameCreditRel rel) { 
-		return relService.save(rel);
-	}
+
 }

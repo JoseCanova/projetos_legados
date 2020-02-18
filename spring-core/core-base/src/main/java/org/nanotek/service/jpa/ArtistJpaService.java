@@ -6,8 +6,8 @@ import java.util.Optional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.ArtistName;
-import org.nanotek.repository.jpa.ArtistNameRepository;
+import org.nanotek.beans.Artist;
+import org.nanotek.repository.jpa.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -17,41 +17,41 @@ import org.springframework.validation.annotation.Validated;
 //TODO: Create support for ExampleMathcers
 @Service
 @Validated
-public class ArtistNameJpaService extends BasePersistenceService<ArtistName,Long> {
+public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 
 	@Autowired
-	private ArtistNameRepository artistNameRepository;
+	private ArtistRepository ArtistRepository;
 
 	@Transactional
-	public ArtistName save(ArtistName artistName) { 
-		return artistNameRepository.save(artistName);
+	public Artist save(Artist Artist) { 
+		return ArtistRepository.save(Artist);
 	}
 	
 	@Transactional
-	public List<ArtistName> saveAll(List<ArtistName> list) { 
-		return artistNameRepository.saveAll(list);
+	public List<Artist> saveAll(List<Artist> list) { 
+		return ArtistRepository.saveAll(list);
 	}
 
 	@Override
 	@Transactional
-	public  Optional<ArtistName> findById(Long k) {
-		return artistNameRepository.findById(k);
+	public  Optional<Artist> findById(Long k) {
+		return ArtistRepository.findById(k);
 	}
 	
 	@Transactional
-	public  Optional<ArtistName> findOne(Example<ArtistName> example) {
-		return artistNameRepository.findOne(example);
+	public  Optional<Artist> findOne(Example<Artist> example) {
+		return ArtistRepository.findOne(example);
 	}
 	
 	@Transactional
-	public  List<ArtistName> findByArtistId(Long artistId) {
-		return artistNameRepository.findByArtistId(artistId);
+	public  List<Artist> findByArtistId(Long artistId) {
+		return ArtistRepository.findByArtistId(artistId);
 	}
 	
 	@Transactional
-	public List<ArtistName> findByNameContaining(@NotNull @NotEmpty String name){ 
-		return artistNameRepository.findByNameEspec(name.toUpperCase());
-//		return artistNameRepository.findByNameContainingIgnoreCase(name.toUpperCase());
+	public List<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
+		return ArtistRepository.findByNameEspec(name.toUpperCase());
+//		return ArtistRepository.findByNameContainingIgnoreCase(name.toUpperCase());
 	}
 	
 }

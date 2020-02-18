@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
-import org.nanotek.beans.ArtistName;
+import org.nanotek.beans.Artist;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ArtistCreditNameJpaService;
-import org.nanotek.service.jpa.ArtistNameJpaService;
+import org.nanotek.service.jpa.ArtistJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtistService{
 
 	@Autowired
-	private ArtistNameJpaService artistNameJpaService;
+	private ArtistJpaService ArtistJpaService;
 
 	@Autowired 
 	private ArtistCreditJpaService artistCreditJpaService;
@@ -29,8 +29,8 @@ public class ArtistService{
 	private ArtistCreditNameJpaService artistCreditNameJpaService;
 	
 	@Transactional
-	public Optional<ArtistName> findArtistNameById(Long id){ 
-		return artistNameJpaService.findById(id);
+	public Optional<Artist> findArtistById(Long id){ 
+		return ArtistJpaService.findById(id);
 	}
 	
 	@Transactional
@@ -55,12 +55,12 @@ public class ArtistService{
 	}
 
 	@Transactional 
-	public List<ArtistName> findByArtistId(Long artistId) {
-		return artistNameJpaService.findByArtistId(artistId);
+	public List<Artist> findByArtistId(Long artistId) {
+		return ArtistJpaService.findByArtistId(artistId);
 	}
 	
 	@Transactional
-	public List<ArtistName> findByNameLike(@NotNull @NotEmpty  String name){ 
-		return artistNameJpaService.findByNameContaining(name);
+	public List<Artist> findByNameLike(@NotNull @NotEmpty  String name){ 
+		return ArtistJpaService.findByNameContaining(name);
 	}
 }
