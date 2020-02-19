@@ -59,7 +59,7 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 		}
 	}
 
-	private void save(@Valid ArtistBean artistBean) {
+	private void save(ArtistBean artistBean) {
 		Artist artist = new Artist(artistBean.getId() , artistBean.getGid() , artistBean.getName() , artistBean.getSortName());
 		save(artist);
 	}

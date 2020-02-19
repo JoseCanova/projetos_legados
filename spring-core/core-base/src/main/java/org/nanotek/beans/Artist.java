@@ -53,7 +53,7 @@ public class Artist implements LongBase{
 	@Column(name="gid", nullable=false)
 	private String gid;
 	
-	@OneToOne(mappedBy = "artist")
+	@OneToOne(mappedBy = "artist" , fetch = FetchType.LAZY)
 	private ArtistComment artistComment;
 	/*
 	 * @Column(name="type", nullable=true) private Integer type;
