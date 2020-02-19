@@ -2,6 +2,7 @@ package org.nanotek.controller.csv;
 
 import org.nanotek.base.maps.ArtistCreditBaseMap;
 import org.nanotek.beans.ArtistCredit;
+import org.nanotek.beans.csv.ArtistCreditBean;
 import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,7 +13,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @RestController
 @RequestMapping("/csv/artist_credit")
-public class ArtistCreditCsvController extends CsvController<ArtistCreditBaseMap , ArtistCredit, ArtistCreditParser>
+public class ArtistCreditCsvController extends CsvController<ArtistCreditBaseMap , ArtistCreditBean, ArtistCreditParser>
 {
 
 	@Autowired
@@ -21,7 +22,7 @@ public class ArtistCreditCsvController extends CsvController<ArtistCreditBaseMap
 	
 	@Autowired
 	@Qualifier("ArtistCreditCsvToBean")
-	private CsvToBean<ArtistCredit> csvToBean;
+	private CsvToBean<ArtistCreditBean> csvToBean;
 
 	
 	@Override
@@ -30,7 +31,7 @@ public class ArtistCreditCsvController extends CsvController<ArtistCreditBaseMap
 	}
 
 	@Override
-	public CsvToBean<ArtistCredit> getCsvToBean() {
+	public CsvToBean<ArtistCreditBean> getCsvToBean() {
 		return csvToBean;
 	}
 

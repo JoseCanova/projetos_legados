@@ -44,7 +44,7 @@ public class ArtistCreditAsyncHttpClientServices {
 					}
 				}
 				private boolean validateArtistCredit(ArtistCredit artist) {
-					return Optional.ofNullable(artist.getArtistCreditId()).orElse(0L) != 0 &&  notEmpty(artist.getName());
+					return true;//Optional.ofNullable(artist.getId()).orElse(0L) != 0 &&  notEmpty(artist.getName());
 				}
 			});
 		}while((testValue != null));

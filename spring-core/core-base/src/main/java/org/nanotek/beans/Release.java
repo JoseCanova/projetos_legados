@@ -63,7 +63,7 @@ public class Release implements LongBase {
 
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="artist_credit" , referencedColumnName="artist_credit_id")
+	@JoinColumn(name="artist_credit" , referencedColumnName="id")
 	private ArtistCredit artistCreditReference;
 
 	public Release() { 

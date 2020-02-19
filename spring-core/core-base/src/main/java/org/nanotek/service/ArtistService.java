@@ -50,7 +50,7 @@ public class ArtistService{
 	
 	@Transactional 
 	public Optional<ArtistCredit> findByArtistCreditId(Long id) { 
-		Optional<ArtistCredit> artistCredit = artistCreditJpaService.findByArtistCreditId(id);
+		Optional<ArtistCredit> artistCredit = artistCreditJpaService.findById(id);
 		return artistCredit;
 	}
 

@@ -34,7 +34,7 @@ public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 
 	@Transactional
 	private Optional<ArtistCredit> findArtistCredit(Long artistCreditId) {
-		return creditJpaService.findByArtistCreditId(artistCreditId);
+		return creditJpaService.findById(artistCreditId);
 	}
 
 }

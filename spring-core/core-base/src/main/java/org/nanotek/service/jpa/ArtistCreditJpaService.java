@@ -31,8 +31,4 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 		return artistCreditRepository.findById(k);
 	}
 	
-	public Optional<ArtistCredit> findByArtistCreditId(Long id){ 
-		return artistCreditRepository.findByArtistCreditId(id);
-	}
-	
 }

@@ -9,6 +9,7 @@ import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.beans.csv.ArtistCreditBean;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
@@ -110,7 +111,7 @@ public class BaseConfiguration {
 
 	@Bean
 	@Qualifier(value = "ArtistCreditCsvToBean")
-	public CsvToBean<ArtistCredit> csvArtistCreditToBean() {
+	public CsvToBean<ArtistCreditBean> csvArtistCreditToBean() {
 		return new CsvToBean<>();
 	}
 

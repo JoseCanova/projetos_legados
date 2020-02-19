@@ -29,7 +29,7 @@ public class ArtistCreditName implements LongBase {
 	//	@Column(name="ARTIST_CREDIT",insertable=true)
 	//	private Long artistCredit; 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "artist_credit_id" , insertable = true , nullable = true, referencedColumnName = "artist_credit_id")
+	@JoinColumn(name = "artist_credit_id" , insertable = true , nullable = true, referencedColumnName = "id")
 	private ArtistCredit artistCredit;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artistid" , insertable = true , nullable = true, referencedColumnName = "id")

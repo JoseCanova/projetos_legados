@@ -25,11 +25,4 @@ public class ArtistCreditController implements BaseController<ArtistCredit, Arti
 		return artistOpt.isPresent() ? artistOpt.get() : null;
 	}
 
-	@RequestMapping("/artist_credit_id/{id}")
-	public @ResponseBody  ArtistCredit findByArtistCreditId(@PathVariable(value="id") String  id) {
-		Optional<ArtistCredit> artistOpt = baseService.findByArtistCreditId(Long.valueOf(id));
-		return artistOpt.isPresent() ? artistOpt.get() : null;
-	}
-	
-
 }
