@@ -39,12 +39,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 })
 public class ArtistCredit implements LongBase {
 
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
+//	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
+//	private Long id;
+//	@Column(name="id" , insertable=true,nullable=false,unique = true)
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
-	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
 	private Long id;
-	@Column(name="artist_credit_id" , insertable=true,nullable=false,unique = true)
-	private Long artistCreditId;
 	@Column (name="artist_name" ,length=1000, insertable=true,nullable=false)
 	private String name; 
 	@Column (name="artist_count")
@@ -60,7 +61,7 @@ public class ArtistCredit implements LongBase {
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
 	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
-	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="artist_credit_id") })
+	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
 	private List<Artist> artists;
 	
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
@@ -73,14 +74,6 @@ public class ArtistCredit implements LongBase {
 	@Override
 	public Long getId() {
 		return id;
-	}
-
-	public Long getArtistCreditId() {
-		return artistCreditId;
-	}
-
-	public void setArtistCreditId(Long artistCreditId) {
-		this.artistCreditId = artistCreditId;
 	}
 
 	public String getName() {
@@ -107,22 +100,6 @@ public class ArtistCredit implements LongBase {
 		this.refCount = refCount;
 	}
 
-	@Override
-	public String toString() {
-		return "ArtistCredit [id=" + id + ", artistCreditId=" + artistCreditId
-				+ ", name=" + name + ", artistCount=" + artistCount
-				+ ", refCount=" + refCount + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((artistCreditId == null) ? 0 : artistCreditId.hashCode());
-		return result;
-	}
-
 	public Set<Release> getReleases() {
 		return releases != null ? releases : (releases = newAnyType(HashSet::new)); 
 	}
@@ -131,23 +108,6 @@ public class ArtistCredit implements LongBase {
 		this.releases = releases;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArtistCredit other = (ArtistCredit) obj;
-		if (artistCreditId == null) {
-			if (other.artistCreditId != null)
-				return false;
-		} else if (!artistCreditId.equals(other.artistCreditId))
-			return false;
-		return true;
-	}
-
 	public List<Artist> getArtists() {
 		return artists;
 	}
