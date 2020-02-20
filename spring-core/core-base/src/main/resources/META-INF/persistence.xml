@@ -7,6 +7,7 @@
 	<persistence-unit name="spring-core-music-brainz" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
+		<class>org.nanotek.beans.SuperLongBase</class>
 		<class>org.nanotek.beans.ArtistComment</class>
 		<class>org.nanotek.beans.ArtistCredit</class>
 		<class>org.nanotek.beans.ArtistCreditName</class>

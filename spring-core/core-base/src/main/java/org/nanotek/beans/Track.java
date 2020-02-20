@@ -13,12 +13,16 @@ import org.nanotek.LongBase;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track")
-public class Track implements LongBase {
+public class Track extends SuperLongBase {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="track_id_seq")
-	@SequenceGenerator(name="track_id_seq",sequenceName="track_id_seq")
-	private Long id; 
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="track_id_seq")
+	 * 
+	 * @SequenceGenerator(name="track_id_seq",sequenceName="track_id_seq") private
+	 * Long id;
+	 */ 
 	@Column(name="TRACK_ID")
 	private Long trackId; 
 	@Column(name="GID" , length=255)
@@ -42,9 +46,9 @@ public class Track implements LongBase {
 	@JoinColumn(name="recording" , referencedColumnName="recording_id")
 	private Recording recording;*/
 	
-	public Long getId() {
-		return id;
-	}
+	/*
+	 * public Long getId() { return id; }
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}

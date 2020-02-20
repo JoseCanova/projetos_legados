@@ -35,7 +35,6 @@ public class ReleaseGroupBean implements LongBase {
 		return releaseGroupId;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.releaseGroupId = id;
 	}

@@ -6,34 +6,25 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.LongBase;
+import org.nanotek.MutableBase;
 
 @Entity
 @SuppressWarnings("serial")
 @Table(name="artist")
 @NamedQuery(name = "Artist.LoadAll", query ="Select a from Artist a order by a.name asc")
-public class Artist implements LongBase{
+public class Artist extends SuperLongBase implements MutableBase<Long>{
 
 //	@Id
 //	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)
 //	@SequenceGenerator(name = "artist_id_seq", sequenceName = "artist_id_seq")
 //	private Long id;
-	
-	@Id
-	@NotNull
-	@Column(name="id",nullable=false,unique=true)
-	private Long id;
 	
 	@NotNull
 	@Length(min = 1 , max = 1000)
@@ -73,6 +64,9 @@ public class Artist implements LongBase{
 		this.gid = gid;
 	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -81,7 +75,6 @@ public class Artist implements LongBase{
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getSortName() {
 		return sortName;
@@ -106,14 +99,6 @@ public class Artist implements LongBase{
 
 	public void setArtistCredits(List<ArtistCredit> artistCredits) {
 		this.artistCredits = artistCredits;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public ArtistComment getArtistComment() {

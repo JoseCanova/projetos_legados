@@ -23,12 +23,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="RELEASE")
-public class Release implements LongBase {
-
-	@Id
-	@GeneratedValue(generator="release_seq" , strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="release_seq", sequenceName="release_id_seq")
-	private Long id; 
+public class Release extends SuperLongBase {
+//
+//	@Id
+//	@GeneratedValue(generator="release_seq" , strategy=GenerationType.SEQUENCE)
+//	@SequenceGenerator(name="release_seq", sequenceName="release_id_seq")
+//	private Long id; 
 	@Column(name="RELEASE_ID" , nullable=false)
 	private Long releaseId; 
 	@Column(name="GID" , nullable=false)
@@ -70,11 +70,9 @@ public class Release implements LongBase {
 		super();
 	}
 
-	@Override
-	public Long getId() {
-		return id;
-	}
-
+	/*
+	 * @Override public Long getId() { return id; }
+	 */
 
 	public Long getReleaseId() {
 		return releaseId;

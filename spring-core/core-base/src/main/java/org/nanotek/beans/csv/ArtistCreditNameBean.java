@@ -61,7 +61,6 @@ public class ArtistCreditNameBean implements LongBase {
 		return 0l;
 	}
 
-	@Override
 	public void setId(Long id) {
 	}
 

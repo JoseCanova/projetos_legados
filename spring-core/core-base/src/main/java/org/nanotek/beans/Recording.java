@@ -12,12 +12,12 @@ import org.nanotek.Base;
 
 @SuppressWarnings("serial")@Entity
 @Table(name="RECORDING")
-public class Recording implements Base {
+public class Recording extends SuperLongBase {
 
-	@Id
-	@GeneratedValue(generator="recording_id_seq",strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="recording_id_seq",sequenceName="recording_id_seq")
-	private Long id; 
+//	@Id
+//	@GeneratedValue(generator="recording_id_seq",strategy=GenerationType.SEQUENCE)
+//	@SequenceGenerator(name="recording_id_seq",sequenceName="recording_id_seq")
+//	private Long id; 
 	@Column(name="RECORDING_ID" , insertable=true)
 	private Long recordingId; 
 	@Column(name="GID" , length=255 , insertable=true)
@@ -38,14 +38,6 @@ public class Recording implements Base {
 	@OneToMany(mappedBy="recording" , fetch=FetchType.LAZY)
 	private Set<Track> tracks;*/
 	
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
 	public Long getRecordingId() {
 		return recordingId;
