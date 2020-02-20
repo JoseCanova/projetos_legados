@@ -82,7 +82,7 @@ artistcredit:
   id: ArtistCreditBean
   type: org.nanotek.beans.csv.ArtistCreditBean
   baseMap:  
-    artistCreditId: 0
+    id: 0
     name: 1
     artistCount: 2
     refCount: 3

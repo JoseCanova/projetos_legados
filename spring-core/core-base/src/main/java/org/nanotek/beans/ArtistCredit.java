@@ -15,8 +15,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongBase;
+import org.hibernate.validator.constraints.Length;
+import org.nanotek.SuperLongBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,20 +36,22 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.id in (:ids)"),
 		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.id = :id")
 })
-public class ArtistCredit implements LongBase {
+public class ArtistCredit extends SuperLongBase {
 
 //	@Id
 //	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
 //	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
 //	private Long id;
 //	@Column(name="id" , insertable=true,nullable=false,unique = true)
-	@Id
-	private Long id;
-	@Column (name="artist_name" ,length=1000, insertable=true,nullable=false)
+	@NotNull
+	@Length(min = 1 , max = 1000)
+	@Column (name="artist_name" ,length=1000, insertable=true,nullable=false,updatable = true)
 	private String name; 
-	@Column (name="artist_count")
+	@NotNull
+	@Column (name="artist_count" , insertable=true,nullable=false,updatable = true)
 	private Long artistCount; 
-	@Column (name="ref_count")
+	@NotNull
+	@Column (name="ref_count" , insertable=true,nullable=false,updatable = true)
 	private Long refCount;
 
 	@JsonIgnore
@@ -64,15 +68,6 @@ public class ArtistCredit implements LongBase {
 /*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Recording> recordings; */
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
 	public String getName() {
 		return name;
 	}

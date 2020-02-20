@@ -26,6 +26,13 @@ public class ApacheMqConfiguration {
 	}
 
 	@Bean
+	@Qualifier(value="artistCreditQueue")
+	public Queue artistCreditQueue() {
+		return new ActiveMQQueue("musicbrainz.artist_credit_queue");
+	}
+
+	
+	@Bean
 	@Qualifier(value="releaseQueue")
 	public Queue queue() {
 		return new ActiveMQQueue("musicbrainz.queue");
