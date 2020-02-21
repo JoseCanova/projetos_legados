@@ -1,5 +1,6 @@
 package org.nanotek.service.http;
 
+import org.nanotek.apachemq.AsyncBaseSender;
 import org.nanotek.beans.csv.ArtistCreditBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,11 @@ public class ArtistCreditAsyncHttpClientServices {
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
-	final String uri = "http://localhost:8080/artist_credit/next";
+	final String uri = "http://localhost:8080/csv/artist_credit/next";
+	
+	@Autowired
+	@Qualifier("ArtistCreditBeanMessageSender")
+	AsyncBaseSender<ArtistCreditBean> sender;
 
 	@Autowired
 	@Qualifier("serviceTaskExecutor")
@@ -27,12 +32,8 @@ public class ArtistCreditAsyncHttpClientServices {
 		ArtistCreditBean artistCredit = null;
 		do {
 			artistCredit = restTemplate.getForObject(uri, ArtistCreditBean.class);
+			sender.sendAsync(artistCredit);
 		}while((artistCredit != null));
 
 	}
-
-	private static boolean notEmpty(String value) {
-		return value !=null && !"".equals(value.trim());
-	}
-
 }

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.MutableBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,7 +35,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.id in (:ids)"),
 		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.id = :id")
 })
-public class ArtistCredit extends SuperLongBase {
+public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 
 //	@Id
 //	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
@@ -104,6 +105,11 @@ public class ArtistCredit extends SuperLongBase {
 
 	public void setArtists(List<Artist> artists) {
 		this.artists = artists;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

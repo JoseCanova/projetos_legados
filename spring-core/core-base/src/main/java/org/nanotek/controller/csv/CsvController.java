@@ -25,7 +25,7 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
 	public abstract  P getBaseParser();
 	
 	@RequestMapping("/map_config")
-    public MapColumnStrategy<? , ?> mapConfig(@RequestParam(value="count", defaultValue="1") Long count) {
+    public MapColumnStrategy<? , ?> mapConfig() {
         return getBaseParser().getBaseMap();
     }
 
