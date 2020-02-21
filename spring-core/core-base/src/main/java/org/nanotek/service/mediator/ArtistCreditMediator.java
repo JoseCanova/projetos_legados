@@ -11,13 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistCreditMediator implements Mediator<ArtistCreditBean>{
+public class ArtistCreditMediator extends ArtistCreditService implements Mediator<ArtistCreditBean>{
 		
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 		
-	@Autowired
-	ArtistCreditService service;
-	
 	@Autowired 
 	ArtistCreditBeanTransformer transformer;
 
@@ -25,7 +22,7 @@ public class ArtistCreditMediator implements Mediator<ArtistCreditBean>{
 	public void mediate(ArtistCreditBean bean) {
 		try { 
 			ArtistCredit ac = transformer.transform(bean);
-			service.save(ac);
+			save(ac);
 		}catch (Exception ex) {
 			logger.error("erro prcessando transformacao banco dados" , ex);
 		}
