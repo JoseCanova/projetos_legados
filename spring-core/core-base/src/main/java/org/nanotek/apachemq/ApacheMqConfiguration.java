@@ -137,7 +137,7 @@ public class ApacheMqConfiguration {
 	
 	@Bean
 	public DefaultMessageListenerContainer listenerContainer5(@Autowired ConnectionFactory connectionFactory , 
-															 @Autowired @Qualifier("ArtistCreditListener") BaseBeanJmsListener<?,?> jmsListener) {
+															 @Autowired @Qualifier("ArtistCreditListener") BaseBeanJmsListener<?> jmsListener) {
 		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		container.setMaxConcurrentConsumers(10);

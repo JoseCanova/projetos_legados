@@ -13,7 +13,7 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.google.gson.Gson;
 
-public abstract class BaseBeanJmsListener <K extends Base,I extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
+public abstract class BaseBeanJmsListener <K extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
     
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	
