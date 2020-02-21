@@ -6,7 +6,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.nanotek.beans.ArtistAlias;
-import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.csv.ArtistCreditBean;
@@ -30,6 +29,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
@@ -57,6 +57,11 @@ public class BaseConfiguration {
 		return new HikariDataSource(hikariConfig());
 	}
 
+	@Bean
+	LocalValidatorFactoryBean validator() { 
+		return new LocalValidatorFactoryBean();
+	}
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
