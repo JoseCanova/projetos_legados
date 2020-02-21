@@ -4,6 +4,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
+import org.nanotek.Base;
 import org.nanotek.apachemq.listener.ArtistBeanJmsListener;
 import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
@@ -119,6 +120,13 @@ public class ApacheMqConfiguration {
 		a.setConnectionFactory(connectionFactory);
 		a.setMessageListener(jmsListener);
 		return a;
+	}
+	
+	@Bean
+	@Qualifier(value = "ArtistCreditBeanMessageSender")
+	AsyncBaseSender <?> artistCreditBeanSender(@Autowired JmsMessagingTemplate jmsMessagingTemplate 
+						, @Autowired  @Qualifier("artistCreditQueue") Queue queue){ 
+		return new AsyncBaseSender<> (jmsMessagingTemplate , queue);
 	}
 
 }

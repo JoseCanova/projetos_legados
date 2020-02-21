@@ -30,6 +30,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
 import com.google.gson.Gson;
 import com.zaxxer.hikari.HikariConfig;
@@ -156,4 +158,12 @@ public class BaseConfiguration {
 		return new Gson();
 	}
 
+	@Bean
+	public RequestMappingInfo artistRequestMappingInfo() { 
+		return RequestMappingInfo
+						.paths("/request_artist")
+						.mappingName("request_artist")
+						.methods(RequestMethod.GET).build();
+	}
+	
 }
