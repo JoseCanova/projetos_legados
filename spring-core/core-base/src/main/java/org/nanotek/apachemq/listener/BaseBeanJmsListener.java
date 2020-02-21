@@ -6,8 +6,7 @@ import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.nanotek.Base;
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.service.dispatcher.EntityDispatcher;
+import org.nanotek.Mediator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +41,10 @@ public abstract class BaseBeanJmsListener <K extends Base,I extends Base> implem
 	}
 
 	private void dispatch(@Valid K bean) {
-		I result = getDispatcher().transform(bean);
-		getDispatcher().dispatch(result);
+		getMediator().mediate(bean);
 	}
 
-	protected abstract EntityDispatcher<K,I> getDispatcher();
+	protected abstract Mediator<K> getMediator();
 	
 	protected Gson getGson() {
 		return gson;

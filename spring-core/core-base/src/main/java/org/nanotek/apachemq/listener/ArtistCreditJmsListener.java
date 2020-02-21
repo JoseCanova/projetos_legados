@@ -1,9 +1,9 @@
 package org.nanotek.apachemq.listener;
 
+import org.nanotek.Mediator;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.csv.ArtistCreditBean;
-import org.nanotek.service.dispatcher.ArtistCreditBeanDispatcher;
-import org.nanotek.service.dispatcher.EntityDispatcher;
+import org.nanotek.service.mediator.ArtistCreditMediator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class ArtistCreditJmsListener extends BaseBeanJmsListener<ArtistCreditBean,ArtistCredit>{
 
 	@Autowired 
-	ArtistCreditBeanDispatcher dispatcher;
+	ArtistCreditMediator dispatcher;
 	
 	public ArtistCreditJmsListener() {
 	}
 
 	@Override
-	protected EntityDispatcher<ArtistCreditBean,ArtistCredit> getDispatcher() {
+	protected Mediator<ArtistCreditBean> getMediator() {
 		return dispatcher;
 	}
 
