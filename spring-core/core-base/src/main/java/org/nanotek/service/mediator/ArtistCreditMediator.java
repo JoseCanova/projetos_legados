@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import jdk.internal.jline.internal.Log;
+
 @Service
 @Validated
 public class ArtistCreditMediator extends ArtistCreditService implements EntityBaseTransformer<ArtistCreditBean,ArtistCredit> , Mediator<ArtistCreditBean> {
@@ -29,6 +31,7 @@ public class ArtistCreditMediator extends ArtistCreditService implements EntityB
 			transformAndSave(bean);
 		}catch (Exception ex) {
 			logger.error("erro prcessando mediacao" , ex);
+			Log.info(bean.toJson());
 		}
 	}
 
