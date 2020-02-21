@@ -13,6 +13,8 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.ImmutableLongBase;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="artist_comment")
 public class ArtistComment implements ImmutableLongBase {
@@ -46,7 +48,8 @@ public class ArtistComment implements ImmutableLongBase {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
+	
+	@JsonIgnore
 	public Artist getArtist() {
 		return artist;
 	}

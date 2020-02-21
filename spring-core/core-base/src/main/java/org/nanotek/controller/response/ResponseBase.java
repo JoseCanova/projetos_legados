@@ -1,6 +1,9 @@
 package org.nanotek.controller.response;
 
+import java.lang.reflect.Constructor;
+
 import org.nanotek.Base;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -22,5 +25,9 @@ public class ResponseBase<T extends Base> extends ResponseEntity<T> {
 	public ResponseBase(T body, MultiValueMap<String, String> headers, HttpStatus status) {
 		super(body, headers, status);
 	}
-
+	
+	public static <B extends Base>  ResponseBase<B> fromEntity(B t , HttpStatus s) {
+		return new ResponseBase<B>(t, s);
+	}
+	
 }

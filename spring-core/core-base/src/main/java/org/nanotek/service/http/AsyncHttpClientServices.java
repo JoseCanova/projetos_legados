@@ -31,7 +31,6 @@ public class AsyncHttpClientServices {
 			artist = restTemplate.getForObject(uri, ArtistBean.class);
 			if (artist !=null) {
 				dispatcher.dispatch(artist);
-				//log.info(artist.toString());
 			}
 		}while((artist != null));
 		return new AsyncResult<>("finished : " + Thread.currentThread().getId());
