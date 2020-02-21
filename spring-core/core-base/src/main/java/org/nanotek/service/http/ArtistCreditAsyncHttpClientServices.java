@@ -1,9 +1,6 @@
 package org.nanotek.service.http;
 
-import java.util.Optional;
-
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.service.jpa.ArtistCreditJpaService;
+import org.nanotek.beans.csv.ArtistCreditBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +17,6 @@ public class ArtistCreditAsyncHttpClientServices {
 	final String uri = "http://localhost:8080/artist_credit/next";
 
 	@Autowired
-	private ArtistCreditJpaService jpaService;
-
-	@Autowired
 	@Qualifier("serviceTaskExecutor")
 	private ThreadPoolTaskExecutor taskExecutor;
 
@@ -30,24 +24,10 @@ public class ArtistCreditAsyncHttpClientServices {
 	public void process() {
 		log.info("started");
 		RestTemplate restTemplate = new RestTemplate();
-		ArtistCredit testValue;
+		ArtistCreditBean artistCredit = null;
 		do {
-			ArtistCredit artistCredit;
-			artistCredit = restTemplate.getForObject(uri, ArtistCredit.class);
-			testValue = artistCredit;
-			taskExecutor.execute(new Runnable() {
-				public void run() {
-					if (artistCredit !=null) { 
-						if (validateArtistCredit(artistCredit)) {
-							jpaService.save(artistCredit);
-						}
-					}
-				}
-				private boolean validateArtistCredit(ArtistCredit artist) {
-					return true;//Optional.ofNullable(artist.getId()).orElse(0L) != 0 &&  notEmpty(artist.getName());
-				}
-			});
-		}while((testValue != null));
+			artistCredit = restTemplate.getForObject(uri, ArtistCreditBean.class);
+		}while((artistCredit != null));
 
 	}
 

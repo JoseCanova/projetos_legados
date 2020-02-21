@@ -38,6 +38,4 @@ public abstract class JmsMessageSender <K extends Base>  implements Sender<K>{
 		this.queue = queue;
 	}
 	
-	
-	
 }

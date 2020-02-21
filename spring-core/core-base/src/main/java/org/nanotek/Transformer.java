@@ -1,4 +1,4 @@
-package org.nanotek.service.tranformer;
+package org.nanotek;
 
 @FunctionalInterface
 public interface Transformer<I, R> {

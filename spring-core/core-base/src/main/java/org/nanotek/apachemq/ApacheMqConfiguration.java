@@ -4,11 +4,14 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
-import org.nanotek.Base;
+import org.nanotek.Dispatcher;
 import org.nanotek.apachemq.listener.ArtistBeanJmsListener;
 import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
+import org.nanotek.apachemq.listener.BaseBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
 import org.nanotek.apachemq.listener.RecordingBeanMessageJmsListener;
+import org.nanotek.beans.csv.ArtistCreditBean;
+import org.nanotek.service.tranformer.ArtistCreditBeanTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +19,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+
+import com.google.gson.Gson;
 
 @Configuration
 public class ApacheMqConfiguration {
@@ -129,4 +134,15 @@ public class ApacheMqConfiguration {
 		return new AsyncBaseSender<> (jmsMessagingTemplate , queue);
 	}
 
+	
+	@Bean
+	public DefaultMessageListenerContainer listenerContainer5(@Autowired ConnectionFactory connectionFactory , 
+															 @Autowired @Qualifier("ArtistCreditListener") BaseBeanJmsListener<?,?> jmsListener) {
+		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		container.setMaxConcurrentConsumers(10);
+		container.setDestinationName("musicbrainz.artist_credit_queue");
+		container.setMessageListener(jmsListener);
+		return container;
+	}
 }

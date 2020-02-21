@@ -3,6 +3,7 @@ package org.nanotek.service.tranformer;
 import java.util.List;
 import java.util.Optional;
 
+import org.nanotek.Transformer;
 import org.nanotek.beans.Artist;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.ArtistCreditName;

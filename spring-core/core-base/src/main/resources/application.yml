@@ -3,7 +3,13 @@ server:
   
 http:
     end-point: /core-base  
-
+    
+management:
+   endpoints:
+      web:
+         exposure:
+            include: info, health , mappings , integrationgraph
+    
 spring:
   activemq:
    broker-url: tcp://localhost:61616
