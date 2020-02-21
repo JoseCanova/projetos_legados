@@ -32,7 +32,8 @@ public class ArtistCreditAsyncHttpClientServices {
 		ArtistCreditBean artistCredit = null;
 		do {
 			artistCredit = restTemplate.getForObject(uri, ArtistCreditBean.class);
-			sender.sendAsync(artistCredit);
+			if (artistCredit !=null)
+				sender.sendAsync(artistCredit);
 		}while((artistCredit != null));
 
 	}
