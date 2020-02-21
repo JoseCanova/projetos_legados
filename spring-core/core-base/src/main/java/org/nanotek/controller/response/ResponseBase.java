@@ -1,9 +1,6 @@
 package org.nanotek.controller.response;
 
-import java.lang.reflect.Constructor;
-
 import org.nanotek.Base;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;

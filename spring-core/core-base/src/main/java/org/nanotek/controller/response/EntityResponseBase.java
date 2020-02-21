@@ -1,6 +1,5 @@
 package org.nanotek.controller.response;
 
-import org.nanotek.Base;
 import org.nanotek.EntityBase;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;

@@ -22,6 +22,5 @@ public class ArtistCreditResponse extends EntityResponseBase<ArtistCredit>{
 	public ArtistCreditResponse(MultiValueMap<String, String> headers, HttpStatus status) {
 		super(headers, status);
 	}
-	
 
 }
