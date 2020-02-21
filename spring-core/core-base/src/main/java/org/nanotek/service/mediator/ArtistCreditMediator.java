@@ -1,7 +1,9 @@
 package org.nanotek.service.mediator;
 
+import javax.validation.Valid;
+
+import org.nanotek.EntityBaseTransformer;
 import org.nanotek.Mediator;
-import org.nanotek.Transformer;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.csv.ArtistCreditBean;
 import org.nanotek.service.ArtistCreditService;
@@ -10,9 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
-public class ArtistCreditMediator extends ArtistCreditService implements Mediator<ArtistCreditBean> , Transformer<ArtistCreditBean,ArtistCredit>{
+@Validated
+public class ArtistCreditMediator extends ArtistCreditService implements EntityBaseTransformer<ArtistCreditBean,ArtistCredit> , Mediator<ArtistCreditBean> {
 		
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 		
@@ -24,11 +28,11 @@ public class ArtistCreditMediator extends ArtistCreditService implements Mediato
 		try { 
 			transformAndSave(bean);
 		}catch (Exception ex) {
-			logger.error("erro prcessando transformacao banco dados" , ex);
+			logger.error("erro prcessando mediacao" , ex);
 		}
 	}
 
-	private void transformAndSave(ArtistCreditBean bean) {
+	private void transformAndSave(@Valid ArtistCreditBean bean) {
 		ArtistCredit ac = transformer.transform(bean);
 		save(ac);
 	}

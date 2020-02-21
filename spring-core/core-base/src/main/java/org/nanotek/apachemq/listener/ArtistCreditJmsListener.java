@@ -19,7 +19,7 @@ public class ArtistCreditJmsListener extends BaseBeanJmsListener<ArtistCreditBea
 	}
 
 	@Override
-	protected Mediator<ArtistCreditBean> getMediator() {
+	protected ArtistCreditMediator getMediator() {
 		return dispatcher;
 	}
 

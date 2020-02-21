@@ -2,7 +2,6 @@ package org.nanotek.apachemq.listener;
 
 import javax.jms.JMSException;
 import javax.jms.Session;
-import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.nanotek.Base;
@@ -11,11 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.SessionAwareMessageListener;
-import org.springframework.validation.annotation.Validated;
 
 import com.google.gson.Gson;
 
-@Validated
 public abstract class BaseBeanJmsListener <K extends Base,I extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
     
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
@@ -33,22 +30,18 @@ public abstract class BaseBeanJmsListener <K extends Base,I extends Base> implem
 
 	private void readAndDispatch(ActiveMQBytesMessage message, Session session) {
 		try { 
-			K bean = MessageListenerHelper.processMessage(message, getGson(), getClazz());
+			K bean = MessageListenerHelper.processMessage(message, gson, getClazz());
 			dispatch(bean);
 		}catch (Exception ex) { 
 			log.error("error processing message pipeline", ex);
 		}
 	}
 
-	private void dispatch(@Valid K bean) {
+	private void dispatch(K bean) {
 		getMediator().mediate(bean);
 	}
 
 	protected abstract Mediator<K> getMediator();
-	
-	protected Gson getGson() {
-		return gson;
-	}
 	
 	protected abstract Class<K> getClazz();
 
