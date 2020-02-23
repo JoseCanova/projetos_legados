@@ -12,6 +12,7 @@ import org.nanotek.service.tranformer.RecordingTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 
 @Service
 @Validated
+@Qualifier(value="RecordingBeanMessageJmsListener")
 public class RecordingBeanMessageJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());

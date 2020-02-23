@@ -13,14 +13,20 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.google.gson.Gson;
 
-public abstract class BaseBeanJmsListener <K extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
+public class BaseBeanJmsListener <K extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
     
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	
 	@Autowired 
 	Gson gson; 
 	
-	public BaseBeanJmsListener() {
+	private Mediator<K> mediator; 
+	
+	private Class<K> clazz;
+	
+	public BaseBeanJmsListener(Mediator<K> mediator , Class<K> clazz) {
+		this.mediator = mediator;
+		this.clazz = clazz;
 	}
 	
 	@Override
@@ -31,18 +37,19 @@ public abstract class BaseBeanJmsListener <K extends Base> implements SessionAwa
 	private void readAndDispatch(ActiveMQBytesMessage message, Session session) {
 		try { 
 			K bean = MessageListenerHelper.processMessage(message, gson, getClazz());
-			dispatch(bean);
+			getMediator().mediate(bean);
+			log.info(bean.toJson());
 		}catch (Exception ex) { 
 			log.error("error processing message pipeline", ex);
 		}
 	}
 
-	private void dispatch(K bean) {
-		getMediator().mediate(bean);
+	protected Mediator<K> getMediator(){
+		return mediator;
 	}
-
-	protected abstract Mediator<K> getMediator();
 	
-	protected abstract Class<K> getClazz();
+	protected Class<K> getClazz(){
+		return  clazz;
+	}
 
 }

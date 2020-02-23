@@ -15,6 +15,7 @@ import org.nanotek.service.jpa.ArtistJpaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import com.google.gson.Gson;
 
 @Service
 @Validated
+@Qualifier(value="ArtistBeanJmsListener")
 public class ArtistBeanJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());

@@ -84,7 +84,7 @@ artistalias:
     
 artistcredit:
   fileLocation: /opt/mbdump
-  fileName: artist_credit
+  fileName: artist_credit1
   id: ArtistCreditBean
   type: org.nanotek.beans.csv.ArtistCreditBean
   baseMap:  

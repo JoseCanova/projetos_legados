@@ -5,12 +5,8 @@ import javax.validation.Valid;
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
-@Service
-@Validated
-public class ArtistCreditService {
+public abstract class ArtistCreditService {
 
 	@Autowired
 	ArtistCreditJpaService jpaService;

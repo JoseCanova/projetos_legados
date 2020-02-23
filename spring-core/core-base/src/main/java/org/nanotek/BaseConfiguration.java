@@ -4,6 +4,7 @@ import java.util.concurrent.Executor;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import javax.validation.Validator;
 
 import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistCreditName;
@@ -14,6 +15,7 @@ import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.nanotek.beans.csv.TrackBean;
+import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -30,6 +32,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.validation.beanvalidation.MethodValidationInterceptor;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
@@ -58,10 +62,39 @@ public class BaseConfiguration {
 	}
 
 	@Bean
-	LocalValidatorFactoryBean validator() { 
+	public LocalValidatorFactoryBean validatorFactoryBean() { 
 		return new LocalValidatorFactoryBean();
 	}
 	
+	@Bean 
+	public Validator validator()
+	{ 
+		return validatorFactoryBean().getValidator();
+	}
+	
+	@Bean(name = "MethodValidationInterceptor")
+	@Qualifier(value="MethodValidationInterceptor")
+	MethodValidationInterceptor methodValidationInterceptor(@Autowired Validator validator) { 
+		return new MethodValidationInterceptor(validator);
+	}
+	
+    @Bean
+    public MethodValidationPostProcessor getMethodValidationPostProcessor(@Autowired LocalValidatorFactoryBean validatorFactoryBean){
+        MethodValidationPostProcessor processor = new MethodValidationPostProcessor();
+         processor.setValidator(validatorFactoryBean.getValidator());
+         processor.setValidatorFactory(validatorFactoryBean);
+         return processor;
+     }
+	
+    
+    @Bean
+    public BeanNameAutoProxyCreator beanNameAutoproxyCreator(@Autowired MethodValidationInterceptor interceptor) { 
+    	BeanNameAutoProxyCreator proxyCreator = new BeanNameAutoProxyCreator();
+    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator"});
+    	proxyCreator.setInterceptorNames(new String[] {"MethodValidationInterceptor"});
+    	return proxyCreator;
+    }
+    
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
