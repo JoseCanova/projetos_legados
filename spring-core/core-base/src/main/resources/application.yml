@@ -158,7 +158,7 @@ releasegroup:
  
 recordingbean: 
   fileLocation: /opt/mbdump
-  fileName: recording
+  fileName: recording1
   id: RecordingBean
   type: org.nanotek.beans.csv.RecordingBean 
   baseMap:   

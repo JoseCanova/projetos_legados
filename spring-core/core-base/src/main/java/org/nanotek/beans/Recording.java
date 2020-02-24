@@ -1,98 +1,67 @@
 package org.nanotek.beans;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.nanotek.Base;
+import org.nanotek.MutableBase;
 
-@SuppressWarnings("serial")@Entity
+@SuppressWarnings("serial")
+@Entity
 @Table(name="RECORDING")
-public class Recording extends SuperLongBase {
+public class Recording extends SuperLongBase implements MutableBase<Long>{
 
-//	@Id
-//	@GeneratedValue(generator="recording_id_seq",strategy=GenerationType.SEQUENCE)
-//	@SequenceGenerator(name="recording_id_seq",sequenceName="recording_id_seq")
-//	private Long id; 
-	@Column(name="RECORDING_ID" , insertable=true)
-	private Long recordingId; 
-	@Column(name="GID" , length=255 , insertable=true)
-	private String gid; 
-	@Column(name="NAME" , length=2500 , nullable=false , insertable=true)
+	@NotNull
+	@Size(min= 1 , max=40)
+	@Column(name="gid" , length=40 , insertable=true, nullable=true)
+	private String gid;
+	
+	@NotNull
+	@Size(min=1 , max=1000)
+	@Column(name="name" , length=1000 , nullable=false , insertable=true)
 	private String name; 
-	@Column(name="ARTIST_CREDIT" , nullable=false , insertable=true)
-	private Long artistCredit;
-	@Column(name="LENGTH" , nullable=true , insertable=true)
-	private Long length;
-	@Column(name="COMMENT" , length=2500  , nullable=true , insertable=true)
-	private String comment;
 	
-/*	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="artist_credit" , referencedColumnName="artist_credit_id")
-	private ArtistCredit artistCreditReference; */
-/*	
+	@NotNull
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="artist_credit_id" , referencedColumnName="id")
+	private ArtistCredit artistCredit; 
+	
 	@OneToMany(mappedBy="recording" , fetch=FetchType.LAZY)
-	private Set<Track> tracks;*/
+	private Set<Track> tracks;
 	
+	@OneToOne(mappedBy = "recording" , fetch = FetchType.LAZY)
+	private RecordingLength recordingLenght;
 	
-	public Long getRecordingId() {
-		return recordingId;
+	public Recording() {}
+	
+	@Override
+	public void setId(Long id) {
+		this.id = id; 
 	}
 
-	public void setRecordingId(Long recordingId) {
-		this.recordingId = recordingId;
-	}
-	
 	public String getGid() {
 		return gid;
 	}
-	
+
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-	
-	public Long getArtistCredit() {
-		return artistCredit;
-	}
-	
-	public void setArtistCredit(Long artistCredit) {
-		this.artistCredit = artistCredit;
-	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public String getComment() {
-		return comment;
-	}
-	
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Long getLength() {
-		return length;
-	}
-
-	public void setLength(Long length) {
-		this.length = length;
-	}
-
-/*	public ArtistCredit getArtistCreditReference() {
-		return artistCreditReference;
-	}
-
-	public void setArtistCreditReference(ArtistCredit artistCreditReference) {
-		this.artistCreditReference = artistCreditReference;
 	}
 
 	public Set<Track> getTracks() {
@@ -101,39 +70,22 @@ public class Recording extends SuperLongBase {
 
 	public void setTracks(Set<Track> tracks) {
 		this.tracks = tracks;
-	}*/
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((recordingId == null) ? 0 : recordingId.hashCode());
-		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Recording other = (Recording) obj;
-		if (recordingId == null) {
-			if (other.recordingId != null)
-				return false;
-		} else if (!recordingId.equals(other.recordingId))
-			return false;
-		return true;
+	public ArtistCredit getArtistCredit() {
+		return artistCredit;
 	}
 
-	@Override
-	public String toString() {
-		return "Recording [id=" + id + ", recordingId=" + recordingId
-				+ ", gid=" + gid + ", artistCredit=" + artistCredit + ", name="
-				+ name + ", length=" + length + ", comment=" + comment + "]";
+	public void setArtistCredit(ArtistCredit artistCredit) {
+		this.artistCredit = artistCredit;
+	}
+
+	public RecordingLength getRecordingLenght() {
+		return recordingLenght;
+	}
+
+	public void setRecordingLenght(RecordingLength recordingLenght) {
+		this.recordingLenght = recordingLenght;
 	}
 
 }

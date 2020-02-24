@@ -17,13 +17,14 @@
 		<class>org.nanotek.beans.Label</class>
 		<class>org.nanotek.beans.Medium</class>
 		<class>org.nanotek.beans.Recording</class>
+		<class>org.nanotek.beans.RecordingLength</class>
 		<class>org.nanotek.beans.Release</class>
 		<class>org.nanotek.beans.ReleaseGroup</class>
 		<class>org.nanotek.beans.Track</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<!-- <property name="javax.persistence.jdbc.url"
 				value="jdbc:postgresql://127.0.0.1:5432/music-brainz" />

@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="artist_comment")
 public class ArtistComment implements ImmutableLongBase {
 
+	private static final long serialVersionUID = 4732596233741255252L;
+
 	@Id
 	@NotNull
 	private Long id;
@@ -26,6 +28,7 @@ public class ArtistComment implements ImmutableLongBase {
 	@Column(name="comment", length=1000, nullable = false , updatable = true )
 	private String comment;
 	
+	@JsonIgnore
 	@OneToOne
 	@MapsId
 	private Artist artist;

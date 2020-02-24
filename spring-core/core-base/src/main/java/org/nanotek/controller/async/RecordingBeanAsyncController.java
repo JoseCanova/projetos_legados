@@ -28,9 +28,9 @@ public class RecordingBeanAsyncController {
 		Future<RecordingBean> process1 = null;
 		do{
 			process1 = httpService.process();
-			while(!process1.isDone()){
-				Thread.sleep(5);
-			}
+//			while(!process1.isDone()){
+//				Thread.sleep(5);
+//			}
 			if (process1.get() !=null) { 
 				dispatcher.dispatch(process1.get());
 			}

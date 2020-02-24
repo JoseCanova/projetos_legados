@@ -10,8 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -35,6 +38,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		@NamedQuery(name="FindArtistCredits" , query = "Select a from ArtistCredit a where a.id in (:ids)"),
 		@NamedQuery(name="ArtistCredit.findByArtistCreditId" , query="Select a from ArtistCredit a left outer join a.releases where a.id = :id")
 })
+@NamedEntityGraph( name = "fetch.ArtistCredit.recordings",
+					attributeNodes = {@NamedAttributeNode(value="recordings",subgraph = "recordings")},
+					subgraphs = @NamedSubgraph(name = "recordings", 
+					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
+))
 public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 
 //	@Id
@@ -64,9 +72,20 @@ public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
 	private List<Artist> artists;
 	
-/*	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
-	private Set<Recording> recordings; */
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
+	private Set<Recording> recordings; 
 	
+	public ArtistCredit() {}
+	
+	public ArtistCredit(@NotNull Long id , @NotNull @Length(min = 1, max = 1000) String name, @NotNull Long artistCount,
+			@NotNull Long refCount, Set<Recording> recordings) {
+		super(id);
+		this.name = name;
+		this.artistCount = artistCount;
+		this.refCount = refCount;
+		this.recordings = recordings;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -110,6 +129,14 @@ public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Set<Recording> getRecordings() {
+		return recordings;
+	}
+
+	public void setRecordings(Set<Recording> recordings) {
+		this.recordings = recordings;
 	}
 
 }

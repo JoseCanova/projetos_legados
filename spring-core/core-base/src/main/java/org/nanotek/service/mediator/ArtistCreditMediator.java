@@ -1,14 +1,5 @@
 package org.nanotek.service.mediator;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validator;
-import javax.validation.executable.ExecutableType;
-import javax.validation.executable.ValidateOnExecution;
-import javax.validation.groups.Default;
-
 import org.nanotek.EntityBaseTransformer;
 import org.nanotek.Mediator;
 import org.nanotek.beans.ArtistCredit;
@@ -22,13 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 @Service
-@Validated
 @EnableCaching
 @Qualifier(value="ArtistCreditMediator")
-@ValidateOnExecution(type = ExecutableType.ALL)
 public class ArtistCreditMediator extends ArtistCreditService implements EntityBaseTransformer<ArtistCreditBean,ArtistCredit> , Mediator<ArtistCreditBean> {
 		
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
@@ -49,7 +37,7 @@ public class ArtistCreditMediator extends ArtistCreditService implements EntityB
 
 	private void transformAndSave(ArtistCreditBean bean) throws ViolationException {
 		ArtistCredit ac = transform(bean);
-//		save(ac);
+		save(ac);
 	}
 
 	@Override

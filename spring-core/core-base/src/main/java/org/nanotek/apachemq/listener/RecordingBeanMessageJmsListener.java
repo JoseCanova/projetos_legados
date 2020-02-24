@@ -9,6 +9,7 @@ import org.nanotek.Transformer;
 import org.nanotek.beans.Recording;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.service.jpa.RecordingJpaService;
+import org.nanotek.service.jpa.RecordingLengthJpaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import com.google.gson.Gson;
 @Service
 @Validated
 @Qualifier(value="RecordingBeanMessageJmsListener")
-public class RecordingBeanMessageJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
+public class RecordingBeanMessageJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage> , Transformer<RecordingBean,Recording>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	
@@ -36,21 +37,31 @@ public class RecordingBeanMessageJmsListener implements SessionAwareMessageListe
 	
 	@Autowired
 	private RecordingJpaService jpaService; 
+	
+	@Autowired
+	private RecordingLengthJpaService lengthService;
 
 	@Override
 	public void onMessage(ActiveMQBytesMessage message, Session session) throws JMSException {
 		try { 
 			RecordingBean bean = MessageListenerHelper.processMessage(message, gson, RecordingBean.class);
+			log.info(bean.toJson());
 			validateAndSave(bean);
 		}catch (Exception ex) { 
-			log.info(ex.getMessage());
+			log.error("Error processing Recording Bean Messae" , ex);
 		}
 	}
 
 	@Transactional
 	private void validateAndSave(@Valid RecordingBean bean) {
-		Recording recording = transformer.transform(bean);
+		Recording recording = transform(bean);
 		jpaService.save(recording);
+		if (recording.getRecordingLenght() !=null)
+			lengthService.save(recording.getRecordingLenght());
 	}
 	
+	@Override
+	public Recording transform(RecordingBean bean) {
+		return transformer.transform(bean);
+	}
 }

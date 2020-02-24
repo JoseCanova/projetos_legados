@@ -15,7 +15,7 @@ public class RecordingBeanHttpClientService {
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	  
-    final String uri = "http://localhost:8081/recording_bean/next";
+    final String uri = "http://localhost:8080/csv/recording_bean/next";
     
     @Async("threadPoolTaskExecutor")
    	public Future<RecordingBean> process(){ 

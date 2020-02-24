@@ -89,13 +89,13 @@ public class BaseConfiguration {
          return processor;
      }
 	
-    @Bean
-    public BeanNameAutoProxyCreator beanNameAutoproxyCreator(@Autowired MethodValidationInterceptor interceptor) { 
-    	BeanNameAutoProxyCreator proxyCreator = new BeanNameAutoProxyCreator();
-    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator", "ArtistCreditBeanTransformer"});
-    	proxyCreator.setInterceptorNames(new String[] {"MethodValidationInterceptor"});
-    	return proxyCreator;
-    }
+//    @Bean
+//    public BeanNameAutoProxyCreator beanNameAutoproxyCreator(@Autowired MethodValidationInterceptor interceptor) { 
+//    	BeanNameAutoProxyCreator proxyCreator = new BeanNameAutoProxyCreator();
+//    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator", "ArtistCreditBeanTransformer"});
+//    	proxyCreator.setInterceptorNames(new String[] {"MethodValidationInterceptor"});
+//    	return proxyCreator;
+//    }
     
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

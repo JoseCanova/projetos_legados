@@ -3,6 +3,8 @@ package org.nanotek.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 import org.nanotek.beans.ArtistCredit;
 import org.nanotek.repository.jpa.ArtistCreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;

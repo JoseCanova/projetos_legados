@@ -8,5 +8,5 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @FunctionalInterface
 public interface Transformer<I, R> {
-	@Validated(value = Default.class) @Valid R transform(I i);
+	@Validated(value = Default.class) @Valid R transform(@Validated(value = Default.class) @Valid I i);
 }
