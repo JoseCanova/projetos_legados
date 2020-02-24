@@ -34,6 +34,7 @@ public class ArtistCreditMediator extends ArtistCreditService implements EntityB
 	private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 		
 	@Autowired 
+	@Qualifier("ArtistCreditBeanTransformer")
 	ArtistCreditBeanTransformer transformer;
 	
 	@Override
@@ -46,10 +47,9 @@ public class ArtistCreditMediator extends ArtistCreditService implements EntityB
 		}
 	}
 
-	@Validated(value = Default.class)
-	private void transformAndSave(@Valid ArtistCreditBean bean) throws ViolationException {
+	private void transformAndSave(ArtistCreditBean bean) throws ViolationException {
 		ArtistCredit ac = transform(bean);
-		//save(ac);
+//		save(ac);
 	}
 
 	@Override

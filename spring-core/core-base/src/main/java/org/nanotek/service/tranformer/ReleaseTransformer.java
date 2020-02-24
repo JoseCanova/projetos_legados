@@ -8,10 +8,12 @@ import org.nanotek.beans.Release;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Qualifier(value="ReleaseTransformer")
 public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 
 	@Autowired 

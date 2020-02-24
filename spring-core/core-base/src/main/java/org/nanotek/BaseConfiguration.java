@@ -22,6 +22,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationInterceptor;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
 import com.google.gson.Gson;
 import com.zaxxer.hikari.HikariConfig;
@@ -49,6 +48,9 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class BaseConfiguration {
 
+	@Autowired
+	ApplicationContext applicationContext;
+	
 	@Bean
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -83,14 +85,14 @@ public class BaseConfiguration {
         MethodValidationPostProcessor processor = new MethodValidationPostProcessor();
          processor.setValidator(validatorFactoryBean.getValidator());
          processor.setValidatorFactory(validatorFactoryBean);
+         processor.setBeanFactory(applicationContext);
          return processor;
      }
 	
-    
     @Bean
     public BeanNameAutoProxyCreator beanNameAutoproxyCreator(@Autowired MethodValidationInterceptor interceptor) { 
     	BeanNameAutoProxyCreator proxyCreator = new BeanNameAutoProxyCreator();
-    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator"});
+    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator", "ArtistCreditBeanTransformer"});
     	proxyCreator.setInterceptorNames(new String[] {"MethodValidationInterceptor"});
     	return proxyCreator;
     }
@@ -113,7 +115,6 @@ public class BaseConfiguration {
 		txManager.setEntityManagerFactory(entityManagerFactory); 
 		return txManager; 
 	}
-
 
 	@Bean(name = "serviceTaskExecutor")
 	public ThreadPoolTaskExecutor getServiceTaskExecutor() {
@@ -196,12 +197,4 @@ public class BaseConfiguration {
 		return new Gson();
 	}
 
-	@Bean
-	public RequestMappingInfo artistRequestMappingInfo() { 
-		return RequestMappingInfo
-						.paths("/request_artist")
-						.mappingName("request_artist")
-						.methods(RequestMethod.GET).build();
-	}
-	
 }

@@ -6,10 +6,10 @@ import javax.jms.Session;
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.apache.activemq.command.Message;
 import org.apache.activemq.util.ByteSequence;
+import org.nanotek.Transformer;
 import org.nanotek.beans.Release;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.service.jpa.ReleaseJpaService;
-import org.nanotek.service.tranformer.ReleaseTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.listener.SessionAwareMessageListener;
@@ -25,7 +25,8 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 	private Gson gson;
 	
 	@Autowired 
-	private ReleaseTransformer transformer;
+	@Qualifier("ReleaseTransformer")
+	private Transformer<ReleaseBean,Release> transformer;
 	
 	@Autowired
 	private ReleaseJpaService jpaService;

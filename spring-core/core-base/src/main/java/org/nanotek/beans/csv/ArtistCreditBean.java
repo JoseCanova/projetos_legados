@@ -1,9 +1,7 @@
 package org.nanotek.beans.csv;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
 import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
@@ -12,8 +10,6 @@ public class ArtistCreditBean implements LongBase{
 	@NotNull
 	Long id; 
 	@NotNull
-	@NotEmpty
-	@Length(min = 1 , max = 1000)
 	String name; 
 	@NotNull
 	Integer artistCount;

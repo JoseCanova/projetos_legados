@@ -5,10 +5,10 @@ import javax.jms.Session;
 import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
+import org.nanotek.Transformer;
 import org.nanotek.beans.Recording;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.service.jpa.RecordingJpaService;
-import org.nanotek.service.tranformer.RecordingTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,8 @@ public class RecordingBeanMessageJmsListener implements SessionAwareMessageListe
 	private Gson gson;
 	
 	@Autowired
-	private RecordingTransformer transformer;
+	@Qualifier("RecordingTransformer")
+	private Transformer<RecordingBean,Recording> transformer;
 	
 	@Autowired
 	private RecordingJpaService jpaService; 

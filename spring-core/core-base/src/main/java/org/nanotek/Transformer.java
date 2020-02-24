@@ -1,6 +1,12 @@
 package org.nanotek;
 
+import javax.validation.Valid;
+import javax.validation.groups.Default;
+
+import org.springframework.validation.annotation.Validated;
+
+@Validated
 @FunctionalInterface
 public interface Transformer<I, R> {
-	R transform(I i);
+	@Validated(value = Default.class) @Valid R transform(I i);
 }

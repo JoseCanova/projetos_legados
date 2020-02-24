@@ -3,9 +3,11 @@ package org.nanotek.service.tranformer;
 import org.nanotek.Transformer;
 import org.nanotek.beans.Recording;
 import org.nanotek.beans.csv.RecordingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+@Qualifier(value="RecordingTransformer")
 public class RecordingTransformer implements Transformer<RecordingBean , Recording> {
 
 	@Override
