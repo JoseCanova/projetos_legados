@@ -20,8 +20,6 @@
         
         
         <wb-resource deploy-path="/" source-path="/.apt_generated"/>
-                        
-        
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
                                                     
     

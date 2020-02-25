@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.MutableBase;
 
@@ -29,7 +32,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
-@SuppressWarnings("serial")
 @Entity
 @Table(name="artist_credit")
 @NamedQueries(value = { 
@@ -43,9 +45,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 
-//	@Id
+	private static final long serialVersionUID = -3086006757943654550L;
+	//	@Id
 //	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
 //	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
 //	private Long id;

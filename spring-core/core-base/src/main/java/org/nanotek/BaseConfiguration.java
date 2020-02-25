@@ -15,13 +15,13 @@ import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.nanotek.beans.csv.TrackBean;
-import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,6 +44,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @Configuration
 @ComponentScan("org.nanotek")
+@EnableCaching
 @EnableConfigurationProperties
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class BaseConfiguration {
@@ -58,6 +59,7 @@ public class BaseConfiguration {
 		return new HikariConfig();
 	}
 
+	
 	@Bean
 	public DataSource dataSource() {
 		return new HikariDataSource(hikariConfig());

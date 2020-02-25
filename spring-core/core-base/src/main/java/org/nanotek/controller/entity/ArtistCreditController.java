@@ -1,9 +1,13 @@
 package org.nanotek.controller.entity;
 
 import org.nanotek.beans.ArtistCredit;
+import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,4 +23,10 @@ public class ArtistCreditController  implements  EntityResponseController<Artist
 		return baseService;
 	}
 
+	@GetMapping("/cache/{id}")
+	public EntityResponseBase<ArtistCredit> findByIdCache(@PathVariable(value="id") Long  id)  {
+		ArtistCredit opt = baseService.findByIdCache(id);
+		HttpStatus status =  opt != null  ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+		return EntityResponseBase.fromEntity(opt , status);
+	}
 }

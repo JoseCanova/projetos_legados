@@ -28,6 +28,22 @@ spring:
       hibernate:
         format_sql: false
         ddl-auto: update
+        javax:
+         cache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+        cache:
+           use_second_level_cache: true
+           use_query_cache: true
+           #region:
+              #factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+  ehcache:
+      config: classpath:ehcache.xml                  
+  properties:
+    javax:
+      persistence:
+        sharedCache: 
+            #required - enable selective caching mode - only entities with @Cacheable annotation will use L2 cache.
+        mode: ENABLE_SELECTIVE         
 
 entitymanager:
   packagesToScan: org.nanotek

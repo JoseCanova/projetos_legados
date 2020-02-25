@@ -16,7 +16,6 @@ import org.hibernate.validator.constraints.Length;
 import org.nanotek.MutableBase;
 
 @Entity
-@SuppressWarnings("serial")
 @Table(name="artist")
 @NamedQuery(name = "Artist.LoadAll", query ="Select a from Artist a order by a.name asc")
 public class Artist extends SuperLongBase implements MutableBase<Long>{
@@ -25,7 +24,8 @@ public class Artist extends SuperLongBase implements MutableBase<Long>{
 //	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)
 //	@SequenceGenerator(name = "artist_id_seq", sequenceName = "artist_id_seq")
 //	private Long id;
-	
+	private static final long serialVersionUID = -932806802235346847L;
+
 	@NotNull
 	@Length(min = 1 , max = 1000)
 	@Column(name="name",length=1000,nullable=false)

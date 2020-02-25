@@ -32,11 +32,16 @@ public abstract class BaseParser extends CSVParser implements InitializingBean ,
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		openFileReader();
+		
+	}
+
+	private void openFileReader() throws Exception{
 		StringBuffer fileLocationStr = new StringBuffer();
 		fileLocationStr.append(getBaseMap().getFileLocation())
 		.append(System.getProperty("file.separator")).append(getBaseMap().getFileName().toString());
 		FileReader fileReader = new FileReader(new File(fileLocationStr.toString()));
-		csvReader = new CSVReader(fileReader , '\t');
+		csvReader = new CSVReader(fileReader , '\t');		
 	}
 
 	public List<String[]> readAll() throws IOException {
@@ -52,6 +57,11 @@ public abstract class BaseParser extends CSVParser implements InitializingBean ,
 		csvReader.close();
 	}
 
+	public void reopen() throws Exception { 
+		csvReader.close();
+		openFileReader();
+	}
+	
 	public abstract BaseMapColumnStrategy<?> getBaseMap();
 
 }

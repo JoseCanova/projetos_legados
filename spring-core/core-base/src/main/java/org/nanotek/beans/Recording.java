@@ -15,10 +15,11 @@ import javax.validation.constraints.Size;
 
 import org.nanotek.MutableBase;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="RECORDING")
 public class Recording extends SuperLongBase implements MutableBase<Long>{
+
+	private static final long serialVersionUID = 1795844351898160253L;
 
 	@NotNull
 	@Size(min= 1 , max=40)

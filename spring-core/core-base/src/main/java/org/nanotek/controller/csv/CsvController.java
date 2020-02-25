@@ -12,6 +12,7 @@ import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.opencsv.MapColumnStrategy;
 import org.nanotek.service.parser.BaseParser;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,6 +34,11 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
         return getBaseParser().getBaseMap();
     }
 
+	@GetMapping("/reopenFile")
+    public ResponseEntity<String> reopenFile() throws Exception {
+         getBaseParser().reopen();
+         return new ResponseEntity<String>("reopened", HttpStatus.OK);
+    }
 
     @GetMapping("/next")
     public I next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {

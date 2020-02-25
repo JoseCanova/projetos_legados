@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.nanotek.LongBase;
+import org.nanotek.MutableBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,10 +21,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(
 		generator = ObjectIdGenerators.PropertyGenerator.class, 
 		property = "id")
-@SuppressWarnings("serial")
 @Entity
 @Table(name="RELEASE")
-public class Release extends SuperLongBase {
+public class Release extends SuperLongBase implements MutableBase<Long>{
+
+	private static final long serialVersionUID = 8526436903189806951L;
 //
 //	@Id
 //	@GeneratedValue(generator="release_seq" , strategy=GenerationType.SEQUENCE)
