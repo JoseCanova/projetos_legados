@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
- <diskStore path="java.io.tmpdir"/>
+ <diskStore path="/opt/ehcache"/>
  <defaultCache
      maxEntriesLocalHeap="10000"
      eternal="false"
@@ -11,6 +11,14 @@
      memoryStoreEvictionPolicy="LRU">
      <persistence strategy="localTempSwap"/>
   </defaultCache>
+ <cache
+	name="org.nanotek.beans.Recording"
+	maxEntriesLocalHeap="50000"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+ </cache> 
  <cache
 	name="org.nanotek.beans.ArtistCredit"
 	maxEntriesLocalHeap="50000"

@@ -2,6 +2,7 @@ package org.nanotek.beans;
 
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,10 +14,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.MutableBase;
 
 @Entity
 @Table(name="RECORDING")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Recording extends SuperLongBase implements MutableBase<Long>{
 
 	private static final long serialVersionUID = 1795844351898160253L;
