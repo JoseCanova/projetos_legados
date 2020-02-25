@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="recording_length")
-public class RecordingLength extends SuperLongBase {
+public class RecordingLength extends EntityLongBase {
 	
 	private static final long serialVersionUID = -8708909035267715010L;
 	

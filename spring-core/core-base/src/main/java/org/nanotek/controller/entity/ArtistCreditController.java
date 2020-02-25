@@ -25,7 +25,7 @@ public class ArtistCreditController  implements  EntityResponseController<Artist
 
 	@GetMapping("/cache/{id}")
 	public EntityResponseBase<ArtistCredit> findByIdCache(@PathVariable(value="id") Long  id)  {
-		ArtistCredit opt = baseService.findByIdCache(id);
+		ArtistCredit opt = baseService.findArtistCreditRecordingsById(id);
 		HttpStatus status =  opt != null  ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 		return EntityResponseBase.fromEntity(opt , status);
 	}

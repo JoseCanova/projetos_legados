@@ -1,6 +1,7 @@
 package org.nanotek;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -37,9 +38,13 @@ public interface Base extends Serializable {
 		return baseSupplier.get();
 	}
 
-	@SuppressWarnings("deprecation")
-	default Base newInstance() throws InstantiationException, IllegalAccessException{ 
-		return this.getClass().newInstance();
+	default Base newInstance() throws BaseInstantiationException { 
+		try {
+			return this.getClass().getDeclaredConstructor(null).newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
 	}
 
 	static <K extends Base> Optional<K> NULL_VALUE(Class<K> clazz) {

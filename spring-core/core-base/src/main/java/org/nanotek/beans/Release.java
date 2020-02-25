@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		property = "id")
 @Entity
 @Table(name="RELEASE")
-public class Release extends SuperLongBase implements MutableBase<Long>{
+public class Release extends EntityLongBase implements MutableBase<Long>{
 
 	private static final long serialVersionUID = 8526436903189806951L;
 //

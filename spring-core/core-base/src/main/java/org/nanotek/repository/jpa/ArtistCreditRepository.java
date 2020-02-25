@@ -3,6 +3,7 @@ package org.nanotek.repository.jpa;
 import java.util.Optional;
 
 import org.nanotek.beans.ArtistCredit;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,6 @@ public interface ArtistCreditRepository extends JpaRepository <ArtistCredit ,Lon
 	 */
 	
 //	@EntityGraph(value = "fetch.ArtistCredit.recordings")
-	Optional<ArtistCredit>  getArtistCreditRecordingsById(Long id);
+	@EntityGraph(value="fetch.ArtistCredit.recordings")
+	Optional<ArtistCredit>  findArtistCreditRecordingsById(Long id);
 }

@@ -22,7 +22,7 @@ import org.nanotek.MutableBase;
 @Table(name="RECORDING")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Recording extends SuperLongBase implements MutableBase<Long>{
+public class Recording extends EntityLongBase implements MutableBase<Long>{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 

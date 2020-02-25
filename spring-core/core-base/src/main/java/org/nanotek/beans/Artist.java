@@ -18,7 +18,7 @@ import org.nanotek.MutableBase;
 @Entity
 @Table(name="artist")
 @NamedQuery(name = "Artist.LoadAll", query ="Select a from Artist a order by a.name asc")
-public class Artist extends SuperLongBase implements MutableBase<Long>{
+public class Artist extends EntityLongBase implements MutableBase<Long>{
 
 //	@Id
 //	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)

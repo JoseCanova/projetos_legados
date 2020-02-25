@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import javax.validation.Validator;
 
+import org.assertj.core.util.Arrays;
 import org.nanotek.beans.ArtistAlias;
 import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.csv.ArtistBean;
@@ -27,6 +28,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -36,6 +38,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationInterceptor;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.google.gson.Gson;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -57,6 +60,11 @@ public class BaseConfiguration {
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public HikariConfig hikariConfig() {
 		return new HikariConfig();
+	}
+	
+	@Bean
+	public Jackson2ObjectMapperBuilder configureObjectMapper() {
+	    return new Jackson2ObjectMapperBuilder().modulesToInstall(Arrays.array(Hibernate5Module.class));
 	}
 
 	

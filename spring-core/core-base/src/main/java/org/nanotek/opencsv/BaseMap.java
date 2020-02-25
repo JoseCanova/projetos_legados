@@ -3,6 +3,7 @@ package org.nanotek.opencsv;
 import java.util.HashMap;
 
 import org.nanotek.Base;
+import org.nanotek.BaseInstantiationException;
 import org.nanotek.StringBase;
 
 /**
@@ -42,8 +43,7 @@ public class BaseMap<T extends Base> extends HashMap<String,Integer> implements 
 		this.target = type;
 	}
 
-	public Base newInstance() throws InstantiationException,
-			IllegalAccessException {
+	public Base newInstance() throws BaseInstantiationException {
 		return target.newInstance();
 	}
 

@@ -27,6 +27,7 @@ import org.nanotek.MutableBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(
@@ -47,7 +48,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 ))
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
+public class ArtistCredit extends EntityLongBase implements MutableBase<Long>{
 
 	private static final long serialVersionUID = -3086006757943654550L;
 	//	@Id
@@ -66,11 +67,9 @@ public class ArtistCredit extends SuperLongBase implements MutableBase<Long>{
 	@Column (name="ref_count" , insertable=true,nullable=false,updatable = true)
 	private Long refCount;
 
-	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
 	private Set<Release> releases; 
 
-	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
 	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },

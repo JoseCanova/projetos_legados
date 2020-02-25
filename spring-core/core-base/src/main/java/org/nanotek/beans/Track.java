@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track")
-public class Track extends SuperLongBase {
+public class Track extends EntityLongBase {
 
 	/*
 	 * @Id
