@@ -14,11 +14,12 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.MutableBase;
+import org.nanotek.NameBase;
 
 @Entity
 @Table(name="artist")
 @NamedQuery(name = "Artist.LoadAll", query ="Select a from Artist a order by a.name asc")
-public class Artist extends EntityLongBase implements MutableBase<Long>{
+public class Artist extends EntityLongBase implements MutableBase<Long> , NameBase{
 
 //	@Id
 //	@GeneratedValue(generator="artist_id_seq",strategy=GenerationType.IDENTITY)

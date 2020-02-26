@@ -20,7 +20,7 @@ public class TestSomeShit {
 			System.out.println("there are a anotated type");
 			for (AnnotatedType annotatedType : aT) { 
 				Type type = annotatedType.getType();
-	            System.out.println("Type :" + type);
+	            System.out.println("Type 1:" + type);
 
 	            Annotation[] annotations = annotatedType.getAnnotations();
 	            System.out.println(Arrays.toString(annotations));
@@ -29,6 +29,7 @@ public class TestSomeShit {
 	            System.out.println(Arrays.toString(declaredAnnotations));
 			}
 		}
+		main2();
 		main3();
 		main4();
 		try {
@@ -43,7 +44,7 @@ public class TestSomeShit {
 	        AnnotatedType[] ais = ArtistCredit.class.getAnnotatedInterfaces();
 	        for (AnnotatedType annotatedType : ais) {
 	            Type type = annotatedType.getType();
-	            System.out.println("Type :" + type);
+	            System.out.println("Type 2:" + type);
 
 	            System.out.println("-- type annotations --");
 	            Annotation[] annotations = annotatedType.getAnnotations();
@@ -55,7 +56,7 @@ public class TestSomeShit {
 
 	 public static void main3() {
 	        AnnotatedType annotatedType = ArtistCredit.class.getAnnotatedSuperclass();
-	        System.out.println("Type: " + annotatedType.getType().getTypeName());
+	        System.out.println("Type3: " + annotatedType.getType().getTypeName());
 	        System.out.println("Annotations: " +
 	                Arrays.toString(annotatedType.getAnnotations()));
 	        System.out.println("Declared Annotations: " +
@@ -69,7 +70,8 @@ public class TestSomeShit {
 	    }
 	 
 	 public static void main4() {
-	        Annotation[] annotations = ArtistCredit.class.getAnnotations();
+		 ArtistCredit ac = new ArtistCredit();
+	        Annotation[] annotations = ac.getClass().getAnnotations();
 	        String s = Arrays.toString(annotations);
 	        System.out.println(s);
 	 }
