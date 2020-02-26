@@ -2,7 +2,7 @@ package org.nanotek.controller.entity;
 
 import java.util.List;
 
-import org.nanotek.beans.Artist;
+import org.nanotek.beans.entity.Artist;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +21,10 @@ public class ArtistController  implements  EntityResponseController<Artist, Long
 	private ArtistJpaService baseService;
 	
 
-	/*
-	 * @RequestMapping("/artistId/{id}") public @ResponseBody List<Artist>
-	 * findByArtistId(@PathVariable(value="id") String id) { return
-	 * getBaseService().findByArtistId(Long.valueOf(id)); }
-	 */
-
 	@RequestMapping("/name/{name}")
 	public IterableResponseEntity<List<Artist>, Artist> findByName(@PathVariable(value="name") String  name) {
 		List<Artist> list = getBaseService().findByNameContaining(name);
-		return IterableResponseEntity.fromCollection(list, HttpStatus.OK);
+		return IterableResponseEntity.fromIterable(list, HttpStatus.OK);
 	}
 
 	public ArtistJpaService getBaseService() {

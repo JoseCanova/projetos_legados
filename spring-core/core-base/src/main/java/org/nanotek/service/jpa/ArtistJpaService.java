@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.Artist;
+import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -20,38 +20,38 @@ import org.springframework.validation.annotation.Validated;
 public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 
 	@Autowired
-	private ArtistRepository ArtistRepository;
+	private ArtistRepository artistRepository;
 	
 
 	@Transactional
 	public Artist save(Artist Artist) { 
-		return ArtistRepository.save(Artist);
+		return artistRepository.save(Artist);
 	}
 	
 	@Transactional
 	public List<Artist> saveAll(List<Artist> list) { 
-		return ArtistRepository.saveAll(list);
+		return artistRepository.saveAll(list);
 	}
 
 	@Override
 	@Transactional
 	public  Optional<Artist> findById(Long k) {
-		return ArtistRepository.findById(k);
+		return artistRepository.findById(k);
 	}
 	
 	@Transactional
 	public  Optional<Artist> findOne(Example<Artist> example) {
-		return ArtistRepository.findOne(example);
+		return artistRepository.findOne(example);
 	}
 	
 	@Transactional
 	public  List<Artist> findByArtistId(Long artistId) {
-		return ArtistRepository.findByArtistId(artistId);
+		return artistRepository.findByArtistId(artistId);
 	}
 	
 	@Transactional
 	public List<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
-		return ArtistRepository.findByNameEspec(name.toUpperCase());
+		return artistRepository.findByNameContainingIgnoreCase(name);
 //		return ArtistRepository.findByNameContainingIgnoreCase(name.toUpperCase());
 	}
 	

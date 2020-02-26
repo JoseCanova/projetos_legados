@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import org.nanotek.BaseInstantiationException;
 import org.nanotek.ImmutableBase;
-import org.nanotek.beans.ArtistCredit;
+import org.nanotek.beans.entity.ArtistCredit;
 
 import com.google.common.base.Optional;
 

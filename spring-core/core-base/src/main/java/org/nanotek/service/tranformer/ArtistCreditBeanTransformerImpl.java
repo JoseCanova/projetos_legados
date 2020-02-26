@@ -1,7 +1,7 @@
 package org.nanotek.service.tranformer;
 
-import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.csv.ArtistCreditBean;
+import org.nanotek.beans.entity.ArtistCredit;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 

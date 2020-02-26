@@ -1,6 +1,6 @@
 package org.nanotek.repository.jpa;
 
-import org.nanotek.beans.Recording;
+import org.nanotek.beans.entity.Recording;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

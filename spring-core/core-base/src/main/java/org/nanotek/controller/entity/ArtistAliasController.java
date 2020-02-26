@@ -1,6 +1,6 @@
 package org.nanotek.controller.entity;
 
-import org.nanotek.beans.ArtistAlias;
+import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.controller.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

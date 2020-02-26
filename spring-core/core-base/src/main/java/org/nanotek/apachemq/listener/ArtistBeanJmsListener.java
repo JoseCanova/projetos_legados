@@ -7,9 +7,9 @@ import javax.jms.Session;
 import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
-import org.nanotek.beans.Artist;
-import org.nanotek.beans.ArtistComment;
 import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.beans.entity.Artist;
+import org.nanotek.beans.entity.ArtistComment;
 import org.nanotek.service.jpa.ArtistCommentJpaService;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.slf4j.Logger;

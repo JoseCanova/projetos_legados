@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.nanotek.beans.Release;
+import org.nanotek.beans.entity.Release;
 import org.nanotek.ws.WsBase;
 
 @XmlAccessorType(XmlAccessType.FIELD)

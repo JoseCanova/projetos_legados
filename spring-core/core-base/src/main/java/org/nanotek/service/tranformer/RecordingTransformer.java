@@ -6,10 +6,10 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.Base;
 import org.nanotek.EntityBaseTransformer;
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.beans.Recording;
-import org.nanotek.beans.RecordingLength;
 import org.nanotek.beans.csv.RecordingBean;
+import org.nanotek.beans.entity.ArtistCredit;
+import org.nanotek.beans.entity.Recording;
+import org.nanotek.beans.entity.RecordingLength;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

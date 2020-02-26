@@ -3,9 +3,9 @@ package org.nanotek.service.tranformer;
 import java.util.Optional;
 
 import org.nanotek.Transformer;
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.beans.Release;
 import org.nanotek.beans.csv.ReleaseBean;
+import org.nanotek.beans.entity.ArtistCredit;
+import org.nanotek.beans.entity.Release;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

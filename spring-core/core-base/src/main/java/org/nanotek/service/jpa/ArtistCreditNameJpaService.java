@@ -3,7 +3,7 @@ package org.nanotek.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import org.nanotek.beans.ArtistCreditName;
+import org.nanotek.beans.entity.ArtistCreditName;
 import org.nanotek.repository.jpa.ArtistCreditNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

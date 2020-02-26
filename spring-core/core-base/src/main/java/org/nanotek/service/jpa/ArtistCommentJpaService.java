@@ -1,6 +1,6 @@
 package org.nanotek.service.jpa;
 
-import org.nanotek.beans.ArtistComment;
+import org.nanotek.beans.entity.ArtistComment;
 import org.nanotek.repository.jpa.ArtistCommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

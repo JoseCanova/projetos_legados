@@ -1,7 +1,7 @@
 package org.nanotek.controller.csv;
 
 import org.nanotek.base.maps.ArtistAliasBaseMap;
-import org.nanotek.beans.ArtistAlias;
+import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.service.parser.ArtistAliasParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

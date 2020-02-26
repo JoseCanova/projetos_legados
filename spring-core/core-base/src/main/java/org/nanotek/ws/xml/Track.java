@@ -20,7 +20,7 @@ public class Track implements WsBase{
 	
 	public Track(){}
 	
-	public Track(org.nanotek.beans.Track p1) {
+	public Track(org.nanotek.beans.entity.Track p1) {
 		this.id = p1.getId();
 		this.name = p1.getName();
 	}

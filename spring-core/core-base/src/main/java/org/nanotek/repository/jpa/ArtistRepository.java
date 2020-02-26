@@ -2,7 +2,7 @@ package org.nanotek.repository.jpa;
 
 import java.util.List;
 
-import org.nanotek.beans.Artist;
+import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.projections.NameableProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

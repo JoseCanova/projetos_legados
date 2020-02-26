@@ -2,8 +2,8 @@ package org.nanotek.service.mediator;
 
 import org.nanotek.EntityBaseTransformer;
 import org.nanotek.Mediator;
-import org.nanotek.beans.ArtistCredit;
 import org.nanotek.beans.csv.ArtistCreditBean;
+import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.exception.validator.ViolationException;
 import org.nanotek.service.ArtistCreditService;
 import org.nanotek.service.tranformer.ArtistCreditBeanTransformer;

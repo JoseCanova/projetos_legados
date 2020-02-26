@@ -1,8 +1,8 @@
 package org.nanotek.service.tranformer;
 
 import org.nanotek.Transformer;
-import org.nanotek.beans.Artist;
 import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.beans.entity.Artist;
 import org.springframework.stereotype.Service;
 
 @Service

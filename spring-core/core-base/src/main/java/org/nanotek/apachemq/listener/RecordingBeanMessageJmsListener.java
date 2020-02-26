@@ -6,8 +6,8 @@ import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.nanotek.Transformer;
-import org.nanotek.beans.Recording;
 import org.nanotek.beans.csv.RecordingBean;
+import org.nanotek.beans.entity.Recording;
 import org.nanotek.service.jpa.RecordingJpaService;
 import org.nanotek.service.jpa.RecordingLengthJpaService;
 import org.slf4j.Logger;

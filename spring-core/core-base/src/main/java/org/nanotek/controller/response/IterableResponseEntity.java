@@ -23,7 +23,7 @@ public class IterableResponseEntity<T extends Iterable<K> , K extends Base> exte
 		super(body, headers, status);
 	}
 
-	public static <T extends Iterable<K>, K extends Base> IterableResponseEntity<T,K> fromCollection(T e, HttpStatus status){ 
+	public static <T extends Iterable<K>, K extends Base> IterableResponseEntity<T,K> fromIterable(T e, HttpStatus status){ 
 		return new IterableResponseEntity<>(e,status);
 	}
 }

@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.Transformer;
-import org.nanotek.beans.Artist;
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.beans.ArtistCreditName;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
+import org.nanotek.beans.entity.Artist;
+import org.nanotek.beans.entity.ArtistCredit;
+import org.nanotek.beans.entity.ArtistCreditName;
 import org.nanotek.service.ArtistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

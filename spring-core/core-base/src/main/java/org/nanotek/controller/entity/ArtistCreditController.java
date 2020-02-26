@@ -1,6 +1,6 @@
 package org.nanotek.controller.entity;
 
-import org.nanotek.beans.ArtistCredit;
+import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.BasePersistenceService;

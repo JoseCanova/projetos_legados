@@ -3,7 +3,7 @@ package org.nanotek.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.nanotek.beans.Artist;
+import org.nanotek.beans.entity.Artist;
 import org.nanotek.controller.entity.EntityResponseController;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.nanotek.service.jpa.BasePersistenceService;

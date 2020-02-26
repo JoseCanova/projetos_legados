@@ -1,6 +1,6 @@
 package org.nanotek.repository.jpa;
 
-import org.nanotek.beans.Release;
+import org.nanotek.beans.entity.Release;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

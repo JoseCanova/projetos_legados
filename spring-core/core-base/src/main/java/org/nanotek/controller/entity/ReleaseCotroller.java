@@ -1,6 +1,6 @@
 package org.nanotek.controller.entity;
 
-import org.nanotek.beans.Release;
+import org.nanotek.beans.entity.Release;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

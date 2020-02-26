@@ -1,6 +1,6 @@
 package org.nanotek.service;
 
-import org.nanotek.beans.ArtistCredit;
+import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 

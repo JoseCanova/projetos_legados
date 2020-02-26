@@ -6,9 +6,9 @@ import java.util.Optional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.ArtistCredit;
-import org.nanotek.beans.ArtistCreditName;
-import org.nanotek.beans.Artist;
+import org.nanotek.beans.entity.Artist;
+import org.nanotek.beans.entity.ArtistCredit;
+import org.nanotek.beans.entity.ArtistCreditName;
 import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ArtistCreditNameJpaService;
 import org.nanotek.service.jpa.ArtistJpaService;
