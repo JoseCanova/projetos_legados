@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtistService {
 
 	@Autowired
-	private ArtistJpaService ArtistJpaService;
+	private ArtistJpaService artistJpaService;
 
 	@Autowired 
 	private ArtistCreditJpaService artistCreditJpaService;
@@ -30,7 +30,7 @@ public class ArtistService {
 	
 	@Transactional
 	public Optional<Artist> findArtistById(Long id){ 
-		return ArtistJpaService.findById(id);
+		return artistJpaService.findById(id);
 	}
 	
 	@Transactional
@@ -56,11 +56,11 @@ public class ArtistService {
 
 	@Transactional 
 	public List<Artist> findByArtistId(Long artistId) {
-		return ArtistJpaService.findByArtistId(artistId);
+		return artistJpaService.findByArtistId(artistId);
 	}
 	
 	@Transactional
-	public List<Artist> findByNameLike(@NotNull @NotEmpty  String name){ 
-		return ArtistJpaService.findByNameContaining(name);
+	public Iterable<Artist> findByNameLike(@NotNull @NotEmpty  String name){ 
+		return artistJpaService.findByNameContaining(name);
 	}
 }

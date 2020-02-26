@@ -50,7 +50,7 @@ public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 	}
 	
 	@Transactional
-	public List<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
+	public Iterable<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
 		return artistRepository.findByNameContainingIgnoreCase(name);
 //		return ArtistRepository.findByNameContainingIgnoreCase(name.toUpperCase());
 	}
