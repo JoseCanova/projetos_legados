@@ -15,7 +15,7 @@ public interface ArtistRepository extends JpaRepository <Artist ,Long> , NameBas
 	@Query("from Artist a left outer join fetch a.artistCredits where a.id = ?1")
 	List<Artist> findByArtistId(Long artistId);
 	
-	@Query("select new org.nanotek.beans.Artist(a.id , a.name , a.sortName , a.gid) "
+	@Query("select new org.nanotek.beans.entity.Artist(a.id , a.name , a.sortName , a.gid) "
 			+ "from Artist a where UPPER(a.name) like %:name% order by a.name")
 	List<Artist> findByNameEspec(@Param("name")String name);
 

@@ -3,15 +3,10 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
 import org.nanotek.MutableBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -66,7 +61,7 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_credit" , referencedColumnName="id")
-	private ArtistCredit artistCreditReference;
+	private ArtistCredit artistCredit;
 
 	public Release() { 
 		super();
@@ -184,16 +179,6 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 		this.id = id;
 	}
 
-	public ArtistCredit getArtistCreditReference() {
-		return artistCreditReference;
-	}
-
-
-	public void setArtistCreditReference(ArtistCredit artistCreditReference) {
-		this.artistCreditReference = artistCreditReference;
-	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -221,16 +206,20 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Release [id=" + id + ", releaseId=" + releaseId + ", gid=" + gid + ", releaseGroup=" + releaseGroup
-				+ ", name=" + name + ", barCode=" + barCode + ", dateYear=" + dateYear + ", dateMonth=" + dateMonth
-				+ ", dateDay=" + dateDay + ", country=" + country + ", status=" + status + ", packaging=" + packaging
-				+ ", language=" + language + ", script=" + script + ", artistCreditReference=" + artistCreditReference
-				+ "]";
+	public ArtistCredit getArtistCredit() {
+		return artistCredit;
 	}
 
+	public void setArtistCredit(ArtistCredit artistCredit) {
+		this.artistCredit = artistCredit;
+	}
 
-
+	@Override
+	public String toString() {
+		return "Release [releaseId=" + releaseId + ", gid=" + gid + ", releaseGroup=" + releaseGroup + ", name=" + name
+				+ ", barCode=" + barCode + ", dateYear=" + dateYear + ", dateMonth=" + dateMonth + ", dateDay="
+				+ dateDay + ", country=" + country + ", status=" + status + ", packaging=" + packaging + ", language="
+				+ language + ", script=" + script + ", artistCredit=" + artistCredit + "]";
+	}
 
 }

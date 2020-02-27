@@ -74,7 +74,6 @@ public class TestSomeShit {
 	    }
 	 
 	 public static void main4() {
-		 ArtistCredit ac = new ArtistCredit();
 	        Annotation[] annotations = NameBaseProjection.class.getAnnotations();
 	        String s = Arrays.toString(annotations);
 	        System.out.println(s);

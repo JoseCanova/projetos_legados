@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/recording")
 public class RecordingBeanController implements  EntityResponseController<Recording, Long>  {
 
-	
 	private BasePersistenceService<Recording, Long> baseService;
 
 	@Override

@@ -8,20 +8,20 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
-		<class>org.nanotek.beans.SuperLongBase</class>
-		<class>org.nanotek.beans.ArtistComment</class>
-		<class>org.nanotek.beans.ArtistCredit</class>
-		<class>org.nanotek.beans.ArtistCreditName</class>
-		<class>org.nanotek.beans.Artist</class>
-		<class>org.nanotek.beans.ArtistType</class>
-		<class>org.nanotek.beans.Isrc</class>
-		<class>org.nanotek.beans.Label</class>
-		<class>org.nanotek.beans.Medium</class>
-		<class>org.nanotek.beans.Recording</class>
-		<class>org.nanotek.beans.RecordingLength</class>
-		<class>org.nanotek.beans.Release</class>
-		<class>org.nanotek.beans.ReleaseGroup</class>
-		<class>org.nanotek.beans.Track</class>
+		<class>org.nanotek.beans.entity.SuperLongBase</class>
+		<class>org.nanotek.beans.entity.ArtistComment</class>
+		<class>org.nanotek.beans.entity.ArtistCredit</class>
+		<class>org.nanotek.beans.entity.ArtistCreditName</class>
+		<class>org.nanotek.beans.entity.Artist</class>
+		<class>org.nanotek.beans.entity.ArtistType</class>
+		<class>org.nanotek.beans.entity.Isrc</class>
+		<class>org.nanotek.beans.entity.Label</class>
+		<class>org.nanotek.beans.entity.Medium</class>
+		<class>org.nanotek.beans.entity.Recording</class>
+		<class>org.nanotek.beans.entity.RecordingLength</class>
+		<class>org.nanotek.beans.entity.Release</class>
+		<class>org.nanotek.beans.entity.ReleaseGroup</class>
+		<class>org.nanotek.beans.entity.Track</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

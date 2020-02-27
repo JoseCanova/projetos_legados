@@ -1,27 +1,27 @@
 package org.nanotek.service.parser;
 
+import org.nanotek.Base;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.opencsv.BaseMap;
 
-@Deprecated
-public class BaseMapParser<T extends BaseMap<?>> extends BaseParser{
+public class BaseMapParser<I extends Base> extends BaseParser{
 	
-	private BaseMapColumnStrategy<T> baseMap;
+	private BaseMapColumnStrategy<I> baseMap;
 
 	public BaseMapParser() {}
 	
-	public BaseMapParser(BaseMapColumnStrategy<T> baseMap) {
+	public BaseMapParser(BaseMapColumnStrategy<I> baseMap) {
 		super();
 		this.baseMap = baseMap;
 	}
 
 
-	public void setBaseMap(BaseMapColumnStrategy<T> baseMap) {
+	public void setBaseMap(BaseMapColumnStrategy<I> baseMap) {
 		this.baseMap = baseMap;
 	}
 
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
+	public BaseMapColumnStrategy<I> getBaseMap() {
 		return baseMap;
 	}
 	

@@ -7,9 +7,11 @@ import javax.sql.DataSource;
 import javax.validation.Validator;
 
 import org.assertj.core.util.Arrays;
+import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.csv.ArtistCreditBean;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
+import org.nanotek.beans.csv.InstrumentTypeBean;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.beans.csv.ReleaseGroupBean;

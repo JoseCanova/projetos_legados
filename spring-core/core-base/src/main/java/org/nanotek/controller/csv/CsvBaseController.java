@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nanotek.Base;
-import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.opencsv.MapColumnStrategy;
-import org.nanotek.service.parser.BaseParser;
+import org.nanotek.service.parser.BaseMapParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I extends Base, P extends BaseParser > {
 
+public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
 
-	public abstract T getBaseMap();
+	private P parser; 
+	
+	private CsvToBean<I> csvToBean;
+	
+	public CsvBaseController(P parser, CsvToBean<I> csvToBean) {
+		super();
+		this.parser = parser;
+		this.csvToBean = csvToBean;
+	}
 
-	public abstract CsvToBean<I> getCsvToBean();
+	public  CsvToBean<I> getCsvToBean(){ 
+		return csvToBean;
+	}
 
-	public abstract  P getBaseParser();
+	public   P getBaseParser() {
+		return parser;
+	}
 	
 	@GetMapping("/map_config")
     public MapColumnStrategy<? , ?> mapConfig() {
@@ -43,7 +54,7 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
     	String[] instanceArray = null;
     	I bean = null;
     	if ((instanceArray = getBaseParser().readNext()) !=null) {
-    		bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
+    		bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
     	}
     	return bean;
     }
@@ -57,7 +68,7 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
 		    	String[] instanceArray = null;
 		    	I bean = null;
 		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
-		    		bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
+		    		bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
 		    	}
 		    	if (bean == null)
 		    		status = HttpStatus.SERVICE_UNAVAILABLE;
@@ -78,7 +89,7 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
     	int i = 0;
     	String[] instanceArray = null;
     	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) {
-    		I bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
+    		I bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
     		list.add(bean);
     		i++;
     	}
@@ -86,3 +97,4 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
     }	
 	
 }
+

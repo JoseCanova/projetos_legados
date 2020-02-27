@@ -31,7 +31,7 @@ public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 		release.setStatus(i.getStatus() != null ? i.getStatus().toString() : null);
 		Optional<ArtistCredit> opt = findArtistCredit(i.getArtistCreditId());
 		if (opt.isPresent())
-			release.setArtistCreditReference(opt.get());
+			release.setArtistCredit(opt.get());
 		return release;
 	}
 

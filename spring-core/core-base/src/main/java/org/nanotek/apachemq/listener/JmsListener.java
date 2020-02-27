@@ -53,7 +53,7 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 					&& release.getReleaseId() != null 
 					&& release.getReleaseGroup() !=null 
 					&& release.getName() !=null 
-					&& release.getArtistCreditReference() !=null;
+					&& release.getArtistCredit() !=null;
 	}
 
 }

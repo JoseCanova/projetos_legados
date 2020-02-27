@@ -24,10 +24,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.MutableBase;
+import org.nanotek.NameBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(
@@ -48,7 +47,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 ))
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ArtistCredit extends EntityLongBase implements MutableBase<Long>{
+public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , NameBase{
 
 	private static final long serialVersionUID = -3086006757943654550L;
 	//	@Id
@@ -67,7 +66,7 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long>{
 	@Column (name="ref_count" , insertable=true,nullable=false,updatable = true)
 	private Long refCount;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCreditReference")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
 	private Set<Release> releases; 
 
 	@ManyToMany(fetch=FetchType.LAZY)

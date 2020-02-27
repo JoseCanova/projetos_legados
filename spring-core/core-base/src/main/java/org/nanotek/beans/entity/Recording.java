@@ -17,12 +17,13 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.MutableBase;
+import org.nanotek.NameBase;
 
 @Entity
 @Table(name="RECORDING")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Recording extends EntityLongBase implements MutableBase<Long>{
+public class Recording extends EntityLongBase implements MutableBase<Long> , NameBase{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 
