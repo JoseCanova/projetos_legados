@@ -38,18 +38,18 @@ public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
 		return parser;
 	}
 	
-	@GetMapping("/map_config")
+	@GetMapping("${csv-endpoint.map-config}")
     public MapColumnStrategy<? , ?> mapConfig() {
         return getBaseParser().getBaseMap();
     }
 
-	@GetMapping("/reopenFile")
+	@GetMapping("${csv-endpoint.reopen}")
     public ResponseEntity<String> reopenFile() throws Exception {
          getBaseParser().reopen();
          return new ResponseEntity<String>("reopened", HttpStatus.OK);
     }
 
-    @GetMapping("/next")
+    @GetMapping("${csv-endpoint.next}")
     public I next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
     	String[] instanceArray = null;
     	I bean = null;
@@ -60,7 +60,7 @@ public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
     }
 
 
-    @GetMapping("/next_entity")
+    @GetMapping("${csv-endpoint.next_entity}")
     public ResponseBase<I> nextEntity() {
     	ResponseBase<I> response = null;
     	HttpStatus status = null;
@@ -83,7 +83,7 @@ public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
     }
 
     
-    @GetMapping("/load")
+    @GetMapping("${csv-endpoint.load}")
     public List<I> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
     	List<I> list = new  ArrayList<>();
     	int i = 0;

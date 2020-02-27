@@ -19,8 +19,6 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 @EnableConfigurationProperties
 public class InstrumentTypeCsvConfiguration {
 
-	private static final String CONTROLLER_BASE_MAPPING = "/csv/instrument";
-	
 	public InstrumentTypeCsvConfiguration() {
 	}
 
@@ -40,8 +38,9 @@ public class InstrumentTypeCsvConfiguration {
 		return new BaseMapParser<>(intrumentTypeBaseMap());
 	}
 	
-	@RestController
-	@RequestMapping(CONTROLLER_BASE_MAPPING)
+	@RestController(value = "InstrumentTypeRestController")
+	@ConfigurationProperties(prefix = "csv-endpoint")
+	@RequestMapping("${csv-endpoint.instrument-type}")
 	class CsvRestController extends CsvBaseController<InstrumentTypeBean, BaseMapParser<InstrumentTypeBean>>{ 
 		public CsvRestController(BaseMapParser<InstrumentTypeBean> parser, CsvToBean<InstrumentTypeBean> csvToBean) {
 			super(parser, csvToBean);

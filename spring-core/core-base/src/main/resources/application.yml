@@ -246,4 +246,12 @@ instrumenttype:
     parent: 2
     child_order: 3
     description: 4
-    gid: 5    
+    gid: 5
+
+csv-endpoint:
+   instrument-type: /csv/instrument 
+   map-config: /map_config
+   reopen: /reopen_file
+   next: /next
+   next_entity: /next_entity
+   load: /load
