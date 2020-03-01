@@ -248,6 +248,21 @@ instrumenttype:
     description: 4
     gid: 5
 
+instrument:
+  fileLocation: /opt/mbdump
+  fileName: instrument
+  id: InstrumentBean
+  type: org.nanotek.beans.csv.InstrumentBean 
+  baseMap:     
+    id: 0
+    gid: 1
+    name: 2
+    type: 3
+    editsPending: 4
+    lastUpdatead: 5
+    comment: 6 
+    description: 7
+
 csv-endpoint:
    instrument-type: /csv/instrument 
    map-config: /map_config

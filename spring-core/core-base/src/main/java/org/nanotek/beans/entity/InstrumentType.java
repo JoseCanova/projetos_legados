@@ -1,7 +1,11 @@
 package org.nanotek.beans.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,6 +32,8 @@ public class InstrumentType extends EntityLongBase{
 	@Column(name="gid" , length = 50 , nullable = false , insertable = true , updatable = true)
 	private String gid; 
 	
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<Instrument> instruments;
 	
 	public InstrumentType() {
 	}
@@ -65,6 +71,16 @@ public class InstrumentType extends EntityLongBase{
 	@Override
 	public String toString() {
 		return "InstrumentType [name=" + name + ", description=" + description + ", gid=" + gid + ", id=" + id + "]";
+	}
+
+
+	public Set<Instrument> getInstruments() {
+		return instruments;
+	}
+
+
+	public void setInstruments(Set<Instrument> instruments) {
+		this.instruments = instruments;
 	}
 
 }
