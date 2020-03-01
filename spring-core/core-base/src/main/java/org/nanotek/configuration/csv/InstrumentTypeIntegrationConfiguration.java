@@ -43,7 +43,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 @Configuration
 @EnableIntegration
 @EnableConfigurationProperties
-@IntegrationComponentScan(basePackages = {"org.nanotek.configuration.csv" , "org.nanotek.beans.csv"})
+@IntegrationComponentScan(basePackageClasses = {InstrumentTypeIntegrationConfiguration.class})
 public class InstrumentTypeIntegrationConfiguration {
 
 	
