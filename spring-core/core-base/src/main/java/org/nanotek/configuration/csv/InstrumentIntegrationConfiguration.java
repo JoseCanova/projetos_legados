@@ -129,7 +129,8 @@ public class InstrumentIntegrationConfiguration {
 	}
 
 	@Bean
-	public IntegrationFlow instrumentFlowRequestHttp(@Autowired InstrumentBeanProcessor handler,
+	IntegrationFlow instrumentFlowRequestHttp
+	(@Autowired InstrumentBeanProcessor handler,
 			@Autowired @Qualifier("instrumentChannel") MessageChannel channel) { 
 		return IntegrationFlows
 				.from(channel)
@@ -193,7 +194,6 @@ public class InstrumentIntegrationConfiguration {
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			service.save((Instrument) message.getPayload());
-			System.out.println(message.toString());
 		}
 	}
 
