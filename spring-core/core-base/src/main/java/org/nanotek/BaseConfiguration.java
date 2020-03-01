@@ -129,6 +129,7 @@ public class BaseConfiguration {
 	}
 
 	@Bean(name = "serviceTaskExecutor")
+	@Qualifier(value = "serviceTaskExecutor")
 	public ThreadPoolTaskExecutor getServiceTaskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(10);

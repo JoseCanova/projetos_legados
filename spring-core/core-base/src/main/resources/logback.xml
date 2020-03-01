@@ -40,8 +40,18 @@
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
+    
+   <logger name="org.springframework.integration" level="info"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
 
     <logger name="org.nanotek" level="debug"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.nanotek.configuration.csv" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>

@@ -82,4 +82,11 @@ public class InstrumentTypeBean implements LongBase{
 		this.gid = gid;
 	}
 
+
+	@Override
+	public String toString() {
+		return "InstrumentTypeBean [id=" + id + ", name=" + name + ", parent=" + parent + ", childOrder=" + childOrder
+				+ ", description=" + description + ", gid=" + gid + "]";
+	}
+
 }

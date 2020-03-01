@@ -15,6 +15,7 @@
 		<class>org.nanotek.beans.entity.Artist</class>
 		<class>org.nanotek.beans.entity.ArtistType</class>
 		<class>org.nanotek.beans.entity.Isrc</class>
+		<class>org.nanotek.beans.entity.InstrumentType</class>
 		<class>org.nanotek.beans.entity.Label</class>
 		<class>org.nanotek.beans.entity.Medium</class>
 		<class>org.nanotek.beans.entity.Recording</class>
