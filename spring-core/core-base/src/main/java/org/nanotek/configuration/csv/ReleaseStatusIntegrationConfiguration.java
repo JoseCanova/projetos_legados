@@ -2,10 +2,8 @@ package org.nanotek.configuration.csv;
 
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
-import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.nanotek.beans.csv.ReleaseStatusBean;
 import org.nanotek.beans.entity.ReleaseStatus;
-import org.nanotek.configuration.csv.ReleaseGroupPrimaryTypeConfiguration.ReleasePrimaryGroupProcessor;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.ReleaseStatusRepository;
 import org.nanotek.service.CsvMessageHandler;
