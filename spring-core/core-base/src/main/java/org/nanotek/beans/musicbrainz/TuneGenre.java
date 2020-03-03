@@ -8,7 +8,7 @@ import org.nanotek.Base;
 
 @SuppressWarnings("serial")
 @Entity
-public class TuneGenre implements Base<Long>{
+public class TuneGenre implements Base{
 
 	@Id
 	private Long id; 

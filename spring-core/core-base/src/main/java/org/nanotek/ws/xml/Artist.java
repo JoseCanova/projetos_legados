@@ -14,7 +14,7 @@ import org.nanotek.ws.WsBase;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="artist" , namespace="org.nanotek.ws.xml")
 @SuppressWarnings("serial")
-public class Artist implements WsBase<Long>{
+public class Artist implements WsBase{
 
 	@XmlElement(name="id")
 	private Long id; 

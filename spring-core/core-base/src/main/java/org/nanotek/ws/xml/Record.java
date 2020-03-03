@@ -14,7 +14,7 @@ import org.nanotek.ws.WsBase;
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="record" , namespace="org.nanotek.ws.xml")
-public class Record implements WsBase<Long>{
+public class Record implements WsBase{
 
 	@XmlElement(name="recordId")
 	private Long id;

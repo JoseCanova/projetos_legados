@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.nanotek.beans.Release;
+import org.nanotek.beans.entity.Release;
 import org.nanotek.ws.WsBase;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="release", namespace="org.nanotek.ws.xml")
 @SuppressWarnings("serial")
-public class ArtistRelease implements WsBase<Long>{
+public class ArtistRelease implements WsBase{
 
 	@XmlElement(name="releaseId")
 	private Long id; 
@@ -34,7 +34,7 @@ public class ArtistRelease implements WsBase<Long>{
 	}
 
 	public ArtistRelease(Release release) {
-		this.id = release.getReleaseId();
+		this.id = release.getId();
 		try {
 			this.name = new String (release.getName().getBytes() , "UTF-8");
 		} catch (UnsupportedEncodingException e) {

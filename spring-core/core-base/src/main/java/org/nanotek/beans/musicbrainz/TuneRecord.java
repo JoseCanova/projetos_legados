@@ -1,7 +1,6 @@
 package org.nanotek.beans.musicbrainz;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,7 +13,7 @@ import org.nanotek.Base;
 
 @SuppressWarnings("serial")
 @Entity
-public class TuneRecord  implements Base<Long>{
+public class TuneRecord  implements Base{
 
 	@Id
 	private Long id; 

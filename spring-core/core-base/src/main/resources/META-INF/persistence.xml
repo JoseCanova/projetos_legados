@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-	<persistence-unit name="spring-core-music-brainz"
-		transaction-type="JTA">
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="spring-core-music-brainz" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/jboss/datasources/MB</jta-data-source>
-		<class>org.nanotek.beans.ArtistCredit</class>
-		<class>org.nanotek.beans.ArtistCreditName</class>
-		<class>org.nanotek.beans.ArtistName</class>
-		<class>org.nanotek.beans.Isrc</class>
-		<class>org.nanotek.beans.Medium</class>
-		<class>org.nanotek.beans.Recording</class>
-		<class>org.nanotek.beans.Release</class>
-		<class>org.nanotek.beans.ReleaseGroup</class>
-		<class>org.nanotek.beans.Track</class>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
+		<class>org.nanotek.beans.entity.SuperLongBase</class>
+		<class>org.nanotek.beans.entity.ArtistComment</class>
+		<class>org.nanotek.beans.entity.ArtistCredit</class>
+		<class>org.nanotek.beans.entity.ArtistCreditName</class>
+		<class>org.nanotek.beans.entity.Artist</class>
+		<class>org.nanotek.beans.entity.ArtistType</class>
+		<class>org.nanotek.beans.entity.Isrc</class>
+		<class>org.nanotek.beans.entity.InstrumentType</class>
+		<class>org.nanotek.beans.entity.Instrument</class>
+		<class>org.nanotek.beans.entity.Label</class>
+		<class>org.nanotek.beans.entity.Medium</class>
+		<class>org.nanotek.beans.entity.Recording</class>
+		<class>org.nanotek.beans.entity.RecordingLength</class>
+		<class>org.nanotek.beans.entity.Release</class>
+		<class>org.nanotek.beans.entity.ReleaseGroup</class>
+		<class>org.nanotek.beans.entity.ReleaseStatus</class>
+		<class>org.nanotek.beans.entity.ReleasePackaging</class>
+		<class>org.nanotek.beans.entity.ReleaseGroupPrimaryType</class>
+		<class>org.nanotek.beans.entity.Track</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:postgresql://127.0.0.1:5432/musicbrainz" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+			<property name="hibernate.cache.use_query_cache" value="true" />
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
+			<!-- <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property> -->
+			<!-- <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property> -->
+			<!-- <property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://127.0.0.1:5432/music-brainz" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="postgres123" />
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
-		</properties>
+			<property name="javax.persistence.jdbc.password" value="Postgres123@" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> -->
+<!-- 			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+ -->
+ 		</properties>
 	</persistence-unit>
 </persistence>

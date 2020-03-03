@@ -10,7 +10,7 @@ import org.nanotek.ws.WsBase;
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="track" , namespace="org.nanotek.ws.xml")
-public class Track implements WsBase<Long>{
+public class Track implements WsBase{
 
 	@XmlElement(name="trackId")
 	private Long id;
@@ -20,8 +20,8 @@ public class Track implements WsBase<Long>{
 	
 	public Track(){}
 	
-	public Track(org.nanotek.beans.Track p1) {
-		this.id = p1.getTrackId();
+	public Track(org.nanotek.beans.entity.Track p1) {
+		this.id = p1.getId();
 		this.name = p1.getName();
 	}
 
