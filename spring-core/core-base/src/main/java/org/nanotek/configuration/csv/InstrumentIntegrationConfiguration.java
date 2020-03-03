@@ -118,16 +118,6 @@ public class InstrumentIntegrationConfiguration {
 		return new BaseMapParser<>(intrumentBaseMap());
 	}
 
-	@Service
-	class IntrumentProcessor extends CsvBaseProcessor<InstrumentBean, BaseMapParser<InstrumentBean>>{
-
-		public IntrumentProcessor
-		(@Autowired @Qualifier("instrumentParser") BaseMapParser<InstrumentBean> parser,
-				@Autowired @Qualifier("instrumentCsvToBean") CsvToBean<InstrumentBean> csvToBean) {
-			super(parser, csvToBean);
-		} 
-	}
-
 	@Bean
 	IntegrationFlow instrumentFlowRequestHttp
 	(@Autowired InstrumentBeanProcessor handler,
@@ -140,7 +130,7 @@ public class InstrumentIntegrationConfiguration {
 
 
 	@Bean IntegrationFlow processInstrumentRequest
-	(@Autowired InstrumentHandler handler , 
+			(@Autowired InstrumentHandler handler , 
 			@Autowired @Qualifier("instrumentIntegrationStartChannel") ExecutorChannel executorChannel,
 			@Autowired InstrumentTransformer transformer) { 
 		return IntegrationFlows
@@ -148,6 +138,16 @@ public class InstrumentIntegrationConfiguration {
 				.transform(transformer)
 				.handle(handler)
 				.get();
+	}
+	
+	@Service
+	class InstrumentProcessor extends CsvBaseProcessor<InstrumentBean, BaseMapParser<InstrumentBean>>{
+
+		public InstrumentProcessor
+		(@Autowired @Qualifier("instrumentParser") BaseMapParser<InstrumentBean> parser,
+				@Autowired @Qualifier("instrumentCsvToBean") CsvToBean<InstrumentBean> csvToBean) {
+			super(parser, csvToBean);
+		} 
 	}
 
 	@MessageEndpoint
@@ -162,7 +162,7 @@ public class InstrumentIntegrationConfiguration {
 		private MessageChannel responseChannel;
 
 		@Autowired
-		private IntrumentProcessor processor;
+		private InstrumentProcessor processor;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
@@ -174,7 +174,6 @@ public class InstrumentIntegrationConfiguration {
 					instrument = processor.next();
 					if (instrument !=null) { 
 						Message<?> m = MessageBuilder.withPayload(instrument).build();
-						System.out.println(m.toString());
 						dispatcherChannel.send(m);
 					}
 				}while(instrument !=null);
@@ -215,7 +214,6 @@ public class InstrumentIntegrationConfiguration {
 											source.getComment() , source.getDescription());
 			return instrument;
 		} 
-
 	}
 
 }

@@ -9,14 +9,12 @@
         </layout>
     </appender>
 
-
-
     <logger name="reactor" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.ehcache" level="debug"
+    <logger name="org.ehcache" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
@@ -26,12 +24,12 @@
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="org.hibernate.cache" level="debug"
+    <logger name="org.hibernate.cache" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="net.sf.ehcache" level="debug"
+    <logger name="net.sf.ehcache" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>

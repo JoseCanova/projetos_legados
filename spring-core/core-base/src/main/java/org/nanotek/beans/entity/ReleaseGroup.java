@@ -2,42 +2,51 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.nanotek.Base;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="RELEASE_GROUP")
-public class ReleaseGroup implements Base {
+@Table(name="release_group")
+public class ReleaseGroup extends EntityLongBase{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="release_group_seq")
-	@SequenceGenerator(name="release_group_seq",sequenceName="release_group_id_seq")
-	private Long id; 
-	@Column(name="RELEASE_GROUP_ID" , nullable=false , unique=true)
-	private Long releaseGroupId; 
-	@Column (name="GID" , length=255 , nullable=true)
+	@NotBlank
+	@Column (name="gid" , length=50 , nullable=false)
 	private String gid; 
-	@Column (name="NAME" , length=2500 , nullable=false)
+	@NotBlank
+	@Column (name="name" , length=2500 , nullable=false)
 	private String name; 
-	@Column(name="ARTIST_CREDIT" , nullable=false)
-	private Long artistCredit; 
-	@Column(name="TYPE" , nullable=true)
-	private Integer type;
 	
-	public Long getId() {
-		return id;
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY , optional = false)
+	@JoinColumn(name="artist_credit_id")
+	private ArtistCredit artistCredit; 
+	
+	@ManyToOne(fetch = FetchType.LAZY , optional = true)
+	@JoinColumn(name = "type_id")
+	private ReleaseGroupPrimaryType type;
+	
+	public ReleaseGroup() {}
+	
+	public ReleaseGroup(@NotNull Long id, @NotBlank String gid, @NotBlank String name, @NotNull ArtistCredit artistCredit,
+			ReleaseGroupPrimaryType type) {
+		super(id);
+		this.gid = gid;
+		this.name = name;
+		this.artistCredit = artistCredit;
+		this.type = type;
 	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
+
 	public String getGid() {
 		return gid;
 	}
@@ -54,36 +63,28 @@ public class ReleaseGroup implements Base {
 		this.name = name;
 	}
 	
-	public Long getArtistCredit() {
+	public ArtistCredit getArtistCredit() {
 		return artistCredit;
 	}
-	
-	public void setArtistCredit(Long artistCredit) {
+
+	public void setArtistCredit(ArtistCredit artistCredit) {
 		this.artistCredit = artistCredit;
 	}
-	
-	public Integer getType() {
+
+	public ReleaseGroupPrimaryType getType() {
 		return type;
 	}
-	
-	public void setType(Integer type) {
-		this.type = type;
-	} 
-	
-	public Long getReleaseGroupId() {
-		return releaseGroupId;
-	}
 
-	public void setReleaseGroupId(Long releaseGroupId) {
-		this.releaseGroupId = releaseGroupId;
+	public void setType(ReleaseGroupPrimaryType type) {
+		this.type = type;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((releaseGroupId == null) ? 0 : releaseGroupId.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -91,23 +92,28 @@ public class ReleaseGroup implements Base {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		ReleaseGroup other = (ReleaseGroup) obj;
-		if (releaseGroupId == null) {
-			if (other.releaseGroupId != null)
+		if (gid == null) {
+			if (other.gid != null)
 				return false;
-		} else if (!releaseGroupId.equals(other.releaseGroupId))
+		} else if (!gid.equals(other.gid))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReleaseGroup [id=" + id + ", releaseGroupId=" + releaseGroupId
-				+ ", gid=" + gid + ", name=" + name + ", artistCredit="
-				+ artistCredit + ", type=" + type + "]";
-	}
+		return "ReleaseGroup [gid=" + gid + ", name=" + name + ", artistCredit=" + artistCredit + ", type=" + type
+				+ ", id=" + id + "]";
+	} 
+	
 }

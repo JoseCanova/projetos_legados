@@ -16,11 +16,11 @@ public class ReleaseGroupBean implements LongBase {
 	 */
 	private static final long serialVersionUID = -1119657398190391884L;
 
-	private Long releaseGroupId; 
+	private Long id; 
 	private String gid; 
 	private String name; 
 	private Long artistCredit; 
-	private Integer type;
+	private Long type;
 	private String comment; 
 	private String editsPending;
 	private String lastUpdated;
@@ -32,19 +32,11 @@ public class ReleaseGroupBean implements LongBase {
 	
 	@Override
 	public Long getId() {
-		return releaseGroupId;
+		return id;
 	}
 
 	public void setId(Long id) {
-		this.releaseGroupId = id;
-	}
-
-	public Long getReleaseGroupId() {
-		return releaseGroupId;
-	}
-
-	public void setReleaseGroupId(Long releaseGroupId) {
-		this.releaseGroupId = releaseGroupId;
+		this.id = id;
 	}
 
 	public String getGid() {
@@ -71,14 +63,6 @@ public class ReleaseGroupBean implements LongBase {
 		this.artistCredit = artistCredit;
 	}
 
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
 	public String getComment() {
 		return comment;
 	}
@@ -103,8 +87,19 @@ public class ReleaseGroupBean implements LongBase {
 		this.lastUpdated = lastUpdated;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "ReleaseGroupBean [id=" + id + ", gid=" + gid + ", name=" + name + ", artistCredit=" + artistCredit
+				+ ", type=" + type + ", comment=" + comment + ", editsPending=" + editsPending + ", lastUpdated="
+				+ lastUpdated + "]";
+	}
+
+	public Long getType() {
+		return type;
+	}
+
+	public void setType(Long type) {
+		this.type = type;
 	}
 
 }
