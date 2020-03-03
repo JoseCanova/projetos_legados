@@ -2,9 +2,6 @@ package org.nanotek.service;
 
 import org.nanotek.Base;
 import org.nanotek.processor.csv.CsvBaseProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;

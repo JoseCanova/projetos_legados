@@ -302,6 +302,20 @@ releasepackaging:
       description: 4 
       gid: 5            
 
+language:
+  fileLocation: /opt/mbdump
+  fileName: language
+  id: LanguageBean
+  type: org.nanotek.beans.csv.LanguageBean
+  baseMap:  
+      id: 0 
+      isoCode2t: 1 
+      isoCode2b: 2 
+      isoCode1: 3 
+      name: 4 
+      frequency: 5 
+      isoCode3: 6            
+
 csv-endpoint:
    instrument-type: /csv/instrument 
    map-config: /map_config

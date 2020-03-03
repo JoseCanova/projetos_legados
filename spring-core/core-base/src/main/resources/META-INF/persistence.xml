@@ -18,6 +18,7 @@
 		<class>org.nanotek.beans.entity.InstrumentType</class>
 		<class>org.nanotek.beans.entity.Instrument</class>
 		<class>org.nanotek.beans.entity.Label</class>
+		<class>org.nanotek.beans.entity.Language</class>
 		<class>org.nanotek.beans.entity.Medium</class>
 		<class>org.nanotek.beans.entity.Recording</class>
 		<class>org.nanotek.beans.entity.RecordingLength</class>
