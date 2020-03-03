@@ -22,7 +22,7 @@ public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 	@Override
 	public Release transform(ReleaseBean i) {
 		Release release = new Release(); 
-		release.setReleaseId(i.getId());
+		release.setId(i.getId());
 		release.setBarCode(i.getBarcode());
 //		release.setCountry(i.getLanguage());
 		release.setName(i.getName());

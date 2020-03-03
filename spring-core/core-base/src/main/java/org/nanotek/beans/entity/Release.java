@@ -9,15 +9,9 @@ import javax.persistence.Table;
 
 import org.nanotek.MutableBase;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class, 
-		property = "id")
 @Entity
-@Table(name="RELEASE")
+@Table(name="release")
 public class Release extends EntityLongBase implements MutableBase<Long>{
 
 	private static final long serialVersionUID = 8526436903189806951L;
@@ -26,39 +20,38 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 //	@GeneratedValue(generator="release_seq" , strategy=GenerationType.SEQUENCE)
 //	@SequenceGenerator(name="release_seq", sequenceName="release_id_seq")
 //	private Long id; 
-	@Column(name="RELEASE_ID" , nullable=false)
-	private Long releaseId; 
-	@Column(name="GID" , nullable=false)
+	@Column(name="gid" , nullable=false)
 	private String gid; 
-	@Column(name="RELEASE_GROUP" , insertable=true , nullable=false)
-	private Long releaseGroup; 
 	//	@Column(name="ARTIST_CREDIT" , insertable=true , nullable=false)
 	//	private Long artistCredit; 
 	//TODO REFACTOR TABLE
-	@Column(name="NAME" , insertable=true , nullable=false , length=2500)
+	@Column(name="name" , insertable=true , nullable=false , length=2500)
 	private String name; 
 
-	@Column(name="BAR_CODE" , insertable=true , nullable=true)
+	@Column(name="barCode" , insertable=true , nullable=true)
 	private String barCode; 
-	@Column(name="DATE_YEAR" , insertable=true , nullable=true)
+	@Column(name="dateYear" , insertable=true , nullable=true)
 	private String dateYear; 
-	@Column(name="DATE_MONTH" , insertable=true , nullable=true)
+	@Column(name="dateMonth" , insertable=true , nullable=true)
 	private String dateMonth; 
-	@Column(name="DATE_DAY" , insertable=true , nullable=true)
+	@Column(name="dateDay" , insertable=true , nullable=true)
 	private String dateDay; 
 
-	@Column(name="COUNTRY" , insertable=true , nullable=true)
+	@Column(name="country" , insertable=true , nullable=true)
 	private String country; 
-	@Column(name="STATUS" , insertable=true , nullable=true)
+	@Column(name="status" , insertable=true , nullable=true)
 	private String status; 
-	@Column(name="PACKAGING" , insertable=true , nullable=true)
+	@Column(name="packaging" , insertable=true , nullable=true)
 	private String packaging;
-	@Column(name="LANGUAGE" , insertable=true , nullable=true)
+	@Column(name="language" , insertable=true , nullable=true)
 	private String language; 
-	@Column(name="SCRIPT" , insertable=true , nullable=true)
+	@Column(name="script" , insertable=true , nullable=true)
 	private String script; 
 
-	@JsonIgnore
+	
+	@Column(name="RELEASE_GROUP" , insertable=true , nullable=false)
+	private Long releaseGroup; 
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_credit" , referencedColumnName="id")
 	private ArtistCredit artistCredit;
@@ -70,14 +63,6 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 	/*
 	 * @Override public Long getId() { return id; }
 	 */
-
-	public Long getReleaseId() {
-		return releaseId;
-	}
-
-	public void setReleaseId(Long releaseId) {
-		this.releaseId = releaseId;
-	}
 
 	public String getGid() {
 		return gid;
@@ -179,32 +164,6 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 		this.id = id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((releaseId == null) ? 0 : releaseId.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Release other = (Release) obj;
-		if (releaseId == null) {
-			if (other.releaseId != null)
-				return false;
-		} else if (!releaseId.equals(other.releaseId))
-			return false;
-		return true;
-	}
 
 	public ArtistCredit getArtistCredit() {
 		return artistCredit;
@@ -212,14 +171,6 @@ public class Release extends EntityLongBase implements MutableBase<Long>{
 
 	public void setArtistCredit(ArtistCredit artistCredit) {
 		this.artistCredit = artistCredit;
-	}
-
-	@Override
-	public String toString() {
-		return "Release [releaseId=" + releaseId + ", gid=" + gid + ", releaseGroup=" + releaseGroup + ", name=" + name
-				+ ", barCode=" + barCode + ", dateYear=" + dateYear + ", dateMonth=" + dateMonth + ", dateDay="
-				+ dateDay + ", country=" + country + ", status=" + status + ", packaging=" + packaging + ", language="
-				+ language + ", script=" + script + ", artistCredit=" + artistCredit + "]";
 	}
 
 }

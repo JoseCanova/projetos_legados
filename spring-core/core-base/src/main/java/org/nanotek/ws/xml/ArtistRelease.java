@@ -34,7 +34,7 @@ public class ArtistRelease implements WsBase{
 	}
 
 	public ArtistRelease(Release release) {
-		this.id = release.getReleaseId();
+		this.id = release.getId();
 		try {
 			this.name = new String (release.getName().getBytes() , "UTF-8");
 		} catch (UnsupportedEncodingException e) {

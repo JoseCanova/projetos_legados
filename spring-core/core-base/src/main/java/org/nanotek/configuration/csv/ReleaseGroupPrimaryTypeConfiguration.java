@@ -2,7 +2,6 @@ package org.nanotek.configuration.csv;
 
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
-import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.nanotek.beans.csv.ReleaseGroupPrimaryTypeBean;
 import org.nanotek.beans.entity.ReleaseGroupPrimaryType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
@@ -95,28 +94,28 @@ public class ReleaseGroupPrimaryTypeConfiguration {
 	@Bean
 	@ConfigurationProperties(prefix = "releasegroupprimarytype")
 	@Qualifier(value="releasePrimaryTypeGroupMapStrategy")
-	BaseMapColumnStrategy<ReleaseGroupBean> releasePrimaryTypeGroupMapStrategy(){ 
+	BaseMapColumnStrategy<ReleaseGroupPrimaryTypeBean> releasePrimaryTypeGroupMapStrategy(){ 
 		return new BaseMapColumnStrategy<>();
 	}
 
 	@Bean
 	@Qualifier(value="releasePrimaryTypeGroupCsvToBean")
-	CsvToBean<ReleaseGroupBean> releasePrimaryTypeGroupCsvToBean() {
+	CsvToBean<ReleaseGroupPrimaryTypeBean> releasePrimaryTypeGroupCsvToBean() {
 		return new CsvToBean<>();
 	}
 
 	@Bean
 	@Qualifier(value="releasePrimaryTypeGroupParser")
-	BaseMapParser<ReleaseGroupBean> releasePrimaryTypeGroupParser() { 
+	BaseMapParser<ReleaseGroupPrimaryTypeBean> releasePrimaryTypeGroupParser() { 
 		return new BaseMapParser<>(releasePrimaryTypeGroupMapStrategy());
 	}
 
 	@Service
-	class ReleasePrimaryGroupProcessor extends CsvBaseProcessor<ReleaseGroupBean, BaseMapParser<ReleaseGroupBean>>{
+	class ReleasePrimaryGroupProcessor extends CsvBaseProcessor<ReleaseGroupPrimaryTypeBean, BaseMapParser<ReleaseGroupPrimaryTypeBean>>{
 
 		public ReleasePrimaryGroupProcessor
-		(@Autowired @Qualifier("releasePrimaryTypeGroupParser") BaseMapParser<ReleaseGroupBean> parser,
-				@Autowired @Qualifier("releasePrimaryTypeGroupCsvToBean") CsvToBean<ReleaseGroupBean> csvToBean) {
+		(@Autowired @Qualifier("releasePrimaryTypeGroupParser") BaseMapParser<ReleaseGroupPrimaryTypeBean> parser,
+				@Autowired @Qualifier("releasePrimaryTypeGroupCsvToBean") CsvToBean<ReleaseGroupPrimaryTypeBean> csvToBean) {
 			super(parser, csvToBean);
 		} 
 	}

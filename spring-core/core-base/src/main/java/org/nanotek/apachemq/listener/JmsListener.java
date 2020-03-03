@@ -50,7 +50,7 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 	private boolean isValid(Release release) {
 		
 		return release !=null 
-					&& release.getReleaseId() != null 
+					&& release.getId() != null 
 					&& release.getReleaseGroup() !=null 
 					&& release.getName() !=null 
 					&& release.getArtistCredit() !=null;
