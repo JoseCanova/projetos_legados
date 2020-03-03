@@ -61,7 +61,6 @@ public class LanguageIntegrationConfiguration {
 	MessageChannel languageReplyChannel() {
 		return new DirectChannel();
 	}
-
 	
 	@Bean(name = "languageTaskExecutor")
 	@Qualifier(value = "languageTaskExecutor")
