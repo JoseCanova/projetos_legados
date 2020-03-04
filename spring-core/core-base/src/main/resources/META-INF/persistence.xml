@@ -8,7 +8,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
-		<class>org.nanotek.beans.entity.SuperLongBase</class>
+		<class>org.nanotek.beans.entity.EntityLongBase</class>
+		<class>org.nanotek.beans.entity.BaseType</class>
 		<class>org.nanotek.beans.entity.ArtistComment</class>
 		<class>org.nanotek.beans.entity.AreaType</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
@@ -32,7 +33,7 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache" value="true" />

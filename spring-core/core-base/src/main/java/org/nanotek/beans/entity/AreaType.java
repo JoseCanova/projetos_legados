@@ -3,11 +3,9 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.NameBase;
-
 @Entity
 @Table(name="area_type")
-public class AreaType extends BaseType implements NameBase{
+public class AreaType extends BaseType {
 
 	private static final long serialVersionUID = 5334032717060542549L;
 	

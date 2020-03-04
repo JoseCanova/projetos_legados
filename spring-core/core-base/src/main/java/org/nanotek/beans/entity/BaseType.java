@@ -1,13 +1,16 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
+import org.nanotek.NameBase;
+
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class BaseType extends EntityLongBase {
+public class BaseType extends EntityLongBase implements NameBase{
 
 	private static final long serialVersionUID = 863905425134347710L;
 
@@ -77,8 +80,5 @@ public class BaseType extends EntityLongBase {
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-	
-	
-	
 
 }

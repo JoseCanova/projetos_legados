@@ -7,11 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.nanotek.NameBase;
-
 @Entity
 @Table(name="instrument_type")
-public class InstrumentType extends BaseType implements NameBase{
+public class InstrumentType extends BaseType {
 
 	
 	private static final long serialVersionUID = 1526958848784766177L;
