@@ -7,10 +7,11 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongBase;
 
-@SuppressWarnings("serial")
 @MappedSuperclass
 public class EntityLongBase implements LongBase {
 
+	private static final long serialVersionUID = 2659167150844511025L;
+	
 	@Id
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)

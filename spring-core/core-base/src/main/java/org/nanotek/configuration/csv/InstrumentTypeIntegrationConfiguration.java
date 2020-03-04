@@ -216,7 +216,7 @@ public class InstrumentTypeIntegrationConfiguration {
     	
 		@Override
 		public InstrumentType transform(InstrumentTypeBean source) {
-			return new InstrumentType(source.getId() , source.getName() , source.getDescription(), source.getGid());
+			return new InstrumentType(source.getId() , source.getName() , source.getParent() , source.getChildOrder() , source.getDescription(), source.getGid());
 		}
     }
 }

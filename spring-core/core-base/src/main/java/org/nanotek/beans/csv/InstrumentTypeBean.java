@@ -12,7 +12,7 @@ public class InstrumentTypeBean implements LongBase{
 	
 	private Long parent; 
 	
-	private Integer childOrder; 
+	private Long childOrder; 
 	
 	private String description; 
 	
@@ -53,12 +53,12 @@ public class InstrumentTypeBean implements LongBase{
 	}
 
 
-	public Integer getChildOrder() {
+	public Long getChildOrder() {
 		return childOrder;
 	}
 
 
-	public void setChildOrder(Integer childOrder) {
+	public void setChildOrder(Long childOrder) {
 		this.childOrder = childOrder;
 	}
 
