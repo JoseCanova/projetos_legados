@@ -16,8 +16,8 @@ public class ReleaseBean implements LongBase{
 	private Long artistCreditId; 
 	private Long releaseGroup; 
 	private Long status; 
-	private Integer  packaging; 
-	private Integer  language; 
+	private Long  packaging; 
+	private Long  language; 
 	private Integer script;
 	private String barcode; 
 	private String comment; 
@@ -64,18 +64,6 @@ public class ReleaseBean implements LongBase{
 	public void setStatus(Long status) {
 		this.status = status;
 	}
-	public Integer getPackaging() {
-		return packaging;
-	}
-	public void setPackaging(Integer packaging) {
-		this.packaging = packaging;
-	}
-	public Integer getLanguage() {
-		return language;
-	}
-	public void setLanguage(Integer language) {
-		this.language = language;
-	}
 	public Integer getScript() {
 		return script;
 	}
@@ -119,6 +107,22 @@ public class ReleaseBean implements LongBase{
 				+ ", releaseGroup=" + releaseGroup + ", status=" + status + ", packaging=" + packaging + ", language="
 				+ language + ", script=" + script + ", barcode=" + barcode + ", comment=" + comment + ", editsPending="
 				+ editsPending + ", quality=" + quality + ", lastUpdated=" + lastUpdated + "]";
+	}
+
+	public Long getPackaging() {
+		return packaging;
+	}
+
+	public void setPackaging(Long packaging) {
+		this.packaging = packaging;
+	}
+
+	public Long getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Long language) {
+		this.language = language;
 	} 
 	
 }

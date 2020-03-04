@@ -138,7 +138,7 @@ artistcreditnamebean:
     
 releasebean: 
   fileLocation: /opt/mbdump
-  fileName: release
+  fileName: release_test
   id: ReleaseBean
   type: org.nanotek.beans.csv.ReleaseBean 
   baseMap: 

@@ -64,7 +64,7 @@ public class LanguageIntegrationConfiguration {
 	
 	@Bean(name = "languageTaskExecutor")
 	@Qualifier(value = "languageTaskExecutor")
-	public ThreadPoolTaskExecutor languageTaskExecutor() {
+	ThreadPoolTaskExecutor languageTaskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(10);
 		executor.setMaxPoolSize(200);

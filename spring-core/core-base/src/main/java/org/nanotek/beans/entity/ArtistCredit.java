@@ -142,4 +142,43 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , 
 		this.recordings = recordings;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((artistCount == null) ? 0 : artistCount.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((refCount == null) ? 0 : refCount.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArtistCredit other = (ArtistCredit) obj;
+		if (artistCount == null) {
+			if (other.artistCount != null)
+				return false;
+		} else if (!artistCount.equals(other.artistCount))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (refCount == null) {
+			if (other.refCount != null)
+				return false;
+		} else if (!refCount.equals(other.refCount))
+			return false;
+		return true;
+	}
+
+	
+	
 }

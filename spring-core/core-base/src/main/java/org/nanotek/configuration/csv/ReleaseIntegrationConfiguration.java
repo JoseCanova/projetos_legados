@@ -1,11 +1,24 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ReleaseBean;
+import org.nanotek.beans.entity.ArtistCredit;
+import org.nanotek.beans.entity.Language;
 import org.nanotek.beans.entity.Release;
+import org.nanotek.beans.entity.ReleaseGroup;
+import org.nanotek.beans.entity.ReleasePackaging;
+import org.nanotek.beans.entity.ReleaseStatus;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.LanguageRepository;
+import org.nanotek.repository.jpa.ReleaseGroupJpaRepository;
+import org.nanotek.repository.jpa.ReleasePackagingRepository;
+import org.nanotek.repository.jpa.ReleaseStatusRepository;
 import org.nanotek.service.CsvMessageHandler;
+import org.nanotek.service.jpa.ArtistCreditJpaService;
 import org.nanotek.service.jpa.ReleaseJpaService;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -38,13 +51,12 @@ import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-//@Configuration
-//@EnableIntegration
-//@EnableConfigurationProperties
-//@IntegrationComponentScan(basePackageClasses = {ReleaseIntegrationConfiguration.class})
+@Configuration
+@EnableIntegration
+@EnableConfigurationProperties
+@IntegrationComponentScan(basePackageClasses = {ReleaseIntegrationConfiguration.class})
 public class ReleaseIntegrationConfiguration {
 
-	
 	private final Logger logger = LoggerFactory.getLogger(ReleaseIntegrationConfiguration.class);
 
 	@Value("${server.port}")
@@ -106,7 +118,7 @@ public class ReleaseIntegrationConfiguration {
 	}
 	
 	@Bean
-	@ConfigurationProperties(prefix = "release")
+	@ConfigurationProperties(prefix = "releasebean")
 	@Qualifier(value="releaseMapStrategy")
 	BaseMapColumnStrategy<ReleaseBean> releaseMapStrategy(){ 
 		return new BaseMapColumnStrategy<>();
@@ -157,9 +169,74 @@ public class ReleaseIntegrationConfiguration {
 	@MessageEndpoint
 	class ReleaseTransformer implements GenericTransformer<ReleaseBean , Release>{
 
+		@Autowired
+		ArtistCreditJpaService creditService;
+		
+		@Autowired
+		ReleaseStatusRepository statusRep; 
+		
+		@Autowired
+		ReleaseGroupJpaRepository groupRep;
+		
+		@Autowired
+		ReleasePackagingRepository packRep;
+		
+		@Autowired
+		LanguageRepository langRep; 
+		
+		
 		@Override
 		public Release transform(ReleaseBean source) {
-			return new Release();
+			
+			Optional<ReleaseStatus> optStatus = Base.NULL_VALUE(ReleaseStatus.class);
+			ReleaseStatus status = null;
+			
+			Optional<ReleasePackaging> optPack = Base.NULL_VALUE(ReleasePackaging.class);
+			ReleasePackaging pack = null; 
+			
+			Optional<ReleaseGroup> optGroup = Base.NULL_VALUE(ReleaseGroup.class);
+			ReleaseGroup group = null;
+			
+			Optional<Language> optLanguage = Base.NULL_VALUE(Language.class);
+			Language language = null;
+			
+			Optional<ArtistCredit> optCredit = Base.NULL_VALUE(ArtistCredit.class);
+			ArtistCredit credit = null;
+			
+			if (source.getStatus() !=null) {
+			 optStatus = statusRep.findById(source.getStatus());
+				 if (optStatus.isPresent())
+					 status =  optStatus.get();
+			}
+			
+			if (source.getPackaging() !=null) { 
+				optPack = packRep.findById(source.getPackaging());
+				if (optPack.isPresent())
+					pack = optPack.get();
+			}
+			
+			if(source.getReleaseGroup() !=null) { 
+				optGroup = groupRep.findById(source.getReleaseGroup());
+				if(optGroup.isPresent())
+					group = optGroup.get();
+			}
+			
+			if (source.getLanguage() !=null) { 
+				optLanguage  = langRep.findById(source.getLanguage());
+				if (optLanguage.isPresent()) { 
+					language = optLanguage.get();
+				}
+			}
+			
+			if (source.getArtistCreditId() !=null){ 
+				optCredit = creditService.findById(source.getArtistCreditId());
+				if(optCredit.isPresent())
+					credit = optCredit.get();
+			}
+			
+			return new Release(source.getId(),source.getGid(), 
+					source.getName(),source.getBarcode(),source.getComment(),
+					status , pack, language , group , credit);
 		} 
 	}
 	
@@ -171,7 +248,6 @@ public class ReleaseIntegrationConfiguration {
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
 			service.save((Release) message.getPayload());
 		}
 	}

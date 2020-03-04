@@ -25,7 +25,7 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 	private Gson gson;
 	
 	@Autowired 
-	@Qualifier("ReleaseTransformer")
+	@Qualifier("ReleaseTransformerOld")
 	private Transformer<ReleaseBean,Release> transformer;
 	
 	@Autowired
@@ -50,10 +50,7 @@ public class JmsListener implements SessionAwareMessageListener<ActiveMQBytesMes
 	private boolean isValid(Release release) {
 		
 		return release !=null 
-					&& release.getId() != null 
-					&& release.getReleaseGroup() !=null 
-					&& release.getName() !=null 
-					&& release.getArtistCredit() !=null;
+					&& release.getId() != null ;
 	}
 
 }
