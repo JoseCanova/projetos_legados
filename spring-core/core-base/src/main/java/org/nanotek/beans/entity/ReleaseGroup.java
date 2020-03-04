@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,13 +14,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.Base;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="release_group")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReleaseGroup extends EntityLongBase{
 
+	private static final long serialVersionUID = 7603390865547084527L;
+	
 	@NotBlank
 	@Column (name="gid" , length=50 , nullable=false)
 	private String gid; 

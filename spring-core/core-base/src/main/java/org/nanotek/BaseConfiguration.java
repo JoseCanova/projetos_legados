@@ -134,7 +134,7 @@ public class BaseConfiguration {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(10);
 		executor.setMaxPoolSize(100);
-		executor.setQueueCapacity(100000);
+		executor.setQueueCapacity(1000000);
 		executor.setThreadNamePrefix("ServiceThreadPoolExecutor");
 		executor.initialize();
 		return executor;

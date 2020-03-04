@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Qualifier(value="ReleaseTransformer")
+@Qualifier(value="ReleaseTransformerOld")
 public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 
 	@Autowired 
@@ -21,18 +21,7 @@ public class ReleaseTransformer implements Transformer<ReleaseBean , Release> {
 	
 	@Override
 	public Release transform(ReleaseBean i) {
-		Release release = new Release(); 
-		release.setId(i.getId());
-		release.setBarCode(i.getBarcode());
-//		release.setCountry(i.getLanguage());
-		release.setName(i.getName());
-		release.setGid(i.getGid());
-		release.setReleaseGroup(i.getReleaseGroup());
-		release.setStatus(i.getStatus() != null ? i.getStatus().toString() : null);
-		Optional<ArtistCredit> opt = findArtistCredit(i.getArtistCreditId());
-		if (opt.isPresent())
-			release.setArtistCredit(opt.get());
-		return release;
+		return null;
 	}
 
 	@Transactional

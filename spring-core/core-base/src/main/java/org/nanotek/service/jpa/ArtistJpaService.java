@@ -19,6 +19,9 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 
+	private static final long serialVersionUID = 4661067648228104876L;
+	
+	
 	@Autowired
 	private ArtistRepository artistRepository;
 	

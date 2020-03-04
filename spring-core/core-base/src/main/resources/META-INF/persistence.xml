@@ -8,8 +8,11 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
-		<class>org.nanotek.beans.entity.SuperLongBase</class>
+		<class>org.nanotek.beans.entity.EntityLongBase</class>
+		<class>org.nanotek.beans.entity.BaseType</class>
 		<class>org.nanotek.beans.entity.ArtistComment</class>
+		<class>org.nanotek.beans.entity.AreaType</class>
+		<class>org.nanotek.beans.entity.Area</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
@@ -18,6 +21,7 @@
 		<class>org.nanotek.beans.entity.InstrumentType</class>
 		<class>org.nanotek.beans.entity.Instrument</class>
 		<class>org.nanotek.beans.entity.Label</class>
+		<class>org.nanotek.beans.entity.Language</class>
 		<class>org.nanotek.beans.entity.Medium</class>
 		<class>org.nanotek.beans.entity.Recording</class>
 		<class>org.nanotek.beans.entity.RecordingLength</class>

@@ -1,25 +1,19 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.LongBase;
+import org.nanotek.Base;
 
-public class InstrumentTypeBean implements LongBase{
+public class AreaTypeBean implements Base {
 
-	private static final long serialVersionUID = 245355432039730928L;
-
+	private static final long serialVersionUID = -6271568961378072618L;
+	
 	private Long id; 
-	
 	private String name; 
-	
 	private Long parent; 
-	
 	private Long childOrder; 
-	
 	private String description; 
+	private String gid;
 	
-	private String gid; 
-	
-	
-	public InstrumentTypeBean() {
+	public AreaTypeBean() {
 	}
 
 
@@ -81,12 +75,4 @@ public class InstrumentTypeBean implements LongBase{
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-
-
-	@Override
-	public String toString() {
-		return "InstrumentTypeBean [id=" + id + ", name=" + name + ", parent=" + parent + ", childOrder=" + childOrder
-				+ ", description=" + description + ", gid=" + gid + "]";
-	}
-
 }

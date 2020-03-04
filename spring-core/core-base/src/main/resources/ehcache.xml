@@ -12,7 +12,7 @@
      <persistence strategy="localTempSwap"/>
   </defaultCache>
  <cache
-	name="org.nanotek.beans.Recording"
+	name="org.nanotek.beans.entity.Recording"
 	maxEntriesLocalHeap="50000"
 	eternal="false"
 	timeToIdleSeconds="3000"
@@ -20,7 +20,7 @@
     <persistence strategy="localTempSwap"/>
  </cache> 
  <cache
-	name="org.nanotek.beans.ArtistCredit"
+	name="org.nanotek.beans.entity.ArtistCredit"
 	maxEntriesLocalHeap="50000"
 	eternal="false"
 	timeToIdleSeconds="3000"
@@ -28,13 +28,45 @@
     <persistence strategy="localTempSwap"/>
     </cache>
  <cache
-	name="org.nanotek.beans.ReleaseGroupPrimaryType"
+	name="org.nanotek.beans.entity.ReleaseGroupPrimaryType"
 	maxEntriesLocalHeap="50000"
 	eternal="false"
 	timeToIdleSeconds="3000"
 	timeToLiveSeconds="6000">
     <persistence strategy="localTempSwap"/>
     </cache>
+ <cache
+	name="org.nanotek.beans.entity.ReleaseGroup"
+	maxEntriesLocalHeap="50000"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+    </cache>
+ <cache
+	name="org.nanotek.beans.entity.Language"
+	maxEntriesLocalHeap="50000"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+    </cache>
+ <cache
+	name="org.nanotek.beans.entity.ReleasePackaging"
+	maxEntriesLocalHeap="50000"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+    </cache>
+  <cache
+	name="org.nanotek.beans.entity.AreaType"
+	maxEntriesLocalHeap="50000"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+    </cache>   
   <cache
 	name="credits"
 	maxEntriesLocalHeap="50000"
