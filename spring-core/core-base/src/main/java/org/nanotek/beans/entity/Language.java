@@ -1,14 +1,21 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-@SuppressWarnings("serial")
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name="language")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Language extends  EntityLongBase {
+
+	private static final long serialVersionUID = 3416483640256915L;
 
 	@Column(name="isoCode2t" , length=3)
 	private String isoCode2t; 
