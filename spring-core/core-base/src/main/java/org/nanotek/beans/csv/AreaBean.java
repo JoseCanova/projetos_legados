@@ -1,38 +1,10 @@
 package org.nanotek.beans.csv;
 
-public class AreaBean {
+import org.nanotek.Base;
 
-	/**
-	 *  
-	id                  SERIAL, -- PK
-    gid                 uuid NOT NULL,
-    name                VARCHAR NOT NULL,
-    type                INTEGER, -- references area_type.id
-    edits_pending       INTEGER NOT NULL DEFAULT 0 CHECK (edits_pending >=0),
-    last_updated        TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    begin_date_year     SMALLINT,
-    begin_date_month    SMALLINT,
-    begin_date_day      SMALLINT,
-    end_date_year       SMALLINT,
-    end_date_month      SMALLINT,
-    end_date_day        SMALLINT,
-    ended               BOOLEAN NOT NULL DEFAULT FALSE
-      CHECK (
-        (
-          -- If any end date fields are not null, then ended must be true
-          (end_date_year IS NOT NULL OR
-           end_date_month IS NOT NULL OR
-           end_date_day IS NOT NULL) AND
-          ended = TRUE
-        ) OR (
-          -- Otherwise, all end date fields must be null
-          (end_date_year IS NULL AND
-           end_date_month IS NULL AND
-           end_date_day IS NULL)
-        )
-      ),
-    comment             VARCHAR(255) NOT NULL DEFAULT ''
-	 */
+public class AreaBean implements Base{
+
+	private static final long serialVersionUID = 1708381486272333902L;
 	
 	private Long id; 
 	private String gid; 
@@ -51,6 +23,146 @@ public class AreaBean {
 	
 	
 	public AreaBean() {
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getGid() {
+		return gid;
+	}
+
+
+	public void setGid(String gid) {
+		this.gid = gid;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Long getType() {
+		return type;
+	}
+
+
+	public void setType(Long type) {
+		this.type = type;
+	}
+
+
+	public Integer getEditsPending() {
+		return editsPending;
+	}
+
+
+	public void setEditsPending(Integer editsPending) {
+		this.editsPending = editsPending;
+	}
+
+
+	public String getLastUpdated() {
+		return lastUpdated;
+	}
+
+
+	public void setLastUpdated(String lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+
+	public Integer getBeginDateYear() {
+		return beginDateYear;
+	}
+
+
+	public void setBeginDateYear(Integer beginDateYear) {
+		this.beginDateYear = beginDateYear;
+	}
+
+
+	public Integer getBeginDateMonth() {
+		return beginDateMonth;
+	}
+
+
+	public void setBeginDateMonth(Integer beginDateMonth) {
+		this.beginDateMonth = beginDateMonth;
+	}
+
+
+	public Integer getBeginDateDay() {
+		return beginDateDay;
+	}
+
+
+	public void setBeginDateDay(Integer beginDateDay) {
+		this.beginDateDay = beginDateDay;
+	}
+
+
+	public Integer getEndDateYead() {
+		return endDateYead;
+	}
+
+
+	public void setEndDateYead(Integer endDateYead) {
+		this.endDateYead = endDateYead;
+	}
+
+
+	public Integer getEndDateMonth() {
+		return endDateMonth;
+	}
+
+
+	public void setEndDateMonth(Integer endDateMonth) {
+		this.endDateMonth = endDateMonth;
+	}
+
+
+	public Integer getEndDateDay() {
+		return endDateDay;
+	}
+
+
+	public void setEndDateDay(Integer endDateDay) {
+		this.endDateDay = endDateDay;
+	}
+
+
+	public String getEnded() {
+		return ended;
+	}
+
+
+	public void setEnded(String ended) {
+		this.ended = ended;
+	}
+
+
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

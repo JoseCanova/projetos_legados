@@ -329,6 +329,28 @@ areatype:
     description: 4
     gid: 5
 
+
+area: 
+  fileLocation: /opt/mbdump
+  fileName: area
+  id: AreaBean
+  type: org.nanotek.beans.csv.AreaBean 
+  baseMap:     
+    id: 0 
+    gid: 1 
+    name: 2 
+    type: 3 
+    editsPending: 4 
+    lastUpdated: 5 
+    beginDateYear: 6 
+    beginDateMonth: 7 
+    beginDateDay: 8 
+    endDateYead: 9 
+    endDateMonth: 10 
+    endDateDay: 11
+    ended: 12 
+    comment: 13 
+
 csv-endpoint:
    instrument-type: /csv/instrument 
    map-config: /map_config

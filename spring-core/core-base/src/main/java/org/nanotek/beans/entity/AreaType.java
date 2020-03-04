@@ -1,10 +1,16 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name="area_type")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE , region = "org.nanotek.beans.entity.AreaType")
 public class AreaType extends BaseType {
 
 	private static final long serialVersionUID = 5334032717060542549L;

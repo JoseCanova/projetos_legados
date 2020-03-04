@@ -12,6 +12,7 @@
 		<class>org.nanotek.beans.entity.BaseType</class>
 		<class>org.nanotek.beans.entity.ArtistComment</class>
 		<class>org.nanotek.beans.entity.AreaType</class>
+		<class>org.nanotek.beans.entity.Area</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
@@ -33,7 +34,7 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache" value="true" />
