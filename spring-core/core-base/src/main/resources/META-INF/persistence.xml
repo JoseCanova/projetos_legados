@@ -10,6 +10,7 @@
 		<!-- <jta-data-source>java:/jboss/datasources/MB</jta-data-source> -->
 		<class>org.nanotek.beans.entity.SuperLongBase</class>
 		<class>org.nanotek.beans.entity.ArtistComment</class>
+		<class>org.nanotek.beans.entity.AreaType</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
