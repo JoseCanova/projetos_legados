@@ -34,8 +34,8 @@ spring:
         cache:
            use_second_level_cache: true
            use_query_cache: true
-           #region:
-              #factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+           region:
+              factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   ehcache:
       config: classpath:ehcache.xml                  
   properties:
@@ -173,8 +173,8 @@ releasegroup:
     lastUpdated: 7
  
 recordingbean: 
-  fileLocation: /opt/mbdump
-  fileName: recording1
+  fileLocation: /opt/mbdump/recording_split
+  fileName: recaa
   id: RecordingBean
   type: org.nanotek.beans.csv.RecordingBean 
   baseMap:   

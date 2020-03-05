@@ -31,7 +31,7 @@ public class CsvBaseProcessor<I extends Base, P extends BaseMapParser<I>> {
 		return csvToBean;
 	}
 
-	P getBaseParser() {
+	public P getBaseParser() {
 		return parser;
 	}
 	

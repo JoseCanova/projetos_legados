@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +11,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 @Entity
 @Table(name="release")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Release extends EntityLongBase {
 
 	private static final long serialVersionUID = 8526436903189806951L;
@@ -178,8 +184,6 @@ public class Release extends EntityLongBase {
 		return "Release [gid=" + gid + ", name=" + name + ", barCode=" + barCode + ", comment=" + comment + ", id=" + id
 				+ "]";
 	}
-	
-	
 	
 
 }

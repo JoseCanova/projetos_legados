@@ -3,6 +3,7 @@ package org.nanotek.beans.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +12,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.MutableBase;
 import org.nanotek.NameBase;
 
 @Entity
 @Table(name="artist")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Artist extends EntityLongBase implements MutableBase<Long> , NameBase {
 	
 	private static final long serialVersionUID = -932806802235346847L;
@@ -102,6 +107,43 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 
 	public void setArtistComment(ArtistComment artistComment) {
 		this.artistComment = artistComment;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((sortName == null) ? 0 : sortName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artist other = (Artist) obj;
+		if (gid == null) {
+			if (other.gid != null)
+				return false;
+		} else if (!gid.equals(other.gid))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (sortName == null) {
+			if (other.sortName != null)
+				return false;
+		} else if (!sortName.equals(other.sortName))
+			return false;
+		return true;
 	}
 	
 }

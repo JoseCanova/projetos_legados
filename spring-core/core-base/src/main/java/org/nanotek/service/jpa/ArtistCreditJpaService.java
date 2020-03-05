@@ -30,13 +30,13 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 
 	@Override
 	@Transactional
-	@Cacheable(cacheNames="credits", key="#id")
+//	@Cacheable(cacheNames="credits", key="#id")
 	public  Optional<ArtistCredit> findById(Long id) {
 		return artistCreditRepository.findById(id);
 	}
 	
 	@Transactional
-	@Cacheable(cacheNames="credits", key="#id")
+//	@Cacheable(cacheNames="credits", key="#id")
 	public  ArtistCredit findArtistCreditRecordingsById(Long id) {
 		Optional<ArtistCredit>  opt = artistCreditRepository.findArtistCreditRecordingsById(id);
 		return opt.isPresent() ? opt.get() : null;

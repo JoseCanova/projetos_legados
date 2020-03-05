@@ -32,7 +32,7 @@ public class RecordingBeanMessageJmsListener implements SessionAwareMessageListe
 	private Gson gson;
 	
 	@Autowired
-	@Qualifier("RecordingTransformer")
+	@Qualifier("RecordingTransformerOld")
 	private Transformer<RecordingBean,Recording> transformer;
 	
 	@Autowired
