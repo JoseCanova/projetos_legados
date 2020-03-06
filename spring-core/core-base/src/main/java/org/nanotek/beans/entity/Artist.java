@@ -65,7 +65,6 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 	
 	@NotNull
 	@ManyToOne(optional = false)
-	@Column(name="type")
 	private ArtistType type; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,8 +88,15 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
 	private Area endArea;
 	
-	
 	public Artist() {
+	}
+	
+	public Artist(@NotNull Long id, @NotNull @Length(min = 1, max = 1000) String name, @NotNull @Length(min = 1, max = 40) String gid,
+			@NotNull String sortName) {
+		super(id);
+		this.name = name;
+		this.gid = gid;
+		this.sortName = sortName;
 	}
 	
 	public Artist(@NotNull Long id, @NotNull @Length(min = 1, max = 1000) String name,

@@ -135,7 +135,6 @@ artistcreditnamebean:
     name: 3                
     joinPhrase: 4      
     
-    
 releasebean: 
   fileLocation: /opt/mbdump/release_cut
   fileName: release_ah
@@ -398,6 +397,29 @@ releasealias:
     endDateDay: 13
     primaryForLocale: 14 
     ended: 15 
+    
+recordingalias: 
+  fileLocation: /opt/mbdump
+  fileName: recording_alias
+  id: RecordingAliasBean
+  type: org.nanotek.beans.csv.RecordingAliasBean 
+  baseMap:     
+    id: 0 
+    release: 1 
+    name: 2 
+    locale: 3 
+    editsPending: 4 
+    lastUpdated: 5 
+    type: 6
+    sortName: 7
+    beginDateYear: 8 
+    beginDateMonth: 9 
+    beginDateDay: 10
+    endDateYead: 11 
+    endDateMonth: 12 
+    endDateDay: 13
+    primaryForLocale: 14 
+    ended: 15     
 
 mediumformat: 
   fileLocation: /opt/mbdump
@@ -413,6 +435,10 @@ mediumformat:
     hasDiscIds: 5
     description: 5
     gid: 6
+    
+
+
+    
 
 csv-endpoint:
    instrument-type: /csv/instrument 

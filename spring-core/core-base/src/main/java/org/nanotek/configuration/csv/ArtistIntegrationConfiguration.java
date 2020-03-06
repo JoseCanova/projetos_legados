@@ -110,7 +110,7 @@ public class ArtistIntegrationConfiguration {
 	}
 	
 	@Bean
-	@ConfigurationProperties(prefix = "artistbean")
+	@ConfigurationProperties(prefix = "artist")
 	@Qualifier(value="artistMapStrategy")
 	BaseMapColumnStrategy<ArtistBean> artistMapStrategy(){ 
 		return new BaseMapColumnStrategy<>();

@@ -10,8 +10,10 @@ import org.nanotek.beans.entity.Medium;
 import org.nanotek.repository.jpa.MediumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class MediumJpaService extends BasePersistenceService<Medium,Long> {
 
 	private static final long serialVersionUID = 4661067648228104876L;
