@@ -47,6 +47,13 @@ public class ArtistComment implements ImmutableLongBase {
 		this.id = artist.getId();
 	}
 
+	
+	
+	public ArtistComment(@NotNull @Length(min = 0, max = 1000) String comment) {
+		super();
+		this.comment = comment;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -62,6 +69,7 @@ public class ArtistComment implements ImmutableLongBase {
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
+		this.id = artist.getId();
 	}
 
 	public Long getId() {

@@ -1,18 +1,26 @@
 package org.nanotek.configuration.csv;
 
+import java.io.Serializable;
 import java.util.Optional;
 
-import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistBean;
+import org.nanotek.beans.entity.Area;
 import org.nanotek.beans.entity.Artist;
-import org.nanotek.beans.entity.ArtistCredit;
-import org.nanotek.beans.entity.Language;
+import org.nanotek.beans.entity.ArtistBeginDate;
+import org.nanotek.beans.entity.ArtistComment;
+import org.nanotek.beans.entity.ArtistEndDate;
+import org.nanotek.beans.entity.ArtistType;
+import org.nanotek.beans.entity.Gender;
 import org.nanotek.processor.csv.CsvBaseProcessor;
-import org.nanotek.repository.jpa.LanguageRepository;
+import org.nanotek.repository.jpa.AreaRepository;
+import org.nanotek.repository.jpa.ArtistBeginDateRepository;
+import org.nanotek.repository.jpa.ArtistEndDateRespository;
+import org.nanotek.repository.jpa.ArtistTypeRepository;
+import org.nanotek.repository.jpa.GenderRepository;
 import org.nanotek.service.CsvMessageHandler;
-import org.nanotek.service.jpa.ArtistCreditJpaService;
+import org.nanotek.service.jpa.ArtistCommentJpaService;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -55,7 +63,7 @@ public class ArtistIntegrationConfiguration {
 
 	@Value("${server.port}")
 	private String serverPort;
-	
+
 	@Bean
 	@Qualifier(value="artistChannel")
 	MessageChannel artistChannel() {
@@ -79,14 +87,14 @@ public class ArtistIntegrationConfiguration {
 		executor.initialize();
 		return executor;
 	}
-	
+
 	@Bean
 	@Qualifier(value="artistIntegrationStartChannel")
 	MessageChannel artistIntegrationStartChannel(
 			@Autowired @Qualifier("artistTaskExecutor") ThreadPoolTaskExecutor executor) {
 		return new ExecutorChannel(executor);
 	}
-	
+
 	@Bean
 	RequestMapping initArtist() { 
 		RequestMapping mapping = new RequestMapping();
@@ -96,7 +104,7 @@ public class ArtistIntegrationConfiguration {
 		mapping.setPathPatterns("/initArtist");
 		return mapping;
 	}
-	
+
 	@Bean
 	@Qualifier("artistGate")
 	HttpRequestHandlingMessagingGateway artistGate() {
@@ -108,7 +116,7 @@ public class ArtistIntegrationConfiguration {
 		gateway.setReplyChannel(artistReplyChannel());
 		return gateway;
 	}
-	
+
 	@Bean
 	@ConfigurationProperties(prefix = "artist")
 	@Qualifier(value="artistMapStrategy")
@@ -121,14 +129,14 @@ public class ArtistIntegrationConfiguration {
 	CsvToBean<ArtistBean> artistCsvToBean() {
 		return new CsvToBean<>();
 	}
-	
+
 	@Bean
 	@Qualifier(value="artistParser")
 	BaseMapParser<ArtistBean> artistParser() { 
 		return new BaseMapParser<>(artistMapStrategy());
 	}
-	
-	
+
+
 	@Service
 	class ArtistProcessor extends CsvBaseProcessor<ArtistBean, BaseMapParser<ArtistBean>>{
 
@@ -138,7 +146,7 @@ public class ArtistIntegrationConfiguration {
 			super(parser, csvToBean);
 		} 
 	}
-	
+
 	@Bean
 	@Qualifier(value="artistMessageHander")
 	CsvMessageHandler artistMessageHander
@@ -147,7 +155,7 @@ public class ArtistIntegrationConfiguration {
 			@Autowired ArtistProcessor processor) { 
 		return new CsvMessageHandler(integrationChannel , replyChannel , processor);
 	}
-	
+
 	@Bean
 	IntegrationFlow artistFlowRequestHttp
 	(@Autowired @Qualifier("artistMessageHander") CsvMessageHandler handler,
@@ -157,41 +165,109 @@ public class ArtistIntegrationConfiguration {
 				.handle(handler)
 				.get();
 	}
-	
+
 	@MessageEndpoint
-	class ArtistTransformer implements GenericTransformer<ArtistBean , Artist>{
+	class ArtistTransformer implements GenericTransformer<ArtistBean , ArtistMessageHolder>{
 
 		@Autowired
-		ArtistCreditJpaService creditService;
-		
+		GenderRepository genderRepository;
+
 		@Autowired
-		LanguageRepository langRep; 
-		
+		AreaRepository areaRepository;
+
+		@Autowired
+		ArtistTypeRepository typeRepository;
+
 		@Override
-		public Artist transform(ArtistBean source) {
+		public ArtistMessageHolder transform(ArtistBean source) {
+
+			Artist artist = new Artist(source.getId(),source.getName(),source.getGid(),source.getSortName());
+
+			if (source.getBeginDateYear() != null) {
+				ArtistBeginDate beginDate = new ArtistBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
+				artist.setArtistBeginDate(beginDate);
+			}
+
+			if (source.getEndDateDay() != null) {
+				ArtistEndDate beginDate = new ArtistEndDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
+				artist.setArtistEndDate(beginDate);
+			}
+
+			if (source.getGender() != null) { 
+				Optional<Gender> optGender = genderRepository.findById(source.getGender());
+				if (optGender.isPresent())
+					artist.setGender(optGender.get());
+			}
+
+			if (source.getBeginArea()!=null) { 
+				Optional<Area> optBegin = areaRepository.findById(source.getBeginArea());
+				if (optBegin.isPresent())
+					artist.setBeginArea(optBegin.get());
+			}
+
+			if (source.getEndArea()!=null) { 
+				Optional<Area> optEnd = areaRepository.findById(source.getEndArea());
+				if (optEnd.isPresent())
+					artist.setEndArea(optEnd.get());
+			}
+
+			if (source.getType() !=null) {
+				Optional<ArtistType> optType =  typeRepository.findById(source.getType());
+				if (optType.isPresent()) {
+					artist.setType(optType.get());
+				}
+			}
 			
-			Optional<Language> optLanguage = Base.NULL_VALUE(Language.class);
-			Language language = null;
+			if (source.getArea()!=null) { 
+				Optional<Area> optArea = areaRepository.findById(source.getArea());
+				if (optArea.isPresent())
+					artist.setEndArea(optArea.get());
+			}
 			
-			Optional<ArtistCredit> optCredit = Base.NULL_VALUE(ArtistCredit.class);
-			ArtistCredit credit = null;
+			ArtistComment artistComment = null;
+			if(source.getComment() !=null) { 
+				 artistComment = new ArtistComment(source.getComment());
+			}
 			
-			return new Artist();
+			return new ArtistMessageHolder(artist, artistComment);
 		} 
 	}
-	
+
 	@MessageEndpoint
 	class ArtistHandler implements MessageHandler{ 
 
 		@Autowired
 		ArtistJpaService service;
-
+		
+		@Autowired
+		ArtistCommentJpaService commentService;
+		
+		@Autowired
+		ArtistBeginDateRepository beginDateRepository; 
+		
+		@Autowired
+		ArtistEndDateRespository endDateRepository;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			service.save((Artist) message.getPayload());
+			ArtistMessageHolder messageHolder = (ArtistMessageHolder) message.getPayload();
+			Artist artist = messageHolder.getArtist();
+			ArtistComment comment = messageHolder.getArtistComment();
+			
+			if(artist.getArtistBeginDate() !=null)
+				artist.setArtistBeginDate(beginDateRepository.save(artist.getArtistBeginDate()));
+			
+			if (artist.getArtistEndDate() !=null)
+				artist.setArtistEndDate(endDateRepository.save(artist.getArtistEndDate()));
+			
+			service.save(artist);
+			if (comment !=null) { 
+				comment.setArtist(artist);
+				commentService.save(comment);
+			}
 		}
 	}
-	
+
 	@Bean IntegrationFlow processArtistRequest
 	(@Autowired ArtistHandler handler , 
 			@Autowired @Qualifier("artistIntegrationStartChannel") MessageChannel executorChannel,
@@ -203,4 +279,27 @@ public class ArtistIntegrationConfiguration {
 				.get();
 	}
 	
+	class ArtistMessageHolder implements Serializable{ 
+		
+		private static final long serialVersionUID = -853649880260963575L;
+
+		private Artist artist;
+		
+		private ArtistComment artistComment;
+
+		public ArtistMessageHolder(Artist artist, ArtistComment artistComment) {
+			super();
+			this.artist = artist;
+			this.artistComment = artistComment;
+		}
+
+		public Artist getArtist() {
+			return artist;
+		}
+
+		public ArtistComment getArtistComment() {
+			return artistComment;
+		}
+	}
+
 }

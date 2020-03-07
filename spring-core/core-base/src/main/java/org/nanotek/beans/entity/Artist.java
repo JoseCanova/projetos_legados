@@ -46,7 +46,7 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 	@Column(name="gid", nullable=false)
 	private String gid;
 	
-	@OneToOne(mappedBy = "artist" , fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "artist" , fetch = FetchType.LAZY , optional = true)
 	private ArtistComment artistComment;
 	
 	@OneToOne
@@ -258,7 +258,5 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 			return false;
 		return true;
 	}
-	
-	
 	
 }

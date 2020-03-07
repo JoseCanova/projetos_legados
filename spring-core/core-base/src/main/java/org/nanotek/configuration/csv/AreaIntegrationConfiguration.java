@@ -1,13 +1,20 @@
 package org.nanotek.configuration.csv;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.AreaBean;
 import org.nanotek.beans.entity.Area;
+import org.nanotek.beans.entity.AreaBeginDate;
+import org.nanotek.beans.entity.AreaComment;
+import org.nanotek.beans.entity.AreaEndDate;
 import org.nanotek.beans.entity.AreaType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.AreaBeginDateRepository;
+import org.nanotek.repository.jpa.AreaCommentRepository;
+import org.nanotek.repository.jpa.AreaEndDateRepository;
 import org.nanotek.service.jpa.AreaJpaService;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
@@ -190,40 +197,91 @@ public class AreaIntegrationConfiguration {
 		@Autowired
 		AreaJpaService service;
 		
+		@Autowired
+		AreaBeginDateRepository dRep;
+		
+		@Autowired
+		AreaEndDateRepository eRep;
+		
+		@Autowired
+		AreaCommentRepository cRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			service.save((Area) message.getPayload());
+			AreaHolder holder = (AreaHolder) message.getPayload();
+			Area transientArea = holder.getArea();
+			if (transientArea.getAreaBeginDate() !=null) {
+				AreaBeginDate bd = dRep.save(transientArea.getAreaBeginDate());
+				transientArea.setAreaBeginDate(bd);
+			}
+			if(transientArea.getAreaEndDate() !=null) {
+				AreaEndDate ed = eRep.save(transientArea.getAreaEndDate());
+				transientArea.setAreaEndDate(ed);
+			}
+			AreaComment areaComment = holder.getAreaComment();
+			Area persitedArea = service.save(transientArea);
+			if (areaComment !=null) {
+				areaComment.setArea(persitedArea);
+				cRep.save(areaComment);
+			}
 		}
 	}
 
 	@MessageEndpoint
-	class AreaTransformer implements GenericTransformer<AreaBean  , Area>{
+	class AreaTransformer implements GenericTransformer<AreaBean  , AreaHolder>{
 
 		@Autowired
 		AreaTypeJpaService service;
-
+		
 		@Override
-		public Area transform(AreaBean source) {
-			Optional<AreaType> optType = service.findById(source.getType());
-			if(optType.isEmpty())
+		public AreaHolder transform(AreaBean source) {
+			Area area = new Area(source.getId(),source.getName(),source.getGid());
+			if(source.getType() == null)
 				throw new MessagingException("No type found for bean");
-			
-			AreaType itye  = optType.get();
-			Area area = new Area(
-									source.getId(),
-									source.getName(),
-									source.getGid(),
-									itye,
-									source.getBeginDateYear(),
-									source.getBeginDateMonth(),
-									source.getBeginDateDay(),
-									source.getEndDateYead(),
-									source.getEndDateMonth(),
-									source.getEndDateDay(),
-									source.getComment()
-						);
-			return area;
+			Optional<AreaType> optType = service.findById(source.getType());
+			area.setType(optType.get());
+			if (source.getBeginDateYear() !=null) { 
+				AreaBeginDate eDate  = new AreaBeginDate(source.getBeginDateYear(), source.getBeginDateMonth(), source.getBeginDateDay());
+				area.setAreaBeginDate(eDate);
+			}
+			if (source.getEndDateYead() !=null) { 
+				AreaEndDate eDate = new AreaEndDate(source.getEndDateYead(),source.getEndDateMonth(),source.getEndDateDay());
+				area.setAreaEndDate(eDate);
+			}
+			AreaComment areaComment = null;
+			if (NotEmpty(source.getComment())) { 
+				areaComment = new AreaComment(source.getComment());
+			}
+			return new AreaHolder(area,areaComment);
+		}
+
+		private boolean NotEmpty(String comment) {
+			return comment !=null && !"".contentEquals(comment.trim());
 		} 
+	}
+	
+	class AreaHolder implements Serializable{ 
+		
+		private static final long serialVersionUID = -544891655711717670L;
+
+		private Area area; 
+		
+		private AreaComment areaComment;
+
+		public AreaHolder(Area area, AreaComment areaComment) {
+			super();
+			this.area = area;
+			this.areaComment = areaComment;
+		}
+
+		public Area getArea() {
+			return area;
+		}
+
+		public AreaComment getAreaComment() {
+			return areaComment;
+		}
+		
 	}
 
 }

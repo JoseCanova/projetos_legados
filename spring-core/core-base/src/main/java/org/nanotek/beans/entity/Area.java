@@ -3,7 +3,10 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -31,40 +34,45 @@ public class Area extends EntityLongBase implements NameBase{
 	@ManyToOne(optional=false, fetch = FetchType.LAZY )
 	private AreaType type; 
 	
-	@Column(name="beginDateYear")
-	private Integer beginDateYear; 
-	@Column(name="beginDateMonth")
-	private Integer beginDateMonth;
-	@Column(name="beginDateDay")
-	private Integer beginDateDay; 
+	@OneToOne
+	@JoinTable(
+			  name = "area_begin_date_join", 
+			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
+	private AreaBeginDate areaBeginDate; 
 	
-	@Column(name="endDateYear")
-	private Integer endDateYear; 
-	@Column(name="endDateMonth")
-	private Integer endDateMonth;
-	@Column(name="endDateDay")
-	private Integer endDateDay;
+	@OneToOne
+	@JoinTable(
+			  name = "area_end_date_join", 
+			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
+	private AreaEndDate areaEndDate;
 	
-	@Column(name="comment" , length=1000 , insertable=true , updatable=true , nullable=true)
-	private String comment;
+
+	@OneToOne
+	private AreaComment areaComment;
 	
 	public Area() {}
 	
-	public Area(@NotNull Long id,@NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid,
-			@NotNull AreaType type, Integer beginDateYear, Integer beginDateMonth, Integer beginDateDay,
-			Integer endDateYear, Integer endDateMonth, Integer endDateDay, String comment) {
+	public Area(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid) {
+		super(id);
+		this.name = name;
+		this.gid = gid;
+	}
+
+	public Area(@NotNull Long id, 
+			@NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid,
+			@NotNull AreaType type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment areaComment) {
 		super(id);
 		this.name = name;
 		this.gid = gid;
 		this.type = type;
-		this.beginDateYear = beginDateYear;
-		this.beginDateMonth = beginDateMonth;
-		this.beginDateDay = beginDateDay;
-		this.endDateYear = endDateYear;
-		this.endDateMonth = endDateMonth;
-		this.endDateDay = endDateDay;
-		this.comment = comment;
+		this.areaBeginDate = areaBeginDate;
+		this.areaEndDate = areaEndDate;
+		this.areaComment = areaComment;
 	}
+
+
 
 	public String getName() {
 		return name;
@@ -82,62 +90,6 @@ public class Area extends EntityLongBase implements NameBase{
 		this.type = type;
 	}
 
-	public Integer getBeginDateYear() {
-		return beginDateYear;
-	}
-
-	public void setBeginDateYear(Integer beginDateYear) {
-		this.beginDateYear = beginDateYear;
-	}
-
-	public Integer getBeginDateMonth() {
-		return beginDateMonth;
-	}
-
-	public void setBeginDateMonth(Integer beginDateMonth) {
-		this.beginDateMonth = beginDateMonth;
-	}
-
-	public Integer getBeginDateDay() {
-		return beginDateDay;
-	}
-
-	public void setBeginDateDay(Integer beginDateDay) {
-		this.beginDateDay = beginDateDay;
-	}
-
-	public Integer getEndDateYear() {
-		return endDateYear;
-	}
-
-	public void setEndDateYear(Integer endDateYear) {
-		this.endDateYear = endDateYear;
-	}
-
-	public Integer getEndDateMonth() {
-		return endDateMonth;
-	}
-
-	public void setEndDateMonth(Integer endDateMonth) {
-		this.endDateMonth = endDateMonth;
-	}
-
-	public Integer getEndDateDay() {
-		return endDateDay;
-	}
-
-	public void setEndDateDay(Integer endDateDay) {
-		this.endDateDay = endDateDay;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
 	public String getGid() {
 		return gid;
 	}
@@ -146,13 +98,36 @@ public class Area extends EntityLongBase implements NameBase{
 		this.gid = gid;
 	}
 
+	public AreaBeginDate getAreaBeginDate() {
+		return areaBeginDate;
+	}
+
+	public void setAreaBeginDate(AreaBeginDate areaBeginDate) {
+		this.areaBeginDate = areaBeginDate;
+	}
+
+	public AreaEndDate getAreaEndDate() {
+		return areaEndDate;
+	}
+
+	public void setAreaEndDate(AreaEndDate areaEndDate) {
+		this.areaEndDate = areaEndDate;
+	}
+
+	public AreaComment getAreaComment() {
+		return areaComment;
+	}
+
+	public void setAreaComment(AreaComment areaComment) {
+		this.areaComment = areaComment;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -175,21 +150,14 @@ public class Area extends EntityLongBase implements NameBase{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Area [name=" + name + ", gid=" + gid + ", type=" + type + ", beginDateYear=" + beginDateYear
-				+ ", beginDateMonth=" + beginDateMonth + ", beginDateDay=" + beginDateDay + ", endDateYear="
-				+ endDateYear + ", endDateMonth=" + endDateMonth + ", endDateDay=" + endDateDay + ", comment=" + comment
-				+ ", id=" + id + "]";
+		return "Area [name=" + name + ", gid=" + gid + ", type=" + type + ", areaBeginDate=" + areaBeginDate
+				+ ", areaEndDate=" + areaEndDate + ", areaComment=" + areaComment + ", id=" + id + "]";
 	}
-
+	
 }
 	

@@ -22,15 +22,15 @@ public class ArtistBean implements LongBase{
 	private Integer endDateYear;
 	private Integer endDateMonth;
 	private Integer endDateDay;  
-	private Integer type;
-	private Integer area;
-	private Integer gender;
+	private Long type;
+	private Long area;
+	private Long gender;
 	private String comment;
-	private Integer editsPending;
+	private Long editsPending;
 	private String lastUpdated;
 	private String ended;
-	private Integer beginArea;
-	private Integer endArea;
+	private Long beginArea;
+	private Long endArea;
 
 
 	public ArtistBean() {}
@@ -89,22 +89,22 @@ public class ArtistBean implements LongBase{
 	public void setEndDateMonth(Integer endDateMonth) {
 		this.endDateMonth = endDateMonth;
 	}
-	public Integer getType() {
+	public Long getType() {
 		return type;
 	}
-	public void setType(Integer type) {
+	public void setType(Long type) {
 		this.type = type;
 	}
-	public Integer getArea() {
+	public Long getArea() {
 		return area;
 	}
-	public void setArea(Integer area) {
+	public void setArea(Long area) {
 		this.area = area;
 	}
-	public Integer getGender() {
+	public Long getGender() {
 		return gender;
 	}
-	public void setGender(Integer gender) {
+	public void setGender(Long gender) {
 		this.gender = gender;
 	}
 	public String getComment() {
@@ -113,10 +113,10 @@ public class ArtistBean implements LongBase{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Integer getEditsPending() {
+	public Long getEditsPending() {
 		return editsPending;
 	}
-	public void setEditsPending(Integer editsPending) {
+	public void setEditsPending(Long editsPending) {
 		this.editsPending = editsPending;
 	}
 	public String getLastUpdated() {
@@ -140,19 +140,19 @@ public class ArtistBean implements LongBase{
 		this.endDateDay = endDateDay;
 	}
 
-	public Integer getBeginArea() {
+	public Long getBeginArea() {
 		return beginArea;
 	}
 
-	public void setBeginArea(Integer beginArea) {
+	public void setBeginArea(Long beginArea) {
 		this.beginArea = beginArea;
 	}
 
-	public Integer getEndArea() {
+	public Long getEndArea() {
 		return endArea;
 	}
 
-	public void setEndArea(Integer endArea) {
+	public void setEndArea(Long endArea) {
 		this.endArea = endArea;
 	}
 

@@ -27,7 +27,7 @@ spring:
     properties:
       hibernate:
         format_sql: false
-        ddl-auto: update
+        ddl-auto: create-drop
         javax:
          cache:
             provider: org.ehcache.jsr107.EhcacheCachingProvider
@@ -50,7 +50,7 @@ entitymanager:
 
 artist:
   fileLocation: /opt/mbdump
-  fileName: artist
+  fileName: artist_test
   id: ArtistBean
   type: org.nanotek.beans.csv.ArtistBean
   baseMap:
@@ -224,8 +224,8 @@ mediumbean:
 artisttype: 
   fileLocation: /opt/mbdump
   fileName: artist_type
-  id: ArtistType
-  type: org.nanotek.beans.entity.ArtistType 
+  id: ArtistTypeBean
+  type: org.nanotek.beans.csv.ArtistTypeBean 
   baseMap:     
     id: 0
     name: 1
