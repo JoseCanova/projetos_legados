@@ -188,9 +188,9 @@ public class ArtistIntegrationConfiguration {
 				artist.setArtistBeginDate(beginDate);
 			}
 
-			if (source.getEndDateDay() != null) {
-				ArtistEndDate beginDate = new ArtistEndDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
-				artist.setArtistEndDate(beginDate);
+			if (source.getEndDateYear()!= null) {
+				ArtistEndDate endDate = new ArtistEndDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
+				artist.setArtistEndDate(endDate);
 			}
 
 			if (source.getGender() != null) { 
@@ -221,15 +221,19 @@ public class ArtistIntegrationConfiguration {
 			if (source.getArea()!=null) { 
 				Optional<Area> optArea = areaRepository.findById(source.getArea());
 				if (optArea.isPresent())
-					artist.setEndArea(optArea.get());
+					artist.setArea(optArea.get());
 			}
 			
 			ArtistComment artistComment = null;
-			if(source.getComment() !=null) { 
+			if(NotEmpty(source.getComment())) { 
 				 artistComment = new ArtistComment(source.getComment());
 			}
 			
 			return new ArtistMessageHolder(artist, artistComment);
+		}
+
+		private boolean NotEmpty(String comment) {
+			return comment !=null && !"".contentEquals(comment.trim());
 		} 
 	}
 
@@ -248,21 +252,35 @@ public class ArtistIntegrationConfiguration {
 		@Autowired
 		ArtistEndDateRespository endDateRepository;
 		
+		@Autowired
+		AreaRepository areaRepository;
+		
+		@Autowired 
+		ArtistTypeRepository typeRepository;
+		
+		@Autowired
+		GenderRepository genderRepository;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			ArtistMessageHolder messageHolder = (ArtistMessageHolder) message.getPayload();
-			Artist artist = messageHolder.getArtist();
+			Artist transientArtist = messageHolder.getArtist();
 			ArtistComment comment = messageHolder.getArtistComment();
 			
-			if(artist.getArtistBeginDate() !=null)
-				artist.setArtistBeginDate(beginDateRepository.save(artist.getArtistBeginDate()));
+			if(transientArtist.getArtistBeginDate() !=null)
+				transientArtist.setArtistBeginDate(beginDateRepository.save(transientArtist.getArtistBeginDate()));
 			
-			if (artist.getArtistEndDate() !=null)
-				artist.setArtistEndDate(endDateRepository.save(artist.getArtistEndDate()));
+			if (transientArtist.getArtistEndDate() !=null)
+				transientArtist.setArtistEndDate(endDateRepository.save(transientArtist.getArtistEndDate()));
 			
-			service.save(artist);
+			if (transientArtist.getType() == null) { 
+				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
+				transientArtist.setType(type);
+			}
+			
+			service.save(transientArtist);
 			if (comment !=null) { 
-				comment.setArtist(artist);
+				comment.setArtist(transientArtist);
 				commentService.save(comment);
 			}
 		}

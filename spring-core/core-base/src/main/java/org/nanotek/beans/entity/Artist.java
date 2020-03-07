@@ -73,6 +73,14 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "gender_id",referencedColumnName = "id"))
 	private Gender gender; 
+
+	@ManyToOne
+	@JoinTable(
+			  name = "artist_area_join", 
+			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
+	private Area area;
+
 	
 	@ManyToOne
 	@JoinTable(
@@ -210,6 +218,14 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 		this.endArea = endArea;
 	}
 
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -258,5 +274,5 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 			return false;
 		return true;
 	}
-	
+
 }

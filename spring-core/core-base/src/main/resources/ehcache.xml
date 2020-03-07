@@ -114,7 +114,15 @@
 	timeToIdleSeconds="3000"
 	timeToLiveSeconds="6000">
     <persistence strategy="localTempSwap"/>
-   </cache>      
+   </cache>
+  <cache
+	name="org.nanotek.beans.entity.Area"
+	maxEntriesLocalHeap="100"
+	eternal="false"
+	timeToIdleSeconds="3000"
+	timeToLiveSeconds="6000">
+    <persistence strategy="localTempSwap"/>
+   </cache>     
   <cache
 	name="credits"
 	maxEntriesLocalHeap="50000"

@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +13,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.NameBase;
 
 @Entity
 @Table(name="area")
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE , region = "org.nanotek.beans.entity.Area")
 public class Area extends EntityLongBase implements NameBase{
 
 	private static final long serialVersionUID = -7073321340141567106L;
@@ -49,7 +54,7 @@ public class Area extends EntityLongBase implements NameBase{
 	private AreaEndDate areaEndDate;
 	
 
-	@OneToOne
+	@OneToOne(mappedBy = "area")
 	private AreaComment areaComment;
 	
 	public Area() {}
@@ -71,8 +76,6 @@ public class Area extends EntityLongBase implements NameBase{
 		this.areaEndDate = areaEndDate;
 		this.areaComment = areaComment;
 	}
-
-
 
 	public String getName() {
 		return name;
@@ -160,4 +163,3 @@ public class Area extends EntityLongBase implements NameBase{
 	}
 	
 }
-	
