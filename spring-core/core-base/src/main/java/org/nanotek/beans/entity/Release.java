@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -63,10 +64,15 @@ public class Release extends LongIdGidNameEntity {
 
 	public Release() { 
 	}
+	
+	public Release(@NotNull Long id, @NotBlank @Size(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+		this.releaseId = id;
+	}
 
 	public Release(
 			@NotNull Long id, 
-			@NotBlank String gid, 
+			@NotBlank @NotBlank @Size(min = 1, max = 50) String gid, 
 			@NotBlank  String name, 
 			ReleaseBarCode barCode,
 			ReleaseComment comment, 
@@ -159,12 +165,12 @@ public class Release extends LongIdGidNameEntity {
 		this.artistCredit = artistCredit;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((releaseId == null) ? 0 : releaseId.hashCode());
 		return result;
 	}
 
@@ -177,24 +183,20 @@ public class Release extends LongIdGidNameEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		Release other = (Release) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (releaseId == null) {
+			if (other.releaseId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!releaseId.equals(other.releaseId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Release [gid=" + gid + ", name=" + name + ", barCode=" + barCode + ", comment=" + comment + ", id=" + id
-				+ "]";
+		return "Release [releaseId=" + releaseId + ", barCode=" + barCode + ", comment=" + comment + ", status="
+				+ status + ", packaging=" + packaging + ", language=" + language + ", releaseGroup=" + releaseGroup
+				+ ", artistCredit=" + artistCredit + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
 	
-
+	
 }

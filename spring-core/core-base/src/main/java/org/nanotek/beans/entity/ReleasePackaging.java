@@ -1,7 +1,6 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -12,46 +11,32 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="release_packaging")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ReleasePackaging extends EntityLongBase{
+public class ReleasePackaging extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = 5351338443793025420L;
 
-	@Column(name="name" , length=255 , nullable=false , insertable=true , updatable=true)
-	private String name; 
-	
-	@Column(name="gid" , length=50 , nullable=false , insertable=true , updatable=true)
-	private String gid;
+	private Long releasePackagingId;
 	
 	public ReleasePackaging() {}
 
 	public ReleasePackaging(Long id, String name, String gid) {
-		super(id);
-		this.name = name;
-		this.gid = gid;
+		super(gid,name);
+		this.releasePackagingId = id;
 	}
 
-	public String getName() {
-		return name;
+	public Long getReleasePackagingId() {
+		return releasePackagingId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getGid() {
-		return gid;
-	}
-
-	public void setGid(String gid) {
-		this.gid = gid;
+	public void setReleasePackagingId(Long releasePackagingId) {
+		this.releasePackagingId = releasePackagingId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((releasePackagingId == null) ? 0 : releasePackagingId.hashCode());
 		return result;
 	}
 
@@ -64,22 +49,18 @@ public class ReleasePackaging extends EntityLongBase{
 		if (getClass() != obj.getClass())
 			return false;
 		ReleasePackaging other = (ReleasePackaging) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (releasePackagingId == null) {
+			if (other.releasePackagingId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!releasePackagingId.equals(other.releasePackagingId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReleasePackaging [name=" + name + ", gid=" + gid + ", id=" + id + "]";
+		return "ReleasePackaging [releasePackagingId=" + releasePackagingId + ", gid=" + gid + ", name=" + name
+				+ ", id=" + id + "]";
 	}
-	
+
 }

@@ -24,11 +24,6 @@ public class ReleaseBarCode extends BarCodeBase {
 		super(barCode);
 	}
 
-	public ReleaseBarCode(@NotNull Release release) {
-		super();
-		this.release = release;
-	}
-	
 	public ReleaseBarCode(@NotBlank String barCode , @NotNull Release release) {
 		super();
 		this.release = release;
