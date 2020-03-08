@@ -28,11 +28,11 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 	private ReleaseAliasLocale locale;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY,optional = false)
+	@ManyToOne(fetch = FetchType.LAZY,optional=false)
 	@JoinColumn(name = "release_id")
 	private Release release; 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,optional=false)
 	@JoinColumn(name="type_id")
 	private ReleaseAliasType type;
 
@@ -52,7 +52,12 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 
 	public ReleaseAlias() {
 	}
-
+	
+	public ReleaseAlias(@NotNull Long id , @NotBlank String name, @NotBlank String sortName) {
+		super(name, sortName);
+		this.releaseAliasId = id;
+	}
+	
 	public ReleaseAlias(
 			@NotNull Long id, 
 			@NotBlank String name, 

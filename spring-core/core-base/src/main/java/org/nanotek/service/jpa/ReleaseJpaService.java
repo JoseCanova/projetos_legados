@@ -29,4 +29,8 @@ public class ReleaseJpaService {
 		return repository.findById(id);
 	}
 	
+	@Transactional
+	public Optional<Release> findByReleaseId(@Validated @Valid @NotNull Long releaseId){ 
+		return repository.findByReleaseId(releaseId);
+	}
 }

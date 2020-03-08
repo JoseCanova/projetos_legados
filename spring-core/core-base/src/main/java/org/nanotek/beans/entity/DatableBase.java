@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="composite_dates")
@@ -20,6 +21,7 @@ public class DatableBase extends SequenceLongBase {
 
 	private static final long serialVersionUID = -2752304170904238032L;
 
+	@NotNull
 	@Column(name="year", nullable = false)
 	protected Integer year;
 	
@@ -32,26 +34,22 @@ public class DatableBase extends SequenceLongBase {
 	public DatableBase() {
 	}
 
-	public DatableBase(Integer year) {
+	public DatableBase(@NotNull Integer year) {
 		super();
 		this.year = year;
 	}
 	
-	public DatableBase(Integer year, Integer month) {
+	public DatableBase(@NotNull  Integer year, Integer month) {
 		super();
 		this.year = year;
 		this.month = month;
 	}
 	
-	public DatableBase(Integer year, Integer month, Integer day) {
+	public DatableBase(@NotNull  Integer year, Integer month, Integer day) {
 		super();
 		this.year = year;
 		this.month = month;
 		this.day = day;
-	}
-
-	public Long getId() { 
-		return this.id;
 	}
 
 	public Integer getYear() {

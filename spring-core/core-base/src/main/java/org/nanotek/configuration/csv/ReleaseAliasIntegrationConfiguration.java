@@ -13,8 +13,14 @@ import org.nanotek.beans.csv.ReleaseAliasBean;
 import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.beans.entity.Release;
 import org.nanotek.beans.entity.ReleaseAlias;
+import org.nanotek.beans.entity.ReleaseAliasBeginDate;
+import org.nanotek.beans.entity.ReleaseAliasEndDate;
+import org.nanotek.beans.entity.ReleaseAliasLocale;
 import org.nanotek.beans.entity.ReleaseAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.ReleaseAliasBeginDateRepository;
+import org.nanotek.repository.jpa.ReleaseAliasEndDateRepository;
+import org.nanotek.repository.jpa.ReleaseAliasLocaleRepository;
 import org.nanotek.repository.jpa.ReleaseAliasTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.jpa.ReleaseAliasJpaService;
@@ -168,21 +174,50 @@ public class ReleaseAliasIntegrationConfiguration {
 				.get();
 	}
 
-	
 	@MessageEndpoint
 	class ReleaseAliasHandler implements MessageHandler{ 
 		
 		@Autowired 
 		ReleaseAliasJpaService service;
 		
+		@Autowired 
+		ReleaseAliasBeginDateRepository beginRepo;
+		
+		@Autowired 
+		ReleaseAliasEndDateRepository endRepo;
+		
+		@Autowired
+		ReleaseAliasLocaleRepository localeRepo;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			service.save((ReleaseAlias) message.getPayload());
+			ReleaseAliasHolder holder = (ReleaseAliasHolder) message.getPayload();
+			ReleaseAlias releaseAlias = service.save(holder.getAlias());
+			Optional<ReleaseAliasBeginDate> optBegin = holder.getOptBeginDate();
+			Optional<ReleaseAliasEndDate> optEnd = holder.getOptEndDate();
+			Optional<ReleaseAliasLocale> optLocale = holder.getOptLocale();
+			optBegin.ifPresent(
+								b -> 
+								{
+									b.setReleaseAlias(releaseAlias); 
+									beginRepo.save(b);
+								});
+			optEnd.ifPresent(
+								e ->{
+									e.setReleaseAlias(releaseAlias);
+									endRepo.save(e);
+								});
+			optLocale.ifPresent(
+									l -> {
+											l.setReleaseAlias(releaseAlias);
+											localeRepo.save(l);
+									});
 		}
+		
 	}
 	
 	@MessageEndpoint
-	class ReleaseAliasTransformer implements GenericTransformer<ReleaseAliasBean , ReleaseAlias>{
+	class ReleaseAliasTransformer implements GenericTransformer<ReleaseAliasBean , ReleaseAliasHolder>{
 
 		@Autowired
 		ReleaseJpaService releaseService; 
@@ -191,25 +226,99 @@ public class ReleaseAliasIntegrationConfiguration {
 		ReleaseAliasTypeRepository repository;
 		
 		@Override
-		public ReleaseAlias transform(ReleaseAliasBean source) {
+		public ReleaseAliasHolder transform(ReleaseAliasBean source) {
 			
-			Optional<Release> optRelease = releaseService.findById(source.getRelease());
+			if (source.getRelease() == null)
+				throw new MessagingException ("Release is not present " + source.getRelease());
+			
+			ReleaseAlias alias = new ReleaseAlias(source.getId() ,  source.getName() , source.getSortName());
+			
+			Optional<Release> optRelease = releaseService.findByReleaseId(source.getRelease());
 			Optional<ReleaseAliasType> ptype = Base.NULL_VALUE(ReleaseAliasType.class);
-			ReleaseAliasType type = null; 
+			Optional<ReleaseAliasBeginDate> optBeginDate = Base.NULL_VALUE(ReleaseAliasBeginDate.class);
+			Optional<ReleaseAliasEndDate> optEndDate = Base.NULL_VALUE(ReleaseAliasEndDate.class);
+			Optional<ReleaseAliasLocale> optLocale = Base.NULL_VALUE(ReleaseAliasLocale.class);
+			
 			if (!optRelease.isPresent())
 				throw new MessagingException ("Release is not present " + source.getRelease());
-			Release release = optRelease.get();
+			
+			alias.setRelease(optRelease.get());
+			
+			if(NotEmpty(source.getLocale())) { 
+				ReleaseAliasLocale locale = new ReleaseAliasLocale(source.getLocale());
+				optLocale = Optional.of(locale);
+			}
+			
 			if (source.getType() !=null) {
-				ptype = repository.findById(source.getType());
-				if (ptype.isPresent())
-					type =  ptype.get();
+				repository
+					.findById(source.getType())
+					.ifPresent(p -> alias.setType(p));
 			} 
 			
-			return new ReleaseAlias(source.getId() ,  source.getName() , source.getLocale() , release,
-					type , source.getSortName() , source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay(),
-					source.getEndDateYear() , source.getEndDateMonth() , source.getEndDateDay());
+			if(source.getBeginDateYear() !=null) { 
+				ReleaseAliasBeginDate dt = new ReleaseAliasBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
+				optBeginDate = Optional.of(dt);
+			}
 			
+			if(source.getEndDateYear() != null) { 
+				ReleaseAliasEndDate dt = new ReleaseAliasEndDate(source.getEndDateYear() , source.getEndDateMonth() , source.getEndDateDay());
+				optEndDate = Optional.of(dt);
+			}
+			
+			return new ReleaseAliasHolder(alias , optRelease , ptype , optBeginDate , optEndDate , optLocale);
+			
+		}
+
+		private boolean NotEmpty(String locale) {
+			return locale != null && !"".contentEquals(locale.trim());
 		} 
+		
+	}
+	
+	class ReleaseAliasHolder { 
+		
+		private ReleaseAlias alias;
+		private Optional<Release> optRelease ;
+		private Optional<ReleaseAliasType> ptype ;
+		private Optional<ReleaseAliasBeginDate> optBeginDate ;
+		private Optional<ReleaseAliasEndDate> optEndDate ;
+		private Optional<ReleaseAliasLocale> optLocale ;
+		
+		public ReleaseAliasHolder(ReleaseAlias alias, Optional<Release> optRelease, Optional<ReleaseAliasType> ptype,
+				Optional<ReleaseAliasBeginDate> optBeginDate, Optional<ReleaseAliasEndDate> optEndDate,
+				Optional<ReleaseAliasLocale> optLocale) {
+			super();
+			this.alias = alias;
+			this.optRelease = optRelease;
+			this.ptype = ptype;
+			this.optBeginDate = optBeginDate;
+			this.optEndDate = optEndDate;
+			this.optLocale = optLocale;
+		}
+
+		public ReleaseAlias getAlias() {
+			return alias;
+		}
+
+		public Optional<Release> getOptRelease() {
+			return optRelease;
+		}
+
+		public Optional<ReleaseAliasType> getPtype() {
+			return ptype;
+		}
+
+		public Optional<ReleaseAliasBeginDate> getOptBeginDate() {
+			return optBeginDate;
+		}
+
+		public Optional<ReleaseAliasEndDate> getOptEndDate() {
+			return optEndDate;
+		}
+
+		public Optional<ReleaseAliasLocale> getOptLocale() {
+			return optLocale;
+		}
 		
 	}
 	
