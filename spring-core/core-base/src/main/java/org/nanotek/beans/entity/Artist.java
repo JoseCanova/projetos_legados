@@ -6,6 +6,7 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,9 +19,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Index;
 
 @Entity
 @Table(name="artist" , 
@@ -108,10 +106,10 @@ public class Artist extends LongIdGidSortNameEntity {
 	
 	public Artist(
 			@NotNull Long id, 
-			@NotNull @Length(min = 1, max = 1000) String name,
-			@NotNull @Length(min = 1, max = 1000) String sortName, 
+			@NotBlank String name,
+			@NotBlank String sortName, 
 			List<ArtistCredit> artistCredits,
-			@NotNull @Length(min = 1, max = 40) String gid, 
+			@NotBlank String gid, 
 			ArtistComment artistComment,
 			ArtistBeginDate artistBeginDate, 
 			ArtistEndDate artistEndDate, 

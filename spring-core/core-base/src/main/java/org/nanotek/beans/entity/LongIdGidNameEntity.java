@@ -27,7 +27,9 @@ public class LongIdGidNameEntity extends LongIdNameEntity {
 		super(name);
 	}
 
-	public LongIdGidNameEntity(@NotBlank @Length(min = 1, max = 50) String gid , @NotNull String name) {
+	public LongIdGidNameEntity(
+								@NotBlank @Length(min = 1, max = 50) String gid, 
+								@NotNull String name) {
 		super(name);
 		this.gid = gid;
 	}
