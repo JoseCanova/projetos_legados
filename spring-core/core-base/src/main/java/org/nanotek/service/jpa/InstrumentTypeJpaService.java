@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class InstrumentTypeJpaService extends BasePersistenceService<InstrumentType, Long> {
 
-	private static final long serialVersionUID = -1097949690707573749L;
+	
+	private static final long serialVersionUID = 753700785985875965L;
+	
 	
 	@Autowired
 	InstrumentTypeRepository repository;

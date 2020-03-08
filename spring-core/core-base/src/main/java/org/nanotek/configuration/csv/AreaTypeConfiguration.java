@@ -110,9 +110,9 @@ public class AreaTypeConfiguration {
 	}
 
 	@Service
-	class ReleasePrimaryGroupProcessor extends CsvBaseProcessor<AreaTypeBean, BaseMapParser<AreaTypeBean>>{
+	class AreaTypeProcessor extends CsvBaseProcessor<AreaTypeBean, BaseMapParser<AreaTypeBean>>{
 
-		public ReleasePrimaryGroupProcessor
+		public AreaTypeProcessor
 		(@Autowired @Qualifier("areaTypeParser") BaseMapParser<AreaTypeBean> parser,
 				@Autowired @Qualifier("areaTypeCsvToBean") CsvToBean<AreaTypeBean> csvToBean) {
 			super(parser, csvToBean);
@@ -124,7 +124,7 @@ public class AreaTypeConfiguration {
 	CsvMessageHandler areaTypeMessageHander
 	(@Autowired @Qualifier("areaTypeIntegrationStartChannel") MessageChannel integrationChannel, 
 			@Autowired @Qualifier("areaTypeReplyChannel") MessageChannel replyChannel,
-			@Autowired ReleasePrimaryGroupProcessor processor) { 
+			@Autowired AreaTypeProcessor processor) { 
 		return new CsvMessageHandler(integrationChannel , replyChannel , processor);
 	}
 
@@ -139,7 +139,7 @@ public class AreaTypeConfiguration {
 	}
 
 	@MessageEndpoint
-	class ReleasePrimaryTypeGroupHandler implements MessageHandler{ 
+	class AreaTypeHandler implements MessageHandler{ 
 
 		@Autowired
 		AreaTypeRepository repository;
@@ -155,7 +155,7 @@ public class AreaTypeConfiguration {
 	}
 
 	@Bean IntegrationFlow processAreaTypeRequest
-	(@Autowired ReleasePrimaryTypeGroupHandler handler , 
+	(@Autowired AreaTypeHandler handler , 
 			@Autowired @Qualifier("areaTypeIntegrationStartChannel") MessageChannel executorChannel,
 			@Autowired AreaTypeTransformer transformer) { 
 		return IntegrationFlows

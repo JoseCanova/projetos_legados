@@ -27,15 +27,15 @@ spring:
     properties:
       hibernate:
         format_sql: false
-        ddl-auto: update
+        ddl-auto: create-drop
         javax:
          cache:
             provider: org.ehcache.jsr107.EhcacheCachingProvider
         cache:
            use_second_level_cache: true
            use_query_cache: true
-           #region:
-              #factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+           region:
+              factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   ehcache:
       config: classpath:ehcache.xml                  
   properties:
@@ -50,7 +50,7 @@ entitymanager:
 
 artist:
   fileLocation: /opt/mbdump
-  fileName: artist
+  fileName: artist_test
   id: ArtistBean
   type: org.nanotek.beans.csv.ArtistBean
   baseMap:
@@ -78,17 +78,17 @@ artist:
 artistalias:
   fileLocation: /opt/mbdump
   fileName: artist_alias
-  id: ArtistAlias
-  type: org.nanotek.beans.entity.ArtistAlias
+  id: ArtistAliasBean
+  type: org.nanotek.beans.csv.ArtistAliasBean
   baseMap:  
     id: 0
     artistId: 1
-    alias: 2
+    name: 2
     locale: 3
     editsPending: 4
     lastUpdated: 5
     type: 6
-    sortAlias: 7
+    sortName: 7
     beginDateYear: 8
     beginDateMonth: 9
     beginDateDay: 10
@@ -135,10 +135,9 @@ artistcreditnamebean:
     name: 3                
     joinPhrase: 4      
     
-    
 releasebean: 
-  fileLocation: /opt/mbdump
-  fileName: release_test
+  fileLocation: /opt/mbdump/release_cut
+  fileName: release_ah
   id: ReleaseBean
   type: org.nanotek.beans.csv.ReleaseBean 
   baseMap: 
@@ -173,8 +172,8 @@ releasegroup:
     lastUpdated: 7
  
 recordingbean: 
-  fileLocation: /opt/mbdump
-  fileName: recording1
+  fileLocation: /opt/mbdump/recording_split
+  fileName: recaa
   id: RecordingBean
   type: org.nanotek.beans.csv.RecordingBean 
   baseMap:   
@@ -225,8 +224,8 @@ mediumbean:
 artisttype: 
   fileLocation: /opt/mbdump
   fileName: artist_type
-  id: ArtistType
-  type: org.nanotek.beans.entity.ArtistType 
+  id: ArtistTypeBean
+  type: org.nanotek.beans.csv.ArtistTypeBean 
   baseMap:     
     id: 0
     name: 1
@@ -234,6 +233,19 @@ artisttype:
     child_order: 3
     description: 4
     gid: 5
+    
+artistaliastype: 
+  fileLocation: /opt/mbdump
+  fileName: artist_alias_type
+  id: ArtistAliasTypeBean
+  type: org.nanotek.beans.csv.ArtistAliasTypeBean 
+  baseMap:     
+    id: 0
+    name: 1
+    parent: 2
+    child_order: 3
+    description: 4
+    gid: 5    
 
 instrumenttype:
   fileLocation: /opt/mbdump
@@ -328,7 +340,45 @@ areatype:
     child_order: 3
     description: 4
     gid: 5
+    
+gendertype: 
+  fileLocation: /opt/mbdump
+  fileName: gender
+  id: GenderBean
+  type: org.nanotek.beans.csv.GenderBean 
+  baseMap:     
+    id: 0
+    name: 1
+    parent: 2
+    child_order: 3
+    description: 4
+    gid: 5    
 
+releasealiastype: 
+  fileLocation: /opt/mbdump
+  fileName: release_alias_type
+  id: ReleaseAliasTypeBean
+  type: org.nanotek.beans.csv.ReleaseAliasTypeBean 
+  baseMap:     
+    id: 0
+    name: 1
+    parent: 2
+    child_order: 3
+    description: 4
+    gid: 5
+
+recordingaliastype:
+  fileLocation: /opt/mbdump
+  fileName: recording_alias_type
+  id: RecordingAliasTypeBean
+  type: org.nanotek.beans.csv.RecordingAliasTypeBean 
+  baseMap:     
+    id: 0
+    name: 1
+    parent: 2
+    child_order: 3
+    description: 4
+    gid: 5
 
 area: 
   fileLocation: /opt/mbdump
@@ -350,7 +400,68 @@ area:
     endDateDay: 11
     ended: 12 
     comment: 13 
+    
+releasealias: 
+  fileLocation: /opt/mbdump
+  fileName: release_alias
+  id: ReleaseAliasBean
+  type: org.nanotek.beans.csv.ReleaseAliasBean 
+  baseMap:     
+    id: 0 
+    release: 1 
+    name: 2 
+    locale: 3 
+    editsPending: 4 
+    lastUpdated: 5 
+    type: 6
+    sortName: 7
+    beginDateYear: 8 
+    beginDateMonth: 9 
+    beginDateDay: 10
+    endDateYead: 11 
+    endDateMonth: 12 
+    endDateDay: 13
+    primaryForLocale: 14 
+    ended: 15 
+    
+recordingalias: 
+  fileLocation: /opt/mbdump
+  fileName: recording_alias
+  id: RecordingAliasBean
+  type: org.nanotek.beans.csv.RecordingAliasBean 
+  baseMap:     
+    id: 0 
+    release: 1 
+    name: 2 
+    locale: 3 
+    editsPending: 4 
+    lastUpdated: 5 
+    type: 6
+    sortName: 7
+    beginDateYear: 8 
+    beginDateMonth: 9 
+    beginDateDay: 10
+    endDateYead: 11 
+    endDateMonth: 12 
+    endDateDay: 13
+    primaryForLocale: 14 
+    ended: 15     
 
+mediumformat: 
+  fileLocation: /opt/mbdump
+  fileName: medium_format
+  id: MediumFormatBean
+  type: org.nanotek.beans.csv.MediumFormatBean 
+  baseMap:     
+    id: 0
+    name: 1
+    parent: 2
+    child_order: 3
+    year: 4
+    hasDiscIds: 5
+    description: 5
+    gid: 6
+    
 csv-endpoint:
    instrument-type: /csv/instrument 
    map-config: /map_config

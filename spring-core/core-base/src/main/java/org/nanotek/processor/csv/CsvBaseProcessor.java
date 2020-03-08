@@ -9,13 +9,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.Base;
-import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.opencsv.MapColumnStrategy;
 import org.nanotek.service.parser.BaseMapParser;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
@@ -36,7 +31,7 @@ public class CsvBaseProcessor<I extends Base, P extends BaseMapParser<I>> {
 		return csvToBean;
 	}
 
-	P getBaseParser() {
+	public P getBaseParser() {
 		return parser;
 	}
 	

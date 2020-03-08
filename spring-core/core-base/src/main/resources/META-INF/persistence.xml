@@ -13,19 +13,36 @@
 		<class>org.nanotek.beans.entity.ArtistComment</class>
 		<class>org.nanotek.beans.entity.AreaType</class>
 		<class>org.nanotek.beans.entity.Area</class>
+		<class>org.nanotek.beans.entity.AreaBeginDate</class>
+		<class>org.nanotek.beans.entity.AreaComment</class>
+		<class>org.nanotek.beans.entity.AreaEndDate</class>
+		<class>org.nanotek.beans.entity.ArtistBeginDate</class>
+		<class>org.nanotek.beans.entity.ArtistEndDate</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
+		<class>org.nanotek.beans.entity.ArtistAlias</class>
+		<class>org.nanotek.beans.entity.ArtistAliasType</class>
+		<class>org.nanotek.beans.entity.ArtistAliasBeginDate</class>
+		<class>org.nanotek.beans.entity.ArtistAliasEndDate</class>
+		<class>org.nanotek.beans.entity.ArtistGroupType</class>
 		<class>org.nanotek.beans.entity.ArtistType</class>
+		<class>org.nanotek.beans.entity.DatableBase</class>
+		<class>org.nanotek.beans.entity.Gender</class>
 		<class>org.nanotek.beans.entity.Isrc</class>
 		<class>org.nanotek.beans.entity.InstrumentType</class>
 		<class>org.nanotek.beans.entity.Instrument</class>
 		<class>org.nanotek.beans.entity.Label</class>
 		<class>org.nanotek.beans.entity.Language</class>
 		<class>org.nanotek.beans.entity.Medium</class>
+		<class>org.nanotek.beans.entity.MediumFormat</class>
 		<class>org.nanotek.beans.entity.Recording</class>
 		<class>org.nanotek.beans.entity.RecordingLength</class>
+		<class>org.nanotek.beans.entity.RecordingAlias</class>
+		<class>org.nanotek.beans.entity.RecordingAliasType</class>
 		<class>org.nanotek.beans.entity.Release</class>
+		<class>org.nanotek.beans.entity.ReleaseAlias</class>
+		<class>org.nanotek.beans.entity.ReleaseAliasType</class>
 		<class>org.nanotek.beans.entity.ReleaseGroup</class>
 		<class>org.nanotek.beans.entity.ReleaseStatus</class>
 		<class>org.nanotek.beans.entity.ReleasePackaging</class>
@@ -35,10 +52,10 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache" value="true" />
-			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
 			<!-- <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property> -->
 			<!-- <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property> -->
 			<!-- <property name="javax.persistence.jdbc.url"

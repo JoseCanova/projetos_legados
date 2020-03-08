@@ -7,16 +7,14 @@ import javax.sql.DataSource;
 import javax.validation.Validator;
 
 import org.assertj.core.util.Arrays;
-import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.beans.csv.ArtistAliasBean;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.csv.ArtistCreditBean;
 import org.nanotek.beans.csv.ArtistCreditNameBean;
-import org.nanotek.beans.csv.InstrumentTypeBean;
 import org.nanotek.beans.csv.RecordingBean;
 import org.nanotek.beans.csv.ReleaseBean;
 import org.nanotek.beans.csv.ReleaseGroupBean;
 import org.nanotek.beans.csv.TrackBean;
-import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.beans.entity.ArtistCreditName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -159,7 +157,7 @@ public class BaseConfiguration {
 
 	@Bean
 	@Qualifier(value = "ArtistAliasCsvToBean")
-	public CsvToBean<ArtistAlias> csvAliasToBean() {
+	public CsvToBean<ArtistAliasBean> csvAliasToBean() {
 		return new CsvToBean<>();
 	}
 
