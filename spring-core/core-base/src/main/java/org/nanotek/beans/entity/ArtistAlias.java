@@ -13,12 +13,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.nanotek.MutableBase;
-import org.nanotek.NameBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="artist_alias")
-public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , NameBase {
+public class ArtistAlias  extends LongIdSortNameEntity implements MutableBase<Long> {
 
 	@NotNull
 	@ManyToOne(optional = false)
@@ -28,17 +27,7 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 			  inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id") )
 	private Artist artist;
 
-	@NotBlank
-	@Size(min = 1 , max = 1000)
-	@Column(name="name",length=1000,nullable=false)
-	private String name;
-	
-	@NotBlank
-	@Size(min = 1 , max = 1000)
-	@Column(name="sort_name",length=1000,nullable=false)
-	private String sortName;
-	
-	@Column(name="locale",length=1000,nullable=true)
+	@Column(name="locale",nullable=true , columnDefinition = "VARCHAR")
 	private String locale;
 	
 	@ManyToOne(optional = false)
@@ -65,6 +54,7 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 	public ArtistAlias() {}
 	
 	public ArtistAlias(
+			@NotNull Long id,
 			@NotNull Artist artist, 
 			@NotBlank @Size(min = 1, max = 1000) String name,
 			@NotBlank @Size(min = 1, max = 1000) String sortName, 
@@ -72,10 +62,8 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 			ArtistAliasType artistAliasType,
 			ArtistAliasBeginDate artistAliasBeginDate, 
 			ArtistAliasEndDate artistAliasEndDate) {
-		super();
+		super(id , name , sortName);
 		this.artist = artist;
-		this.name = name;
-		this.sortName = sortName;
 		this.locale = locale;
 		this.artistAliasType = artistAliasType;
 		this.artistAliasBeginDate = artistAliasBeginDate;
@@ -86,10 +74,8 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 						@NotNull Artist artist, 
 						@NotBlank @Size(min = 1, max = 1000) String name,
 						@NotBlank @Size(min = 1, max = 1000) String sortName) {
-		super(id);
+		super(id , name , sortName);
 		this.artist = artist;
-		this.name = name;
-		this.sortName = sortName;
 	}
 
 	@Override
@@ -111,14 +97,6 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
-	}
-
-	public String getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
 	}
 
 	public String getLocale() {

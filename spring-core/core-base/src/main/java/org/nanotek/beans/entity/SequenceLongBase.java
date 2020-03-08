@@ -59,7 +59,4 @@ public class SequenceLongBase implements LongBase {
 		return "SequenceLongBase [id=" + id + "]";
 	}
 	
-	
-	
-	
 }
