@@ -189,7 +189,7 @@ public class ArtistIntegrationConfiguration {
 			}
 
 			if (source.getEndDateYear()!= null) {
-				ArtistEndDate endDate = new ArtistEndDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
+				ArtistEndDate endDate = new ArtistEndDate(source.getEndDateYear() , source.getEndDateMonth() , source.getEndDateDay());
 				artist.setArtistEndDate(endDate);
 			}
 
