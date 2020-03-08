@@ -78,17 +78,17 @@ artist:
 artistalias:
   fileLocation: /opt/mbdump
   fileName: artist_alias
-  id: ArtistAlias
-  type: org.nanotek.beans.entity.ArtistAlias
+  id: ArtistAliasBean
+  type: org.nanotek.beans.entity.ArtistAliasBean
   baseMap:  
     id: 0
     artistId: 1
-    alias: 2
+    name: 2
     locale: 3
     editsPending: 4
     lastUpdated: 5
     type: 6
-    sortAlias: 7
+    sortName: 7
     beginDateYear: 8
     beginDateMonth: 9
     beginDateDay: 10

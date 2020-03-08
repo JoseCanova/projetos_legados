@@ -21,6 +21,10 @@
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
+		<class>org.nanotek.beans.entity.ArtistAlias</class>
+		<class>org.nanotek.beans.entity.ArtistAliasType</class>
+		<class>org.nanotek.beans.entity.ArtistAliasBeginDate</class>
+		<class>org.nanotek.beans.entity.ArtistAliasEndDate</class>
 		<class>org.nanotek.beans.entity.ArtistGroupType</class>
 		<class>org.nanotek.beans.entity.ArtistType</class>
 		<class>org.nanotek.beans.entity.DatableBase</class>

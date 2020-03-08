@@ -62,13 +62,16 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
 	private ArtistAliasEndDate artistAliasEndDate;
 	
-	
 	public ArtistAlias() {}
 	
-	
-	public ArtistAlias(@NotNull Artist artist, @NotBlank @Size(min = 1, max = 1000) String name,
-			@NotBlank @Size(min = 1, max = 1000) String sortName, String locale, ArtistAliasType artistAliasType,
-			ArtistAliasBeginDate artistAliasBeginDate, ArtistAliasEndDate artistAliasEndDate) {
+	public ArtistAlias(
+			@NotNull Artist artist, 
+			@NotBlank @Size(min = 1, max = 1000) String name,
+			@NotBlank @Size(min = 1, max = 1000) String sortName, 
+			String locale, 
+			ArtistAliasType artistAliasType,
+			ArtistAliasBeginDate artistAliasBeginDate, 
+			ArtistAliasEndDate artistAliasEndDate) {
 		super();
 		this.artist = artist;
 		this.name = name;
@@ -79,8 +82,10 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 		this.artistAliasEndDate = artistAliasEndDate;
 	}
 
-	public ArtistAlias(@NotNull Long id, @NotNull Artist artist, @NotBlank @Size(min = 1, max = 1000) String name,
-			@NotBlank @Size(min = 1, max = 1000) String sortName) {
+	public ArtistAlias(	@NotNull Long id, 
+						@NotNull Artist artist, 
+						@NotBlank @Size(min = 1, max = 1000) String name,
+						@NotBlank @Size(min = 1, max = 1000) String sortName) {
 		super(id);
 		this.artist = artist;
 		this.name = name;
@@ -148,7 +153,50 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 		this.artistAliasEndDate = artistAliasEndDate;
 	}
 
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((sortName == null) ? 0 : sortName.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArtistAlias other = (ArtistAlias) obj;
+		if (artist == null) {
+			if (other.artist != null)
+				return false;
+		} else if (!artist.equals(other.artist))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (sortName == null) {
+			if (other.sortName != null)
+				return false;
+		} else if (!sortName.equals(other.sortName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ArtistAlias [artist=" + artist + ", name=" + name + ", sortName=" + sortName + ", locale=" + locale
+				+ ", artistAliasType=" + artistAliasType + ", artistAliasBeginDate=" + artistAliasBeginDate
+				+ ", artistAliasEndDate=" + artistAliasEndDate + ", id=" + id + "]";
+	}
 	
 }
