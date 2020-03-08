@@ -38,11 +38,10 @@ public class Recording extends LongIdGidNameEntity {
 	@OneToMany(mappedBy="recording" , fetch=FetchType.LAZY)
 	private Set<Track> tracks;
 	
-	@OneToOne(mappedBy = "recording" , fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	private RecordingLength recordingLenght;
 	
 	public Recording() {}
-	
 	
 	public Recording(@NotNull Long id , @NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
 		super(gid, name);
@@ -51,10 +50,6 @@ public class Recording extends LongIdGidNameEntity {
 	
 	public Recording(@NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
 		super(gid, name);
-	}
-
-	public Recording(@NotNull String name) {
-		super(name);
 	}
 
 	public Set<Track> getTracks() {

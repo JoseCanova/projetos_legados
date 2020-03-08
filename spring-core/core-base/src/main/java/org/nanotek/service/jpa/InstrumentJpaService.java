@@ -3,10 +3,9 @@ package org.nanotek.service.jpa;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.Instrument;
-import org.nanotek.repository.jpa.InstrumentCommentRepository;
-import org.nanotek.repository.jpa.InstrumentDescriptionRepository;
 import org.nanotek.repository.jpa.InstrumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,11 @@ public class InstrumentJpaService extends BasePersistenceService<Instrument, Lon
 	@Transactional
 	public Optional<Instrument> findById(Long k) {
 		return repository.findById(k);
+	}
+	
+	@Transactional
+	public Optional<Instrument> findByInstrumentId(@NotNull Long instrumentId){ 
+		return repository.findByInstrumentId(instrumentId);
 	}
 	
 	@Transactional

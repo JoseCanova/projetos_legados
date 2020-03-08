@@ -48,6 +48,4 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 		Optional<ArtistCredit>  opt = artistCreditRepository.findArtistCreditRecordingsById(id);
 		return opt.isPresent() ? opt.get() : null;
 	}
-	
-	
 }

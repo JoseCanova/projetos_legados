@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="track")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Track extends EntityLongBase {
+public class Track extends LongIdGidNameEntity {
 
 	/*
 	 * @Id
@@ -26,24 +26,18 @@ public class Track extends EntityLongBase {
 	 * @SequenceGenerator(name="track_id_seq",sequenceName="track_id_seq") private
 	 * Long id;
 	 */ 
-	@Column(name="GID" , length=255)
-	private String gid;
-//	@Column(name="RECORDING")
-//	private Long recordingId; 
 	@Column(name="MEDIUM")
 	private Long medium; 
 	@Column(name="POSITION")
 	private Integer position;
 	@Column(name="NUMBER")
 	private String number; 
-	@Column(name="NAME" , length=1000)
-	private String name; 
 	@Column(name="ARTIST_CREDIT")
 	private Long artistCredit; 
 	@Column(name="LENGTH")
 	private Long length;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY , optional = false)
 	@JoinColumn(name="recordingId" , referencedColumnName="id")
 	private Recording recording;
 	
@@ -53,20 +47,6 @@ public class Track extends EntityLongBase {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getGid() {
-		return gid;
-	}
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
-	
-/*	public Recording getRecording() {
-		return recording;
-	}
-	public void setRecording(Recording recording) {
-		this.recording = recording;
-	}*/
 	
 	public Long getMedium() {
 		return medium;
