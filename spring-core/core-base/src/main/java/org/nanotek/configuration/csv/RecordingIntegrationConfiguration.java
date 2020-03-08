@@ -25,7 +25,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -36,7 +35,6 @@ import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.expression.ValueExpression;
 import org.springframework.integration.http.inbound.HttpRequestHandlingMessagingGateway;
 import org.springframework.integration.http.inbound.RequestMapping;
 import org.springframework.integration.transformer.GenericTransformer;
@@ -185,7 +183,7 @@ public class RecordingIntegrationConfiguration {
 		@Override
 		public Recording transform(RecordingBean i) {
 			Recording recording = new Recording();
-			recording.setId(i.getId());
+			recording.setRecordingId(i.getId());
 			recording.setGid(i.getGid());
 			recording.setName(i.getName());
 			Optional<ArtistCredit> ac = findArtistCredit(i.getArtistCredit());
@@ -201,7 +199,7 @@ public class RecordingIntegrationConfiguration {
 		}
 
 		private Optional<ArtistCredit> findArtistCredit(@Validated @NotNull Long artistCredit) {
-			return artistCreditJpaService.findById(artistCredit);
+			return artistCreditJpaService.findByArtistCreditId(artistCredit);
 		}
 	}
 	

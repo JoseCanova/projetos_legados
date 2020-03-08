@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.nanotek.beans.entity.Instrument;
+import org.nanotek.repository.jpa.InstrumentCommentRepository;
+import org.nanotek.repository.jpa.InstrumentDescriptionRepository;
 import org.nanotek.repository.jpa.InstrumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class InstrumentJpaService extends BasePersistenceService<Instrument, Lon
 	
 	@Autowired
 	InstrumentRepository repository;
-
+	
 	@Override
 	@Transactional
 	public Optional<Instrument> findById(Long k) {

@@ -27,6 +27,10 @@
 		<class>org.nanotek.beans.entity.ArtistAliasEndDate</class>
 		<class>org.nanotek.beans.entity.ArtistGroupType</class>
 		<class>org.nanotek.beans.entity.ArtistType</class>
+		<class>org.nanotek.beans.entity.CommentBase</class>
+		<class>org.nanotek.beans.entity.DescriptionBase</class>
+		<class>org.nanotek.beans.entity.InstrumentComment</class>
+		<class>org.nanotek.beans.entity.InstrumentDescription</class>
 		<class>org.nanotek.beans.entity.DatableBase</class>
 		<class>org.nanotek.beans.entity.Gender</class>
 		<class>org.nanotek.beans.entity.Isrc</class>
@@ -34,6 +38,7 @@
 		<class>org.nanotek.beans.entity.Instrument</class>
 		<class>org.nanotek.beans.entity.Label</class>
 		<class>org.nanotek.beans.entity.Language</class>
+		<class>org.nanotek.beans.entity.LongIdNameEntity</class>
 		<class>org.nanotek.beans.entity.Medium</class>
 		<class>org.nanotek.beans.entity.MediumFormat</class>
 		<class>org.nanotek.beans.entity.Recording</class>
@@ -47,6 +52,7 @@
 		<class>org.nanotek.beans.entity.ReleaseStatus</class>
 		<class>org.nanotek.beans.entity.ReleasePackaging</class>
 		<class>org.nanotek.beans.entity.ReleaseGroupPrimaryType</class>
+		<class>org.nanotek.beans.entity.SequenceLongBase</class>
 		<class>org.nanotek.beans.entity.Track</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

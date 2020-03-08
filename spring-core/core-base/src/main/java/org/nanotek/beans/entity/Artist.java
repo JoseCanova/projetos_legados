@@ -6,46 +6,42 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Length;
-import org.nanotek.MutableBase;
-import org.nanotek.NameBase;
 
 @Entity
-@Table(name="artist")
+@Table(name="artist" , 
+		uniqueConstraints= {
+		@UniqueConstraint(name="uk_artist_gid",columnNames={"gid"}),
+		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
+		},
+		indexes= {
+					@Index(unique = false , name = "artist_name_idx" , columnList ="name"),
+					@Index(unique = false , name = "artist_sort_name_idx" , columnList ="sort_name")
+				})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Artist extends EntityLongBase implements MutableBase<Long> , NameBase {
+public class Artist extends LongIdGidSortNameEntity {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
-	@NotNull
-	@Length(min = 1 , max = 1000)
-	@Column(name="name",length=1000,nullable=false)
-	private String name;
+	@Column(name="artist_id" , nullable = false , insertable = true , updatable = false)
+	private Long artistId;
 	
-	@NotNull
-	@Length(min = 1 , max = 1000)
-	@Column(name="sort_name",length=1000,nullable=false)
-	private String sortName;
-
 	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
 	private List<ArtistCredit> artistCredits;
 
-	@NotNull
-	@Length(min = 1 , max = 40)
-	@Column(name="gid", nullable=false)
-	private String gid;
-	
 	@OneToOne(mappedBy = "artist" , fetch = FetchType.LAZY , optional = true)
 	private ArtistComment artistComment;
 	
@@ -99,24 +95,31 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 	public Artist() {
 	}
 	
-	public Artist(@NotNull Long id, @NotNull @Length(min = 1, max = 1000) String name, @NotNull @Length(min = 1, max = 40) String gid,
+	public Artist(
+			@NotBlank Long id, 
+			@NotBlank String name, 
+			@NotBlank String gid,
 			@NotNull String sortName) {
-		super(id);
-		this.name = name;
-		this.gid = gid;
-		this.sortName = sortName;
+		super(name,sortName,gid);
+		this.artistId = id;
 	}
 	
-	public Artist(@NotNull Long id, @NotNull @Length(min = 1, max = 1000) String name,
-			@NotNull @Length(min = 1, max = 1000) String sortName, List<ArtistCredit> artistCredits,
-			@NotNull @Length(min = 1, max = 40) String gid, ArtistComment artistComment,
-			ArtistBeginDate artistBeginDate, ArtistEndDate artistEndDate, @NotNull ArtistType type, Gender gender,
-			Area beginArea, Area endArea) {
-		super(id);
-		this.name = name;
-		this.sortName = sortName;
+	public Artist(
+			@NotNull Long id, 
+			@NotBlank String name,
+			@NotBlank String sortName, 
+			List<ArtistCredit> artistCredits,
+			@NotBlank String gid, 
+			ArtistComment artistComment,
+			ArtistBeginDate artistBeginDate, 
+			ArtistEndDate artistEndDate, 
+			@NotNull ArtistType type, 
+			Gender gender,
+			Area beginArea, 
+			Area endArea) {
+		super(name,sortName,gid);
+		this.artistId = id;
 		this.artistCredits = artistCredits;
-		this.gid = gid;
 		this.artistComment = artistComment;
 		this.artistBeginDate = artistBeginDate;
 		this.artistEndDate = artistEndDate;
@@ -130,36 +133,12 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
-	}
-
 	public List<ArtistCredit> getArtistCredits() {
 		return artistCredits;
 	}
 
 	public void setArtistCredits(List<ArtistCredit> artistCredits) {
 		this.artistCredits = artistCredits;
-	}
-
-	public String getGid() {
-		return gid;
-	}
-
-	public void setGid(String gid) {
-		this.gid = gid;
 	}
 
 	public ArtistComment getArtistComment() {
@@ -225,16 +204,12 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 	public void setArea(Area area) {
 		this.area = area;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((artistBeginDate == null) ? 0 : artistBeginDate.hashCode());
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((sortName == null) ? 0 : sortName.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((artistId == null) ? 0 : artistId.hashCode());
 		return result;
 	}
 
@@ -247,32 +222,20 @@ public class Artist extends EntityLongBase implements MutableBase<Long> , NameBa
 		if (getClass() != obj.getClass())
 			return false;
 		Artist other = (Artist) obj;
-		if (artistBeginDate == null) {
-			if (other.artistBeginDate != null)
+		if (artistId == null) {
+			if (other.artistId != null)
 				return false;
-		} else if (!artistBeginDate.equals(other.artistBeginDate))
-			return false;
-		if (gid == null) {
-			if (other.gid != null)
-				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (sortName == null) {
-			if (other.sortName != null)
-				return false;
-		} else if (!sortName.equals(other.sortName))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
+		} else if (!artistId.equals(other.artistId))
 			return false;
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Artist [artistId=" + artistId + ", artistCredits=" + artistCredits + ", artistComment=" + artistComment
+				+ ", artistBeginDate=" + artistBeginDate + ", artistEndDate=" + artistEndDate + ", type=" + type
+				+ ", gender=" + gender + ", area=" + area + ", beginArea=" + beginArea + ", endArea=" + endArea
+				+ ", gid=" + gid + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
+	}
+	
 }

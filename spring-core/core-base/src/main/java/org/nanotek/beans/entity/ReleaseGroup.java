@@ -4,34 +4,26 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nanotek.Base;
 
 @Entity
 @Table(name="release_group")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ReleaseGroup extends EntityLongBase{
+public class ReleaseGroup extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = 7603390865547084527L;
 	
-	@NotBlank
-	@Column (name="gid" , length=50 , nullable=false)
-	private String gid; 
-	@NotBlank
-	@Column (name="name" , length=2500 , nullable=false)
-	private String name; 
+	@NotNull
+	@Column(name="release_group_id" , nullable=false)
+	private Long releaseGroupId;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY , optional = false)
@@ -46,29 +38,12 @@ public class ReleaseGroup extends EntityLongBase{
 	
 	public ReleaseGroup(@NotNull Long id, @NotBlank String gid, @NotBlank String name, @NotNull ArtistCredit artistCredit,
 			ReleaseGroupPrimaryType type) {
-		super(id);
-		this.gid = gid;
-		this.name = name;
+		super(gid,name);
 		this.artistCredit = artistCredit;
 		this.type = type;
+		this.releaseGroupId = id;
 	}
 
-	public String getGid() {
-		return gid;
-	}
-	
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public ArtistCredit getArtistCredit() {
 		return artistCredit;
 	}
@@ -85,12 +60,20 @@ public class ReleaseGroup extends EntityLongBase{
 		this.type = type;
 	}
 
+	public Long getReleaseGroupId() {
+		return releaseGroupId;
+	}
+
+	public void setReleaseGroupId(Long releaseGroupId) {
+		this.releaseGroupId = releaseGroupId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((releaseGroupId == null) ? 0 : releaseGroupId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -103,23 +86,25 @@ public class ReleaseGroup extends EntityLongBase{
 		if (getClass() != obj.getClass())
 			return false;
 		ReleaseGroup other = (ReleaseGroup) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (releaseGroupId == null) {
+			if (other.releaseGroupId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
+		} else if (!releaseGroupId.equals(other.releaseGroupId))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (type == null) {
+			if (other.type != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ReleaseGroup [gid=" + gid + ", name=" + name + ", artistCredit=" + artistCredit + ", type=" + type
-				+ ", id=" + id + "]";
-	} 
+		return "ReleaseGroup [releaseGroupId=" + releaseGroupId + ", artistCredit=" + artistCredit + ", type=" + type
+				+ ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
+	}
+
+	
 	
 }
