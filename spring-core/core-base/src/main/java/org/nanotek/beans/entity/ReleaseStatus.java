@@ -25,7 +25,9 @@ public class ReleaseStatus extends LongIdGidNameEntity {
 	public ReleaseStatus() {
 	}
 	
-	public ReleaseStatus(@NotNull Long id, @NotBlank String name, @NotBlank  String gid) {
+	public ReleaseStatus(@NotNull Long id, 
+						 @NotBlank String name, 
+						 @NotBlank  String gid) {
 		super(gid,name);
 		this.releaseStatusId = id;
 	}
@@ -60,8 +62,4 @@ public class ReleaseStatus extends LongIdGidNameEntity {
 		return "ReleaseStatus [releaseStatusId=" + releaseStatusId + ", gid=" + gid + ", name=" + name + ", id=" + id
 				+ "]";
 	}
-
-	
-	
-
 }

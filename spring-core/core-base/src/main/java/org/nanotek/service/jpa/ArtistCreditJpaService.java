@@ -32,7 +32,7 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 	@Override
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
-	public  Optional<ArtistCredit> findById(@NotNull Long id) {
+	public  Optional<ArtistCredit> findById(Long id) {
 		return artistCreditRepository.findById(id);
 	}
 	
@@ -41,6 +41,7 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 		return artistCreditRepository.findByArtistCreditId(artistCreditId);
 	}
 	
+	//TODO: refactor this.
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
 	public  ArtistCredit findArtistCreditRecordingsById(Long id) {
