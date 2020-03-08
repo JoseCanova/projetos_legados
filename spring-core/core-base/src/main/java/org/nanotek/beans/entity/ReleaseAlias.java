@@ -4,27 +4,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.nanotek.NameBase;
 
 @Entity
 @Table(name="release_alias")
-public class ReleaseAlias extends EntityLongBase implements NameBase{
+public class ReleaseAlias extends LongIdSortNameEntity {
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	
-	@NotBlank
-	@Size(min=1,max=1000)
-	@Column(name="name", length=1000,insertable=true,nullable=false,updatable=true)
-	private String name;
-
-	@Column(name="locale", length=1000)
-	private String locale; 
+	@Column(name="relase_alias_id" , nullable=false)
+	private Long releaseAliasId;
+	
+	@OneToOne(optional=true)
+	@JoinTable(
+			  name = "release_alias_locale_join", 
+			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id"))
+	private ReleaseAliasLocale locale;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
@@ -35,64 +36,40 @@ public class ReleaseAlias extends EntityLongBase implements NameBase{
 	@JoinColumn(name="type_id")
 	private ReleaseAliasType type;
 
-	@NotNull
-	@Size(min=0,max=1000)
-	@Column(name="sortName", length=1000,insertable=true,nullable=false,updatable=true)
-	private String sortName; 
-	
-    @Column(name="begin_date_year")
-	private Integer beginDateYear ;
+    @OneToOne(optional=true)
+	@JoinTable(
+			  name = "release_alias_begin_date_join", 
+			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
+    private ReleaseAliasBeginDate beginDate;
     
-    @Column(name="begin_date_month")
-	private Integer beginDateMonth    ;
-	
-    @Column(name="begin_date_day")
-	private Integer beginDateDay      ;
+    @OneToOne(optional=true)
+	@JoinTable(
+			  name = "release_alias_end_date_join", 
+			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
+    private ReleaseAliasEndDate endDate;
 
-    @Column(name="end_date_year")
-	private Integer endDateYear       ;
-    
-    @Column(name="end_date_month")
-	private Integer endDateMonth      ;
-    
-    @Column(name="end_date_day")
-	private Integer endDateDay        ; 
-	
 	public ReleaseAlias() {
 	}
 
-	public ReleaseAlias(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, String locale, @NotNull Release release,
-			ReleaseAliasType type, @NotNull @Size(min = 0, max = 1000) String sortName, Integer beginDateYear,
-			Integer beginDateMonth, Integer beginDateDay, Integer endDateYear, Integer endDateMonth,
-			Integer endDateDay) {
-		super(id);
+	public ReleaseAlias(
+			@NotNull Long id, 
+			@NotBlank String name, 
+			ReleaseAliasLocale locale, 
+			@NotNull Release release,
+			ReleaseAliasType type, 
+			@NotBlank String sortName, 
+			ReleaseAliasBeginDate beginDate,
+			ReleaseAliasEndDate endDate) {
+		this.releaseAliasId = id;
 		this.name = name;
 		this.locale = locale;
 		this.release = release;
 		this.type = type;
 		this.sortName = sortName;
-		this.beginDateYear = beginDateYear;
-		this.beginDateMonth = beginDateMonth;
-		this.beginDateDay = beginDateDay;
-		this.endDateYear = endDateYear;
-		this.endDateMonth = endDateMonth;
-		this.endDateDay = endDateDay;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLocale() {
-		return locale;
-	}
-
-	public void setLocale(String locale) {
-		this.locale = locale;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
 	}
 
 	public Release getRelease() {
@@ -111,68 +88,51 @@ public class ReleaseAlias extends EntityLongBase implements NameBase{
 		this.type = type;
 	}
 
-	public String getSortName() {
-		return sortName;
+	public Long getReleaseAliasId() {
+		return releaseAliasId;
 	}
 
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
+	public void setReleaseAliasId(Long releaseAliasId) {
+		this.releaseAliasId = releaseAliasId;
 	}
 
-	public Integer getBeginDateYear() {
-		return beginDateYear;
+	public ReleaseAliasLocale getLocale() {
+		return locale;
 	}
 
-	public void setBeginDateYear(Integer beginDateYear) {
-		this.beginDateYear = beginDateYear;
+	public void setLocale(ReleaseAliasLocale locale) {
+		this.locale = locale;
 	}
 
-	public Integer getBeginDateMonth() {
-		return beginDateMonth;
+	public ReleaseAliasBeginDate getBeginDate() {
+		return beginDate;
 	}
 
-	public void setBeginDateMonth(Integer beginDateMonth) {
-		this.beginDateMonth = beginDateMonth;
+	public void setBeginDate(ReleaseAliasBeginDate beginDate) {
+		this.beginDate = beginDate;
 	}
 
-	public Integer getBeginDateDay() {
-		return beginDateDay;
+	public ReleaseAliasEndDate getEndDate() {
+		return endDate;
 	}
 
-	public void setBeginDateDay(Integer beginDateDay) {
-		this.beginDateDay = beginDateDay;
+	public void setEndDate(ReleaseAliasEndDate endDate) {
+		this.endDate = endDate;
 	}
 
-	public Integer getEndDateYear() {
-		return endDateYear;
-	}
-
-	public void setEndDateYear(Integer endDateYear) {
-		this.endDateYear = endDateYear;
-	}
-
-	public Integer getEndDateMonth() {
-		return endDateMonth;
-	}
-
-	public void setEndDateMonth(Integer endDateMonth) {
-		this.endDateMonth = endDateMonth;
-	}
-
-	public Integer getEndDateDay() {
-		return endDateDay;
-	}
-
-	public void setEndDateDay(Integer endDateDay) {
-		this.endDateDay = endDateDay;
+	@Override
+	public String toString() {
+		return "ReleaseAlias [releaseAliasId=" + releaseAliasId + ", locale=" + locale + ", release=" + release
+				+ ", type=" + type + ", beginDate=" + beginDate + ", endDate=" + endDate + ", sortName=" + sortName
+				+ ", name=" + name + ", id=" + id + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((release == null) ? 0 : release.hashCode());
+		result = prime * result + ((releaseAliasId == null) ? 0 : releaseAliasId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -185,27 +145,17 @@ public class ReleaseAlias extends EntityLongBase implements NameBase{
 		if (getClass() != obj.getClass())
 			return false;
 		ReleaseAlias other = (ReleaseAlias) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (releaseAliasId == null) {
+			if (other.releaseAliasId != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!releaseAliasId.equals(other.releaseAliasId))
 			return false;
-		if (release == null) {
-			if (other.release != null)
+		if (type == null) {
+			if (other.type != null)
 				return false;
-		} else if (!release.equals(other.release))
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "ReleaseAlias [name=" + name + ", locale=" + locale + ", release=" + release + ", type=" + type
-				+ ", sortName=" + sortName + ", beginDateYear=" + beginDateYear + ", beginDateMonth=" + beginDateMonth
-				+ ", beginDateDay=" + beginDateDay + ", endDateYear=" + endDateYear + ", endDateMonth=" + endDateMonth
-				+ ", endDateDay=" + endDateDay + ", id=" + id + "]";
-	}
-
-	
-	
 }

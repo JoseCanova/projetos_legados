@@ -19,11 +19,11 @@ public class LongIdSortNameEntity extends LongIdNameEntity implements SortedName
 	public LongIdSortNameEntity() {
 	}
 
-	public LongIdSortNameEntity(@NotNull String name) {
+	public LongIdSortNameEntity(@NotBlank String name) {
 		super(name);
 	}
 	
-	public LongIdSortNameEntity(@NotNull String name , @NotNull String sortName) {
+	public LongIdSortNameEntity(@NotBlank String name , @NotBlank String sortName) {
 		super(name);
 		this.sortName = sortName;
 	}

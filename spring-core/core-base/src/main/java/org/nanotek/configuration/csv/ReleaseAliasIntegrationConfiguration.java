@@ -192,6 +192,7 @@ public class ReleaseAliasIntegrationConfiguration {
 		
 		@Override
 		public ReleaseAlias transform(ReleaseAliasBean source) {
+			
 			Optional<Release> optRelease = releaseService.findById(source.getRelease());
 			Optional<ReleaseAliasType> ptype = Base.NULL_VALUE(ReleaseAliasType.class);
 			ReleaseAliasType type = null; 

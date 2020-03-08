@@ -4,17 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.nanotek.LongBase;
-import org.nanotek.MutableBase;
 
 @Entity
 @Table(name="composite_dates")
@@ -24,17 +16,10 @@ import org.nanotek.MutableBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR(2)"
 	)
-public class DatableBase implements LongBase {
+public class DatableBase extends SequenceLongBase {
 
 	private static final long serialVersionUID = -2752304170904238032L;
 
-	@Id
-	@NotNull
-	@Column(name="id",nullable=false,unique=true)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="datetable_id_seq")
-	@SequenceGenerator(name = "datetable_id_seq", sequenceName = "datetable_id_seq")
-	protected Long id;
-	
 	@Column(name="year", nullable = false)
 	protected Integer year;
 	
@@ -122,6 +107,4 @@ public class DatableBase implements LongBase {
 	public String toString() {
 		return "DatableBase [year=" + year + ", month=" + month + ", day=" + day + ", id=" + id + "]";
 	}
-	
-	
 }

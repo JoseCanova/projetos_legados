@@ -5,11 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,24 +20,26 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="release")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Release extends EntityLongBase {
+public class Release extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 8526436903189806951L;
-	
-	@NotBlank
-	@Column(name="gid" , nullable=false, length=50 , insertable=true)
-	private String gid; 
-	
-	@NotBlank
-	@Size(min=1 , max=4000)
-	@Column(name="name" , insertable=true , nullable=false , length=4000)
-	private String name; 
+		
+	@Column(name="release_id" , nullable=false)
+	private Long releaseId;
 
-	@Column(name="barCode" , length=255)
-	private String barCode;
+	@OneToOne(optional = true , orphanRemoval = true)
+	@JoinTable(
+			  name = "release_barcode_join", 
+			  joinColumns = @JoinColumn(name = "release_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "barcode_id",referencedColumnName = "id"))
+	private ReleaseBarCode barCode;
 	
-	@Column(name="comment" , length=255)
-	private String comment; 
+	@OneToOne(optional = true , orphanRemoval = true)
+	@JoinTable(
+			  name = "release_comment_join", 
+			  joinColumns = @JoinColumn(name = "release_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "barcode_id",referencedColumnName = "id"))
+	private ReleaseComment comment; 
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="status_id")
@@ -61,10 +64,18 @@ public class Release extends EntityLongBase {
 	public Release() { 
 	}
 
-	public Release(@NotNull Long id, @NotBlank String gid, @NotBlank @Size(min = 1, max = 4000) String name, String barCode,
-			String comment, ReleaseStatus status, ReleasePackaging packaging, Language language,
-			ReleaseGroup releaseGroup, ArtistCredit artistCredit) {
-		super(id);
+	public Release(
+			@NotNull Long id, 
+			@NotBlank String gid, 
+			@NotBlank  String name, 
+			ReleaseBarCode barCode,
+			ReleaseComment comment, 
+			ReleaseStatus status, 
+			ReleasePackaging packaging, 
+			Language language,
+			ReleaseGroup releaseGroup, 
+			ArtistCredit artistCredit) {
+		this.releaseId = id;
 		this.gid = gid;
 		this.name = name;
 		this.barCode = barCode;
@@ -92,19 +103,19 @@ public class Release extends EntityLongBase {
 		this.name = name;
 	}
 
-	public String getBarCode() {
+	public ReleaseBarCode getBarCode() {
 		return barCode;
 	}
 
-	public void setBarCode(String barCode) {
+	public void setBarCode(ReleaseBarCode barCode) {
 		this.barCode = barCode;
 	}
 
-	public String getComment() {
+	public ReleaseComment getComment() {
 		return comment;
 	}
 
-	public void setComment(String comment) {
+	public void setComment(ReleaseComment comment) {
 		this.comment = comment;
 	}
 

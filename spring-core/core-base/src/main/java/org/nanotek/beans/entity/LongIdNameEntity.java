@@ -3,7 +3,6 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.nanotek.MutableName;
 import org.nanotek.NameBase;
@@ -21,7 +20,7 @@ public class LongIdNameEntity extends SequenceLongBase implements NameBase , Mut
 		super();
 	}
 
-	public LongIdNameEntity(@NotNull String name) {
+	public LongIdNameEntity(@NotBlank String name) {
 		super();
 		this.name = name;
 	}
