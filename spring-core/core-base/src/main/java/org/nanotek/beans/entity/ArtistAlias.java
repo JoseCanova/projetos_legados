@@ -57,7 +57,7 @@ public class ArtistAlias  extends EntityLongBase implements MutableBase<Long> , 
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinTable(
-			  name = "artist_alias_begin_date_join", 
+			  name = "artist_alias_end_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
 	private ArtistAliasEndDate artistAliasEndDate;

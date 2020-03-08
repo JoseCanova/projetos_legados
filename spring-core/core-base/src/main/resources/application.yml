@@ -79,7 +79,7 @@ artistalias:
   fileLocation: /opt/mbdump
   fileName: artist_alias
   id: ArtistAliasBean
-  type: org.nanotek.beans.entity.ArtistAliasBean
+  type: org.nanotek.beans.csv.ArtistAliasBean
   baseMap:  
     id: 0
     artistId: 1
