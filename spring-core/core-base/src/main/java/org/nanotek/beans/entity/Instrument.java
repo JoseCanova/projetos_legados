@@ -12,19 +12,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.nanotek.MutableName;
-
 @Entity
 @Table(name="instrument")
-public class Instrument extends LongIdNameEntity implements MutableName{
+public class Instrument extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 1720965406197902687L;
-
-	@NotBlank
-	@Size(min=1,max=50)
-	@Column(name="gid" , length=50 , nullable=false,insertable=true,updatable=true)
-	private String gid;
 	
+	@Column(name="instrument_id" , nullable=false)
+	private Long instrumentId; 
+
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY , optional = false )
 	private InstrumentType type; 
@@ -50,10 +46,9 @@ public class Instrument extends LongIdNameEntity implements MutableName{
 						@NotBlank @Size(min = 1, max = 50) String gid, 
 						@NotBlank String name,
 						@NotNull InstrumentType type) {
-		super(id);
-		this.gid = gid;
-		this.name = name;
+		super(gid,name);
 		this.type = type;
+		this.instrumentId = id;
 	}
 
 	public Instrument(
@@ -63,25 +58,11 @@ public class Instrument extends LongIdNameEntity implements MutableName{
 						@NotNull InstrumentType type, 
 						InstrumentComment comment, 
 						InstrumentDescription description) {
-		super(id);
-		this.gid = gid;
-		this.name = name;
+		super(gid,name);
 		this.type = type;
 		this.comment = comment;
 		this.description = description;
-	}
-
-	public String getGid() {
-		return gid;
-	}
-
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
+		this.instrumentId = id;
 	}
 
 	public InstrumentComment getComment() {
@@ -109,17 +90,11 @@ public class Instrument extends LongIdNameEntity implements MutableName{
 	}
 
 	@Override
-	public String toString() {
-		return "Instrument [gid=" + gid + ", name=" + name + ", type=" + type + ", comment=" + comment
-				+ ", description=" + description + ", id=" + id + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((instrumentId == null) ? 0 : instrumentId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -132,17 +107,23 @@ public class Instrument extends LongIdNameEntity implements MutableName{
 		if (getClass() != obj.getClass())
 			return false;
 		Instrument other = (Instrument) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (instrumentId == null) {
+			if (other.instrumentId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
+		} else if (!instrumentId.equals(other.instrumentId))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (type == null) {
+			if (other.type != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Instrument [instrumentId=" + instrumentId + ", type=" + type + ", comment=" + comment + ", description="
+				+ description + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
 
 }

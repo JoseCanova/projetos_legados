@@ -8,8 +8,6 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -19,15 +17,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Length;
-import org.nanotek.MutableBase;
-import org.nanotek.NameBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -50,21 +45,18 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 ))
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , NameBase{
-
+public class ArtistCredit extends LongIdNameEntity {
+	
 	private static final long serialVersionUID = -3086006757943654550L;
-	//	@Id
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
-//	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
-//	private Long id;
-//	@Column(name="id" , insertable=true,nullable=false,unique = true)
+	
 	@NotNull
-	@Length(min = 1 , max = 1000)
-	@Column (name="artist_name" ,length=1000, insertable=true,nullable=false,updatable = true)
-	private String name; 
+	@Column(name="artist_credit_id" , nullable=false)
+	private Long artistCreditId;
+	
 	@NotNull
 	@Column (name="artist_count" , insertable=true,nullable=false,updatable = true)
 	private Long artistCount; 
+	
 	@NotNull
 	@Column (name="ref_count" , insertable=true,nullable=false,updatable = true)
 	private Long refCount;
@@ -83,10 +75,10 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , 
 	
 	public ArtistCredit() {}
 	
-	public ArtistCredit(@NotNull Long id , @NotNull @Length(min = 1, max = 1000) String name, @NotNull Long artistCount,
+	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull Long artistCount,
 			@NotNull Long refCount, Set<Recording> recordings) {
-		super(id);
-		this.name = name;
+		super(name);
+		this.artistCreditId = id;
 		this.artistCount = artistCount;
 		this.refCount = refCount;
 		this.recordings = recordings;
@@ -132,13 +124,6 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , 
 		this.artists = artists;
 	}
 
-	@Override
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="artist_credit_id_seq")
-	@SequenceGenerator(name = "artist_credit_id_seq", sequenceName = "artist_credit_id_seq")
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Set<Recording> getRecordings() {
 		return recordings;
 	}
@@ -147,13 +132,20 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , 
 		this.recordings = recordings;
 	}
 
+	public Long getArtistCreditId() {
+		return artistCreditId;
+	}
+
+	public void setArtistCreditId(Long artistCreditId) {
+		this.artistCreditId = artistCreditId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((artistCount == null) ? 0 : artistCount.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((refCount == null) ? 0 : refCount.hashCode());
+		result = prime * result + ((artistCreditId == null) ? 0 : artistCreditId.hashCode());
+		result = prime * result + ((recordings == null) ? 0 : recordings.hashCode());
 		return result;
 	}
 
@@ -166,24 +158,23 @@ public class ArtistCredit extends EntityLongBase implements MutableBase<Long> , 
 		if (getClass() != obj.getClass())
 			return false;
 		ArtistCredit other = (ArtistCredit) obj;
-		if (artistCount == null) {
-			if (other.artistCount != null)
+		if (artistCreditId == null) {
+			if (other.artistCreditId != null)
 				return false;
-		} else if (!artistCount.equals(other.artistCount))
+		} else if (!artistCreditId.equals(other.artistCreditId))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (recordings == null) {
+			if (other.recordings != null)
 				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (refCount == null) {
-			if (other.refCount != null)
-				return false;
-		} else if (!refCount.equals(other.refCount))
+		} else if (!recordings.equals(other.recordings))
 			return false;
 		return true;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "ArtistCredit [artistCreditId=" + artistCreditId + ", artistCount=" + artistCount + ", refCount="
+				+ refCount + ", releases=" + releases + ", artists=" + artists + ", recordings=" + recordings
+				+ ", name=" + name + ", id=" + id + "]";
+	}
 }

@@ -36,6 +36,11 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 	}
 	
 	@Transactional
+	public Optional<ArtistCredit> findByArtistCreditId(Long artistCreditId){ 
+		return artistCreditRepository.findByArtistCreditId(artistCreditId);
+	}
+	
+	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
 	public  ArtistCredit findArtistCreditRecordingsById(Long id) {
 		Optional<ArtistCredit>  opt = artistCreditRepository.findArtistCreditRecordingsById(id);

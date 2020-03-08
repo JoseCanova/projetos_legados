@@ -38,23 +38,6 @@ public class SequenceLongBase implements LongBase {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SequenceLongBase other = (SequenceLongBase) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "SequenceLongBase [id=" + id + "]";
 	}
