@@ -3,10 +3,11 @@ package org.nanotek.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.repository.jpa.ArtistCreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,12 +32,12 @@ public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,
 	@Override
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
-	public  Optional<ArtistCredit> findById(Long id) {
+	public  Optional<ArtistCredit> findById(@NotNull Long id) {
 		return artistCreditRepository.findById(id);
 	}
 	
 	@Transactional
-	public Optional<ArtistCredit> findByArtistCreditId(Long artistCreditId){ 
+	public Optional<ArtistCredit> findByArtistCreditId(@NotNull Long artistCreditId){ 
 		return artistCreditRepository.findByArtistCreditId(artistCreditId);
 	}
 	

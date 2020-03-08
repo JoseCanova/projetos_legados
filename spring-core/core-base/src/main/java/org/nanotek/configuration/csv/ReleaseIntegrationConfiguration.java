@@ -208,23 +208,23 @@ public class ReleaseIntegrationConfiguration {
 			Optional<ReleaseComment> optComment = Base.NULL_VALUE(ReleaseComment.class);
 			
 			if (source.getStatus() !=null) {
-				optStatus = statusRep.findById(source.getStatus());
+				optStatus = statusRep.findByReleaseStatusId(source.getStatus());
 			}
 			
 			if (source.getPackaging() !=null) { 
-				optPack = packRep.findById(source.getPackaging());
+				optPack = packRep.findByReleasePackagingId(source.getPackaging());
 			}
 			
 			if(source.getReleaseGroup() !=null) { 
-				optGroup = groupRep.findById(source.getReleaseGroup());
+				optGroup = groupRep.findByReleaseGroupId(source.getReleaseGroup());
 			}
 			
 			if (source.getLanguage() !=null) { 
-				optLanguage  = langRep.findById(source.getLanguage());
+				optLanguage  = langRep.findByLanguageId(source.getLanguage());
 			}
 			
 			if (source.getArtistCreditId() !=null){ 
-				optCredit = creditService.findById(source.getArtistCreditId());
+				optCredit = creditService.findByArtistCreditId(source.getArtistCreditId());
 			}
 			
 			if (notEmpty(source.getBarcode())){ 

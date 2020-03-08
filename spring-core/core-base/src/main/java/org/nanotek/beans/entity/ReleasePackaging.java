@@ -1,8 +1,11 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -15,11 +18,13 @@ public class ReleasePackaging extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = 5351338443793025420L;
 
+	@NotNull
+	@Column(name="release_packaging_id" , nullable=false)
 	private Long releasePackagingId;
 	
 	public ReleasePackaging() {}
 
-	public ReleasePackaging(Long id, String name, String gid) {
+	public ReleasePackaging(@NotNull Long id, @NotBlank String name, @NotBlank  String gid) {
 		super(gid,name);
 		this.releasePackagingId = id;
 	}

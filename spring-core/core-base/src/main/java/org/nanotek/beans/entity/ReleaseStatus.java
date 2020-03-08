@@ -4,6 +4,8 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -12,51 +14,29 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="release_status")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ReleaseStatus extends EntityLongBase {
+public class ReleaseStatus extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 4793056857806342212L;
 	
-	@Column(name="name" , length=255 , nullable=false , insertable=true , updatable=true)
-	private String name; 
-	
-	@Column(name="gid" , length=255 , nullable=false , insertable=true , updatable=true)
-	private String gid; 
+	@NotNull
+	@Column(name="release_status_id",nullable=false)
+	private Long releaseStatusId;
 	
 	public ReleaseStatus() {
 	}
 	
-	public ReleaseStatus(Long id, String name, String gid) {
-		super(id);
-		this.name = name;
-		this.gid = gid;
+	public ReleaseStatus(@NotNull Long id, @NotBlank String name, @NotBlank  String gid) {
+		super(gid,name);
+		this.releaseStatusId = id;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getGid() {
-		return gid;
-	}
-
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((releaseStatusId == null) ? 0 : releaseStatusId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -67,18 +47,20 @@ public class ReleaseStatus extends EntityLongBase {
 		if (getClass() != obj.getClass())
 			return false;
 		ReleaseStatus other = (ReleaseStatus) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (releaseStatusId == null) {
+			if (other.releaseStatusId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!releaseStatusId.equals(other.releaseStatusId))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ReleaseStatus [releaseStatusId=" + releaseStatusId + ", gid=" + gid + ", name=" + name + ", id=" + id
+				+ "]";
+	}
+
 	
 	
 
