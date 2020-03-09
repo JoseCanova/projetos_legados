@@ -5,7 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -18,22 +20,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Track extends LongIdGidNameEntity {
 
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="track_id_seq")
-	 * 
-	 * @SequenceGenerator(name="track_id_seq",sequenceName="track_id_seq") private
-	 * Long id;
-	 */ 
 	@Column(name="MEDIUM")
 	private Long medium; 
-	@Column(name="POSITION")
-	private Integer position;
+	
+	@OneToOne
+	@JoinTable(
+			  name = "track_position_join", 
+			  joinColumns = @JoinColumn(name = "track_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "position_id",referencedColumnName = "id"))
+	private TrackPosition position;
+	
+	
 	@Column(name="NUMBER")
 	private String number; 
+	
 	@Column(name="ARTIST_CREDIT")
 	private Long artistCredit; 
+	
 	@Column(name="LENGTH")
 	private Long length;
 	
@@ -55,10 +58,10 @@ public class Track extends LongIdGidNameEntity {
 		this.medium = medium;
 	}
 	
-	public Integer getPosition() {
+	public TrackPosition getPosition() {
 		return position;
 	}
-	public void setPosition(Integer position) {
+	public void setPosition(TrackPosition position) {
 		this.position = position;
 	}
 	
@@ -82,14 +85,6 @@ public class Track extends LongIdGidNameEntity {
 	public void setArtistCredit(Long artistCredit) {
 		this.artistCredit = artistCredit;
 	}
-	
-//	public Long getRecordingId() {
-//		return recordingId;
-//	}
-//	
-//	public void setRecordingId(Long recordingId) {
-//		this.recordingId = recordingId;
-//	}
 	
 	public Long getLength() {
 		return length;
