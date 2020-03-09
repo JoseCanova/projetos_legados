@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value="re")
+@DiscriminatorValue(value="ReleaseComment")
 public class ReleaseComment extends CommentBase {
 
 	private static final long serialVersionUID = 4978743759627354208L;

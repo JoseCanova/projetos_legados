@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@DiscriminatorValue("is")
+@DiscriminatorValue("InstrumentComment")
 public class InstrumentComment extends CommentBase{
 	
 	@JsonIgnore

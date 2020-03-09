@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value="me")
+@DiscriminatorValue(value="MediumCount")
 public class MediumCount extends LongCountBase{
 
 	private static final long serialVersionUID = 4332038107455870423L;

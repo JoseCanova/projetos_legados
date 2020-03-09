@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@DiscriminatorValue("ra")
+@DiscriminatorValue("ReleaseAliasLocale")
 public class ReleaseAliasLocale extends LocaleBase{
 
 	private static final long serialVersionUID = -5609249998157622354L;

@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,6 +32,7 @@ public class Area extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = -7073321340141567106L;
 	
+	@NotNull
 	@Column(name="area_id",nullable=false)
 	private Long areaId; 
 	
@@ -55,19 +55,23 @@ public class Area extends LongIdGidNameEntity{
 	private AreaEndDate areaEndDate;
 	
 
-	@OneToOne(mappedBy = "area")
+	@OneToOne
+	@JoinTable(
+			  name = "area_comment_join", 
+			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
 	private AreaComment areaComment;
 	
 	public Area() {}
 	
-	public Area(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid) {
+	public Area(@NotNull Long id, @NotBlank String name, @NotBlank  String gid) {
 		this.name = name;
 		this.gid = gid;
 		this.areaId = id;
 	}
 
 	public Area(@NotNull Long id, 
-			@NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid,
+			@NotBlank String name, @NotBlank  String gid,
 			@NotNull AreaType type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment areaComment) {
 		this.name = name;
 		this.gid = gid;

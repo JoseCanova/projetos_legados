@@ -4,14 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="comment_base",
+					indexes= {
+							@Index(unique = false , name = "table_idx" , columnList ="table_id")
+						})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
-	    columnDefinition = "VARCHAR(2)"
+	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public class CommentBase extends SequenceLongBase {
 
@@ -65,7 +71,4 @@ public class CommentBase extends SequenceLongBase {
 	public String toString() {
 		return "CommentBase [comment=" + comment + ", id=" + id + "]";
 	}
-
-	
-	
 }

@@ -4,17 +4,22 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="string_number_base")
+@Table(name="string_number_base",
+							indexes= {
+									@Index(unique = false , name = "table_idx" , columnList ="table_id"),
+									@Index(unique = false , name = "number_idx" , columnList ="number")
+								})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
-	    columnDefinition = "VARCHAR(2)"
+	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public class StringNumberBase extends NumberBase<String> {
 

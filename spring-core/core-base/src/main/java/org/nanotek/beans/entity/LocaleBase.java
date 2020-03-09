@@ -4,18 +4,22 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="locale_base")
+@Table(name="locale_base",
+					indexes= {
+							@Index(unique = false , name = "table_idx" , columnList ="table_id")
+						})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
-	    columnDefinition = "VARCHAR(2)"
+	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public class LocaleBase extends SequenceLongBase{
 

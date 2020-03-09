@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value="tr")
+@DiscriminatorValue(value="TrackNumber")
 public class TrackNumber extends StringNumberBase{
 
 	private static final long serialVersionUID = -3716558925729074194L;

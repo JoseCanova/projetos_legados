@@ -1,62 +1,31 @@
 package org.nanotek.beans.entity;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.nanotek.Base;
-import org.nanotek.ImmutableLongBase;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="area_comment")
-public class AreaComment implements ImmutableLongBase,Base{
+@DiscriminatorValue(value = "AreaComment")
+public class AreaComment extends CommentBase{
 
 	private static final long serialVersionUID = 5715488911104999603L;
 
-	@Id
-	private Long id; 
-	
-	@Column(name="comment" , length=1000 , insertable=true , updatable=true , nullable=true)
-	private String comment;
-	
-	@JsonIgnore
-	@OneToOne
-	@MapsId
+	@NotNull
+	@OneToOne(mappedBy = "areaComment")
 	private Area area;
 
 	public AreaComment() {}
 	
-	public AreaComment(String comment) {
-		super();
-		this.comment = comment;
+	public AreaComment(@NotBlank String comment) {
+		super(comment);
 	}
 
-	public AreaComment(String comment, Area area) {
-		super();
-		this.comment = comment;
+	public AreaComment(@NotBlank String comment,@NotNull Area area) {
+		super(comment);
 		this.area = area;
-		this.id = area.getId();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 
 	public Area getArea() {
@@ -65,7 +34,36 @@ public class AreaComment implements ImmutableLongBase,Base{
 
 	public void setArea(Area area) {
 		this.area = area;
-		this.id = area.getId();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AreaComment other = (AreaComment) obj;
+		if (area == null) {
+			if (other.area != null)
+				return false;
+		} else if (!area.equals(other.area))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "AreaComment [area=" + area + ", comment=" + comment + ", id=" + id + "]";
+	}
+	
 }

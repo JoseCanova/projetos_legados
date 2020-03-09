@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value="rc")
+@DiscriminatorValue(value="RecordingLength")
 public class RecordingLength extends LongLengthyBase {
 	
 	private static final long serialVersionUID = -8708909035267715010L;

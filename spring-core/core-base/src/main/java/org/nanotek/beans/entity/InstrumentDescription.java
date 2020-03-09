@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue("id")
+@DiscriminatorValue("InstrumentDescription")
 public class InstrumentDescription extends DescriptionBase{
 
 	private static final long serialVersionUID = 8312961172730412162L;
