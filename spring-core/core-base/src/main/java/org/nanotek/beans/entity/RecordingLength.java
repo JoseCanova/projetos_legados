@@ -13,7 +13,7 @@ public class RecordingLength extends LongLengthyBase {
 	private static final long serialVersionUID = -8708909035267715010L;
 	
 	@NotNull
-	@OneToOne(fetch = FetchType.LAZY , mappedBy = "length")
+	@OneToOne(fetch = FetchType.LAZY , mappedBy = "recordingLenght")
 	private Recording recording;
 	
 	public RecordingLength() {}

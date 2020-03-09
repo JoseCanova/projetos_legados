@@ -22,8 +22,8 @@ public class Track extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 8642862162010029043L;
 
-	@Column(name="MEDIUM")
-	private Long medium; 
+	@ManyToOne(optional=false)
+	private Medium medium; 
 	
 	@OneToOne
 	@JoinTable(
@@ -38,7 +38,7 @@ public class Track extends LongIdGidNameEntity {
 			  name = "track_number_join", 
 			  joinColumns = @JoinColumn(name = "track_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "number_id",referencedColumnName = "id"))
-	private String number; 
+	private TrackNumber number; 
 	
 	@NotNull
 	@ManyToOne(optional=false)
@@ -57,10 +57,10 @@ public class Track extends LongIdGidNameEntity {
 	@JoinColumn(name="recordingId" , referencedColumnName="id")
 	private Recording recording;
 	
-	public Long getMedium() {
+	public Medium getMedium() {
 		return medium;
 	}
-	public void setMedium(Long medium) {
+	public void setMedium(Medium medium) {
 		this.medium = medium;
 	}
 	
@@ -71,10 +71,10 @@ public class Track extends LongIdGidNameEntity {
 		this.position = position;
 	}
 	
-	public String getNumber() {
+	public TrackNumber getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(TrackNumber number) {
 		this.number = number;
 	}
 	

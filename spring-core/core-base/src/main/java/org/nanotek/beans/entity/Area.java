@@ -4,36 +4,37 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nanotek.NameBase;
 
 @Entity
-@Table(name="area")
+@Table(name="area" , 
+uniqueConstraints= {
+		@UniqueConstraint(name="uk_area_gid",columnNames={"gid"}),
+		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
+		},
+		indexes= {
+					@Index(unique = false , name = "artist_name_idx" , columnList ="name")
+				})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE , region = "org.nanotek.beans.entity.Area")
-public class Area extends EntityLongBase implements NameBase{
+public class Area extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = -7073321340141567106L;
 	
-	@NotBlank
-	@Size(min=1,max=1000)
-	@Column(name="name" , length=1000 , insertable=true , updatable=true , nullable=false)
-	private String name; 
-	
-	@NotBlank
-	@Size(min=1,max=50)
-	@Column(name="gid" , length=50 , insertable=true , updatable=true , nullable=false)
-	private String gid;
+	@Column(name="area_id",nullable=false)
+	private Long areaId; 
 	
 	@NotNull
 	@ManyToOne(optional=false, fetch = FetchType.LAZY )
@@ -60,21 +61,21 @@ public class Area extends EntityLongBase implements NameBase{
 	public Area() {}
 	
 	public Area(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid) {
-		super(id);
 		this.name = name;
 		this.gid = gid;
+		this.areaId = id;
 	}
 
 	public Area(@NotNull Long id, 
 			@NotBlank @Size(min = 1, max = 1000) String name, @NotBlank @Size(min = 1, max = 50) String gid,
 			@NotNull AreaType type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment areaComment) {
-		super(id);
 		this.name = name;
 		this.gid = gid;
 		this.type = type;
 		this.areaBeginDate = areaBeginDate;
 		this.areaEndDate = areaEndDate;
 		this.areaComment = areaComment;
+		this.areaId = id;
 	}
 
 	public String getName() {
@@ -125,12 +126,19 @@ public class Area extends EntityLongBase implements NameBase{
 		this.areaComment = areaComment;
 	}
 
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((areaId == null) ? 0 : areaId.hashCode());
 		return result;
 	}
 
@@ -143,23 +151,19 @@ public class Area extends EntityLongBase implements NameBase{
 		if (getClass() != obj.getClass())
 			return false;
 		Area other = (Area) obj;
-		if (gid == null) {
-			if (other.gid != null)
+		if (areaId == null) {
+			if (other.areaId != null)
 				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!areaId.equals(other.areaId))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Area [name=" + name + ", gid=" + gid + ", type=" + type + ", areaBeginDate=" + areaBeginDate
-				+ ", areaEndDate=" + areaEndDate + ", areaComment=" + areaComment + ", id=" + id + "]";
+		return "Area [areaId=" + areaId + ", type=" + type + ", areaBeginDate=" + areaBeginDate + ", areaEndDate="
+				+ areaEndDate + ", areaComment=" + areaComment + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
+
 	
 }

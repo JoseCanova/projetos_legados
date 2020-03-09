@@ -17,6 +17,7 @@ import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaRepository;
 import org.nanotek.repository.jpa.ArtistBeginDateRepository;
 import org.nanotek.repository.jpa.ArtistEndDateRespository;
+import org.nanotek.repository.jpa.ArtistRepository;
 import org.nanotek.repository.jpa.ArtistTypeRepository;
 import org.nanotek.repository.jpa.GenderRepository;
 import org.nanotek.service.CsvMessageHandler;
@@ -170,6 +171,9 @@ public class ArtistIntegrationConfiguration {
 	class ArtistTransformer implements GenericTransformer<ArtistBean , ArtistMessageHolder>{
 
 		@Autowired
+		ArtistRepository arep;
+		
+		@Autowired
 		GenderRepository genderRepository;
 
 		@Autowired
@@ -180,7 +184,9 @@ public class ArtistIntegrationConfiguration {
 
 		@Override
 		public ArtistMessageHolder transform(ArtistBean source) {
-
+			
+			arep.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present" + a.toJson());});
+			
 			Artist artist = new Artist(source.getId(),source.getName(),source.getGid(),source.getSortName());
 
 			if (source.getBeginDateYear() != null) {
@@ -200,13 +206,13 @@ public class ArtistIntegrationConfiguration {
 			}
 
 			if (source.getBeginArea()!=null) { 
-				Optional<Area> optBegin = areaRepository.findById(source.getBeginArea());
+				Optional<Area> optBegin = areaRepository.findByAreaId(source.getBeginArea());
 				if (optBegin.isPresent())
 					artist.setBeginArea(optBegin.get());
 			}
 
 			if (source.getEndArea()!=null) { 
-				Optional<Area> optEnd = areaRepository.findById(source.getEndArea());
+				Optional<Area> optEnd = areaRepository.findByAreaId(source.getEndArea());
 				if (optEnd.isPresent())
 					artist.setEndArea(optEnd.get());
 			}
@@ -219,7 +225,7 @@ public class ArtistIntegrationConfiguration {
 			}
 			
 			if (source.getArea()!=null) { 
-				Optional<Area> optArea = areaRepository.findById(source.getArea());
+				Optional<Area> optArea = areaRepository.findByAreaId(source.getArea());
 				if (optArea.isPresent())
 					artist.setArea(optArea.get());
 			}

@@ -21,32 +21,61 @@
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
+		<class>org.nanotek.beans.entity.ArtistBeginDate</class>
+		<class>org.nanotek.beans.entity.ArtistEndDate</class>
+		<class>org.nanotek.beans.entity.ArtistGender</class>
+		<class>org.nanotek.beans.entity.ArtistComment</class>
 		<class>org.nanotek.beans.entity.ArtistAlias</class>
 		<class>org.nanotek.beans.entity.ArtistAliasType</class>
 		<class>org.nanotek.beans.entity.ArtistAliasBeginDate</class>
 		<class>org.nanotek.beans.entity.ArtistAliasEndDate</class>
 		<class>org.nanotek.beans.entity.ArtistGroupType</class>
 		<class>org.nanotek.beans.entity.ArtistType</class>
+		<class>org.nanotek.beans.entity.BarCodeBase</class>
+		<class>org.nanotek.beans.entity.BaseType</class>
 		<class>org.nanotek.beans.entity.CommentBase</class>
+		<class>org.nanotek.beans.entity.CountBase</class>
 		<class>org.nanotek.beans.entity.DescriptionBase</class>
 		<class>org.nanotek.beans.entity.InstrumentComment</class>
 		<class>org.nanotek.beans.entity.InstrumentDescription</class>
 		<class>org.nanotek.beans.entity.DatableBase</class>
+		<class>org.nanotek.beans.entity.DescriptionBase</class>
 		<class>org.nanotek.beans.entity.Gender</class>
 		<class>org.nanotek.beans.entity.Isrc</class>
 		<class>org.nanotek.beans.entity.InstrumentType</class>
 		<class>org.nanotek.beans.entity.Instrument</class>
+		<class>org.nanotek.beans.entity.InstrumentDescription</class>
 		<class>org.nanotek.beans.entity.Label</class>
 		<class>org.nanotek.beans.entity.Language</class>
+		<class>org.nanotek.beans.entity.LengthyBase</class>
+		<class>org.nanotek.beans.entity.LocaleBase</class>
 		<class>org.nanotek.beans.entity.LongIdNameEntity</class>
+		<class>org.nanotek.beans.entity.LongIdGidNameEntity</class>
+		<class>org.nanotek.beans.entity.LongIdSorNameEntity</class>
+		<class>org.nanotek.beans.entity.LongCountBase</class>
+		<class>org.nanotek.beans.entity.LongLengthyBase</class>
+		<class>org.nanotek.beans.entity.LongNumberBase</class>
+		<class>org.nanotek.beans.entity.LongPositionBase</class>
 		<class>org.nanotek.beans.entity.Medium</class>
+		<class>org.nanotek.beans.entity.MediumCount</class>
+		<class>org.nanotek.beans.entity.MediumPosition</class>
 		<class>org.nanotek.beans.entity.MediumFormat</class>
+		<class>org.nanotek.beans.entity.NumberBase</class>
+		<class>org.nanotek.beans.entity.PositionBase</class>
 		<class>org.nanotek.beans.entity.Recording</class>
 		<class>org.nanotek.beans.entity.RecordingLength</class>
 		<class>org.nanotek.beans.entity.RecordingAlias</class>
 		<class>org.nanotek.beans.entity.RecordingAliasType</class>
+		<class>org.nanotek.beans.entity.RecordingAliasBeginDate</class>
+		<class>org.nanotek.beans.entity.RecordingAliasEndDate</class>
+		<class>org.nanotek.beans.entity.RecordingAliasLocale</class>
 		<class>org.nanotek.beans.entity.Release</class>
+		<class>org.nanotek.beans.entity.ReleaseBarCode</class>
+		<class>org.nanotek.beans.entity.ReleaseComment</class>
 		<class>org.nanotek.beans.entity.ReleaseAlias</class>
+		<class>org.nanotek.beans.entity.ReleaseAliasLocale</class>
+		<class>org.nanotek.beans.entity.ReleaseAliasBeginDate</class>
+		<class>org.nanotek.beans.entity.ReleaseAliasEndDate</class>
 		<class>org.nanotek.beans.entity.ReleaseAliasType</class>
 		<class>org.nanotek.beans.entity.ReleaseGroup</class>
 		<class>org.nanotek.beans.entity.ReleaseStatus</class>
@@ -54,6 +83,9 @@
 		<class>org.nanotek.beans.entity.ReleaseGroupPrimaryType</class>
 		<class>org.nanotek.beans.entity.SequenceLongBase</class>
 		<class>org.nanotek.beans.entity.Track</class>
+		<class>org.nanotek.beans.entity.TrackLength</class>
+		<class>org.nanotek.beans.entity.TrackNumber</class>
+		<class>org.nanotek.beans.entity.TrackPosition</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

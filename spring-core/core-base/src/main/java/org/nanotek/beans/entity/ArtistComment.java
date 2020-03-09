@@ -1,87 +1,48 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Length;
-import org.nanotek.ImmutableLongBase;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="artist_comment")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ArtistComment implements ImmutableLongBase {
+public class ArtistComment extends CommentBase {
 
 	private static final long serialVersionUID = 2608408556126104972L;
 
-	@Id
-	@NotNull
-	private Long id;
-	
-	@NotNull
-	@Length(min = 0 , max = 1000)
-	@Column(name="comment", length=1000, nullable = false , updatable = true )
-	private String comment;
-	
-	@JsonIgnore
-	@OneToOne
-	@MapsId
+	@OneToOne(mappedBy = "artistComment")
 	private Artist artist;
 
 	public ArtistComment() {}
 	
-	public ArtistComment(String comment, Artist artist) {
-		super();
-		this.comment = comment;
-		this.artist = artist;
-		this.id = artist.getId();
-	}
-
-	
-	
-	public ArtistComment(@NotNull @Length(min = 0, max = 1000) String comment) {
-		super();
-		this.comment = comment;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
+	public ArtistComment(@NotBlank String comment, Artist artist) {
+		super(comment);
 	}
 	
-	@JsonIgnore
+	public ArtistComment(@NotBlank String comment) {
+		super(comment);
+	}
+
 	public Artist getArtist() {
 		return artist;
 	}
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
-		this.id = artist.getId();
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
 		return result;
 	}
 
@@ -89,24 +50,22 @@ public class ArtistComment implements ImmutableLongBase {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		ArtistComment other = (ArtistComment) obj;
-		if (comment == null) {
-			if (other.comment != null)
+		if (artist == null) {
+			if (other.artist != null)
 				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		} else if (!artist.equals(other.artist))
 			return false;
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ArtistComment [artist=" + artist + ", comment=" + comment + ", id=" + id + "]";
+	}
 	
 }

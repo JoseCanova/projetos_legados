@@ -1,6 +1,7 @@
 package org.nanotek.repository.jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.projections.NameBaseProjection;
@@ -12,8 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArtistRepository extends JpaRepository <Artist ,Long> , NameBaseProjection<Artist>{
 	
-	@Query("from Artist a left outer join fetch a.artistCredits where a.id = ?1")
-	List<Artist> findByArtistId(Long artistId);
+	Optional<Artist> findByArtistId(Long artistId);
 	
 	@Query("select new org.nanotek.beans.entity.Artist(a.id , a.name , a.sortName , a.gid) "
 			+ "from Artist a where UPPER(a.name) like %:name% order by a.name")

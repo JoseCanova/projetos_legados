@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("rb")
+@DiscriminatorValue("eb")
 public class AreaBeginDate extends DatableBase {
 
 	private static final long serialVersionUID = 4640549011512215583L;

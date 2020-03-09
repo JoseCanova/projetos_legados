@@ -15,6 +15,7 @@ import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaBeginDateRepository;
 import org.nanotek.repository.jpa.AreaCommentRepository;
 import org.nanotek.repository.jpa.AreaEndDateRepository;
+import org.nanotek.repository.jpa.AreaRepository;
 import org.nanotek.service.jpa.AreaJpaService;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
@@ -233,11 +234,19 @@ public class AreaIntegrationConfiguration {
 		@Autowired
 		AreaTypeJpaService service;
 		
+		@Autowired
+		AreaRepository areaRep;
+		
 		@Override
 		public AreaHolder transform(AreaBean source) {
-			Area area = new Area(source.getId(),source.getName(),source.getGid());
+			Area area = null;
+			Optional <Area> optArea = areaRep.findByAreaId(source.getId());
+			if (optArea.isPresent()) 
+			 area = optArea.get();
+			 else
+				 area = new Area(source.getId(),source.getName(),source.getGid());
 			if(source.getType() == null)
-				throw new MessagingException("No type found for bean");
+				throw new MessagingException("Are Areatype found for bean " + source.toJson());
 			Optional<AreaType> optType = service.findById(source.getType());
 			area.setType(optType.get());
 			if (source.getBeginDateYear() !=null) { 

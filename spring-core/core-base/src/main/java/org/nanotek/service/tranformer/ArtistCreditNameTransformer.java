@@ -34,8 +34,7 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 		if (i.getArtistCreditId() !=null)
 			artistCredit = artistService.findByArtistCreditId(i.getArtistCreditId()); 
 		if(i.getArtistId() !=null) {
-			List<Artist> list = artistService.findByArtistId(i.getArtistId());
-			Optional<Artist> opt = list.stream().findFirst();
+			Optional<Artist> opt = artistService.findByArtistId(i.getArtistId());
 			Artist = opt.isPresent() ? opt : null;
 		}
 		ac = Optional.of(populate(i , artistCredit , Artist));
