@@ -9,16 +9,18 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name="track")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Track extends LongIdGidNameEntity {
+
+	private static final long serialVersionUID = 8642862162010029043L;
 
 	@Column(name="MEDIUM")
 	private Long medium; 
@@ -30,26 +32,30 @@ public class Track extends LongIdGidNameEntity {
 			  inverseJoinColumns = @JoinColumn(name = "position_id",referencedColumnName = "id"))
 	private TrackPosition position;
 	
-	
-	@Column(name="NUMBER")
+	@NotNull
+	@OneToOne(optional=false)
+	@JoinTable(
+			  name = "track_number_join", 
+			  joinColumns = @JoinColumn(name = "track_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "number_id",referencedColumnName = "id"))
 	private String number; 
 	
-	@Column(name="ARTIST_CREDIT")
-	private Long artistCredit; 
+	@NotNull
+	@ManyToOne(optional=false)
+	private ArtistCredit artistCredit; 
 	
-	@Column(name="LENGTH")
-	private Long length;
+	@NotNull
+	@OneToOne(optional=false)
+	@JoinTable(
+			  name = "track_length_join", 
+			  joinColumns = @JoinColumn(name = "track_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "length_id",referencedColumnName = "id"))
+	private TrackLength length;
 	
+	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY , optional = false)
 	@JoinColumn(name="recordingId" , referencedColumnName="id")
 	private Recording recording;
-	
-	/*
-	 * public Long getId() { return id; }
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
 	public Long getMedium() {
 		return medium;
@@ -79,17 +85,17 @@ public class Track extends LongIdGidNameEntity {
 		this.name = name;
 	}
 	
-	public Long getArtistCredit() {
+	public ArtistCredit getArtistCredit() {
 		return artistCredit;
 	}
-	public void setArtistCredit(Long artistCredit) {
+	public void setArtistCredit(ArtistCredit artistCredit) {
 		this.artistCredit = artistCredit;
 	}
 	
-	public Long getLength() {
+	public TrackLength getLength() {
 		return length;
 	}
-	public void setLength(Long length) {
+	public void setLength(TrackLength length) {
 		this.length = length;
 	}
 

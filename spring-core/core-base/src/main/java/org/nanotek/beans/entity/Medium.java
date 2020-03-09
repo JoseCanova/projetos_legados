@@ -6,47 +6,27 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.nanotek.NameBase;
 
 @Entity
 @Table(name="medium")
-public class Medium extends EntityLongBase implements NameBase{
+public class Medium extends LongIdNameEntity{
 
 	private static final long serialVersionUID = 6669274101742169443L;
-	
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(generator="medium_id_seq",strategy=GenerationType.SEQUENCE)
-	 * 
-	 * @SequenceGenerator(name="medium_id_seq" , sequenceName="medium_id_seq")
-	 * private Long id;
-	 */
-	/*
-	 * @Column(name="MEDIUM_ID") private Long mediumId;
-	 */
-	
-	@NotBlank
-	@Size(min=1 , max=2500)
-	@Column(name="name" , length=2500 , nullable=false)
-	private String name; 
 
 	@Column(name="track_count")
 	private Long trackCount; 
 
 	@NotNull
 	@Column(name="position",nullable=true)
-	private Long position;
+	private MediumPosition position;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY , optional = false)
 	@JoinColumn(name="release_id")
 	private Release release;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="medium_format_id")
 	private MediumFormat format;
@@ -54,14 +34,7 @@ public class Medium extends EntityLongBase implements NameBase{
 	public Medium() {}
 	
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public Long getTrackCount() {
 		return trackCount;
 	}
