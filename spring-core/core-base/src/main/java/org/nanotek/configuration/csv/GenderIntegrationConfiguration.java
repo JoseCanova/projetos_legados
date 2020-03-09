@@ -1,10 +1,17 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.GenderBean;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.beans.entity.Gender;
+import org.nanotek.beans.entity.ReleaseAliasType;
+import org.nanotek.configuration.csv.ReleaseAliasTypeConfiguration.ReleaseAliasTypeHolder;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.repository.jpa.GenderRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
@@ -143,14 +150,20 @@ public class GenderIntegrationConfiguration {
 
 		@Autowired
 		GenderRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
+		
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((Gender) message.getPayload());
+			GenderHolder holder = (GenderHolder) message.getPayload();
+			Gender type = holder.getGender();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -166,13 +179,41 @@ public class GenderIntegrationConfiguration {
 	}
 	
 	@MessageEndpoint
-	class GenderTransformer implements GenericTransformer<GenderBean, Gender>{
+	class GenderTransformer implements GenericTransformer<GenderBean, GenderHolder>{
 
 		@Override
-		public Gender transform(GenderBean source) {
-			return new Gender(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public GenderHolder transform(GenderBean source) {
+			Gender type = new Gender(source.getGid() , source.getName());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			type.setTypeId(source.getId());
+			source.setParent(source.getParent());
+			source.setChildOrder(source.getChildOrder());
+			if (notEmpty(source.getDescription())) { 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new GenderHolder (type, optDesc);
 		} 
+
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
+		}  
 		
+	}
+	
+	class GenderHolder{ 
+		Gender gender; 
+		Optional<BaseTypeDescription> optDesc;
+		public GenderHolder(Gender gender, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.gender = gender;
+			this.optDesc = optDesc;
+		}
+		public Gender getGender() {
+			return gender;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		}
 	}
 	
 }

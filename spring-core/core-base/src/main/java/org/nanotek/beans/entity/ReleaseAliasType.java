@@ -1,14 +1,17 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="release_alias_type")
+@DiscriminatorValue(value="ReleaseAliasType")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE , region = "org.nanotek.beans.entity.ReleaseAliasType")
 public class ReleaseAliasType extends BaseType {
@@ -18,8 +21,12 @@ public class ReleaseAliasType extends BaseType {
 	public ReleaseAliasType() {
 	}
 
-	public ReleaseAliasType(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id, name, parent, childOrder, description, gid);
+	public ReleaseAliasType(@NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
+		super(gid, name);
+	}
+
+	public ReleaseAliasType(@NotNull String name) {
+		super(name);
 	}
 
 	@Override

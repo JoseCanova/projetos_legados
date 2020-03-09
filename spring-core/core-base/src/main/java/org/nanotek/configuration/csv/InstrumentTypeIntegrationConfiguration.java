@@ -1,10 +1,17 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.InstrumentTypeBean;
+import org.nanotek.beans.entity.ArtistType;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.beans.entity.InstrumentType;
+import org.nanotek.configuration.csv.ArtistTypeInegrationConfiguration.ArtistTypeHolder;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.service.jpa.InstrumentTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -204,19 +211,59 @@ public class InstrumentTypeIntegrationConfiguration {
     	@Autowired
     	InstrumentTypeJpaService jpaService;
     	
+    	@Autowired
+		BaseTypeDescriptionRepository descRep;
+    	
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			jpaService.save((InstrumentType) message.getPayload());
-			System.out.println(message.toString());
+			
+			InstrumentTypeHolder holder = (InstrumentTypeHolder) message.getPayload();
+			InstrumentType type = holder.getType();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			jpaService.save(type);
+			
 		}
     }
     
     @MessageEndpoint
-    class InstrumentTypeTransformer implements GenericTransformer<InstrumentTypeBean  , InstrumentType> {
+    class InstrumentTypeTransformer implements GenericTransformer<InstrumentTypeBean  , InstrumentTypeHolder> {
     	
 		@Override
-		public InstrumentType transform(InstrumentTypeBean source) {
-			return new InstrumentType(source.getId() , source.getName() , source.getParent() , source.getChildOrder() , source.getDescription(), source.getGid());
+		public InstrumentTypeHolder transform(InstrumentTypeBean source) {
+			
+			InstrumentType type = new InstrumentType(source.getGid() , source.getName());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			type.setTypeId(source.getId());
+			source.setParent(source.getParent());
+			source.setChildOrder(source.getChildOrder());
+			if (notEmpty(source.getDescription())) { 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new InstrumentTypeHolder (type, optDesc);
 		}
+		
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
+		} 
+    }
+    
+    class InstrumentTypeHolder{ 
+    	InstrumentType type; 
+    	Optional<BaseTypeDescription> optDesc;
+		public InstrumentTypeHolder(InstrumentType type, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.type = type;
+			this.optDesc = optDesc;
+		}
+		public InstrumentType getType() {
+			return type;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		} 
     }
 }

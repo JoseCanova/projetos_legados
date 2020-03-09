@@ -1,10 +1,15 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.RecordingAliasTypeBean;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.beans.entity.RecordingAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.repository.jpa.RecordingAliasTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
@@ -143,14 +148,20 @@ public class RecordingAliasTypeConfiguration {
 
 		@Autowired
 		RecordingAliasTypeRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
+		
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((RecordingAliasType) message.getPayload());
+			RecordingAliasTypeHolder holder = (RecordingAliasTypeHolder) message.getPayload();
+			RecordingAliasType type = holder.getType();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -166,13 +177,42 @@ public class RecordingAliasTypeConfiguration {
 	}
 	
 	@MessageEndpoint
-	class RecordingAliasTypeTransformer implements GenericTransformer<RecordingAliasTypeBean, RecordingAliasType>{
+	class RecordingAliasTypeTransformer implements GenericTransformer<RecordingAliasTypeBean, RecordingAliasTypeHolder>{
 
 		@Override
-		public RecordingAliasType transform(RecordingAliasTypeBean source) {
-			return new RecordingAliasType(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public RecordingAliasTypeHolder transform(RecordingAliasTypeBean source) {
+			
+			RecordingAliasType type = new RecordingAliasType(source.getGid() , source.getName());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			type.setTypeId(source.getId());
+			source.setParent(source.getParent());
+			source.setChildOrder(source.getChildOrder());
+			if (notEmpty(source.getDescription())) { 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new RecordingAliasTypeHolder (type, optDesc);
 		} 
 		
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
+		} 
+	}
+	
+	class RecordingAliasTypeHolder { 
+		
+		RecordingAliasType type; 
+		Optional<BaseTypeDescription> optDesc;
+		public RecordingAliasTypeHolder(RecordingAliasType type, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.type = type;
+			this.optDesc = optDesc;
+		}
+		public RecordingAliasType getType() {
+			return type;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		}
 	}
 	
 }

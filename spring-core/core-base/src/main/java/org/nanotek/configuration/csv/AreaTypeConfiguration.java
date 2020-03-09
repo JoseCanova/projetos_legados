@@ -1,11 +1,17 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.AreaTypeBean;
 import org.nanotek.beans.entity.AreaType;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaTypeRepository;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
+import org.nanotek.repository.jpa.BaseTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -143,14 +149,20 @@ public class AreaTypeConfiguration {
 
 		@Autowired
 		AreaTypeRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
 
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((AreaType) message.getPayload());
+			AreaTypeHolder typeHolder = (AreaTypeHolder) message.getPayload();
+			AreaType type = typeHolder.getAreaType();
+			Optional<BaseTypeDescription> optDesc = typeHolder.getOptDescription();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -166,13 +178,44 @@ public class AreaTypeConfiguration {
 	}
 	
 	@MessageEndpoint
-	class AreaTypeTransformer implements GenericTransformer<AreaTypeBean, AreaType>{
+	class AreaTypeTransformer implements GenericTransformer<AreaTypeBean, AreaTypeHolder>{
 
 		@Override
-		public AreaType transform(AreaTypeBean source) {
-			return new AreaType(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public AreaTypeHolder transform(AreaTypeBean source) {
+			
+			AreaType areaType = new AreaType(source.getGid() , source.getName());
+			areaType.setParent(source.getParent());
+			areaType.setTypeId(source.getId());
+			areaType.setParent(source.getParent());
+			Optional<BaseTypeDescription> typeDescription = Base.NULL_VALUE(BaseTypeDescription.class);
+			
+			if (notEmpty(source.getDescription())) { 
+				typeDescription = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new AreaTypeHolder(areaType, typeDescription);
+		}
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
 		} 
-		
 	}
 	
+	class AreaTypeHolder{
+		
+		AreaType areaType; 
+		Optional<BaseTypeDescription> optDescription;
+
+		public AreaTypeHolder(AreaType areaType, Optional<BaseTypeDescription> optDescription) {
+			super();
+			this.areaType = areaType;
+			this.optDescription = optDescription;
+		}
+
+		public AreaType getAreaType() {
+			return areaType;
+		}
+
+		public Optional<BaseTypeDescription> getOptDescription() {
+			return optDescription;
+		}
+	}
 }

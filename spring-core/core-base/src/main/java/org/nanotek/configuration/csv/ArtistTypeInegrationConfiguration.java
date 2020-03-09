@@ -1,11 +1,16 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistTypeBean;
 import org.nanotek.beans.entity.ArtistType;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.ArtistTypeRepository;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -143,14 +148,20 @@ public class ArtistTypeInegrationConfiguration {
 
 		@Autowired
 		ArtistTypeRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
+
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((ArtistType) message.getPayload());
+			ArtistTypeHolder holder = (ArtistTypeHolder) message.getPayload();
+			ArtistType type = holder.getType();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -166,13 +177,42 @@ public class ArtistTypeInegrationConfiguration {
 	}
 	
 	@MessageEndpoint
-	class ArtistTypeTransformer implements GenericTransformer<ArtistTypeBean, ArtistType>{
+	class ArtistTypeTransformer implements GenericTransformer<ArtistTypeBean, ArtistTypeHolder>{
 
 		@Override
-		public ArtistType transform(ArtistTypeBean source) {
-			return new ArtistType(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public ArtistTypeHolder transform(ArtistTypeBean source) {
+			
+			ArtistType type = new ArtistType(source.getGid() , source.getName());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			type.setTypeId(source.getId());
+			type.setParent(source.getParent());
+			type.setChildOrder(source.getChildOrder());
+			if(notEmpty(source.getDescription())) { 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			
+			return new ArtistTypeHolder(type,optDesc);
 		} 
 		
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
+		} 
+	}
+	
+	class ArtistTypeHolder { 
+		ArtistType type; 
+		Optional<BaseTypeDescription> optDesc;
+		public ArtistTypeHolder(ArtistType type, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.type = type;
+			this.optDesc = optDesc;
+		}
+		public ArtistType getType() {
+			return type;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		} 
 	}
 	
 }

@@ -1,14 +1,17 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="recording_alias_type")
+@DiscriminatorValue(value="RecordingAliasType")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RecordingAliasType extends BaseType {
@@ -17,9 +20,13 @@ public class RecordingAliasType extends BaseType {
 	
 	public RecordingAliasType() {
 	}
+	
+	public RecordingAliasType(@NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
+		super(gid, name);
+	}
 
-	public RecordingAliasType(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id, name, parent, childOrder, description, gid);
+	public RecordingAliasType(@NotNull String name) {
+		super(name);
 	}
 
 	@Override

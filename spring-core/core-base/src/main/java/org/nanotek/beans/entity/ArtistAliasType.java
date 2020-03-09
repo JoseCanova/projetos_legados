@@ -1,10 +1,13 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="artist_alias_type")
+@DiscriminatorValue(value="ArtistAliasType")
 public class ArtistAliasType extends BaseType{
 
 	private static final long serialVersionUID = 430998067473248669L;
@@ -12,8 +15,14 @@ public class ArtistAliasType extends BaseType{
 	public ArtistAliasType() {
 	}
 
-	public ArtistAliasType(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id, name, parent, childOrder, description, gid);
+	
+	public ArtistAliasType(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+	}
+
+
+	public ArtistAliasType(@NotBlank String name) {
+		super(name);
 	}
 
 	@Override

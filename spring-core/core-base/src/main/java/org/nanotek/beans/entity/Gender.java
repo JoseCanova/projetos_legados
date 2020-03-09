@@ -1,10 +1,13 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="gender")
+@DiscriminatorValue(value="Gender")
 public class Gender extends BaseType{
 
 	private static final long serialVersionUID = 1628032460585953186L;
@@ -12,10 +15,17 @@ public class Gender extends BaseType{
 	public Gender() {
 	}
 
-	public Gender(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id, name, parent, childOrder, description, gid);
-	}
 	
+	public Gender(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+	}
+
+
+	public Gender(@NotBlank String name) {
+		super(name);
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

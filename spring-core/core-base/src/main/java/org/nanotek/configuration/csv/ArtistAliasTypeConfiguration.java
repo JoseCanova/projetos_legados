@@ -1,11 +1,16 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistAliasTypeBean;
 import org.nanotek.beans.entity.ArtistAliasType;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.ArtistAliasTypeRepository;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;
@@ -143,14 +148,20 @@ public class ArtistAliasTypeConfiguration {
 
 		@Autowired
 		ArtistAliasTypeRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
+
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((ArtistAliasType) message.getPayload());
+			ArtistAliasTypeHolder holder = (ArtistAliasTypeHolder) message.getPayload();
+			ArtistAliasType type = holder.getType();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -166,13 +177,41 @@ public class ArtistAliasTypeConfiguration {
 	}
 	
 	@MessageEndpoint
-	class ArtistAliasTypeTransformer implements GenericTransformer<ArtistAliasTypeBean, ArtistAliasType>{
+	class ArtistAliasTypeTransformer implements GenericTransformer<ArtistAliasTypeBean, ArtistAliasTypeHolder>{
 
 		@Override
-		public ArtistAliasType transform(ArtistAliasTypeBean source) {
-			return new ArtistAliasType(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public ArtistAliasTypeHolder transform(ArtistAliasTypeBean source) {
+			ArtistAliasType type = new ArtistAliasType(source.getGid() , source.getName());
+			type.setTypeId(source.getId());
+			type.setChildOrder(source.getChildOrder());
+			type.setParent(source.getParent());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			if (notEmpty(source.getDescription())){ 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new ArtistAliasTypeHolder(type,optDesc);
+		} 
+		
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
 		} 
 		
 	}
 	
+	class ArtistAliasTypeHolder{ 
+		ArtistAliasType type; 
+		Optional<BaseTypeDescription> optDesc;
+		public ArtistAliasTypeHolder(ArtistAliasType type, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.type = type;
+			this.optDesc = optDesc;
+		}
+		public ArtistAliasType getType() {
+			return type;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		}
+		
+	}
 }

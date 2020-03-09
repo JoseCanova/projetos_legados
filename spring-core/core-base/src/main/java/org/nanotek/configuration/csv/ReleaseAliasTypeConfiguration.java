@@ -1,10 +1,15 @@
 package org.nanotek.configuration.csv;
 
+import java.util.Optional;
+
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ReleaseAliasTypeBean;
+import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.beans.entity.ReleaseAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
+import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.repository.jpa.ReleaseAliasTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
@@ -143,14 +148,20 @@ public class ReleaseAliasTypeConfiguration {
 
 		@Autowired
 		ReleaseAliasTypeRepository repository;
-		/*
-		 * @Autowired InstrumentJpaService service;
-		 */
+
+		@Autowired
+		BaseTypeDescriptionRepository descRep;
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			logger.info(message.getPayload().toString());
-			repository.save((ReleaseAliasType) message.getPayload());
+			ReleaseAliasTypeHolder holder = (ReleaseAliasTypeHolder) message.getPayload();
+			ReleaseAliasType type = holder.getType();
+			Optional<BaseTypeDescription> optDesc = holder.getOptDesc();
+			optDesc.ifPresent(d -> {
+				descRep.save(d);
+				type.setDescription(d);
+			});
+			repository.save(type);
 		}
 	}
 
@@ -164,15 +175,44 @@ public class ReleaseAliasTypeConfiguration {
 				.handle(handler)
 				.get();
 	}
-	
+
 	@MessageEndpoint
-	class ReleaseAliasTypeTransformer implements GenericTransformer<ReleaseAliasTypeBean, ReleaseAliasType>{
+	class ReleaseAliasTypeTransformer implements GenericTransformer<ReleaseAliasTypeBean, ReleaseAliasTypeHolder>{
 
 		@Override
-		public ReleaseAliasType transform(ReleaseAliasTypeBean source) {
-			return new ReleaseAliasType(source.getId(), source.getName() , source.getParent() , source.getChildOrder() , source.getDescription() , source.getGid());
+		public ReleaseAliasTypeHolder transform(ReleaseAliasTypeBean source) {
+			ReleaseAliasType type = new ReleaseAliasType(source.getGid() , source.getName());
+			Optional<BaseTypeDescription> optDesc = Base.NULL_VALUE(BaseTypeDescription.class);
+			type.setTypeId(source.getId());
+			source.setParent(source.getParent());
+			source.setChildOrder(source.getChildOrder());
+			if (notEmpty(source.getDescription())) { 
+				optDesc = Optional.of(new BaseTypeDescription(source.getDescription()));
+			}
+			return new ReleaseAliasTypeHolder (type, optDesc);
 		} 
-		
+
+		private boolean notEmpty(String str) {
+			return str !=null && !"".contentEquals(str.trim());
+		} 
+
 	}
-	
+
+	class ReleaseAliasTypeHolder { 
+
+		ReleaseAliasType type; 
+		Optional<BaseTypeDescription> optDesc;
+		public ReleaseAliasTypeHolder(ReleaseAliasType type, Optional<BaseTypeDescription> optDesc) {
+			super();
+			this.type = type;
+			this.optDesc = optDesc;
+		}
+		public ReleaseAliasType getType() {
+			return type;
+		}
+		public Optional<BaseTypeDescription> getOptDesc() {
+			return optDesc;
+		}
+	}
+
 }

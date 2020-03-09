@@ -1,14 +1,16 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="area_type")
+@DiscriminatorValue(value = "AreaType")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AreaType extends BaseType {
@@ -18,8 +20,12 @@ public class AreaType extends BaseType {
 	public AreaType() {
 	}
 
-	public AreaType(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id , name , parent  , childOrder , description , gid);
+	public AreaType(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+	}
+
+	public AreaType(@NotBlank String name) {
+		super(name);
 	}
 
 	@Override

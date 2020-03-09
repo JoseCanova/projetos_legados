@@ -1,9 +1,29 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@MappedSuperclass
+import org.hibernate.validator.constraints.Length;
+
+
+@Entity
+@Table(name="base_type",
+					indexes= {
+							@Index(unique = false , name = "table_idx" , columnList ="table_id"),
+							@Index(unique = false , name = "type_id_idx" , columnList ="type_id")
+						})
+@DiscriminatorColumn(
+	    discriminatorType = DiscriminatorType.STRING,
+	    name = "table_id",
+	    columnDefinition = "VARCHAR NOT NULL"
+	)
 public class BaseType extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = 863905425134347710L;
@@ -17,19 +37,18 @@ public class BaseType extends LongIdGidNameEntity{
 	@Column(name="childOrder")
 	protected Long childOrder;
 
-	@Column(name="description" , length=4000)
-	protected String description; 
+	@OneToOne
+	protected BaseTypeDescription description; 
 	
 	public BaseType() {
 	}
 
-	public BaseType(Long id , String name, Long parent, Long childOrder, String description, String gid) {
-		this.typeId = id;
-		this.name = name;
-		this.parent = parent;
-		this.childOrder = childOrder;
-		this.description = description;
-		this.gid = gid;
+	public BaseType(@NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
+		super(gid, name);
+	}
+
+	public BaseType(@NotNull String name) {
+		super(name);
 	}
 
 	public Long getParent() {
@@ -48,11 +67,11 @@ public class BaseType extends LongIdGidNameEntity{
 		this.childOrder = childOrder;
 	}
 
-	public String getDescription() {
+	public BaseTypeDescription getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(BaseTypeDescription description) {
 		this.description = description;
 	}
 
@@ -91,6 +110,14 @@ public class BaseType extends LongIdGidNameEntity{
 	public String toString() {
 		return "BaseType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
 				+ description + ", gid=" + gid + ", id=" + id + "]";
+	}
+
+	public Long getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 
 }

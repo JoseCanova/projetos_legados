@@ -6,9 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name="instrument_type")
 public class InstrumentType extends BaseType {
 
 	
@@ -20,8 +23,12 @@ public class InstrumentType extends BaseType {
 	public InstrumentType() {
 	}
 
-	public InstrumentType(Long id, String name, Long parent, Long childOrder, String description, String gid) {
-		super(id , name , parent  , childOrder , description , gid);
+	public InstrumentType(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+	}
+
+	public InstrumentType(@NotBlank String name) {
+		super(name);
 	}
 
 	@Override
