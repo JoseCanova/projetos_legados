@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("le")
+@DiscriminatorValue("ArtistAliasEndDate")
 public class ArtistAliasEndDate extends DatableBase{
 
 	private static final long serialVersionUID = 7987268027913627678L;

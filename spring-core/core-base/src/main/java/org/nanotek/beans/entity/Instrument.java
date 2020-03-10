@@ -3,17 +3,27 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="instrument")
+@Table(name="instrument", 
+uniqueConstraints= {
+@UniqueConstraint(name="uk_instrument_gid",columnNames={"gid"}),
+@UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
+},
+indexes= {
+			@Index(unique = false , name = "instrument_name_idx" , columnList ="name"),
+			@Index(unique = false , name = "instrument_sort_name_idx" , columnList ="sort_name")
+		})
 public class Instrument extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 1720965406197902687L;

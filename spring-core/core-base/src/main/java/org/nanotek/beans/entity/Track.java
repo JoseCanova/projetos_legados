@@ -22,6 +22,9 @@ public class Track extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 8642862162010029043L;
 
+	@Column(name="track_id")
+	private Long trackId;
+	
 	@ManyToOne(optional=false)
 	private Medium medium; 
 	
@@ -98,5 +101,48 @@ public class Track extends LongIdGidNameEntity {
 	public void setLength(TrackLength length) {
 		this.length = length;
 	}
+	public Long getTrackId() {
+		return trackId;
+	}
+	public void setTrackId(Long trackId) {
+		this.trackId = trackId;
+	}
+	public Recording getRecording() {
+		return recording;
+	}
+	public void setRecording(Recording recording) {
+		this.recording = recording;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((trackId == null) ? 0 : trackId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Track other = (Track) obj;
+		if (trackId == null) {
+			if (other.trackId != null)
+				return false;
+		} else if (!trackId.equals(other.trackId))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Track [trackId=" + trackId + ", medium=" + medium + ", position=" + position + ", number=" + number
+				+ ", artistCredit=" + artistCredit + ", length=" + length + ", recording=" + recording + ", gid=" + gid
+				+ ", name=" + name + ", id=" + id + "]";
+	}
 
+	
+	
 }

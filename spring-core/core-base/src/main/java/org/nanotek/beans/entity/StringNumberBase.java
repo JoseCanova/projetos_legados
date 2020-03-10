@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="string_number_base",
 							indexes= {
-									@Index(unique = false , name = "table_idx" , columnList ="table_id"),
-									@Index(unique = false , name = "number_idx" , columnList ="number")
+									@Index(unique = false , name = "string_number_table_idx" , columnList ="table_id"),
+									@Index(unique = false , name = "string_number_number_idx" , columnList ="number")
 								})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(

@@ -4,11 +4,13 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,7 +20,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 
 @Entity
-@Table(name="release")
+@Table(name="release",
+uniqueConstraints= {
+@UniqueConstraint(name="uk_release_gid",columnNames={"gid"}),
+@UniqueConstraint(name="uk_release_id",columnNames={"release_id"})
+},
+indexes= {
+			@Index(unique = false , name = "release_name_idx" , columnList ="name")
+		})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Release extends LongIdGidNameEntity {

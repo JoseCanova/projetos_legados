@@ -3,17 +3,26 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="artist_alias")
+@Table(name="artist_alias", 
+uniqueConstraints= {
+@UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
+},
+indexes= {
+			@Index(unique = false , name = "artist_alias_name_idx" , columnList ="name"),
+			@Index(unique = false , name = "artist_alias_sort_name_idx" , columnList ="sort_name")
+		})
 public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	private static final long serialVersionUID = -6829974720983757034L;

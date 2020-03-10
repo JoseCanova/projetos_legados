@@ -1,20 +1,31 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="medium")
+@Table(name="medium", uniqueConstraints= {
+		@UniqueConstraint(name="uk_medium_id",columnNames={"medium_id"})
+		},
+		indexes= {
+			@Index(unique = false , name = "medium_name_idx" , columnList ="name")
+		})
 public class Medium extends LongIdNameEntity{
 
 	private static final long serialVersionUID = 6669274101742169443L;
+	
+	@Column(name="medium_id")
+	private Long mediumId;
 
 	@NotNull
 	@OneToOne(optional=false)
@@ -74,14 +85,31 @@ public class Medium extends LongIdNameEntity{
 	}
 
 
+	public Long getMediumId() {
+		return mediumId;
+	}
+
+
+	public void setMediumId(Long mediumId) {
+		this.mediumId = mediumId;
+	}
+
+
+	public MediumFormat getFormat() {
+		return format;
+	}
+
+
+	public void setFormat(MediumFormat format) {
+		this.format = format;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((format == null) ? 0 : format.hashCode());
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + ((release == null) ? 0 : release.hashCode());
-		result = prime * result + ((trackCount == null) ? 0 : trackCount.hashCode());
+		result = prime * result + ((mediumId == null) ? 0 : mediumId.hashCode());
 		return result;
 	}
 
@@ -95,25 +123,10 @@ public class Medium extends LongIdNameEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		Medium other = (Medium) obj;
-		if (format == null) {
-			if (other.format != null)
+		if (mediumId == null) {
+			if (other.mediumId != null)
 				return false;
-		} else if (!format.equals(other.format))
-			return false;
-		if (position == null) {
-			if (other.position != null)
-				return false;
-		} else if (!position.equals(other.position))
-			return false;
-		if (release == null) {
-			if (other.release != null)
-				return false;
-		} else if (!release.equals(other.release))
-			return false;
-		if (trackCount == null) {
-			if (other.trackCount != null)
-				return false;
-		} else if (!trackCount.equals(other.trackCount))
+		} else if (!mediumId.equals(other.mediumId))
 			return false;
 		return true;
 	}
@@ -121,8 +134,8 @@ public class Medium extends LongIdNameEntity{
 
 	@Override
 	public String toString() {
-		return "Medium [trackCount=" + trackCount + ", position=" + position + ", release=" + release + ", format="
-				+ format + ", name=" + name + ", id=" + id + "]";
+		return "Medium [mediumId=" + mediumId + ", trackCount=" + trackCount + ", position=" + position + ", release="
+				+ release + ", format=" + format + ", name=" + name + ", id=" + id + "]";
 	}
 
 }

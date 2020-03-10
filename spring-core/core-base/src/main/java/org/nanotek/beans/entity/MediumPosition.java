@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value="me")
+@DiscriminatorValue(value="MediumPosition")
 public class MediumPosition extends LongPositionBase {
 
 	private static final long serialVersionUID = -5847962105120235784L;

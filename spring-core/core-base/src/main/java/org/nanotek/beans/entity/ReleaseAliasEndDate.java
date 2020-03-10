@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-@DiscriminatorValue(value="re")
+@DiscriminatorValue(value="ReleaseAliasEndDate")
 public class ReleaseAliasEndDate extends DatableBase {
 
 	private static final long serialVersionUID = -2316725967469275402L;

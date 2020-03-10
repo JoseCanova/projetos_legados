@@ -16,8 +16,8 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="base_type",
 					indexes= {
-							@Index(unique = false , name = "table_idx" , columnList ="table_id"),
-							@Index(unique = false , name = "type_id_idx" , columnList ="type_id")
+							@Index(unique = false , name = "base_table_idx" , columnList ="table_id"),
+							@Index(unique = false , name = "base_type_id_idx" , columnList ="type_id")
 						})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,

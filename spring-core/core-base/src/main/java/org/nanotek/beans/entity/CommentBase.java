@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="comment_base",
 					indexes= {
-							@Index(unique = false , name = "table_idx" , columnList ="table_id")
+							@Index(unique = false , name = "comment_table_idx" , columnList ="table_id")
 						})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,

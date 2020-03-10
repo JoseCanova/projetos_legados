@@ -3,7 +3,9 @@ package org.nanotek.beans.entity;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +13,14 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name="release_packaging")
+@Table(name="release_packaging",
+uniqueConstraints= {
+@UniqueConstraint(name="uk_release_pack_gid",columnNames={"gid"}),
+@UniqueConstraint(name="uk_release_pack_id",columnNames={"release_packaging_id"})
+},
+indexes= {
+			@Index(unique = false , name = "release_pack_name_idx" , columnList ="name")
+		})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReleasePackaging extends LongIdGidNameEntity{

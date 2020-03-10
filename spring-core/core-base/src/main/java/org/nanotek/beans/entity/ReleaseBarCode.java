@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue(value = "re")
+@DiscriminatorValue(value = "ReleaseBarCode")
 public class ReleaseBarCode extends BarCodeBase {
 
 	private static final long serialVersionUID = 2946106607354210235L;
