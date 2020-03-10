@@ -12,6 +12,7 @@ import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.beans.entity.ArtistAliasBeginDate;
 import org.nanotek.beans.entity.ArtistAliasEndDate;
 import org.nanotek.beans.entity.ArtistAliasLocale;
+import org.nanotek.beans.entity.ArtistAliasSortName;
 import org.nanotek.beans.entity.ArtistAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaRepository;
@@ -19,6 +20,7 @@ import org.nanotek.repository.jpa.ArtistAliasBeginDateRepository;
 import org.nanotek.repository.jpa.ArtistAliasEndDateRepository;
 import org.nanotek.repository.jpa.ArtistAliasLocaleRepository;
 import org.nanotek.repository.jpa.ArtistAliasRepository;
+import org.nanotek.repository.jpa.ArtistAliasSortNameRepository;
 import org.nanotek.repository.jpa.ArtistAliasTypeRepository;
 import org.nanotek.repository.jpa.ArtistRepository;
 import org.nanotek.repository.jpa.GenderRepository;
@@ -190,6 +192,8 @@ public class ArtistAliasIntegrationConfiguration {
 			
 			Optional<ArtistAliasLocale> optLocale = Base.NULL_VALUE(ArtistAliasLocale.class);
 			
+			Optional<ArtistAliasSortName> optSortName = Optional.of(new ArtistAliasSortName(source.getSortName()));
+			
 			if (source.getArtistId() == null)
 				throw new MessagingException("Artist is Required and Not Present " + source.toJson());
 			
@@ -201,7 +205,7 @@ public class ArtistAliasIntegrationConfiguration {
 				throw new MessagingException("Artist is Required and Not Present " + source.toJson());
 			}
 			
-			ArtistAlias artistAlias = new ArtistAlias(source.getId(),optArtist.get(),source.getName(),source.getSortName());
+			ArtistAlias artistAlias = new ArtistAlias(source.getId(),optArtist.get(),source.getName());
 
 			if (source.getBeginDateYear() != null) {
 				ArtistAliasBeginDate beginDate = new ArtistAliasBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
@@ -222,7 +226,7 @@ public class ArtistAliasIntegrationConfiguration {
 				optLocale = Optional.of(new ArtistAliasLocale(source.getLocale()));
 			}
 			
-			return new ArtistAliasMessageHolder(artistAlias, optLocale);
+			return new ArtistAliasMessageHolder(artistAlias, optLocale , optSortName);
 		}
 
 		private boolean notEmpty(String comment) {
@@ -254,11 +258,17 @@ public class ArtistAliasIntegrationConfiguration {
 		@Autowired
 		ArtistAliasLocaleRepository localeRep;
 		
+		@Autowired
+		ArtistAliasSortNameRepository sortRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			Optional<ArtistAliasLocale> optLocale ; 
 			ArtistAliasMessageHolder messageHolder = (ArtistAliasMessageHolder) message.getPayload();
 			ArtistAlias transientArtistAlias = messageHolder.getArtistAlias();
+			Optional<ArtistAliasSortName> optSort = messageHolder.getOptSortName();
+			optSort.ifPresent(s -> s.setArtistAlias(transientArtistAlias));
+			ArtistAliasSortName transientSort = optSort.get();
 			
 			if(transientArtistAlias.getArtistAliasBeginDate() !=null)
 				transientArtistAlias.setArtistAliasBeginDate(beginDateRepository.save(transientArtistAlias.getArtistAliasBeginDate()));
@@ -271,6 +281,7 @@ public class ArtistAliasIntegrationConfiguration {
 				transientArtistAlias.setArtistAliasType(type);
 			}
 			
+			transientArtistAlias.setSortName(sortRep.save(transientSort));
 			ArtistAlias theAlias = service.save(transientArtistAlias);
 			
 			optLocale = messageHolder.getOptLocale(); 
@@ -299,8 +310,10 @@ public class ArtistAliasIntegrationConfiguration {
 		private ArtistAlias artistAlias;
 		
 		private Optional<ArtistAliasLocale> optLocale;
+		
+		private Optional<ArtistAliasSortName> optSortName;
 
-		public ArtistAliasMessageHolder(ArtistAlias artistAlias , Optional<ArtistAliasLocale> optLocale) {
+		public ArtistAliasMessageHolder(ArtistAlias artistAlias , Optional<ArtistAliasLocale> optLocale , Optional<ArtistAliasSortName> optSortName) {
 			super();
 			this.artistAlias = artistAlias;
 			this.optLocale = optLocale;
@@ -312,6 +325,10 @@ public class ArtistAliasIntegrationConfiguration {
 
 		public Optional<ArtistAliasLocale> getOptLocale() {
 			return optLocale;
+		}
+
+		public Optional<ArtistAliasSortName> getOptSortName() {
+			return optSortName;
 		}
 		
 	}

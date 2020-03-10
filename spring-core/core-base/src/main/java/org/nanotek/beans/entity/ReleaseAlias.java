@@ -61,6 +61,11 @@ public class ReleaseAlias extends LongIdNameEntity {
 	public ReleaseAlias() {
 	}
 	
+	public ReleaseAlias(@NotNull Long id , @NotBlank String name) {
+		super(name);
+		this.releaseAliasId = id;
+	}
+	
 	public ReleaseAlias(@NotNull Long id , @NotBlank String name, @NotNull ReleaseAliasSortName sortName) {
 		super(name);
 		this.releaseAliasId = id;

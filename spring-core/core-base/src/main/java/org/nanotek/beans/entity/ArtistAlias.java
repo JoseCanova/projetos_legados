@@ -26,7 +26,7 @@ public class ArtistAlias  extends LongIdNameEntity  {
 	private Long aliasId; 
 	
 	@NotNull
-	@OneToOne
+	@OneToOne(optional = false)
 	@JoinTable(
 			  name = "artist_alias_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
@@ -91,6 +91,14 @@ public class ArtistAlias  extends LongIdNameEntity  {
 	}
 
 	public ArtistAlias(	@NotNull Long id, 
+			@NotNull Artist artist, 
+			@NotBlank String name) {
+				super(name);
+				this.aliasId = id;
+				this.artist = artist;
+	}
+	
+	public ArtistAlias(	@NotNull Long id, 
 						@NotNull Artist artist, 
 						@NotBlank String name,
 						@NotNull ArtistAliasSortName sortName) {
@@ -148,6 +156,8 @@ public class ArtistAlias  extends LongIdNameEntity  {
 		this.artistAliasLocale = artistAliasLocale;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,6 +165,14 @@ public class ArtistAlias  extends LongIdNameEntity  {
 		result = prime * result + ((aliasId == null) ? 0 : aliasId.hashCode());
 		result = prime * result + ((artistAliasType == null) ? 0 : artistAliasType.hashCode());
 		return result;
+	}
+	
+	public ArtistAliasSortName getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(ArtistAliasSortName sortName) {
+		this.sortName = sortName;
 	}
 
 	@Override

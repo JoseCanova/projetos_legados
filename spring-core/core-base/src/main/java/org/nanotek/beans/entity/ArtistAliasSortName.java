@@ -11,7 +11,7 @@ public class ArtistAliasSortName extends SortNameBase{
 
 	private static final long serialVersionUID = -7162854301861535960L;
 
-	@OneToOne(mappedBy="sortName",optional=false)
+	@OneToOne(mappedBy="sortName")
 	private ArtistAlias artistAlias;
 	
 	public ArtistAliasSortName() {

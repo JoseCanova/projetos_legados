@@ -16,11 +16,13 @@ import org.nanotek.beans.entity.ReleaseAlias;
 import org.nanotek.beans.entity.ReleaseAliasBeginDate;
 import org.nanotek.beans.entity.ReleaseAliasEndDate;
 import org.nanotek.beans.entity.ReleaseAliasLocale;
+import org.nanotek.beans.entity.ReleaseAliasSortName;
 import org.nanotek.beans.entity.ReleaseAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.ReleaseAliasBeginDateRepository;
 import org.nanotek.repository.jpa.ReleaseAliasEndDateRepository;
 import org.nanotek.repository.jpa.ReleaseAliasLocaleRepository;
+import org.nanotek.repository.jpa.ReleaseAliasSortNameRepository;
 import org.nanotek.repository.jpa.ReleaseAliasTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.jpa.ReleaseAliasJpaService;
@@ -189,13 +191,25 @@ public class ReleaseAliasIntegrationConfiguration {
 		@Autowired
 		ReleaseAliasLocaleRepository localeRepo;
 		
+		@Autowired
+		ReleaseAliasSortNameRepository sortRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			ReleaseAliasHolder holder = (ReleaseAliasHolder) message.getPayload();
-			ReleaseAlias releaseAlias = service.save(holder.getAlias());
+			ReleaseAlias transientAlias = holder.getAlias();
 			Optional<ReleaseAliasBeginDate> optBegin = holder.getOptBeginDate();
 			Optional<ReleaseAliasEndDate> optEnd = holder.getOptEndDate();
 			Optional<ReleaseAliasLocale> optLocale = holder.getOptLocale();
+			Optional<ReleaseAliasSortName> optSortName = holder.getOptSortName();
+			
+			optSortName.ifPresent(s -> {
+				ReleaseAliasSortName newSort = sortRep.save(s);
+				transientAlias.setSortName(newSort);
+			});
+			
+			ReleaseAlias releaseAlias = service.save(transientAlias);
+			
 			optBegin.ifPresent(
 								b -> 
 								{
@@ -231,7 +245,9 @@ public class ReleaseAliasIntegrationConfiguration {
 			if (source.getRelease() == null)
 				throw new MessagingException ("Release is not present " + source.getRelease());
 			
-			ReleaseAlias alias = new ReleaseAlias(source.getId() ,  source.getName() , source.getSortName());
+			ReleaseAlias alias = new ReleaseAlias(source.getId() ,  source.getName());
+			
+			Optional<ReleaseAliasSortName> optSortName = Optional.of(new ReleaseAliasSortName(source.getSortName()));
 			
 			Optional<Release> optRelease = releaseService.findByReleaseId(source.getRelease());
 			Optional<ReleaseAliasType> ptype = Base.NULL_VALUE(ReleaseAliasType.class);
@@ -265,7 +281,7 @@ public class ReleaseAliasIntegrationConfiguration {
 				optEndDate = Optional.of(dt);
 			}
 			
-			return new ReleaseAliasHolder(alias , optRelease , ptype , optBeginDate , optEndDate , optLocale);
+			return new ReleaseAliasHolder(alias , optRelease , ptype , optBeginDate , optEndDate , optLocale , optSortName );
 			
 		}
 
@@ -283,10 +299,11 @@ public class ReleaseAliasIntegrationConfiguration {
 		private Optional<ReleaseAliasBeginDate> optBeginDate ;
 		private Optional<ReleaseAliasEndDate> optEndDate ;
 		private Optional<ReleaseAliasLocale> optLocale ;
+		Optional<ReleaseAliasSortName> optSortName;
 		
 		public ReleaseAliasHolder(ReleaseAlias alias, Optional<Release> optRelease, Optional<ReleaseAliasType> ptype,
 				Optional<ReleaseAliasBeginDate> optBeginDate, Optional<ReleaseAliasEndDate> optEndDate,
-				Optional<ReleaseAliasLocale> optLocale) {
+				Optional<ReleaseAliasLocale> optLocale, Optional<ReleaseAliasSortName> optSortName) {
 			super();
 			this.alias = alias;
 			this.optRelease = optRelease;
@@ -294,6 +311,7 @@ public class ReleaseAliasIntegrationConfiguration {
 			this.optBeginDate = optBeginDate;
 			this.optEndDate = optEndDate;
 			this.optLocale = optLocale;
+			this.optSortName = optSortName;
 		}
 
 		public ReleaseAlias getAlias() {
@@ -318,6 +336,10 @@ public class ReleaseAliasIntegrationConfiguration {
 
 		public Optional<ReleaseAliasLocale> getOptLocale() {
 			return optLocale;
+		}
+
+		public Optional<ReleaseAliasSortName> getOptSortName() {
+			return optSortName;
 		}
 		
 	}

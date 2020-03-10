@@ -41,7 +41,8 @@ public class Artist extends LongIdGidNameEntity {
 	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
 	private List<ArtistCredit> artistCredits;
 
-	@OneToOne
+	@NotNull
+	@OneToOne(optional=false)
 	@JoinTable(
 			  name = "artist_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 

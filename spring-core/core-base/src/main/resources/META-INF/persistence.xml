@@ -86,6 +86,10 @@
 		<class>org.nanotek.beans.entity.ReleasePackaging</class>
 		<class>org.nanotek.beans.entity.ReleaseGroupPrimaryType</class>
 		<class>org.nanotek.beans.entity.SequenceLongBase</class>
+		<class>org.nanotek.beans.entity.SortNameBase</class>
+		<class>org.nanotek.beans.entity.ArtistAliasSortName</class>
+		<class>org.nanotek.beans.entity.ArtistSortName</class>
+		<class>org.nanotek.beans.entity.ReleaseAliasSortName</class>
 		<class>org.nanotek.beans.entity.Track</class>
 		<class>org.nanotek.beans.entity.TrackLength</class>
 		<class>org.nanotek.beans.entity.TrackNumber</class>
