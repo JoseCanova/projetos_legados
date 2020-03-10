@@ -3,7 +3,6 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
@@ -18,13 +17,21 @@ import javax.validation.constraints.NotNull;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias  extends LongIdSortNameEntity  {
+public class ArtistAlias  extends LongIdNameEntity  {
 
 	private static final long serialVersionUID = -6829974720983757034L;
 
 	@NotNull
 	@Column(name="artist_alias_id"  , nullable = false)
 	private Long aliasId; 
+	
+	@NotNull
+	@OneToOne
+	@JoinTable(
+			  name = "artist_alias_sortname_join", 
+			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
+	private ArtistAliasSortName sortName;
 	
 	@NotNull
 	@ManyToOne(optional = false)
@@ -68,27 +75,29 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 			@NotNull Long id,
 			@NotNull Artist artist, 
 			@NotBlank String name,
-			@NotBlank String sortName, 
+			@NotNull ArtistAliasSortName sortName, 
 			ArtistAliasLocale locale, 
 			ArtistAliasType artistAliasType,
 			ArtistAliasBeginDate artistAliasBeginDate, 
 			ArtistAliasEndDate artistAliasEndDate) {
-		super(name , sortName);
+		super(name);
 		this.aliasId = id;
 		this.artist = artist;
 		this.artistAliasLocale = locale;
 		this.artistAliasType = artistAliasType;
 		this.artistAliasBeginDate = artistAliasBeginDate;
 		this.artistAliasEndDate = artistAliasEndDate;
+		this.sortName = sortName;
 	}
 
 	public ArtistAlias(	@NotNull Long id, 
 						@NotNull Artist artist, 
 						@NotBlank String name,
-						@NotBlank String sortName) {
-		super(name , sortName);
+						@NotNull ArtistAliasSortName sortName) {
+		super(name);
 		this.aliasId = id;
 		this.artist = artist;
+		this.sortName = sortName;
 	}
 
 	public Artist getArtist() {

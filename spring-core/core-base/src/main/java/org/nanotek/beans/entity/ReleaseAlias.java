@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="release_alias")
-public class ReleaseAlias extends LongIdSortNameEntity {
+public class ReleaseAlias extends LongIdNameEntity {
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	
@@ -26,6 +26,14 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id"))
 	private ReleaseAliasLocale locale;
+	
+	@NotNull
+	@OneToOne
+	@JoinTable(
+			  name = "release_alias_locale_join", 
+			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "sortname_id",referencedColumnName = "id"))
+	private ReleaseAliasSortName sortName;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY,optional=false)
@@ -53,9 +61,10 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 	public ReleaseAlias() {
 	}
 	
-	public ReleaseAlias(@NotNull Long id , @NotBlank String name, @NotBlank String sortName) {
-		super(name, sortName);
+	public ReleaseAlias(@NotNull Long id , @NotBlank String name, @NotNull ReleaseAliasSortName sortName) {
+		super(name);
 		this.releaseAliasId = id;
+		this.sortName = sortName;
 	}
 	
 	public ReleaseAlias(
@@ -64,7 +73,7 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 			ReleaseAliasLocale locale, 
 			@NotNull Release release,
 			ReleaseAliasType type, 
-			@NotBlank String sortName, 
+			@NotNull ReleaseAliasSortName sortName, 
 			ReleaseAliasBeginDate beginDate,
 			ReleaseAliasEndDate endDate) {
 		this.releaseAliasId = id;
@@ -125,6 +134,14 @@ public class ReleaseAlias extends LongIdSortNameEntity {
 		this.endDate = endDate;
 	}
 
+	public ReleaseAliasSortName getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(ReleaseAliasSortName sortName) {
+		this.sortName = sortName;
+	}
+	
 	@Override
 	public String toString() {
 		return "ReleaseAlias [releaseAliasId=" + releaseAliasId + ", locale=" + locale + ", release=" + release
