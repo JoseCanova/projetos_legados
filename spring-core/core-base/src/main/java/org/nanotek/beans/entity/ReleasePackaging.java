@@ -15,12 +15,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="release_packaging",
 uniqueConstraints= {
-@UniqueConstraint(name="uk_release_pack_gid",columnNames={"gid"}),
 @UniqueConstraint(name="uk_release_pack_id",columnNames={"release_packaging_id"})
-},
-indexes= {
-			@Index(unique = false , name = "release_pack_name_idx" , columnList ="name")
-		})
+})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReleasePackaging extends LongIdGidNameEntity{

@@ -1,13 +1,16 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.SortedNameBase;
 
-@MappedSuperclass
+@Entity
+@Table(name="long_id_sort_name")
 public class LongIdSortNameEntity extends LongIdNameEntity implements SortedNameBase {
 
 	private static final long serialVersionUID = -3442197714885490996L;

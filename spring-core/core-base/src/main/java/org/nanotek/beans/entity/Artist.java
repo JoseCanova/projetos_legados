@@ -23,7 +23,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="artist" , 
 		uniqueConstraints= {
-		@UniqueConstraint(name="uk_artist_gid",columnNames={"gid"}),
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		},
 		indexes= {
@@ -32,7 +31,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 				})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Artist extends LongIdGidSortNameEntity {
+public class Artist extends LongIdGidNameEntity {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -44,9 +43,17 @@ public class Artist extends LongIdGidSortNameEntity {
 
 	@OneToOne
 	@JoinTable(
+			  name = "artist_sortname_join", 
+			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
+	private ArtistSortName sortName;
+	
+	
+	@OneToOne
+	@JoinTable(
 			  name = "artist_comment_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
-			  inverseJoinColumns = @JoinColumn(name = "commentS_id",referencedColumnName = "id") )
+			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
 	private ArtistComment artistComment;
 	
 	@OneToOne
@@ -102,16 +109,15 @@ public class Artist extends LongIdGidSortNameEntity {
 	public Artist(
 			@NotBlank Long id, 
 			@NotBlank String name, 
-			@NotBlank String gid,
-			@NotNull String sortName) {
-		super(name,sortName,gid);
+			@NotBlank String gid) {
+		super(gid,name);
 		this.artistId = id;
 	}
 	
 	public Artist(
 			@NotNull Long id, 
 			@NotBlank String name,
-			@NotBlank String sortName, 
+			@NotBlank ArtistSortName sortName, 
 			List<ArtistCredit> artistCredits,
 			@NotBlank String gid, 
 			ArtistComment artistComment,
@@ -121,7 +127,7 @@ public class Artist extends LongIdGidSortNameEntity {
 			Gender gender,
 			Area beginArea, 
 			Area endArea) {
-		super(name,sortName,gid);
+		super(gid,name);
 		this.artistId = id;
 		this.artistCredits = artistCredits;
 		this.artistComment = artistComment;
@@ -131,6 +137,7 @@ public class Artist extends LongIdGidSortNameEntity {
 		this.gender = gender;
 		this.beginArea = beginArea;
 		this.endArea = endArea;
+		this.sortName = sortName;
 	}
 
 	public void setId(Long id) { 
@@ -209,6 +216,22 @@ public class Artist extends LongIdGidSortNameEntity {
 		this.area = area;
 	}
 
+	public Long getArtistId() {
+		return artistId;
+	}
+
+	public void setArtistId(Long artistId) {
+		this.artistId = artistId;
+	}
+
+	public ArtistSortName getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(ArtistSortName sortName) {
+		this.sortName = sortName;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -241,5 +264,6 @@ public class Artist extends LongIdGidSortNameEntity {
 				+ ", gender=" + gender + ", area=" + area + ", beginArea=" + beginArea + ", endArea=" + endArea
 				+ ", gid=" + gid + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
 	}
+	
 	
 }

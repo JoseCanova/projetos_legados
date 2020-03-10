@@ -14,10 +14,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
-		},
-	indexes= {
-		@Index(unique = false , name = "language_name_idx" , columnList ="name")
-	})
+		})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Language extends  LongIdNameEntity {

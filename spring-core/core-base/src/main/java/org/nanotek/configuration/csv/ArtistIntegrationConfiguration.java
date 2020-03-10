@@ -3,6 +3,7 @@ package org.nanotek.configuration.csv;
 import java.io.Serializable;
 import java.util.Optional;
 
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistBean;
@@ -11,6 +12,7 @@ import org.nanotek.beans.entity.Artist;
 import org.nanotek.beans.entity.ArtistBeginDate;
 import org.nanotek.beans.entity.ArtistComment;
 import org.nanotek.beans.entity.ArtistEndDate;
+import org.nanotek.beans.entity.ArtistSortName;
 import org.nanotek.beans.entity.ArtistType;
 import org.nanotek.beans.entity.Gender;
 import org.nanotek.processor.csv.CsvBaseProcessor;
@@ -18,6 +20,7 @@ import org.nanotek.repository.jpa.AreaRepository;
 import org.nanotek.repository.jpa.ArtistBeginDateRepository;
 import org.nanotek.repository.jpa.ArtistEndDateRespository;
 import org.nanotek.repository.jpa.ArtistRepository;
+import org.nanotek.repository.jpa.ArtistSortNameRepository;
 import org.nanotek.repository.jpa.ArtistTypeRepository;
 import org.nanotek.repository.jpa.GenderRepository;
 import org.nanotek.service.CsvMessageHandler;
@@ -185,10 +188,16 @@ public class ArtistIntegrationConfiguration {
 		@Override
 		public ArtistMessageHolder transform(ArtistBean source) {
 			
+			Optional<ArtistSortName> optSortName = Base.NULL_VALUE(ArtistSortName.class); 
+			
 			arep.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present " + a.toJson());});
 			
-			Artist artist = new Artist(source.getId(),source.getName(),source.getGid(),source.getSortName());
+			Artist artist = new Artist(source.getId(),source.getName(),source.getGid());
 
+			if(NotEmpty(source.getSortName())) { 
+				optSortName = Optional.of(new ArtistSortName(source.getSortName()));
+			}
+			
 			if (source.getBeginDateYear() != null) {
 				ArtistBeginDate beginDate = new ArtistBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
 				artist.setArtistBeginDate(beginDate);
@@ -224,12 +233,12 @@ public class ArtistIntegrationConfiguration {
 					optArea.ifPresent(a -> artist.setArea(a));
 			}
 			
-			ArtistComment artistComment = null;
+			Optional<ArtistComment> optComment = Base.NULL_VALUE(ArtistComment.class);
 			if(NotEmpty(source.getComment())) { 
-				 artistComment = new ArtistComment(source.getComment());
+				optComment = Optional.of(new ArtistComment(source.getComment()));
 			}
 			
-			return new ArtistMessageHolder(artist, artistComment);
+			return new ArtistMessageHolder(artist, optComment , optSortName);
 		}
 
 		private boolean NotEmpty(String comment) {
@@ -261,28 +270,31 @@ public class ArtistIntegrationConfiguration {
 		@Autowired
 		GenderRepository genderRepository;
 		
+		@Autowired
+		ArtistSortNameRepository sortNameRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			ArtistMessageHolder messageHolder = (ArtistMessageHolder) message.getPayload();
 			Artist transientArtist = messageHolder.getArtist();
-			ArtistComment comment = messageHolder.getArtistComment();
+			Optional<ArtistComment> optComment = messageHolder.getArtistComment();
+			Optional<ArtistSortName> optSortName = messageHolder.getOptSortName();
 			
 			if(transientArtist.getArtistBeginDate() !=null)
 				transientArtist.setArtistBeginDate(beginDateRepository.save(transientArtist.getArtistBeginDate()));
 			
 			if (transientArtist.getArtistEndDate() !=null)
 				transientArtist.setArtistEndDate(endDateRepository.save(transientArtist.getArtistEndDate()));
-			
+
 			if (transientArtist.getType() == null) { 
 				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
 				transientArtist.setType(type);
 			}
 			
-			service.save(transientArtist);
-			if (comment !=null) { 
-				comment.setArtist(transientArtist);
-				commentService.save(comment);
-			}
+			Artist theArtist = service.save(transientArtist);
+			
+			optComment.ifPresent(c -> {c.setArtist(theArtist);commentService.save(c);});
+			optSortName.ifPresent(s -> {s.setArtist(theArtist);sortNameRep.save(s);});
 		}
 	}
 
@@ -301,22 +313,29 @@ public class ArtistIntegrationConfiguration {
 		
 		private static final long serialVersionUID = -853649880260963575L;
 
-		private Artist artist;
+		Artist artist;
 		
-		private ArtistComment artistComment;
+		Optional<ArtistComment> optComment;
+		
+		Optional<ArtistSortName> optSortName;
 
-		public ArtistMessageHolder(Artist artist, ArtistComment artistComment) {
+		public ArtistMessageHolder(Artist artist, Optional<ArtistComment> optComment , Optional<ArtistSortName> optSortName) {
 			super();
 			this.artist = artist;
-			this.artistComment = artistComment;
+			this.optComment = optComment;
+			this.optSortName = optSortName;
 		}
 
 		public Artist getArtist() {
 			return artist;
 		}
 
-		public ArtistComment getArtistComment() {
-			return artistComment;
+		public Optional<ArtistComment> getArtistComment() {
+			return optComment;
+		}
+
+		public Optional<ArtistSortName> getOptSortName() {
+			return optSortName;
 		}
 	}
 

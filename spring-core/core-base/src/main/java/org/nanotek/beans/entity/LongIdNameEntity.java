@@ -1,13 +1,19 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.MutableName;
 import org.nanotek.NameBase;
 
-@MappedSuperclass
+@Entity
+@Table(name="long_id_name",
+		indexes= {
+					@Index(unique = false , name = "name_idx" , columnList ="name")
+				})
 public class LongIdNameEntity extends SequenceLongBase implements NameBase , MutableName{
 
 	private static final long serialVersionUID = -3442197714885490996L;

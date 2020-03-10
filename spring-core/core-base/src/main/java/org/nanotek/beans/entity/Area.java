@@ -20,12 +20,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="area" , 
 uniqueConstraints= {
-		@UniqueConstraint(name="uk_area_gid",columnNames={"gid"}),
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
-		},
-		indexes= {
-					@Index(unique = false , name = "area_name_idx" , columnList ="name")
-				})
+		})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE , region = "org.nanotek.beans.entity.Area")
 public class Area extends LongIdGidNameEntity{

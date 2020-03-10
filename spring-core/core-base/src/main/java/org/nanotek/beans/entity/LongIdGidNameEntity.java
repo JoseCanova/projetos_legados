@@ -1,13 +1,17 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-@MappedSuperclass
+@Entity
+@Table(name="long_id_gid_name",uniqueConstraints= @UniqueConstraint(name="uk_id_gid_name",columnNames={"gid"})
+)
 public class LongIdGidNameEntity extends LongIdNameEntity {
 
 	private static final long serialVersionUID = -3230710199273457686L;

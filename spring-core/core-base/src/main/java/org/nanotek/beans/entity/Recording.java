@@ -23,12 +23,8 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="recording" ,
 uniqueConstraints= {
-@UniqueConstraint(name="uk_recording_gid",columnNames={"gid"}),
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
-},
-indexes= {
-			@Index(unique = false , name = "recording_name_idx" , columnList ="name")
-		})
+})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Recording extends LongIdGidNameEntity {

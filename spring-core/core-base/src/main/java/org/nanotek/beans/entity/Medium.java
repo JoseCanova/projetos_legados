@@ -16,9 +16,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="medium", uniqueConstraints= {
 		@UniqueConstraint(name="uk_medium_id",columnNames={"medium_id"})
-		},
-		indexes= {
-			@Index(unique = false , name = "medium_name_idx" , columnList ="name")
 		})
 public class Medium extends LongIdNameEntity{
 

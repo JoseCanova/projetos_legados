@@ -18,12 +18,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="release_group",
 uniqueConstraints= {
-@UniqueConstraint(name="uk_release_group_gid",columnNames={"gid"}),
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
-},
-indexes= {
-			@Index(unique = false , name = "release__group_name_idx" , columnList ="name")
-		})
+})
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReleaseGroup extends LongIdGidNameEntity{

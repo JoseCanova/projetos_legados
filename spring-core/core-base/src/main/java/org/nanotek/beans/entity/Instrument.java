@@ -17,12 +17,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="instrument", 
 uniqueConstraints= {
-@UniqueConstraint(name="uk_instrument_gid",columnNames={"gid"}),
 @UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
-},
-indexes= {
-			@Index(unique = false , name = "instrument_name_idx" , columnList ="name")
-		})
+})
 public class Instrument extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 1720965406197902687L;

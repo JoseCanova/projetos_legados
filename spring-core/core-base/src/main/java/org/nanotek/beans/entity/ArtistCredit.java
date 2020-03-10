@@ -33,9 +33,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_credit_id",columnNames={"artist_credit_id"})
-		},
-		indexes= {
-			@Index(unique = false , name = "artist_cretit_name_idx" , columnList ="name")
 		})
 @NamedQueries(value = { 
 		@NamedQuery(name = "FindArtistCreditById", query ="Select a from ArtistCredit a where a.id = :id"),

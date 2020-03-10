@@ -17,11 +17,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="artist_alias", 
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
-},
-indexes= {
-			@Index(unique = false , name = "artist_alias_name_idx" , columnList ="name"),
-			@Index(unique = false , name = "artist_alias_sort_name_idx" , columnList ="sort_name")
-		})
+})
 public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	private static final long serialVersionUID = -6829974720983757034L;
