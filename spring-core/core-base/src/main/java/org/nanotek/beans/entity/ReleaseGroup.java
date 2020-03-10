@@ -2,6 +2,7 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
@@ -20,8 +21,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReleaseGroup extends LongIdGidNameEntity{
 
 	private static final long serialVersionUID = 7603390865547084527L;

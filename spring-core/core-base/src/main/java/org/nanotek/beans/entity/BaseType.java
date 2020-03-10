@@ -1,10 +1,14 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
@@ -12,13 +16,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name="base_type",
 					indexes= {
-							@Index(unique = false , name = "base_table_idx" , columnList ="table_id"),
 							@Index(unique = false , name = "base_type_id_idx" , columnList ="type_id")
 						})
 @DiscriminatorColumn(
@@ -26,7 +32,9 @@ import org.hibernate.validator.constraints.Length;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BaseType extends LongIdGidNameEntity{
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class BaseType extends TypeNamedEntity{
 
 	private static final long serialVersionUID = 863905425134347710L;
 	

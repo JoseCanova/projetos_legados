@@ -1,6 +1,7 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="release_alias")
+@Table(name = "release_alias")
 public class ReleaseAlias extends LongIdNameEntity {
 
 	private static final long serialVersionUID = -4420910201637029585L;
@@ -30,7 +31,7 @@ public class ReleaseAlias extends LongIdNameEntity {
 	@NotNull
 	@OneToOne
 	@JoinTable(
-			  name = "release_alias_locale_join", 
+			  name = "release_alias_sortname_join", 
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sortname_id",referencedColumnName = "id"))
 	private ReleaseAliasSortName sortName;

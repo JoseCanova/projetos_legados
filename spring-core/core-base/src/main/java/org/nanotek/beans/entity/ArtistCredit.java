@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
@@ -45,8 +46,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ArtistCredit extends LongIdNameEntity {
 	
 	private static final long serialVersionUID = -3086006757943654550L;

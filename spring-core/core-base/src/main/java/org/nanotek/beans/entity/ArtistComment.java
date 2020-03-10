@@ -1,18 +1,12 @@
 package org.nanotek.beans.entity;
 
-import javax.persistence.Cacheable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ArtistComment extends CommentBase {
 
 	private static final long serialVersionUID = 2608408556126104972L;

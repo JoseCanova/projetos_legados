@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="composite_dates",
 				indexes= {
-						@Index(unique = false , name = "date_year_table_idx" , columnList ="year, table_id"),
 						@Index(unique = false , name = "date_year_idx" , columnList ="year")
 					}
 )

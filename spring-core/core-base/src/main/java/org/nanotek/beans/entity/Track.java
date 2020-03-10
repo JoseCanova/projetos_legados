@@ -2,6 +2,7 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -16,8 +17,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="track")
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Track extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 8642862162010029043L;

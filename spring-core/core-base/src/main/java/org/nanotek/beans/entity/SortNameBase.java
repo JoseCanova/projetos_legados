@@ -15,7 +15,6 @@ import org.nanotek.SortBase;
 @Entity
 @Table(name="sort_name_base",
 							indexes= {
-									@Index(unique = false , name = "long_count_table_idx" , columnList ="table_id"),
 									@Index(unique = false , name = "sort_name_idx" , columnList ="sort_name")
 								})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

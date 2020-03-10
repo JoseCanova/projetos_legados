@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
@@ -25,8 +26,6 @@ import org.hibernate.validator.constraints.Length;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Recording extends LongIdGidNameEntity {
 
 	private static final long serialVersionUID = 1795844351898160253L;

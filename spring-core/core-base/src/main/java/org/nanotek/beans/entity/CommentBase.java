@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -9,16 +10,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name="comment_base",
 					indexes= {
-							@Index(unique = false , name = "comment_table_idx" , columnList ="table_id")
+							@Index(unique = false , name = "comment_table_idx" , columnList ="comment")
 						})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CommentBase extends SequenceLongBase {
 
 	private static final long serialVersionUID = 3073277024991221690L;

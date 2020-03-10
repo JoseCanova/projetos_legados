@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name="locale_base",
 					indexes= {
-							@Index(unique = false , name = "locale_table_idx" , columnList ="table_id")
+							@Index(unique = false , name = "locale_table_idx" , columnList ="locale")
 						})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(

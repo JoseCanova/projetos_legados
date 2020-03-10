@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="long_position_base",
 indexes= {
-		@Index(unique = false , name = "long_position_table_idx" , columnList ="table_id"),
 		@Index(unique = false , name = "long_position_position_idx" , columnList ="position")
 	})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -2,6 +2,7 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
@@ -15,8 +16,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Language extends  LongIdNameEntity {
 
 	private static final long serialVersionUID = 3416483640256915L;

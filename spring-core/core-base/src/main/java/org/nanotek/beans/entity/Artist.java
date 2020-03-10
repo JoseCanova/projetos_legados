@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
@@ -24,13 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name="artist" , 
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
-		},
-		indexes= {
-					@Index(unique = false , name = "artist_name_idx" , columnList ="name"),
-					@Index(unique = false , name = "artist_sort_name_idx" , columnList ="sort_name")
-				})
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+		})
 public class Artist extends LongIdGidNameEntity {
 	
 	private static final long serialVersionUID = -932806802235346847L;

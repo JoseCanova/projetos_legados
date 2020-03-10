@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="medium", uniqueConstraints= {
+@Table(uniqueConstraints= {
 		@UniqueConstraint(name="uk_medium_id",columnNames={"medium_id"})
 		})
 public class Medium extends LongIdNameEntity{

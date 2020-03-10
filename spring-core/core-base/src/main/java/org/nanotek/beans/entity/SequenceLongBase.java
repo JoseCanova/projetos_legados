@@ -1,21 +1,16 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongBase;
 
-@Entity
-@Table(name="sequence_long_base")
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class SequenceLongBase implements LongBase {
 
 	private static final long serialVersionUID = -2671580389296667850L;

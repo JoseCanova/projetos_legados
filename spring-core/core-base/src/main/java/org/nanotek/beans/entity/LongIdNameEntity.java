@@ -1,11 +1,18 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.MutableName;
 import org.nanotek.NameBase;
 
@@ -14,6 +21,9 @@ import org.nanotek.NameBase;
 		indexes= {
 					@Index(unique = false , name = "name_idx" , columnList ="name")
 				})
+@Inheritance(strategy = InheritanceType.JOINED)
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class LongIdNameEntity extends SequenceLongBase implements NameBase , MutableName{
 
 	private static final long serialVersionUID = -3442197714885490996L;
