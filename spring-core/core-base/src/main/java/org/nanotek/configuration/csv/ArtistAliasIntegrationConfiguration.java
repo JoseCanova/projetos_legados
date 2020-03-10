@@ -3,6 +3,7 @@ package org.nanotek.configuration.csv;
 import java.io.Serializable;
 import java.util.Optional;
 
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistAliasBean;
@@ -10,11 +11,13 @@ import org.nanotek.beans.entity.Artist;
 import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.beans.entity.ArtistAliasBeginDate;
 import org.nanotek.beans.entity.ArtistAliasEndDate;
+import org.nanotek.beans.entity.ArtistAliasLocale;
 import org.nanotek.beans.entity.ArtistAliasType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaRepository;
 import org.nanotek.repository.jpa.ArtistAliasBeginDateRepository;
 import org.nanotek.repository.jpa.ArtistAliasEndDateRepository;
+import org.nanotek.repository.jpa.ArtistAliasLocaleRepository;
 import org.nanotek.repository.jpa.ArtistAliasRepository;
 import org.nanotek.repository.jpa.ArtistAliasTypeRepository;
 import org.nanotek.repository.jpa.ArtistRepository;
@@ -185,6 +188,8 @@ public class ArtistAliasIntegrationConfiguration {
 		@Override
 		public ArtistAliasMessageHolder transform(ArtistAliasBean source) {
 			
+			Optional<ArtistAliasLocale> optLocale = Base.NULL_VALUE(ArtistAliasLocale.class);
+			
 			if (source.getArtistId() == null)
 				throw new MessagingException("Artist is Required and Not Present " + source.toJson());
 			
@@ -213,9 +218,16 @@ public class ArtistAliasIntegrationConfiguration {
 				optType.ifPresent(t -> artistAlias.setArtistAliasType(t));
 			}
 			
-			return new ArtistAliasMessageHolder(artistAlias);
+			if (notEmpty(source.getLocale())) {
+				optLocale = Optional.of(new ArtistAliasLocale(source.getLocale()));
+			}
+			
+			return new ArtistAliasMessageHolder(artistAlias, optLocale);
 		}
 
+		private boolean notEmpty(String comment) {
+			return comment !=null && !"".contentEquals(comment.trim());
+		}
 	}
 
 	@MessageEndpoint
@@ -239,8 +251,12 @@ public class ArtistAliasIntegrationConfiguration {
 		@Autowired
 		GenderRepository genderRepository;
 		
+		@Autowired
+		ArtistAliasLocaleRepository localeRep;
+		
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
+			Optional<ArtistAliasLocale> optLocale ; 
 			ArtistAliasMessageHolder messageHolder = (ArtistAliasMessageHolder) message.getPayload();
 			ArtistAlias transientArtistAlias = messageHolder.getArtistAlias();
 			
@@ -255,7 +271,13 @@ public class ArtistAliasIntegrationConfiguration {
 				transientArtistAlias.setArtistAliasType(type);
 			}
 			
-			service.save(transientArtistAlias);
+			ArtistAlias theAlias = service.save(transientArtistAlias);
+			
+			optLocale = messageHolder.getOptLocale(); 
+			optLocale.ifPresent(l ->{
+				l.setArtistAlias(theAlias);   
+				localeRep.save(l);
+			});
 		}
 	}
 
@@ -276,16 +298,22 @@ public class ArtistAliasIntegrationConfiguration {
 
 		private ArtistAlias artistAlias;
 		
+		private Optional<ArtistAliasLocale> optLocale;
 
-		public ArtistAliasMessageHolder(ArtistAlias artistAlias) {
+		public ArtistAliasMessageHolder(ArtistAlias artistAlias , Optional<ArtistAliasLocale> optLocale) {
 			super();
 			this.artistAlias = artistAlias;
+			this.optLocale = optLocale;
 		}
 
 		public ArtistAlias getArtistAlias() {
 			return artistAlias;
 		}
 
+		public Optional<ArtistAliasLocale> getOptLocale() {
+			return optLocale;
+		}
+		
 	}
 
 }

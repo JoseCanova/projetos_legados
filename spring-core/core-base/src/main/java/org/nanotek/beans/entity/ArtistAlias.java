@@ -38,14 +38,18 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 			  inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id") )
 	private Artist artist;
 
-	@Column(name="locale",nullable=true , columnDefinition = "VARCHAR")
-	private String locale;
+	@OneToOne(optional = true)
+	@JoinTable(
+			  name = "artist_alias_locale_join", 
+			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id") )
+	private ArtistAliasLocale artistAliasLocale;
 	
 	@ManyToOne(optional = false)
 	@JoinTable(
 			  name = "artist_alias_type_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
-			  inverseJoinColumns = @JoinColumn(name = "alias_id",referencedColumnName = "id") )
+			  inverseJoinColumns = @JoinColumn(name = "alias_type_id",referencedColumnName = "id") )
 	private ArtistAliasType artistAliasType;
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
@@ -69,14 +73,14 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 			@NotNull Artist artist, 
 			@NotBlank String name,
 			@NotBlank String sortName, 
-			String locale, 
+			ArtistAliasLocale locale, 
 			ArtistAliasType artistAliasType,
 			ArtistAliasBeginDate artistAliasBeginDate, 
 			ArtistAliasEndDate artistAliasEndDate) {
 		super(name , sortName);
 		this.aliasId = id;
 		this.artist = artist;
-		this.locale = locale;
+		this.artistAliasLocale = locale;
 		this.artistAliasType = artistAliasType;
 		this.artistAliasBeginDate = artistAliasBeginDate;
 		this.artistAliasEndDate = artistAliasEndDate;
@@ -97,14 +101,6 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
-	}
-
-	public String getLocale() {
-		return locale;
-	}
-
-	public void setLocale(String locale) {
-		this.locale = locale;
 	}
 
 	public ArtistAliasType getArtistAliasType() {
@@ -137,6 +133,14 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	public void setAliasId(Long aliasId) {
 		this.aliasId = aliasId;
+	}
+
+	public ArtistAliasLocale getArtistAliasLocale() {
+		return artistAliasLocale;
+	}
+
+	public void setArtistAliasLocale(ArtistAliasLocale artistAliasLocale) {
+		this.artistAliasLocale = artistAliasLocale;
 	}
 
 	@Override
@@ -172,7 +176,7 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	@Override
 	public String toString() {
-		return "ArtistAlias [aliasId=" + aliasId + ", artist=" + artist + ", locale=" + locale + ", artistAliasType="
+		return "ArtistAlias [aliasId=" + aliasId + ", artist=" + artist + ", locale=" + artistAliasLocale + ", artistAliasType="
 				+ artistAliasType + ", artistAliasBeginDate=" + artistAliasBeginDate + ", artistAliasEndDate="
 				+ artistAliasEndDate + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
 	}
