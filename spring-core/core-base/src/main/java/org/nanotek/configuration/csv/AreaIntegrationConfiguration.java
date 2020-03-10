@@ -246,7 +246,7 @@ public class AreaIntegrationConfiguration {
 			 else
 				 area = new Area(source.getId(),source.getName(),source.getGid());
 			if(source.getType() == null)
-				throw new MessagingException("Are Areatype found for bean " + source.toJson());
+				throw new MessagingException("No Areatype found for bean " + source.toJson());
 			Optional<AreaType> optType = service.findByTypeId(source.getType());
 			area.setType(optType.get());
 			if (source.getBeginDateYear() !=null) { 

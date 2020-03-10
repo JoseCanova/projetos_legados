@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="artist_alias", 
@@ -85,8 +84,8 @@ public class ArtistAlias  extends LongIdSortNameEntity  {
 
 	public ArtistAlias(	@NotNull Long id, 
 						@NotNull Artist artist, 
-						@NotBlank @Size(min = 1, max = 1000) String name,
-						@NotBlank @Size(min = 1, max = 1000) String sortName) {
+						@NotBlank String name,
+						@NotBlank String sortName) {
 		super(name , sortName);
 		this.aliasId = id;
 		this.artist = artist;
