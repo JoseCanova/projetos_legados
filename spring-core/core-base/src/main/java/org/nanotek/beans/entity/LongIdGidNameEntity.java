@@ -30,7 +30,7 @@ public class LongIdGidNameEntity extends LongIdNameEntity {
 
 	public LongIdGidNameEntity(
 								@NotBlank @Length(min = 1, max = 50) String gid, 
-								@NotNull String name) {
+								@NotBlank String name) {
 		super(name);
 		this.gid = gid;
 	}

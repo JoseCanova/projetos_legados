@@ -5,6 +5,8 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -37,13 +39,17 @@ public class BaseType extends LongIdGidNameEntity{
 	@Column(name="childOrder")
 	protected Long childOrder;
 
-	@OneToOne
+	@OneToOne(optional=true,orphanRemoval = true)
+	@JoinTable(
+			  name = "base_type_description_join", 
+			  joinColumns = @JoinColumn(name = "base_type_id" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "description_id",referencedColumnName = "id"))
 	protected BaseTypeDescription description; 
 	
 	public BaseType() {
 	}
 
-	public BaseType(@NotBlank @Length(min = 1, max = 50) String gid, @NotNull String name) {
+	public BaseType(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
 		super(gid, name);
 	}
 

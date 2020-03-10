@@ -1,6 +1,9 @@
 package org.nanotek.controller.entity;
 
+import java.util.Optional;
+
 import org.nanotek.beans.entity.AreaType;
+import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,12 @@ public class AreaTypeController  implements  EntityResponseController<AreaType, 
 		return IterableResponseEntity.fromIterable(it, HttpStatus.OK);
 	}
 
+	@RequestMapping("/type_id/{type_id}")
+	public EntityResponseBase<AreaType> findByTypeId(@PathVariable(value="type_id") Long  id) {
+		Optional<AreaType> it = getBaseService().findByTypeId(id);
+		return EntityResponseBase.fromEntity(it, HttpStatus.OK);
+	}
+	
 	public AreaTypeJpaService getBaseService() {
 		return baseService;
 	}

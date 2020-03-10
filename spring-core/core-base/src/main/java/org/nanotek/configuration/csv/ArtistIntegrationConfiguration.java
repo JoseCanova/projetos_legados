@@ -280,7 +280,7 @@ public class ArtistIntegrationConfiguration {
 				transientArtist.setArtistEndDate(endDateRepository.save(transientArtist.getArtistEndDate()));
 			
 			if (transientArtist.getType() == null) { 
-				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
+				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Not").iterator().next();
 				transientArtist.setType(type);
 			}
 			

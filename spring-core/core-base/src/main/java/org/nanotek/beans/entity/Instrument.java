@@ -21,8 +21,7 @@ uniqueConstraints= {
 @UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
 },
 indexes= {
-			@Index(unique = false , name = "instrument_name_idx" , columnList ="name"),
-			@Index(unique = false , name = "instrument_sort_name_idx" , columnList ="sort_name")
+			@Index(unique = false , name = "instrument_name_idx" , columnList ="name")
 		})
 public class Instrument extends LongIdGidNameEntity {
 

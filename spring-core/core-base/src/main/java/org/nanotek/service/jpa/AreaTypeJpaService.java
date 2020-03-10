@@ -31,6 +31,11 @@ public class AreaTypeJpaService extends BasePersistenceService<AreaType,Long> {
 	}
 	
 	@Transactional
+	public Optional<AreaType> findByTypeId(@NotNull Long typeId){ 
+		return areaTypeRepository.findByTypeId(typeId);
+	}
+	
+	@Transactional
 	public List<AreaType> saveAll(List<AreaType> list) { 
 		return areaTypeRepository.saveAll(list);
 	}

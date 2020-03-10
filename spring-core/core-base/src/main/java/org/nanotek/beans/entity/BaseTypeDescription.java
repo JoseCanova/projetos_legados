@@ -11,7 +11,7 @@ public class BaseTypeDescription extends DescriptionBase{
 
 	private static final long serialVersionUID = -5502992535337974047L;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "description")
 	protected BaseType baseType;
 
 	public BaseTypeDescription() {

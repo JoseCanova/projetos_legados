@@ -247,7 +247,7 @@ public class AreaIntegrationConfiguration {
 				 area = new Area(source.getId(),source.getName(),source.getGid());
 			if(source.getType() == null)
 				throw new MessagingException("Are Areatype found for bean " + source.toJson());
-			Optional<AreaType> optType = service.findById(source.getType());
+			Optional<AreaType> optType = service.findByTypeId(source.getType());
 			area.setType(optType.get());
 			if (source.getBeginDateYear() !=null) { 
 				AreaBeginDate eDate  = new AreaBeginDate(source.getBeginDateYear(), source.getBeginDateMonth(), source.getBeginDateDay());
