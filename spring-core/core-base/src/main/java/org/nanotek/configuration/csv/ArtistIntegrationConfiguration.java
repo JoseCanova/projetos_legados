@@ -185,7 +185,7 @@ public class ArtistIntegrationConfiguration {
 		@Override
 		public ArtistMessageHolder transform(ArtistBean source) {
 			
-			arep.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present" + a.toJson());});
+			arep.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present " + a.toJson());});
 			
 			Artist artist = new Artist(source.getId(),source.getName(),source.getGid(),source.getSortName());
 
@@ -274,7 +274,7 @@ public class ArtistIntegrationConfiguration {
 				transientArtist.setArtistEndDate(endDateRepository.save(transientArtist.getArtistEndDate()));
 			
 			if (transientArtist.getType() == null) { 
-				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Not").iterator().next();
+				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
 				transientArtist.setType(type);
 			}
 			
