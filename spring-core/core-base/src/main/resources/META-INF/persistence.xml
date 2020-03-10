@@ -20,6 +20,8 @@
 		<class>org.nanotek.beans.entity.ArtistBeginDate</class>
 		<class>org.nanotek.beans.entity.ArtistEndDate</class>
 		<class>org.nanotek.beans.entity.ArtistCredit</class>
+		<class>org.nanotek.beans.entity.ArtistCreditCount</class>
+		<class>org.nanotek.beans.entity.ArtistCreditRefCount</class>
 		<class>org.nanotek.beans.entity.ArtistCreditName</class>
 		<class>org.nanotek.beans.entity.Artist</class>
 		<class>org.nanotek.beans.entity.ArtistBeginDate</class>
