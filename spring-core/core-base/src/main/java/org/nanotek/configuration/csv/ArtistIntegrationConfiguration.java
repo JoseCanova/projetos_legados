@@ -201,33 +201,27 @@ public class ArtistIntegrationConfiguration {
 
 			if (source.getGender() != null) { 
 				Optional<Gender> optGender = genderRepository.findById(source.getGender());
-				if (optGender.isPresent())
-					artist.setGender(optGender.get());
+				optGender.ifPresent(g -> artist.setGender(g));
 			}
 
 			if (source.getBeginArea()!=null) { 
 				Optional<Area> optBegin = areaRepository.findByAreaId(source.getBeginArea());
-				if (optBegin.isPresent())
-					artist.setBeginArea(optBegin.get());
+				optBegin.ifPresent(a -> artist.setBeginArea(a));
 			}
 
 			if (source.getEndArea()!=null) { 
 				Optional<Area> optEnd = areaRepository.findByAreaId(source.getEndArea());
-				if (optEnd.isPresent())
-					artist.setEndArea(optEnd.get());
+				optEnd.ifPresent(a -> artist.setEndArea(a));
 			}
 
 			if (source.getType() !=null) {
-				Optional<ArtistType> optType =  typeRepository.findById(source.getType());
-				if (optType.isPresent()) {
-					artist.setType(optType.get());
-				}
+				Optional<ArtistType> optType =  typeRepository.findByTypeId(source.getType());
+				optType.ifPresent(t -> artist.setType(t));
 			}
 			
 			if (source.getArea()!=null) { 
 				Optional<Area> optArea = areaRepository.findByAreaId(source.getArea());
-				if (optArea.isPresent())
-					artist.setArea(optArea.get());
+					optArea.ifPresent(a -> artist.setArea(a));
 			}
 			
 			ArtistComment artistComment = null;

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
-	    columnDefinition = "VARCHAR(2)"
+	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public class LongNumberBase extends NumberBase<Long> {
 
