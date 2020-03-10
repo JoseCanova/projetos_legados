@@ -22,8 +22,14 @@ public class AreaJpaService extends BasePersistenceService<Area, Long> {
 		return rep.findById(k);
 	}
 	
+	@Transactional
 	public Area save (Area area) { 
 		return rep.save(area);
+	}
+
+	@Transactional
+	public Iterable<Area> findByNameContaining(String name) {
+		return rep.findByNameContainingIgnoreCase(name);
 	}
 
 }
