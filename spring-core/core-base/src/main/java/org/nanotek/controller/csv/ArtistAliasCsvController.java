@@ -15,7 +15,7 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 public class ArtistAliasCsvController extends CsvController<ArtistAliasBaseMap , ArtistAliasBean, ArtistAliasParser> {
 
 	@Autowired
-	@Qualifier("ArtistAliasParser")
+	@Qualifier("ArtistAliasParserOld")
 	private ArtistAliasParser baseParser;
 	
 	@Autowired

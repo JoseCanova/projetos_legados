@@ -116,7 +116,7 @@ public class ArtistAliasIntegrationConfiguration {
 	}
 
 	@Bean
-	@ConfigurationProperties(prefix = "artistAlias")
+	@ConfigurationProperties(prefix = "artistalias")
 	@Qualifier(value="artistAliasMapStrategy")
 	BaseMapColumnStrategy<ArtistAliasBean> artistAliasMapStrategy(){ 
 		return new BaseMapColumnStrategy<>();
@@ -251,7 +251,7 @@ public class ArtistAliasIntegrationConfiguration {
 				transientArtistAlias.setArtistAliasEndDate(endDateRepository.save(transientArtistAlias.getArtistAliasEndDate()));
 			
 			if (transientArtistAlias.getArtistAliasType() == null) { 
-				ArtistAliasType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
+				ArtistAliasType type = typeRepository.findByNameContainingIgnoreCase("Search").iterator().next();
 				transientArtistAlias.setArtistAliasType(type);
 			}
 			
