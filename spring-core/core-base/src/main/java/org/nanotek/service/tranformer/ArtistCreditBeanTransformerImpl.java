@@ -19,12 +19,11 @@ public class ArtistCreditBeanTransformerImpl implements ArtistCreditBeanTransfor
 
         artistCredit.setArtistCreditId(i.getId() );
         artistCredit.setName( i.getName() );
-        if ( i.getArtistCount() != null ) {
-            artistCredit.setArtistCount( i.getArtistCount().longValue() );
-        }
-        if ( i.getRefCount() != null ) {
-            artistCredit.setRefCount( i.getRefCount().longValue() );
-        }
+		/*
+		 * if ( i.getArtistCount() != null ) { artistCredit.setArtistCount(
+		 * i.getArtistCount().longValue() ); } if ( i.getRefCount() != null ) {
+		 * artistCredit.setRefCount( i.getRefCount().longValue() ); }
+		 */
 
         return artistCredit;
     }

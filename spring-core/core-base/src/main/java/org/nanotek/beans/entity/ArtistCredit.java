@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
@@ -58,12 +59,18 @@ public class ArtistCredit extends LongIdNameEntity {
 	private Long artistCreditId;
 	
 	@NotNull
-	@Column (name="artist_count" , insertable=true,nullable=false,updatable = true)
-	private Long artistCount; 
+	@OneToOne(optional=false)
+	@JoinTable(name="artist_credit_count_join",
+		inverseJoinColumns={@JoinColumn(name="artist_count_id", referencedColumnName="id") },
+		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
+	private ArtistCreditCount artistCount; 
 	
 	@NotNull
-	@Column (name="ref_count" , insertable=true,nullable=false,updatable = true)
-	private Long refCount;
+	@OneToOne(optional=false)
+	@JoinTable(name="artist_ref_count_join",
+		inverseJoinColumns={@JoinColumn(name="artist_refcount_id", referencedColumnName="id") },
+		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
+	private ArtistCreditRefCount refCount;
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
 	private Set<Release> releases; 
@@ -79,8 +86,8 @@ public class ArtistCredit extends LongIdNameEntity {
 	
 	public ArtistCredit() {}
 	
-	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull Long artistCount,
-			@NotNull Long refCount, Set<Recording> recordings) {
+	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull ArtistCreditCount artistCount,
+			@NotNull ArtistCreditRefCount refCount, Set<Recording> recordings) {
 		super(name);
 		this.artistCreditId = id;
 		this.artistCount = artistCount;
@@ -96,19 +103,11 @@ public class ArtistCredit extends LongIdNameEntity {
 		this.name = name;
 	}
 
-	public Long getArtistCount() {
-		return artistCount;
-	}
-
-	public void setArtistCount(Long artistCount) {
-		this.artistCount = artistCount;
-	}
-
-	public Long getRefCount() {
+	public ArtistCreditRefCount getRefCount() {
 		return refCount;
 	}
 
-	public void setRefCount(Long refCount) {
+	public void setRefCount(ArtistCreditRefCount refCount) {
 		this.refCount = refCount;
 	}
 
