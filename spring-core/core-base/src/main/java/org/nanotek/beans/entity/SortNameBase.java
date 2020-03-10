@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,6 +11,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.SortBase;
 
 @Entity
@@ -23,6 +26,8 @@ import org.nanotek.SortBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
+@Cacheable(value = true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SortNameBase extends SequenceLongBase implements SortBase<String>{
 
 	private static final long serialVersionUID = -950822256693332353L;

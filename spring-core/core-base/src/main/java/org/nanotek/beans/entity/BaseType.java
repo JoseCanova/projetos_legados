@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -26,14 +27,15 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="base_type",
 					indexes= {
 							@Index(unique = false , name = "base_type_id_idx" , columnList ="type_id")
-						})
+						}, 
+					uniqueConstraints= {
+							@UniqueConstraint(name="uk_base_type_id",columnNames={"type_id,table_id"})
+							})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BaseType extends TypeNamedEntity{
 
 	private static final long serialVersionUID = 863905425134347710L;

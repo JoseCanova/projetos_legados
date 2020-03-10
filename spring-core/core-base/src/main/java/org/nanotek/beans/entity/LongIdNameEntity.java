@@ -2,8 +2,6 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
