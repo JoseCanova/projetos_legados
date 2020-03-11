@@ -3,7 +3,7 @@ package org.nanotek.repository.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import org.nanotek.base.views.ArtistVirtualProjection;
+import org.nanotek.base.bean.projections.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.projections.ArtistBaseProjection;
 import org.nanotek.repository.jpa.projections.NameBaseProjection;

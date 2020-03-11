@@ -1,4 +1,4 @@
-package org.nanotek.base.views;
+package org.nanotek.base.bean.projections;
 
 import org.nanotek.Base;
 import org.nanotek.repository.jpa.projections.Projection;

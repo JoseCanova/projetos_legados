@@ -169,7 +169,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public ArtistType getType() {
-		return type;
+		return Optional.ofNullable(type).orElseGet(ArtistType::new);
 	}
 
 	public void setType(ArtistType type) {

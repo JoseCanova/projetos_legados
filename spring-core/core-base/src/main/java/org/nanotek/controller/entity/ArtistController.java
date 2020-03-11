@@ -2,7 +2,7 @@ package org.nanotek.controller.entity;
 
 import java.util.Optional;
 
-import org.nanotek.base.views.ArtistVirtualProjection;
+import org.nanotek.base.bean.projections.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.controller.response.ResponseBase;

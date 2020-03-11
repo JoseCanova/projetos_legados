@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.base.views.ArtistVirtualProjection;
+import org.nanotek.base.bean.projections.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.ArtistRepository;
 import org.nanotek.repository.jpa.projections.ArtistBaseProjection;
