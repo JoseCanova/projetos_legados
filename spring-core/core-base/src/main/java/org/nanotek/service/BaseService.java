@@ -3,14 +3,12 @@ package org.nanotek.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
 import org.hibernate.service.Service;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.validation.annotation.Validated;
 
 public interface BaseService<O  , K> extends Service {

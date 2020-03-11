@@ -1,9 +1,10 @@
 package org.nanotek.configuration.csv;
 
-import java.io.Serializable;
 import java.util.Optional;
 
+import org.assertj.core.util.Arrays;
 import org.nanotek.Base;
+import org.nanotek.BaseIntegrationException;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistAliasBean;
@@ -46,7 +47,6 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.http.inbound.HttpRequestHandlingMessagingGateway;
 import org.springframework.integration.http.inbound.RequestMapping;
-import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
@@ -64,6 +64,33 @@ public class ArtistAliasIntegrationConfiguration {
 
 	private final Logger logger = LoggerFactory.getLogger(ArtistAliasIntegrationConfiguration.class);
 
+	@Autowired
+	ArtistAliasRepository aliasRepo;
+	
+	@Autowired
+	ArtistAliasBeginDateRepository beginDateRepository; 
+	
+	@Autowired
+	ArtistAliasEndDateRepository endDateRepository;
+	
+	@Autowired
+	AreaRepository areaRepository;
+	
+	@Autowired 
+	ArtistAliasTypeRepository typeRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	ArtistAliasLocaleRepository localeRepo;
+	
+	@Autowired
+	ArtistAliasSortNameRepository sortRep;
+	
+	@Autowired
+	ArtistRepository artRepo;
+	
 	@Value("${server.port}")
 	private String serverPort;
 
@@ -170,34 +197,13 @@ public class ArtistAliasIntegrationConfiguration {
 	}
 
 	@MessageEndpoint
-	class ArtistAliasTransformer implements GenericTransformer<ArtistAliasBean , ArtistAliasMessageHolder>{
+	class ArtistAliasHandler implements MessageHandler{
 
-		@Autowired
-		ArtistRepository artRepo;
-		
-		@Autowired
-		ArtistAliasRepository arep;
-		
-		@Autowired
-		GenderRepository genderRepository;
-
-		@Autowired
-		AreaRepository areaRepository;
-
-		@Autowired
-		ArtistAliasTypeRepository typeRepository;
 
 		@Override
-		public ArtistAliasMessageHolder transform(ArtistAliasBean source) {
+		public void handleMessage(Message<?> message) {
 			
-			Optional<ArtistAliasLocale> optLocale = Base.NULL_VALUE(ArtistAliasLocale.class);
-			
-			Optional<ArtistAliasSortName> optSortName = Optional.of(new ArtistAliasSortName(source.getSortName()));
-			
-			if (source.getArtistId() == null)
-				throw new MessagingException("Artist is Required and Not Present " + source.toString());
-			
-			arep.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toString());});
+			ArtistAliasBean source = (ArtistAliasBean) message.getPayload();
 			
 			Optional<Artist> optArtist = artRepo.findByArtistId(source.getArtistId());
 			
@@ -205,28 +211,53 @@ public class ArtistAliasIntegrationConfiguration {
 				throw new MessagingException("Artist is Required and Not Present " + source.toString());
 			}
 			
-			ArtistAlias artistAlias = new ArtistAlias(source.getId(),optArtist.get(),source.getName());
-
-			if (source.getBeginDateYear() != null) {
-				ArtistAliasBeginDate beginDate = new ArtistAliasBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
-				artistAlias.setArtistAliasBeginDate(beginDate);
-			}
-
-			if (source.getEndDateYear()!= null) {
-				ArtistAliasEndDate endDate = new ArtistAliasEndDate(source.getEndDateYear() , source.getEndDateMonth() , source.getEndDateDay());
-				artistAlias.setArtistAliasEndDate(endDate);
-			}
+			Artist artist = optArtist.get();
 			
-			if (source.getType() !=null) {
-				Optional<ArtistAliasType> optType =  typeRepository.findByTypeId(source.getType());
-				optType.ifPresent(t -> artistAlias.setArtistAliasType(t));
-			}
+			ArtistAlias artistAlias = new ArtistAlias(source.getId(),artist,source.getName());
+			
+			if(notEmpty(source.getSortName())) { 
+				Base.newInstance(ArtistAliasSortName.class, 
+						Arrays.array(source.getSortName()) , 
+						Arrays.array(String.class)).ifPresent(s -> artistAlias.setSortName(sortRep.save(s)));
+			}else {throw new MessagingException("Artist SortName Not Present " + source.toString());}
+			
+			
+			if (source.getArtistId() == null)
+				throw new MessagingException("Artist is Required and Not Present " + source.toString());
+			
+			aliasRepo.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toString());});
+			
+			Optional.ofNullable(source.getBeginDateYear())
+								.ifPresent(y ->{
+													ArtistAliasBeginDate entity = new ArtistAliasBeginDate(y, 
+																							source.getBeginDateMonth(), 
+																							source.getBeginDateDay());
+													artistAlias.setArtistAliasBeginDate(beginDateRepository.save(entity));
+								});
+
+
+			Optional.ofNullable(source.getEndDateYear())
+						.ifPresent(y ->{
+											ArtistAliasEndDate endDate = new ArtistAliasEndDate(y, 
+																								source.getEndDateMonth(), 
+																								source.getEndDateDay());
+											artistAlias.setArtistAliasEndDate(endDateRepository.save(endDate));
+											
+			});
+
+			Long typeId = Optional.ofNullable(source.getType()).orElseThrow(BaseIntegrationException::new);
+			
+			ArtistAliasType type =  typeRepository
+														.findByTypeId(typeId)
+														.orElse(typeRepository.findByTypeId(3l).get());
+			
+			artistAlias.setArtistAliasType(type);
 			
 			if (notEmpty(source.getLocale())) {
-				optLocale = Optional.of(new ArtistAliasLocale(source.getLocale()));
+				ArtistAliasLocale locale =  localeRepo.save(new ArtistAliasLocale(source.getLocale()));
+				artistAlias.setArtistAliasLocale(locale);
 			}
-			
-			return new ArtistAliasMessageHolder(artistAlias, optLocale , optSortName);
+			aliasRepo.save(artistAlias);
 		}
 
 		private boolean notEmpty(String comment) {
@@ -234,103 +265,16 @@ public class ArtistAliasIntegrationConfiguration {
 		}
 	}
 
-	@MessageEndpoint
-	class ArtistAliasHandler implements MessageHandler{ 
-
-		@Autowired
-		ArtistAliasRepository service;
-		
-		@Autowired
-		ArtistAliasBeginDateRepository beginDateRepository; 
-		
-		@Autowired
-		ArtistAliasEndDateRepository endDateRepository;
-		
-		@Autowired
-		AreaRepository areaRepository;
-		
-		@Autowired 
-		ArtistAliasTypeRepository typeRepository;
-		
-		@Autowired
-		GenderRepository genderRepository;
-		
-		@Autowired
-		ArtistAliasLocaleRepository localeRep;
-		
-		@Autowired
-		ArtistAliasSortNameRepository sortRep;
-		
-		@Override
-		public void handleMessage(Message<?> message) throws MessagingException {
-			Optional<ArtistAliasLocale> optLocale ; 
-			ArtistAliasMessageHolder messageHolder = (ArtistAliasMessageHolder) message.getPayload();
-			ArtistAlias transientArtistAlias = messageHolder.getArtistAlias();
-			Optional<ArtistAliasSortName> optSort = messageHolder.getOptSortName();
-			optSort.ifPresent(s -> s.setArtistAlias(transientArtistAlias));
-			ArtistAliasSortName transientSort = optSort.get();
-			
-			if(transientArtistAlias.getArtistAliasBeginDate() !=null)
-				transientArtistAlias.setArtistAliasBeginDate(beginDateRepository.save(transientArtistAlias.getArtistAliasBeginDate()));
-			
-			if (transientArtistAlias.getArtistAliasEndDate() !=null)
-				transientArtistAlias.setArtistAliasEndDate(endDateRepository.save(transientArtistAlias.getArtistAliasEndDate()));
-			
-			if (transientArtistAlias.getArtistAliasType() == null) { 
-				ArtistAliasType type = typeRepository.findByNameContainingIgnoreCase("Search").iterator().next();
-				transientArtistAlias.setArtistAliasType(type);
-			}
-			
-			transientArtistAlias.setSortName(sortRep.save(transientSort));
-			ArtistAlias theAlias = service.save(transientArtistAlias);
-			
-			optLocale = messageHolder.getOptLocale(); 
-			optLocale.ifPresent(l ->{
-				l.setArtistAlias(theAlias);   
-				localeRep.save(l);
-			});
-		}
-	}
 
 	@Bean IntegrationFlow processArtistAliasRequest
 	(@Autowired ArtistAliasHandler handler , 
-			@Autowired @Qualifier("artistAliasIntegrationStartChannel") MessageChannel executorChannel,
-			@Autowired ArtistAliasTransformer transformer) { 
+			@Autowired @Qualifier("artistAliasIntegrationStartChannel") MessageChannel artistAliasIntegrationStartChannel) { 
 		return IntegrationFlows
-				.from(executorChannel)
-				.transform(transformer)
+				.from(artistAliasIntegrationStartChannel)
 				.handle(handler)
 				.get();
 	}
 	
-	class ArtistAliasMessageHolder implements Serializable{ 
-		
-		private static final long serialVersionUID = -853649880260963575L;
 
-		private ArtistAlias artistAlias;
-		
-		private Optional<ArtistAliasLocale> optLocale;
-		
-		private Optional<ArtistAliasSortName> optSortName;
-
-		public ArtistAliasMessageHolder(ArtistAlias artistAlias , Optional<ArtistAliasLocale> optLocale , Optional<ArtistAliasSortName> optSortName) {
-			super();
-			this.artistAlias = artistAlias;
-			this.optLocale = optLocale;
-		}
-
-		public ArtistAlias getArtistAlias() {
-			return artistAlias;
-		}
-
-		public Optional<ArtistAliasLocale> getOptLocale() {
-			return optLocale;
-		}
-
-		public Optional<ArtistAliasSortName> getOptSortName() {
-			return optSortName;
-		}
-		
-	}
 
 }
