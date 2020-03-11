@@ -54,7 +54,10 @@ public class AreaTypeJpaService extends BasePersistenceService<AreaType,Long> {
 	@Transactional
 	public Iterable<AreaType> findByNameContaining(@NotNull @NotEmpty String name){ 
 		return areaTypeRepository.findByNameContainingIgnoreCase(name);
-//		return AreaTypeRepository.findByNameContainingIgnoreCase(name.toUpperCase());
 	}
 	
+	@Transactional
+	public List<AreaType> findAll(){
+		return areaTypeRepository.findAll();
+	}
 }

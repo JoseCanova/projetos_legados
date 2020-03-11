@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.nanotek.EntityBase;
 import org.nanotek.controller.EntityServiceResponseBase;
 import org.nanotek.controller.response.EntityResponseBase;
+import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public interface EntityResponseController < E extends EntityBase<K> , K extends 
 		HttpStatus status =  opt.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 		E body = opt.isPresent() ? opt.get() : null;
 		return EntityResponseBase.fromEntity(body , status);
+	}
+	
+	@GetMapping("/findAll")
+	default IterableResponseEntity<?, E> findAll(){ 
+		return IterableResponseEntity.fromIterable(getBaseService().findAll() , HttpStatus.OK);
 	}
 	
 }
