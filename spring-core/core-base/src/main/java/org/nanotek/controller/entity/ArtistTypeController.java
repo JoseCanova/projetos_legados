@@ -2,7 +2,6 @@ package org.nanotek.controller.entity;
 
 import java.util.Optional;
 
-import org.nanotek.beans.entity.AreaType;
 import org.nanotek.beans.entity.ArtistType;
 import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
