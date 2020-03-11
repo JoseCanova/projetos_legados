@@ -30,7 +30,7 @@ public class ArtistTypeController  implements  EntityResponseController<ArtistTy
 	@RequestMapping("/type_id/{type_id}")
 	public EntityResponseBase<ArtistType> findByTypeId(@PathVariable(value="type_id") Long  id) {
 		Optional<ArtistType> it = getBaseService().findByTypeId(id);
-		return EntityResponseBase.fromEntity(it, HttpStatus.OK);
+		return EntityResponseBase.fromEntityBase(it, HttpStatus.OK);
 	}
 	
 	public ArtistTypeService getBaseService() {

@@ -30,7 +30,7 @@ public class AreaTypeController  implements  EntityResponseController<AreaType, 
 	@RequestMapping("/type_id/{type_id}")
 	public EntityResponseBase<AreaType> findByTypeId(@PathVariable(value="type_id") Long  id) {
 		Optional<AreaType> it = getBaseService().findByTypeId(id);
-		return EntityResponseBase.fromEntity(it, HttpStatus.OK);
+		return EntityResponseBase.fromEntityBase(it, HttpStatus.OK);
 	}
 	
 	public AreaTypeJpaService getBaseService() {

@@ -6,8 +6,10 @@ import java.util.Optional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.base.views.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.repository.jpa.ArtistRepository;
+import org.nanotek.repository.jpa.projections.ArtistBaseProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 	
 	@Autowired
 	private ArtistRepository artistRepository;
+	
+	@Autowired
+	ArtistBaseProjection baseProjection;
 	
 
 	@Transactional
@@ -56,6 +61,11 @@ public class ArtistJpaService extends BasePersistenceService<Artist,Long> {
 	public Iterable<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
 		return artistRepository.findByNameContainingIgnoreCase(name);
 //		return ArtistRepository.findByNameContainingIgnoreCase(name.toUpperCase());
+	}
+	
+	@Transactional
+	public Optional<ArtistVirtualProjection> projectArtistVirtualByArtistId(Long artistId){ 
+		return baseProjection.findByArtistId(artistId);
 	}
 	
 }

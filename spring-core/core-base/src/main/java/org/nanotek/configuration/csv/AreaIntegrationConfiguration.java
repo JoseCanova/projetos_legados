@@ -220,11 +220,10 @@ public class AreaIntegrationConfiguration {
 				transientArea.setAreaEndDate(ed);
 			}
 			AreaComment areaComment = holder.getAreaComment();
-			Area persitedArea = service.save(transientArea);
 			if (areaComment !=null) {
-				areaComment.setArea(persitedArea);
-				cRep.save(areaComment);
+				transientArea.setAreaComment(cRep.save(areaComment));
 			}
+			service.save(transientArea);
 		}
 	}
 

@@ -29,7 +29,7 @@ public class EntityResponseBase <T extends EntityBase<?>> extends ResponseBase<T
 		return new EntityResponseBase<B>(t, s);
 	}
 	
-	public static <B extends EntityBase<?>>  EntityResponseBase<B> fromEntity(Optional<B> t , HttpStatus s) {
+	public static <B extends EntityBase<?>>  EntityResponseBase<B> fromEntityBase(Optional<B> t , HttpStatus s) {
 		return new EntityResponseBase<B>(t.isPresent() ? t.get() : null, s);
 	}
 	

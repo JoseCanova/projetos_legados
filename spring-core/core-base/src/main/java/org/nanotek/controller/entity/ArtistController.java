@@ -1,7 +1,11 @@
 package org.nanotek.controller.entity;
 
+import java.util.Optional;
+
+import org.nanotek.base.views.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.controller.response.IterableResponseEntity;
+import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.service.jpa.ArtistJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +28,11 @@ public class ArtistController  implements  EntityResponseController<Artist, Long
 		return IterableResponseEntity.fromIterable(it, HttpStatus.OK);
 	}
 
+	@RequestMapping("/virtual/{artistId}")
+	public  ResponseBase<ArtistVirtualProjection> projectByArtistId(@PathVariable(value="artistId") Long  artistId){
+		return ResponseBase.fromEntity(baseService.projectArtistVirtualByArtistId(artistId), HttpStatus.OK);
+	}
+	
 	public ArtistJpaService getBaseService() {
 		return baseService;
 	}

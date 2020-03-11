@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.base.Optional;
+
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 
@@ -64,9 +66,9 @@ public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
     public ResponseBase<I> nextEntity() {
     	ResponseBase<I> response = null;
     	HttpStatus status = null;
+    	I bean = null;
     	try { 
 		    	String[] instanceArray = null;
-		    	I bean = null;
 		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
 		    		bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
 		    	}
@@ -77,7 +79,7 @@ public class CsvBaseController<I extends Base, P extends BaseMapParser<I>> {
 		    	response = ResponseBase.fromEntity(bean, status);
     	}catch (Exception ex) { 
     		status = HttpStatus.INTERNAL_SERVER_ERROR;
-    		response = ResponseBase.fromEntity(null, status);
+    		response = ResponseBase.fromEntity(bean, status);
     	}
     	return response;
     }

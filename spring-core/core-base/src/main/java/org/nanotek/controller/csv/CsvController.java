@@ -53,9 +53,9 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
     public ResponseBase<I> nextEntity() {
     	ResponseBase<I> response = null;
     	HttpStatus status = null;
+    	I bean = null;
     	try { 
 		    	String[] instanceArray = null;
-		    	I bean = null;
 		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
 		    		bean = getCsvToBean().processLine(getBaseMap(), instanceArray);
 		    	}
@@ -66,7 +66,7 @@ public abstract class CsvController<T extends BaseMapColumnStrategy<I> , I exten
 		    	response = ResponseBase.fromEntity(bean, status);
     	}catch (Exception ex) { 
     		status = HttpStatus.INTERNAL_SERVER_ERROR;
-    		response = ResponseBase.fromEntity(null, status);
+    		response = ResponseBase.fromEntity(bean, status);
     	}
     	return response;
     }

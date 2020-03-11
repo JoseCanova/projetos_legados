@@ -2,6 +2,7 @@ package org.nanotek.configuration.csv;
 
 import java.io.Serializable;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.nanotek.Base;
 import org.nanotek.JsonMessage;
@@ -209,7 +210,7 @@ public class ArtistIntegrationConfiguration {
 			}
 
 			if (source.getGender() != null) { 
-				Optional<Gender> optGender = genderRepository.findById(source.getGender());
+				Optional<Gender> optGender = genderRepository.findByTypeId(source.getGender());
 				optGender.ifPresent(g -> artist.setGender(g));
 			}
 
@@ -268,9 +269,6 @@ public class ArtistIntegrationConfiguration {
 		ArtistTypeRepository typeRepository;
 		
 		@Autowired
-		GenderRepository genderRepository;
-		
-		@Autowired
 		ArtistSortNameRepository sortNameRep;
 		
 		@Override
@@ -293,18 +291,35 @@ public class ArtistIntegrationConfiguration {
 
 			optSortName.ifPresent(s -> {transientArtist.setSortName(sortNameRep.save(s));});
 			
-			Artist theArtist = service.save(transientArtist);
+			optComment.ifPresent(c -> {transientArtist.setArtistComment(commentService.save(c));});
 			
-			optComment.ifPresent(c -> {c.setArtist(theArtist);commentService.save(c);});
+			service.save(transientArtist);
 		}
 	}
 
+	@Service
+	@Qualifier(value="ArtistBeanFilter")
+	class ArtistBeanFilter implements Predicate<Message<ArtistBean>>{
+
+		@Autowired
+		ArtistJpaService service;
+		
+		@Override
+		public boolean test(Message<ArtistBean> message ) {
+			ArtistBean bean = message.getPayload();
+			return service.findByArtistId(bean.getId()).isEmpty();
+		} 
+		
+	}
+	
 	@Bean IntegrationFlow processArtistRequest
 	(@Autowired ArtistHandler handler , 
 			@Autowired @Qualifier("artistIntegrationStartChannel") MessageChannel executorChannel,
-			@Autowired ArtistTransformer transformer) { 
+			@Autowired ArtistTransformer transformer,
+			@Autowired ArtistBeanFilter filter) { 
 		return IntegrationFlows
 				.from(executorChannel)
+//				.filter(filter, "test")
 				.transform(transformer)
 				.handle(handler)
 				.get();
