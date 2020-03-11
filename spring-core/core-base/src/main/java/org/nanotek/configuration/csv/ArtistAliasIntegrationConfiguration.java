@@ -195,14 +195,14 @@ public class ArtistAliasIntegrationConfiguration {
 			Optional<ArtistAliasSortName> optSortName = Optional.of(new ArtistAliasSortName(source.getSortName()));
 			
 			if (source.getArtistId() == null)
-				throw new MessagingException("Artist is Required and Not Present " + source.toJson());
+				throw new MessagingException("Artist is Required and Not Present " + source.toString());
 			
-			arep.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toJson());});
+			arep.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toString());});
 			
 			Optional<Artist> optArtist = artRepo.findByArtistId(source.getArtistId());
 			
 			if (!optArtist.isPresent()) {
-				throw new MessagingException("Artist is Required and Not Present " + source.toJson());
+				throw new MessagingException("Artist is Required and Not Present " + source.toString());
 			}
 			
 			ArtistAlias artistAlias = new ArtistAlias(source.getId(),optArtist.get(),source.getName());

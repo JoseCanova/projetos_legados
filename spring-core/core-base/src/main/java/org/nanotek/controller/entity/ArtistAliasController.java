@@ -1,18 +1,22 @@
 package org.nanotek.controller.entity;
 
 import org.nanotek.beans.entity.ArtistAlias;
-import org.nanotek.controller.BaseController;
+import org.nanotek.service.jpa.ArtistAliasJpaService;
+import org.nanotek.service.jpa.BasePersistenceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/artist_alias")
-public class ArtistAliasController implements BaseController<String , ArtistAlias> {
+public class ArtistAliasController implements  EntityResponseController<ArtistAlias, Long>  {
 	
-
+	@Autowired
+	ArtistAliasJpaService service;
+	
 	@Override
-	public ArtistAlias get(String id) {
-		return null;
+	public BasePersistenceService<ArtistAlias, Long> getBaseService() {
+		return service;
 	}
 
 }
