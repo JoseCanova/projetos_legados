@@ -19,17 +19,17 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.hibernate" level="debug"
+    <logger name="org.hibernate" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="org.hibernate.cache" level="debug"
+    <logger name="org.hibernate.cache" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     
-    <logger name="net.sf.ehcache" level="debug"
+    <logger name="net.sf.ehcache" level="info"
             additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>

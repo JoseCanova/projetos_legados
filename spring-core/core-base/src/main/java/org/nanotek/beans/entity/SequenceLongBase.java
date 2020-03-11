@@ -10,6 +10,12 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongBase;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 @MappedSuperclass
 public class SequenceLongBase implements LongBase {
 

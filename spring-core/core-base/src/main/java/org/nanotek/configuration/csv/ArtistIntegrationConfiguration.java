@@ -290,11 +290,12 @@ public class ArtistIntegrationConfiguration {
 				ArtistType type = typeRepository.findByNameContainingIgnoreCase("Other").iterator().next();
 				transientArtist.setType(type);
 			}
+
+			optSortName.ifPresent(s -> {transientArtist.setSortName(sortNameRep.save(s));});
 			
 			Artist theArtist = service.save(transientArtist);
 			
 			optComment.ifPresent(c -> {c.setArtist(theArtist);commentService.save(c);});
-			optSortName.ifPresent(s -> {s.setArtist(theArtist);sortNameRep.save(s);});
 		}
 	}
 

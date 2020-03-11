@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+
 @Entity
 @DiscriminatorValue(value="ArtistSortName")
 public class ArtistSortName extends SortNameBase {
