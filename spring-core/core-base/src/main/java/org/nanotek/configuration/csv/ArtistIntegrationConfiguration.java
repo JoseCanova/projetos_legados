@@ -12,6 +12,7 @@ import org.nanotek.beans.entity.ArtistBeginDate;
 import org.nanotek.beans.entity.ArtistComment;
 import org.nanotek.beans.entity.ArtistEndDate;
 import org.nanotek.beans.entity.ArtistSortName;
+import org.nanotek.beans.entity.ArtistType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaRepository;
 import org.nanotek.repository.jpa.ArtistBeginDateRepository;
@@ -50,6 +51,7 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
@@ -183,11 +185,11 @@ public class ArtistIntegrationConfiguration {
 	@MessageEndpoint
 	class ArtistHandler implements MessageHandler{
 
+		@Transactional
 		@Override
 		public void handleMessage(Message<?> message) {
-			logger.debug(message.getPayload().toString());
 			ArtistBean source = (ArtistBean) message.getPayload();
-			service.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present " + a.toJson());});
+//			service.findByArtistId(source.getId()).ifPresent(a -> {throw new MessagingException("Artist Present " + source.toJson());});
 			
 			Artist artist = new Artist(source.getId(),source.getName(),source.getGid());
 
@@ -195,7 +197,7 @@ public class ArtistIntegrationConfiguration {
 				Base.newInstance(ArtistSortName.class, 
 						Arrays.array(source.getSortName()) , 
 						Arrays.array(String.class)).ifPresent(s -> artist.setSortName(sortNameRep.save(s)));
-			}else {throw new MessagingException("Artist SortName Not Present " + source.toJson());}
+			}else {throw new MessagingException("Artist SortName Not Present " + source.toString());}
 			
 			if (source.getBeginDateYear() != null) {
 				ArtistBeginDate beginDate = new ArtistBeginDate(source.getBeginDateYear() , source.getBeginDateMonth() , source.getBeginDateDay());
@@ -227,6 +229,10 @@ public class ArtistIntegrationConfiguration {
 				typeRepository.findByTypeId(source.getType()).ifPresent(t ->{
 					artist.setType(t);
 				});
+			}else { 
+				typeRepository.findByTypeId(3l).ifPresent(t ->{
+					artist.setType(t);
+				});
 			}
 			
 			if (source.getArea()!=null) { 
@@ -244,7 +250,7 @@ public class ArtistIntegrationConfiguration {
 		}
 
 		private boolean NotEmpty(String str) {
-			return  str !=null && !"".contentEquals(str);
+			return  str !=null && !"".contentEquals(str.trim());
 		} 
 	}
 
