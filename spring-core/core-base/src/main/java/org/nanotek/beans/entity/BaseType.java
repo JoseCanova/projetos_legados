@@ -27,10 +27,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="base_type",
 					indexes= {
 							@Index(unique = false , name = "base_type_id_idx" , columnList ="type_id")
-						}, 
-					uniqueConstraints= {
-							@UniqueConstraint(name="uk_base_type_id",columnNames={"type_id,table_id"})
-							})
+						})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
 	    name = "table_id",

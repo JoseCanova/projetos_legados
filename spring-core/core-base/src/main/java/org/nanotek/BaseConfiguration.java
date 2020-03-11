@@ -2,6 +2,7 @@ package org.nanotek;
 
 import java.util.concurrent.Executor;
 
+import javax.management.MBeanServer;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import javax.validation.Validator;
@@ -23,12 +24,14 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.jmx.support.MBeanServerFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -44,6 +47,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.management.ManagementService;
 
 @Configuration
 @ComponentScan("org.nanotek")
@@ -55,6 +60,43 @@ public class BaseConfiguration {
 	@Autowired
 	ApplicationContext applicationContext;
 	
+	/*
+	 * <bean id="managementService"
+	 * class="net.sf.ehcache.management.ManagementService" init-method="init"
+	 * destroy-method="dispose"> <constructor-arg ref="cacheManager"/>
+	 * <constructor-arg ref="mbeanServer"/> <constructor-arg index="2"
+	 * value="true"/> <constructor-arg index="3" value="true"/> <constructor-arg
+	 * index="4" value="true"/> <constructor-arg index="5" value="true"/> </bean>
+	 * <bean id="cacheManager"
+	 * class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	 * <property name="configLocation" value="classpath:ehcache.xml"/> <property
+	 * name="shared" value="true"/> </bean>
+	 */		
+	
+	
+	@Bean
+	ManagementService ehCacheJmx(
+							@Autowired @Qualifier("ehCacheManager")CacheManager cacheManager , 
+							@Autowired @Qualifier("mBeanServer") MBeanServer mBeanServer ) { 
+		ManagementService service =  new ManagementService(cacheManager , mBeanServer , true , true , true,true);
+		service.init();
+		return service;
+	}
+	
+	@Bean
+	@Qualifier(value="mBeanServer")
+	MBeanServerFactoryBean mBeanServer() { 
+		return new  MBeanServerFactoryBean();
+	}
+	
+	@Bean
+	@Qualifier(value="ehCacheManager")
+	EhCacheManagerFactoryBean ehCacheFactoryBean() { 
+		EhCacheManagerFactoryBean eh =  new EhCacheManagerFactoryBean();
+		eh.setShared(true);
+		return eh;
+	}
+		
 	@Bean
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -99,14 +141,6 @@ public class BaseConfiguration {
          return processor;
      }
 	
-//    @Bean
-//    public BeanNameAutoProxyCreator beanNameAutoproxyCreator(@Autowired MethodValidationInterceptor interceptor) { 
-//    	BeanNameAutoProxyCreator proxyCreator = new BeanNameAutoProxyCreator();
-//    	proxyCreator.setBeanNames(new String[] {"ArtistCreditMediator", "ArtistCreditBeanTransformer"});
-//    	proxyCreator.setInterceptorNames(new String[] {"MethodValidationInterceptor"});
-//    	return proxyCreator;
-//    }
-    
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();

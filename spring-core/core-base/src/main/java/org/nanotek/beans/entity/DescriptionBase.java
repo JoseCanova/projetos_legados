@@ -15,7 +15,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="description_base",
 						indexes= {
-								@Index(unique = false , name = "description_table_idx" , columnList ="description")
+								@Index(unique = false , name = "description_table_idx" , columnList ="description"),
+								@Index(unique = false , name = "description_table_id_idx" , columnList ="table_id")
 							})
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
