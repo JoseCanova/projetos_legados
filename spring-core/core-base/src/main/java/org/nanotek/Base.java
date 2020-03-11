@@ -47,6 +47,16 @@ public interface Base extends Serializable {
 		}
 	}
 
+	static <K extends Base> Optional<K> newInstance(Class<K> clazz , Object[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
+		try {
+			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+
+	
 	static <K extends Base> Optional<K> NULL_VALUE(Class<K> clazz) {
 		return Optional.empty();
 	}

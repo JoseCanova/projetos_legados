@@ -1,8 +1,6 @@
 package org.nanotek.beans.entity;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -137,7 +135,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 	
 	public List<ArtistCredit> getArtistCredits() {
-		return Optional.ofNullable(artistCredits).orElseGet(ArrayList::new) ;
+		return artistCredits;
 	}
 
 	public void setArtistCredits(List<ArtistCredit> artistCredits) {
@@ -145,7 +143,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public ArtistComment getArtistComment() {
-		return Optional.ofNullable(artistComment).orElseGet(ArtistComment::new);
+		return artistComment;
 	}
 
 	public void setArtistComment(ArtistComment artistComment) {
@@ -153,7 +151,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public ArtistBeginDate getArtistBeginDate() {
-		return Optional.ofNullable(artistBeginDate).orElseGet(ArtistBeginDate::new);
+		return artistBeginDate;
 	}
 
 	public void setArtistBeginDate(ArtistBeginDate artistBeginDate) {
@@ -161,7 +159,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public ArtistEndDate getArtistEndDate() {
-		return Optional.ofNullable(artistEndDate).orElseGet(ArtistEndDate::new);
+		return artistEndDate;
 	}
 
 	public void setArtistEndDate(ArtistEndDate artistEndDate) {
@@ -169,7 +167,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public ArtistType getType() {
-		return Optional.ofNullable(type).orElseGet(ArtistType::new);
+		return type;
 	}
 
 	public void setType(ArtistType type) {
@@ -177,7 +175,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public Gender getGender() {
-		return Optional.ofNullable(gender).orElseGet(Gender::new);
+		return gender;
 	}
 
 	public void setGender(Gender gender) {
@@ -185,7 +183,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public Area getBeginArea() {
-		return Optional.ofNullable(beginArea).orElseGet(Area::new);
+		return beginArea;
 	}
 
 	public void setBeginArea(Area beginArea) {
@@ -193,7 +191,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public Area getEndArea() {
-		return Optional.ofNullable(endArea).orElseGet(Area::new);
+		return endArea;
 	}
 
 	public void setEndArea(Area endArea) {
@@ -201,7 +199,7 @@ public class Artist extends LongIdGidNameEntity {
 	}
 
 	public Area getArea() {
-		return Optional.ofNullable(area).orElseGet(Area::new);
+		return area;
 	}
 
 	public void setArea(Area area) {
@@ -256,5 +254,4 @@ public class Artist extends LongIdGidNameEntity {
 				+ ", gender=" + gender + ", area=" + area + ", beginArea=" + beginArea + ", endArea=" + endArea
 				+ ", gid=" + gid + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
 	}
-	
 }
