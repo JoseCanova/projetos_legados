@@ -1,7 +1,6 @@
 package org.nanotek;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;

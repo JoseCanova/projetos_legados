@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nanotek.MutableName;
 import org.nanotek.NameBase;
 
 @Entity
