@@ -40,7 +40,16 @@ public interface Base extends Serializable {
 
 	default Base newInstance() throws BaseInstantiationException { 
 		try {
-			return this.getClass().getDeclaredConstructor(null).newInstance();
+			return this.getClass().getDeclaredConstructor(Void.class).newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+	
+	static <K extends Base> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
+		try {
+			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			throw new BaseInstantiationException(e);

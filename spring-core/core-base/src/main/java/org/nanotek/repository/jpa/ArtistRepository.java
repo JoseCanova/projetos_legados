@@ -3,18 +3,13 @@ package org.nanotek.repository.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import org.nanotek.base.bean.projections.ArtistVirtualProjection;
 import org.nanotek.beans.entity.Artist;
-import org.nanotek.repository.jpa.projections.ArtistBaseProjection;
-import org.nanotek.repository.jpa.projections.NameBaseProjection;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistRepository extends JpaRepository <Artist ,Long> , NameBaseProjection<Artist> {
+public interface ArtistRepository extends LongIdNameEntityRepository<Artist>{
 	
 	Optional<Artist> findByArtistId(Long artistId);
 	

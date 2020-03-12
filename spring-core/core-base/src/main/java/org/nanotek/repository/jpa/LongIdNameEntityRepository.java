@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LongIdNameEntityRepository<K extends LongIdNameEntity, ID> extends JpaRepository<K, ID> , NameBaseProjection<K>{
+public interface LongIdNameEntityRepository<K extends LongIdNameEntity> extends JpaRepository<K, Long> , NameBaseProjection<K>{
 }

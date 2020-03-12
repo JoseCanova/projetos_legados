@@ -10,8 +10,11 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.InstrumentComment;
 import org.nanotek.beans.entity.InstrumentType;
+import org.nanotek.configuration.csv.AreaIntegrationConfiguration;
 import org.nanotek.repository.jpa.InstrumentCommentRepository;
 import org.nanotek.repository.jpa.InstrumentTypeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -24,6 +27,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class InstrumentTypeJpaService extends BasePersistenceService<InstrumentType, Long> {
 
+	private final Logger logger = LoggerFactory.getLogger(AreaIntegrationConfiguration.class);
 	
 	private static final long serialVersionUID = 753700785985875965L;
 	

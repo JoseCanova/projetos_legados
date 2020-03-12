@@ -8,6 +8,6 @@ import org.nanotek.beans.entity.BaseType;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BaseTypeRepository<T extends BaseType> extends LongIdNameEntityRepository<T,Long> {
+public interface BaseTypeRepository<T extends BaseType> extends LongIdNameEntityRepository<T> {
 	Optional<T> findByTypeId(@NotNull Long typeId);
 }

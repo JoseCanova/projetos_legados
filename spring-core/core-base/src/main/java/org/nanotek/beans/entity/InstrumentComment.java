@@ -6,8 +6,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @DiscriminatorValue("InstrumentComment")
 public class InstrumentComment extends CommentBase{
