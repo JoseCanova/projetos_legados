@@ -14,7 +14,7 @@ import org.nanotek.NameBase;
 
 @Entity
 @Table(name="recording_alias")
-public class RecordingAlias extends EntityLongBase implements NameBase{
+public class RecordingAlias extends EntityLongBase implements NameBase<String>{
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	

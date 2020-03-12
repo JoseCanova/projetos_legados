@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.assertj.core.util.Arrays;
 import org.nanotek.Base;
-import org.nanotek.BaseIntegrationException;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistAliasBean;

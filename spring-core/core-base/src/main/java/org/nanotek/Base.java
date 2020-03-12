@@ -1,8 +1,12 @@
 package org.nanotek;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -38,6 +42,20 @@ public interface Base extends Serializable {
 		return baseSupplier.get();
 	}
 
+	default UUID withUUID() { 
+		UUID uuid = null;
+		try { 
+				ByteArrayOutputStream bao = new ByteArrayOutputStream();
+				ObjectOutputStream oos =  new ObjectOutputStream(bao);
+				oos.writeObject(this);
+				oos.flush();
+				uuid = UUID.nameUUIDFromBytes(bao.toByteArray());
+				oos.close();
+		}catch (Exception ex) { 
+		}
+		return Optional.ofNullable(uuid).orElseThrow(BaseException::new);
+	}
+	
 	default Base newInstance() throws BaseInstantiationException { 
 		try {
 			return this.getClass().getDeclaredConstructor(Void.class).newInstance();

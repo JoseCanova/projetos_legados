@@ -12,6 +12,8 @@ import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface EntityResponseController < E extends EntityBase<K> , K extends Serializable >
 			extends EntityServiceResponseBase<ResponseBase<E>, E, K , BasePersistenceService<E,K>> {
@@ -31,6 +33,12 @@ public interface EntityResponseController < E extends EntityBase<K> , K extends 
 	@GetMapping("/findAll")
 	default IterableResponseEntity<?, E> findAll(){ 
 		return IterableResponseEntity.fromIterable(getBaseService().findAll() , HttpStatus.OK);
+	}
+	
+	@PostMapping("/add")
+	default EntityResponseBase<E> post(@RequestBody E e){ 
+		E ei = getBaseService().saveAndFlush(e);
+		return EntityResponseBase.fromEntity(ei ,  HttpStatus.OK );
 	}
 	
 }

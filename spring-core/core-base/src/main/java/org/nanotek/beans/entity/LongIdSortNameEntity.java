@@ -3,7 +3,6 @@ package org.nanotek.beans.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +10,7 @@ import org.nanotek.SortedNameBase;
 
 @Entity
 @Table(name="long_id_sort_name")
-public class LongIdSortNameEntity extends LongIdNameEntity implements SortedNameBase {
+public class LongIdSortNameEntity extends LongIdNameEntity implements SortedNameBase<String> {
 
 	private static final long serialVersionUID = -3442197714885490996L;
 
@@ -35,7 +34,7 @@ public class LongIdSortNameEntity extends LongIdNameEntity implements SortedName
 		return sortName;
 	}
 
-	public void setSortName(@NotNull String sortName) {
+	public void setSortName(String sortName) {
 		this.sortName = sortName;
 	}
 

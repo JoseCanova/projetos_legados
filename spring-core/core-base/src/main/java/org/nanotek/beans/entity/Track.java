@@ -136,7 +136,4 @@ public class Track extends LongIdGidNameEntity {
 				+ ", artistCredit=" + artistCredit + ", length=" + length + ", recording=" + recording + ", gid=" + gid
 				+ ", name=" + name + ", id=" + id + "]";
 	}
-
-	
-	
 }

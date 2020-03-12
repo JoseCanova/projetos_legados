@@ -8,8 +8,6 @@ import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.GenderBean;
 import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.beans.entity.Gender;
-import org.nanotek.beans.entity.ReleaseAliasType;
-import org.nanotek.configuration.csv.ReleaseAliasTypeConfiguration.ReleaseAliasTypeHolder;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
 import org.nanotek.repository.jpa.GenderRepository;

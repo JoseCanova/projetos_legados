@@ -2,6 +2,8 @@ package org.nanotek;
 
 public class BaseHolder<K extends Base> implements ImmutableStringBase {
 	
+	private static final long serialVersionUID = 1230174889204486587L;
+	
 	private K base;
 	
 	public BaseHolder(K base) { 
@@ -17,4 +19,7 @@ public class BaseHolder<K extends Base> implements ImmutableStringBase {
 		return base;
 	}
 	
+	static <K extends Base> BaseHolder<K> of (K k) { 
+		return new BaseHolder<K>(k);
+	}
 }

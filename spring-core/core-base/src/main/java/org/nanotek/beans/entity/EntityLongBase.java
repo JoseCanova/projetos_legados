@@ -31,6 +31,11 @@ public class EntityLongBase implements LongBase {
 	}
 
 	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -54,5 +59,5 @@ public class EntityLongBase implements LongBase {
 			return false;
 		return true;
 	}
-
+	
 }

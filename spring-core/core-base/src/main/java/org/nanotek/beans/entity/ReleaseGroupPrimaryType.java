@@ -8,7 +8,7 @@ import org.nanotek.NameBase;
 
 @Entity
 @Table(name="release_group_primary_type")
-public class ReleaseGroupPrimaryType extends EntityLongBase implements NameBase{
+public class ReleaseGroupPrimaryType extends EntityLongBase implements NameBase<String>{
 
 	private static final long serialVersionUID = 3855412565715717271L;
 	

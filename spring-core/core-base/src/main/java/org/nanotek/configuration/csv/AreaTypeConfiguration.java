@@ -11,7 +11,6 @@ import org.nanotek.beans.entity.BaseTypeDescription;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaTypeRepository;
 import org.nanotek.repository.jpa.BaseTypeDescriptionRepository;
-import org.nanotek.repository.jpa.BaseTypeRepository;
 import org.nanotek.service.CsvMessageHandler;
 import org.nanotek.service.parser.BaseMapParser;
 import org.slf4j.Logger;

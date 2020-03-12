@@ -16,7 +16,7 @@ import org.nanotek.NameBase;
 @Table(name="medium_format")
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class MediumFormat extends EntityLongBase implements NameBase{
+public class MediumFormat extends EntityLongBase implements NameBase<String>{
 
 	private static final long serialVersionUID = 8104913204474210789L;
 	

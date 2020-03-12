@@ -1,8 +1,10 @@
 package org.nanotek;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 
 @FunctionalInterface
-public interface MutableName {
-	public void setName(@NotBlank String name);
+public interface MutableName<K extends Serializable> {
+	public void setName(@NotBlank K name);
 }

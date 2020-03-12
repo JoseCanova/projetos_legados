@@ -22,7 +22,7 @@ import org.nanotek.NameBase;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class LongIdNameEntity extends SequenceLongBase implements NameBase , MutableName{
+public class LongIdNameEntity extends SequenceLongBase implements NameBase<String>{
 
 	private static final long serialVersionUID = -3442197714885490996L;
 

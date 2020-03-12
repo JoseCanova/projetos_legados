@@ -1,9 +1,5 @@
 package org.nanotek.configuration.csv;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.MediumFormatBean;

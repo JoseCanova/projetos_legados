@@ -1,6 +1,6 @@
 package org.nanotek;
 
 @FunctionalInterface
-public interface Nameable {
-	String  getName();
+public interface Nameable<K> {
+	K  getName();
 }
