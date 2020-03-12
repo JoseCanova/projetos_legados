@@ -2,6 +2,7 @@ package org.nanotek.configuration.csv;
 
 import java.util.Optional;
 
+import org.assertj.core.util.Arrays;
 import org.nanotek.Base;
 import org.nanotek.BaseIntegrationException;
 import org.nanotek.JsonMessage;
@@ -12,8 +13,6 @@ import org.nanotek.beans.entity.InstrumentComment;
 import org.nanotek.beans.entity.InstrumentDescription;
 import org.nanotek.beans.entity.InstrumentType;
 import org.nanotek.processor.csv.CsvBaseProcessor;
-import org.nanotek.repository.jpa.InstrumentCommentRepository;
-import org.nanotek.repository.jpa.InstrumentDescriptionRepository;
 import org.nanotek.service.jpa.InstrumentJpaService;
 import org.nanotek.service.jpa.InstrumentTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
@@ -37,7 +36,6 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.http.inbound.HttpRequestHandlingMessagingGateway;
 import org.springframework.integration.http.inbound.RequestMapping;
-import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
@@ -208,28 +206,32 @@ public class InstrumentIntegrationConfiguration {
 								.of(instrumentTypeService.findByTypeId(source.getType())
 										.orElseThrow(BaseIntegrationException::new));
 			
-			Instrument instrument = Optional.of(new Instrument(
-																source.getId() , 
-																source.getGid() , 
-																source.getName() , 
-																optType.get() 
-																)).map(i -> instrumentService.save(i)).get();
-			
-			
+			Instrument instrument = Base.newInstance(Instrument.class, 
+																Arrays.array(
+																		source.getId() , 
+																		source.getGid() , 
+																		source.getName() , 
+																		optType.get()),
+																Arrays.array(
+																		Long.class , 
+																		String.class,
+																		String.class,
+																		InstrumentType.class)
+																).map(i -> instrumentService.save(i)).get();
 			if (NotEmpty(source.getComment())) {
-				Optional.of(new InstrumentComment(source.getComment()))
-															.ifPresent(c -> {
-																				c.setInstrument(instrument); 
+				Base.newInstance(InstrumentComment.class, 
+									Arrays.array(source.getComment()), 
+									Arrays.array(String.class)).ifPresent(c -> {c.setInstrument(instrument);
 																				instrumentService.saveComment(c);
-																			});
+																				});
 			}
-
 			if (NotEmpty(source.getDescription())) {
-				
-				Optional.of(new InstrumentDescription(source.getDescription())).ifPresent(d -> {
-					d.setInstrument(instrument);
-					instrumentService.saveDescription(d);
-				});
+				Base.newInstance(
+						InstrumentDescription.class , 
+							Arrays.array(source.getDescription()) , 
+							Arrays.array(String.class)).ifPresent(d -> {d.setInstrument(instrument); 
+																	instrumentService.saveDescription(d);
+																	});
 			}
 		}
 
