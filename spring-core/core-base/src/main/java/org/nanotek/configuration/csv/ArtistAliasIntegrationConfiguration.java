@@ -215,6 +215,8 @@ public class ArtistAliasIntegrationConfiguration {
 			
 			ArtistAlias artistAlias = new ArtistAlias(source.getId(),artist,source.getName());
 			
+//			aliasRepo.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toString());});
+			
 			if(notEmpty(source.getSortName())) { 
 				Base.newInstance(ArtistAliasSortName.class, 
 						Arrays.array(source.getSortName()) , 
@@ -224,8 +226,6 @@ public class ArtistAliasIntegrationConfiguration {
 			
 			if (source.getArtistId() == null)
 				throw new MessagingException("Artist is Required and Not Present " + source.toString());
-			
-			aliasRepo.findByAliasId(source.getId()).ifPresent(a -> {throw new MessagingException("ArtistAlias Present " + a.toString());});
 			
 			Optional.ofNullable(source.getBeginDateYear())
 								.ifPresent(y ->{
@@ -245,7 +245,7 @@ public class ArtistAliasIntegrationConfiguration {
 											
 			});
 
-			Long typeId = Optional.ofNullable(source.getType()).orElseThrow(BaseIntegrationException::new);
+			Long typeId = Optional.ofNullable(source.getType()).orElse(3l);
 			
 			ArtistAliasType type =  typeRepository
 														.findByTypeId(typeId)
