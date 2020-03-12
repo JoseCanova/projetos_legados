@@ -3,6 +3,7 @@ package org.nanotek.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -14,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 public interface BaseService<O  , K> extends Service {
 	
 	@Validated(value = Default.class)
-	Optional<O> findById(@NotNull K k );
+	Optional<O> findById(@Validated @Valid @NotNull K k);
 	
 	List<O> findAll();
 

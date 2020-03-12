@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.BaseTypeBase;
 
 
 @Entity
@@ -28,11 +29,12 @@ import org.hibernate.validator.constraints.Length;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BaseType extends TypeNamedEntity{
+public class BaseType extends TypeNamedEntity implements BaseTypeBase<Long>{
 
 	private static final long serialVersionUID = 863905425134347710L;
 	
-	@Column(name="type_id")
+	@NotNull
+	@Column(name="type_id" , nullable = false)
 	protected Long typeId;
 	
 	@Column(name="parent")
@@ -51,6 +53,11 @@ public class BaseType extends TypeNamedEntity{
 	public BaseType() {
 	}
 
+	public BaseType(@NotNull Long typeId , @NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
+		super(gid, name);
+		this.typeId = typeId;
+	}
+	
 	public BaseType(@NotBlank @Length(min = 1, max = 50) String gid, @NotBlank String name) {
 		super(gid, name);
 	}
@@ -59,6 +66,15 @@ public class BaseType extends TypeNamedEntity{
 		super(name);
 	}
 
+	public Long getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
+
+	
 	public Long getParent() {
 		return parent;
 	}
@@ -120,12 +136,5 @@ public class BaseType extends TypeNamedEntity{
 				+ description + ", gid=" + gid + ", id=" + id + "]";
 	}
 
-	public Long getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(Long typeId) {
-		this.typeId = typeId;
-	}
 
 }

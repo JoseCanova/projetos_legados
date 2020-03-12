@@ -3,6 +3,7 @@ package org.nanotek.configuration.csv;
 import java.util.Optional;
 
 import org.nanotek.Base;
+import org.nanotek.BaseIntegrationException;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.InstrumentBean;
@@ -55,6 +56,12 @@ public class InstrumentIntegrationConfiguration {
 
 	private final Logger logger = LoggerFactory.getLogger(InstrumentIntegrationConfiguration.class);
 
+	@Autowired
+	InstrumentTypeJpaService instrumentTypeService;
+	
+	@Autowired
+	InstrumentJpaService instrumentService;
+	
 	@Value("${server.port}")
 	private String serverPort;
 
@@ -136,11 +143,9 @@ public class InstrumentIntegrationConfiguration {
 
 	@Bean IntegrationFlow processInstrumentRequest
 			(@Autowired InstrumentHandler handler , 
-			@Autowired @Qualifier("instrumentIntegrationStartChannel") ExecutorChannel executorChannel,
-			@Autowired InstrumentTransformer transformer) { 
+			@Autowired @Qualifier("instrumentIntegrationStartChannel") ExecutorChannel executorChannel) { 
 		return IntegrationFlows
 				.from(executorChannel)
-				.transform(transformer)
 				.handle(handler)
 				.get();
 	}
@@ -190,107 +195,46 @@ public class InstrumentIntegrationConfiguration {
 
 
 	@MessageEndpoint
-	class InstrumentHandler implements MessageHandler{ 
-		
-		@Autowired
-		InstrumentJpaService service;
-		
-		@Autowired
-		InstrumentCommentRepository commentRepository;
-		
-		@Autowired 
-		InstrumentDescriptionRepository descRepository;
-		
-		
-		@Override
-		public void handleMessage(Message<?> message) throws MessagingException {
-			InstrumentHolder holder = (InstrumentHolder) message.getPayload();
-			Instrument transientInstrument = holder.getOptInstrument().get();
-			
-			transientInstrument = service.save(transientInstrument);
-			
-			Optional<InstrumentComment> oic = holder.getOptComment();
-			Optional<InstrumentDescription> oid = holder.getOpdDescription();
-			
-			if (oic.isPresent()) { 
-				InstrumentComment ic = oic.get();
-				ic.setInstrument(transientInstrument);
-				commentRepository.save(ic);
-			}
-			
-			if(oid.isPresent()) {
-				InstrumentDescription id = oid.get();
-				id.setInstrument(transientInstrument);
-				descRepository.save(id);
-			}
-		}
-	}
-
-	@MessageEndpoint
-	class InstrumentTransformer implements GenericTransformer<InstrumentBean  , InstrumentHolder>{
-
-		@Autowired
-		InstrumentTypeJpaService service;
+	class InstrumentHandler implements MessageHandler{
 
 		@Override
-		public InstrumentHolder transform(InstrumentBean source) {
+		public void handleMessage(Message<?> message){
+			
+			InstrumentBean source = (InstrumentBean) message.getPayload();
+			
 			Optional<InstrumentType> optType = Base.NULL_VALUE(InstrumentType.class);
-			Optional<InstrumentComment> optComment = Base.NULL_VALUE(InstrumentComment.class);
-			Optional<InstrumentDescription> optDescription = Base.NULL_VALUE(InstrumentDescription.class);
 			
-			if (source.getType() !=null)
-				optType = service.findById(source.getType());
+			optType =  Optional
+								.of(instrumentTypeService.findByTypeId(source.getType())
+										.orElseThrow(BaseIntegrationException::new));
 			
-			if(optType.isEmpty())
-				throw new MessagingException("No type found for bean");
+			Instrument instrument = Optional.of(new Instrument(
+																source.getId() , 
+																source.getGid() , 
+																source.getName() , 
+																optType.get() 
+																)).map(i -> instrumentService.save(i)).get();
+			
 			
 			if (NotEmpty(source.getComment())) {
-				InstrumentComment ic = new InstrumentComment(source.getComment());
-				optComment = Optional.of(ic);
+				Optional.of(new InstrumentComment(source.getComment()))
+															.ifPresent(c -> {
+																				c.setInstrument(instrument); 
+																				instrumentService.saveComment(c);
+																			});
 			}
 
 			if (NotEmpty(source.getDescription())) {
-				InstrumentDescription id = new InstrumentDescription(source.getDescription());
-				optDescription = Optional.of(id);
+				
+				Optional.of(new InstrumentDescription(source.getDescription())).ifPresent(d -> {
+					d.setInstrument(instrument);
+					instrumentService.saveDescription(d);
+				});
 			}
-			
-			
-			InstrumentType itye  = optType.get();
-			Instrument instrument = new Instrument(
-											source.getId() , 
-											source.getGid() , 
-											source.getName() , 
-											itye 
-											);
-			Optional<Instrument> optInst = Optional.of(instrument);
-			return new InstrumentHolder(optInst , optComment , optDescription);
 		}
 
 		private boolean NotEmpty(String str) {
 			return str !=null && !"".contentEquals(str.trim());
 		} 
 	}
-
-	class InstrumentHolder{ 
-		private Optional<Instrument> optInstrument; 
-		private Optional<InstrumentComment> optComment; 
-		private Optional<InstrumentDescription> opdDescription;
-		public InstrumentHolder(Optional<Instrument> optInstrument, Optional<InstrumentComment> optComment,
-				Optional<InstrumentDescription> opdDescription) {
-			super();
-			this.optInstrument = optInstrument;
-			this.optComment = optComment;
-			this.opdDescription = opdDescription;
-		}
-		public Optional<Instrument> getOptInstrument() {
-			return optInstrument;
-		}
-		public Optional<InstrumentComment> getOptComment() {
-			return optComment;
-		}
-		public Optional<InstrumentDescription> getOpdDescription() {
-			return opdDescription;
-		}
-	}
-	
 }

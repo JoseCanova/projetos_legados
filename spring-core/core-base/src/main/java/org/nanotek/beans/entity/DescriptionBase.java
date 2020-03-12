@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nanotek.BaseDescriptionBase;
 
 @Entity
 @Table(name="description_base",
@@ -25,7 +26,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 	)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DescriptionBase extends SequenceLongBase{
+public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String>{
 
 	private static final long serialVersionUID = -4976009864905272762L;
 

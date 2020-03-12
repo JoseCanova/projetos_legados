@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DiscriminatorValue("InstrumentComment")
 public class InstrumentComment extends CommentBase{
 	
-	@JsonIgnore
 	@NotNull
 	@OneToOne(optional=false ,  mappedBy = "comment")
 	private Instrument instrument;
