@@ -1,4 +1,4 @@
-package org.nanotek.service.jpa;
+package org.nanotek.service;
 
 import org.nanotek.beans.entity.LongIdSortNameEntity;
 import org.nanotek.repository.jpa.LongIdSortNameEntityRepository;

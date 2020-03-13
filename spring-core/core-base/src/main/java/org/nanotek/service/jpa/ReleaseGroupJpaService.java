@@ -4,30 +4,19 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ReleaseGroup;
 import org.nanotek.repository.jpa.ReleaseGroupRepository;
+import org.nanotek.service.LongIdGidNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ReleaseGroupJpaService  extends BasePersistenceService<ReleaseGroup,Long> {
+public class ReleaseGroupJpaService  extends LongIdGidNameEntityService<ReleaseGroup,ReleaseGroupRepository> {
 
-	private static final long serialVersionUID = -2685317051279601491L;
-	
-	@Autowired
-	ReleaseGroupRepository rep; 
-	
-	public ReleaseGroupJpaService() {
+	public ReleaseGroupJpaService(@Autowired ReleaseGroupRepository rep) {
+		super(rep);
 	}
 
-	@Override
-	@Transactional
-	public Optional<ReleaseGroup> findById(Long k) {
-		return rep.findById(k);
-	}
-	
-	@Transactional
-	public ReleaseGroup save (ReleaseGroup group) { 
-		return rep.save(group);
+	public Optional<ReleaseGroup> findByReleaseGrouId(Long releaseGroupId){
+		return baseRepository.findByReleaseGroupId(releaseGroupId);
 	}
 
 }

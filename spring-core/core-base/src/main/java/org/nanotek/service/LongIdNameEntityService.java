@@ -1,10 +1,10 @@
-package org.nanotek.service.jpa;
+package org.nanotek.service;
 
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongIdEntityNameBase;
 import org.nanotek.repository.jpa.LongIdNameEntityRepository;
-import org.springframework.beans.factory.InitializingBean;
+import org.nanotek.service.jpa.BasePersistenceService;
 
 public abstract class LongIdNameEntityService <O extends LongIdEntityNameBase , B extends LongIdNameEntityRepository<O>> 
 									extends BasePersistenceService<O, B>  {

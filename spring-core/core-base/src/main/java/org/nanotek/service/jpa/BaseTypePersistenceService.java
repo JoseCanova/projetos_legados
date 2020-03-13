@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.BaseType;
 import org.nanotek.repository.jpa.BaseTypeRepository;
+import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class BaseTypePersistenceService<O extends BaseType , B extends BaseTypeRepository<O>> extends LongIdNameEntityService<O, B> {

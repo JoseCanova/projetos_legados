@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.repository.jpa.ArtistCreditRepository;
+import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

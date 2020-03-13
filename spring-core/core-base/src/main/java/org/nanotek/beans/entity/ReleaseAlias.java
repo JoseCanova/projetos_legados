@@ -11,9 +11,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ReleaseAliasBase;
+
 @Entity
 @Table(name = "release_alias")
-public class ReleaseAlias extends LongIdNameEntity {
+public class ReleaseAlias extends LongIdNameEntity implements ReleaseAliasBase<Long>{
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	

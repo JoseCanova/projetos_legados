@@ -9,6 +9,6 @@ import org.nanotek.ReleaseGroupBase;
 
 public interface ReleaseGroupBaseRepository<K extends ReleaseGroupBase<ID>, ID extends Serializable> {
 
-	Optional<ReleaseGroupBase<ID>> findByReleaseGroupId(@NotNull ID releaseGroupId);
+	Optional<K> findByReleaseGroupId(@NotNull ID releaseGroupId);
 	
 }
