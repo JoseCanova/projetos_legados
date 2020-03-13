@@ -7,28 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="long_lengthy_base",
-						indexes= {
-								@Index(unique = false , name = "long_length_table_idx" , columnList ="length")
-							})
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-	    discriminatorType = DiscriminatorType.STRING,
-	    name = "table_id",
-	    columnDefinition = "VARCHAR NOT NULL"
-	)
-public class LongLengthyBase extends LengthyBase<Long>{
 
-	private static final long serialVersionUID = -8797268785342768025L;
-	
-	@NotNull
-	@Column(name="length" , nullable=false)
-	protected  Long length;
-	
+@MappedSuperclass
+public abstract class LongLengthyBase extends LengthyBase<Long>{
+
 	public LongLengthyBase() {
 	}
 
@@ -37,13 +23,8 @@ public class LongLengthyBase extends LengthyBase<Long>{
 		this.length = length;
 	}
 
-	@Override
 	public Long getLength() {
 		return length;
-	}
-
-	public void setLength(Long length) {
-		this.length = length;
 	}
 
 	@Override

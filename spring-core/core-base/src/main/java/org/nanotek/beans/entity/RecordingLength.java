@@ -1,14 +1,32 @@
 package org.nanotek.beans.entity;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ImuTableLengthIdBase;
+
 @Entity
+@Table(name="recording_lengthy_base",
+						indexes= {
+								@Index(unique = false , name = "long_length_table_idx" , columnList ="length")
+							})
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+	    discriminatorType = DiscriminatorType.STRING,
+	    name = "table_id",
+	    columnDefinition = "VARCHAR NOT NULL"
+	)
 @DiscriminatorValue(value="RecordingLength")
-public class RecordingLength extends LongLengthyBase {
+public class RecordingLength extends LongLengthyBase implements ImuTableLengthIdBase<Long,Long>{
 	
 	private static final long serialVersionUID = -8708909035267715010L;
 	
@@ -17,6 +35,7 @@ public class RecordingLength extends LongLengthyBase {
 	private Recording recording;
 	
 	public RecordingLength() {}
+	
 	
 	public RecordingLength(@NotNull Long length) {
 		super(length);
