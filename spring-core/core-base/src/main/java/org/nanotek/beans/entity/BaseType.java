@@ -29,7 +29,7 @@ import org.nanotek.BaseTypeBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BaseType extends TypeNamedEntity implements BaseTypeBase<Long>{
+public class BaseType extends TypeNamedEntity implements BaseTypeBase<String,Long>{
 
 	private static final long serialVersionUID = 863905425134347710L;
 	

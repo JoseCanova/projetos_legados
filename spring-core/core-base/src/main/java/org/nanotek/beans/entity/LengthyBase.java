@@ -3,13 +3,10 @@ package org.nanotek.beans.entity;
 import javax.persistence.MappedSuperclass;
 
 import org.nanotek.Dimentionable;
-import org.nanotek.LengthBase;
 
 @MappedSuperclass
-public abstract class LengthyBase<K> extends SequenceLongBase implements LengthBase<K> ,  Dimentionable{
+public abstract class LengthyBase<K> extends SequenceLongBase implements Dimentionable{
 
-	private static final long serialVersionUID = -8797268785342768025L;
-	
 	public LengthyBase() {
 	}
 

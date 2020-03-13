@@ -1,7 +1,34 @@
 package org.nanotek;
 
-public interface BaseTypeBase<K> extends Base{
+import java.io.Serializable;
+
+public interface BaseTypeBase<K extends Serializable,ID extends Serializable> extends BaseDescriptionBase<K, ID> , GidBase<K>{
 	
-	K getTypeId();
-	void setTypeId(K id);
+	@Override
+	default K getDescription() {
+		return get().getDescription();
+	}
+	
+	@Override
+	default void setId(ID id) {
+		get().setId(id);
+	}
+	
+	default ID getTypeId() { 
+		return get().getTypeId();
+	}
+	
+	default void setTypeId(ID id) {
+		get().setId(id);
+	}
+	
+	@Override
+	default K getGid() {
+		return get().getGid();
+	}
+	
+	@Override
+	default BaseTypeBase<K, ID> get() {
+		return this;
+	}
 }

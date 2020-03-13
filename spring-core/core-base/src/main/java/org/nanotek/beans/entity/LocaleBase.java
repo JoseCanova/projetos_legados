@@ -24,7 +24,7 @@ import org.nanotek.Locale;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase extends SequenceLongBase implements Locale<String>{
+public class LocaleBase extends SequenceLongBase implements Locale<String,Long>{
 
 	private static final long serialVersionUID = -6664969453930737424L;
 

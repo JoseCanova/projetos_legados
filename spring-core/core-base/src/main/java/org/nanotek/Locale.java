@@ -2,9 +2,20 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface Locale<K extends Serializable> extends Base{
+public interface Locale<K extends Serializable , ID extends Serializable> extends IdBase<ID>{
 
-	K getLocale();
-	void setLocale(K k);
+	
+	default K getLocale() { 
+		return get().getLocale();
+	}
+	
+	default void setLocale(K k) {
+		get().setLocale(k);
+	}
+	
+	@Override
+	default Locale<K , ID> get() {
+		return this;
+	}
 	
 }
