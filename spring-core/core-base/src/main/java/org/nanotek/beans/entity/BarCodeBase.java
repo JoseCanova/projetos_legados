@@ -23,7 +23,7 @@ indexes= {
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BarCodeBase extends SequenceLongBase implements BarCode<Long, String>{
+public class BarCodeBase extends SequenceLongBase implements BarCode<String,Long>{
 
 	private static final long serialVersionUID = 3988946185099694426L;
 

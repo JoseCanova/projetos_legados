@@ -5,17 +5,17 @@ import java.io.Serializable;
 public interface BaseDescriptionBase<K extends Serializable, ID extends Serializable> extends MutableDescriptionBase<K , ID>{
 
 	@Override
-	default K getId() {
+	default ID getId() {
 		return get().getId();
 	}
 	
 	@Override
-	default void setId(K id) {
+	default void setId(ID id) {
 		get().setId(id);
 	}
 	
 	@Override
-	default BaseDescriptionBase<K,ID> withId(K id) {
+	default BaseDescriptionBase<K,ID> withId(ID id) {
 		return get().withId(id);
 	}
 	
@@ -24,7 +24,7 @@ public interface BaseDescriptionBase<K extends Serializable, ID extends Serializ
 	}
 	
 	@Override
-	default void setDescription(ID id) {
+	default void setDescription(K id) {
 		get().setDescription(id);
 	}
 	

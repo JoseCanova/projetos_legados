@@ -26,7 +26,7 @@ import org.nanotek.BaseDescriptionBase;
 	)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String> {
+public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String,Long> {
 
 	private static final long serialVersionUID = -4976009864905272762L;
 

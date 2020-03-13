@@ -10,13 +10,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nanotek.BaseDescriptionIdBase;
 import org.nanotek.NameBase;
 
 @Entity
 @Table(name="medium_format")
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class MediumFormat extends EntityLongBase implements NameBase<String>{
+public class MediumFormat extends SequenceLongBase implements BaseDescriptionIdBase<Long,String>{
 
 	private static final long serialVersionUID = 8104913204474210789L;
 	
@@ -45,11 +44,10 @@ public class MediumFormat extends EntityLongBase implements NameBase<String>{
 		super();
 	}
 	
-	public MediumFormat(@NotNull Long id , 
+	public MediumFormat(
 			@NotBlank @Size(min = 1, max = 100) String name, 
 			Long parent, Integer year, String hasDiscId,
 			@NotBlank String gid, String description) {
-		super(id);
 		this.name = name;
 		this.parent = parent;
 		this.year = year;
@@ -143,5 +141,6 @@ public class MediumFormat extends EntityLongBase implements NameBase<String>{
 		return "MediumFormat [name=" + name + ", parent=" + parent + ", year=" + year + ", hasDiscId=" + hasDiscId
 				+ ", gid=" + gid + ", description=" + description + ", id=" + id + "]";
 	}
+
 	
 }

@@ -2,7 +2,7 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface BarCode<K extends Serializable , B extends Serializable> extends EntityBase<K>{
+public interface BarCode<B extends Serializable , K extends Serializable > extends BaseDescriptionBase<B, K>{
 
 	@Override
 	default K getId() {
@@ -23,7 +23,7 @@ public interface BarCode<K extends Serializable , B extends Serializable> extend
 	}
     
 	@Override
-	default BarCode<K,B> get() {
+	default BarCode<B,K> get() {
 		return this;
 	}
 }
