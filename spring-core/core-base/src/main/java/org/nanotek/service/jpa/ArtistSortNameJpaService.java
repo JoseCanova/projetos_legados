@@ -8,22 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistSortNameJpaService extends BasePersistenceService<ArtistSortName, Long> {
+public class ArtistSortNameJpaService extends EntityBasePersistenceService<ArtistSortName , ArtistSortNameRepository,Long> {
 
-	private static final long serialVersionUID = 6744665690728195270L;
-
-	@Autowired
-	ArtistSortNameRepository repository;
+	protected ArtistSortNameRepository artistSortNameRepository;
 	
-	public ArtistSortNameJpaService() {
+	public ArtistSortNameJpaService(@Autowired ArtistSortNameRepository artistSortNameRepository) {
+		this.artistSortNameRepository = artistSortNameRepository;
 	}
 
 	public Optional<ArtistSortName> findById(Long k) {
-		return repository.findById(k);
+		return artistSortNameRepository.findById(k);
 	}
 
 	public Iterable<ArtistSortName> findByNameContaining(String name){
-		return repository.findBySortNameContainingIgnoreCase(name);
+		return artistSortNameRepository.findBySortNameContainingIgnoreCase(name);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		baseRepository = artistSortNameRepository;
 	}
 	
 }

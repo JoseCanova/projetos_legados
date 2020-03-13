@@ -18,7 +18,7 @@ import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.LanguageRepository;
 import org.nanotek.repository.jpa.ReleaseBarCodeRepository;
 import org.nanotek.repository.jpa.ReleaseCommentRepository;
-import org.nanotek.repository.jpa.ReleaseGroupJpaRepository;
+import org.nanotek.repository.jpa.ReleaseGroupRepository;
 import org.nanotek.repository.jpa.ReleasePackagingRepository;
 import org.nanotek.repository.jpa.ReleaseStatusRepository;
 import org.nanotek.service.CsvMessageHandler;
@@ -180,7 +180,7 @@ public class ReleaseIntegrationConfiguration {
 		ReleaseStatusRepository statusRep; 
 		
 		@Autowired
-		ReleaseGroupJpaRepository groupRep;
+		ReleaseGroupRepository groupRep;
 		
 		@Autowired
 		ReleasePackagingRepository packRep;

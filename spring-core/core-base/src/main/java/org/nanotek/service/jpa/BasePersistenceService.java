@@ -1,66 +1,134 @@
 package org.nanotek.service.jpa;
 
-import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
-import org.nanotek.Base;
-import org.nanotek.service.BaseService;
+import org.nanotek.IdBase;
+import org.nanotek.repository.jpa.IdBaseRepository;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-@SuppressWarnings("serial")
-public abstract class BasePersistenceService<O extends Base, K extends Serializable> implements BaseService<O,K>{
+public abstract class BasePersistenceService<O extends IdBase<Long>, R extends IdBaseRepository<O,Long>>  {
 
-	@Override
+	protected R  baseRepository;
+	
+	public BasePersistenceService() {
+		super();
+	}
+
+	public BasePersistenceService(R baseRepository) {
+		super();
+		this.baseRepository = baseRepository;
+	}
+
+
 	public List<O> findAll() {
-		return null;
+		return baseRepository.findAll();
 	}
 
-	@Override
+	
 	public List<O> findAll(Sort sort) {
-		return null;
+		return baseRepository.findAll(sort);
 	}
 
-	@Override
+	
 	public List<O> findAllById(Iterable<Long> ids) {
-		return null;
+		return baseRepository.findAllById(ids);
 	}
 
-	@Override
-	public <S extends O> List<S> saveAll(Iterable<S> entities) {
-		return null;
+	
+	public  List<O> saveAll(Iterable<O> entities) {
+		return baseRepository.saveAll(entities);
 	}
 
-	@Override
+	
 	public void flush() {
+		baseRepository.flush();
 	}
 
-	@Override
-	public <S extends O> S saveAndFlush(S entity) {
-		return null;
+	
+	public  O saveAndFlush(O entity) {
+		return baseRepository.saveAndFlush(entity);
 	}
 
-	@Override
+	
 	public void deleteInBatch(Iterable<O> entities) {
+		baseRepository.deleteInBatch(entities);
 	}
 
-	@Override
+	
 	public void deleteAllInBatch() {
+		baseRepository.deleteAllInBatch();
 	}
 
-	@Override
+	
+	public  List<O> findAll(Example<O> example) {
+		return baseRepository.findAll(example);
+	}
+
+	
+	public  List<O> findAll(Example<O> example, Sort sort) {
+		return findAll(example,sort);
+	}
+
+	public  O save(O entity) {
+		return baseRepository.save(entity);
+	}
+
+	public  Optional<O> findOne(Example<O> example) {
+		return baseRepository.findOne(example);
+	}
+
+	public Page<O> findAll(Pageable pageable) {
+		return baseRepository.findAll(pageable);
+	}
+
+	public Optional<O> findById(Long id) {
+		return baseRepository.findById(id);
+	}
+
+	public boolean existsById(Long id) {
+		return baseRepository.existsById(id);
+	}
+
+	public  Page<O> findAll(Example<O> example, Pageable pageable) {
+		return baseRepository.findAll(example, pageable);
+	}
+
 	public O getOne(Long id) {
-		return null;
+		return baseRepository.getOne(id);
 	}
 
-	@Override
-	public <S extends O> List<S> findAll(Example<S> example) {
-		return null;
+	public  long count(Example<O> example) {
+		return baseRepository.count(example);
 	}
 
-	@Override
-	public <S extends O> List<S> findAll(Example<S> example, Sort sort) {
-		return null;
+	public  boolean exists(Example<O> example) {
+		return baseRepository.exists(example);
 	}
+
+	public long count() {
+		return baseRepository.count();
+	}
+
+	public void deleteById(Long id) {
+		baseRepository.deleteById(id);
+	}
+
+	public void delete(O entity) {
+		baseRepository.delete(entity);
+	}
+
+	public void deleteAll(Iterable<? extends O> entities) {
+		baseRepository.deleteAll(entities);
+	}
+
+	public void deleteAll() {
+		baseRepository.deleteAll();
+	}
+	
+	
 
 }

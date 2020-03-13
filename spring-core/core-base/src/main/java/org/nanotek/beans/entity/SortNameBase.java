@@ -28,7 +28,7 @@ import org.nanotek.SortBase;
 	)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class SortNameBase extends SequenceLongBase implements SortBase<String>{
+public class SortNameBase extends SequenceLongBase implements SortBase<Long,String>{
 
 	private static final long serialVersionUID = -950822256693332353L;
 

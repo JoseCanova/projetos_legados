@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("InstrumentComment")
-public class InstrumentComment extends CommentBase{
+public class InstrumentComment extends CommentBase {
 	
 	@NotNull
 	@OneToOne(optional=false ,  mappedBy = "comment")

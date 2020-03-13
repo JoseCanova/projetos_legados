@@ -10,6 +10,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.BarCode;
+
 @Entity
 @Table(name="bar_code_base", 
 indexes= {
@@ -21,7 +23,7 @@ indexes= {
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BarCodeBase extends SequenceLongBase{
+public class BarCodeBase extends SequenceLongBase implements BarCode<String>{
 
 	private static final long serialVersionUID = 3988946185099694426L;
 

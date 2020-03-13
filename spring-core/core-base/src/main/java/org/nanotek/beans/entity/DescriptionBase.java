@@ -26,7 +26,7 @@ import org.nanotek.BaseDescriptionBase;
 	)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String>{
+public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<Long , String>{
 
 	private static final long serialVersionUID = -4976009864905272762L;
 
@@ -79,6 +79,4 @@ public class DescriptionBase extends SequenceLongBase implements BaseDescription
 	public String toString() {
 		return "DescriptionBase [description=" + description + ", id=" + id + "]";
 	}
-
-
 }

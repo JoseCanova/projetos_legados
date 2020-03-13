@@ -1,6 +1,5 @@
 package org.nanotek.service.jpa;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
@@ -11,41 +10,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+//<O extends ArtistCredit , R extends LongIdNameEntityRepository> 
 @Service
-public class ArtistCreditJpaService extends BasePersistenceService<ArtistCredit,Long> {
+public class ArtistCreditJpaService extends LongIdNameEntityService<ArtistCredit, ArtistCreditRepository>  {
 
-	private static final long serialVersionUID = -6963247633512676934L;
-	
-	@Autowired
-	private ArtistCreditRepository artistCreditRepository;
 
-	@Transactional
-	public ArtistCredit save(ArtistCredit ArtistCredit) { 
-		return artistCreditRepository.save(ArtistCredit);
-	}
-	
-	@Transactional
-	public List<ArtistCredit> saveAll(List<ArtistCredit> list) { 
-		return artistCreditRepository.saveAll(list);
+	public ArtistCreditJpaService(@Autowired ArtistCreditRepository rep) {
+		super(rep);
 	}
 
-	@Override
-	@Transactional
-//	@Cacheable(cacheNames="credits", key="#id")
-	public  Optional<ArtistCredit> findById(Long id) {
-		return artistCreditRepository.findById(id);
-	}
-	
 	@Transactional
 	public Optional<ArtistCredit> findByArtistCreditId(@NotNull Long artistCreditId){ 
-		return artistCreditRepository.findByArtistCreditId(artistCreditId);
+		return baseRepository.findByArtistCreditId(artistCreditId);
 	}
 	
-	//TODO: refactor this.
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
 	public  ArtistCredit findArtistCreditRecordingsById(Long id) {
-		Optional<ArtistCredit>  opt = artistCreditRepository.findArtistCreditRecordingsById(id);
+		Optional<ArtistCredit>  opt = baseRepository.findArtistCreditRecordingsById(id);
 		return opt.isPresent() ? opt.get() : null;
 	}
+
 }

@@ -10,6 +10,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.Base;
+import org.nanotek.Locale;
+
 @Entity
 @Table(name="locale_base",
 					indexes= {
@@ -21,7 +24,7 @@ import javax.validation.constraints.NotBlank;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase extends SequenceLongBase{
+public class LocaleBase extends SequenceLongBase implements Locale<String>{
 
 	private static final long serialVersionUID = -6664969453930737424L;
 

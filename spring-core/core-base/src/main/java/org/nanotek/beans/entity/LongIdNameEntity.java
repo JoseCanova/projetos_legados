@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nanotek.IdNameBase;
+import org.nanotek.LongIdEntityNameBase;
 import org.nanotek.NameBase;
 
 @Entity
@@ -21,7 +23,7 @@ import org.nanotek.NameBase;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class LongIdNameEntity extends SequenceLongBase implements NameBase<String>{
+public class LongIdNameEntity extends SequenceLongBase implements LongIdEntityNameBase {
 
 	private static final long serialVersionUID = -3442197714885490996L;
 

@@ -15,12 +15,14 @@ import javax.persistence.Table;
 
 import org.nanotek.Base;
 import org.nanotek.LongBase;
+import org.nanotek.LongIdEntityNameBase;
+import org.nanotek.repository.jpa.LongIdNameEntityRepository;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="artist_credit_name")
 //@NamedQuery(name="FindArtistCreditByMbid" , query= "Select a from ArtistCreditName a where a.artistName.artistid = :mbid")
-public class ArtistCreditName implements LongBase {
+public class ArtistCreditName implements LongIdEntityNameBase {
 
 	@Id
 	@GeneratedValue(generator="artist_credit_name_id_seq" , strategy=GenerationType.SEQUENCE)

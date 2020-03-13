@@ -5,11 +5,9 @@ import java.util.Optional;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.ArtistAlias;
-import org.nanotek.repository.jpa.projections.NameBaseProjection;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistAliasRepository extends JpaRepository<ArtistAlias,Long> , NameBaseProjection<ArtistAlias>{
+public interface ArtistAliasRepository extends LongIdNameEntityRepository<ArtistAlias>{
 	Optional<ArtistAlias> findByAliasId(@NotNull Long aliasId);
 }

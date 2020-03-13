@@ -15,13 +15,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.RecordBase;
 
 @Entity
 @Table(name="recording" ,
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording extends LongIdGidNameEntity {
+public class Recording extends LongIdGidNameEntity implements RecordBase<Long>{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 
@@ -75,14 +76,15 @@ public class Recording extends LongIdGidNameEntity {
 		this.recordingLenght = recordingLenght;
 	}
 
+	@Override
 	public Long getRecordingId() {
 		return recordingId;
 	}
-
+	
+	@Override
 	public void setRecordingId(Long recordingId) {
 		this.recordingId = recordingId;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -116,5 +118,5 @@ public class Recording extends LongIdGidNameEntity {
 		return "Recording [recordingId=" + recordingId + ", artistCredit=" + artistCredit + ", tracks=" + tracks
 				+ ", recordingLenght=" + recordingLenght + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
-	
+
 }

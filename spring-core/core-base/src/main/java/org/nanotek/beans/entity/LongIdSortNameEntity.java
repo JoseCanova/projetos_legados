@@ -1,14 +1,14 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.SortedNameBase;
 
 @Entity
-@Table(name="long_id_sort_name")
+@DiscriminatorValue(value = "LongIdSortNameEntity")
 public class LongIdSortNameEntity extends LongIdNameEntity implements SortedNameBase<String> {
 
 	private static final long serialVersionUID = -3442197714885490996L;

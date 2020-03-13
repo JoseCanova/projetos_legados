@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistRepository extends LongIdNameEntityRepository<Artist>{
+public interface ArtistRepository extends LongIdGidNameEntityRepository<Artist>{
 	
 	Optional<Artist> findByArtistId(Long artistId);
 	

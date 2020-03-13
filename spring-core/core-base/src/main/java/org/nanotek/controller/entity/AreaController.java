@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/area")
-public class AreaController  implements  EntityResponseController<Area, Long> {
+public class AreaController  implements  EntityNameBaseResponseController<Area> {
 
 
 	@Autowired
@@ -19,8 +19,8 @@ public class AreaController  implements  EntityResponseController<Area, Long> {
 	
 
 	@RequestMapping("/name/{name}")
-	public IterableResponseEntity<Iterable<Area>, Area> findByName(@PathVariable(value="name") String  name) {
-		Iterable<Area> it = getBaseService().findByNameContaining(name);
+	public IterableResponseEntity<Iterable<Area>, Area> findByNameContainingIgnoreCase(@PathVariable(value="name") String  name) {
+		Iterable<Area> it = getBaseService().findByNameContainingIgnoreCase(name);
 		return IterableResponseEntity.fromIterable(it, HttpStatus.OK);
 	}
 

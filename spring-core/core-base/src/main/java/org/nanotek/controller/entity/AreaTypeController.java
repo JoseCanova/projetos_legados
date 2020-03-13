@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/area_type")
-public class AreaTypeController  implements  EntityResponseController<AreaType, Long> {
+public class AreaTypeController  implements  BaseTypeController<AreaType> {
 
 
 	@Autowired
@@ -22,17 +22,11 @@ public class AreaTypeController  implements  EntityResponseController<AreaType, 
 	
 
 	@RequestMapping("/name/{name}")
-	public IterableResponseEntity<Iterable<AreaType>, AreaType> findByName(@PathVariable(value="name") String  name) {
-		Iterable<AreaType> it = getBaseService().findByNameContaining(name);
+	public IterableResponseEntity<Iterable<AreaType>, AreaType> findByNameContainingIgnoreCase(@PathVariable(value="name") String  name) {
+		Iterable<AreaType> it = getBaseService().findByNameContainingIgnoreCase(name);
 		return IterableResponseEntity.fromIterable(it, HttpStatus.OK);
 	}
 
-	@RequestMapping("/type_id/{type_id}")
-	public EntityResponseBase<AreaType> findByTypeId(@PathVariable(value="type_id") Long  id) {
-		Optional<AreaType> it = getBaseService().findByTypeId(id);
-		return EntityResponseBase.fromEntityBase(it, HttpStatus.OK);
-	}
-	
 	public AreaTypeJpaService getBaseService() {
 		return baseService;
 	}

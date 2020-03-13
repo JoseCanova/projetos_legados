@@ -16,10 +16,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 @MappedSuperclass
-public class SequenceLongBase implements LongBase {
+public class SequenceLongBase {
 
-	private static final long serialVersionUID = -2671580389296667850L;
-	
 	@Id
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)
@@ -29,12 +27,10 @@ public class SequenceLongBase implements LongBase {
 
 	public SequenceLongBase() {}
 	
-	@Override
 	public Long getId() {
 		return this.id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

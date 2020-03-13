@@ -1,28 +1,27 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.nanotek.NameBase;
+import org.nanotek.RecordingAliasIdBase;
 
 @Entity
-@Table(name="recording_alias")
-public class RecordingAlias extends EntityLongBase implements NameBase<String>{
+@DiscriminatorValue(value = "RecordingAlias")
+public class RecordingAlias extends LongIdSortNameEntity implements RecordingAliasIdBase<Long>{
 
-	private static final long serialVersionUID = -4420910201637029585L;
+	private static final long serialVersionUID = -1952011326249338518L;
+
+	@NotNull
+	@Column(name = "recording_alias_id")
+	private Long recordingAliasId;
 	
-	@NotBlank
-	@Size(min=1,max=1000)
-	@Column(name="name", length=1000,insertable=true,nullable=false,updatable=true)
-	private String name;
-
 	@Column(name="locale", length=1000)
 	private String locale; 
 	
@@ -35,11 +34,6 @@ public class RecordingAlias extends EntityLongBase implements NameBase<String>{
 	@JoinColumn(name="recording_type_id")
 	private RecordingAliasType type;
 
-	@NotNull
-	@Size(min=0,max=1000)
-	@Column(name="sortName", length=1000,insertable=true,nullable=false,updatable=true)
-	private String sortName; 
-	
     @Column(name="begin_date_year")
 	private Integer beginDateYear ;
     
@@ -65,7 +59,6 @@ public class RecordingAlias extends EntityLongBase implements NameBase<String>{
 			RecordingAliasType type, @NotNull @Size(min = 0, max = 1000) String sortName, Integer beginDateYear,
 			Integer beginDateMonth, Integer beginDateDay, Integer endDateYear, Integer endDateMonth,
 			Integer endDateDay) {
-		super(id);
 		this.name = name;
 		this.locale = locale;
 		this.recording = recording;
@@ -207,6 +200,14 @@ public class RecordingAlias extends EntityLongBase implements NameBase<String>{
 		this.type = type;
 	}
 
-	
+	@Override
+	public Long getRecordingAliasId() {
+		return recordingAliasId;
+	}
+
+	@Override
+	public void setRecordingAliasId(Long id) {
+		this.recordingAliasId = id;
+	}
 	
 }

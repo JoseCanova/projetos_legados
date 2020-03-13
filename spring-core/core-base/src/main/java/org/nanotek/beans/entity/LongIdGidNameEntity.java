@@ -8,11 +8,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.GidBase;
 
 @Entity
 @Table(name="long_id_gid_name",uniqueConstraints= @UniqueConstraint(name="uk_id_gid_name",columnNames={"gid"})
 )
-public class LongIdGidNameEntity extends LongIdNameEntity {
+public class LongIdGidNameEntity extends LongIdNameEntity implements GidBase<String>{
 
 	private static final long serialVersionUID = -3230710199273457686L;
 	

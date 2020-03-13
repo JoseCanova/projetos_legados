@@ -2,7 +2,6 @@ package org.nanotek.controller.csv;
 
 import org.nanotek.base.maps.ArtistCreditBaseMap;
 import org.nanotek.beans.csv.ArtistCreditBean;
-import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.service.parser.ArtistCreditParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

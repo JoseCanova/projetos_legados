@@ -9,6 +9,6 @@ import org.nanotek.repository.jpa.projections.NameBaseProjection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InstrumentRepository extends LongIdNameEntityRepository<Instrument> , NameBaseProjection<Instrument>{
+public interface InstrumentRepository extends LongIdGidNameEntityRepository  <Instrument> , NameBaseProjection<Instrument>{
 	Optional<Instrument> findByInstrumentId(@NotNull Long instrumentId);
 }

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nanotek.Base;
 
 @Entity
 @Table(name="composite_dates",
@@ -28,7 +29,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 	)
 @Cacheable(value = true)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DatableBase extends SequenceLongBase {
+public class DatableBase extends SequenceLongBase implements Base{
 
 	private static final long serialVersionUID = -2752304170904238032L;
 

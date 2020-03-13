@@ -1,13 +1,10 @@
 package org.nanotek.controller.entity;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 import org.nanotek.EntityBase;
-import org.nanotek.controller.EntityServiceResponseBase;
 import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
-import org.nanotek.controller.response.ResponseBase;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface EntityResponseController < E extends EntityBase<K> , K extends Serializable >
-			extends EntityServiceResponseBase<ResponseBase<E>, E, K , BasePersistenceService<E,K>> {
+public interface EntityResponseController < E extends EntityBase<Long> , S extends BasePersistenceService<E, ?>>{
 
 
-	BasePersistenceService<E,K> getBaseService();
+	BasePersistenceService<E,?> getBaseService();
 
-	@Override
 	@GetMapping("/{id}")
-	default EntityResponseBase<E> get(@PathVariable(value="id") K  id)  {
+	default EntityResponseBase<E> get(@PathVariable(value="id") Long  id)  {
 		Optional<E> opt = getBaseService().findById(id);
 		HttpStatus status =  opt.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 		E body = opt.isPresent() ? opt.get() : null;

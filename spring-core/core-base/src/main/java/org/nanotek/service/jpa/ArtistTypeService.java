@@ -10,33 +10,35 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ArtistTypeService extends BasePersistenceService<ArtistType,Long> {
+public class ArtistTypeService extends BasePersistenceService<ArtistType, ArtistTypeRepository>  {
 
-	private static final long serialVersionUID = 3238318006531548699L;
+	private ArtistTypeRepository typeRepository;
 	
-	@Autowired
-	ArtistTypeRepository repository;
+	public ArtistTypeService(@Autowired ArtistTypeRepository baseRepository) { 
+		this.baseRepository = baseRepository;
+		this.typeRepository = baseRepository;
+	}
 
 	@Override
 	@Transactional
 	public Optional<ArtistType> findById(Long k) {
-		return repository.findById(k);
+		return baseRepository.findById(k);
 	} 
 	
 	@Transactional
-	public Iterable<ArtistType> findByNameContaining(String name){ 
-		return repository.findByNameContainingIgnoreCase(name);
+	public Iterable<ArtistType> findByNameContainingIgnoreCase(String name){ 
+		return typeRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	@Transactional
 	public Optional<ArtistType> findByTypeId(Long id) {
-		return repository.findByTypeId(id);
+		return typeRepository.findByTypeId(id);
 	}
 	
 	@Override
 	@Transactional
 	public List<ArtistType> findAll() {
-		return repository.findAll();
+		return baseRepository.findAll();
 	}
 	
 }

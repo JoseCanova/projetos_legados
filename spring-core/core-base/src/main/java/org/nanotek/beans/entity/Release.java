@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_id",columnNames={"release_id"})
 })
-public class Release extends LongIdGidNameEntity {
+public class Release extends LongIdGidNameEntity implements ReleaseBase<Long> {
 
 	private static final long serialVersionUID = 8526436903189806951L;
 		
@@ -194,6 +194,14 @@ public class Release extends LongIdGidNameEntity {
 		return "Release [releaseId=" + releaseId + ", barCode=" + barCode + ", comment=" + comment + ", status="
 				+ status + ", packaging=" + packaging + ", language=" + language + ", releaseGroup=" + releaseGroup
 				+ ", artistCredit=" + artistCredit + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
+	}
+
+	public Long getReleaseId() {
+		return releaseId;
+	}
+
+	public void setReleaseId(Long releaseId) {
+		this.releaseId = releaseId;
 	}
 	
 	

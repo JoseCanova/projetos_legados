@@ -10,12 +10,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ReleaseGroupBase;
+
 @Entity
 @Table(name="release_group",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-public class ReleaseGroup extends LongIdGidNameEntity{
+public class ReleaseGroup extends LongIdGidNameEntity implements ReleaseGroupBase<Long>{
 
 	private static final long serialVersionUID = 7603390865547084527L;
 	
