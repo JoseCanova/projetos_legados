@@ -1,54 +1,39 @@
 package org.nanotek.beans.entity;
 
-import java.util.Optional;
-
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
-import org.nanotek.LongBase;
-import org.nanotek.LongIdEntityNameBase;
-import org.nanotek.repository.jpa.LongIdNameEntityRepository;
+import org.nanotek.ArtistCreditBase;
+import org.nanotek.ArtistCreditNameIdBase;
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name="artist_credit_name")
-//@NamedQuery(name="FindArtistCreditByMbid" , query= "Select a from ArtistCreditName a where a.artistName.artistid = :mbid")
-public class ArtistCreditName implements LongIdEntityNameBase {
+@DiscriminatorValue(value="ArtistCreditName")
+public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNameIdBase<Long>, ArtistCreditBase<ArtistCredit>{
 
-	@Id
-	@GeneratedValue(generator="artist_credit_name_id_seq" , strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "artist_credit_name_id_seq", sequenceName = "artist_credit_name_id_seq")
-	private Long id;
-	//	@Column(name="ARTIST_CREDIT",insertable=true)
-	//	private Long artistCredit; 
+	private static final long serialVersionUID = -5124525598245692335L;
+
+	@NotNull
+	@Column(name="artist_credit_name_id" , nullable=false)
+	private Long artistCreditNameId;
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artist_credit_id" , insertable = true , nullable = true, referencedColumnName = "id")
 	private ArtistCredit artistCredit;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artistid" , insertable = true , nullable = true, referencedColumnName = "id")
 	private Artist artist;
+	
 	@Column(name="ARTIST_CREDIT_NAME_POSITION",nullable = true , insertable=true)
 	private Long position; 
-	@Column(name="ARTIST_NAME" ,length=1000, nullable = true , insertable=true)
-	private String name;
+	
 	@Column(name="artist_credit_name_join_prase" ,length=2000,nullable=true,insertable=true)
 	private String joinPhrase;
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getPosition() {
 		return position;
@@ -83,16 +68,19 @@ public class ArtistCreditName implements LongIdEntityNameBase {
 	public Artist getArtist() {
 		return artist;
 	}
+	
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
 	
-	public static ArtistCreditName NULL_VALUE() {
-		Optional<ArtistCreditName> a = Base.NULL_VALUE(ArtistCreditName.class);
-		ArtistCreditName acn = null;
-		acn = a.get();
-		acn.setId(0l);
-		return Optional.of(acn).orElse(null);
+	@Override
+	public Long getArtistCreditNameId() {
+		return artistCreditNameId;
 	}
 	
+	@Override
+	public void setArtistCreditNameId(Long k) {
+		this.artistCreditNameId = k;
+	}
+
 }

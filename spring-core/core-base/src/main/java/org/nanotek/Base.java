@@ -12,7 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
 
-public interface Base extends Serializable {
+public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 
 	static String hash = "35454B055CC325EA1AF2126E27707052";
 
@@ -55,7 +55,7 @@ public interface Base extends Serializable {
 		return Optional.ofNullable(uuid).orElseThrow(BaseException::new);
 	}
 	
-	default Base newInstance() throws BaseInstantiationException { 
+	default Base<?> newInstance() throws BaseInstantiationException { 
 		try {
 			return this.getClass().getDeclaredConstructor(Void.class).newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -64,7 +64,7 @@ public interface Base extends Serializable {
 		}
 	}
 	
-	static <K extends Base> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
+	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -73,7 +73,7 @@ public interface Base extends Serializable {
 		}
 	}
 
-	static <K extends Base> Optional<K> newInstance(Class<K> clazz , Object[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
+	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Object[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -83,7 +83,7 @@ public interface Base extends Serializable {
 	}
 
 	
-	static <K extends Base> Optional<K> NULL_VALUE(Class<K> clazz) {
+	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
 		return Optional.empty();
 	}
 }

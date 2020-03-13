@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistSortName;
 import org.nanotek.repository.jpa.ArtistSortNameRepository;
+import org.nanotek.service.EntityBasePersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

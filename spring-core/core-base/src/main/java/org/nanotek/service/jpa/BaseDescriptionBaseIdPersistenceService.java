@@ -3,16 +3,21 @@ package org.nanotek.service.jpa;
 import java.io.Serializable;
 
 import org.nanotek.BaseDescriptionBase;
+import org.nanotek.BaseDescriptionIdBase;
 import org.nanotek.repository.jpa.BaseDescriptionBaseRepository;
 import org.nanotek.repository.jpa.IdBaseRepository;
+import org.nanotek.service.EntityBasePersistenceService;
 
-public abstract class BaseDescriptionBasePersistenceService<O extends BaseDescriptionBase<ID,?> , R extends BaseDescriptionBaseRepository<O,ID> , ID extends Serializable> extends EntityBasePersistenceService<O, R, ID> {
+public abstract class BaseDescriptionBaseIdPersistenceService<O extends BaseDescriptionIdBase<ID,?> , 
+				R extends BaseDescriptionBaseIdRepository<O,?, ID , ?> , 
+				ID extends Serializable,BD extends BaseDescriptionBase<D> , D extends Serializable> 
+				extends EntityBasePersistenceService<O, R, ID> {
 
-	public BaseDescriptionBasePersistenceService() {
+	public BaseDescriptionBaseIdPersistenceService() {
 		super();
 	}
 
-	public BaseDescriptionBasePersistenceService(IdBaseRepository<O, ID> baseRepository) {
+	public BaseDescriptionBaseIdPersistenceService(R baseRepository) {
 		super(baseRepository);
 	}
 

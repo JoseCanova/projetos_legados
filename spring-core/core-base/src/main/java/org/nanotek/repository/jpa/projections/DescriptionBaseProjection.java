@@ -1,7 +1,7 @@
 package org.nanotek.repository.jpa.projections;
 
-import org.nanotek.BaseDescriptionBase;
+import org.nanotek.BaseDescriptionIdBase;
 
-public interface DescriptionBaseProjection<D , K extends BaseDescriptionBase<?,D>>{
+public interface DescriptionBaseProjection<D , K extends BaseDescriptionIdBase<?,D>>{
 	Iterable<K> findByDescriptionContaining(D d);
 }

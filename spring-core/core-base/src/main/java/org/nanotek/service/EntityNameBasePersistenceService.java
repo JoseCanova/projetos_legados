@@ -1,4 +1,4 @@
-package org.nanotek.service.jpa;
+package org.nanotek.service;
 
 import java.io.Serializable;
 

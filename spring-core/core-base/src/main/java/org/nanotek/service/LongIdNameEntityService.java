@@ -1,5 +1,6 @@
 package org.nanotek.service;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongIdEntityNameBase;
@@ -13,6 +14,7 @@ public abstract class LongIdNameEntityService <O extends LongIdEntityNameBase , 
 		super(rep);
 	}
 
+	@Transactional
 	public Iterable<O> findByNameContainingIgnoreCase(@NotNull String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}

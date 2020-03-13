@@ -4,7 +4,14 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-@FunctionalInterface
-public interface MutableName<K extends Serializable> {
-	public void setName(@NotBlank K name);
+public interface MutableName<K extends Serializable> extends Nameable<K>{
+	
+	default void setName(@NotBlank K name) {
+		get().setName(name);
+	};
+	
+	@Override
+	default MutableName<K> get() { 
+		return this;
+	}
 }

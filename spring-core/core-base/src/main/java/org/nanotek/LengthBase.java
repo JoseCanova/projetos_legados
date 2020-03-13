@@ -1,6 +1,15 @@
 package org.nanotek;
 
-@FunctionalInterface
-public interface LengthBase<T> extends Base{
-	T getLength();
+import java.io.Serializable;
+
+public interface LengthBase<T extends Serializable> extends MutableLength<T>{
+	
+	default T getLength() { 
+		return get().getLength();
+	}
+	
+	@Override
+	default LengthBase<T> get() {
+		return this;
+	}
 }

@@ -1,6 +1,5 @@
 package org.nanotek.service.tranformer;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.Transformer;
@@ -38,7 +37,6 @@ public class ArtistCreditNameTransformer implements Transformer<ArtistCreditName
 			Artist = opt.isPresent() ? opt : null;
 		}
 		ac = Optional.of(populate(i , artistCredit , Artist));
-		log.info("ArtistCreditName: " + (ac.isPresent() ? ac.toString() : ArtistCreditName.NULL_VALUE().toString()));
 		return ac.isPresent() ? ac.get() : null;
 	}
 

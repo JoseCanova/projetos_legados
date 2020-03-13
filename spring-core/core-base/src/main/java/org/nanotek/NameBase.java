@@ -4,12 +4,20 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-public interface NameBase<K extends Serializable> extends MutableName<K> ,  Nameable<K> , Base {
+public interface NameBase<K extends Serializable> extends MutableName<K>   {
 	
-	@SuppressWarnings("unchecked")
-	default <N extends NameBase<K>> N withName(@NotBlank K name) { 
-		this.setName(name);
-		return (N) this;
+	default NameBase<K> getName() { 
+		return get().getName();
+	}
+	
+	default NameBase<K> withName(@NotBlank K name) { 
+		get().setName(name);
+		return this;
+	}
+
+	@Override
+	default NameBase<K> get(){ 
+		return this;
 	}
 	
 }
