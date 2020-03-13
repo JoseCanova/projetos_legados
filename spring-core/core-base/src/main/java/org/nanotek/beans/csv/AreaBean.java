@@ -1,5 +1,7 @@
 package org.nanotek.beans.csv;
 
+import java.util.Optional;
+
 import org.nanotek.Base;
 
 public class AreaBean implements Base<AreaBean>{
@@ -165,9 +167,8 @@ public class AreaBean implements Base<AreaBean>{
 		this.comment = comment;
 	}
 
-	@Override
-	public AreaBean get() {
-		return Base.newInstance(AreaBean.class);
+	public AreaBean get(){
+			return Base.newInstance(AreaBean.class).get();
 	}
 	
 }

@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class AreaTypeBean implements Base {
+public class AreaTypeBean implements Base<AreaTypeBean> {
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	
@@ -71,8 +71,14 @@ public class AreaTypeBean implements Base {
 		return gid;
 	}
 
-
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
+
+	@Override
+	public AreaTypeBean get() {
+		return Base.newInstance(AreaTypeBean.class).get();
+	}
+	
+	
 }

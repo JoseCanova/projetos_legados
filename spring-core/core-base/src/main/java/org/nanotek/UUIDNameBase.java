@@ -2,9 +2,7 @@ package org.nanotek;
 
 import java.util.UUID;
 
-import javax.validation.constraints.NotBlank;
-
-public class UUIDNameBase implements NameBase<String> , UUIDBase , Base{
+public class UUIDNameBase implements UUIDBaseBase {
 
 	private static final long serialVersionUID = 2692875536991084184L;
 
@@ -13,16 +11,6 @@ public class UUIDNameBase implements NameBase<String> , UUIDBase , Base{
 	private UUID uuid;
 	
 	public UUIDNameBase() {
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 	@Override
@@ -37,11 +25,7 @@ public class UUIDNameBase implements NameBase<String> , UUIDBase , Base{
 
 	@Override
 	public UUID withUUID() {
-		return this.uuid = UUIDBase.super.withUUID();
-	}
-
-	public <K extends NameBase<String>> K withName(String name) {
-		return NameBase.super.withName(name);
+		return this.uuid = UUIDBaseBase.super.withUUID();
 	}
 	
 }

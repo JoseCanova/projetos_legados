@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UUIDBase extends UUIDImutableBase {
+public interface UUIDBaseBase extends UUIDImutableBase {
 
 	default UUID withUUID() { 
 		UUID uuid = null;
