@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class MediumFormatBean implements Base{
+public class MediumFormatBean implements Base<MediumFormatBean>{
 
 	private static final long serialVersionUID = 6169777855661430422L;
 
@@ -80,6 +80,11 @@ public class MediumFormatBean implements Base{
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+	@Override
+	public MediumFormatBean get() {
+		return Base.newInstance(MediumFormatBean.class).get();
 	}
 
 }

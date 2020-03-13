@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class ReleaseAliasBean implements Base{
+public class ReleaseAliasBean implements Base<ReleaseAliasBean>{
 
 	private static final long serialVersionUID = 3986721500454057322L;
 	
@@ -218,6 +218,10 @@ public class ReleaseAliasBean implements Base{
 		this.ended = ended;
 	}
 
+	@Override
+	public ReleaseAliasBean get() {
+		return Base.newInstance(ReleaseAliasBean.class).get();
+	}
 	
 	
 }

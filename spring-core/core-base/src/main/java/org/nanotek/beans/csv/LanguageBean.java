@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class LanguageBean implements Base{
+public class LanguageBean implements Base<LanguageBean>{
 
 	private static final long serialVersionUID = 2997501833949969600L;
 
@@ -93,6 +93,11 @@ public class LanguageBean implements Base{
 	public String toString() {
 		return "LanguageBean [id=" + id + ", isoCode2t=" + isoCode2t + ", isoCode2b=" + isoCode2b + ", isoCode1="
 				+ isoCode1 + ", name=" + name + ", frequency=" + frequency + ", isoCode3=" + isoCode3 + "]";
+	}
+
+	@Override
+	public LanguageBean get() {
+		return Base.newInstance(LanguageBean.class).get();
 	}
 
 }

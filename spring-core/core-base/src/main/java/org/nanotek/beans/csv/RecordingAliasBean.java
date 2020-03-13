@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class RecordingAliasBean implements Base{
+public class RecordingAliasBean implements Base<RecordingAliasBean>{
 
 	private static final long serialVersionUID = 4772995387500387928L;
 
@@ -152,6 +152,11 @@ public class RecordingAliasBean implements Base{
 
 	public void setEnded(String ended) {
 		this.ended = ended;
+	}
+
+	@Override
+	public RecordingAliasBean get() {
+		return Base.newInstance(RecordingAliasBean.class).get();
 	}
 
 }

@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.Base;
 
-public class GenderBean implements Base{
+public class GenderBean implements Base<GenderBean>{
 
 	private static final long serialVersionUID = -1492542566677551150L;
 	private Long id; 
@@ -13,7 +13,6 @@ public class GenderBean implements Base{
 	private String gid;
 	
 	public GenderBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -63,7 +62,10 @@ public class GenderBean implements Base{
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-	
-	
+
+	@Override
+	public GenderBean get() {
+		return Base.newInstance(GenderBean.class).get();
+	}
 
 }
