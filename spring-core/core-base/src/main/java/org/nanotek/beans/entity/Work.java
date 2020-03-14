@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -62,6 +64,12 @@ public class Work implements LongBase {
 
 	public void setIswc(Long iswc) {
 		this.iswc = iswc;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.nanotek;
 
-import com.google.common.base.Supplier;
+import java.io.Serializable;
 
-public interface Kong<K extends Kong<?>> extends Supplier<K> {
+public interface Kong<K extends Serializable> extends KongSupplier<K> {
 }

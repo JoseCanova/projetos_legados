@@ -1,9 +1,11 @@
 package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
+
+import org.nanotek.Base;
 import org.nanotek.LongBase;
 
-public class ArtistBean implements LongBase{
+public class ArtistBean extends HolderBaseBean {
 
 	private static final long serialVersionUID = 2864330060600897052L;
 

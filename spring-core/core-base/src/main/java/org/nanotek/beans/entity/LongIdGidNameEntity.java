@@ -1,21 +1,16 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.GidBase;
+import org.nanotek.MutableGidBase;
 
-@Entity
-@Table(name="long_id_gid_name",uniqueConstraints= @UniqueConstraint(name="uk_id_gid_name",columnNames={"gid"})
-)
-public class LongIdGidNameEntity extends LongIdNameEntity implements GidBase<String>{
+@MappedSuperclass
+public abstract class LongIdGidNameEntity extends LongIdNameEntity implements MutableGidBase<String>{
 
-	private static final long serialVersionUID = -3230710199273457686L;
 	
 	
 	@NotBlank
@@ -38,11 +33,6 @@ public class LongIdGidNameEntity extends LongIdNameEntity implements GidBase<Str
 								@NotBlank String name) {
 		super(name);
 		this.gid = gid;
-	}
-
-
-	public String getGid() {
-		return gid;
 	}
 
 

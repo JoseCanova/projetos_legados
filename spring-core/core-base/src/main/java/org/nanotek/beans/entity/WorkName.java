@@ -1,14 +1,17 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.nanotek.LongBase;
+import org.nanotek.LongIdNameEntityBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="work_name")
-public class WorkName implements LongBase{
+public class WorkName implements LongIdNameEntityBase<String>{
 	
 	private Long id; 
 	private String name; 
@@ -30,6 +33,12 @@ public class WorkName implements LongBase{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

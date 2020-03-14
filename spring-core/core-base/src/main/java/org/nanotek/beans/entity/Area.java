@@ -12,12 +12,15 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.LongIdNameGidEntityBase;
+import org.nanotek.TypeBase;
+
 @Entity
 @Table(name="area" , 
 uniqueConstraints= {
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
 		})
-public class Area extends LongIdGidNameEntity{
+public class Area extends LongIdGidNameEntity implements LongIdNameGidEntityBase<String,String> , TypeBase<AreaType>{
 
 	private static final long serialVersionUID = -7073321340141567106L;
 	
@@ -73,10 +76,6 @@ public class Area extends LongIdGidNameEntity{
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public AreaType getType() {

@@ -1,9 +1,11 @@
 package org.nanotek.opencsv;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 import org.nanotek.Base;
 import org.nanotek.BaseInstantiationException;
+import org.nanotek.MutableId;
 import org.nanotek.StringBase;
 
 /**
@@ -15,7 +17,7 @@ import org.nanotek.StringBase;
  */
 //Avoiding the Usage of this. Type & AnnotatedElement & GenericDeclaration & Serializable & Base<?>
 @SuppressWarnings("serial")
-public class BaseMap<T extends Base> extends HashMap<String,Integer> implements StringBase{
+public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implements StringBase , MutableId<String>{
 
 	//works fine with the "Bean Name";
 	protected String id;
@@ -25,6 +27,13 @@ public class BaseMap<T extends Base> extends HashMap<String,Integer> implements 
 	public BaseMap() {
 	}
 	
+	public BaseMap(String id, T target, Integer targetSize) {
+		super();
+		this.id = id;
+		this.target = target;
+		this.targetSize = targetSize;
+	}
+
 	@Override
 	public String getId() {
 		return id;
@@ -43,11 +52,16 @@ public class BaseMap<T extends Base> extends HashMap<String,Integer> implements 
 		this.target = type;
 	}
 
-	public Base newInstance() throws BaseInstantiationException {
+	public Base<?> newInstance() throws BaseInstantiationException {
 		return target.newInstance();
 	}
 
 	public Integer getTargetSize() {
 		return size();
+	}
+
+	@Override
+	public void on(Consumer<String> k) {
+		k.accept(id);
 	}
 }

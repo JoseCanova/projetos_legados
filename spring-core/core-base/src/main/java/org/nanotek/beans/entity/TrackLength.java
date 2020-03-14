@@ -1,13 +1,17 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ImmutableLengthIdBase;
+
 @Entity
 @DiscriminatorValue(value="TrackLength")
-public class TrackLength extends LongLengthyBase {
+public class TrackLength extends LongLengthyBase implements ImmutableLengthIdBase<Long,Long> {
 
 	private static final long serialVersionUID = 3623778681403832594L;
 	
@@ -58,6 +62,11 @@ public class TrackLength extends LongLengthyBase {
 	@Override
 	public String toString() {
 		return "TrackLength [track=" + track + ", length=" + length + ", id=" + id + "]";
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 
 }

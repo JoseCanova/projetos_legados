@@ -3,16 +3,16 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.Base;
+import org.nanotek.LongIdNameEntityBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_name")
-public class TrackName implements Base{
+public class TrackName implements LongIdNameEntityBase<String>{
 
 	private Long id;
 	
-	private String page;
+	private String name;
 	
 	
 	public Long getId() {
@@ -23,12 +23,14 @@ public class TrackName implements Base{
 		this.id = id;
 	}
 
-	public String getPage() {
-		return page;
+	public String getName() {
+		return name;
 	}
 
-	public void setPage(String page) {
-		this.page = page;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	 
 	
 }

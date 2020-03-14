@@ -2,15 +2,8 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface MutableBase<K extends Serializable> extends Base<MutableBase<K>>{
+public interface MutableBase<K extends Serializable> extends Mutable<K>{
 
-	default void setId(K id) { 
-		get().setId(id);
-	};
-
-	@Override
-	default MutableBase<K> get() { 
-		return this;
-	}
+	void setId(K id);
 	
 }

@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @DiscriminatorValue(value="ArtistType")
-public class ArtistType extends BaseType{
+public class ArtistType extends BaseType {
 
 	private static final long serialVersionUID = 962190613873549033L;
 

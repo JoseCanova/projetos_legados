@@ -6,12 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 public interface MutableName<K extends Serializable> extends Nameable<K>{
 	
-	default void setName(@NotBlank K name) {
-		get().setName(name);
-	};
+	void setName(@NotBlank K name);
 	
-	@Override
-	default MutableName<K> get() { 
-		return this;
-	}
+	
 }

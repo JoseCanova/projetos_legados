@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -81,5 +83,6 @@ public class SortNameBase extends SequenceLongBase implements SortBase<Long,Stri
 	public String toString() {
 		return "SortNameBase [sortName=" + sortName + ", id=" + id + "]";
 	}
+
 
 }

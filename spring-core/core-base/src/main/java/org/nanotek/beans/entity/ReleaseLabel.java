@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,6 +11,8 @@ import org.nanotek.LongBase;
 @Table(name="release_label")
 public class ReleaseLabel implements LongBase {
 
+	private static final long serialVersionUID = -4336246677898584112L;
+	
 	private Long id; 
 	private Long release; 
 	private Long label; 
@@ -45,6 +49,11 @@ public class ReleaseLabel implements LongBase {
 
 	public void setCatalogNumber(String catalogNumber) {
 		this.catalogNumber = catalogNumber;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 
 }

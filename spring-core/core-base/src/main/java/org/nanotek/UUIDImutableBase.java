@@ -2,7 +2,7 @@ package org.nanotek;
 
 import java.util.UUID;
 
-public interface UUIDImutableBase extends ImmutableBase<UUID>{
+public interface UUIDImutableBase {
 
 	UUID getUUID();
 	

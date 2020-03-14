@@ -12,12 +12,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.LongIdNameEntityBase;
+
 @Entity
 @Table(name="artist_alias", 
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias  extends LongIdNameEntity  {
+public class ArtistAlias  extends LongIdNameEntity  implements LongIdNameEntityBase<String>{
 
 	private static final long serialVersionUID = -6829974720983757034L;
 

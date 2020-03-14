@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -136,6 +138,4 @@ public class MediumFormat extends SequenceLongBase implements BaseDescriptionBas
 		return "MediumFormat [name=" + name + ", parent=" + parent + ", year=" + year + ", hasDiscId=" + hasDiscId
 				+ ", gid=" + gid + ", description=" + description + ", id=" + id + "]";
 	}
-
-	
 }

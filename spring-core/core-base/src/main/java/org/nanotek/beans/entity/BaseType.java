@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -15,7 +17,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.BaseTypeBase;
 
 
 @Entity
@@ -29,10 +30,10 @@ import org.nanotek.BaseTypeBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class BaseType extends TypeNamedEntity implements BaseTypeBase<String,Long>{
+public abstract class BaseType extends TypeNamedEntity implements BaseTypeEntityBase<AreaType, Long> {
 
-	private static final long serialVersionUID = 863905425134347710L;
-	
+	private static final long serialVersionUID = -6795816207025448078L;
+
 	@NotNull
 	@Column(name="type_id" , nullable = false)
 	protected Long typeId;
@@ -135,6 +136,4 @@ public class BaseType extends TypeNamedEntity implements BaseTypeBase<String,Lon
 		return "BaseType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
 				+ description + ", gid=" + gid + ", id=" + id + "]";
 	}
-
-
 }

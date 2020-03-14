@@ -1,9 +1,8 @@
 package org.nanotek.beans.entity;
 
-import javax.persistence.Cacheable;
+import java.io.Serializable;
+
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
@@ -11,9 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nanotek.Base;
+import org.nanotek.MutableDatableBase;
 
 @Entity
 @Table(name="composite_dates",
@@ -22,69 +19,60 @@ import org.nanotek.Base;
 					}
 )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-	    discriminatorType = DiscriminatorType.STRING,
-	    name = "table_id",
-	    columnDefinition = "VARCHAR NOT NULL"
-	)
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DatableBase extends SequenceLongBase implements Base{
-
-	private static final long serialVersionUID = -2752304170904238032L;
+public class DatableBase <Y extends Serializable , M extends Serializable , D extends Serializable>extends SequenceLongBase  implements MutableDatableBase<Y , M , D> {
 
 	@NotNull
 	@Column(name="year", nullable = false)
-	protected Integer year;
+	protected Y year;
 	
 	@Column(name="month")
-	protected Integer month;
+	protected M month;
 	
 	@Column(name="day")
-	protected Integer day;
+	protected D day;
 
 	public DatableBase() {
 	}
 
-	public DatableBase(@NotNull Integer year) {
+	public DatableBase(@NotNull Y year) {
 		super();
 		this.year = year;
 	}
 	
-	public DatableBase(@NotNull  Integer year, Integer month) {
+	public DatableBase(@NotNull  Y year, M month) {
 		super();
 		this.year = year;
 		this.month = month;
 	}
 	
-	public DatableBase(@NotNull  Integer year, Integer month, Integer day) {
+	public DatableBase(@NotNull  Y year, M month, D day) {
 		super();
 		this.year = year;
 		this.month = month;
 		this.day = day;
 	}
 
-	public Integer getYear() {
+	public Y getYear() {
 		return year;
 	}
 
-	public void setYear(Integer year) {
+	public void setYear(Y year) {
 		this.year = year;
 	}
 
-	public Integer getMonth() {
+	public M getMonth() {
 		return month;
 	}
 
-	public void setMonth(Integer month) {
+	public void setMonth(M  month) {
 		this.month = month;
 	}
 
-	public Integer getDay() {
+	public D getDay() {
 		return day;
 	}
 
-	public void setDay(Integer day) {
+	public void setDay(D day) {
 		this.day = day;
 	}
 
@@ -96,22 +84,6 @@ public class DatableBase extends SequenceLongBase implements Base{
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DatableBase other = (DatableBase) obj;
-		if (year == null) {
-			if (other.year != null)
-				return false;
-		} else if (!year.equals(other.year))
-			return false;
-		return true;
-	}
 
 	@Override
 	public String toString() {

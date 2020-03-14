@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.ImmutableCommentEntityBase;
+
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment extends CommentBase {
+public class ArtistComment extends CommentBase<String> implements ImmutableCommentEntityBase<String , Long>{
 
 	private static final long serialVersionUID = 2608408556126104972L;
 

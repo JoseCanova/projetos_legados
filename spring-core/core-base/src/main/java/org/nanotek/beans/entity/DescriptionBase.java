@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -9,8 +11,6 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.BaseDescriptionBase;
 
 @Entity
@@ -24,9 +24,7 @@ import org.nanotek.BaseDescriptionBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String,Long> {
+public abstract class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String,Long> {
 
 	private static final long serialVersionUID = -4976009864905272762L;
 
@@ -79,4 +77,5 @@ public class DescriptionBase extends SequenceLongBase implements BaseDescription
 	public String toString() {
 		return "DescriptionBase [description=" + description + ", id=" + id + "]";
 	}
+
 }

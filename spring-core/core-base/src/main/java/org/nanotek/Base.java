@@ -36,7 +36,7 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 		return Optional.ofNullable(dest).orElseGet(supplier); 
 	}
 
-	default <T extends Base> T newType(Supplier<T> baseSupplier)
+	default <T extends Base<?>> T newType(Supplier<T> baseSupplier)
 	{ 
 		return baseSupplier.get();
 	}
@@ -82,8 +82,8 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 		}
 	}
 
-	
 	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
 		return Optional.empty();
 	}
+	
 }

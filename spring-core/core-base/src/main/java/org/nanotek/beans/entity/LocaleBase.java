@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.Locale;
+import org.nanotek.LocaleEntityBase;
 
 @Entity
 @Table(name="locale_base",
@@ -23,7 +26,7 @@ import org.nanotek.Locale;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase extends SequenceLongBase implements Locale<String,Long>{
+public class LocaleBase extends SequenceLongBase implements LocaleEntityBase<String> {
 
 	private static final long serialVersionUID = -6664969453930737424L;
 
@@ -70,5 +73,10 @@ public class LocaleBase extends SequenceLongBase implements Locale<String,Long>{
 		} else if (!locale.equals(other.locale))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 }

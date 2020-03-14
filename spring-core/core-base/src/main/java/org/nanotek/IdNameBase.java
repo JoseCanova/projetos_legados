@@ -2,20 +2,19 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface IdNameBase<K extends Serializable, N extends Serializable> extends  EntityNameBase<K, N> {
+import com.google.common.base.Supplier;
 
-	@Override
-	default K getId() {
+public interface IdNameBase<K extends Serializable, ID extends Serializable> extends  MutableNameBase<K> , Supplier<IdNameBase<K,ID>>{
+
+	default ID getId() {
 		return get().getId();
 	}
 	
-	@Override
-	default void setId(K id) {
+	default void setId(ID id) {
 		get().setId(id);
 	}
 	
-	@Override
-	default IdNameBase<K,N> get(){ 
+	default IdNameBase<K,ID> get(){ 
 		return this;
 	}
 }

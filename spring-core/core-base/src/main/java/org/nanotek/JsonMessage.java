@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Document
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JsonMessage implements Base<StringBase>{
+public class JsonMessage implements ImmutableBase<JsonMessage>{
 
 	private static final long serialVersionUID = 6737835842589884724L;
 
@@ -24,11 +24,5 @@ public class JsonMessage implements Base<StringBase>{
 	public void setResponse(String response) {
 		this.response = response;
 	}
-
-	@Override
-	public StringBase get() {
-		return Base.newInstance(StringBase.class).get();
-	}
-   
 	
 }

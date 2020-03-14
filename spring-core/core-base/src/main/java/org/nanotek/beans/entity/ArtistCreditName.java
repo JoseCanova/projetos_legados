@@ -6,14 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.ArtistCreditBase;
-import org.nanotek.ArtistCreditNameIdBase;
+import org.nanotek.ArtistCreditNameIdEntityBase;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNameIdBase<Long>, ArtistCreditBase<ArtistCredit>{
+public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNameIdEntityBase<Long>, ArtistCreditBase<ArtistCredit> {
 
 	private static final long serialVersionUID = -5124525598245692335L;
 
@@ -35,6 +36,10 @@ public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNa
 	@Column(name="artist_credit_name_join_prase" ,length=2000,nullable=true,insertable=true)
 	private String joinPhrase;
 
+	public ArtistCreditName(@NotBlank String name, @NotNull Long artistCreditNameId) {
+		super(name);
+		this.artistCreditNameId = artistCreditNameId;
+	}
 	public Long getPosition() {
 		return position;
 	}
@@ -78,9 +83,4 @@ public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNa
 		return artistCreditNameId;
 	}
 	
-	@Override
-	public void setArtistCreditNameId(Long k) {
-		this.artistCreditNameId = k;
-	}
-
 }

@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -12,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ImuTableLengthIdBase;
+import org.nanotek.ImmutableLengthIdBase;
 
 @Entity
 @Table(name="recording_lengthy_base",
@@ -26,7 +28,7 @@ import org.nanotek.ImuTableLengthIdBase;
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
 @DiscriminatorValue(value="RecordingLength")
-public class RecordingLength extends LongLengthyBase implements ImuTableLengthIdBase<Long,Long>{
+public class RecordingLength extends LongLengthyBase implements ImmutableLengthIdBase<Long,Long>{
 	
 	private static final long serialVersionUID = -8708909035267715010L;
 	
@@ -82,6 +84,12 @@ public class RecordingLength extends LongLengthyBase implements ImuTableLengthId
 	@Override
 	public String toString() {
 		return "RecordingLength [recording=" + recording + ", length=" + length + ", id=" + id + "]";
+	}
+
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 	
 }

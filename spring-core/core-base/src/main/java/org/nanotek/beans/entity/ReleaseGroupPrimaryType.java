@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.nanotek.LongIdNameGidEntityBase;
 import org.nanotek.NameBase;
 
 @Entity
 @Table(name="release_group_primary_type")
-public class ReleaseGroupPrimaryType extends EntityLongBase implements NameBase<String>{
+public class ReleaseGroupPrimaryType extends EntityLongBase implements LongIdNameGidEntityBase<String, String>{
 
 	private static final long serialVersionUID = 3855412565715717271L;
 	

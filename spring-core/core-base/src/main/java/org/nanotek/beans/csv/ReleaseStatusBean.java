@@ -1,5 +1,7 @@
 package org.nanotek.beans.csv;
 
+import java.util.function.Consumer;
+
 import org.nanotek.EntityBase;
 
 public class ReleaseStatusBean implements EntityBase<Long>{
@@ -75,6 +77,12 @@ public class ReleaseStatusBean implements EntityBase<Long>{
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 
 }

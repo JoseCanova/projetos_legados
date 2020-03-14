@@ -1,16 +1,19 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.nanotek.LongBase;
+import org.nanotek.LongIdEntityBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="label")
-public class Label implements LongBase {
+public class Label implements LongIdEntityBase {
 	
 	@Id
 	private Long id; 
@@ -164,6 +167,11 @@ public class Label implements LongBase {
 
 	public void setLabelId(Long labelId) {
 		this.labelId = labelId;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	} 
 
 }

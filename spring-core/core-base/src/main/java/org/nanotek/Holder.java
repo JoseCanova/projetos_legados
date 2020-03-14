@@ -1,8 +1,10 @@
 package org.nanotek;
 
+import java.util.function.Consumer;
+
 @FunctionalInterface
 public interface Holder<K> {
 	
-	void on(K s);
+	<B extends Base<?>> B on(Consumer<K> k);
 	
 }

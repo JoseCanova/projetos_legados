@@ -1,31 +1,12 @@
 package org.nanotek.beans.entity;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nanotek.IdNameBase;
-import org.nanotek.LongIdEntityNameBase;
-import org.nanotek.NameBase;
+@MappedSuperclass
+public class LongIdNameEntity extends SequenceLongBase {
 
-@Entity
-@Table(name="long_id_name",
-		indexes= {
-					@Index(unique = false , name = "name_idx" , columnList ="name")
-				})
-@Inheritance(strategy = InheritanceType.JOINED)
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class LongIdNameEntity extends SequenceLongBase implements LongIdEntityNameBase {
-
-	private static final long serialVersionUID = -3442197714885490996L;
 
 	@NotBlank
 	@Column(name="name" , nullable=false, columnDefinition = "VARCHAR NOT NULL")
@@ -40,13 +21,7 @@ public class LongIdNameEntity extends SequenceLongBase implements LongIdEntityNa
 		this.name = name;
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
+	public void setName(String name) { 
 		this.name = name;
 	}
 	
@@ -79,5 +54,5 @@ public class LongIdNameEntity extends SequenceLongBase implements LongIdEntityNa
 	public String toString() {
 		return "LongIdNameEntity [name=" + name + ", id=" + id + "]";
 	}
-
+	
 }

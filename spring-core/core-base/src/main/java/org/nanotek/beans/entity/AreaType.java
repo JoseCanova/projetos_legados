@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.TypeBase;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")
-public class AreaType extends BaseType {
+public class AreaType extends BaseType  {
 
 	private static final long serialVersionUID = 5334032717060542549L;
 	

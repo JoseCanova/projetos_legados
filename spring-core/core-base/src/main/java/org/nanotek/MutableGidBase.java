@@ -1,8 +1,7 @@
 package org.nanotek;
 
-public interface GidBase<K> {
+public interface MutableGidBase<K> {
 
-	K getGid();
 	void setGid(K k);
 	
 }

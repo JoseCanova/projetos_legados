@@ -22,6 +22,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.LongIdNameEntityBase;
+
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_credit_id",columnNames={"artist_credit_id"})
@@ -37,7 +39,7 @@ import javax.validation.constraints.NotNull;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit extends LongIdNameEntity {
+public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEntityBase<Long>{
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
@@ -99,7 +101,7 @@ public class ArtistCredit extends LongIdNameEntity {
 	}
 
 	public Set<Release> getReleases() {
-		return releases != null ? releases : (releases = newAnyType(HashSet::new)); 
+		return releases); 
 	}
 
 	public void setReleases(Set<Release> releases) {

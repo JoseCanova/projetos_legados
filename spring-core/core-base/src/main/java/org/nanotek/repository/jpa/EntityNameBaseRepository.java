@@ -2,7 +2,7 @@ package org.nanotek.repository.jpa;
 
 import java.io.Serializable;
 
-import org.nanotek.EntityNameBase;
+import org.nanotek.MutableNameBase;
 
-public interface EntityNameBaseRepository<E extends EntityNameBase<ID, ? > , ID extends Serializable> extends EntityBaseRepository<E, ID> {
+public interface EntityNameBaseRepository<E extends MutableNameBase<ID, ? > , ID extends Serializable> extends EntityBaseRepository<E, ID> {
 }

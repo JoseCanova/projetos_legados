@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -28,6 +30,11 @@ public class TrackList implements LongBase {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 
 }

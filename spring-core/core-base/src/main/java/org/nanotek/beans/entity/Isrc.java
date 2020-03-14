@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
+import org.nanotek.LongIdEntityBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="isrc")
-public class Isrc implements LongBase {
+public class Isrc implements LongIdEntityBase {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="isrc_id_seq")
@@ -103,5 +105,9 @@ public class Isrc implements LongBase {
 				+ recording + ", source=" + source + ", isrc=" + isrc + "]";
 	}
 
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
+	}
 	
 }

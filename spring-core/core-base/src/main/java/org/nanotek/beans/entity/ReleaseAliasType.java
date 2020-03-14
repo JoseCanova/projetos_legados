@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @DiscriminatorValue(value="ReleaseAliasType")
-public class ReleaseAliasType extends BaseType {
+public class ReleaseAliasType extends BaseType  {
 
 	private static final long serialVersionUID = 6615127464602860751L;
 

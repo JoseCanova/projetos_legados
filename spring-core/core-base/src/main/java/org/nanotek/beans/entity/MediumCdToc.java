@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -90,6 +92,11 @@ public class MediumCdToc implements LongBase{
 	public String toString() {
 		return "MediumCdToc [id=" + id + ", mediumCdTocId=" + mediumCdTocId
 				+ ", medium=" + medium + ", cdToc=" + cdToc + "]";
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	}
 
 }

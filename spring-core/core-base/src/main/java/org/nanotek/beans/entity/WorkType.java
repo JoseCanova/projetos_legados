@@ -29,6 +29,12 @@ public class WorkType implements Base{
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public Object get() {
+		// TODO Auto-generated method stub
+		return null;
 	} 
 
 }

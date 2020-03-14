@@ -8,10 +8,8 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.LongBase;
 
 @MappedSuperclass
-public class EntityLongBase implements LongBase {
+public class EntityLongBase  {
 
-	private static final long serialVersionUID = 2659167150844511025L;
-	
 	@Id
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)
@@ -25,12 +23,10 @@ public class EntityLongBase implements LongBase {
 		this.id = id;
 	}
 
-	@Override
 	public Long getId() {
 		return id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

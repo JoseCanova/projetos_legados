@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.function.Consumer;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -36,6 +38,11 @@ public class ReleaseName implements LongBase {
 	
 	public void setRefCount(String refCount) {
 		this.refCount = refCount;
+	}
+
+	@Override
+	public void on(Consumer<Long> k) {
+		k.accept(getId());
 	} 
 
 }

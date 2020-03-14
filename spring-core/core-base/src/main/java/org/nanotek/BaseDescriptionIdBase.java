@@ -8,14 +8,6 @@ public interface BaseDescriptionIdBase<K extends Serializable, ID extends Serial
 	
 	void setDescriptionId(K id);
 	
-	@Override
-	default K getDescription() { 
-		return get().getDescription();
-	}
-	
-	@Override
-	default BaseDescriptionIdBase<K,ID> get() { 
-		return this;
-	}
+	K getDescription();
 
 }

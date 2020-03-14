@@ -1,31 +1,16 @@
 package org.nanotek;
 
 import java.io.Serializable;
+import java.util.Optional;
  
-public interface IdBase<K extends Serializable> extends Base<IdBase<K>> , Holder<IdBase<K>> {
+public interface IdBase<K extends Serializable> extends Base<IdBase<K>> , Id<K> {
 
-	default void setId(K id) { 
-		get().setId(id);
-	}
 	
-	
-	default IdBase<K> withId(K id) { 
-		get().setId(id);
-		return this;
-	}
-	
+	K getId();
+		
 	@Override
-	default IdBase<K> get() { 
-		return this;
+	default Optional<IdBase<K>> get() { 
+		return Optional.ofNullable(this);
 	}
 
-	default void on() { 
-		on(get());
-	}
-	
-	@Override
-	default void on(IdBase<K> s) {
-			on();
-	}
-	
 }
