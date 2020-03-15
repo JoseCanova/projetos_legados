@@ -8,7 +8,7 @@ import org.nanotek.LongBase;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_list")
-public class TrackList implements LongBase {
+public class TrackList implements LongBase<TrackList> {
 
 	private Long id; 
 	private Long count; 

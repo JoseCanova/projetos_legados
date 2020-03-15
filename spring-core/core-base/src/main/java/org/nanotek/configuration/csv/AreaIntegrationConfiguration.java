@@ -3,6 +3,7 @@ package org.nanotek.configuration.csv;
 import java.io.Serializable;
 import java.util.Optional;
 
+import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.AreaBean;
@@ -11,6 +12,7 @@ import org.nanotek.beans.entity.AreaBeginDate;
 import org.nanotek.beans.entity.AreaComment;
 import org.nanotek.beans.entity.AreaEndDate;
 import org.nanotek.beans.entity.AreaType;
+import org.nanotek.opencsv.BaseMap;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaBeginDateRepository;
 import org.nanotek.repository.jpa.AreaCommentRepository;
@@ -110,8 +112,8 @@ public class AreaIntegrationConfiguration {
 	@Bean
 	@ConfigurationProperties(prefix = "area")
 	@Qualifier(value="areaMapStrategy")
-	BaseMapColumnStrategy<AreaBean> areaMapStrategy(){ 
-		return new BaseMapColumnStrategy<>();
+	BaseMapColumnStrategy<?,?> areaMapStrategy(){ 
+		return   Base.newInstance(BaseMapColumnStrategy.class).get();
 	}
 
 	@Bean
@@ -122,8 +124,8 @@ public class AreaIntegrationConfiguration {
 
 	@Bean
 	@Qualifier(value="areaParser")
-	BaseMapParser<AreaBean> areaParser() { 
-		return new BaseMapParser<>(areaMapStrategy());
+	BaseMapParser<?,?> areaParser() { 
+		return new BaseMapParser<>();
 	}
 
 	@Bean
@@ -149,10 +151,10 @@ public class AreaIntegrationConfiguration {
 	}
 	
 	@Service
-	class AreaProcessor extends CsvBaseProcessor<AreaBean, BaseMapParser<AreaBean>>{
+	class AreaProcessor extends CsvBaseProcessor<AreaBean, BaseMapParser<AreaBean,Long>>{
 
 		public AreaProcessor
-		(@Autowired @Qualifier("areaParser") BaseMapParser<AreaBean> parser,
+		(@Autowired @Qualifier("areaParser") BaseMapParser<AreaBean,Long> parser,
 				@Autowired @Qualifier("areaCsvToBean") CsvToBean<AreaBean> csvToBean) {
 			super(parser, csvToBean);
 		} 

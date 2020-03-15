@@ -37,5 +37,4 @@ public class BaseMapColumnStrategy<T extends BaseMap<T> , ID extends IdBase<ID, 
 		return fileName;
 	}
 
-	
 }

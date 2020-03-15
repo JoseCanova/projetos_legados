@@ -19,7 +19,6 @@ import au.com.bytecode.opencsv.CSVReader;
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-
 public class ColumnPositionMappingStrategy<T> extends HeaderColumnNameMappingStrategy<T> {
     private String[] columnMapping = new String[] {};
     public void captureHeader(CSVReader reader) throws IOException {

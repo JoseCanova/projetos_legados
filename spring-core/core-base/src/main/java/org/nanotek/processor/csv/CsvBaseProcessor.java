@@ -18,20 +18,19 @@ import com.sun.xml.bind.v2.model.core.ID;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public class CsvBaseProcessor<I extends HolderBaseBean<IdBase<ID,I>, Serializable>, P extends BaseMapParser<I>> {
+public class CsvBaseProcessor<I extends HolderBaseBean<I, Serializable>, P extends BaseMapParser<I,Serializable>> {
 
-	
 	private P parser; 
 	
-	private CsvToBean<I> csvToBean;
+	private CsvToBean<?> csvToBean;
 	
-	public CsvBaseProcessor(P parser, CsvToBean<I> csvToBean) {
+	public CsvBaseProcessor(P parser, CsvToBean<?> csvToBean) {
 		super();
 		this.parser = parser;
 		this.csvToBean = csvToBean;
 	}
 
-	CsvToBean<I> getCsvToBean(){ 
+	CsvToBean<?> getCsvToBean(){ 
 		return csvToBean;
 	}
 
@@ -39,10 +38,6 @@ public class CsvBaseProcessor<I extends HolderBaseBean<IdBase<ID,I>, Serializabl
 		return parser;
 	}
 	
-    public MapColumnStrategy<? , ?> mapConfig() {
-        return getBaseParser().getBaseMap();
-    }
-
     public void reopenFile() throws Exception {
          getBaseParser().reopen();
     }
@@ -51,7 +46,7 @@ public class CsvBaseProcessor<I extends HolderBaseBean<IdBase<ID,I>, Serializabl
     	String[] instanceArray = null;
     	I bean = null;
     	if ((instanceArray = getBaseParser().readNext()) !=null) {
-    		bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
+    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
     	}
     	return bean;
     }

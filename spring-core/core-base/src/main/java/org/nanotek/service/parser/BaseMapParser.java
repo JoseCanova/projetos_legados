@@ -1,30 +1,44 @@
 package org.nanotek.service.parser;
 
-import org.nanotek.base.maps.BaseMapColumnStrategy;
+import java.io.Serializable;
+import java.util.Optional;
 
-public class BaseMapParser<K extends HolderBaseBean<IdBase<K,I>, I extends Serializable>> extends BaseParser{
+import org.nanotek.IdBaseMap;
+import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.beans.csv.HolderBaseBean;
+import org.nanotek.opencsv.BaseMap;
+import org.nanotek.opencsv.MapColumnStrategy;
+
+public class BaseMapParser<K extends MapColumnStrategy<?,Long>, I extends Serializable> extends BaseParser{
 	
-	private BaseMapColumnStrategy<K,I> baseMap;
+	private BaseMapColumnStrategy<?,?> baseMapColumnStrategy;
 	
 	public BaseMapParser() {}
 	
-	public BaseMapParser(BaseMapColumnStrategy<I> baseMap) {
+	public BaseMapParser(BaseMapColumnStrategy<?,?> baseMapColumnStrategy) {
 		super();
-		this.baseMap = baseMap;
+		this.baseMapColumnStrategy = baseMapColumnStrategy;
 	}
 
 
-	public void setBaseMap(BaseMapColumnStrategy<I> baseMap) {
-		this.baseMap = baseMap;
+	public void setBaseMap(BaseMapColumnStrategy<?,?> baseMapColumnStrategy) {
+		this.baseMapColumnStrategy = baseMapColumnStrategy;
 	}
 
-	@Override
-	public BaseMapColumnStrategy<I> getBaseMap() {
-		return baseMap;
+	public BaseMap<T> getBaseMap() {
+		return baseMapColumnStrategy.getBaseMap();
 	}
 
 	public void setFileName(String newFileName) {
-		getBaseMap().setFileName(newFileName);
+		getBaseMapColumnStrategy().setFileName(newFileName);
+	}
+
+	public BaseMapColumnStrategy<?, ?> getBaseMapColumnStrategy() {
+		return baseMapColumnStrategy;
+	}
+
+	public void setBaseMapColumnStrategy(BaseMapColumnStrategy<?, ?> baseMapColumnStrategy) {
+		this.baseMapColumnStrategy = baseMapColumnStrategy;
 	}
 	
 }

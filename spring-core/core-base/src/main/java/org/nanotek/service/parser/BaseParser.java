@@ -7,14 +7,19 @@ import java.io.IOException;
 import java.util.List;
 
 import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.opencsv.BaseMap;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import au.com.bytecode.opencsv.CSVParser;
 import au.com.bytecode.opencsv.CSVReader;
 
-public abstract class BaseParser extends CSVParser implements InitializingBean , Closeable{
+public class BaseParser extends CSVParser implements InitializingBean , Closeable{
 
 	protected CSVReader csvReader;
+	
+	@Autowired
+	protected BaseMapColumnStrategy<?,?> baseMapColumnStrategy;
 	
 	public BaseParser() {}
 	
@@ -38,8 +43,8 @@ public abstract class BaseParser extends CSVParser implements InitializingBean ,
 
 	private void openFileReader() throws Exception{
 		StringBuffer fileLocationStr = new StringBuffer();
-		fileLocationStr.append(getBaseMap().getFileLocation())
-		.append(System.getProperty("file.separator")).append(getBaseMap().getFileName().toString());
+		fileLocationStr.append(getBaseMapColumnStrategy().getFileLocation())
+		.append(System.getProperty("file.separator")).append(getBaseMapColumnStrategy().getFileName().toString());
 		FileReader fileReader = new FileReader(new File(fileLocationStr.toString()));
 		csvReader = new CSVReader(fileReader , '\t');		
 	}
@@ -62,6 +67,14 @@ public abstract class BaseParser extends CSVParser implements InitializingBean ,
 		openFileReader();
 	}
 	
-	public abstract BaseMapColumnStrategy<?> getBaseMap();
+	public BaseMapColumnStrategy<?,?> getBaseMapColumnStrategy(){
+		return baseMapColumnStrategy;
+	}
+
+	public BaseMap<?> getBaseMap(){
+		return baseMapColumnStrategy.getBaseMap();
+	}
+	
+	
 
 }

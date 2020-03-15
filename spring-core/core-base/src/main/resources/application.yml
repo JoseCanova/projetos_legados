@@ -53,7 +53,7 @@ artist:
   fileName: artist
   id: ArtistBean
   type: org.nanotek.beans.csv.ArtistBean
-  baseMap:
+  baseMapColumnStrategy:
     id: 0
     gid: 1
     name: 2
@@ -80,7 +80,7 @@ artistalias:
   fileName: artist_alias
   id: ArtistAliasBean
   type: org.nanotek.beans.csv.ArtistAliasBean
-  baseMap:  
+  baseMapColumnStrategy:  
     id: 0
     artistId: 1
     name: 2
@@ -103,7 +103,7 @@ artistcredit:
   fileName: artist_credit1
   id: ArtistCreditBean
   type: org.nanotek.beans.csv.ArtistCreditBean
-  baseMap:  
+  baseMapColumnStrategy:  
     id: 0
     name: 1
     artistCount: 2
@@ -116,7 +116,7 @@ artistcreditname:
   fileName: artist_credit_name
   id: ArtistCreditName
   type: org.nanotek.beans.entity.ArtistCreditName
-  baseMap:  
+  baseMapColumnStrategy:  
     artistCredit: 0
     position: 1            
     artist: 2              
@@ -128,7 +128,7 @@ artistcreditnamebean:
   fileName: artist_credit_name
   id: ArtistCreditNameBean
   type: org.nanotek.beans.csv.ArtistCreditNameBean
-  baseMap:  
+  baseMapColumnStrategy:  
     artistCreditId: 0
     position: 1            
     artistId: 2              
@@ -140,7 +140,7 @@ releasebean:
   fileName: release_ah
   id: ReleaseBean
   type: org.nanotek.beans.csv.ReleaseBean 
-  baseMap: 
+  baseMapColumnStrategy: 
     id: 0 
     gid: 1 
     name: 2
@@ -161,7 +161,7 @@ releasegroup:
   fileName: release_group
   id: ReleaseGroupBean
   type: org.nanotek.beans.csv.ReleaseGroupBean 
-  baseMap:   
+  baseMapColumnStrategy:   
     id: 0 
     gid: 1 
     name: 2 
@@ -176,7 +176,7 @@ recordingbean:
   fileName: recaa
   id: RecordingBean
   type: org.nanotek.beans.csv.RecordingBean 
-  baseMap:   
+  baseMapColumnStrategy:   
     id: 0
     gid: 1
     name: 2
@@ -192,7 +192,7 @@ trackbean:
   fileName: track
   id: TrackBean
   type: org.nanotek.beans.csv.TrackBean 
-  baseMap:    
+  baseMapColumnStrategy:    
     id: 0 
     gid: 1 
     recordingId: 2 
@@ -211,7 +211,7 @@ mediumbean:
   fileName: medium
   id: MediumBean
   type: org.nanotek.beans.csv.MediumBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     release: 1 
     position: 2
@@ -226,7 +226,7 @@ artisttype:
   fileName: artist_type
   id: ArtistTypeBean
   type: org.nanotek.beans.csv.ArtistTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -239,7 +239,7 @@ artistaliastype:
   fileName: artist_alias_type
   id: ArtistAliasTypeBean
   type: org.nanotek.beans.csv.ArtistAliasTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -252,7 +252,7 @@ instrumenttype:
   fileName: instrument_type
   id: InstrumentTypeBean
   type: org.nanotek.beans.csv.InstrumentTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -265,7 +265,7 @@ instrument:
   fileName: instrument
   id: InstrumentBean
   type: org.nanotek.beans.csv.InstrumentBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     gid: 1
     name: 2
@@ -280,7 +280,7 @@ releasegroupprimarytype:
   fileName: release_group_primary_type
   id: ReleaseGroupPrimaryTypeBean
   type: org.nanotek.beans.csv.ReleaseGroupPrimaryTypeBean
-  baseMap:  
+  baseMapColumnStrategy:  
       id: 0 
       name: 1 
       parent: 2 
@@ -293,7 +293,7 @@ releasestatus:
   fileName: release_status
   id: ReleaseStatusBean
   type: org.nanotek.beans.csv.ReleaseStatusBean
-  baseMap:  
+  baseMapColumnStrategy:  
       id: 0 
       name: 1 
       parent: 2 
@@ -306,7 +306,7 @@ releasepackaging:
   fileName: release_packaging
   id: ReleasePackagingBean
   type: org.nanotek.beans.csv.ReleasePackagingBean
-  baseMap:  
+  baseMapColumnStrategy:  
       id: 0 
       name: 1 
       parent: 2 
@@ -319,7 +319,7 @@ language:
   fileName: language
   id: LanguageBean
   type: org.nanotek.beans.csv.LanguageBean
-  baseMap:  
+  baseMapColumnStrategy:  
       id: 0 
       isoCode2t: 1 
       isoCode2b: 2 
@@ -333,7 +333,7 @@ areatype:
   fileName: area_type
   id: AreaTypeBean
   type: org.nanotek.beans.csv.AreaTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -346,7 +346,7 @@ gendertype:
   fileName: gender
   id: GenderBean
   type: org.nanotek.beans.csv.GenderBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -359,7 +359,7 @@ releasealiastype:
   fileName: release_alias_type
   id: ReleaseAliasTypeBean
   type: org.nanotek.beans.csv.ReleaseAliasTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -372,7 +372,7 @@ recordingaliastype:
   fileName: recording_alias_type
   id: RecordingAliasTypeBean
   type: org.nanotek.beans.csv.RecordingAliasTypeBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
@@ -385,7 +385,7 @@ area:
   fileName: area
   id: AreaBean
   type: org.nanotek.beans.csv.AreaBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0 
     gid: 1 
     name: 2 
@@ -406,7 +406,7 @@ releasealias:
   fileName: release_alias
   id: ReleaseAliasBean
   type: org.nanotek.beans.csv.ReleaseAliasBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0 
     release: 1 
     name: 2 
@@ -429,7 +429,7 @@ recordingalias:
   fileName: recording_alias
   id: RecordingAliasBean
   type: org.nanotek.beans.csv.RecordingAliasBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0 
     release: 1 
     name: 2 
@@ -452,7 +452,7 @@ mediumformat:
   fileName: medium_format
   id: MediumFormatBean
   type: org.nanotek.beans.csv.MediumFormatBean 
-  baseMap:     
+  baseMapColumnStrategy:     
     id: 0
     name: 1
     parent: 2
