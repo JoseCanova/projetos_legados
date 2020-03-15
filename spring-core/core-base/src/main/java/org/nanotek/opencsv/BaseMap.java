@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 
 import org.nanotek.Base;
 import org.nanotek.BaseInstantiationException;
+import org.nanotek.IdBase;
+import org.nanotek.ImmutableBase;
 import org.nanotek.MutableId;
 import org.nanotek.StringBase;
 
@@ -17,7 +19,7 @@ import org.nanotek.StringBase;
  */
 //Avoiding the Usage of this. Type & AnnotatedElement & GenericDeclaration & Serializable & Base<?>
 @SuppressWarnings("serial")
-public class BaseMap<T extends Base<?>> extends HashMap<String,Integer> implements StringBase , MutableId<String>{
+public class BaseMap<T extends IdBase<?>> extends HashMap<String,Integer> implements StringBase , ImmutableBase<T>{
 
 	//works fine with the "Bean Name";
 	protected String id;

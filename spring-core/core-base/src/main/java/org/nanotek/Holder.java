@@ -1,12 +1,11 @@
 package org.nanotek;
 
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public interface Holder<K extends IdBase<?>> extends IdBase<K>{
+public interface Holder<K extends IdBase<K,ID> , ID extends Serializable> extends IdBase<K,ID>{
 	
-	default Optional<Result<K, K>> on(Predicate<K> k) {
-		return Optional.of(new Result<>(this.getId(),Optional.of(this.getId())));
-	}
+	Optional<Result<?>> on(Predicate<K> k);
 	
 }

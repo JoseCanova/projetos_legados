@@ -1,15 +1,6 @@
 package org.nanotek;
 
 import java.io.Serializable;
-import java.util.Optional;
-import java.util.function.Predicate;
 
-public interface Mutables<K extends Serializable>  extends IdBase<K> , MutableBase<K>{
-
-	@Override
-	default <B extends Base<?>> Optional<Result<?>> on(Predicate<K> k) {
-		return Optional.of(new Result<>(this , k.test(getId())));
-	}
-	
-	
+public interface Mutables<K extends IdBase<K,ID>,ID extends Serializable>  extends IdBase<K,ID> , MutableBase<K>{
 }

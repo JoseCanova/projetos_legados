@@ -11,7 +11,7 @@ public class TestUUIDBaseShit {
 		org.nanotek.Base.newInstance(UUIDNameBase.class).ifPresent(u -> {
 			u.withUUID();
 			System.out.println(u.getUUID());
-			u.withName("jose canova"); System.out.println(u.getUUID());
+			u.withName("jose canova"); System.out.println(u.toString());
 		});
 	}
 

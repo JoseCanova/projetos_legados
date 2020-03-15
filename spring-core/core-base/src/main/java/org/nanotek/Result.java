@@ -2,26 +2,28 @@ package org.nanotek;
 
 import java.util.Optional;
 
-public class Result<K extends IdBase<?> , ID extends IdBase<?>> implements BooleanBase<K,ID> {
+public class Result<K extends IdBase<K,K>> implements BooleanBase<K> {
 
 	private static final long serialVersionUID = -307344888633306177L;
-	
+
 	private K id;
-	
-	private Optional<ID> result;
+
+	private Optional<K> result;
 
 	public Result() {}
-	
-	public Result(K id,Optional<ID> result) { 
+
+	public Result(K id,Optional<K> result) { 
 		this.id = id;
 		this.result = result;
 	}
 
+	@Override
 	public K getId() {
 		return id;
 	}
 
-	public Optional<ID> getResult() {
+	@Override
+	public Optional<K> getResult() {
 		return result;
 	}
 

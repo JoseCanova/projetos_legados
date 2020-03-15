@@ -1,8 +1,6 @@
 package org.nanotek;
 
-import java.io.Serializable;
-
-public interface MutableCommentBase<K extends Serializable> extends Mutable<K> , Holder<K>{
+public interface MutableCommentBase<K extends IdBase<?>> {
 
 	void setComment(K k);
 	

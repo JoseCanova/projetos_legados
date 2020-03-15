@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Document
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JsonMessage<K extends Base<?>> implements ImmutableBase<K>{
+public class JsonMessage<K extends IdBase<?>> implements ImmutableBase<K>{
 
 	private static final long serialVersionUID = 6737835842589884724L;
 

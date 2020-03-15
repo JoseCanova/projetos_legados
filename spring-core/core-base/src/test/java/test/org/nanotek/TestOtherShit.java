@@ -5,7 +5,6 @@ import java.util.*;
 public class TestOtherShit {
 
 	public TestOtherShit() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) {

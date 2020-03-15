@@ -17,7 +17,7 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 	static String hash = "35454B055CC325EA1AF2126E27707052";
 
 	default String md5Digest()  { 
-		return DigestUtils.md5Hex(toJson()).toUpperCase();
+		return DigestUtils.md5Hex(withUUID().toString());
 	}
 
 	default String toJson () 

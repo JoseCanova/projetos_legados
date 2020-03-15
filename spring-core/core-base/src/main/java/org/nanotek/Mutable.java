@@ -1,9 +1,8 @@
 package org.nanotek;
 
-import java.util.Optional;
-import java.util.function.Predicate;
+import java.io.Serializable;
 
-public interface Mutable<K extends IdBase<?>> extends Holder<K> {
+public interface Mutable<K extends IdBase<K,ID>, ID extends Serializable> extends Holder<K,ID> {
 
 
 }

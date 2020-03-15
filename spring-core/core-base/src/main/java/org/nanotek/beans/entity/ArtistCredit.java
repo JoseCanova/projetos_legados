@@ -101,7 +101,7 @@ public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEnti
 	}
 
 	public Set<Release> getReleases() {
-		return releases); 
+		return releases; 
 	}
 
 	public void setReleases(Set<Release> releases) {

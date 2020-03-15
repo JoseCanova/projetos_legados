@@ -8,19 +8,11 @@ public class UUIDNameBase implements UUIDBaseBase {
 
 	private String name; 
 	
-	private UUID uuid;
-	
-	
 	
 	public UUIDNameBase() {
 		withUUID();
 	}
 
-	@Override
-	public UUID getUUID() {
-		return uuid;
-	}
-	
 	@Override
 	public String getName() {
 		return name;
@@ -28,17 +20,12 @@ public class UUIDNameBase implements UUIDBaseBase {
 
 	@Override
 	public String toString() {
-		return "UUIDNameBase [name=" + name + ", uuid=" + uuid.toString() + "]";
+		return "UUIDNameBase [name=" + name + ", uuid=" + getUUID().toString() + "]";
 	}
 
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public void setUUID(UUID uuid) {
-		this.uuid = uuid;
 	}
 
 	@Override

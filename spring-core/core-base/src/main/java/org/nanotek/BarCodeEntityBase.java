@@ -2,11 +2,11 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface BarCodeEntityBase<K extends Serializable , ID extends Serializable > extends IdBase<ID>{
+public interface BarCodeEntityBase<K extends BarCodeEntityBase<K,B,ID> , B ,  ID extends Serializable > extends IdBase<K,ID>{
 
 	ID getId();
 	
-	K getBarCode();
+	B getBarCode();
     
 	void setBarCode(K B);
     

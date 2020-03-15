@@ -2,18 +2,16 @@ package test.org.nanotek;
 
 import java.util.Optional;
 
-import org.nanotek.Base;
-import org.nanotek.beans.entity.Artist;
+import org.nanotek.ImmutableBase;
 
 public class TestBaseShit {
 
 	public TestBaseShit() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) {
-		Optional<Artist> artist = Base.newInstance(Artist.class);
-		artist.ifPresent(a -> System.out.println("Artist is present"));
+		Optional<BaseShit> artist = ImmutableBase.newImmutableBase(BaseShit.class);
+		artist.ifPresent(a -> System.out.println(a.getId()));
 	}
-
+	
 }
