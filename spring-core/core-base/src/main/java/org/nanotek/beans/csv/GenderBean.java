@@ -63,9 +63,4 @@ public class GenderBean implements Base<GenderBean>{
 		this.gid = gid;
 	}
 
-	@Override
-	public GenderBean get() {
-		return Base.newInstance(GenderBean.class).get();
-	}
-
 }

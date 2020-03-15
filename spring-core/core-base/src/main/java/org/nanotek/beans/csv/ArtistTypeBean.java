@@ -76,9 +76,4 @@ public class ArtistTypeBean implements Base<ArtistTypeBean> {
 		this.gid = gid;
 	}
 
-
-	@Override
-	public ArtistTypeBean get() {
-		return Base.newInstance(ArtistTypeBean.class).get();
-	}
 }

@@ -154,9 +154,4 @@ public class RecordingAliasBean implements Base<RecordingAliasBean>{
 		this.ended = ended;
 	}
 
-	@Override
-	public RecordingAliasBean get() {
-		return Base.newInstance(RecordingAliasBean.class).get();
-	}
-
 }

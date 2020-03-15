@@ -73,9 +73,5 @@ public class ReleasePackagingBean implements Base<ReleasePackagingBean>{
 		this.gid = gid;
 	}
 
-	@Override
-	public ReleasePackagingBean get() {
-		return Base.newInstance(ReleasePackagingBean.class).get();
-	}
 
 }

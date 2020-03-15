@@ -95,9 +95,5 @@ public class LanguageBean implements Base<LanguageBean>{
 				+ isoCode1 + ", name=" + name + ", frequency=" + frequency + ", isoCode3=" + isoCode3 + "]";
 	}
 
-	@Override
-	public LanguageBean get() {
-		return Base.newInstance(LanguageBean.class).get();
-	}
 
 }

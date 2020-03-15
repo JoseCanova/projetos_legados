@@ -187,9 +187,4 @@ public class ArtistAliasBean implements Base<ArtistAliasBean>{
 		this.ended = ended;
 	}
 
-	@Override
-	public ArtistAliasBean get() {
-		return Base.newInstance(ArtistAliasBean.class).get();
-	}
-	
 }

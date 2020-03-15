@@ -77,9 +77,4 @@ public class ReleaseAliasTypeBean implements Base<ReleaseAliasTypeBean> {
 		this.gid = gid;
 	}
 
-	@Override
-	public ReleaseAliasTypeBean get() {
-		return Base.newInstance(ReleaseAliasTypeBean.class).get();
-	}
-
 }

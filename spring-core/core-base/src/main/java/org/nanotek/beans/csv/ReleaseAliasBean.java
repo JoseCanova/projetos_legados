@@ -218,10 +218,6 @@ public class ReleaseAliasBean implements Base<ReleaseAliasBean>{
 		this.ended = ended;
 	}
 
-	@Override
-	public ReleaseAliasBean get() {
-		return Base.newInstance(ReleaseAliasBean.class).get();
-	}
 	
 	
 }

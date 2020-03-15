@@ -63,9 +63,4 @@ public class ArtistAliasTypeBean implements Base<ArtistAliasTypeBean> {
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-
-	@Override
-	public ArtistAliasTypeBean get() {
-		return Base.newInstance(ArtistAliasTypeBean.class).get();
-	}
 }

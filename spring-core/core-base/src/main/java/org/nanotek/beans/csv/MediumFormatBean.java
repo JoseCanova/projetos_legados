@@ -82,9 +82,4 @@ public class MediumFormatBean implements Base<MediumFormatBean>{
 		this.gid = gid;
 	}
 
-	@Override
-	public MediumFormatBean get() {
-		return Base.newInstance(MediumFormatBean.class).get();
-	}
-
 }

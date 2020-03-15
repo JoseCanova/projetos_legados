@@ -64,10 +64,5 @@ public class RecordingAliasTypeBean implements Base<RecordingAliasTypeBean>{
 	public void setGid(String gid) {
 		this.gid = gid;
 	}
-
-	@Override
-	public RecordingAliasTypeBean get() {
-		return Base.newInstance(RecordingAliasTypeBean.class).get();
-	}
 	
 }
