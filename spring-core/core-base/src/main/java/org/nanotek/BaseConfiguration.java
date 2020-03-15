@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import javax.validation.Validator;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.assertj.core.util.Arrays;
 import org.nanotek.beans.csv.ArtistAliasBean;
 import org.nanotek.beans.csv.ArtistBean;
@@ -60,19 +61,11 @@ public class BaseConfiguration {
 	@Autowired
 	ApplicationContext applicationContext;
 	
-	/*
-	 * <bean id="managementService"
-	 * class="net.sf.ehcache.management.ManagementService" init-method="init"
-	 * destroy-method="dispose"> <constructor-arg ref="cacheManager"/>
-	 * <constructor-arg ref="mbeanServer"/> <constructor-arg index="2"
-	 * value="true"/> <constructor-arg index="3" value="true"/> <constructor-arg
-	 * index="4" value="true"/> <constructor-arg index="5" value="true"/> </bean>
-	 * <bean id="cacheManager"
-	 * class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-	 * <property name="configLocation" value="classpath:ehcache.xml"/> <property
-	 * name="shared" value="true"/> </bean>
-	 */		
-	
+	@Bean
+	@Qualifier(value = "ApachePropertyUtils")
+	PropertyUtils createApachePropertyUtils() {
+		return new PropertyUtils();
+	}
 	
 	@Bean
 	ManagementService ehCacheJmx(
