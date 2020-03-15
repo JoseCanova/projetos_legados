@@ -56,9 +56,4 @@ public class LabelAlias implements Base<LabelAlias> {
 		this.aliasId = aliasId;
 	}
 
-	@Override
-	public LabelAlias get() {
-		return Base.newInstance(LabelAlias.class).get();
-	}
-	
 }

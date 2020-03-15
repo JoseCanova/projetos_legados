@@ -37,4 +37,16 @@ public class Gender extends BaseType {
 				+ description + ", gid=" + gid + ", id=" + id + "]";
 	}
 
+
+	@Override
+	public String getGid() {
+		return gid;
+	}
+
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }

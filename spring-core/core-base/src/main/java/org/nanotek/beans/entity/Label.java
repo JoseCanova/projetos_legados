@@ -169,9 +169,4 @@ public class Label implements LongIdEntityBase {
 		this.labelId = labelId;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	} 
-
 }

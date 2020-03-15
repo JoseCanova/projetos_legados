@@ -8,7 +8,7 @@ import org.nanotek.LongBase;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="cd_toc")
-public class CdToc implements LongBase {
+public class CdToc implements LongBase<CdToc> {
 
 	private Long id;
 	private Long cdtocId;

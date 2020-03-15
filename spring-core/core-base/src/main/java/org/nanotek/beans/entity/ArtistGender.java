@@ -3,7 +3,7 @@ package org.nanotek.beans.entity;
 import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
-public class ArtistGender implements LongBase{
+public class ArtistGender implements LongBase<ArtistGender>{
 
 	private Long id;
 

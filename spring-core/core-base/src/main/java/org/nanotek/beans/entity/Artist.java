@@ -266,11 +266,6 @@ public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBa
 	}
 
 	@Override
-	public <B extends Base<?>> Optional<B> on(Consumer<Long> k) {
-		return null;
-	}
-
-	@Override
 	public String getGid() {
 		return gid;
 	}

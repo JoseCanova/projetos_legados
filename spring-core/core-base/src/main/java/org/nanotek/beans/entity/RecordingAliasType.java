@@ -27,5 +27,16 @@ public class RecordingAliasType extends BaseType {
 		return "RecordingAliasType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder
 				+ ", description=" + description + ", gid=" + gid + ", id=" + id + "]";
 	}
+
+	@Override
+	public String getGid() {
+		// TODO Auto-generated method stub
+		return gid;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
 	
 }

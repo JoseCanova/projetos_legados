@@ -24,7 +24,7 @@ import org.nanotek.BaseDescriptionBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class DescriptionBase extends SequenceLongBase implements BaseDescriptionBase<String,Long> {
+public abstract class DescriptionBase extends SequenceLongBase  {
 
 	private static final long serialVersionUID = -4976009864905272762L;
 

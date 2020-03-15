@@ -1,11 +1,8 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +10,7 @@ import org.nanotek.ImmutableCommentEntityBase;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")
-public class AreaComment extends CommentBase<String> implements ImmutableCommentEntityBase<String,Long>{
+public class AreaComment extends CommentBase<String> implements ImmutableCommentEntityBase<AreaComment,String,Long>{
 
 	private static final long serialVersionUID = -68821965634755841L;
 	
@@ -71,9 +68,7 @@ public class AreaComment extends CommentBase<String> implements ImmutableComment
 	}
 
 	@Override
-	public void on(Consumer<Long> k) {
-		// TODO Auto-generated method stub
-		
+	public String getComment() {
+		return comment;
 	}
-	
 }

@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,7 @@ import org.nanotek.apachemq.listener.StringBaseIdListener;
 @Entity
 @EntityListeners(value = {StringBaseIdListener.class})
 @Table(name="medium_cd_toc")
-public class MediumCdToc implements LongBase{
+public class MediumCdToc implements LongBase<MediumCdToc>{
 
 
 	@Id

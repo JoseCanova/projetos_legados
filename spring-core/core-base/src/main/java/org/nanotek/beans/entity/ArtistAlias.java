@@ -206,4 +206,9 @@ public class ArtistAlias  extends LongIdNameEntity  implements LongIdNameEntityB
 				+ artistAliasEndDate + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
 	}
 
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }

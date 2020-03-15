@@ -34,9 +34,4 @@ public class LabelName implements LongIdEntityBase {
 		this.id = id;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-
 }

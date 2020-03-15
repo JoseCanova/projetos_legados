@@ -1,18 +1,14 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.nanotek.BaseDescriptionBase;
-
 @Entity
 @Table(name="medium_format")
-public class MediumFormat extends SequenceLongBase implements BaseDescriptionBase<String,Long>{
+public class MediumFormat extends SequenceLongBase implements LongIdNameGidEntityDescriptionBase<String,String, String>{
 
 	private static final long serialVersionUID = 8104913204474210789L;
 	

@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -12,7 +10,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.Locale;
 import org.nanotek.LocaleEntityBase;
 
 @Entity
@@ -75,8 +72,4 @@ public class LocaleBase extends SequenceLongBase implements LocaleEntityBase<Str
 		return true;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
 }

@@ -105,9 +105,4 @@ public class Isrc implements LongIdEntityBase {
 				+ recording + ", source=" + source + ", isrc=" + isrc + "]";
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-	
 }

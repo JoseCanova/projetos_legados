@@ -6,10 +6,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.ImmutableCommentEntityBase;
+import org.nanotek.MutableCommentBase;
 
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment extends CommentBase<String> implements ImmutableCommentEntityBase<String , Long>{
+public class ArtistComment extends CommentBase<String> implements ImmutableCommentEntityBase<ArtistComment , String , Long>,MutableCommentBase<ArtistComment,String>{
 
 	private static final long serialVersionUID = 2608408556126104972L;
 
@@ -35,33 +36,20 @@ public class ArtistComment extends CommentBase<String> implements ImmutableComme
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArtistComment other = (ArtistComment) obj;
-		if (artist == null) {
-			if (other.artist != null)
-				return false;
-		} else if (!artist.equals(other.artist))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "ArtistComment [artist=" + artist + ", comment=" + comment + ", id=" + id + "]";
 	}
+
+	@Override
+	public void setComment(String k) {
+		this.comment = k;
+	}
+
+	@Override
+	public String getComment() {
+		return comment;
+	}
+
+	
 	
 }

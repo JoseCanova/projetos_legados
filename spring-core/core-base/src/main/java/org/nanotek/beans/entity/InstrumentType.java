@@ -43,4 +43,14 @@ public class InstrumentType extends BaseType {
 		this.instruments = instruments;
 	}
 
+	@Override
+	public String getGid() {
+		return gid;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }

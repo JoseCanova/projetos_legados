@@ -28,7 +28,7 @@ import org.nanotek.ImmutableLengthIdBase;
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
 @DiscriminatorValue(value="RecordingLength")
-public class RecordingLength extends LongLengthyBase implements ImmutableLengthIdBase<Long,Long>{
+public class RecordingLength extends LongLengthyBase implements ImmutableLengthIdBase<RecordingLength,Long,Long>{
 	
 	private static final long serialVersionUID = -8708909035267715010L;
 	
@@ -86,10 +86,4 @@ public class RecordingLength extends LongLengthyBase implements ImmutableLengthI
 		return "RecordingLength [recording=" + recording + ", length=" + length + ", id=" + id + "]";
 	}
 
-
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-	
 }

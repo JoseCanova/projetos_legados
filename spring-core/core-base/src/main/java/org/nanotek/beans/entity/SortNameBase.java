@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nanotek.LongIdSortNameEntityBase;
 import org.nanotek.SortBase;
 
 @Entity
@@ -28,9 +29,7 @@ import org.nanotek.SortBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-@Cacheable(value = true)
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class SortNameBase extends SequenceLongBase implements SortBase<Long,String>{
+public class SortNameBase extends SequenceLongBase implements LongIdSortNameEntityBase<String>{
 
 	private static final long serialVersionUID = -950822256693332353L;
 
@@ -83,6 +82,5 @@ public class SortNameBase extends SequenceLongBase implements SortBase<Long,Stri
 	public String toString() {
 		return "SortNameBase [sortName=" + sortName + ", id=" + id + "]";
 	}
-
 
 }

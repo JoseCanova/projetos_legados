@@ -8,6 +8,6 @@ public interface BarCodeEntityBase<K extends BarCodeEntityBase<K,B,ID> , B ,  ID
 	
 	B getBarCode();
     
-	void setBarCode(K B);
+	void setBarCode(B B);
     
 }

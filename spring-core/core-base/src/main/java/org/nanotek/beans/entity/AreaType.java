@@ -29,5 +29,15 @@ public class AreaType extends BaseType  {
 		return "AreaType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
 				+ description + ", gid=" + gid + ", id=" + id + "]";
 	}
+
+	@Override
+	public String getGid() {
+		return gid;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
 	
 }

@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,7 +7,7 @@ import org.nanotek.LongBase;
 
 @Entity
 @Table(name="release_label")
-public class ReleaseLabel implements LongBase {
+public class ReleaseLabel implements LongBase<ReleaseLabel> {
 
 	private static final long serialVersionUID = -4336246677898584112L;
 	

@@ -2,12 +2,10 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface BaseDescriptionIdBase<K extends Serializable, ID extends Serializable> extends BaseDescriptionBase<K,ID>  {
+public interface BaseDescriptionIdBase<K extends IdBase<K,ID>, I extends Serializable, ID extends Serializable> extends BaseDescriptionBase<K,K,ID>  {
 	
-	K getDescriptionId();
+	I getDescriptionId();
 	
-	void setDescriptionId(K id);
-	
-	K getDescription();
+	void setDescriptionId(I id);
 
 }

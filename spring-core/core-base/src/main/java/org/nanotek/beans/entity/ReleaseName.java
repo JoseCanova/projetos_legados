@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -10,7 +8,7 @@ import org.nanotek.LongBase;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="release_name")
-public class ReleaseName implements LongBase {
+public class ReleaseName implements LongBase<ReleaseName> {
 
 	private Long id; 
 	private String name; 

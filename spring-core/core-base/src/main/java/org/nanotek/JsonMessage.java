@@ -1,5 +1,7 @@
 package org.nanotek;
 
+import java.io.Serializable;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,18 +10,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Document
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JsonMessage<K extends IdBase<?>> implements ImmutableBase<K>{
+public class JsonMessage<K extends IdBase<K,ID>,ID extends Serializable> implements ImmutableBase<K,ID>{
 
 	private static final long serialVersionUID = 6737835842589884724L;
 
-	private K id;
+	private ID id;
 	
 	private String response; 
 	
 	public JsonMessage() {
 	}
 	
-	public JsonMessage(K id) {
+	public JsonMessage(ID id) {
 		super();
 		this.id = id;
 	}
@@ -33,7 +35,7 @@ public class JsonMessage<K extends IdBase<?>> implements ImmutableBase<K>{
 	}
 
 	@Override
-	public K getId() {
+	public ID getId() {
 		return id;
 	}
 	

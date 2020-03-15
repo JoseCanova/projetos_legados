@@ -34,5 +34,18 @@ public class ArtistAliasType extends BaseType  {
 	public String toString() {
 		return "ArtistAliasType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
 				+ description + ", gid=" + gid + ", id=" + id + "]";
+	}
+
+
+	@Override
+	public String getGid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getName() {
+		return name;
 	}	
 }

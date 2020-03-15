@@ -68,4 +68,9 @@ public class ReleaseBarCode extends BarCodeBase {
 		return "ReleaseBarCode [barCode=" + barCode + ", id=" + id + "]";
 	}
 
+	@Override
+	public void setBarCode(String B) {
+		this.barCode = B;
+	}
+
 }

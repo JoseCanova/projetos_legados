@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.MutableCommentBase;
 
 @MappedSuperclass
-public class CommentBase<K extends Serializable> extends SequenceLongBase implements MutableCommentBase<K> {
+public class CommentBase<K extends Serializable> extends SequenceLongBase {
 
 	@NotNull
 	@Column(name="comment", columnDefinition = "VARCHAR NOT NULL"  , nullable=false)
@@ -24,10 +24,6 @@ public class CommentBase<K extends Serializable> extends SequenceLongBase implem
 		this.comment = comment;
 	}
 
-	public void setComment(K comment) {
-		this.comment = comment;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,8 +32,4 @@ public class CommentBase<K extends Serializable> extends SequenceLongBase implem
 		return result;
 	}
 
-	@Override
-	public void on(Consumer<K> k) {
-		k.accept(comment);
-	}
 }
