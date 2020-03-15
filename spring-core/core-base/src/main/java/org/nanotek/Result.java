@@ -10,8 +10,6 @@ public class Result<K extends IdBase<K,K>> implements BooleanBase<K> {
 
 	private Optional<K> result;
 
-	public Result() {}
-
 	public Result(K id,Optional<K> result) { 
 		this.id = id;
 		this.result = result;
