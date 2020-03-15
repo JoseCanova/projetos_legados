@@ -1,8 +1,10 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
+import java.io.Serializable;
 
-public class BaseBean implements Base<BaseBean>{
+import org.nanotek.IdBase;
+
+public abstract class BaseBean<K extends Serializable> implements IdBase<Serializable>{
 
 	private static final long serialVersionUID = 1939354964505054726L;
 

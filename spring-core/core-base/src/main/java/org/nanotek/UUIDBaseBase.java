@@ -1,24 +1,27 @@
 package org.nanotek;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.util.Optional;
 import java.util.UUID;
 
-public interface UUIDBaseBase extends UUIDImutableBase {
+public interface UUIDBaseBase extends ImmutableBase<UUIDBaseBase> {
 
-	default UUID withUUID() { 
-		UUID uuid = null;
-		try { 
-				ByteArrayOutputStream bao = new ByteArrayOutputStream();
-				ObjectOutputStream oos =  new ObjectOutputStream(bao);
-				oos.writeObject(this);
-				oos.flush();
-				uuid = UUID.nameUUIDFromBytes(bao.toByteArray());
-				oos.close();
-		}catch (Exception ex) { 
-		}
-		return Optional.ofNullable(uuid).orElseThrow(BaseException::new);
+	String getName();
+	
+	void setName(String name);
+	
+	void setUUID(UUID uuid);
+	
+	default UUIDBaseBase  withName(String name) { 
+		setName(name);
+		withUUID();
+		return this;
 	}
+	
+	@Override
+	default UUID withUUID() {
+		UUID uuid = ImmutableBase.super.withUUID();
+		setUUID(uuid);
+		return uuid;
+	}
+	
 	
 }

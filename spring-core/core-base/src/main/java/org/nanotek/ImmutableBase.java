@@ -6,20 +6,29 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ImmutableBase <K extends ImmutableBase<?>> extends Base<K> , KongSupplier<K> {
+public interface ImmutableBase <K extends Base<?>> extends Base<K> , KongSupplier<ImmutableBase<K>> {
 	
-	default UUID getUUId() { 
+	default UUID getUUID() { 
 		return withUUID();
 	}
 	
 	@Override
-	default Optional<K> get() {
-		return newImmutableBase(this.getClass());
-	}
+	default Optional<ImmutableBase<K>> get() {
+		return Optional.ofNullable(this);
+	}	
 	
-	default Optional<K> newImmutableBase(Class<? extends ImmutableBase> class1) throws BaseInstantiationException { 
+	static <K extends ImmutableBase<B> , B extends Base<?>> Optional<K> newImmutableBase(Class<K> class1) throws BaseInstantiationException { 
 		try {
 			return Optional.of(class1.getDeclaredConstructor(null).newInstance());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+	
+	default Optional<K> newInstance(Class<K> clazz , Object[] args , Class<?>... classArgs) throws BaseInstantiationException { 
+		try {
+			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			throw new BaseInstantiationException(e);

@@ -1,4 +1,4 @@
 package org.nanotek;
 
-public interface BooleanBase<K extends IdBase<Boolean>> extends  ImmutableBase<BooleanBase<?>> , MutableBase<K> {
+public interface BooleanBase<K extends IdBase<?>> extends  ImmutableBase<BooleanBase<?>> , MutableBase<K> {
 }

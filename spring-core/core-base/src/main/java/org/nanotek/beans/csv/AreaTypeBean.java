@@ -1,5 +1,7 @@
 package org.nanotek.beans.csv;
 
+import java.util.Optional;
+
 import org.nanotek.Base;
 
 public class AreaTypeBean implements Base<AreaTypeBean> {
@@ -75,10 +77,5 @@ public class AreaTypeBean implements Base<AreaTypeBean> {
 		this.gid = gid;
 	}
 
-	@Override
-	public AreaTypeBean get() {
-		return Base.newInstance(AreaTypeBean.class).get();
-	}
-	
 	
 }

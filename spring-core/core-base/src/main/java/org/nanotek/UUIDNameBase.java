@@ -10,12 +10,20 @@ public class UUIDNameBase implements UUIDBaseBase {
 	
 	private UUID uuid;
 	
+	
+	
 	public UUIDNameBase() {
+		withUUID();
 	}
 
 	@Override
 	public UUID getUUID() {
 		return uuid;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -24,8 +32,13 @@ public class UUIDNameBase implements UUIDBaseBase {
 	}
 
 	@Override
-	public UUID withUUID() {
-		return this.uuid = UUIDBaseBase.super.withUUID();
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void setUUID(UUID uuid) {
+		this.uuid = uuid;
 	}
 	
 }

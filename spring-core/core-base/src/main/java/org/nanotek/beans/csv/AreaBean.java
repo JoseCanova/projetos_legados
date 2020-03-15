@@ -1,10 +1,6 @@
 package org.nanotek.beans.csv;
 
-import java.util.Optional;
-
-import org.nanotek.Base;
-
-public class AreaBean implements Base<AreaBean>{
+public class AreaBean extends HolderBaseBean<Long>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
@@ -26,8 +22,7 @@ public class AreaBean implements Base<AreaBean>{
 	
 	public AreaBean() {
 	}
-
-
+ 
 	public Long getId() {
 		return id;
 	}
@@ -167,8 +162,4 @@ public class AreaBean implements Base<AreaBean>{
 		this.comment = comment;
 	}
 
-	public AreaBean get(){
-			return Base.newInstance(AreaBean.class).get();
-	}
-	
 }

@@ -1,6 +1,8 @@
 package org.nanotek.beans.entity;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +17,15 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.Base;
+import org.nanotek.LongIdNameGidEntityBase;
+
 @Entity
 @Table(name="artist" , 
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist extends LongIdGidNameEntity {
+public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBase<String, String> {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -253,5 +258,20 @@ public class Artist extends LongIdGidNameEntity {
 				+ ", artistBeginDate=" + artistBeginDate + ", artistEndDate=" + artistEndDate + ", type=" + type
 				+ ", gender=" + gender + ", area=" + area + ", beginArea=" + beginArea + ", endArea=" + endArea
 				+ ", gid=" + gid + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public <B extends Base<?>> Optional<B> on(Consumer<Long> k) {
+		return null;
+	}
+
+	@Override
+	public String getGid() {
+		return gid;
 	}
 }

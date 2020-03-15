@@ -1,8 +1,6 @@
 package org.nanotek;
 
-import java.util.function.Consumer;
-
-public class Result<K extends IdBase<Boolean>> implements BooleanBase<K> {
+public abstract class Result<K extends IdBase<?>> implements BooleanBase<K> {
 
 	private static final long serialVersionUID = -307344888633306177L;
 	
@@ -12,8 +10,9 @@ public class Result<K extends IdBase<Boolean>> implements BooleanBase<K> {
 
 	public Result() {}
 	
-	public Result(Boolean value , Boolean result) { 
+	public Result(Boolean value , K result) { 
 		this.id = value;
+		this.result = result;
 	}
 
 	public Boolean getId() {
@@ -23,5 +22,4 @@ public class Result<K extends IdBase<Boolean>> implements BooleanBase<K> {
 	public K getResult() {
 		return result;
 	}
-
 }
