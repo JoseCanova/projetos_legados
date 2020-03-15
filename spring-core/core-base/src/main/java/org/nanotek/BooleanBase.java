@@ -1,6 +1,7 @@
 package org.nanotek;
 
-import java.io.Serializable;
+import java.util.Optional;
 
-public interface BooleanBase<K extends IdBase<?>,ID extends Serializable> extends  ImmutableBase<BooleanBase<?,ID>> , Holder<K> {
+public interface BooleanBase<ID extends IdBase<?>> extends  ImmutableBase<BooleanBase<ID>> , Holder<ID> {
+	Optional<Boolean> result;
 }

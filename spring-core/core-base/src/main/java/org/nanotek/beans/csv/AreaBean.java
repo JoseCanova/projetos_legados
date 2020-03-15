@@ -4,7 +4,7 @@ public class AreaBean extends HolderBaseBean<Long>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
-	private Long id; 
+	private Long areaId; 
 	private String gid; 
 	private String name; 
 	private Long type; 
@@ -24,12 +24,12 @@ public class AreaBean extends HolderBaseBean<Long>{
 	}
  
 	public Long getId() {
-		return id;
+		return areaId;
 	}
 
 
 	public void setId(Long id) {
-		this.id = id;
+		this.areaId = id;
 	}
 
 
