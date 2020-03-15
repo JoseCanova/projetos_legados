@@ -3,11 +3,11 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
+import org.nanotek.Base;
 
 @Entity
 @Table(name="work")
-public class Work implements LongBase {
+public class Work implements Base {
 	
 	private Long id; 
 	private String gid; 
@@ -16,7 +16,6 @@ public class Work implements LongBase {
 	private Long iswc; 
 	
 	
-	@Override
 	public Long getId() {
 		return id;
 	}

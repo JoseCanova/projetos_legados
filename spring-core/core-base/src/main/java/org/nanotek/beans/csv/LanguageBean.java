@@ -1,8 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-
-public class LanguageBean implements Base<LanguageBean>{
+public class LanguageBean extends HolderBaseBean<LanguageBean,Long>{
 
 	private static final long serialVersionUID = 2997501833949969600L;
 

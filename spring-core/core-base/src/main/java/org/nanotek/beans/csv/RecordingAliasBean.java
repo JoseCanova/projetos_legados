@@ -1,8 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-
-public class RecordingAliasBean implements Base<RecordingAliasBean>{
+public class RecordingAliasBean extends HolderBaseBean<RecordingAliasBean,Long>{
 
 	private static final long serialVersionUID = 4772995387500387928L;
 

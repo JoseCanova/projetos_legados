@@ -1,8 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-
-public class MediumFormatBean implements Base<MediumFormatBean>{
+public class MediumFormatBean extends HolderBaseBean<MediumFormatBean,Long>{
 
 	private static final long serialVersionUID = 6169777855661430422L;
 

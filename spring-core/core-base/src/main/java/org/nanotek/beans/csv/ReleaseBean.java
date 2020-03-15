@@ -1,13 +1,11 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.LongBase;
-
 /**
  * 
  * @author josecanova
  *
  */
-public class ReleaseBean implements LongBase{
+public class ReleaseBean extends HolderBaseBean<ReleaseBean,Long>{
 
 	private static final long serialVersionUID = -11618084576388817L;
 	private Long id; 

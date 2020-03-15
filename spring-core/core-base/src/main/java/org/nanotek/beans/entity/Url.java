@@ -58,8 +58,4 @@ public class Url implements Base {
 		this.refCount = refCount;
 	}
 
-	@Override
-	public Object get() {
-		return null;
-	}
 }

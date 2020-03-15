@@ -2,9 +2,7 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongBase;
-
-public class RecordingBean  implements LongBase{
+public class RecordingBean  extends HolderBaseBean<RecordingBean,Long>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	

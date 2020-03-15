@@ -2,7 +2,7 @@ package org.nanotek.beans.csv;
 
 import org.nanotek.LongBase;
 
-public class ArtistCreditNameBean implements LongBase {
+public class ArtistCreditNameBean  extends HolderBaseBean<ArtistCreditNameBean,Long> {
 
 	private static final long serialVersionUID = -625201514069517695L;
 

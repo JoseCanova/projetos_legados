@@ -1,8 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-
-public class GenderBean implements Base<GenderBean>{
+public class GenderBean extends HolderBaseBean<GenderBean,Long>{
 
 	private static final long serialVersionUID = -1492542566677551150L;
 	private Long id; 

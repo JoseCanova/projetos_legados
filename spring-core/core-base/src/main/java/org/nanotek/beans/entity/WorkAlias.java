@@ -3,11 +3,11 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
+import org.nanotek.Base;
 
 @Entity
 @Table(name="work_alias")
-public class WorkAlias implements LongBase {
+public class WorkAlias implements Base {
 
 	private Long id; 
 	
@@ -18,7 +18,6 @@ public class WorkAlias implements LongBase {
 	private String locale; 
 	
 	
-	@Override
 	public Long getId() {
 		return id;
 	}

@@ -1,8 +1,8 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
 
-public class ArtistTypeBean implements Base<ArtistTypeBean> {
+
+public class ArtistTypeBean extends HolderBaseBean<ArtistTypeBean,Long> {
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	

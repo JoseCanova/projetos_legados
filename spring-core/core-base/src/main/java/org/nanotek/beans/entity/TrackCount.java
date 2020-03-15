@@ -44,10 +44,5 @@ public class TrackCount implements StringBase {
 	}
 
 
-	@Override
-	public void on(Consumer<String> k) {
-		k.accept(getId());
-	}
-
 	
 }

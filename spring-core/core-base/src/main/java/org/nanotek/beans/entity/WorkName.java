@@ -34,10 +34,4 @@ public class WorkName implements LongIdNameEntityBase<String>{
 		this.name = name;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

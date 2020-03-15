@@ -1,11 +1,10 @@
 package org.nanotek.service.parser;
 
-import org.nanotek.Base;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 
-public class BaseMapParser<I extends Base> extends BaseParser{
+public class BaseMapParser<K extends HolderBaseBean<IdBase<K,I>, I extends Serializable>> extends BaseParser{
 	
-	private BaseMapColumnStrategy<I> baseMap;
+	private BaseMapColumnStrategy<K,I> baseMap;
 	
 	public BaseMapParser() {}
 	

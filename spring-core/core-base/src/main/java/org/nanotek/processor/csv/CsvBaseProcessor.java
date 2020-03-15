@@ -2,19 +2,23 @@ package org.nanotek.processor.csv;
 
 import java.beans.IntrospectionException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
+import org.nanotek.IdBase;
+import org.nanotek.beans.csv.HolderBaseBean;
 import org.nanotek.opencsv.MapColumnStrategy;
 import org.nanotek.service.parser.BaseMapParser;
 
+import com.sun.xml.bind.v2.model.core.ID;
+
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public class CsvBaseProcessor<I extends Base, P extends BaseMapParser<I>> {
+public class CsvBaseProcessor<I extends HolderBaseBean<IdBase<ID,I>, Serializable>, P extends BaseMapParser<I>> {
 
 	
 	private P parser; 

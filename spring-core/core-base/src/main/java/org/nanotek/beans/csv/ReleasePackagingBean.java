@@ -1,8 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-
-public class ReleasePackagingBean implements Base<ReleasePackagingBean>{
+public class ReleasePackagingBean extends HolderBaseBean<ReleasePackagingBean,Long>{
 
 	private static final long serialVersionUID = -6068518463159348252L;
 	/**
