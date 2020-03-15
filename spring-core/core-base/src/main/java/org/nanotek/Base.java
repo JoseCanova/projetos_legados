@@ -73,7 +73,7 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 		}
 	}
 
-	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Object[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
+	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Serializable[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException

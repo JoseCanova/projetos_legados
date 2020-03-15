@@ -1,4 +1,4 @@
 package org.nanotek;
 
-public interface LongIdEntityBase extends IdBase<Long> , MutableBase<Long>{
+public interface LongIdEntityBase extends  KongSupplier<LongIdEntityBase> , Mutable<LongIdEntityBase>{
 }

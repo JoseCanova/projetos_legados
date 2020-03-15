@@ -1,6 +1,7 @@
 package org.nanotek.beans.entity;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.nanotek.LongIdNameGidEntityBase;
 
@@ -8,7 +9,7 @@ public interface BaseTypeEntityBase<K extends BaseType, ID extends Serializable>
 	
 	
 	@Override
-	default BaseTypeEntityBase<K ,ID> get() {
+	default Optional<BaseTypeEntityBase<K ,ID>> get() {
 		return this;
 	}
 }

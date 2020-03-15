@@ -1,6 +1,6 @@
 package org.nanotek;
 
 @FunctionalInterface
-public interface Evaluator<K> {
+public interface Evaluative<K> {
 	void evaluate(K k);
 }
