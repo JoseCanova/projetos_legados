@@ -40,9 +40,4 @@ public class ReleaseName implements LongBase {
 		this.refCount = refCount;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	} 
-
 }

@@ -66,10 +66,4 @@ public class Work implements LongBase {
 		this.iswc = iswc;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

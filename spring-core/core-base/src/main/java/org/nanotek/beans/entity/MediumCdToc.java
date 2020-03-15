@@ -94,9 +94,4 @@ public class MediumCdToc implements LongBase{
 				+ ", medium=" + medium + ", cdToc=" + cdToc + "]";
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-
 }

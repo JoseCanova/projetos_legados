@@ -32,9 +32,4 @@ public class TrackList implements LongBase {
 		this.id = id;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-
 }

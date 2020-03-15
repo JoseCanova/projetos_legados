@@ -51,9 +51,4 @@ public class ReleaseLabel implements LongBase {
 		this.catalogNumber = catalogNumber;
 	}
 
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-
 }

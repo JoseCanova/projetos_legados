@@ -60,11 +60,4 @@ public class WorkAlias implements LongBase {
 		this.id = id;
 	}
 
-
-	@Override
-	public void on(Consumer<Long> k) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

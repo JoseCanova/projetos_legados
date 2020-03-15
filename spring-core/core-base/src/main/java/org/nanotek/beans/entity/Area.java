@@ -1,5 +1,8 @@
 package org.nanotek.beans.entity;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +15,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.Base;
 import org.nanotek.LongIdNameGidEntityBase;
 import org.nanotek.TypeBase;
 
@@ -156,6 +160,5 @@ public class Area extends LongIdGidNameEntity implements LongIdNameGidEntityBase
 		return "Area [areaId=" + areaId + ", type=" + type + ", areaBeginDate=" + areaBeginDate + ", areaEndDate="
 				+ areaEndDate + ", areaComment=" + areaComment + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
-
 	
 }

@@ -1,6 +1,9 @@
 package org.nanotek;
 
-public abstract class Result<K extends IdBase<?>> implements BooleanBase<K> {
+import java.util.Optional;
+import java.util.function.Predicate;
+
+public class Result<K extends IdBase<?>> implements BooleanBase<K , Boolean> {
 
 	private static final long serialVersionUID = -307344888633306177L;
 	
@@ -22,4 +25,10 @@ public abstract class Result<K extends IdBase<?>> implements BooleanBase<K> {
 	public K getResult() {
 		return result;
 	}
+
+	@Override
+	public <B extends Base<?>> Optional<Result<?>> on(Predicate<K> k) {
+		return Optional.of(new Result<>(k.test(result) , result));
+	}
+
 }

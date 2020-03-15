@@ -79,10 +79,4 @@ public class ReleaseStatusBean implements EntityBase<Long>{
 		this.gid = gid;
 	}
 
-
-	@Override
-	public void on(Consumer<Long> k) {
-		k.accept(getId());
-	}
-
 }
