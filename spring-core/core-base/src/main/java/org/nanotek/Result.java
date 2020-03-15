@@ -1,7 +1,6 @@
 package org.nanotek;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 
 public class Result<K extends IdBase<?>> implements BooleanBase<K> {
 
@@ -25,9 +24,6 @@ public class Result<K extends IdBase<?>> implements BooleanBase<K> {
 		return result;
 	}
 
-	@Override
-	public <B extends Base<?>> Optional<Result<?>> on(Predicate<K> k) {
-		return Optional.of(new Result<>(id,k.test(id)));
-	}
+
 
 }

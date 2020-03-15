@@ -8,7 +8,7 @@ public interface Mutables<K extends Serializable>  extends IdBase<K> , MutableBa
 
 	@Override
 	default <B extends Base<?>> Optional<Result<?>> on(Predicate<K> k) {
-		return Optional.of(new Result<>(k.test(getId()),this));
+		return Optional.of(new Result<>(this , k.test(getId())));
 	}
 	
 	

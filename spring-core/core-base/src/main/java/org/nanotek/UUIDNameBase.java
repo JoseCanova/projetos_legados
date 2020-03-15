@@ -40,5 +40,10 @@ public class UUIDNameBase implements UUIDBaseBase {
 	public void setUUID(UUID uuid) {
 		this.uuid = uuid;
 	}
+
+	@Override
+	public UUIDBaseBase getId() {
+		return this;
+	}
 	
 }

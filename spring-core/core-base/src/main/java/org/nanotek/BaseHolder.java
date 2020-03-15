@@ -1,13 +1,18 @@
 package org.nanotek;
 
-public abstract class BaseHolder<K extends Base<?>> implements Holder<K> , ImmutableBase<ImmutableBase<?>>{
+public abstract class BaseHolder<K extends Base<?>> implements  ImmutableBase<K>{
 	
-	private K base;
+	private static final long serialVersionUID = 1063313814504252299L;
+	
+	private K id; 
 	
 	public BaseHolder(K base) { 
-		this.base = base;
+		this.id = base;
 	}
 	
-	
+	@Override
+	public K getId() {
+		return id;
+	}
 
 }

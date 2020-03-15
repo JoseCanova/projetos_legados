@@ -5,8 +5,14 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
-public interface ImmutableBase <K extends Base<?>> extends Base<K> , KongSupplier<ImmutableBase<K>> {
+public interface ImmutableBase <K extends Base<?>> extends KongSupplier<ImmutableBase<K>>  , IdBase<K> , Holder<K>{
+	
+	@Override
+	default <B extends Base<?>> Optional<Result<?>> on(Predicate<K> k) {
+		return Optional.of(new Result<>(this,k.test(this.getId())));
+	}
 	
 	default UUID getUUID() { 
 		return withUUID();
