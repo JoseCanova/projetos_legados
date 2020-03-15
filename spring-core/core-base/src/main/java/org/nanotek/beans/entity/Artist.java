@@ -1,8 +1,6 @@
 package org.nanotek.beans.entity;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +15,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
 import org.nanotek.LongIdNameGidEntityBase;
 
 @Entity

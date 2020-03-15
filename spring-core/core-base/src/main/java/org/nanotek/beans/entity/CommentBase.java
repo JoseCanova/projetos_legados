@@ -1,14 +1,11 @@
 package org.nanotek.beans.entity;
 
 import java.io.Serializable;
-import java.util.function.Consumer;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.nanotek.MutableCommentBase;
 
 @MappedSuperclass
 public class CommentBase<K extends Serializable> extends SequenceLongBase {

@@ -1,6 +1,5 @@
 package org.nanotek.service.jpa;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -11,15 +10,10 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.beans.entity.Instrument;
 import org.nanotek.beans.entity.InstrumentComment;
 import org.nanotek.beans.entity.InstrumentDescription;
-import org.nanotek.repository.jpa.IdBaseRepository;
 import org.nanotek.repository.jpa.InstrumentCommentRepository;
 import org.nanotek.repository.jpa.InstrumentDescriptionRepository;
 import org.nanotek.repository.jpa.InstrumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 

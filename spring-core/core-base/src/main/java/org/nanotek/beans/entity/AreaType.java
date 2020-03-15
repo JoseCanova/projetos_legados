@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.TypeBase;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")

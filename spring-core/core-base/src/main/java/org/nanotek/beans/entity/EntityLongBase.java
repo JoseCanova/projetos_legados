@@ -5,8 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongBase;
-
 @MappedSuperclass
 public class EntityLongBase  {
 

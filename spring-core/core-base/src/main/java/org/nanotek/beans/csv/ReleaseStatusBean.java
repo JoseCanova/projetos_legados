@@ -1,10 +1,8 @@
 package org.nanotek.beans.csv;
 
-import java.util.function.Consumer;
-
 import org.nanotek.EntityBase;
 
-public class ReleaseStatusBean implements EntityBase<Long>{
+public class ReleaseStatusBean implements EntityBase<ReleaseStatusBean,Long>{
 
 	private static final long serialVersionUID = -1032984444131323024L;
 	

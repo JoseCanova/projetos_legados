@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.nanotek.LongIdNameGidEntityBase;
-import org.nanotek.NameBase;
 
 @Entity
 @Table(name="release_group_primary_type")

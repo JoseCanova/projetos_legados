@@ -1,8 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -13,10 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nanotek.LongIdSortNameEntityBase;
-import org.nanotek.SortBase;
 
 @Entity
 @Table(name="sort_name_base",

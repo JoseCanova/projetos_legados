@@ -1,11 +1,8 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
 import org.nanotek.LongIdEntityBase;
 
 @SuppressWarnings("serial")

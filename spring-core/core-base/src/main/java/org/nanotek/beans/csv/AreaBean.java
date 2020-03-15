@@ -1,6 +1,6 @@
 package org.nanotek.beans.csv;
 
-public class AreaBean extends HolderBaseBean<Long>{
+public class AreaBean extends HolderBaseBean<AreaBean,Long>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	

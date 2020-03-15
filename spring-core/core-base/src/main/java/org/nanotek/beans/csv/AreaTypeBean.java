@@ -1,7 +1,5 @@
 package org.nanotek.beans.csv;
 
-import java.util.Optional;
-
 import org.nanotek.Base;
 
 public class AreaTypeBean implements Base<AreaTypeBean> {

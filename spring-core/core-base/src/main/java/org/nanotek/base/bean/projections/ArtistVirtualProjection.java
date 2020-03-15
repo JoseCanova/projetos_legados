@@ -1,7 +1,5 @@
 package org.nanotek.base.bean.projections;
 
-import java.util.Optional;
-
 import org.nanotek.Base;
 import org.nanotek.repository.jpa.projections.Projection;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,9 +1,6 @@
 package org.nanotek.controller.entity;
 
-import java.util.Optional;
-
 import org.nanotek.beans.entity.AreaType;
-import org.nanotek.controller.response.EntityResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.springframework.beans.factory.annotation.Autowired;

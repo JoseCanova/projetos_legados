@@ -1,7 +1,5 @@
 package org.nanotek;
 
-import java.util.UUID;
-
 public class UUIDNameBase implements UUIDBaseBase {
 
 	private static final long serialVersionUID = 2692875536991084184L;

@@ -1,6 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,8 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.nanotek.LongIdNameEntityBase;
 
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {

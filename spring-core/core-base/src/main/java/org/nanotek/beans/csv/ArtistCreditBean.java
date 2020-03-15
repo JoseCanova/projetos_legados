@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.LongBase;
 
 @SuppressWarnings("serial")
-public class ArtistCreditBean implements LongBase{
+public class ArtistCreditBean extends HolderBaseBean<ArtistCreditBean,Long>{
 
 	@NotNull
 	Long id; 

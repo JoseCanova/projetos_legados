@@ -1,7 +1,6 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.DiscriminatorValue;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 

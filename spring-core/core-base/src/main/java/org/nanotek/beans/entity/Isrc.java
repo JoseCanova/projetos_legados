@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -2,15 +2,10 @@ package org.nanotek.configuration.csv;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ReleaseAliasBean;
-import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.beans.entity.Release;
 import org.nanotek.beans.entity.ReleaseAlias;
 import org.nanotek.beans.entity.ReleaseAliasBeginDate;

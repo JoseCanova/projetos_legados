@@ -1,8 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.util.function.Consumer;
-
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.nanotek.BaseDescriptionBase;
 
 @Entity
 @Table(name="description_base",

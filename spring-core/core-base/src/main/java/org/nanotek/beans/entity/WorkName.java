@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.LongBase;
 import org.nanotek.LongIdNameEntityBase;
 
 @SuppressWarnings("serial")
