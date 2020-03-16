@@ -1,12 +1,12 @@
 package org.nanotek;
 
-import java.io.Serializable;
 import java.util.Optional;
 
-import org.apache.commons.collections4.Predicate;
+import org.nanotek.csv.PredicateBase;
 
-public interface Holder<K extends IdBase<K,ID> , ID extends Serializable> extends IdBase<K,ID>{
+@FunctionalInterface
+public interface Holder<K extends IdBase<K,ID> , ID extends BooleanBase<?,?>>{
 	
-	Optional<Result<?>> on(Predicate<K> k);
+	Optional<ID> on(PredicateBase<K,ID> predicate);
 	
 }

@@ -1,8 +1,11 @@
 package org.nanotek;
 
-import java.io.Serializable;
+import java.util.Optional;
 
-public interface Mutable<K extends IdBase<K,ID>, ID extends Serializable> extends Holder<K,ID> {
+public interface Mutable<K extends IdBase<K,ID>, ID extends Result<?,?>> extends Holder<K,ID> {
 
+	default Optional<ID> mutate (){ 
+		return Optional.empty();
+	}
 
 }

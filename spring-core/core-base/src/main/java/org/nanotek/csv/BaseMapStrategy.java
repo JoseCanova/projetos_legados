@@ -10,7 +10,7 @@ import org.nanotek.WrappedBaseClass;
 @FunctionalInterface
 public interface BaseMapStrategy<K extends WrappedBaseClass<ID>, ID extends Base<?>> {
 
-    Optional<Result<?>> findProperty(Predicate<Class<ID>> evaluator);
+    Optional<Result<?,?>> findProperty(Predicate<Class<ID>> evaluator);
 
     default Optional<K> createBean(Class<K> clazz){ 
     	return Base.newInstance(clazz);
