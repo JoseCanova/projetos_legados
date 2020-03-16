@@ -5,13 +5,8 @@ public class StringPositionBase<K extends StringBase<K>,ID extends IdBase<ID,K> 
 	private static final long serialVersionUID = -6208474088768715766L;
 	
 	
-	public StringPositionBase(ID immutable) {
+	public StringPositionBase() {
 		super();
-	}
-
-	
-	public  static void main(String[] args) {
-		
 	}
 
 
