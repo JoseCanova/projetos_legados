@@ -41,14 +41,13 @@ public class CsvBaseProcessor<I extends BaseMapColumnStrategy<?, ?>, P extends B
          getBaseParser().reopen();
     }
 
-    public I next() throws BaseException {
+    public R next() throws BaseException {
     	String[] instanceArray = null;
-    	I bean = null;
+    	R bean = null;
     	try { 
 		    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
 		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
-		    		get
-		    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
+//		    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
 		    	}
     	}catch(Exception ex) { 
     		

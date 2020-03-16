@@ -1,6 +1,5 @@
 package org.nanotek;
 
-@FunctionalInterface
-public interface Positionable<T> {
-	T getPosition();
+public interface Positionable<P extends Positionable<P,T> , T extends IdBase<T,?>>{
+	P getPosition();
 }
