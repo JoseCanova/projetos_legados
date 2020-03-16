@@ -9,16 +9,15 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.IdBase;
-import org.nanotek.beans.csv.HolderBaseBean;
-import org.nanotek.opencsv.MapColumnStrategy;
+import org.nanotek.BaseException;
+import org.nanotek.Result;
+import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.processor.ProcessorBase;
 import org.nanotek.service.parser.BaseMapParser;
-
-import com.sun.xml.bind.v2.model.core.ID;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-public class CsvBaseProcessor<I extends HolderBaseBean<I, Serializable>, P extends BaseMapParser<I,Serializable>> {
+public class CsvBaseProcessor<I extends BaseMapColumnStrategy<?, ?>, P extends BaseMapParser<I,?>, R extends Result<?,?>> implements ProcessorBase<I,P,R>{
 
 	private P parser; 
 	
@@ -42,11 +41,17 @@ public class CsvBaseProcessor<I extends HolderBaseBean<I, Serializable>, P exten
          getBaseParser().reopen();
     }
 
-    public I next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
+    public I next() throws BaseException {
     	String[] instanceArray = null;
     	I bean = null;
-    	if ((instanceArray = getBaseParser().readNext()) !=null) {
-    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
+    	try { 
+		    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
+		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
+		    		get
+		    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
+		    	}
+    	}catch(Exception ex) { 
+    		
     	}
     	return bean;
     }
