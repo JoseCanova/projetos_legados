@@ -1,14 +1,11 @@
 package org.nanotek.processor.csv;
 
-import java.beans.IntrospectionException;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
-
-import javax.validation.constraints.NotNull;
 
 import org.nanotek.Base;
 import org.nanotek.BaseException;
@@ -45,52 +42,58 @@ public class CsvBaseProcessor<I extends BaseMapColumnStrategy<?, ?>, P extends B
     }
 
     public R next(){
-
-    	String[] instanceArray = null;
-    	Optional<R> bean = null;
-    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
-    	try { 
-		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
-		    		bean = computeInstanceArray(instanceArray);
-		    	}
-    	}catch (Exception ex) { 
-    		throw new BaseException(ex);
-    	}
-    	return bean.orElseThrow(BaseException::new);
+    	return computeNext().orElseThrow(BaseException::new);
     }
     
-    private Optional<R> computeInstanceArray(String[] instanceArray)  {
+    private Optional<R> computeNext()  {
     	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
     	Base<?> base = Base.newInstance(m.getType()).get();
-    	m.getBaseMap().entrySet().forEach((e)->{
-    		try {
-				Optional.ofNullable(m.findDescriptor(e.getValue())).ifPresent(d ->{
-					String value = instanceArray[e.getValue()];
-					Object obj;
-					try {
-						obj = csvToBean.convertValue(value, d);
-						d.getWriteMethod().invoke(base, obj);
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				});
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-    	});
+			getBaseParser().readNext().ifPresent(array ->{
+			m.getBaseMap().entrySet().forEach((e)->{
+				computePropertyValue(e,array,base,m);}
+					);
+			});
 		return ImmutableBase.newInstance(Result.class , Arrays.asList(base).toArray() , base.getClass());
 	}
 
-	public List<Optional<R>> load(@NotNull Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
-    	List<Optional<R>> list = new  ArrayList<>();
+	private void computePropertyValue(Entry<String, Integer> e, String[] instanceArray, Base<?> base , BaseMapColumnStrategy <? , ? > m)  {
+		try { 
+			Optional.ofNullable(m.findDescriptor(e.getValue())).ifPresent(d ->{
+			String value = instanceArray[e.getValue()];
+			Object obj = convertPropertyValue(value,d);
+			invokeWriteMethod(d , base,obj);
+		});
+		} catch (Exception e1) {
+			throw new BaseException(e1);
+		}
+	}
+
+	private void invokeWriteMethod(PropertyDescriptor d, Base<?> base, Object obj) {
+		try {
+			d.getWriteMethod().invoke(base, obj);
+		} catch (Exception e1) {
+			throw new BaseException(e1);
+		}
+	}
+
+	private Object convertPropertyValue(String value, PropertyDescriptor d) {
+		try {
+				return csvToBean.convertValue(value, d);
+		} catch (Exception e1) {
+			throw new BaseException(e1);
+		}
+	}
+
+	public List<R> load(Long count) {
+    	List<R> list = new  ArrayList<>();
     	int i = 0;
-    	String[] instanceArray = null;
-    	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) {
-    		Optional<R> bean = computeInstanceArray(instanceArray);
-    		list.add(bean);
+    	while (i < count) {
+    		Optional<R> bean = computeNext();
+    		Optional.of(bean).orElse(Base.NULL_VALUE()).ifPresent(value -> list.add(value));
     		i++;
+    		if(bean.isEmpty()) break;
     	}
     	return list;
     }	
-
+	
 }

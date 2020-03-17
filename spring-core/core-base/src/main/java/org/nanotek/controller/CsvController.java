@@ -29,13 +29,13 @@ public abstract class CsvController<P extends CsvBaseProcessor<?,?,R> , R extend
 
 
     @RequestMapping("/next")
-    public R next() throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
+    public R next()  {
     	return processor.next();
     }
 
 
     @RequestMapping("/load")
-    public List<Optional<R>> load(@RequestParam(value="count", defaultValue="1") Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
+    public List<Optional<R>> load(@RequestParam(value="count", defaultValue="1") Long count)  {
     	return processor.load(count);
     }	
 	

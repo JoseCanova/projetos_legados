@@ -44,17 +44,17 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 	default UUID withUUID() { 
 		UUID uuid = null;
 		try { 
-				ByteArrayOutputStream bao = new ByteArrayOutputStream();
-				ObjectOutputStream oos =  new ObjectOutputStream(bao);
-				oos.writeObject(this);
-				oos.flush();
-				uuid = UUID.nameUUIDFromBytes(bao.toByteArray());
-				oos.close();
+			ByteArrayOutputStream bao = new ByteArrayOutputStream();
+			ObjectOutputStream oos =  new ObjectOutputStream(bao);
+			oos.writeObject(this);
+			oos.flush();
+			uuid = UUID.nameUUIDFromBytes(bao.toByteArray());
+			oos.close();
 		}catch (Exception ex) { 
 		}
 		return Optional.ofNullable(uuid).orElseThrow(BaseException::new);
 	}
-	
+
 	default Base<?> newInstance() throws BaseInstantiationException { 
 		try {
 			return this.getClass().getDeclaredConstructor(Void.class).newInstance();
@@ -63,7 +63,7 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 			throw new BaseInstantiationException(e);
 		}
 	}
-	
+
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
@@ -80,6 +80,14 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 				| NoSuchMethodException | SecurityException e) {
 			throw new BaseInstantiationException(e);
 		}
+	}
+
+	static <K extends Base<?>> Optional<K> NULL_VALUE() {
+		return Optional.empty();
+	}
+
+	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
+		return Optional.empty();
 	}
 
 }

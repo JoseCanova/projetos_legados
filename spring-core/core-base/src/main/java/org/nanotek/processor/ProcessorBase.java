@@ -1,7 +1,10 @@
 package org.nanotek.processor;
 
-public interface ProcessorBase<T1, T2 , R> {
+import java.util.List;
 
-	R next();
-	
+import javax.validation.constraints.NotNull;
+
+public interface ProcessorBase<T1, T2 , R> {
+	@NotNull R next();
+	List<R> load (@NotNull Long count);
 }
