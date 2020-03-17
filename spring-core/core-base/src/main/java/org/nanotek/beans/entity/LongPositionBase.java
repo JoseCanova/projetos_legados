@@ -10,6 +10,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.PositionEntity;
+
 @Entity
 @Table(name="long_position_base",
 indexes= {
@@ -22,7 +24,7 @@ indexes= {
 	    name = "class_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LongPositionBase extends PositionEntityBase<Long> {
+public class LongPositionBase extends PositionEntityBase<Long> implements PositionEntity<Long>{
 
 	private static final long serialVersionUID = 2610811597922933992L;
 

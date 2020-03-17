@@ -17,10 +17,10 @@ public class StringPositionBase<K extends StringBase<K>,ID extends IdBase<ID,K> 
 		return id;
 	}
 
-
 	@Override
-	public P getPosition() {
-		return position;
+	public ID getPosition() {
+		return null;
 	}
+
 
 }
