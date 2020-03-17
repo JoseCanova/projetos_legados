@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="track")
-public class Track extends LongIdGidNameEntity {
+public class Track extends LongIdGidName {
 
 	private static final long serialVersionUID = 8642862162010029043L;
 

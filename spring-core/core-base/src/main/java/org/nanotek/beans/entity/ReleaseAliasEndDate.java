@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue(value="ReleaseAliasEndDate")
-public class ReleaseAliasEndDate extends DatableBase {
+public class ReleaseAliasEndDate extends DatableBase<Integer,Integer,Integer> {
 
 	private static final long serialVersionUID = -2316725967469275402L;
 
@@ -34,11 +34,6 @@ public class ReleaseAliasEndDate extends DatableBase {
 
 	public void setReleaseAlias(ReleaseAlias releaseAlias) {
 		this.releaseAlias = releaseAlias;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
 	}
 	
 }

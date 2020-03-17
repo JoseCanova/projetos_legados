@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.MutableTypeEntity;
 
 
 @Entity
@@ -28,7 +31,7 @@ import org.hibernate.validator.constraints.Length;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BaseType extends TypeNamedEntity implements BaseTypeEntityBase<AreaType, Long> {
+public abstract class BaseType<K extends Serializable> extends TypeNamedEntity  {
 
 	private static final long serialVersionUID = -6795816207025448078L;
 
@@ -98,40 +101,4 @@ public abstract class BaseType extends TypeNamedEntity implements BaseTypeEntity
 		this.description = description;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseType other = (BaseType) obj;
-		if (gid == null) {
-			if (other.gid != null)
-				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "BaseType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
-				+ description + ", gid=" + gid + ", id=" + id + "]";
-	}
 }

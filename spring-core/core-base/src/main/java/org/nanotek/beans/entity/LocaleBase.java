@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.LocaleEntityBase;
+import org.nanotek.MutableLocaleEntity;
 
 @Entity
 @Table(name="locale_base",
@@ -23,7 +23,7 @@ import org.nanotek.LocaleEntityBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase extends SequenceLongBase implements LocaleEntityBase<String> {
+public class LocaleBase extends SequenceLongBase<LocaleBase> implements MutableLocaleEntity<String> {
 
 	private static final long serialVersionUID = -6664969453930737424L;
 

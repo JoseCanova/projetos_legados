@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.LongIdSortNameEntityBase;
+import org.nanotek.MutableSortNameEntity;
 
 @Entity
 @Table(name="sort_name_base",
@@ -23,7 +23,7 @@ import org.nanotek.LongIdSortNameEntityBase;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class SortNameBase extends SequenceLongBase implements LongIdSortNameEntityBase<String>{
+public class SortNameBase extends SequenceLongBase<SortNameBase> implements MutableSortNameEntity<String>{
 
 	private static final long serialVersionUID = -950822256693332353L;
 

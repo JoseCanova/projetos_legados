@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("ArtistBeginDate")
-public class ArtistBeginDate extends DatableBase{
+public class ArtistBeginDate extends DatableBase<Integer,Integer,Integer>{
 
 	private static final long serialVersionUID = 4339317283945952774L;
 
@@ -24,9 +24,4 @@ public class ArtistBeginDate extends DatableBase{
 		super(year);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-	
 }

@@ -6,11 +6,12 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.MutableArtistEntity;
+import org.nanotek.MutableCommentEntity;
 import org.nanotek.IdBase;
 
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment extends CommentBase<String> implements MutableArtistEntity<Artist>{
+public class ArtistComment extends CommentBase<String> implements MutableArtistEntity<Artist> , MutableCommentEntity<String>{
 
 	private static final long serialVersionUID = 2608408556126104972L;
 
@@ -33,16 +34,6 @@ public class ArtistComment extends CommentBase<String> implements MutableArtistE
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
-	}
-
-	@Override
-	public void setComment(String k) {
-		this.comment = k;
-	}
-
-	@Override
-	public String getComment() {
-		return comment;
 	}
 
 	

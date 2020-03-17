@@ -25,28 +25,4 @@ public class Gender extends BaseType {
 		super(name);
 	}
 
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
-	public String toString() {
-		return "Gender [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
-				+ description + ", gid=" + gid + ", id=" + id + "]";
-	}
-
-
-	@Override
-	public String getGid() {
-		return gid;
-	}
-
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
 }

@@ -16,13 +16,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.LongIdNameGidEntityBase;
+import org.nanotek.MutableArtistSortNameEntity;
 
 @Entity
 @Table(name="artist" , 
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBase<String, String> {
+public class Artist extends LongIdGidName<String> implements MutableArtistSortNameEntity<ArtistSortName> {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -38,7 +39,7 @@ public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBa
 			  name = "artist_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
-	private ArtistSortName sortName;
+	private ArtistSortName artistSortName;
 	
 	
 	@OneToOne
@@ -109,7 +110,7 @@ public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBa
 	public Artist(
 			@NotNull Long id, 
 			@NotBlank String name,
-			@NotBlank ArtistSortName sortName, 
+			@NotBlank ArtistSortName artistSortName, 
 			List<ArtistCredit> artistCredits,
 			@NotBlank String gid, 
 			ArtistComment artistComment,
@@ -129,7 +130,7 @@ public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBa
 		this.gender = gender;
 		this.beginArea = beginArea;
 		this.endArea = endArea;
-		this.sortName = sortName;
+		this.artistSortName = artistSortName;
 	}
 
 	public void setId(Long id) { 
@@ -216,47 +217,14 @@ public class Artist extends LongIdGidNameEntity implements LongIdNameGidEntityBa
 		this.artistId = artistId;
 	}
 
-	public ArtistSortName getSortName() {
-		return sortName;
+	public ArtistSortName getArtistSortName() {
+		return artistSortName;
 	}
 
-	public void setSortName(ArtistSortName sortName) {
-		this.sortName = sortName;
+	public void setArtistSortName(ArtistSortName artistSortName) {
+		this.artistSortName = artistSortName;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((artistId == null) ? 0 : artistId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Artist other = (Artist) obj;
-		if (artistId == null) {
-			if (other.artistId != null)
-				return false;
-		} else if (!artistId.equals(other.artistId))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Artist [artistId=" + artistId + ", artistCredits=" + artistCredits + ", artistComment=" + artistComment
-				+ ", artistBeginDate=" + artistBeginDate + ", artistEndDate=" + artistEndDate + ", type=" + type
-				+ ", gender=" + gender + ", area=" + area + ", beginArea=" + beginArea + ", endArea=" + endArea
-				+ ", gid=" + gid + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
-	}
-
 	@Override
 	public String getName() {
 		return name;

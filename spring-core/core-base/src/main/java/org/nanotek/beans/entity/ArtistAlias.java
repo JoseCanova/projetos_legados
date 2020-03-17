@@ -12,6 +12,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.MutableArtistAliasBeginDateEntity;
+import org.nanotek.MutableArtistAliasEndDateEntity;
+import org.nanotek.MutableArtistAliasLocaleEntity;
 import org.nanotek.MutableArtistAliasTypeEntity;
 import org.nanotek.MutableArtistEntity;
 
@@ -20,7 +23,13 @@ import org.nanotek.MutableArtistEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias  extends LongIdName<String>  implements MutableArtistEntity<Artist> , MutableArtistAliasTypeEntity<ArtistAliasType> {
+public class ArtistAlias  extends LongIdName<String>  implements 
+														MutableAliasIdEntity<Long>,
+														MutableArtistEntity<Artist> , 
+														MutableArtistAliasTypeEntity<ArtistAliasType> , 
+														MutableArtistAliasLocaleEntity<ArtistAliasLocale>,
+														MutableArtistAliasBeginDateEntity<ArtistAliasBeginDate>,
+														MutableArtistAliasEndDateEntity<ArtistAliasEndDate>{
 
 	private static final long serialVersionUID = -6829974720983757034L;
 

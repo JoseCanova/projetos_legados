@@ -6,10 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableLongIdNameEntity;
-
 @MappedSuperclass
-public class LongIdName<K extends Serializable> extends SequenceLongBase<K> implements MutableLongIdNameEntity<K>{
+public class LongIdName<K extends Serializable> extends SequenceLongBase<K> implements MutableNameEntity<K>{
 
 
 	private static final long serialVersionUID = -5795977292694140863L;

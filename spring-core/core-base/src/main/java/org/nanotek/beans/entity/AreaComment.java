@@ -6,11 +6,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ImmutableCommentEntityBase;
+import org.nanotek.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")
-public class AreaComment extends CommentBase<String> implements ImmutableCommentEntityBase<AreaComment,String,Long>{
+public class AreaComment extends CommentBase<String> implements  MutableCommentEntity<String>{
 
 	private static final long serialVersionUID = -68821965634755841L;
 	

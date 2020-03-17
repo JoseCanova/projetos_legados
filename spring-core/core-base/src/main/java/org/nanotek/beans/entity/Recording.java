@@ -22,7 +22,7 @@ import org.nanotek.RecordBase;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording extends LongIdGidNameEntity implements RecordBase<Long>{
+public class Recording extends LongIdGidName implements RecordBase<Long>{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 

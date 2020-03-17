@@ -36,13 +36,15 @@ import javax.validation.constraints.NotNull;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit extends LongIdName<String> implements MutableArtistCreditCountEntity<ArtistCreditCount>{
+public class ArtistCredit extends LongIdName<String> implements  MutableArtistCreditCountEntity<ArtistCreditCount> 
+																, MutableArtistCreditRefCountEntity<ArtistCreditRefCount> , 
+																ArtistCreditEntity<Long>{
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
 	@NotNull
 	@Column(name="artist_credit_id" , nullable=false)
-	private Long artistCreditId;
+	private Long artistCredit;
 	
 	@NotNull
 	@OneToOne(optional=false)
@@ -56,7 +58,7 @@ public class ArtistCredit extends LongIdName<String> implements MutableArtistCre
 	@JoinTable(name="artist_ref_count_join",
 		inverseJoinColumns={@JoinColumn(name="artist_refcount_id", referencedColumnName="id") },
 		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private ArtistCreditRefCount refCount;
+	private ArtistCreditRefCount artistCreditRefCount;
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
 	private Set<Release> releases; 
@@ -75,9 +77,9 @@ public class ArtistCredit extends LongIdName<String> implements MutableArtistCre
 	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull ArtistCreditCount artistCount,
 			@NotNull ArtistCreditRefCount refCount, Set<Recording> recordings) {
 		super(name);
-		this.artistCreditId = id;
+		this.artistCredit = id;
 		this.artistCreditCount = artistCount;
-		this.refCount = refCount;
+		this.artistCreditRefCount = refCount;
 		this.recordings = recordings;
 	}
 
@@ -87,14 +89,6 @@ public class ArtistCredit extends LongIdName<String> implements MutableArtistCre
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public ArtistCreditRefCount getRefCount() {
-		return refCount;
-	}
-
-	public void setRefCount(ArtistCreditRefCount refCount) {
-		this.refCount = refCount;
 	}
 
 	public Set<Release> getReleases() {
@@ -121,43 +115,23 @@ public class ArtistCredit extends LongIdName<String> implements MutableArtistCre
 		this.recordings = recordings;
 	}
 
-	public Long getArtistCreditId() {
-		return artistCreditId;
+	public Long getArtistCredit() {
+		return artistCredit;
 	}
 
 	public void setArtistCreditId(Long artistCreditId) {
-		this.artistCreditId = artistCreditId;
+		this.artistCredit = artistCreditId;
+	}
+
+
+	@Override
+	public ArtistCreditRefCount getArtistCreditRefCount(ArtistCreditRefCount k) {
+		return artistCreditRefCount;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((artistCreditId == null) ? 0 : artistCreditId.hashCode());
-		result = prime * result + ((recordings == null) ? 0 : recordings.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArtistCredit other = (ArtistCredit) obj;
-		if (artistCreditId == null) {
-			if (other.artistCreditId != null)
-				return false;
-		} else if (!artistCreditId.equals(other.artistCreditId))
-			return false;
-		if (recordings == null) {
-			if (other.recordings != null)
-				return false;
-		} else if (!recordings.equals(other.recordings))
-			return false;
-		return true;
+	public void setArtistCreditRefCount(ArtistCreditRefCount k) {
+		this.artistCreditRefCount = k;
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("ArtistEndDate")
-public class ArtistEndDate extends DatableBase{
+public class ArtistEndDate extends DatableBase<Integer,Integer,Integer>{
 
 	private static final long serialVersionUID = 5843448446493083180L;
 

@@ -2,15 +2,20 @@ package org.nanotek.beans.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.MutableAreaEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")
-public class AreaType extends BaseType  {
+public class AreaType extends BaseType<Area> implements MutableAreaEntity<Area> {
 
 	private static final long serialVersionUID = 5334032717060542549L;
+	
+	@OneToOne
+	private Area area;
 	
 	public AreaType() {
 	}
@@ -24,19 +29,13 @@ public class AreaType extends BaseType  {
 	}
 
 	@Override
-	public String toString() {
-		return "AreaType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
-				+ description + ", gid=" + gid + ", id=" + id + "]";
+	public Area getArea() {
+		return area;
 	}
 
 	@Override
-	public String getGid() {
-		return gid;
+	public void setArea(Area k) {
+			this.area = k;
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
-	
 }

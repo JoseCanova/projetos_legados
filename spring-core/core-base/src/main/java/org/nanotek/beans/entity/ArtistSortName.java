@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.ArtistEntity;
+
 
 @Entity
 @DiscriminatorValue(value="ArtistSortName")
-public class ArtistSortName extends SortNameBase {
+public class ArtistSortName extends SortNameBase implements ArtistEntity<Artist> {
 
 	private static final long serialVersionUID = 492175239931176224L;
 

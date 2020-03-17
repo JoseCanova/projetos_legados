@@ -1,7 +1,7 @@
 package org.nanotek.repository.jpa;
 
 
-import org.nanotek.beans.entity.LongIdGidNameEntity;
+import org.nanotek.beans.entity.LongIdGidName;
 
-public interface LongIdGidNameEntityRepository<K extends LongIdGidNameEntity> extends LongIdNameEntityRepository<K> , GidBaseRepository<K> {
+public interface LongIdGidNameEntityRepository<K extends LongIdGidName> extends LongIdNameEntityRepository<K> , GidBaseRepository<K> {
 }
