@@ -7,6 +7,6 @@ import org.nanotek.BooleanBase;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 
-public interface PredicateBase<T extends IdBase<?,?> , ID extends BooleanBase<?,?>> extends Base<T>{
+public interface PredicateBase<T extends IdBase<?,?> , ID extends IdBase<?,?>> extends Base<T>{
 	Optional<ID> evaluate(T immutable);
 }

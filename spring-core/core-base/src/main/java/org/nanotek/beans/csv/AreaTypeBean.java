@@ -1,12 +1,13 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
+import org.nanotek.Result;
+import org.nanotek.beans.entity.AreaType;
 
-public class AreaTypeBean implements Base<AreaTypeBean> {
+public class AreaTypeBean extends Result<AreaTypeBean,AreaType> {
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	
-	private Long id; 
+	private Long areaTypeId; 
 	private String name; 
 	private Long parent; 
 	private Long childOrder; 
@@ -14,16 +15,6 @@ public class AreaTypeBean implements Base<AreaTypeBean> {
 	private String gid;
 	
 	public AreaTypeBean() {
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 
@@ -73,6 +64,16 @@ public class AreaTypeBean implements Base<AreaTypeBean> {
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+
+	public Long getAreaTypeId() {
+		return areaTypeId;
+	}
+
+
+	public void setAreaTypeId(Long areaTypeId) {
+		this.areaTypeId = areaTypeId;
 	}
 
 	

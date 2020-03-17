@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.nanotek.csv.PredicateBase;
 
-public class Result<K extends IdBase<K,ID> , ID extends IdBase<ID,?> , RID extends Result<K,ID,?>> implements BooleanBase<K,ID>  , Holder<K, RID> {
+public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements BooleanBase<K,ID>  , Holder<K, ID> {
 
 	private static final long serialVersionUID = -307344888633306177L;
 
@@ -12,6 +12,8 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<ID,?> , RID exten
 	
 	private ID id = null;
 
+	public Result() {}
+	
 	public Result(K immutable) { 
 		this.immutable = immutable;
 	}
@@ -22,8 +24,9 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<ID,?> , RID exten
 	}
 
 	@Override
-	public Optional<RID> on(PredicateBase<K, RID> predicate) {
+	public Optional<ID> on(PredicateBase<K, ID> predicate) {
 		return predicate.evaluate(immutable);
 	}
+
 
 }

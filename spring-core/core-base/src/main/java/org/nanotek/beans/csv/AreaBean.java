@@ -1,11 +1,9 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.BooleanBase;
-import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.Area;
 
-public class AreaBean extends Result<AreaBean,AreaBean,AreaBean>{
+public class AreaBean extends Result<AreaBean,Area>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
@@ -23,13 +21,7 @@ public class AreaBean extends Result<AreaBean,AreaBean,AreaBean>{
 	private Integer endDateDay;
 	private String ended; 
 	private String comment; 
-	
-	
 
-
-	public void setId(Long id) {
-		this.areaId = id;
-	}
 
 
 	public String getGid() {
@@ -159,6 +151,16 @@ public class AreaBean extends Result<AreaBean,AreaBean,AreaBean>{
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 
 }
