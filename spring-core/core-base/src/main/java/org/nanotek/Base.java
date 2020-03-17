@@ -82,8 +82,4 @@ public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
 		}
 	}
 
-	static <K extends Base<?>> Optional<K> NULL_VALUE(Class<K> clazz) {
-		return Optional.empty();
-	}
-	
 }

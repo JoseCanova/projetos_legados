@@ -1,4 +1,9 @@
 package org.nanotek;
 
-public interface Dimentionable {
+import java.io.Serializable;
+
+public interface Dimentionable<K extends Serializable> {
+	
+	K getDimension();
+	
 }

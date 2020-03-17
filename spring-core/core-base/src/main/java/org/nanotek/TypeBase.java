@@ -1,7 +1,7 @@
 package org.nanotek;
 
-import org.nanotek.beans.entity.BaseTypeEntityBase;
+import java.io.Serializable;
 
-public interface TypeBase<K extends BaseTypeEntityBase<?,?>> extends MutableTypeBase<K> {
+public interface TypeBase<K extends Serializable> extends MutableTypeBase<K> {
 	K getType();
 }

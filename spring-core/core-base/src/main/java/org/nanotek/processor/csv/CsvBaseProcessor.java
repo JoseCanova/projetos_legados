@@ -2,14 +2,17 @@ package org.nanotek.processor.csv;
 
 import java.beans.IntrospectionException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.Base;
 import org.nanotek.BaseException;
+import org.nanotek.ImmutableBase;
 import org.nanotek.Result;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.processor.ProcessorBase;
@@ -41,26 +44,49 @@ public class CsvBaseProcessor<I extends BaseMapColumnStrategy<?, ?>, P extends B
          getBaseParser().reopen();
     }
 
-    public R next() throws BaseException {
+    public R next(){
+
     	String[] instanceArray = null;
-    	R bean = null;
+    	Optional<R> bean = null;
+    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
     	try { 
-		    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
 		    	if ((instanceArray = getBaseParser().readNext()) !=null) {
-//		    		bean = getCsvToBean().processLine(parser.getBaseMapColumnStrategy(), instanceArray);
+		    		bean = computeInstanceArray(instanceArray);
 		    	}
-    	}catch(Exception ex) { 
-    		
+    	}catch (Exception ex) { 
+    		throw new BaseException(ex);
     	}
-    	return bean;
+    	return bean.orElseThrow(BaseException::new);
     }
     
-    public List<I> load(@NotNull Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
-    	List<I> list = new  ArrayList<>();
+    private Optional<R> computeInstanceArray(String[] instanceArray)  {
+    	BaseMapColumnStrategy <? , ? > m = parser.getBaseMapColumnStrategy();
+    	Base<?> base = Base.newInstance(m.getType()).get();
+    	m.getBaseMap().entrySet().forEach((e)->{
+    		try {
+				Optional.ofNullable(m.findDescriptor(e.getValue())).ifPresent(d ->{
+					String value = instanceArray[e.getValue()];
+					Object obj;
+					try {
+						obj = csvToBean.convertValue(value, d);
+						d.getWriteMethod().invoke(base, obj);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				});
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+    	});
+		return ImmutableBase.newInstance(Result.class , Arrays.asList(base).toArray() , base.getClass());
+	}
+
+	public List<Optional<R>> load(@NotNull Long count) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, IntrospectionException {
+    	List<Optional<R>> list = new  ArrayList<>();
     	int i = 0;
     	String[] instanceArray = null;
     	while (i < count && (instanceArray = getBaseParser().readNext()) !=null) {
-    		I bean = getCsvToBean().processLine(parser.getBaseMap(), instanceArray);
+    		Optional<R> bean = computeInstanceArray(instanceArray);
     		list.add(bean);
     		i++;
     	}

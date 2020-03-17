@@ -6,11 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Dimentionable;
 import org.nanotek.MutableLenght;
 
 @MappedSuperclass
-public abstract class LengthyBase<K extends Serializable> extends SequenceLongBase implements MutableLenght<K> , Dimentionable{
+public abstract class LengthyBase<K extends Serializable> extends SequenceLongBase implements MutableLenght<K>{
 
 	@NotNull
 	@Column(name="length" , nullable=false)

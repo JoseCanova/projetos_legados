@@ -1,6 +1,7 @@
 package org.nanotek.opencsv;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.nanotek.Base;
 import org.nanotek.BaseInstantiationException;
@@ -19,13 +20,13 @@ public class BaseMap<T extends IdBase<T,String>> extends HashMap<String,Integer>
 
 	//works fine with the "Bean Name";
 	protected String id;
-	protected T target; 
+	protected Class<T> target; 
 	protected Integer targetSize; 
 	
 	public BaseMap() {
 	}
 	
-	public BaseMap(String id, T target, Integer targetSize) {
+	public BaseMap(String id, Class<T> target, Integer targetSize) {
 		super();
 		this.id = id;
 		this.target = target;
@@ -42,16 +43,12 @@ public class BaseMap<T extends IdBase<T,String>> extends HashMap<String,Integer>
 		this.id = id;
 	}
 	
-	public T getTarget() {
+	public Class<T> getTarget() {
 		return target;
 	}
 
-	public void setTarget(T type) {
+	public void setTarget(Class<T> type) {
 		this.target = type;
-	}
-
-	public Base<?> newInstance() throws BaseInstantiationException {
-		return target.newInstance();
 	}
 
 	public Integer getTargetSize() {

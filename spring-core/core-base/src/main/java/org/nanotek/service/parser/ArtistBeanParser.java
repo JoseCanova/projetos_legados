@@ -2,6 +2,7 @@ package org.nanotek.service.parser;
 
 import org.nanotek.base.maps.ArtistBeanBaseMap;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.opencsv.BaseMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.DependsOn;
@@ -24,7 +25,7 @@ public class ArtistBeanParser extends BaseParser {
 	}
 
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
+	public BaseMap<?> getBaseMap() {
 		return artistBaseMap;
 	}
 	

@@ -1,5 +1,7 @@
 package org.nanotek;
 
-public interface Positionable<P extends Positionable<P,T> , T extends IdBase<T,?>>{
+public interface Positionable<P>{
+
 	P getPosition();
+	
 }

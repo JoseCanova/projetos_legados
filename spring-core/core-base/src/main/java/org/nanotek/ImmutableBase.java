@@ -50,4 +50,12 @@ public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> 
 		return Optional.ofNullable(uuid).orElseThrow(BaseException::new);
 	}
 
+	static <K extends ImmutableBase<?, ?>> Optional<K> NULL_VALUE() {
+		return Optional.empty();
+	}
+
+	static <K extends ImmutableBase<K,ID>,ID extends Serializable> Optional<K> OPTIONAL_INSTANCE(Class<K> clazz) {
+		return ImmutableBase.newInstance(clazz,new Object[] {});
+	}
+	
 }

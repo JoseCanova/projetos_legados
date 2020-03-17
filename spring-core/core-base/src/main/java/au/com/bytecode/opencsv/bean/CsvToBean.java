@@ -79,7 +79,7 @@ public class CsvToBean<T> {
         return !prop.getPropertyType().getName().contains("String");
     }
 
-    protected Object convertValue(String value, PropertyDescriptor prop) throws InstantiationException, IllegalAccessException {
+    public Object convertValue(String value, PropertyDescriptor prop) throws InstantiationException, IllegalAccessException {
         PropertyEditor editor = getPropertyEditor(prop);
         Object obj = value;
         if (null != editor) {
@@ -93,7 +93,7 @@ public class CsvToBean<T> {
         return obj;
     }
 
-    private PropertyEditor getPropertyEditorValue(Class<?> cls) {
+    public PropertyEditor getPropertyEditorValue(Class<?> cls) {
         if (editorMap == null) {
             editorMap = new HashMap<Class<?>, PropertyEditor>();
         }

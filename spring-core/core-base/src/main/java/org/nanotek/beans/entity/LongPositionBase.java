@@ -22,7 +22,7 @@ indexes= {
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LongPositionBase extends PositionBase<Long> {
+public class LongPositionBase extends PositionEntityBase<Long> {
 
 	private static final long serialVersionUID = 2610811597922933992L;
 
