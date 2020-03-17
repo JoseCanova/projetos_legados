@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEntityBase<Long>{
+public class ArtistCredit extends LongIdName<String> implements MutableArtistCreditCountEntity<ArtistCreditCount>{
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
@@ -49,7 +49,7 @@ public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEnti
 	@JoinTable(name="artist_credit_count_join",
 		inverseJoinColumns={@JoinColumn(name="artist_count_id", referencedColumnName="id") },
 		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private ArtistCreditCount artistCount; 
+	private ArtistCreditCount artistCreditCount; 
 	
 	@NotNull
 	@OneToOne(optional=false)
@@ -76,7 +76,7 @@ public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEnti
 			@NotNull ArtistCreditRefCount refCount, Set<Recording> recordings) {
 		super(name);
 		this.artistCreditId = id;
-		this.artistCount = artistCount;
+		this.artistCreditCount = artistCount;
 		this.refCount = refCount;
 		this.recordings = recordings;
 	}
@@ -161,9 +161,13 @@ public class ArtistCredit extends LongIdNameEntity implements LongIdCreditIdEnti
 	}
 
 	@Override
-	public String toString() {
-		return "ArtistCredit [artistCreditId=" + artistCreditId + ", artistCount=" + artistCount + ", refCount="
-				+ refCount + ", releases=" + releases + ", artists=" + artists + ", recordings=" + recordings
-				+ ", name=" + name + ", id=" + id + "]";
+	public ArtistCreditCount getArtistCreditCount() {
+		return artistCreditCount;
 	}
+
+	@Override
+	public void setArtistCreditCount(ArtistCreditCount k) {
+		this.artistCreditCount = k;
+	}
+
 }

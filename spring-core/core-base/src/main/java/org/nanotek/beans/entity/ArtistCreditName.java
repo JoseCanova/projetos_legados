@@ -14,7 +14,7 @@ import org.nanotek.ArtistCreditNameIdEntityBase;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName extends LongIdNameEntity implements ArtistCreditNameIdEntityBase<Long>, ArtistCreditBase<ArtistCredit> {
+public class ArtistCreditName extends LongIdName implements ArtistCreditNameIdEntityBase<Long>, ArtistCreditBase<ArtistCredit> {
 
 	private static final long serialVersionUID = -5124525598245692335L;
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-public interface MutableCommentEntity<K extends Base<?>,ID extends Serializable> extends CommentEntity<K> , Base<K> , Id<ID>{
+public interface MutableCommentEntity<K extends Serializable> extends CommentEntity<K>{
 
 	void setComment(@NotNull K k);
 	

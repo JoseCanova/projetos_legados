@@ -15,7 +15,7 @@ import org.nanotek.ReleaseAliasBase;
 
 @Entity
 @Table(name = "release_alias")
-public class ReleaseAlias extends LongIdNameEntity implements ReleaseAliasBase<Long>{
+public class ReleaseAlias extends LongIdName implements ReleaseAliasBase<Long>{
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	

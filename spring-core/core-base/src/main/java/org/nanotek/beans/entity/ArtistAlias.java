@@ -12,14 +12,15 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongIdNameEntityBase;
+import org.nanotek.MutableArtistAliasTypeEntity;
+import org.nanotek.MutableArtistEntity;
 
 @Entity
 @Table(name="artist_alias", 
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias  extends LongIdNameEntity  implements LongIdNameEntityBase<String>{
+public class ArtistAlias  extends LongIdName<String>  implements MutableArtistEntity<Artist> , MutableArtistAliasTypeEntity<ArtistAliasType> {
 
 	private static final long serialVersionUID = -6829974720983757034L;
 
@@ -159,51 +160,12 @@ public class ArtistAlias  extends LongIdNameEntity  implements LongIdNameEntityB
 	}
 
 	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((aliasId == null) ? 0 : aliasId.hashCode());
-		result = prime * result + ((artistAliasType == null) ? 0 : artistAliasType.hashCode());
-		return result;
-	}
-	
 	public ArtistAliasSortName getSortName() {
 		return sortName;
 	}
 
 	public void setSortName(ArtistAliasSortName sortName) {
 		this.sortName = sortName;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArtistAlias other = (ArtistAlias) obj;
-		if (aliasId == null) {
-			if (other.aliasId != null)
-				return false;
-		} else if (!aliasId.equals(other.aliasId))
-			return false;
-		if (artistAliasType == null) {
-			if (other.artistAliasType != null)
-				return false;
-		} else if (!artistAliasType.equals(other.artistAliasType))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ArtistAlias [aliasId=" + aliasId + ", artist=" + artist + ", locale=" + artistAliasLocale + ", artistAliasType="
-				+ artistAliasType + ", artistAliasBeginDate=" + artistAliasBeginDate + ", artistAliasEndDate="
-				+ artistAliasEndDate + ", sortName=" + sortName + ", name=" + name + ", id=" + id + "]";
 	}
 
 	@Override

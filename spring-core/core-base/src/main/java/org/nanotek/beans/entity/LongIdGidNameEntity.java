@@ -10,7 +10,7 @@ import org.nanotek.LongIdNameGidEntityBase;
 import org.nanotek.MutableGidBase;
 
 @MappedSuperclass
-public abstract class LongIdGidNameEntity extends LongIdNameEntity implements LongIdNameGidEntityBase<String,String>, MutableGidBase<String>{
+public abstract class LongIdGidNameEntity extends LongIdName implements LongIdNameGidEntityBase<String,String>, MutableGidBase<String>{
 
 	
 	

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language extends  LongIdNameEntity {
+public class Language extends  LongIdName {
 
 	private static final long serialVersionUID = 3416483640256915L;
 
