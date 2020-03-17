@@ -4,10 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.NameBase;
+
 @MappedSuperclass
-public class LongIdNameEntity extends SequenceLongBase {
+public class LongIdNameEntity extends SequenceLongBase implements NameBase<LongIdNameEntity, String>{
 
 
+	private static final long serialVersionUID = -5795977292694140863L;
+	
 	@NotBlank
 	@Column(name="name" , nullable=false, columnDefinition = "VARCHAR NOT NULL")
 	protected String name;
@@ -53,6 +57,11 @@ public class LongIdNameEntity extends SequenceLongBase {
 	@Override
 	public String toString() {
 		return "LongIdNameEntity [name=" + name + ", id=" + id + "]";
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 	
 }

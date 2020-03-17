@@ -13,11 +13,6 @@ public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> 
 		return withUUID();
 	}
 
-	@Override
-	default Optional<IdBase<K,ID>> get() {
-		return Optional.of(this);
-	}
-	
 	static <K extends ImmutableBase<K,ID> , ID extends Serializable> Optional<K> newImmutableBase(Class<K> class1) throws BaseInstantiationException { 
 		try {
 			return Optional.of(class1.getDeclaredConstructor().newInstance());

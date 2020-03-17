@@ -1,6 +1,11 @@
 package org.nanotek.beans.csv;
 
-public class AreaBean extends HolderBaseBean<AreaBean,Long>{
+import org.nanotek.BooleanBase;
+import org.nanotek.IdBase;
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Area;
+
+public class AreaBean extends Result<AreaBean,AreaBean,AreaBean>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
@@ -20,12 +25,6 @@ public class AreaBean extends HolderBaseBean<AreaBean,Long>{
 	private String comment; 
 	
 	
-	public AreaBean() {
-	}
- 
-	public Long getId() {
-		return areaId;
-	}
 
 
 	public void setId(Long id) {

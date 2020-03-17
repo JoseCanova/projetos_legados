@@ -12,7 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
 
-public interface Base<K extends Base<?>> extends Kong<K> , Serializable {
+public interface Base<K extends Base<?>> extends Kong<K> , Serializable , KongSupplier<K>{
 
 	static String hash = "35454B055CC325EA1AF2126E27707052";
 

@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import org.nanotek.csv.PredicateBase;
 
-public class Result<K extends IdBase<K,ID> , ID extends BooleanBase<K,ID>> implements BooleanBase<K,ID> {
+public class Result<K extends IdBase<K,ID> , ID extends IdBase<ID,?> , RID extends Result<K,ID,?>> implements BooleanBase<K,ID>  , Holder<K, RID> {
 
 	private static final long serialVersionUID = -307344888633306177L;
 
 	private K immutable;
 	
-	private ID id;
+	private ID id = null;
 
 	public Result(K immutable) { 
 		this.immutable = immutable;
@@ -22,14 +22,8 @@ public class Result<K extends IdBase<K,ID> , ID extends BooleanBase<K,ID>> imple
 	}
 
 	@Override
-	public Optional<ID> getResult() {
-		return Optional.ofNullable(id);
+	public Optional<RID> on(PredicateBase<K, RID> predicate) {
+		return predicate.evaluate(immutable);
 	}
 
-	@Override
-	public Optional<ID> on(PredicateBase<K, ID> predicate) {
-		return Optional.of(id = predicate.evaluate(immutable).orElseThrow(BaseException::new));
-	}
-
-	
 }

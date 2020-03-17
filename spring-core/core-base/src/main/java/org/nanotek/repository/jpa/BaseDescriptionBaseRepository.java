@@ -5,6 +5,6 @@ import java.util.Optional;
 
 import org.nanotek.BaseDescriptionBase;
 
-public interface BaseDescriptionBaseRepository<O extends BaseDescriptionBase<ID> , ID extends Serializable>{
+public interface BaseDescriptionBaseRepository<O extends BaseDescriptionBase<O, D , ID> , D extends Serializable , ID extends Serializable>{
 	Optional<O> findByDescription(ID id);
 }

@@ -13,6 +13,8 @@ public abstract class LongIdGidNameEntity extends LongIdNameEntity implements Mu
 
 	
 	
+	private static final long serialVersionUID = 6451845781007858778L;
+	
 	@NotBlank
 	@Length(min = 1 , max = 50)
 	@Column(name="gid", nullable=false)
