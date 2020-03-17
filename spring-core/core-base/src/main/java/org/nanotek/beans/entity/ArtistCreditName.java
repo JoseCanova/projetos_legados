@@ -24,7 +24,8 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 															 		MutatbleArtistCreditNameIdEntity<Long>, 
 															 		MutableArtistCreditEntity<ArtistCredit<?>>,
 															 		MutableArtistEntity<Artist<?>>,
-															 		MutablePositionEntity<ArtistCreditNamePosition<?>>{
+															 		MutablePositionEntity<ArtistCreditNamePosition<?>>,
+															 		MutableArtistCreditJoinPhrase<String>{
 
 	private static final long serialVersionUID = -5124525598245692335L;
 
@@ -47,8 +48,8 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 			  inverseJoinColumns = @JoinColumn(name = "position_id",referencedColumnName = "id"))
 	public ArtistCreditNamePosition<?> position; 
 	
-	@Column(name="artist_credit_name_join_prase" ,nullable=true,insertable=true)
-	private String joinPhrase;
+	@Column(name="artist_credit_name_join_phrase" ,nullable=true,insertable=true)
+	public String joinPhrase;
 
 	public ArtistCreditName(@NotBlank String name, @NotNull Long artistCreditNameId) {
 		super(name);
