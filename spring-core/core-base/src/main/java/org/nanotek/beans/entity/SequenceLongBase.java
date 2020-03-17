@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.Base;
+import org.nanotek.BaseId;
 import org.nanotek.IdBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -18,8 +22,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name="sequence_long_base")
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class SequenceLongBase {
+public class SequenceLongBase<K extends Serializable> implements IdBase<SequenceLongBase<Long>, Long>{
 
+	private static final long serialVersionUID = 1932266128563675834L;
+	
 	@Id
 	@NotNull
 	@Column(name="id",nullable=false,unique=true)

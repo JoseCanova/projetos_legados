@@ -6,9 +6,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.MutableInstrumentEntity;
+
 @Entity
 @DiscriminatorValue("InstrumentComment")
-public class InstrumentComment extends CommentBase {
+public class InstrumentComment<K,ID> extends CommentBase<String> implements MutableInstrumentEntity<Instrument>{
 	
 	@NotNull
 	@OneToOne(optional=false ,  mappedBy = "comment")

@@ -1,5 +1,7 @@
 package org.nanotek;
 
-public interface Id<ID>{
+import java.io.Serializable;
+
+public interface Id<ID extends Serializable> {
 	ID getId();
 }

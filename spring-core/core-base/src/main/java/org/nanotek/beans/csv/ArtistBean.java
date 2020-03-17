@@ -2,12 +2,16 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-public class ArtistBean extends HolderBaseBean<ArtistBean,Long> {
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Artist;
+
+public class ArtistBean extends Result<ArtistBean,Artist> {
 
 	private static final long serialVersionUID = 2864330060600897052L;
 
+
 	@NotNull
-	private Long id;
+	private Long artistId;
 	@NotNull
 	private String gid;
 	@NotNull
@@ -34,12 +38,6 @@ public class ArtistBean extends HolderBaseBean<ArtistBean,Long> {
 
 	public ArtistBean() {}
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getGid() {
 		return gid;
 	}

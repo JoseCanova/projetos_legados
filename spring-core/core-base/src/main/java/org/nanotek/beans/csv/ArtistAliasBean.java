@@ -1,12 +1,13 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.base.maps.ArtistAliasBaseMap;
+import org.nanotek.Result;
+import org.nanotek.beans.entity.ArtistAlias;
 
-public class ArtistAliasBean  extends HolderBaseBean<ArtistAliasBean,Long> {
+public class ArtistAliasBean  extends Result<ArtistAliasBean,ArtistAlias> {
 
 	private static final long serialVersionUID = -2745888243978330408L;
 	
-	private Long id; 
+	private Long artistAliasId; 
 	private Long artistId; 
 	private String name; 
 	private String locale; 
@@ -26,17 +27,6 @@ public class ArtistAliasBean  extends HolderBaseBean<ArtistAliasBean,Long> {
 	
 	public ArtistAliasBean() {
 	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 
 	public Long getArtistId() {
 		return artistId;
@@ -185,6 +175,20 @@ public class ArtistAliasBean  extends HolderBaseBean<ArtistAliasBean,Long> {
 
 	public void setEnded(String ended) {
 		this.ended = ended;
+	}
+
+
+
+
+	public Long getArtistAliasId() {
+		return artistAliasId;
+	}
+
+
+
+
+	public void setArtistAliasId(Long artistAliasId) {
+		this.artistAliasId = artistAliasId;
 	}
 
 }

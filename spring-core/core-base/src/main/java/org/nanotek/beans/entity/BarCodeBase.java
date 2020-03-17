@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.BarCodeEntityBase;
+import org.nanotek.MutableBarCodeEntity;
 
 @Entity
 @Table(name="bar_code_base", 
@@ -23,7 +26,7 @@ indexes= {
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BarCodeBase extends SequenceLongBase implements BarCodeEntityBase<BarCodeBase,String,Long>{
+public abstract class BarCodeBase extends SequenceLongBase<BarCodeBase> implements MutableBarCodeEntity<String>{
 
 	private static final long serialVersionUID = 3988946185099694426L;
 

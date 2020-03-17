@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
 })
-public class Instrument extends LongIdGidNameEntity {
+public class Instrument extends LongIdGidNameEntity  {
 
 	private static final long serialVersionUID = 1720965406197902687L;
 	

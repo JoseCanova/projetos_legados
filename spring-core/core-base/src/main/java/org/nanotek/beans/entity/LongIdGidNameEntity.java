@@ -6,10 +6,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.LongIdNameGidEntityBase;
 import org.nanotek.MutableGidBase;
 
 @MappedSuperclass
-public abstract class LongIdGidNameEntity extends LongIdNameEntity implements MutableGidBase<String>{
+public abstract class LongIdGidNameEntity extends LongIdNameEntity implements LongIdNameGidEntityBase<String,String>, MutableGidBase<String>{
 
 	
 	
@@ -42,6 +43,11 @@ public abstract class LongIdGidNameEntity extends LongIdNameEntity implements Mu
 		this.gid = gid;
 	}
 
+	@Override
+	public String getGid() {
+		return gid;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

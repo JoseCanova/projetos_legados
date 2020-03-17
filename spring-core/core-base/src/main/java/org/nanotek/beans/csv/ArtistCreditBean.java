@@ -2,13 +2,14 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongBase;
+import org.nanotek.Result;
+import org.nanotek.beans.entity.ArtistCredit;
 
 @SuppressWarnings("serial")
-public class ArtistCreditBean extends HolderBaseBean<ArtistCreditBean,Long>{
+public class ArtistCreditBean extends Result<ArtistCreditBean,ArtistCredit>{
 
 	@NotNull
-	Long id; 
+	Long artistCreditId; 
 	@NotNull
 	String name; 
 	@NotNull
@@ -22,23 +23,15 @@ public class ArtistCreditBean extends HolderBaseBean<ArtistCreditBean,Long>{
 	
 	public ArtistCreditBean(){}
 	
-	public ArtistCreditBean(Long id, String name, Integer artistCount, Integer refCount, String created,
+	public ArtistCreditBean(Long artistCreditId, String name, Integer artistCount, Integer refCount, String created,
 			Integer editsPending) {
 		super();
-		this.id = id;
+		this.artistCreditId = artistCreditId;
 		this.name = name;
 		this.artistCount = artistCount;
 		this.refCount = refCount;
 		this.created = created;
 		this.editsPending = editsPending;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -79,12 +72,6 @@ public class ArtistCreditBean extends HolderBaseBean<ArtistCreditBean,Long>{
 
 	public void setEditsPending(Integer editsPending) {
 		this.editsPending = editsPending;
-	}
-
-	@Override
-	public String toString() {
-		return "ArtistCreditBean [id=" + id + ", name=" + name + ", artistCount=" + artistCount + ", refCount="
-				+ refCount + ", created=" + created + ", editsPending=" + editsPending + "]";
 	}
 
 }

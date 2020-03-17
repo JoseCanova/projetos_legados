@@ -1,4 +1,4 @@
-package org.nanotek.beans.csv;
+package org.nanotek;
 
 import java.io.Serializable;
 

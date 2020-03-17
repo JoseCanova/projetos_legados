@@ -1,9 +1,12 @@
 package org.nanotek.beans.csv;
 
-public class GenderBean extends HolderBaseBean<GenderBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Gender;
+
+public class GenderBean extends Result<GenderBean,Gender>{
 
 	private static final long serialVersionUID = -1492542566677551150L;
-	private Long id; 
+	private Long genderId; 
 	private String name; 
 	private Long parent; 
 	private Long childOrder; 
@@ -13,13 +16,6 @@ public class GenderBean extends HolderBaseBean<GenderBean,Long>{
 	public GenderBean() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -59,6 +55,16 @@ public class GenderBean extends HolderBaseBean<GenderBean,Long>{
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+
+	public Long getGenderId() {
+		return genderId;
+	}
+
+
+	public void setGenderId(Long genderId) {
+		this.genderId = genderId;
 	}
 
 }

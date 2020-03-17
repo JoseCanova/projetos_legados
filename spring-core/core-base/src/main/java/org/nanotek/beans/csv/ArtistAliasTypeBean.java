@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class ArtistAliasTypeBean extends HolderBaseBean<ArtistAliasTypeBean,Long> {
+import org.nanotek.Result;
+import org.nanotek.beans.entity.ArtistAliasType;
+
+public class ArtistAliasTypeBean extends Result<ArtistAliasTypeBean,ArtistAliasType> {
 
 	private static final long serialVersionUID = 901207660901713562L;
 	
-	private Long id; 
+	private Long artistAliasTypeId; 
 	private String name; 
 	private Long parent; 
 	private Long childOrder; 
@@ -14,13 +17,6 @@ public class ArtistAliasTypeBean extends HolderBaseBean<ArtistAliasTypeBean,Long
 	public ArtistAliasTypeBean() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -60,5 +56,15 @@ public class ArtistAliasTypeBean extends HolderBaseBean<ArtistAliasTypeBean,Long
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+
+	public Long getArtistAliasTypeId() {
+		return artistAliasTypeId;
+	}
+
+
+	public void setArtistAliasTypeId(Long artistAliasTypeId) {
+		this.artistAliasTypeId = artistAliasTypeId;
 	}
 }

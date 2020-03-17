@@ -7,9 +7,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.MutableReleaseEntity;
+
 @Entity
 @DiscriminatorValue(value = "ReleaseBarCode")
-public class ReleaseBarCode extends BarCodeBase {
+public class ReleaseBarCode extends BarCodeBase implements MutableReleaseEntity<Release>{
 
 	private static final long serialVersionUID = 2946106607354210235L;
 

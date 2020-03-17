@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class InstrumentBean extends HolderBaseBean<InstrumentBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Instrument;
+
+public class InstrumentBean extends Result<InstrumentBean,Instrument>{
 
 	private static final long serialVersionUID = -6916258778573566572L;
 	
-	private Long id; 
+	private Long instrumentId; 
 	private String gid; 
 	private String name; 
 	private Long type; 
@@ -16,13 +19,6 @@ public class InstrumentBean extends HolderBaseBean<InstrumentBean,Long>{
 	public InstrumentBean() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getGid() {
 		return gid;
@@ -80,11 +76,14 @@ public class InstrumentBean extends HolderBaseBean<InstrumentBean,Long>{
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "InstrumentBean [id=" + id + ", gid=" + gid + ", name=" + name + ", type=" + type + ", editsPending="
-				+ editsPending + ", lastUpdatead=" + lastUpdatead + ", comment=" + comment + ", description="
-				+ description + "]";
+
+	public Long getInstrumentId() {
+		return instrumentId;
+	}
+
+
+	public void setInstrumentId(Long instrumentId) {
+		this.instrumentId = instrumentId;
 	}
 	
 
