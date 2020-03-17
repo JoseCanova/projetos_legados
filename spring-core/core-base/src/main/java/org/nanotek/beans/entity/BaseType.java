@@ -17,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.MutableTypeEntity;
+import org.nanotek.BaseEntity;
 
 
 @Entity
@@ -31,7 +31,7 @@ import org.nanotek.MutableTypeEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BaseType<K extends Serializable> extends TypeNamedEntity<BaseType<?>>  {
+public abstract class BaseType<K extends Serializable> extends TypeNamedEntity<BaseType<?>>  implements BaseEntity{
 
 	private static final long serialVersionUID = -6795816207025448078L;
 

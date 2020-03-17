@@ -7,10 +7,10 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableCommentEntity;
+import org.nanotek.BaseEntity;
 
 @MappedSuperclass
-public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<K> {
+public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<K> implements BaseEntity {
 
 	private static final long serialVersionUID = -3239637365262870832L;
 	
@@ -23,14 +23,6 @@ public class CommentBase<K extends Serializable , E extends Serializable> extend
 	
 	public CommentBase(@NotBlank K comment) {
 		this.comment = comment;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		return result;
 	}
 
 	public K getComment() {

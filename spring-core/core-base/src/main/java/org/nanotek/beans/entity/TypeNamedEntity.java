@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @MappedSuperclass
-public abstract class TypeNamedEntity<E extends Serializable> extends LongIdGidName<String,E> {
+public abstract class TypeNamedEntity<E extends Serializable> extends LongIdGidName<String,String> {
 
 	private static final long serialVersionUID = -5235727515178240574L;
 

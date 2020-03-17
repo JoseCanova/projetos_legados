@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
 import org.nanotek.MutableArtistCreditEntity;
+import org.nanotek.MutableArtistCreditNameJoinPhraseEntity;
 import org.nanotek.MutableArtistEntity;
 import org.nanotek.MutablePositionEntity;
 import org.nanotek.MutatbleArtistCreditNameIdEntity;
@@ -25,7 +26,7 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 															 		MutableArtistCreditEntity<ArtistCredit<?>>,
 															 		MutableArtistEntity<Artist<?>>,
 															 		MutablePositionEntity<ArtistCreditNamePosition<?>>,
-															 		MutableArtistCreditJoinPhrase<String>{
+															 		MutableArtistCreditNameJoinPhraseEntity<String>{
 
 	private static final long serialVersionUID = -5124525598245692335L;
 
@@ -49,7 +50,7 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 	public ArtistCreditNamePosition<?> position; 
 	
 	@Column(name="artist_credit_name_join_phrase" ,nullable=true,insertable=true)
-	public String joinPhrase;
+	public String artistCreditNameJoinPhrase;
 
 	public ArtistCreditName(@NotBlank String name, @NotNull Long artistCreditNameId) {
 		super(name);
@@ -64,12 +65,6 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 		this.position = position;
 	}
 
-	public String getJoinPhrase() {
-		return joinPhrase;
-	}
-	public void setJoinPhrase(String joinPhrase) {
-		this.joinPhrase = joinPhrase;
-	}
 
 	public String getName() {
 		return name;
@@ -102,6 +97,16 @@ public class ArtistCreditName<E extends Serializable> extends LongIdName<String>
 	@Override
 	public void setArtistCreditNameId(Long k) {
 			this.artistCreditNameId = k;
+	}
+
+	@Override
+	public String getArtistCreditJoinPhrase() {
+		return artistCreditNameJoinPhrase;
+	}
+
+	@Override
+	public void setArtistCreditJoinPhrase(String k) {
+		this.artistCreditNameJoinPhrase = k;		
 	}
 	
 }

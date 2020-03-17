@@ -12,7 +12,7 @@ import org.nanotek.MutableArtistEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment<E extends Serializable> extends CommentBase<String,ArtistComment<?>> implements BaseEntity, 
+public class ArtistComment<E extends Serializable> extends CommentBase<String,ArtistComment<?>> implements 
 																										   MutableArtistEntity<Artist<?>> {
 	private static final long serialVersionUID = 2608408556126104972L;
 
@@ -21,7 +21,7 @@ public class ArtistComment<E extends Serializable> extends CommentBase<String,Ar
 
 	public ArtistComment() {}
 	
-	public ArtistComment(@NotBlank String comment, Artist artist) {
+	public ArtistComment(@NotBlank String comment, Artist<?> artist) {
 		super(comment);
 	}
 	

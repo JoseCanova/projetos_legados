@@ -24,20 +24,4 @@ public class ArtistType extends BaseType {
 		super(name);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
-	public String getGid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-	
 }
