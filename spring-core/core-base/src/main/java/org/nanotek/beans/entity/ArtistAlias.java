@@ -12,6 +12,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.MutableArtistAliasBeginDateEntity;
 import org.nanotek.MutableArtistAliasEndDateEntity;
 import org.nanotek.MutableArtistAliasLocaleEntity;
@@ -24,6 +25,7 @@ uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
 public class ArtistAlias  extends LongIdName<String>  implements 
+														BaseEntity,
 														MutableAliasIdEntity<Long>,
 														MutableArtistEntity<Artist> , 
 														MutableArtistAliasTypeEntity<ArtistAliasType> , 
@@ -35,7 +37,7 @@ public class ArtistAlias  extends LongIdName<String>  implements
 
 	@NotNull
 	@Column(name="artist_alias_id"  , nullable = false)
-	private Long aliasId; 
+	public Long aliasId; 
 	
 	@NotNull
 	@OneToOne(optional = false)
@@ -43,7 +45,7 @@ public class ArtistAlias  extends LongIdName<String>  implements
 			  name = "artist_alias_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
-	private ArtistAliasSortName sortName;
+	public ArtistAliasSortName sortName;
 	
 	@NotNull
 	@ManyToOne(optional = false)
@@ -51,14 +53,14 @@ public class ArtistAlias  extends LongIdName<String>  implements
 			  name = "artist_alias_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id") )
-	private Artist artist;
+	public Artist<?> artist;
 
 	@OneToOne(optional = true)
 	@JoinTable(
 			  name = "artist_alias_locale_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id") )
-	private ArtistAliasLocale artistAliasLocale;
+	public ArtistAliasLocale artistAliasLocale;
 	
 	@ManyToOne(optional = false)
 	@JoinTable(

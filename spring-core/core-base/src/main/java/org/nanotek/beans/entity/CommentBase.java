@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.MutableCommentEntity;
 
 @MappedSuperclass
-public class CommentBase<K extends Serializable> extends SequenceLongBase<K> {
+public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<K> {
 
 	private static final long serialVersionUID = -3239637365262870832L;
 	

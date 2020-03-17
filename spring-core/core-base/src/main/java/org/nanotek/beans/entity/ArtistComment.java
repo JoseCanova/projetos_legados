@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -7,11 +9,10 @@ import javax.validation.constraints.NotBlank;
 
 import org.nanotek.MutableArtistEntity;
 import org.nanotek.MutableCommentEntity;
-import org.nanotek.IdBase;
 
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment extends CommentBase<String> implements MutableArtistEntity<Artist> , MutableCommentEntity<String>{
+public class ArtistComment<E extends Serializable> extends CommentBase<String,ArtistComment<?>> implements MutableArtistEntity<Artist> , MutableCommentEntity<String>{
 
 	private static final long serialVersionUID = 2608408556126104972L;
 

@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,31 +16,32 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.RecordBase;
+import org.nanotek.BaseEntity;
+import org.nanotek.MutableRecordingIdEntity;
 
 @Entity
 @Table(name="recording" ,
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording extends LongIdGidName implements RecordBase<Long>{
+public class Recording<E extends Serializable> extends LongIdGidName<String,E> implements MutableRecordingIdEntity<Long> , BaseEntity{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 
 	@NotNull
 	@Column(name="recording_id" , nullable=false)
-	private Long recordingId;
+	public Long recordingId;
 	
 	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_credit_id" , referencedColumnName="id")
-	private ArtistCredit artistCredit; 
+	public ArtistCredit artistCredit; 
 	
 	@OneToMany(mappedBy="recording" , fetch=FetchType.LAZY)
-	private Set<Track> tracks;
+	public Set<Track> tracks;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	private RecordingLength recordingLenght;
+	public RecordingLength recordingLenght;
 	
 	public Recording() {}
 	
@@ -86,37 +88,5 @@ public class Recording extends LongIdGidName implements RecordBase<Long>{
 		this.recordingId = recordingId;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((recordingId == null) ? 0 : recordingId.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Recording other = (Recording) obj;
-		if (recordingId == null) {
-			if (other.recordingId != null)
-				return false;
-		} else if (!recordingId.equals(other.recordingId))
-			return false;
-		return true;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Recording [recordingId=" + recordingId + ", artistCredit=" + artistCredit + ", tracks=" + tracks
-				+ ", recordingLenght=" + recordingLenght + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
-	}
 
 }

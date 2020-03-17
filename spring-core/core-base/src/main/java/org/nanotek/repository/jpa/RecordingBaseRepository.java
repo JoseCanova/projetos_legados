@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.RecordBase;
+import org.nanotek.MutableRecordingIdEntity;
 
-public interface RecordingBaseRepository<K extends RecordBase<?>, ID extends Serializable> {
-	Optional<RecordBase<ID>> findByRecordingId(@NotNull ID recordingId);
+public interface RecordingBaseRepository<K extends MutableRecordingIdEntity<?>, ID extends Serializable> {
+	Optional<MutableRecordingIdEntity<ID>> findByRecordingId(@NotNull ID recordingId);
 }

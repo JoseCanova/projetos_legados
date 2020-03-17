@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.MutableAreaBeginDateEntity;
+import org.nanotek.MutableAreaEndDateEntity;
+import org.nanotek.MutableAreaIdEntity;
 import org.nanotek.TypeEntity;
 
 @Entity
@@ -19,7 +24,12 @@ import org.nanotek.TypeEntity;
 uniqueConstraints= {
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
 		})
-public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
+public class Area<E extends Serializable> extends LongIdGidName<String,E> implements 
+															TypeEntity<AreaType<E>>,
+															MutableAreaCommentEntity<AreaComment<E>>,
+															MutableAreaIdEntity<Long>,
+															MutableAreaBeginDateEntity<AreaBeginDate>,
+															MutableAreaEndDateEntity<AreaEndDate>	{
 
 	private static final long serialVersionUID = -7073321340141567106L;
 	
@@ -29,7 +39,7 @@ public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
 	
 	@NotNull
 	@ManyToOne(optional=false, fetch = FetchType.LAZY )
-	private AreaType type; 
+	private AreaType<E> type; 
 	
 	@OneToOne
 	@JoinTable(
@@ -51,7 +61,7 @@ public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
 			  name = "area_comment_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
-	private AreaComment areaComment;
+	private AreaComment<E> areaComment;
 	
 	public Area() {}
 	
@@ -63,7 +73,7 @@ public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
 
 	public Area(@NotNull Long id, 
 			@NotBlank String name, @NotBlank  String gid,
-			@NotNull AreaType type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment areaComment) {
+			@NotNull AreaType<E> type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment<E> areaComment) {
 		this.name = name;
 		this.gid = gid;
 		this.type = type;
@@ -77,11 +87,11 @@ public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
 		return name;
 	}
 
-	public AreaType getType() {
+	public AreaType<E> getType() {
 		return type;
 	}
 
-	public void setType(AreaType type) {
+	public void setType(AreaType<E> type) {
 		this.type = type;
 	}
 
@@ -125,35 +135,4 @@ public class Area extends LongIdGidName<String> implements TypeEntity<AreaType>{
 		this.areaId = areaId;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((areaId == null) ? 0 : areaId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Area other = (Area) obj;
-		if (areaId == null) {
-			if (other.areaId != null)
-				return false;
-		} else if (!areaId.equals(other.areaId))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Area [areaId=" + areaId + ", type=" + type + ", areaBeginDate=" + areaBeginDate + ", areaEndDate="
-				+ areaEndDate + ", areaComment=" + areaComment + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
-	}
-	
 }

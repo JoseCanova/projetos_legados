@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,14 +12,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ReleaseGroupBase;
+import org.nanotek.MutableReleaseGroupIdEntity;
 
 @Entity
 @Table(name="release_group",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-public class ReleaseGroup extends LongIdGidName implements ReleaseGroupBase<Long>{
+public class ReleaseGroup<E extends Serializable> extends LongIdGidName<String,E> implements MutableReleaseGroupIdEntity<Long>{
 
 	private static final long serialVersionUID = 7603390865547084527L;
 	

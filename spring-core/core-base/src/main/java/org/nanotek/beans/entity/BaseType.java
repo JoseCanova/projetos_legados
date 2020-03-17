@@ -31,7 +31,7 @@ import org.nanotek.MutableTypeEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BaseType<K extends Serializable> extends TypeNamedEntity  {
+public abstract class BaseType<K extends Serializable> extends TypeNamedEntity<BaseType<?>>  {
 
 	private static final long serialVersionUID = -6795816207025448078L;
 

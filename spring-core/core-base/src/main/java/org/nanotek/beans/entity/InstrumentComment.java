@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -11,7 +13,7 @@ import org.nanotek.MutableInstrumentEntity;
 
 @Entity
 @DiscriminatorValue("InstrumentComment")
-public class InstrumentComment extends CommentBase<String> implements MutableInstrumentEntity<Instrument> , MutableCommentEntity<String>{
+public class InstrumentComment<E extends Serializable> extends CommentBase<String,E> implements MutableInstrumentEntity<Instrument> , MutableCommentEntity<String>{
 	
 	@NotNull
 	@OneToOne(optional=false ,  mappedBy = "comment")

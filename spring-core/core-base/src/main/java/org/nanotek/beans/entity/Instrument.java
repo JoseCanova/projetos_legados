@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +20,7 @@ import javax.validation.constraints.Size;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
 })
-public class Instrument extends LongIdGidName  {
+public class Instrument<E extends Serializable> extends LongIdGidName<String,E>  {
 
 	private static final long serialVersionUID = 1720965406197902687L;
 	
@@ -34,7 +36,7 @@ public class Instrument extends LongIdGidName  {
 			  name = "instrument_comment_join", 
 			  joinColumns = @JoinColumn(name = "instrument_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id"))
-	private InstrumentComment comment;
+	private InstrumentComment<E> comment;
 	
 	@OneToOne(optional=true)
 	@JoinTable(
@@ -60,7 +62,7 @@ public class Instrument extends LongIdGidName  {
 						@NotBlank @Size(min = 1, max = 50) String gid, 
 						@NotBlank String name,
 						@NotNull InstrumentType type, 
-						InstrumentComment comment, 
+						InstrumentComment<E> comment, 
 						InstrumentDescription description) {
 		super(gid,name);
 		this.type = type;
@@ -69,11 +71,11 @@ public class Instrument extends LongIdGidName  {
 		this.instrumentId = id;
 	}
 
-	public InstrumentComment getComment() {
+	public InstrumentComment<E> getComment() {
 		return comment;
 	}
 
-	public void setComment(InstrumentComment comment) {
+	public void setComment(InstrumentComment<E> comment) {
 		this.comment = comment;
 	}
 
@@ -91,43 +93,6 @@ public class Instrument extends LongIdGidName  {
 
 	public void setType(InstrumentType type) {
 		this.type = type;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((instrumentId == null) ? 0 : instrumentId.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Instrument other = (Instrument) obj;
-		if (instrumentId == null) {
-			if (other.instrumentId != null)
-				return false;
-		} else if (!instrumentId.equals(other.instrumentId))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Instrument [instrumentId=" + instrumentId + ", type=" + type + ", comment=" + comment + ", description="
-				+ description + ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
 	}
 
 }

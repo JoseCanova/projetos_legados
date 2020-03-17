@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +16,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.LongIdNameGidEntityBase;
 import org.nanotek.MutableArtistSortNameEntity;
 
 @Entity
@@ -23,7 +23,7 @@ import org.nanotek.MutableArtistSortNameEntity;
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist extends LongIdGidName<String> implements MutableArtistSortNameEntity<ArtistSortName> {
+public class Artist<E extends Serializable> extends LongIdGidName<String,E> implements MutableArtistSortNameEntity<ArtistSortName> {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 

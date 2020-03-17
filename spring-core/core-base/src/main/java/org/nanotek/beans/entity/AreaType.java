@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -10,7 +12,7 @@ import org.nanotek.MutableAreaEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")
-public class AreaType extends BaseType<Area> implements MutableAreaEntity<Area> {
+public class AreaType<E extends Serializable> extends BaseType<Area<E>> implements MutableAreaEntity<Area<E>> {
 
 	private static final long serialVersionUID = 5334032717060542549L;
 	

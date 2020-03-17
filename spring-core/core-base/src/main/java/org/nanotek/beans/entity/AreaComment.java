@@ -1,22 +1,25 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")
-public class AreaComment extends CommentBase<String> implements  MutableCommentEntity<String>{
+public class AreaComment<E extends Serializable> extends CommentBase<String, AreaComment<E>> implements  MutableCommentEntity<String>,BaseEntity{
 
 	private static final long serialVersionUID = -68821965634755841L;
 	
 	@NotNull
 	@OneToOne(mappedBy = "areaComment")
-	private Area area;
+	public Area<E> area;
 
 	public AreaComment() {}
 	
@@ -24,16 +27,16 @@ public class AreaComment extends CommentBase<String> implements  MutableCommentE
 		super(comment);
 	}
 
-	public AreaComment(@NotBlank String comment,@NotNull Area area) {
+	public AreaComment(@NotBlank String comment,@NotNull Area<E> area) {
 		super(comment);
 		this.area = area;
 	}
 
-	public Area getArea() {
+	public Area<E> getArea() {
 		return area;
 	}
 
-	public void setArea(Area area) {
+	public void setArea(Area<E> area) {
 		this.area = area;
 	}
 
