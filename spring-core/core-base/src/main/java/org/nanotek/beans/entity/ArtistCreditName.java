@@ -1,49 +1,65 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ArtistCreditBase;
-import org.nanotek.ArtistCreditNameIdEntityBase;
+import org.nanotek.BaseEntity;
+import org.nanotek.MutableArtistCreditEntity;
+import org.nanotek.MutableArtistEntity;
+import org.nanotek.MutablePositionEntity;
+import org.nanotek.MutatbleArtistCreditNameIdEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName extends LongIdName implements ArtistCreditNameIdEntityBase<Long>, ArtistCreditBase<ArtistCredit> {
+public class ArtistCreditName<E extends Serializable> extends LongIdName<String> implements  BaseEntity,
+															 		MutatbleArtistCreditNameIdEntity<Long>, 
+															 		MutableArtistCreditEntity<ArtistCredit<?>>,
+															 		MutableArtistEntity<Artist<?>>,
+															 		MutablePositionEntity<ArtistCreditNamePosition<?>>{
 
 	private static final long serialVersionUID = -5124525598245692335L;
 
 	@NotNull
 	@Column(name="artist_credit_name_id" , nullable=false)
-	private Long artistCreditNameId;
+	public Long artistCreditNameId;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artist_credit_id" , insertable = true , nullable = true, referencedColumnName = "id")
-	private ArtistCredit artistCredit;
+	public ArtistCredit<?> artistCredit;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artistid" , insertable = true , nullable = true, referencedColumnName = "id")
-	private Artist artist;
+	public Artist<?> artist;
 	
-	@Column(name="ARTIST_CREDIT_NAME_POSITION",nullable = true , insertable=true)
-	private Long position; 
+	@OneToOne
+	@JoinTable(
+			  name = "artist_credit_name_position_join", 
+			  joinColumns = @JoinColumn(name = "artist_credit_name" , referencedColumnName = "id"), 
+			  inverseJoinColumns = @JoinColumn(name = "position_id",referencedColumnName = "id"))
+	public ArtistCreditNamePosition<?> position; 
 	
-	@Column(name="artist_credit_name_join_prase" ,length=2000,nullable=true,insertable=true)
+	@Column(name="artist_credit_name_join_prase" ,nullable=true,insertable=true)
 	private String joinPhrase;
 
 	public ArtistCreditName(@NotBlank String name, @NotNull Long artistCreditNameId) {
 		super(name);
 		this.artistCreditNameId = artistCreditNameId;
 	}
-	public Long getPosition() {
+	
+	public ArtistCreditNamePosition<?> getPosition() {
 		return position;
 	}
-	public void setPosition(Long position) {
+	
+	public void setPosition(ArtistCreditNamePosition<?> position) {
 		this.position = position;
 	}
 
@@ -62,25 +78,29 @@ public class ArtistCreditName extends LongIdName implements ArtistCreditNameIdEn
 		this.name = name;
 	}
 
-	public ArtistCredit getArtistCredit() {
+	public ArtistCredit<?> getArtistCredit() {
 		return artistCredit;
 	}
 
-	public void setArtistCredit(ArtistCredit artistCredit) {
+	public void setArtistCredit(ArtistCredit<?> artistCredit) {
 		this.artistCredit = artistCredit;
 	}
 
-	public Artist getArtist() {
+	public Artist<?> getArtist() {
 		return artist;
 	}
 	
-	public void setArtist(Artist artist) {
+	public void setArtist(Artist<?> artist) {
 		this.artist = artist;
 	}
 	
 	@Override
 	public Long getArtistCreditNameId() {
 		return artistCreditNameId;
+	}
+	@Override
+	public void setArtistCreditNameId(Long k) {
+			this.artistCreditNameId = k;
 	}
 	
 }

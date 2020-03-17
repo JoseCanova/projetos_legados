@@ -1,6 +1,8 @@
 package org.nanotek;
 
-public interface Positionable<P>{
+import java.io.Serializable;
+
+public interface Positionable<P extends Serializable>{
 
 	P getPosition();
 	

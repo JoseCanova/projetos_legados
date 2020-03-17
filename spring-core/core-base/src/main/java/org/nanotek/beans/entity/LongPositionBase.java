@@ -19,7 +19,7 @@ indexes= {
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
 	    discriminatorType = DiscriminatorType.STRING,
-	    name = "table_id",
+	    name = "class_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public class LongPositionBase extends PositionEntityBase<Long> {
@@ -47,33 +47,4 @@ public class LongPositionBase extends PositionEntityBase<Long> {
 		this.position = position;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LongPositionBase other = (LongPositionBase) obj;
-		if (position == null) {
-			if (other.position != null)
-				return false;
-		} else if (!position.equals(other.position))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "LongPositionBase [position=" + position + ", id=" + id + "]";
-	}
 }

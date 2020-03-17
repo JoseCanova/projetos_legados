@@ -14,7 +14,7 @@ public class LongIdName<K extends Serializable> extends SequenceLongBase<K> impl
 	
 	@NotNull
 	@Column(name="name" , nullable=false, columnDefinition = "VARCHAR NOT NULL")
-	protected K name;
+	public K name;
 	
 	public LongIdName() {
 		super();
