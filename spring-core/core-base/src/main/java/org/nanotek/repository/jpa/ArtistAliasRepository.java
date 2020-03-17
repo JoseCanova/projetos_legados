@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.entity.ArtistAlias;
+import org.nanotek.ArtistAlias;
 import org.springframework.stereotype.Repository;
 
 @Repository

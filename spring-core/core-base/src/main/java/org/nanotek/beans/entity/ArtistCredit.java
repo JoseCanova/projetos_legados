@@ -1,5 +1,6 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ArtistCreditEntity;
+import org.nanotek.BaseEntity;
+
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_credit_id",columnNames={"artist_credit_id"})
@@ -36,46 +40,46 @@ import javax.validation.constraints.NotNull;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit extends LongIdName<String> implements  MutableArtistCreditCountEntity<ArtistCreditCount> 
+public class ArtistCredit<E extends Serializable> extends LongIdName<String> implements  MutableArtistCreditCountEntity<ArtistCreditCount<?>> 
 																, MutableArtistCreditRefCountEntity<ArtistCreditRefCount> , 
-																ArtistCreditEntity<Long>{
+																ArtistCreditEntity<Long>,BaseEntity{
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
 	@NotNull
 	@Column(name="artist_credit_id" , nullable=false)
-	private Long artistCredit;
+	public Long artistCredit;
 	
 	@NotNull
 	@OneToOne(optional=false)
 	@JoinTable(name="artist_credit_count_join",
 		inverseJoinColumns={@JoinColumn(name="artist_count_id", referencedColumnName="id") },
 		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private ArtistCreditCount artistCreditCount; 
+	public ArtistCreditCount<?> artistCreditCount; 
 	
 	@NotNull
 	@OneToOne(optional=false)
 	@JoinTable(name="artist_ref_count_join",
 		inverseJoinColumns={@JoinColumn(name="artist_refcount_id", referencedColumnName="id") },
 		joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private ArtistCreditRefCount artistCreditRefCount;
+	public ArtistCreditRefCount artistCreditRefCount;
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
-	private Set<Release> releases; 
+	public Set<Release> releases; 
 
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="artist_credit_name_rel",
 	inverseJoinColumns={@JoinColumn(name="artist_name_id", referencedColumnName="id") },
 	joinColumns={ @JoinColumn(name="artist_credit_id", referencedColumnName="id") })
-	private List<Artist> artists;
+	public List<Artist<?>> artists;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="artistCredit")
-	private Set<Recording> recordings; 
+	public Set<Recording<?>> recordings; 
 	
 	public ArtistCredit() {}
 	
-	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull ArtistCreditCount artistCount,
-			@NotNull ArtistCreditRefCount refCount, Set<Recording> recordings) {
+	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull ArtistCreditCount<?> artistCount,
+			@NotNull ArtistCreditRefCount refCount, Set<Recording<?>> recordings) {
 		super(name);
 		this.artistCredit = id;
 		this.artistCreditCount = artistCount;
@@ -99,19 +103,19 @@ public class ArtistCredit extends LongIdName<String> implements  MutableArtistCr
 		this.releases = releases;
 	}
 	
-	public List<Artist> getArtists() {
+	public List<Artist<?>> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(List<Artist> artists) {
+	public void setArtists(List<Artist<?>> artists) {
 		this.artists = artists;
 	}
 
-	public Set<Recording> getRecordings() {
+	public Set<Recording<?>> getRecordings() {
 		return recordings;
 	}
 
-	public void setRecordings(Set<Recording> recordings) {
+	public void setRecordings(Set<Recording<?>> recordings) {
 		this.recordings = recordings;
 	}
 
@@ -135,12 +139,12 @@ public class ArtistCredit extends LongIdName<String> implements  MutableArtistCr
 	}
 
 	@Override
-	public ArtistCreditCount getArtistCreditCount() {
+	public ArtistCreditCount<?> getArtistCreditCount() {
 		return artistCreditCount;
 	}
 
 	@Override
-	public void setArtistCreditCount(ArtistCreditCount k) {
+	public void setArtistCreditCount(ArtistCreditCount<?> k) {
 		this.artistCreditCount = k;
 	}
 

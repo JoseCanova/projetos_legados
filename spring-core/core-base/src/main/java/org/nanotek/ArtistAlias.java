@@ -1,4 +1,4 @@
-package org.nanotek.beans.entity;
+package org.nanotek;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +12,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.BaseEntity;
-import org.nanotek.MutableArtistAliasBeginDateEntity;
-import org.nanotek.MutableArtistAliasEndDateEntity;
-import org.nanotek.MutableArtistAliasLocaleEntity;
-import org.nanotek.MutableArtistAliasTypeEntity;
-import org.nanotek.MutableArtistEntity;
+import org.nanotek.beans.entity.Artist;
+import org.nanotek.beans.entity.ArtistAliasBeginDate;
+import org.nanotek.beans.entity.ArtistAliasEndDate;
+import org.nanotek.beans.entity.ArtistAliasLocale;
+import org.nanotek.beans.entity.ArtistAliasSortName;
+import org.nanotek.beans.entity.ArtistAliasType;
+import org.nanotek.beans.entity.LongIdName;
+import org.nanotek.beans.entity.MutableAliasIdEntity;
 
 @Entity
 @Table(name="artist_alias", 
@@ -27,7 +29,7 @@ uniqueConstraints= {
 public class ArtistAlias  extends LongIdName<String>  implements 
 														BaseEntity,
 														MutableAliasIdEntity<Long>,
-														MutableArtistEntity<Artist> , 
+														MutableArtistEntity<Artist<?>> , 
 														MutableArtistAliasTypeEntity<ArtistAliasType> , 
 														MutableArtistAliasLocaleEntity<ArtistAliasLocale>,
 														MutableArtistAliasBeginDateEntity<ArtistAliasBeginDate>,
@@ -67,21 +69,21 @@ public class ArtistAlias  extends LongIdName<String>  implements
 			  name = "artist_alias_type_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "alias_type_id",referencedColumnName = "id") )
-	private ArtistAliasType artistAliasType;
+	public ArtistAliasType artistAliasType;
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinTable(
 			  name = "artist_alias_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	private ArtistAliasBeginDate artistAliasBeginDate;
+	public ArtistAliasBeginDate artistAliasBeginDate;
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinTable(
 			  name = "artist_alias_end_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	private ArtistAliasEndDate artistAliasEndDate;
+	public ArtistAliasEndDate artistAliasEndDate;
 	
 	public ArtistAlias() {}
 	

@@ -6,16 +6,19 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.ArtistAlias;
+import org.nanotek.BaseEntity;
 import org.nanotek.MutableArtistAliasEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistAliasType")
-public class ArtistAliasType extends BaseType<ArtistAliasType> implements MutableArtistAliasEntity<ArtistAlias>  {
+public class ArtistAliasType extends BaseType<ArtistAliasType> implements BaseEntity, 
+																		  MutableArtistAliasEntity<ArtistAlias>  {
 
 	private static final long serialVersionUID = 430998067473248669L;
 	
 	@OneToOne
-	private ArtistAlias artistAlias;
+	public ArtistAlias artistAlias;
 
 	public ArtistAliasType() {
 	}

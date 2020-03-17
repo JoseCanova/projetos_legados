@@ -1,7 +1,7 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.ArtistAlias;
 import org.nanotek.Result;
-import org.nanotek.beans.entity.ArtistAlias;
 
 public class ArtistAliasBean  extends Result<ArtistAliasBean,ArtistAlias> {
 

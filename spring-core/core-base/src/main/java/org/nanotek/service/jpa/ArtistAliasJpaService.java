@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.entity.ArtistAlias;
+import org.nanotek.ArtistAlias;
 import org.nanotek.repository.jpa.ArtistAliasRepository;
 import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;

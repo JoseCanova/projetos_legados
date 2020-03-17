@@ -1,6 +1,6 @@
 package org.nanotek.controller.entity;
 
-import org.nanotek.beans.entity.ArtistAlias;
+import org.nanotek.ArtistAlias;
 import org.nanotek.service.jpa.ArtistAliasJpaService;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;

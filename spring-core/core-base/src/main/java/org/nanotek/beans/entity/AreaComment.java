@@ -19,7 +19,7 @@ public class AreaComment<E extends Serializable> extends CommentBase<String, Are
 	
 	@NotNull
 	@OneToOne(mappedBy = "areaComment")
-	public Area<E> area;
+	public Area<?> area;
 
 	public AreaComment() {}
 	
@@ -32,37 +32,12 @@ public class AreaComment<E extends Serializable> extends CommentBase<String, Are
 		this.area = area;
 	}
 
-	public Area<E> getArea() {
+	public Area<?> getArea() {
 		return area;
 	}
 
-	public void setArea(Area<E> area) {
+	public void setArea(Area<?> area) {
 		this.area = area;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((area == null) ? 0 : area.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AreaComment other = (AreaComment) obj;
-		if (area == null) {
-			if (other.area != null)
-				return false;
-		} else if (!area.equals(other.area))
-			return false;
-		return true;
 	}
 
 	@Override

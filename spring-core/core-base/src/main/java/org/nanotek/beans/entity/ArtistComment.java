@@ -7,17 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.MutableArtistEntity;
-import org.nanotek.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistComment")
-public class ArtistComment<E extends Serializable> extends CommentBase<String,ArtistComment<?>> implements MutableArtistEntity<Artist> , MutableCommentEntity<String>{
-
+public class ArtistComment<E extends Serializable> extends CommentBase<String,ArtistComment<?>> implements BaseEntity, 
+																										   MutableArtistEntity<Artist<?>> {
 	private static final long serialVersionUID = 2608408556126104972L;
 
 	@OneToOne(mappedBy = "artistComment")
-	private Artist artist;
+	public Artist<?> artist;
 
 	public ArtistComment() {}
 	
@@ -29,14 +29,12 @@ public class ArtistComment<E extends Serializable> extends CommentBase<String,Ar
 		super(comment);
 	}
 
-	public Artist getArtist() {
+	public Artist<?> getArtist() {
 		return artist;
 	}
 
-	public void setArtist(Artist artist) {
+	public void setArtist(Artist<?> artist) {
 		this.artist = artist;
 	}
-
-	
 	
 }

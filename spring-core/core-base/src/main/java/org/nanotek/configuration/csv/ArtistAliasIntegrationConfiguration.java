@@ -3,12 +3,12 @@ package org.nanotek.configuration.csv;
 import java.util.Optional;
 
 import org.assertj.core.util.Arrays;
+import org.nanotek.ArtistAlias;
 import org.nanotek.Base;
 import org.nanotek.JsonMessage;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.ArtistAliasBean;
 import org.nanotek.beans.entity.Artist;
-import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.beans.entity.ArtistAliasBeginDate;
 import org.nanotek.beans.entity.ArtistAliasEndDate;
 import org.nanotek.beans.entity.ArtistAliasLocale;
