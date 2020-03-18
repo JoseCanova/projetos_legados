@@ -9,11 +9,13 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.entities.BaseArtistAliasEntity;
+import org.nanotek.entities.MutableArtistAliasEntity;
+import org.nanotek.entities.MutableArtistAliasTypeEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistAliasType")
 public class ArtistAliasType<K extends Serializable> extends BaseType<ArtistAlias<?>> implements  
-																		  BaseArtistAliasEntity<ArtistAlias<?>>  {
+																		  BaseArtistAliasTypeEntity<ArtistAlias<?>>  {
 
 	private static final long serialVersionUID = 430998067473248669L;
 	

@@ -26,7 +26,7 @@ import org.nanotek.entities.MutableLocaleEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase<K extends Serializable> extends SequenceLongBase<LocaleBase<?>> implements BaseEntity, 
+public class LocaleBase<K extends Serializable> extends SequenceLongBase<LocaleBase<?>> implements 
 																		MutableLocaleEntity<String> {
 
 	private static final long serialVersionUID = -6664969453930737424L;

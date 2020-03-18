@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.entities.BaseReleaseAliasLocaleEntity;
+
 @Entity
 @DiscriminatorValue("ReleaseAliasLocale")
-public class ReleaseAliasLocale extends LocaleBase{
+public class ReleaseAliasLocale extends LocaleBase<ReleaseAliasLocale> implements BaseReleaseAliasLocaleEntity{
 
 	private static final long serialVersionUID = -5609249998157622354L;
 	
