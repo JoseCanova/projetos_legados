@@ -13,8 +13,8 @@ import org.nanotek.MutableAreaEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")
-public class AreaType<E extends Serializable> extends BaseType<Area<E>> implements BaseEntity,
-																				   MutableAreaEntity<Area<E>>{
+public class AreaType<E extends Serializable> extends BaseType<Area<?>> implements BaseEntity,
+																				   MutableAreaEntity<Area<?>>{
 
 	private static final long serialVersionUID = 5334032717060542549L;
 	
@@ -33,12 +33,12 @@ public class AreaType<E extends Serializable> extends BaseType<Area<E>> implemen
 	}
 
 	@Override
-	public Area getArea() {
+	public Area<?> getArea() {
 		return area;
 	}
 
 	@Override
-	public void setArea(Area k) {
+	public void setArea(Area<?> k) {
 			this.area = k;
 	}
 

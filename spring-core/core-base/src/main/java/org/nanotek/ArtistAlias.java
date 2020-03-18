@@ -1,5 +1,7 @@
 package org.nanotek;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +28,7 @@ import org.nanotek.beans.entity.MutableAliasIdEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias  extends LongIdName<String>  implements 
+public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  implements 
 														BaseEntity,
 														MutableAliasIdEntity<Long>,
 														MutableArtistEntity<Artist<?>> , 

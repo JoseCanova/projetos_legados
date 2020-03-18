@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.BaseEntity;
 import org.nanotek.MutableArtistEntity;
 
 @Entity
