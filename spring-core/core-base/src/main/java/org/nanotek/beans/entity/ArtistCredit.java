@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.ArtistCreditEntity;
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.MutableArtistCreditIdEntity;
 
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {
@@ -41,15 +42,16 @@ import org.nanotek.BaseEntity;
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
 public class ArtistCredit<K extends Serializable> extends LongIdName<String> implements  BaseEntity,
+																  MutableArtistCreditIdEntity<Long>,	
 																  MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
-																  MutableArtistCreditRefCountEntity<ArtistCreditRefCount> , 
-																  ArtistCreditEntity<Long>{
+																  MutableArtistCreditRefCountEntity<ArtistCreditRefCount> 
+																  {
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
 	@NotNull
 	@Column(name="artist_credit_id" , nullable=false)
-	public Long artistCredit;
+	public Long artistCreditId;
 	
 	@NotNull
 	@OneToOne(optional=false)
@@ -82,10 +84,40 @@ public class ArtistCredit<K extends Serializable> extends LongIdName<String> imp
 	public ArtistCredit(@NotNull Long id , @NotBlank String name, @NotNull ArtistCreditCount<?> artistCount,
 			@NotNull ArtistCreditRefCount refCount, Set<Recording<?>> recordings) {
 		super(name);
-		this.artistCredit = id;
+		this.artistCreditId = id;
 		this.artistCreditCount = artistCount;
 		this.artistCreditRefCount = refCount;
 		this.recordings = recordings;
+	}
+
+	@Override
+	public Long getArtistCreditId() {
+		return artistCreditId;
+	}
+
+	@Override
+	public ArtistCreditCount<?> getArtistCreditCount() {
+		return artistCreditCount;
+	}
+
+	@Override
+	public ArtistCreditRefCount getArtistCreditRefCount(ArtistCreditRefCount k) {
+		return artistCreditRefCount;
+	}
+
+	@Override
+	public void setArtistCreditRefCount(ArtistCreditRefCount k) {
+		this.artistCreditRefCount = k;
+	}
+
+	@Override
+	public void setArtistCreditCount(ArtistCreditCount<?> k) {
+		this.artistCreditCount = k;
+	}
+
+	@Override
+	public void setArtistCreditId(Long k) {
+		this.artistCreditId = k;
 	}
 
 }

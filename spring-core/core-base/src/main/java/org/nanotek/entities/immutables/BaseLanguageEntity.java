@@ -2,7 +2,6 @@ package org.nanotek.entities.immutables;
 
 import java.util.stream.Stream;
 
-import org.nanotek.BaseEntity;
 import org.nanotek.beans.entity.Language;
 import org.nanotek.entities.MutableBaseLanguageEntity;
 

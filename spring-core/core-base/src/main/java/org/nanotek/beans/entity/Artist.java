@@ -1,8 +1,6 @@
 package org.nanotek.beans.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,20 +15,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.BaseEntity;
-import org.nanotek.Kong;
-import org.nanotek.collections.AritistCreditStreamableEntity;
+import org.nanotek.collections.MutableArtistCreditList;
 import org.nanotek.entities.BaseArtistEntity;
-import org.nanotek.entities.MutableAreaEntity;
-import org.nanotek.entities.MutableArtistBeginAreaEntity;
-import org.nanotek.entities.MutableArtistBeginDateEntity;
-import org.nanotek.entities.MutableArtistCommentEntity;
-import org.nanotek.entities.MutableArtistCreditEntity;
-import org.nanotek.entities.MutableArtistEndDateEntity;
-import org.nanotek.entities.MutableArtistIdEntity;
-import org.nanotek.entities.MutableArtistSortNameEntity;
-import org.nanotek.entities.MutableArtistTypeEntity;
-import org.nanotek.stream.StreamableEntity;
 
 @Entity
 @Table(name="artist" , 
@@ -42,10 +28,10 @@ public class Artist<K extends Serializable> extends LongIdGidName<String,String>
 	private static final long serialVersionUID = -932806802235346847L;
 
 	@Column(name="artist_id" , nullable = false , insertable = true , updatable = false)
-	private Long artistId;
+	public Long artistId;
 	
-	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
-	public AritistCreditStreamableEntity<ArtistCredit<?>> artistCredits;
+	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY , targetEntity=org.nanotek.beans.entity.ArtistCredit.class)
+	public MutableArtistCreditList<ArtistCredit<?>> artistCredits;
 
 	@NotNull
 	@OneToOne(optional=false)
@@ -79,7 +65,7 @@ public class Artist<K extends Serializable> extends LongIdGidName<String,String>
 	
 	@NotNull
 	@ManyToOne(optional = false)
-	public ArtistType<Artist<?>> type; 
+	public ArtistType<Artist<?>> artistType; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -111,6 +97,7 @@ public class Artist<K extends Serializable> extends LongIdGidName<String,String>
 	public Area<Artist<?>> endArea;
 	
 	public Artist() {
+		artistCredits = new MutableArtistCreditList<ArtistCredit<?>>();
 	}
 	
 	public Artist(
@@ -119,7 +106,87 @@ public class Artist<K extends Serializable> extends LongIdGidName<String,String>
 			@NotBlank String gid) {
 		super(gid,name);
 		this.artistId = id;
+		artistCredits = new MutableArtistCreditList<ArtistCredit<?>>();
 	}
-	
+
+	@Override
+	public void setArtistId(Long k) {
+		this.artistId = k;
+	}
+
+	@Override
+	public Long getArtistId() {
+		return artistId;
+	}
+
+	@Override
+	public void setArtistSortName(ArtistSortName<?> k) {
+		this.artistSortName = k;
+	}
+
+	@Override
+	public ArtistSortName<?> getArtistSortName() {
+		return this.artistSortName;
+	}
+
+	@Override
+	public void setArtistComment(ArtistComment<?> k) {
+		this.artistComment = k;
+	}
+
+	@Override
+	public ArtistComment<?> getArtistComment() {
+		return this.artistComment;
+	}
+
+	@Override
+	public void setArtistBeginDate(ArtistBeginDate k) {
+		this.artistBeginDate = k;
+	}
+
+	@Override
+	public ArtistBeginDate getArtistBeginDate() {
+		return this.artistBeginDate;
+	}
+
+	@Override
+	public void setArtistEndDate(ArtistEndDate k) {
+		this.artistEndDate = k;
+	}
+
+	@Override
+	public ArtistEndDate getArtistEndDateEntity() {
+		return this.artistEndDate;
+	}
+
+	@Override
+	public void setArtistType(ArtistType<Artist<?>> k) {
+		this.artistType = k;
+	}
+
+	@Override
+	public ArtistType<Artist<?>> getArtistType() {
+		return this.artistType;
+	}
+
+	@Override
+	public void setGender(Gender k) {
+		this.gender = k;
+	}
+
+	@Override
+	public Gender getGender() {
+		return this.gender;
+	}
+
+	@Override
+	public void setArea(Area<Artist<?>> k) {
+		this.area = k;
+	}
+
+	@Override
+	public Area<Artist<?>> getArea() {
+		return this.area;
+	}
 
 }

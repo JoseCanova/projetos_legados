@@ -15,12 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.entities.MutableArtistAliasBeginDateEntity;
-import org.nanotek.entities.MutableArtistAliasEndDateEntity;
-import org.nanotek.entities.MutableArtistAliasLocaleEntity;
-import org.nanotek.entities.MutableArtistAliasSortNameEntity;
-import org.nanotek.entities.MutableArtistAliasTypeEntity;
-import org.nanotek.entities.MutableArtistEntity;
+import org.nanotek.entities.MutableArtistAliasEntity;
 
 @Entity
 @Table(name="artist_alias", 
@@ -29,13 +24,7 @@ uniqueConstraints= {
 })
 public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  implements 
 														BaseEntity,
-														MutableAliasIdEntity<Long>,
-														MutableArtistAliasSortNameEntity<ArtistAliasSortName<?>>,
-														MutableArtistEntity<Artist<?>> , 
-														MutableArtistAliasTypeEntity<ArtistAliasType<?>> , 
-														MutableArtistAliasLocaleEntity<ArtistAliasLocale>,
-														MutableArtistAliasBeginDateEntity<ArtistAliasBeginDate>,
-														MutableArtistAliasEndDateEntity<ArtistAliasEndDate>{
+														MutableArtistAliasEntity<ArtistAlias<?>>{
 
 	private static final long serialVersionUID = -6829974720983757034L;
 
@@ -64,7 +53,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 			  name = "artist_alias_locale_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id") )
-	public ArtistAliasLocale artistAliasLocale;
+	public ArtistAliasLocale<?> artistAliasLocale;
 	
 	@ManyToOne(optional = false)
 	@JoinTable(
@@ -105,6 +94,76 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 		this.aliasId = id;
 		this.artist = artist;
 		this.artistAliasSortName = sortName;
+	}
+
+	@Override
+	public void setAliasId(Long k) {
+		this.aliasId = k;
+	}
+
+	@Override
+	public Long getAliasId() {
+		return this.aliasId;
+	}
+	
+	@Override
+	public void setArtistAliasSortName(ArtistAliasSortName<?> k) {
+		this.artistAliasSortName = k;
+	}
+
+	@Override
+	public ArtistAliasSortName<?> getArtistAliasSortName() {
+		return this.artistAliasSortName;
+	}
+
+	@Override
+	public void setArtist(Artist<?> e) {
+		this.artist = e;
+	}
+
+	@Override
+	public Artist<?> getArtist() {
+		return this.artist;
+	}
+
+	@Override
+	public void setArtistAliasType(ArtistAliasType<?> k) {
+		this.artistAliasType = k;
+	}
+
+	@Override
+	public ArtistAliasType<?> getArtistAliasType() {
+		return this.artistAliasType;
+	}
+
+	@Override
+	public void setArtistAliasLocale(ArtistAliasLocale<?> k) {
+		this.artistAliasLocale = k;
+	}
+
+	@Override
+	public ArtistAliasLocale<?> getArtistAliasLocale() {
+		return this.artistAliasLocale;
+	}
+
+	@Override
+	public void setArtistAliasBeginDate(ArtistAliasBeginDate k) {
+		this.artistAliasBeginDate = k;
+	}
+
+	@Override
+	public ArtistAliasBeginDate getArtistAliasBeginDate() {
+		return this.artistAliasBeginDate;
+	}
+
+	@Override
+	public void setArtistAliasEndDate(ArtistAliasEndDate k) {
+		this.artistAliasEndDate = k;
+	}
+
+	@Override
+	public ArtistAliasEndDate getArtistAliasEndDate() {
+		return this.artistAliasEndDate;
 	}
 
 

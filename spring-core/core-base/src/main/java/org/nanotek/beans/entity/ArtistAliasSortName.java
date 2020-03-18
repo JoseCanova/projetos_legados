@@ -7,11 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.entities.MutableArtistAliasEntity;
+import org.nanotek.entities.BaseArtistAliasEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistAliasSortName")
-public class ArtistAliasSortName<K extends Serializable> extends SortNameBase<ArtistAliasSortName<?>> implements MutableArtistAliasEntity<ArtistAlias<?>> {
+public class ArtistAliasSortName<K extends Serializable> extends SortNameBase<ArtistAliasSortName<?>> implements BaseArtistAliasEntity<ArtistAlias<?>> {
 
 	private static final long serialVersionUID = -7162854301861535960L;
 

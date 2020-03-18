@@ -64,6 +64,7 @@ public class Language<K extends Serializable> extends  LongIdName<String> implem
 		this.isoCode1 = isoCode1;
 		this.frequency = frequency;
 		this.isoCode3 = isoCode3;
+		immutable = setLanguage(this);
 	}
 
 	@Override
@@ -115,12 +116,7 @@ public class Language<K extends Serializable> extends  LongIdName<String> implem
 	public String getIsoCode3() {
 		return isoCode3;
 	}
-
-	@Override
-	public void setLanguage(Language<?> k) {
-			immutable = KongStream.of(Language.class).add(k).build();
-	}
-
+	
 	@Override
 	public Stream<Language> getLanguage() {
 		return immutable;
