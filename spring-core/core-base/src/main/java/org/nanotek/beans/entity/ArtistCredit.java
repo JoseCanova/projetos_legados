@@ -40,9 +40,10 @@ import org.nanotek.BaseEntity;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit<E extends Serializable> extends LongIdName<String> implements  MutableArtistCreditCountEntity<ArtistCreditCount<?>> 
-																, MutableArtistCreditRefCountEntity<ArtistCreditRefCount> , 
-																ArtistCreditEntity<Long>,BaseEntity{
+public class ArtistCredit<K extends Serializable> extends LongIdName<String> implements  BaseEntity,
+																  MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
+																  MutableArtistCreditRefCountEntity<ArtistCreditRefCount> , 
+																  ArtistCreditEntity<Long>{
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
@@ -85,67 +86,6 @@ public class ArtistCredit<E extends Serializable> extends LongIdName<String> imp
 		this.artistCreditCount = artistCount;
 		this.artistCreditRefCount = refCount;
 		this.recordings = recordings;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<Release> getReleases() {
-		return releases; 
-	}
-
-	public void setReleases(Set<Release> releases) {
-		this.releases = releases;
-	}
-	
-	public List<Artist<?>> getArtists() {
-		return artists;
-	}
-
-	public void setArtists(List<Artist<?>> artists) {
-		this.artists = artists;
-	}
-
-	public Set<Recording<?>> getRecordings() {
-		return recordings;
-	}
-
-	public void setRecordings(Set<Recording<?>> recordings) {
-		this.recordings = recordings;
-	}
-
-	public Long getArtistCredit() {
-		return artistCredit;
-	}
-
-	public void setArtistCreditId(Long artistCreditId) {
-		this.artistCredit = artistCreditId;
-	}
-
-
-	@Override
-	public ArtistCreditRefCount getArtistCreditRefCount(ArtistCreditRefCount k) {
-		return artistCreditRefCount;
-	}
-
-	@Override
-	public void setArtistCreditRefCount(ArtistCreditRefCount k) {
-		this.artistCreditRefCount = k;
-	}
-
-	@Override
-	public ArtistCreditCount<?> getArtistCreditCount() {
-		return artistCreditCount;
-	}
-
-	@Override
-	public void setArtistCreditCount(ArtistCreditCount<?> k) {
-		this.artistCreditCount = k;
 	}
 
 }

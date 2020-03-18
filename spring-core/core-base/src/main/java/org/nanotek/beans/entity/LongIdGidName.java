@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableGidEntity;
+import org.nanotek.entities.MutableGidEntity;
 
 @MappedSuperclass
 public abstract class LongIdGidName<K extends Serializable,E extends Serializable> extends LongIdName<String> implements MutableGidEntity<K>{

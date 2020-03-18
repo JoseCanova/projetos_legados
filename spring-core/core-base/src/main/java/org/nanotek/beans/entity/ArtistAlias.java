@@ -15,12 +15,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableArtistAliasBeginDateEntity;
-import org.nanotek.MutableArtistAliasEndDateEntity;
-import org.nanotek.MutableArtistAliasLocaleEntity;
-import org.nanotek.MutableArtistAliasSortNameEntity;
-import org.nanotek.MutableArtistAliasTypeEntity;
-import org.nanotek.MutableArtistEntity;
+import org.nanotek.entities.MutableArtistAliasBeginDateEntity;
+import org.nanotek.entities.MutableArtistAliasEndDateEntity;
+import org.nanotek.entities.MutableArtistAliasLocaleEntity;
+import org.nanotek.entities.MutableArtistAliasSortNameEntity;
+import org.nanotek.entities.MutableArtistAliasTypeEntity;
+import org.nanotek.entities.MutableArtistEntity;
 
 @Entity
 @Table(name="artist_alias", 

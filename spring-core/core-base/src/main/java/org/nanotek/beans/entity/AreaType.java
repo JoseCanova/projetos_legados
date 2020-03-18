@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableAreaEntity;
+import org.nanotek.entities.MutableAreaEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableReleaseGroupIdEntity;
+import org.nanotek.entities.MutableReleaseGroupIdEntity;
 
 public interface ReleaseGroupBaseRepository<K extends MutableReleaseGroupIdEntity<ID>, ID extends Serializable> {
 

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableArtistCreditNameEntity;
+import org.nanotek.entities.MutableArtistCreditNameEntity;
 
 @Entity
 @DiscriminatorValue(value ="ArtistCreditNamePosition" )

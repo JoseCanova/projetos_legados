@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableCommentEntity;
+import org.nanotek.entities.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")

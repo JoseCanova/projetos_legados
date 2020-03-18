@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableLocaleEntity;
+import org.nanotek.entities.MutableLocaleEntity;
 
 @Entity
 @Table(name="locale_base",

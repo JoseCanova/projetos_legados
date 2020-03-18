@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableDatableBaseEntity;
+import org.nanotek.entities.MutableDatableBaseEntity;
 
 @Entity
 @Table(name="composite_dates",

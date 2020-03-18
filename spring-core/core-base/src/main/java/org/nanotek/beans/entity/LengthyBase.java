@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableLenght;
+import org.nanotek.entities.MutableLenght;
 
 @MappedSuperclass
 public abstract class LengthyBase<K extends Serializable> extends SequenceLongBase implements MutableLenght<K>{

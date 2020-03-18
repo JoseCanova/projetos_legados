@@ -2,7 +2,7 @@ package org.nanotek.service;
 
 import java.io.Serializable;
 
-import org.nanotek.MutableNameBase;
+import org.nanotek.entities.MutableNameBase;
 import org.nanotek.repository.jpa.EntityNameBaseRepository;
 import org.nanotek.repository.jpa.IdBaseRepository;
 

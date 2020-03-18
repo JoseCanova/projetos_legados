@@ -13,11 +13,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableArtistCreditEntity;
-import org.nanotek.MutableArtistCreditNameJoinPhraseEntity;
-import org.nanotek.MutableArtistEntity;
-import org.nanotek.MutablePositionEntity;
-import org.nanotek.MutatbleArtistCreditNameIdEntity;
+import org.nanotek.entities.MutableArtistCreditEntity;
+import org.nanotek.entities.MutableArtistCreditNameJoinPhraseEntity;
+import org.nanotek.entities.MutableArtistEntity;
+import org.nanotek.entities.MutablePositionEntity;
+import org.nanotek.entities.MutatbleArtistCreditNameIdEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")

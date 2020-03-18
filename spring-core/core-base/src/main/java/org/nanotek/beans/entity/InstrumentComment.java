@@ -8,8 +8,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableCommentEntity;
-import org.nanotek.MutableInstrumentEntity;
+import org.nanotek.entities.MutableCommentEntity;
+import org.nanotek.entities.MutableInstrumentEntity;
 
 @Entity
 @DiscriminatorValue("InstrumentComment")

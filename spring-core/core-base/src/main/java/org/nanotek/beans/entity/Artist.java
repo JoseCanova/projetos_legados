@@ -19,16 +19,17 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
 import org.nanotek.Kong;
-import org.nanotek.MutableAreaEntity;
-import org.nanotek.MutableArtistBeginDateEntity;
-import org.nanotek.MutableArtistCommentEntity;
-import org.nanotek.MutableArtistCreditEntity;
-import org.nanotek.MutableArtistEndDateEntity;
-import org.nanotek.MutableArtistIdEntity;
-import org.nanotek.MutableArtistSortNameEntity;
-import org.nanotek.MutableArtistTypeEntity;
 import org.nanotek.collections.AritistCreditStreamableEntity;
-import org.nanotek.collections.StreamableEntity;
+import org.nanotek.entities.MutableAreaEntity;
+import org.nanotek.entities.MutableArtistBeginAreaEntity;
+import org.nanotek.entities.MutableArtistBeginDateEntity;
+import org.nanotek.entities.MutableArtistCommentEntity;
+import org.nanotek.entities.MutableArtistCreditEntity;
+import org.nanotek.entities.MutableArtistEndDateEntity;
+import org.nanotek.entities.MutableArtistIdEntity;
+import org.nanotek.entities.MutableArtistSortNameEntity;
+import org.nanotek.entities.MutableArtistTypeEntity;
+import org.nanotek.stream.StreamableEntity;
 
 @Entity
 @Table(name="artist" , 
@@ -44,7 +45,8 @@ public class Artist<E extends Serializable> extends LongIdGidName<String,String>
 																							MutableArtistEndDateEntity<ArtistEndDate>,
 																							MutableArtistTypeEntity<ArtistType<Artist<?>>>,
 																							MutableGenderEntity<Gender>,
-																							MutableAreaEntity<Area>{
+																							MutableAreaEntity<Area<Artist<?>>>,
+																							MutableArtistBeginAreaEntity<Area<Artist<?>>>{
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -93,14 +95,14 @@ public class Artist<E extends Serializable> extends LongIdGidName<String,String>
 			  name = "artist_gender_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "gender_id",referencedColumnName = "id"))
-	private Gender gender; 
+	public Gender gender; 
 
 	@ManyToOne
 	@JoinTable(
 			  name = "artist_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	private Area area;
+	public Area<Artist<?>> area;
 
 	
 	@ManyToOne
@@ -108,14 +110,14 @@ public class Artist<E extends Serializable> extends LongIdGidName<String,String>
 			  name = "artist_begin_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	private Area beginArea;
+	public Area<Artist<?>> beginArea;
 	
 	@ManyToOne
 	@JoinTable(
 			  name = "artist_end_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	private Area endArea;
+	public Area<Artist<?>> endArea;
 	
 	public Artist() {
 	}

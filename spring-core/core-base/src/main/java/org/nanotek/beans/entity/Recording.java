@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableRecordingIdEntity;
+import org.nanotek.entities.MutableRecordingIdEntity;
 
 @Entity
 @Table(name="recording" ,

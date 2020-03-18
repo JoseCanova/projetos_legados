@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableSortNameEntity;
+import org.nanotek.entities.MutableSortNameEntity;
 
 @Entity
 @Table(name="sort_name_base",

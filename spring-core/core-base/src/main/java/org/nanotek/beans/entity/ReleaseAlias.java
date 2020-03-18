@@ -12,14 +12,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableReleaseAliasBeginDateEntity;
-import org.nanotek.MutableReleaseAliasEndDateEntity;
-import org.nanotek.MutableReleaseAliasIdEntity;
-import org.nanotek.MutableReleaseAliasLocaleEntity;
-import org.nanotek.MutableReleaseAliasSortNameEntity;
-import org.nanotek.MutableReleaseAliasTypeEntity;
-import org.nanotek.MutableReleaseEntity;
 import org.nanotek.k;
+import org.nanotek.entities.MutableReleaseAliasBeginDateEntity;
+import org.nanotek.entities.MutableReleaseAliasEndDateEntity;
+import org.nanotek.entities.MutableReleaseAliasIdEntity;
+import org.nanotek.entities.MutableReleaseAliasLocaleEntity;
+import org.nanotek.entities.MutableReleaseAliasSortNameEntity;
+import org.nanotek.entities.MutableReleaseAliasTypeEntity;
+import org.nanotek.entities.MutableReleaseEntity;
 
 @Entity
 @Table(name = "release_alias")

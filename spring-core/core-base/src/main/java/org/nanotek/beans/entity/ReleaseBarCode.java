@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableReleaseEntity;
+import org.nanotek.entities.MutableReleaseEntity;
 
 @Entity
 @DiscriminatorValue(value = "ReleaseBarCode")

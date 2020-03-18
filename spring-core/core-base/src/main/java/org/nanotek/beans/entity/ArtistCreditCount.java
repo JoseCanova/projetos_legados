@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
-import org.nanotek.MutableArtistCreditEntity;
+import org.nanotek.entities.MutableArtistCreditEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistCreditCount")

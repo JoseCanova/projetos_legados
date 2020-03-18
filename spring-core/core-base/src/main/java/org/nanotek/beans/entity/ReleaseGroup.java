@@ -12,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableReleaseGroupIdEntity;
+import org.nanotek.entities.MutableReleaseGroupIdEntity;
 
 @Entity
 @Table(name="release_group",

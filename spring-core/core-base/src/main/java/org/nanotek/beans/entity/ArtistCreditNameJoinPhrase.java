@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableArtistCreditNameEntity;
+import org.nanotek.entities.MutableArtistCreditNameEntity;
 
 public class ArtistCreditNameJoinPhrase<K extends Serializable> 
 																	extends JoinPhraseBase<K> 

@@ -14,20 +14,20 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.MutableAreaBeginDateEntity;
-import org.nanotek.MutableAreaEndDateEntity;
-import org.nanotek.MutableAreaIdEntity;
 import org.nanotek.TypeEntity;
+import org.nanotek.entities.MutableAreaBeginDateEntity;
+import org.nanotek.entities.MutableAreaEndDateEntity;
+import org.nanotek.entities.MutableAreaIdEntity;
 
 @Entity
 @Table(name="area" , 
 uniqueConstraints= {
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
 		})
-public class Area<E extends Serializable> extends LongIdGidName<String,String> implements 
-															TypeEntity<AreaType<E>>,
-															MutableAreaCommentEntity<AreaComment<E>>,
-															MutableAreaIdEntity<Long>,
+public class Area<K extends Serializable> extends LongIdGidName<String,String> implements 
+															MutableAreaIdEntity<Long>,		
+															TypeEntity<AreaType<Area<?>>>,
+															MutableAreaCommentEntity<AreaComment<Area<?>>>,
 															MutableAreaBeginDateEntity<AreaBeginDate>,
 															MutableAreaEndDateEntity<AreaEndDate>	{
 
@@ -35,25 +35,25 @@ public class Area<E extends Serializable> extends LongIdGidName<String,String> i
 	
 	@NotNull
 	@Column(name="area_id",nullable=false)
-	private Long areaId; 
+	public Long areaId; 
 	
 	@NotNull
 	@ManyToOne(optional=false, fetch = FetchType.LAZY )
-	private AreaType<E> type; 
+	public AreaType<Area<?>> areaType; 
 	
 	@OneToOne
 	@JoinTable(
 			  name = "area_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	private AreaBeginDate areaBeginDate; 
+	public AreaBeginDate areaBeginDate; 
 	
 	@OneToOne
 	@JoinTable(
 			  name = "area_end_date_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	private AreaEndDate areaEndDate;
+	public AreaEndDate areaEndDate;
 	
 
 	@OneToOne
@@ -61,78 +61,64 @@ public class Area<E extends Serializable> extends LongIdGidName<String,String> i
 			  name = "area_comment_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
-	private AreaComment<E> areaComment;
+	private AreaComment<Area<?>> areaComment;
 	
 	public Area() {}
 	
-	public Area(@NotNull Long id, @NotBlank String name, @NotBlank  String gid) {
+	public Area(@NotNull Long id, @NotBlank String name, @NotBlank  String gid , @NotNull  AreaType<Area<?>> type) {
 		this.name = name;
 		this.gid = gid;
 		this.areaId = id;
+		this.areaType = type;
 	}
 
-	public Area(@NotNull Long id, 
-			@NotBlank String name, @NotBlank  String gid,
-			@NotNull AreaType<E> type, AreaBeginDate areaBeginDate, AreaEndDate areaEndDate, AreaComment<E> areaComment) {
-		this.name = name;
-		this.gid = gid;
-		this.type = type;
-		this.areaBeginDate = areaBeginDate;
-		this.areaEndDate = areaEndDate;
-		this.areaComment = areaComment;
-		this.areaId = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public AreaType<E> getType() {
-		return type;
-	}
-
-	public void setType(AreaType<E> type) {
-		this.type = type;
-	}
-
-	public String getGid() {
-		return gid;
-	}
-
-	public void setGid(String gid) {
-		this.gid = gid;
-	}
-
-	public AreaBeginDate getAreaBeginDate() {
-		return areaBeginDate;
-	}
-
-	public void setAreaBeginDate(AreaBeginDate areaBeginDate) {
-		this.areaBeginDate = areaBeginDate;
-	}
-
-	public AreaEndDate getAreaEndDate() {
-		return areaEndDate;
-	}
-
-	public void setAreaEndDate(AreaEndDate areaEndDate) {
-		this.areaEndDate = areaEndDate;
-	}
-
-	public AreaComment getAreaComment() {
-		return areaComment;
-	}
-
-	public void setAreaComment(AreaComment areaComment) {
-		this.areaComment = areaComment;
-	}
-
+	@Override
 	public Long getAreaId() {
+		// TODO Auto-generated method stub
 		return areaId;
 	}
 
-	public void setAreaId(Long areaId) {
-		this.areaId = areaId;
+	@Override
+	public AreaComment<Area<?>> getAreaComment() {
+		// TODO Auto-generated method stub
+		return areaComment;
+	}
+
+	@Override
+	public AreaBeginDate getAreaBeginDate() {
+		// TODO Auto-generated method stub
+		return areaBeginDate;
+	}
+
+	@Override
+	public AreaEndDate getAreaEndDate() {
+		// TODO Auto-generated method stub
+		return areaEndDate;
+	}
+
+	@Override
+	public void setAreaEndDate(AreaEndDate k) {
+		this.areaEndDate = k;
+	}
+
+	@Override
+	public void setAreaBeginDate(AreaBeginDate k) {
+		this.areaBeginDate = k;
+	}
+
+	@Override
+	public void setAreaComment(AreaComment<Area<?>> k) {
+		this.areaComment = k;
+	}
+
+	@Override
+	public AreaType<Area<?>> getType() {
+		return areaType;
+	}
+
+	@Override
+	public void setAreaId(Long k) {
+		this.areaId = k;
 	}
 
 }

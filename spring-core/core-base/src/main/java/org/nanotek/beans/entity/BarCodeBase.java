@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.BarCodeEntityBase;
-import org.nanotek.MutableBarCodeEntity;
+import org.nanotek.entities.MutableBarCodeEntity;
 
 @Entity
 @Table(name="bar_code_base", 

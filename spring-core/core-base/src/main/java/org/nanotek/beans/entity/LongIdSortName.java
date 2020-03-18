@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.MutableSortNameEntity;
+import org.nanotek.entities.MutableSortNameEntity;
 
 @Entity
 @DiscriminatorValue(value = "LongIdSortNameEntity")
