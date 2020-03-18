@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.MutableLocaleEntity;
 
 @Entity
@@ -23,7 +26,8 @@ import org.nanotek.MutableLocaleEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase extends SequenceLongBase<LocaleBase> implements MutableLocaleEntity<String> {
+public class LocaleBase<K extends Serializable> extends SequenceLongBase<LocaleBase<?>> implements BaseEntity, 
+																		MutableLocaleEntity<String> {
 
 	private static final long serialVersionUID = -6664969453930737424L;
 
@@ -45,31 +49,6 @@ public class LocaleBase extends SequenceLongBase<LocaleBase> implements MutableL
 
 	public void setLocale(String locale) {
 		this.locale = locale;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LocaleBase other = (LocaleBase) obj;
-		if (locale == null) {
-			if (other.locale != null)
-				return false;
-		} else if (!locale.equals(other.locale))
-			return false;
-		return true;
 	}
 
 }

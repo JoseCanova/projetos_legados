@@ -11,23 +11,39 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ReleaseAliasBase;
+import org.nanotek.BaseEntity;
+import org.nanotek.MutableReleaseAliasBeginDateEntity;
+import org.nanotek.MutableReleaseAliasEndDateEntity;
+import org.nanotek.MutableReleaseAliasIdEntity;
+import org.nanotek.MutableReleaseAliasLocaleEntity;
+import org.nanotek.MutableReleaseAliasSortNameEntity;
+import org.nanotek.MutableReleaseAliasTypeEntity;
+import org.nanotek.MutableReleaseEntity;
+import org.nanotek.k;
 
 @Entity
 @Table(name = "release_alias")
-public class ReleaseAlias extends LongIdName implements ReleaseAliasBase<Long>{
+public class ReleaseAlias extends LongIdName<String> implements BaseEntity,
+																MutableReleaseAliasIdEntity<Long>,
+																MutableReleaseAliasLocaleEntity<ReleaseAliasLocale>,
+																MutableReleaseAliasSortNameEntity<ReleaseAliasSortName>,
+																MutableReleaseEntity<Release>,
+																MutableReleaseAliasTypeEntity<ReleaseAliasType>,
+																MutableReleaseAliasBeginDateEntity<ReleaseAliasBeginDate>,
+																MutableReleaseAliasEndDateEntity<ReleaseAliasEndDate>
+																{
 
 	private static final long serialVersionUID = -4420910201637029585L;
 	
 	@Column(name="relase_alias_id" , nullable=false)
-	private Long releaseAliasId;
+	public Long releaseAliasId;
 	
 	@OneToOne(optional=true)
 	@JoinTable(
 			  name = "release_alias_locale_join", 
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "locale_id",referencedColumnName = "id"))
-	private ReleaseAliasLocale locale;
+	public ReleaseAliasLocale releaseAliasLocale;
 	
 	@NotNull
 	@OneToOne
@@ -35,30 +51,30 @@ public class ReleaseAlias extends LongIdName implements ReleaseAliasBase<Long>{
 			  name = "release_alias_sortname_join", 
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sortname_id",referencedColumnName = "id"))
-	private ReleaseAliasSortName sortName;
+	public ReleaseAliasSortName releaseAliasSortName;
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY,optional=false)
 	@JoinColumn(name = "release_id")
-	private Release release; 
+	public Release release; 
 	
 	@ManyToOne(fetch = FetchType.LAZY,optional=false)
 	@JoinColumn(name="type_id")
-	private ReleaseAliasType type;
+	public ReleaseAliasType releaseAliasType;
 
     @OneToOne(optional=true)
 	@JoinTable(
 			  name = "release_alias_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
-    private ReleaseAliasBeginDate beginDate;
+    public ReleaseAliasBeginDate releaseAliasBeginDate;
     
     @OneToOne(optional=true)
 	@JoinTable(
 			  name = "release_alias_end_date_join", 
 			  joinColumns = @JoinColumn(name = "release_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
-    private ReleaseAliasEndDate endDate;
+    public  ReleaseAliasEndDate releaseAliasEndDate;
 
 	public ReleaseAlias() {
 	}
@@ -71,7 +87,7 @@ public class ReleaseAlias extends LongIdName implements ReleaseAliasBase<Long>{
 	public ReleaseAlias(@NotNull Long id , @NotBlank String name, @NotNull ReleaseAliasSortName sortName) {
 		super(name);
 		this.releaseAliasId = id;
-		this.sortName = sortName;
+		this.releaseAliasSortName = sortName;
 	}
 	
 	public ReleaseAlias(
@@ -85,106 +101,82 @@ public class ReleaseAlias extends LongIdName implements ReleaseAliasBase<Long>{
 			ReleaseAliasEndDate endDate) {
 		this.releaseAliasId = id;
 		this.name = name;
-		this.locale = locale;
+		this.releaseAliasLocale = locale;
 		this.release = release;
-		this.type = type;
-		this.sortName = sortName;
-		this.beginDate = beginDate;
-		this.endDate = endDate;
+		this.releaseAliasType = type;
+		this.releaseAliasSortName = sortName;
+		this.releaseAliasBeginDate = beginDate;
+		this.releaseAliasEndDate = endDate;
 	}
 
-	public Release getRelease() {
-		return release;
-	}
-
-	public void setRelease(Release release) {
-		this.release = release;
-	}
-
-	public ReleaseAliasType getType() {
-		return type;
-	}
-
-	public void setType(ReleaseAliasType type) {
-		this.type = type;
-	}
-
+	@Override
 	public Long getReleaseAliasId() {
 		return releaseAliasId;
 	}
 
-	public void setReleaseAliasId(Long releaseAliasId) {
-		this.releaseAliasId = releaseAliasId;
-	}
-
-	public ReleaseAliasLocale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(ReleaseAliasLocale locale) {
-		this.locale = locale;
-	}
-
-	public ReleaseAliasBeginDate getBeginDate() {
-		return beginDate;
-	}
-
-	public void setBeginDate(ReleaseAliasBeginDate beginDate) {
-		this.beginDate = beginDate;
-	}
-
-	public ReleaseAliasEndDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(ReleaseAliasEndDate endDate) {
-		this.endDate = endDate;
-	}
-
-	public ReleaseAliasSortName getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(ReleaseAliasSortName sortName) {
-		this.sortName = sortName;
-	}
-	
 	@Override
-	public String toString() {
-		return "ReleaseAlias [releaseAliasId=" + releaseAliasId + ", locale=" + locale + ", release=" + release
-				+ ", type=" + type + ", beginDate=" + beginDate + ", endDate=" + endDate + ", sortName=" + sortName
-				+ ", name=" + name + ", id=" + id + "]";
+	public ReleaseAliasLocale getReleaseAliasLocale() {
+		return releaseAliasLocale;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((releaseAliasId == null) ? 0 : releaseAliasId.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+	public ReleaseAliasSortName getReleaseAliasSortName() {
+		return releaseAliasSortName;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ReleaseAlias other = (ReleaseAlias) obj;
-		if (releaseAliasId == null) {
-			if (other.releaseAliasId != null)
-				return false;
-		} else if (!releaseAliasId.equals(other.releaseAliasId))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
+	public Release getRelease() {
+		return release;
+	}
+
+	@Override
+	public ReleaseAliasType getReleaseAliasType() {
+		return releaseAliasType;
+	}
+
+	@Override
+	public ReleaseAliasBeginDate getReleaseAliasBeginDateEntity(ReleaseAliasBeginDate k) {
+		return releaseAliasBeginDate;
+	}
+
+	@Override
+	public ReleaseAliasEndDate getReleaseAliasEndDate() {
+		return releaseAliasEndDate;
+	}
+
+	@Override
+	public void setReleaseAliasEndDate(ReleaseAliasEndDate k) {
+		this.releaseAliasEndDate = k;
+	}
+
+	@Override
+	public void setReleaseAliasBeginDateEntity(ReleaseAliasBeginDate k) {
+		this.releaseAliasBeginDate = k;
+	}
+
+	@Override
+	public void setReleaseAliasType(ReleaseAliasType releaseAliasType) {
+		this.releaseAliasType = releaseAliasType;
+	}
+
+	@Override
+	public void setRelease(Release k) {
+		this.release = k;
+	}
+
+	@Override
+	public void setReleaseAliasSortName(ReleaseAliasSortName releaseAliasSortName) {
+		this.releaseAliasSortName = releaseAliasSortName;
+	}
+
+	@Override
+	public void setReleaseAliasLocale(ReleaseAliasLocale k) {
+		this.releaseAliasLocale = k;
+	}
+
+	@Override
+	public void setReleaseAliasId(Long k) {
+			this.releaseAliasId = k;
 	}
 
 }

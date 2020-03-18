@@ -2,10 +2,8 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface ReleaseAliasBase<K extends Serializable> {
+public interface MutableReleaseAliasIdEntity<K extends Serializable> extends ReleaseAliasIdEntity<K>{
 
-	K getReleaseAliasId();
-	
 	void setReleaseAliasId(K k);
 	
 }

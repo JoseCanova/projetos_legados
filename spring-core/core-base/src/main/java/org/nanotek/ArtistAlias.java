@@ -32,7 +32,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 														BaseEntity,
 														MutableAliasIdEntity<Long>,
 														MutableArtistEntity<Artist<?>> , 
-														MutableArtistAliasTypeEntity<ArtistAliasType> , 
+														MutableArtistAliasTypeEntity<ArtistAliasType<?>> , 
 														MutableArtistAliasLocaleEntity<ArtistAliasLocale>,
 														MutableArtistAliasBeginDateEntity<ArtistAliasBeginDate>,
 														MutableArtistAliasEndDateEntity<ArtistAliasEndDate>{
@@ -71,7 +71,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 			  name = "artist_alias_type_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "alias_type_id",referencedColumnName = "id") )
-	public ArtistAliasType artistAliasType;
+	public ArtistAliasType<?> artistAliasType;
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinTable(
@@ -91,11 +91,11 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 	
 	public ArtistAlias(
 			@NotNull Long id,
-			@NotNull Artist artist, 
+			@NotNull Artist<?> artist, 
 			@NotBlank String name,
 			@NotNull ArtistAliasSortName sortName, 
 			ArtistAliasLocale locale, 
-			ArtistAliasType artistAliasType,
+			ArtistAliasType<?> artistAliasType,
 			ArtistAliasBeginDate artistAliasBeginDate, 
 			ArtistAliasEndDate artistAliasEndDate) {
 		super(name);
@@ -109,7 +109,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 	}
 
 	public ArtistAlias(	@NotNull Long id, 
-			@NotNull Artist artist, 
+			@NotNull Artist<?> artist, 
 			@NotBlank String name) {
 				super(name);
 				this.aliasId = id;
@@ -117,7 +117,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 	}
 	
 	public ArtistAlias(	@NotNull Long id, 
-						@NotNull Artist artist, 
+						@NotNull Artist<?> artist, 
 						@NotBlank String name,
 						@NotNull ArtistAliasSortName sortName) {
 		super(name);
@@ -126,19 +126,19 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 		this.sortName = sortName;
 	}
 
-	public Artist getArtist() {
+	public Artist<?> getArtist() {
 		return artist;
 	}
 
-	public void setArtist(Artist artist) {
+	public void setArtist(Artist<?> artist) {
 		this.artist = artist;
 	}
 
-	public ArtistAliasType getArtistAliasType() {
+	public ArtistAliasType<?> getArtistAliasType() {
 		return artistAliasType;
 	}
 
-	public void setArtistAliasType(ArtistAliasType artistAliasType) {
+	public void setArtistAliasType(ArtistAliasType<?> artistAliasType) {
 		this.artistAliasType = artistAliasType;
 	}
 
