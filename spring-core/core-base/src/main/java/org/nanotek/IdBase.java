@@ -6,6 +6,4 @@ public interface IdBase<K extends IdBase<K,ID>,ID extends Serializable> extends 
 	default IdBase<K,ID> getIdBase(){
 		return this;
 	}
-	
-	
 }

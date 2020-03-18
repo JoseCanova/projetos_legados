@@ -1,6 +1,7 @@
 package org.nanotek.beans.entity;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,20 +11,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.nanotek.BaseEntity;
-import org.nanotek.entities.MutableFrequencyEntity;
-import org.nanotek.entities.MutableIsoCode2BEntity;
-import org.nanotek.entities.MutableIsoCode2TEntity;
-import org.nanotek.entities.MutableIsoCode3Entity;
-import org.nanotek.entities.MutableLanguageIdEntity;
+import org.nanotek.entities.immutables.BaseLanguageEntity;
+import org.nanotek.stream.KongStream;
 
+@SuppressWarnings("rawtypes")
 @Entity
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language<K extends Serializable> extends  LongIdName<String> implements  MutableLanguageEntity<K> {
+public class Language<K extends Serializable> extends  LongIdName<String> implements  BaseLanguageEntity<Language<?>>, MutableLanguageEntity<Language<?>> {
 
 	private static final long serialVersionUID = 3416483640256915L;
+	
+	private Stream<Language> immutable;
 	
 	@NotNull
 	@Column(name="language_id")
@@ -114,6 +114,16 @@ public class Language<K extends Serializable> extends  LongIdName<String> implem
 	@Override
 	public String getIsoCode3() {
 		return isoCode3;
+	}
+
+	@Override
+	public void setLanguage(Language<?> k) {
+			immutable = KongStream.of(Language.class).add(k).build();
+	}
+
+	@Override
+	public Stream<Language> getLanguage() {
+		return immutable;
 	}
 
 }
