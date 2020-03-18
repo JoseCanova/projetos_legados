@@ -4,20 +4,21 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.MutableArtistEntity;
+import org.nanotek.collections.StreamableArtistEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistType")
-public class ArtistType<K extends Serializable> extends BaseType<Artist<?>> implements MutableArtistEntity<Artist<?>>{
+public class ArtistType<K extends Serializable> extends BaseType<Artist<?>> {
 
 	private static final long serialVersionUID = 962190613873549033L;
 	
-	@OneToOne(mappedBy = "artistType")
-	public Artist<?> artist;
+	@OneToMany(mappedBy = "artistType",orphanRemoval = false,fetch = FetchType.LAZY)
+	public StreamableArtistEntity<Artist<?>> artists;
 
 	public ArtistType() {
 		super();
@@ -31,14 +32,5 @@ public class ArtistType<K extends Serializable> extends BaseType<Artist<?>> impl
 		super(name);
 	}
 
-	@Override
-	public Artist<?> getArtist() {
-		return artist;
-	}
-
-	@Override
-	public void setArtist(Artist<?> e) {
-		this.artist = e;
-	}
 
 }

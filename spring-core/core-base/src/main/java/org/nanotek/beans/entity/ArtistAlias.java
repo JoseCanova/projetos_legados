@@ -1,4 +1,4 @@
-package org.nanotek;
+package org.nanotek.beans.entity;
 
 import java.io.Serializable;
 
@@ -14,14 +14,13 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.entity.Artist;
-import org.nanotek.beans.entity.ArtistAliasBeginDate;
-import org.nanotek.beans.entity.ArtistAliasEndDate;
-import org.nanotek.beans.entity.ArtistAliasLocale;
-import org.nanotek.beans.entity.ArtistAliasSortName;
-import org.nanotek.beans.entity.ArtistAliasType;
-import org.nanotek.beans.entity.LongIdName;
-import org.nanotek.beans.entity.MutableAliasIdEntity;
+import org.nanotek.BaseEntity;
+import org.nanotek.MutableArtistAliasBeginDateEntity;
+import org.nanotek.MutableArtistAliasEndDateEntity;
+import org.nanotek.MutableArtistAliasLocaleEntity;
+import org.nanotek.MutableArtistAliasSortNameEntity;
+import org.nanotek.MutableArtistAliasTypeEntity;
+import org.nanotek.MutableArtistEntity;
 
 @Entity
 @Table(name="artist_alias", 
@@ -90,25 +89,6 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 	
 	public ArtistAlias() {}
 	
-	public ArtistAlias(
-			@NotNull Long id,
-			@NotNull Artist<?> artist, 
-			@NotBlank String name,
-			@NotNull ArtistAliasSortName<?> sortName, 
-			ArtistAliasLocale locale, 
-			ArtistAliasType<?> artistAliasType,
-			ArtistAliasBeginDate artistAliasBeginDate, 
-			ArtistAliasEndDate artistAliasEndDate) {
-		super(name);
-		this.aliasId = id;
-		this.artist = artist;
-		this.artistAliasLocale = locale;
-		this.artistAliasType = artistAliasType;
-		this.artistAliasBeginDate = artistAliasBeginDate;
-		this.artistAliasEndDate = artistAliasEndDate;
-		this.artistAliasSortName = sortName;
-	}
-
 	public ArtistAlias(	@NotNull Long id, 
 			@NotNull Artist<?> artist, 
 			@NotBlank String name) {

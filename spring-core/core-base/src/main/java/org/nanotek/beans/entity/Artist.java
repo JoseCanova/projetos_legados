@@ -19,8 +19,14 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
 import org.nanotek.Kong;
+import org.nanotek.MutableAreaEntity;
+import org.nanotek.MutableArtistBeginDateEntity;
+import org.nanotek.MutableArtistCommentEntity;
 import org.nanotek.MutableArtistCreditEntity;
+import org.nanotek.MutableArtistEndDateEntity;
+import org.nanotek.MutableArtistIdEntity;
 import org.nanotek.MutableArtistSortNameEntity;
+import org.nanotek.MutableArtistTypeEntity;
 import org.nanotek.collections.AritistCreditStreamableEntity;
 import org.nanotek.collections.StreamableEntity;
 
@@ -29,9 +35,16 @@ import org.nanotek.collections.StreamableEntity;
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<E extends Serializable,L> extends LongIdGidName<String,String> implements BaseEntity,
+public class Artist<E extends Serializable> extends LongIdGidName<String,String> implements BaseEntity,
+																							MutableArtistIdEntity<Long>,
 																							AritistCreditStreamableEntity<ArtistCredit<?>>,
-																							MutableArtistSortNameEntity<ArtistSortName> {
+																							MutableArtistSortNameEntity<ArtistSortName<?>>,
+																							MutableArtistCommentEntity<ArtistComment<?>>,
+																							MutableArtistBeginDateEntity<ArtistBeginDate>,
+																							MutableArtistEndDateEntity<ArtistEndDate>,
+																							MutableArtistTypeEntity<ArtistType<Artist<?>>>,
+																							MutableGenderEntity<Gender>,
+																							MutableAreaEntity<Area>{
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -39,7 +52,7 @@ public class Artist<E extends Serializable,L> extends LongIdGidName<String,Strin
 	private Long artistId;
 	
 	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
-	public StreamableEntity<ArtistCredit<?>> artistCredits;
+	public AritistCreditStreamableEntity<ArtistCredit<?>> artistCredits;
 
 	@NotNull
 	@OneToOne(optional=false)
@@ -47,7 +60,7 @@ public class Artist<E extends Serializable,L> extends LongIdGidName<String,Strin
 			  name = "artist_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
-	private ArtistSortName artistSortName;
+	public ArtistSortName<?> artistSortName;
 	
 	
 	@OneToOne
@@ -55,25 +68,25 @@ public class Artist<E extends Serializable,L> extends LongIdGidName<String,Strin
 			  name = "artist_comment_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
-	private ArtistComment artistComment;
+	public ArtistComment<?> artistComment;
 	
 	@OneToOne
 	@JoinTable(
 			  name = "artist_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	private ArtistBeginDate artistBeginDate; 
+	public ArtistBeginDate artistBeginDate; 
 	
 	@OneToOne
 	@JoinTable(
 			  name = "artist_end_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
-	private ArtistEndDate artistEndDate;
+	public ArtistEndDate artistEndDate;
 	
 	@NotNull
 	@ManyToOne(optional = false)
-	private ArtistType type; 
+	public ArtistType<Artist<?>> type; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -115,131 +128,5 @@ public class Artist<E extends Serializable,L> extends LongIdGidName<String,Strin
 		this.artistId = id;
 	}
 	
-	public Artist(
-			@NotNull Long id, 
-			@NotBlank String name,
-			@NotBlank ArtistSortName artistSortName, 
-			List<ArtistCredit> artistCredits,
-			@NotBlank String gid, 
-			ArtistComment artistComment,
-			ArtistBeginDate artistBeginDate, 
-			ArtistEndDate artistEndDate, 
-			@NotNull ArtistType type, 
-			Gender gender,
-			Area beginArea, 
-			Area endArea) {
-		super(gid,name);
-		this.artistId = id;
-		this.artistCredits = artistCredits;
-		this.artistComment = artistComment;
-		this.artistBeginDate = artistBeginDate;
-		this.artistEndDate = artistEndDate;
-		this.type = type;
-		this.gender = gender;
-		this.beginArea = beginArea;
-		this.endArea = endArea;
-		this.artistSortName = artistSortName;
-	}
 
-	public void setId(Long id) { 
-		this.id = id;
-	}
-	
-	public List<ArtistCredit> getArtistCredits() {
-		return artistCredits;
-	}
-
-	public void setArtistCredits(List<ArtistCredit> artistCredits) {
-		this.artistCredits = artistCredits;
-	}
-
-	public ArtistComment getArtistComment() {
-		return artistComment;
-	}
-
-	public void setArtistComment(ArtistComment artistComment) {
-		this.artistComment = artistComment;
-	}
-
-	public ArtistBeginDate getArtistBeginDate() {
-		return artistBeginDate;
-	}
-
-	public void setArtistBeginDate(ArtistBeginDate artistBeginDate) {
-		this.artistBeginDate = artistBeginDate;
-	}
-
-	public ArtistEndDate getArtistEndDate() {
-		return artistEndDate;
-	}
-
-	public void setArtistEndDate(ArtistEndDate artistEndDate) {
-		this.artistEndDate = artistEndDate;
-	}
-
-	public ArtistType getType() {
-		return type;
-	}
-
-	public void setType(ArtistType type) {
-		this.type = type;
-	}
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	public Area getBeginArea() {
-		return beginArea;
-	}
-
-	public void setBeginArea(Area beginArea) {
-		this.beginArea = beginArea;
-	}
-
-	public Area getEndArea() {
-		return endArea;
-	}
-
-	public void setEndArea(Area endArea) {
-		this.endArea = endArea;
-	}
-
-	public Area getArea() {
-		return area;
-	}
-
-	public void setArea(Area area) {
-		this.area = area;
-	}
-
-	public Long getArtistId() {
-		return artistId;
-	}
-
-	public void setArtistId(Long artistId) {
-		this.artistId = artistId;
-	}
-
-	public ArtistSortName getArtistSortName() {
-		return artistSortName;
-	}
-
-	public void setArtistSortName(ArtistSortName artistSortName) {
-		this.artistSortName = artistSortName;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getGid() {
-		return gid;
-	}
 }
