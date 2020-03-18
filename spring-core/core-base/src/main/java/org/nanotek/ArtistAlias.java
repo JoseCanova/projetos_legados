@@ -31,6 +31,7 @@ uniqueConstraints= {
 public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  implements 
 														BaseEntity,
 														MutableAliasIdEntity<Long>,
+														MutableArtistAliasSortNameEntity<ArtistAliasSortName<?>>,
 														MutableArtistEntity<Artist<?>> , 
 														MutableArtistAliasTypeEntity<ArtistAliasType<?>> , 
 														MutableArtistAliasLocaleEntity<ArtistAliasLocale>,
@@ -49,7 +50,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 			  name = "artist_alias_sortname_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "sort_name_id",referencedColumnName = "id") )
-	public ArtistAliasSortName sortName;
+	public ArtistAliasSortName<?> artistAliasSortName;
 	
 	@NotNull
 	@ManyToOne(optional = false)
@@ -93,7 +94,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 			@NotNull Long id,
 			@NotNull Artist<?> artist, 
 			@NotBlank String name,
-			@NotNull ArtistAliasSortName sortName, 
+			@NotNull ArtistAliasSortName<?> sortName, 
 			ArtistAliasLocale locale, 
 			ArtistAliasType<?> artistAliasType,
 			ArtistAliasBeginDate artistAliasBeginDate, 
@@ -105,7 +106,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 		this.artistAliasType = artistAliasType;
 		this.artistAliasBeginDate = artistAliasBeginDate;
 		this.artistAliasEndDate = artistAliasEndDate;
-		this.sortName = sortName;
+		this.artistAliasSortName = sortName;
 	}
 
 	public ArtistAlias(	@NotNull Long id, 
@@ -119,73 +120,12 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  im
 	public ArtistAlias(	@NotNull Long id, 
 						@NotNull Artist<?> artist, 
 						@NotBlank String name,
-						@NotNull ArtistAliasSortName sortName) {
+						@NotNull ArtistAliasSortName<?> sortName) {
 		super(name);
 		this.aliasId = id;
 		this.artist = artist;
-		this.sortName = sortName;
+		this.artistAliasSortName = sortName;
 	}
 
-	public Artist<?> getArtist() {
-		return artist;
-	}
-
-	public void setArtist(Artist<?> artist) {
-		this.artist = artist;
-	}
-
-	public ArtistAliasType<?> getArtistAliasType() {
-		return artistAliasType;
-	}
-
-	public void setArtistAliasType(ArtistAliasType<?> artistAliasType) {
-		this.artistAliasType = artistAliasType;
-	}
-
-	public ArtistAliasBeginDate getArtistAliasBeginDate() {
-		return artistAliasBeginDate;
-	}
-
-	public void setArtistAliasBeginDate(ArtistAliasBeginDate artistAliasBeginDate) {
-		this.artistAliasBeginDate = artistAliasBeginDate;
-	}
-
-	public ArtistAliasEndDate getArtistAliasEndDate() {
-		return artistAliasEndDate;
-	}
-
-	public void setArtistAliasEndDate(ArtistAliasEndDate artistAliasEndDate) {
-		this.artistAliasEndDate = artistAliasEndDate;
-	}
-
-	public Long getAliasId() {
-		return aliasId;
-	}
-
-	public void setAliasId(Long aliasId) {
-		this.aliasId = aliasId;
-	}
-
-	public ArtistAliasLocale getArtistAliasLocale() {
-		return artistAliasLocale;
-	}
-
-	public void setArtistAliasLocale(ArtistAliasLocale artistAliasLocale) {
-		this.artistAliasLocale = artistAliasLocale;
-	}
-
-	
-	public ArtistAliasSortName getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(ArtistAliasSortName sortName) {
-		this.sortName = sortName;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
 
 }

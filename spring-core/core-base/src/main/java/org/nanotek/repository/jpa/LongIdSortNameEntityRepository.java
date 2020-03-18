@@ -1,6 +1,6 @@
 package org.nanotek.repository.jpa;
 
-import org.nanotek.beans.entity.LongIdSortNameEntity;
+import org.nanotek.beans.entity.LongIdSortName;
 
-public interface LongIdSortNameEntityRepository<K extends LongIdSortNameEntity> extends LongIdNameEntityRepository<K> {
+public interface LongIdSortNameEntityRepository<K extends LongIdSortName> extends LongIdNameEntityRepository<K> {
 }

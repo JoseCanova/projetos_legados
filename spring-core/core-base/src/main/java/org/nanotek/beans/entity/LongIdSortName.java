@@ -1,15 +1,17 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.SortedNameBase;
+import org.nanotek.MutableSortNameEntity;
 
 @Entity
 @DiscriminatorValue(value = "LongIdSortNameEntity")
-public class LongIdSortNameEntity extends LongIdName implements SortedNameBase<String> {
+public class LongIdSortName<K extends Serializable> extends LongIdName<String> implements MutableSortNameEntity<String> {
 
 	private static final long serialVersionUID = -3442197714885490996L;
 
@@ -17,14 +19,14 @@ public class LongIdSortNameEntity extends LongIdName implements SortedNameBase<S
 	@Column(name="sort_name" , nullable=false, columnDefinition = "VARCHAR NOT NULL")
 	protected String sortName;
 	
-	public LongIdSortNameEntity() {
+	public LongIdSortName() {
 	}
 
-	public LongIdSortNameEntity(@NotBlank String name) {
+	public LongIdSortName(@NotBlank String name) {
 		super(name);
 	}
 	
-	public LongIdSortNameEntity(@NotBlank String name , @NotBlank String sortName) {
+	public LongIdSortName(@NotBlank String name , @NotBlank String sortName) {
 		super(name);
 		this.sortName = sortName;
 	}
@@ -53,7 +55,7 @@ public class LongIdSortNameEntity extends LongIdName implements SortedNameBase<S
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LongIdSortNameEntity other = (LongIdSortNameEntity) obj;
+		LongIdSortName other = (LongIdSortName) obj;
 		if (sortName == null) {
 			if (other.sortName != null)
 				return false;

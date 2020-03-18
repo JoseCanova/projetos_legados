@@ -14,7 +14,7 @@ import org.nanotek.RecordingAliasIdBase;
 
 @Entity
 @DiscriminatorValue(value = "RecordingAlias")
-public class RecordingAlias extends LongIdSortNameEntity implements RecordingAliasIdBase<Long>{
+public class RecordingAlias extends LongIdSortName<RecordingAlias> implements RecordingAliasIdBase<Long>{
 
 	private static final long serialVersionUID = -1952011326249338518L;
 
@@ -28,7 +28,7 @@ public class RecordingAlias extends LongIdSortNameEntity implements RecordingAli
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "recording_id")
-	private Recording recording; 
+	private Recording<?> recording; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="recording_type_id")
@@ -55,7 +55,7 @@ public class RecordingAlias extends LongIdSortNameEntity implements RecordingAli
 	public RecordingAlias() {
 	}
 
-	public RecordingAlias(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, String locale, @NotNull Recording recording,
+	public RecordingAlias(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, String locale, @NotNull Recording<?> recording,
 			RecordingAliasType type, @NotNull @Size(min = 0, max = 1000) String sortName, Integer beginDateYear,
 			Integer beginDateMonth, Integer beginDateDay, Integer endDateYear, Integer endDateMonth,
 			Integer endDateDay) {
@@ -70,14 +70,6 @@ public class RecordingAlias extends LongIdSortNameEntity implements RecordingAli
 		this.endDateYear = endDateYear;
 		this.endDateMonth = endDateMonth;
 		this.endDateDay = endDateDay;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getLocale() {

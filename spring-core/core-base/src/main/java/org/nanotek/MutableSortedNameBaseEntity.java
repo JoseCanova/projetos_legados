@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-public interface SortedNameBase<K extends Serializable> {
+public interface MutableSortedNameBaseEntity<K extends Serializable> extends SortNameBaseEntity<K> {
 
-	K getSortName();
 	void setSortName(@NotBlank K sortName);
 	
-	default SortedNameBase<K> withSortName(K sortName){ 
+	default MutableSortedNameBaseEntity<K> withSortName(K sortName){ 
 		this.setSortName(sortName);
 		return this;
 	}

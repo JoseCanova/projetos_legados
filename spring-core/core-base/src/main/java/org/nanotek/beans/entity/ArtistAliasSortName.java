@@ -1,21 +1,24 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.ArtistAlias;
-import org.nanotek.BaseEntity;
+import org.nanotek.MutableArtistAliasEntity;
+import org.nanotek.MutableArtistAliasSortNameEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistAliasSortName")
-public class ArtistAliasSortName extends SortNameBase implements BaseEntity{
+public class ArtistAliasSortName<K extends Serializable> extends SortNameBase<ArtistAliasSortName<?>> implements MutableArtistAliasEntity<ArtistAlias<?>> {
 
 	private static final long serialVersionUID = -7162854301861535960L;
 
 	@OneToOne(mappedBy="sortName")
-	public ArtistAlias artistAlias;
+	public ArtistAlias<?> artistAlias;
 	
 	public ArtistAliasSortName() {
 	}
@@ -24,11 +27,11 @@ public class ArtistAliasSortName extends SortNameBase implements BaseEntity{
 		super(sortName);
 	}
 
-	public ArtistAlias getArtistAlias() {
+	public ArtistAlias<?> getArtistAlias() {
 		return artistAlias;
 	}
 
-	public void setArtistAlias(ArtistAlias artistAlias) {
+	public void setArtistAlias(ArtistAlias<?> artistAlias) {
 		this.artistAlias = artistAlias;
 	}
 

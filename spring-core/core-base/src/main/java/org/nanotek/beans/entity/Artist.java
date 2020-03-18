@@ -1,6 +1,7 @@
 package org.nanotek.beans.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,14 +17,21 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
+import org.nanotek.Kong;
+import org.nanotek.MutableArtistCreditEntity;
 import org.nanotek.MutableArtistSortNameEntity;
+import org.nanotek.collections.AritistCreditStreamableEntity;
+import org.nanotek.collections.StreamableEntity;
 
 @Entity
 @Table(name="artist" , 
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<E extends Serializable> extends LongIdGidName<String,E> implements MutableArtistSortNameEntity<ArtistSortName> {
+public class Artist<E extends Serializable,L> extends LongIdGidName<String,String> implements BaseEntity,
+																							AritistCreditStreamableEntity<ArtistCredit<?>>,
+																							MutableArtistSortNameEntity<ArtistSortName> {
 	
 	private static final long serialVersionUID = -932806802235346847L;
 
@@ -31,7 +39,7 @@ public class Artist<E extends Serializable> extends LongIdGidName<String,E> impl
 	private Long artistId;
 	
 	@ManyToMany(mappedBy = "artists",fetch=FetchType.LAZY)
-	private List<ArtistCredit> artistCredits;
+	public StreamableEntity<ArtistCredit<?>> artistCredits;
 
 	@NotNull
 	@OneToOne(optional=false)
