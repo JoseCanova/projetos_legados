@@ -4,17 +4,17 @@ import java.util.Optional;
 
 import org.apache.commons.collections4.Predicate;
 
-public interface BaseEntity extends IdentityPredicate<BaseEntity>{
-		default  Optional<BaseEntity> evaluate(Predicate<BaseEntity> object) {
-			boolean eval = Optional.ofNullable(object.evaluate(this)).orElseThrow(BaseException::new);
-			return eval ? Optional.of(this) : BaseEntity.empty();
+public interface BaseEntity extends IdentityPredicate<BaseEntity> {
+		default  Optional<BaseEntity> compute(Predicate<BaseEntity> predicate) {
+			boolean eval = Optional.ofNullable(predicate.evaluate(this)).orElseThrow(BaseException::new);
+			return eval ? asOptional() : BaseEntity.emptyEntity();
 		}
 		
-		static Optional<BaseEntity> empty() {
+		static Optional<BaseEntity> emptyEntity() {
 			return Optional.empty();
 		}
 
-		default Optional<BaseEntity> get() {
+		default Optional<BaseEntity> asOptional() {
 			return Optional.of(this);
 		}
 }
