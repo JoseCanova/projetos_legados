@@ -6,16 +6,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.nanotek.entities.BaseMediumFormatEntity;
+import org.nanotek.entities.MutableMediumFomatEntity;
+
 @Entity
 @Table(name="medium_format")
-public class MediumFormat extends SequenceLongBase implements LongIdNameGidEntityDescriptionBase<String,String, String>{
+public class MediumFormat extends SequenceLongBase<MediumFormat> implements 
+																  BaseMediumFormatEntity,
+																  MutableMediumFomatEntity<MediumFormat>{
 
 	private static final long serialVersionUID = 8104913204474210789L;
 	
 	@NotBlank
 	@Size(min=1,max=100)
 	@Column(name = "name" , length=100 , insertable=true , nullable=false , updatable=true)
-	private String name; 
+	public String name; 
 	
 	@Column(name = "parent")
 	private Long parent;
@@ -98,40 +103,4 @@ public class MediumFormat extends SequenceLongBase implements LongIdNameGidEntit
 		this.description = description;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MediumFormat other = (MediumFormat) obj;
-		if (gid == null) {
-			if (other.gid != null)
-				return false;
-		} else if (!gid.equals(other.gid))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "MediumFormat [name=" + name + ", parent=" + parent + ", year=" + year + ", hasDiscId=" + hasDiscId
-				+ ", gid=" + gid + ", description=" + description + ", id=" + id + "]";
-	}
 }

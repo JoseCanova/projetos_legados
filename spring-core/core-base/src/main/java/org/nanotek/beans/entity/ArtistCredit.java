@@ -22,7 +22,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ArtistCreditEntity;
 import org.nanotek.BaseEntity;
 import org.nanotek.entities.MutableArtistCreditIdEntity;
 

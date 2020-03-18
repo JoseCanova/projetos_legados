@@ -4,9 +4,11 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import org.nanotek.entities.BaseReleaseAliasEndDateEntity;
+
 @Entity
 @DiscriminatorValue(value="ReleaseAliasEndDate")
-public class ReleaseAliasEndDate extends DatableBase<Integer,Integer,Integer> {
+public class ReleaseAliasEndDate extends DatableBase<Integer,Integer,Integer> implements BaseReleaseAliasEndDateEntity{
 
 	private static final long serialVersionUID = -2316725967469275402L;
 
