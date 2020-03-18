@@ -23,7 +23,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.MutableArtistCreditCountEntity;
 import org.nanotek.entities.MutableArtistCreditIdEntity;
+import org.nanotek.entities.MutableArtistCreditRefCountEntity;
 
 @Entity
 @Table(name="artist_credit", uniqueConstraints= {

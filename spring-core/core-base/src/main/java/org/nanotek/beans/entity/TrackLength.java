@@ -1,17 +1,16 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.ImmutableLengthIdBase;
+import org.nanotek.entities.MutableTrackEntity;
 
 @Entity
 @DiscriminatorValue(value="TrackLength")
-public class TrackLength extends LongLengthyBase implements ImmutableLengthIdBase<TrackLength , Long,Long> {
+public class TrackLength extends LongLengthyBase implements MutableTrackEntity<Track>{
+//ImmutableLengthIdBase<TrackLength , Long,Long> 
 
 	private static final long serialVersionUID = 3623778681403832594L;
 	
@@ -32,36 +31,6 @@ public class TrackLength extends LongLengthyBase implements ImmutableLengthIdBas
 
 	public void setTrack(Track track) {
 		this.track = track;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((track == null) ? 0 : track.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TrackLength other = (TrackLength) obj;
-		if (track == null) {
-			if (other.track != null)
-				return false;
-		} else if (!track.equals(other.track))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TrackLength [track=" + track + ", length=" + length + ", id=" + id + "]";
 	}
 
 }

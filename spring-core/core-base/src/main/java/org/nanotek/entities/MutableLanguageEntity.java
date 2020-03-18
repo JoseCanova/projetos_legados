@@ -1,12 +1,6 @@
-package org.nanotek.beans.entity;
+package org.nanotek.entities;
 
 import java.io.Serializable;
-
-import org.nanotek.entities.MutableFrequencyEntity;
-import org.nanotek.entities.MutableIsoCode2BEntity;
-import org.nanotek.entities.MutableIsoCode2TEntity;
-import org.nanotek.entities.MutableIsoCode3Entity;
-import org.nanotek.entities.MutableLanguageIdEntity;
 
 public interface MutableLanguageEntity <K extends Serializable> extends 					MutableLanguageIdEntity<Long>,
 																							MutableIsoCode2TEntity<String>,

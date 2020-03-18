@@ -11,7 +11,6 @@ import org.nanotek.beans.entity.ArtistEndDate;
 import org.nanotek.beans.entity.ArtistSortName;
 import org.nanotek.beans.entity.ArtistType;
 import org.nanotek.beans.entity.Gender;
-import org.nanotek.beans.entity.MutableGenderEntity;
 
 
 public interface BaseArtistEntity<K extends Serializable> extends 

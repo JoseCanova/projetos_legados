@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.TypeEntity;
 import org.nanotek.entities.MutableAreaBeginDateEntity;
+import org.nanotek.entities.MutableAreaCommentEntity;
 import org.nanotek.entities.MutableAreaEndDateEntity;
 import org.nanotek.entities.MutableAreaIdEntity;
 

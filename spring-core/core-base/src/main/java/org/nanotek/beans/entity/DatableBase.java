@@ -81,17 +81,4 @@ public class DatableBase <Y extends Serializable , M extends Serializable , D ex
 		this.day = day;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((year == null) ? 0 : year.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public String toString() {
-		return "DatableBase [year=" + year + ", month=" + month + ", day=" + day + ", id=" + id + "]";
-	}
 }

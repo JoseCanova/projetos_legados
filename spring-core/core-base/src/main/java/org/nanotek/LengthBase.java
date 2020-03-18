@@ -2,9 +2,9 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-import org.nanotek.entities.MutableLength;
+import org.nanotek.entities.MutableLengthEntity;
 
-public interface LengthBase<T extends Serializable> extends MutableLength<T>{
+public interface LengthBase<T extends Serializable> extends MutableLengthEntity<T>{
 	
 	T getLength();
 	

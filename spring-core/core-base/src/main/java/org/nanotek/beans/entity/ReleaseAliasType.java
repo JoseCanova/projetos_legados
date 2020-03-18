@@ -6,10 +6,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.entities.BaseReleaseAliasTypeEntity;
 
 @Entity
 @DiscriminatorValue(value="ReleaseAliasType")
-public class ReleaseAliasType extends BaseType  {
+public class ReleaseAliasType extends BaseType<ReleaseAliasType> implements BaseReleaseAliasTypeEntity{
 
 	private static final long serialVersionUID = 6615127464602860751L;
 
@@ -28,16 +29,6 @@ public class ReleaseAliasType extends BaseType  {
 	public String toString() {
 		return "ReleaseAliasType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
 				+ description + ", gid=" + gid + ", id=" + id + "]";
-	}
-
-	@Override
-	public String getGid() {
-		return gid;
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 }

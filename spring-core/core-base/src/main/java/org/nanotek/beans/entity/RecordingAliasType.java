@@ -5,9 +5,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.entities.BaseRecordingAliasTypeEntity;
 
 @Entity
-public class RecordingAliasType extends BaseType {
+public class RecordingAliasType extends BaseType<RecordingAliasType> implements BaseRecordingAliasTypeEntity {
 
 	private static final long serialVersionUID = -1922272725479730994L;
 	
@@ -22,21 +23,5 @@ public class RecordingAliasType extends BaseType {
 		super(name);
 	}
 
-	@Override
-	public String toString() {
-		return "RecordingAliasType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder
-				+ ", description=" + description + ", gid=" + gid + ", id=" + id + "]";
-	}
-
-	@Override
-	public String getGid() {
-		// TODO Auto-generated method stub
-		return gid;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
 	
 }

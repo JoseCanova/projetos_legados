@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.nanotek.entities.MutableLanguageEntity;
 import org.nanotek.entities.immutables.BaseLanguageEntity;
 import org.nanotek.stream.KongStream;
 

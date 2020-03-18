@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.MutableNameEntity;
+
 @MappedSuperclass
 public class LongIdName<K extends Serializable> extends SequenceLongBase<K> implements MutableNameEntity<K>{
 

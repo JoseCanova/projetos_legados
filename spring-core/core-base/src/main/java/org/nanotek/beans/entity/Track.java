@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="track")
-public class Track extends LongIdGidName {
+public class Track extends LongIdGidName<String,String> {
 
 	private static final long serialVersionUID = 8642862162010029043L;
 
@@ -39,7 +39,7 @@ public class Track extends LongIdGidName {
 	
 	@NotNull
 	@ManyToOne(optional=false)
-	private ArtistCredit artistCredit; 
+	private ArtistCredit<?> artistCredit; 
 	
 	@NotNull
 	@OneToOne(optional=false)
@@ -52,7 +52,7 @@ public class Track extends LongIdGidName {
 	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY , optional = false)
 	@JoinColumn(name="recordingId" , referencedColumnName="id")
-	private Recording recording;
+	private Recording<?> recording;
 	
 	public Medium getMedium() {
 		return medium;
@@ -75,17 +75,11 @@ public class Track extends LongIdGidName {
 		this.number = number;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	
-	public ArtistCredit getArtistCredit() {
+	public ArtistCredit<?> getArtistCredit() {
 		return artistCredit;
 	}
-	public void setArtistCredit(ArtistCredit artistCredit) {
+	public void setArtistCredit(ArtistCredit<?> artistCredit) {
 		this.artistCredit = artistCredit;
 	}
 	
@@ -101,39 +95,10 @@ public class Track extends LongIdGidName {
 	public void setTrackId(Long trackId) {
 		this.trackId = trackId;
 	}
-	public Recording getRecording() {
+	public Recording<?> getRecording() {
 		return recording;
 	}
-	public void setRecording(Recording recording) {
+	public void setRecording(Recording<?> recording) {
 		this.recording = recording;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((trackId == null) ? 0 : trackId.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Track other = (Track) obj;
-		if (trackId == null) {
-			if (other.trackId != null)
-				return false;
-		} else if (!trackId.equals(other.trackId))
-			return false;
-		return true;
-	}
-	@Override
-	public String toString() {
-		return "Track [trackId=" + trackId + ", medium=" + medium + ", position=" + position + ", number=" + number
-				+ ", artistCredit=" + artistCredit + ", length=" + length + ", recording=" + recording + ", gid=" + gid
-				+ ", name=" + name + ", id=" + id + "]";
 	}
 }
