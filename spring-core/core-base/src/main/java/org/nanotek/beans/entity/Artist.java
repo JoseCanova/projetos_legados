@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.BaseEntity;
 import org.nanotek.Kong;
 import org.nanotek.collections.AritistCreditStreamableEntity;
+import org.nanotek.entities.BaseArtistEntity;
 import org.nanotek.entities.MutableAreaEntity;
 import org.nanotek.entities.MutableArtistBeginAreaEntity;
 import org.nanotek.entities.MutableArtistBeginDateEntity;
@@ -36,17 +37,7 @@ import org.nanotek.stream.StreamableEntity;
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<E extends Serializable> extends LongIdGidName<String,String> implements BaseEntity,
-																							MutableArtistIdEntity<Long>,
-																							AritistCreditStreamableEntity<ArtistCredit<?>>,
-																							MutableArtistSortNameEntity<ArtistSortName<?>>,
-																							MutableArtistCommentEntity<ArtistComment<?>>,
-																							MutableArtistBeginDateEntity<ArtistBeginDate>,
-																							MutableArtistEndDateEntity<ArtistEndDate>,
-																							MutableArtistTypeEntity<ArtistType<Artist<?>>>,
-																							MutableGenderEntity<Gender>,
-																							MutableAreaEntity<Area<Artist<?>>>,
-																							MutableArtistBeginAreaEntity<Area<Artist<?>>>{
+public class Artist<K extends Serializable> extends LongIdGidName<String,String> implements BaseArtistEntity<K>{
 	
 	private static final long serialVersionUID = -932806802235346847L;
 

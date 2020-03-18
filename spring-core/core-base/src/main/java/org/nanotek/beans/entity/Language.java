@@ -1,136 +1,119 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.nanotek.BaseEntity;
+import org.nanotek.entities.MutableFrequencyEntity;
+import org.nanotek.entities.MutableIsoCode2BEntity;
+import org.nanotek.entities.MutableIsoCode2TEntity;
+import org.nanotek.entities.MutableIsoCode3Entity;
+import org.nanotek.entities.MutableLanguageIdEntity;
 
 @Entity
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language extends  LongIdName {
+public class Language<K extends Serializable> extends  LongIdName<String> implements  MutableLanguageEntity<K> {
 
 	private static final long serialVersionUID = 3416483640256915L;
-
+	
+	@NotNull
 	@Column(name="language_id")
 	private Long languageId;
 	
-	@Column(name="isoCode2t" , length=3)
-	private String isoCode2t; 
+	@NotBlank
+	@Size(min = 3 , max = 3)
+	@Column(name="isoCode2T" , length=3)
+	private String isoCode2T; 
 	
-	@Column(name="isoCode2b" , length=3)
-	private String isoCode2b; 
+	@NotBlank
+	@Size(min = 3 , max = 3)
+	@Column(name="isoCode2B" , length=3)
+	private String isoCode2B; 
 	
+	@NotBlank
+	@Size(min = 2 , max = 2)
 	@Column(name="isoCode1" , length=2)
 	private String isoCode1; 
 	
 	@Column(name="frequency")
 	private Long frequency;
 	
+	@NotBlank
+	@Size(min = 3 , max = 3)
 	@Column(name="isoCode3", length=3)
 	private String isoCode3;
 
 	public Language() {}
-	
-	public Language(Long id, String isoCode2t, String isoCode2b, String isoCode1, @NotBlank String name, Long frequency,
-			String isoCode3) {
-		this.languageId = id;
-		this.isoCode2t = isoCode2t;
-		this.isoCode2b = isoCode2b;
+
+	public Language(@NotNull Long languageId, @NotBlank @Size(min = 3, max = 3) String isoCode2T,
+			@NotBlank @Size(min = 3, max = 3) String isoCode2B, @NotBlank @Size(min = 2, max = 2) String isoCode1,
+			Long frequency, @NotBlank @Size(min = 3, max = 3) String isoCode3) {
+		super();
+		this.languageId = languageId;
+		this.isoCode2T = isoCode2T;
+		this.isoCode2B = isoCode2B;
 		this.isoCode1 = isoCode1;
-		this.name = name;
 		this.frequency = frequency;
 		this.isoCode3 = isoCode3;
 	}
 
-	public String getIsoCode2t() {
-		return isoCode2t;
+	@Override
+	public void setLanguageiId(Long k) {
+		this.languageId = k;
 	}
 
-	public void setIsoCode2t(String isoCode2t) {
-		this.isoCode2t = isoCode2t;
-	}
-
-	public String getIsoCode2b() {
-		return isoCode2b;
-	}
-
-	public void setIsoCode2b(String isoCode2b) {
-		this.isoCode2b = isoCode2b;
-	}
-
-	public String getIsoCode1() {
-		return isoCode1;
-	}
-
-	public void setIsoCode1(String isoCode1) {
-		this.isoCode1 = isoCode1;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getFrequency() {
-		return frequency;
-	}
-
-	public void setFrequency(Long frequency) {
-		this.frequency = frequency;
-	}
-
-	public String getIsoCode3() {
-		return isoCode3;
-	}
-
-	public void setIsoCode3(String isoCode3) {
-		this.isoCode3 = isoCode3;
-	}
-
+	@Override
 	public Long getLanguageId() {
 		return languageId;
 	}
 
-	public void setLanguageId(Long languageId) {
-		this.languageId = languageId;
-	}
-	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((languageId == null) ? 0 : languageId.hashCode());
-		return result;
+	public void setIsoCode2T(String k) {
+			this.isoCode2T = k;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Language other = (Language) obj;
-		if (languageId == null) {
-			if (other.languageId != null)
-				return false;
-		} else if (!languageId.equals(other.languageId))
-			return false;
-		return true;
+	public String getIsoCode2T() {
+		return isoCode2T;
 	}
 
 	@Override
-	public String toString() {
-		return "Language [languageId=" + languageId + ", isoCode2t=" + isoCode2t + ", isoCode2b=" + isoCode2b
-				+ ", isoCode1=" + isoCode1 + ", frequency=" + frequency + ", isoCode3=" + isoCode3 + ", name=" + name
-				+ ", id=" + id + "]";
+	public void setIsoCode2B(String k) {
+		this.isoCode2B = k;
+	}
+
+	@Override
+	public String getIsoCode2B() {
+		return isoCode2B;
+	}
+
+	@Override
+	public void setFrequency(Long k) {
+		this.frequency = k;
+	}
+
+	@Override
+	public Long getFrequency() {
+		return frequency;
+	}
+
+	@Override
+	public void setIsoCode3(String k) {
+		this.isoCode3 = k;
+	}
+
+	@Override
+	public String getIsoCode3() {
+		return isoCode3;
 	}
 
 }
