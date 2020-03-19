@@ -32,6 +32,5 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements 
 	public Optional<ID> on(PredicateBase<K, ID> predicate) {
 		return predicate.evaluate(immutable);
 	}
-
-
+    
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 import org.nanotek.Base;
+import org.nanotek.Holder;
 import org.nanotek.JsonMessage;
 import org.nanotek.Kong;
 import org.nanotek.Result;
@@ -54,6 +55,7 @@ import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
+@SuppressWarnings("rawtypes")
 @Configuration
 @EnableIntegration
 @EnableConfigurationProperties
@@ -155,6 +157,7 @@ public class AreaIntegrationConfiguration {
 	@Service
 	class AreaProcessor<A,B,C> extends CsvBaseProcessor{
 
+		@SuppressWarnings("unchecked")
 		public AreaProcessor
 		(@Autowired @Qualifier("areaParser") BaseMapParser<?,?> parser,
 				@Autowired @Qualifier("areaCsvToBean") CsvToBean<AreaBean> csvToBean) {
@@ -214,6 +217,7 @@ public class AreaIntegrationConfiguration {
 		@Autowired
 		AreaCommentRepository cRep;
 		
+
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			AreaHolder holder = (AreaHolder) message.getPayload();
@@ -243,7 +247,8 @@ public class AreaIntegrationConfiguration {
 		@Autowired
 		AreaRepository areaRep;
 		
-		@Override
+		@SuppressWarnings("unchecked")
+@Override
 		public AreaHolder transform(AreaBean source) {
 			Area<?> area = null;
 			Optional <Area<?>> optArea = areaRep.findByAreaId(source.getAreaId());
@@ -254,7 +259,7 @@ public class AreaIntegrationConfiguration {
 			optType.ifPresent(t ->{
 				t.compute((p) ->{
 					area = new Area(source.getAreaId(),source.getName(),source.getGid(),t);
-					Kong.get(area).ifPresent(a -> {});
+					Kong.get(area).ifPresent(a->  );
 					return true;
 				});
 			});
