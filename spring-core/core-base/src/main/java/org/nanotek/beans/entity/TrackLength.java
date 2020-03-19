@@ -9,7 +9,7 @@ import org.nanotek.entities.MutableTrackEntity;
 
 @Entity
 @DiscriminatorValue(value="TrackLength")
-public class TrackLength extends LongLengthyBase implements MutableTrackEntity<Track>{
+public class TrackLength extends LongLengthyBase<TrackLength> implements MutableTrackEntity<Track>{
 //ImmutableLengthIdBase<TrackLength , Long,Long> 
 
 	private static final long serialVersionUID = 3623778681403832594L;

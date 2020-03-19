@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class BasePersistenceService<O extends IdBase<Long>, R extends IdBaseRepository<O,Long>>  {
+public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends IdBaseRepository<O,Long>>  {
 
 	protected R  baseRepository;
 	

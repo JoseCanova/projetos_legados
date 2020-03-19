@@ -23,6 +23,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseArtistCreditEntity;
 import org.nanotek.entities.MutableArtistCreditCountEntity;
 import org.nanotek.entities.MutableArtistCreditIdEntity;
 import org.nanotek.entities.MutableArtistCreditRefCountEntity;
@@ -42,7 +43,7 @@ import org.nanotek.entities.MutableArtistCreditRefCountEntity;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit<K extends Serializable> extends LongIdName<String> implements  BaseEntity,
+public class ArtistCredit<K extends Serializable> extends LongIdName<ArtistCredit<?>> implements  BaseArtistCreditEntity,
 																  MutableArtistCreditIdEntity<Long>,	
 																  MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
 																  MutableArtistCreditRefCountEntity<ArtistCreditRefCount> 

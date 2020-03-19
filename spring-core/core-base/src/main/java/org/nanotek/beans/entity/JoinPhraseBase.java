@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseJoinPhraseBaseEntity;
 
 @MappedSuperclass
-public class JoinPhraseBase<K extends Serializable> extends SequenceLongBase<K> implements BaseEntity{
+public class JoinPhraseBase<K extends Serializable , J extends JoinPhraseBase<?,?>> extends SequenceLongBase<J> implements BaseJoinPhraseBaseEntity{
 
 	private static final long serialVersionUID = -5786425355982517472L;
 

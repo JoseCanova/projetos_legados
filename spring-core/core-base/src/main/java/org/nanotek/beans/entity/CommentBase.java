@@ -7,10 +7,8 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.BaseEntity;
-
 @MappedSuperclass
-public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<K> implements BaseEntity {
+public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<CommentBase<K,E>>  {
 
 	private static final long serialVersionUID = -3239637365262870832L;
 	

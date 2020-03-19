@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("InstrumentDescription")
-public class InstrumentDescription extends DescriptionBase{
+public class InstrumentDescription extends DescriptionBase<BaseTypeDescription>{
 
 	private static final long serialVersionUID = 8312961172730412162L;
 

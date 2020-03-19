@@ -8,16 +8,20 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseInstrumentCommentEntity;
 import org.nanotek.entities.MutableCommentEntity;
 import org.nanotek.entities.MutableInstrumentEntity;
 
 @Entity
 @DiscriminatorValue("InstrumentComment")
-public class InstrumentComment<E extends Serializable> extends CommentBase<String,E> implements MutableInstrumentEntity<Instrument> , MutableCommentEntity<String>{
+public class InstrumentComment<E extends Serializable> extends CommentBase<String,InstrumentComment<?>> implements 
+																					BaseInstrumentCommentEntity,
+																					MutableInstrumentEntity<Instrument<?>> , 
+																					MutableCommentEntity<String>{
 	
 	@NotNull
 	@OneToOne(optional=false ,  mappedBy = "comment")
-	private Instrument instrument;
+	private Instrument<?> instrument;
 
 	private static final long serialVersionUID = -4917697368647426796L;
 
@@ -28,16 +32,16 @@ public class InstrumentComment<E extends Serializable> extends CommentBase<Strin
 		this.comment = comment;
 	}
 	
-	public InstrumentComment(@NotNull Instrument instrument, @NotBlank String comment) {
+	public InstrumentComment(@NotNull Instrument<?> instrument, @NotBlank String comment) {
 		this.instrument = instrument;
 		this.comment = comment;
 	}
 
-	public Instrument getInstrument() {
+	public Instrument<?> getInstrument() {
 		return instrument;
 	}
 	
-	public void setInstrument(Instrument instrument) {
+	public void setInstrument(Instrument<?> instrument) {
 		this.instrument = instrument;
 	}
 

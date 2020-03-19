@@ -9,11 +9,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseAreaCommentEntity;
 import org.nanotek.entities.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")
-public class AreaComment<E extends Serializable> extends CommentBase<String, AreaComment<E>> implements  MutableCommentEntity<String>,BaseEntity{
+public class AreaComment<E extends Serializable> extends CommentBase<String, AreaComment<E>> implements  MutableCommentEntity<String>,BaseAreaCommentEntity{
 
 	private static final long serialVersionUID = -68821965634755841L;
 	

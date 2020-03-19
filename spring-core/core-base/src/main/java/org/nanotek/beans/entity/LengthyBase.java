@@ -9,24 +9,24 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.entities.MutableLengthEntity;
 
 @MappedSuperclass
-public abstract class LengthyBase<K extends Serializable> extends SequenceLongBase<LengthyBase<?>> implements MutableLengthEntity<K>{
+public abstract class LengthyBase<K extends LengthyBase<?,L>,L extends Serializable> extends SequenceLongBase<K> implements MutableLengthEntity<L>{
 	private static final long serialVersionUID = 266384916289553935L;
 //TODO: Check the question mark by what it implements.
 	
 	@NotNull
 	@Column(name="length" , nullable=false)
-	protected  K length;
+	protected  L length;
 	
 	public LengthyBase() {
 	}
 
 	@Override
-	public void setLength(K length) {
+	public void setLength(L length) {
 		this.length = length;
 	}
 	
 	@Override
-	public K getLength() {
+	public L getLength() {
 		return length;
 	}
 	

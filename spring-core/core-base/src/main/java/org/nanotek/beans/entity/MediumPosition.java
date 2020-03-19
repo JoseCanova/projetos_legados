@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue(value="MediumPosition")
-public class MediumPosition extends LongPositionBase {
+public class MediumPosition extends LongPositionBase<MediumPosition> {
 
 	private static final long serialVersionUID = -5847962105120235784L;
 	

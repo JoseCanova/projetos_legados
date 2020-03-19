@@ -9,12 +9,13 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseReleaseCommentEntity;
 import org.nanotek.entities.MutableCommentEntity;
 import org.nanotek.entities.MutableReleaseEntity;
 
 @Entity
 @DiscriminatorValue(value="ReleaseComment")
-public class ReleaseComment<E extends Serializable> extends CommentBase<String,E> implements MutableCommentEntity<String> , MutableReleaseEntity<Release> {
+public class ReleaseComment<E extends Serializable> extends CommentBase<String,ReleaseComment<?>> implements BaseReleaseCommentEntity, MutableCommentEntity<String> , MutableReleaseEntity<Release> {
 
 	private static final long serialVersionUID = 4978743759627354208L;
 	

@@ -22,7 +22,7 @@ import org.nanotek.entities.MutableArtistAliasEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias<K extends Serializable>  extends LongIdName<String>  implements 
+public class ArtistAlias<K extends Serializable>  extends LongIdName<ArtistAlias<?>>  implements 
 														BaseArtistAliasEntity<ArtistAlias<?>>,
 														MutableArtistAliasEntity<ArtistAlias<?>>{
 

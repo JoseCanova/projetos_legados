@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseArtistCreditNameEntity;
 import org.nanotek.entities.MutableArtistCreditEntity;
 import org.nanotek.entities.MutableArtistCreditNameJoinPhraseEntity;
 import org.nanotek.entities.MutableArtistEntity;
@@ -21,7 +22,7 @@ import org.nanotek.entities.MutatbleArtistCreditNameIdEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName<E extends Serializable> extends LongIdName<String> implements  BaseEntity,
+public class ArtistCreditName<E extends Serializable> extends LongIdName<ArtistCreditName<?>> implements  BaseArtistCreditNameEntity,
 															 		MutatbleArtistCreditNameIdEntity<Long>, 
 															 		MutableArtistCreditEntity<ArtistCredit<?>>,
 															 		MutableArtistEntity<Artist<?>>,

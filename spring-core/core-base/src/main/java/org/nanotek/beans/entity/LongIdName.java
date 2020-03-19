@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
@@ -9,31 +7,33 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.entities.MutableNameEntity;
 
 @MappedSuperclass
-public class LongIdName<K extends Serializable> extends SequenceLongBase<K> implements MutableNameEntity<K>{
+public class LongIdName<K extends LongIdName<?>> extends SequenceLongBase<K> implements MutableNameEntity<String>{
 
 
 	private static final long serialVersionUID = -5795977292694140863L;
 	
 	@NotNull
 	@Column(name="name" , nullable=false, columnDefinition = "VARCHAR NOT NULL")
-	public K name;
+	public String name;
 	
 	public LongIdName() {
 		super();
 	}
 
-	public LongIdName(@NotNull K name) {
+	public LongIdName(@NotNull String name) {
 		super();
 		this.name = name;
 	}
 
-	public void setName(K name) { 
-		this.name = name;
-	}
-	
 	@Override
-	public K getName() {
+	public String getName() {
 		return name;
 	}
+
+	@Override
+	public void setName(String k) {
+		this.name = name;
+	}
+
 	
 }

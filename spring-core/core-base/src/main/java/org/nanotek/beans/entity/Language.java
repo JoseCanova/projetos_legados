@@ -20,7 +20,7 @@ import org.nanotek.stream.KongStream;
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language<K extends Serializable> extends  LongIdName<String> implements  BaseLanguageEntity<Language<?>>, MutableLanguageEntity<Language<?>> {
+public class Language<K extends Serializable> extends  LongIdName<Language<?>> implements  BaseLanguageEntity<Language<?>>, MutableLanguageEntity<Language<?>> {
 
 	private static final long serialVersionUID = 3416483640256915L;
 	
