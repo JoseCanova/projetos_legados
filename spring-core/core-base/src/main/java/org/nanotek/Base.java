@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import javax.persistence.IdClass;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
@@ -75,7 +77,7 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 	
 	default <KID extends Base<ID> , ID extends Base<?>> Optional<K> newInstance(Class<K> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
 		try {
-			return Base.newInstance(clazz, new Base[] {Base.newInstance(idClazz).get()},idClazz);
+			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},idClazz);
 		} catch (Exception e) {
 			throw new BaseInstantiationException(e);
 		}
