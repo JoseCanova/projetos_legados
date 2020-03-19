@@ -25,10 +25,4 @@ public class ReleaseAliasType extends BaseType<ReleaseAliasType> implements Base
 		super(name);
 	}
 
-	@Override
-	public String toString() {
-		return "ReleaseAliasType [name=" + name + ", parent=" + parent + ", childOrder=" + childOrder + ", description="
-				+ description + ", gid=" + gid + ", id=" + id + "]";
-	}
-
 }

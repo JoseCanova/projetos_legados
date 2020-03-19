@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.IdBase;
+import org.nanotek.ImmutableBase;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name="sequence_long_base")
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class SequenceLongBase<I extends SequenceLongBase<?>> implements IdBase<I, Long>{
+public class SequenceLongBase<I extends SequenceLongBase<I>> implements ImmutableBase<I, Long>{
 
 	private static final long serialVersionUID = 1932266128563675834L;
 	

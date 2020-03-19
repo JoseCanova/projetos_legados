@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -17,7 +15,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.BaseEntity;
+import org.nanotek.entities.MutableChildOrderEntity;
+import org.nanotek.entities.MutableDescriptionEntity;
+import org.nanotek.entities.MutableParentEntity;
+import org.nanotek.entities.MutableTypeIdEntity;
 
 
 @Entity
@@ -31,7 +32,12 @@ import org.nanotek.BaseEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BaseType<K extends Serializable> extends TypeNamedEntity<BaseType<?>> {
+public abstract class BaseType<K extends BaseType<K>> 
+extends TypeNamedEntity<K> implements
+MutableTypeIdEntity<Long>,
+MutableParentEntity<Long>,
+MutableChildOrderEntity<Long>,
+MutableDescriptionEntity<BaseTypeDescription>{
 
 	private static final long serialVersionUID = -6795816207025448078L;
 

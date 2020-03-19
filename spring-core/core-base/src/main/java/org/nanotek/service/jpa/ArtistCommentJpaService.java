@@ -11,7 +11,7 @@ public class ArtistCommentJpaService {
 	@Autowired
 	private ArtistCommentRepository artistCommentRepository;
 	
-	public ArtistComment save(ArtistComment artistComment) { 
+	public ArtistComment<?> save(ArtistComment<?> artistComment) { 
 		return artistCommentRepository.save(artistComment);
 	}
 	

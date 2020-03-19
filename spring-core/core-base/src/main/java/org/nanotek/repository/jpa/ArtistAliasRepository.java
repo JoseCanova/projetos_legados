@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistAliasRepository extends JpaRepository<ArtistAlias<?>,Long> , NameBaseProjection<MutableNameEntity<String>>{
+public interface ArtistAliasRepository extends IdBaseRepository<ArtistAlias<?>> , NameBaseProjection<ArtistAlias<?>>{
 	Optional<ArtistAlias<?>> findByAliasId(@NotNull Long aliasId);
 }

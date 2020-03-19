@@ -65,7 +65,7 @@ public class Artist<K extends Serializable> extends LongIdGidName<Artist<?>,Stri
 	
 	@NotNull
 	@ManyToOne(optional = false)
-	public ArtistType<Artist<?>> artistType; 
+	public ArtistType<?> artistType; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -160,12 +160,12 @@ public class Artist<K extends Serializable> extends LongIdGidName<Artist<?>,Stri
 	}
 
 	@Override
-	public void setArtistType(ArtistType<Artist<?>> k) {
+	public void setArtistType(ArtistType<?> k) {
 		this.artistType = k;
 	}
 
 	@Override
-	public ArtistType<Artist<?>> getArtistType() {
+	public ArtistType<?> getArtistType() {
 		return this.artistType;
 	}
 

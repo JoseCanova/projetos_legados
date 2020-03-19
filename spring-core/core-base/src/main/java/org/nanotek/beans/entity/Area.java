@@ -27,7 +27,7 @@ uniqueConstraints= {
 		})
 public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,String> implements 
 															MutableAreaIdEntity<Long>,		
-															TypeEntity<AreaType<Area<?>>>,
+															TypeEntity<AreaType<?>>,
 															MutableAreaCommentEntity<AreaComment<Area<?>>>,
 															MutableAreaBeginDateEntity<AreaBeginDate>,
 															MutableAreaEndDateEntity<AreaEndDate>	{
@@ -40,7 +40,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	
 	@NotNull
 	@ManyToOne(optional=false, fetch = FetchType.LAZY )
-	public AreaType<Area<?>> areaType; 
+	public AreaType<?> areaType; 
 	
 	@OneToOne
 	@JoinTable(
@@ -66,7 +66,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	
 	public Area() {}
 	
-	public Area(@NotNull Long id, @NotBlank String name, @NotBlank  String gid , @NotNull  AreaType<Area<?>> type) {
+	public Area(@NotNull Long id, @NotBlank String name, @NotBlank  String gid , @NotNull  AreaType<?> type) {
 		this.name = name;
 		this.gid = gid;
 		this.areaId = id;
@@ -113,7 +113,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	}
 
 	@Override
-	public AreaType<Area<?>> getType() {
+	public AreaType<?> getType() {
 		return areaType;
 	}
 

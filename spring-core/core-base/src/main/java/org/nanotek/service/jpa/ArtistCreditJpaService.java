@@ -2,8 +2,6 @@ package org.nanotek.service.jpa;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotNull;
-
 import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.repository.jpa.ArtistCreditRepository;
 import org.nanotek.service.LongIdNameEntityService;
@@ -14,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 //<O extends ArtistCredit , R extends LongIdNameEntityRepository> 
 @Service
-public class ArtistCreditJpaService extends LongIdNameEntityService<ArtistCredit, ArtistCreditRepository>  {
+public class ArtistCreditJpaService extends LongIdNameEntityService<ArtistCredit<?>, ArtistCreditRepository>  {
 
 
 	public ArtistCreditJpaService(@Autowired ArtistCreditRepository rep) {
@@ -22,15 +20,20 @@ public class ArtistCreditJpaService extends LongIdNameEntityService<ArtistCredit
 	}
 
 	@Transactional
-	public Optional<ArtistCredit> findByArtistCreditId(@NotNull Long artistCreditId){ 
+	public Optional<ArtistCredit<?>> findByArtistCreditId(Long artistCreditId){ 
 		return baseRepository.findByArtistCreditId(artistCreditId);
 	}
 	
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
-	public  ArtistCredit findArtistCreditRecordingsById(Long id) {
-		Optional<ArtistCredit>  opt = baseRepository.findArtistCreditRecordingsById(id);
+	public  ArtistCredit<?> findArtistCreditRecordingsById(Long id) {
+		Optional<ArtistCredit<?>>  opt = baseRepository.findArtistCreditRecordingsById(id);
 		return opt.isPresent() ? opt.get() : null;
+	}
+
+	@Override
+	public Iterable<ArtistCredit<?>> findByNameContainingIgnoreCase(String name) {
+		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 }

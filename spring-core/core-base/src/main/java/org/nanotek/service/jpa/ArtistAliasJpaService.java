@@ -9,15 +9,10 @@ import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.repository.jpa.ArtistAliasRepository;
 import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistAliasJpaService   extends LongIdNameEntityService<ArtistAlias<?>,JpaRepository<ArtistAlias<?>,Long>>{
-
-	
-	@Autowired
-	ArtistAliasRepository repository;
+public class ArtistAliasJpaService   extends LongIdNameEntityService<ArtistAlias<?>,ArtistAliasRepository>{
 	
 	public ArtistAliasJpaService(@Autowired
 			ArtistAliasRepository rep) {
@@ -26,7 +21,12 @@ public class ArtistAliasJpaService   extends LongIdNameEntityService<ArtistAlias
 
 	@Transactional
 	public Optional<ArtistAlias<?>> findByAliasId(@NotNull Long aliasId) {
-		return repository.findByAliasId(aliasId);
+		return baseRepository.findByAliasId(aliasId);
+	}
+
+	@Override
+	public Iterable<ArtistAlias<?>> findByNameContainingIgnoreCase( String name) {
+		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 }

@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +18,7 @@ import javax.validation.constraints.Size;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_instrument_id",columnNames={"instrument_id"})
 })
-public class Instrument<E extends Serializable> extends LongIdGidName<Instrument<?>,String,E>  {
+public class Instrument<E extends Instrument<E>> extends LongIdGidName<E,String,E>  {
 
 	private static final long serialVersionUID = 1720965406197902687L;
 	
@@ -29,14 +27,14 @@ public class Instrument<E extends Serializable> extends LongIdGidName<Instrument
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY , optional = false )
-	private InstrumentType type; 
+	private InstrumentType<?> type; 
 	
 	@OneToOne(optional=true)
 	@JoinTable(
 			  name = "instrument_comment_join", 
 			  joinColumns = @JoinColumn(name = "instrument_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id"))
-	private InstrumentComment<E> comment;
+	private InstrumentComment<?> comment;
 	
 	@OneToOne(optional=true)
 	@JoinTable(
@@ -51,7 +49,7 @@ public class Instrument<E extends Serializable> extends LongIdGidName<Instrument
 	public Instrument(  @NotNull Long id,  
 						@NotBlank @Size(min = 1, max = 50) String gid, 
 						@NotBlank String name,
-						@NotNull InstrumentType type) {
+						@NotNull InstrumentType<?> type) {
 		super(gid,name);
 		this.type = type;
 		this.instrumentId = id;
@@ -61,8 +59,8 @@ public class Instrument<E extends Serializable> extends LongIdGidName<Instrument
 						@NotNull Long id, 
 						@NotBlank @Size(min = 1, max = 50) String gid, 
 						@NotBlank String name,
-						@NotNull InstrumentType type, 
-						InstrumentComment<E> comment, 
+						@NotNull InstrumentType<?> type, 
+						InstrumentComment<?> comment, 
 						InstrumentDescription description) {
 		super(gid,name);
 		this.type = type;
@@ -71,11 +69,11 @@ public class Instrument<E extends Serializable> extends LongIdGidName<Instrument
 		this.instrumentId = id;
 	}
 
-	public InstrumentComment<E> getComment() {
+	public InstrumentComment<?> getComment() {
 		return comment;
 	}
 
-	public void setComment(InstrumentComment<E> comment) {
+	public void setComment(InstrumentComment<?> comment) {
 		this.comment = comment;
 	}
 

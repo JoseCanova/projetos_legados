@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,16 +13,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.entities.BaseArtistAliasEntity;
-import org.nanotek.entities.MutableArtistAliasEntity;
 
 @Entity
 @Table(name="artist_alias", 
 uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
-public class ArtistAlias<K extends Serializable>  extends LongIdName<ArtistAlias<?>>  implements 
-														BaseArtistAliasEntity<ArtistAlias<?>>,
-														MutableArtistAliasEntity<ArtistAlias<?>>{
+public class ArtistAlias<K extends ArtistAlias<K>>  extends 
+LongIdName<ArtistAlias<K>>  
+implements BaseArtistAliasEntity<K>{
 
 	private static final long serialVersionUID = -6829974720983757034L;
 
@@ -60,7 +57,7 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<ArtistAlias
 			  name = "artist_alias_type_join", 
 			  joinColumns = @JoinColumn(name = "artist_alias_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "alias_type_id",referencedColumnName = "id") )
-	public ArtistAliasType<?> artistAliasType;
+	public ArtistAliasType<?,?> artistAliasType;
 	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinTable(
@@ -126,15 +123,6 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<ArtistAlias
 		return this.artist;
 	}
 
-	@Override
-	public void setArtistAliasType(ArtistAliasType<?> k) {
-		this.artistAliasType = k;
-	}
-
-	@Override
-	public ArtistAliasType<?> getArtistAliasType() {
-		return this.artistAliasType;
-	}
 
 	@Override
 	public void setArtistAliasLocale(ArtistAliasLocale<?> k) {
@@ -164,6 +152,17 @@ public class ArtistAlias<K extends Serializable>  extends LongIdName<ArtistAlias
 	@Override
 	public ArtistAliasEndDate getArtistAliasEndDate() {
 		return this.artistAliasEndDate;
+	}
+
+	@Override
+	public void setArtistAliasType(ArtistAliasType<?, ?> k) {
+		this.artistAliasType = k;
+		
+	}
+
+	@Override
+	public ArtistAliasType<?, ?> getArtistAliasType() {
+		return artistAliasType;
 	}
 
 }

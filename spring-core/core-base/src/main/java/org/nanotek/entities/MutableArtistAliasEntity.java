@@ -1,18 +1,9 @@
 package org.nanotek.entities;
 
-import org.nanotek.beans.entity.Artist;
-import org.nanotek.beans.entity.ArtistAliasBeginDate;
-import org.nanotek.beans.entity.ArtistAliasEndDate;
-import org.nanotek.beans.entity.ArtistAliasLocale;
-import org.nanotek.beans.entity.ArtistAliasSortName;
-import org.nanotek.beans.entity.ArtistAliasType;
+import org.nanotek.beans.entity.ArtistAlias;
+import org.nanotek.entities.immutables.ArtistAliasEntity;
 
-public interface MutableArtistAliasEntity<T> extends 
-MutableAliasIdEntity<Long>,
-MutableArtistAliasSortNameEntity<ArtistAliasSortName<?>>,
-MutableArtistEntity<Artist<?>> , 
-MutableArtistAliasTypeEntity<ArtistAliasType<?>> , 
-MutableArtistAliasLocaleEntity<ArtistAliasLocale<?>>,
-MutableArtistAliasBeginDateEntity<ArtistAliasBeginDate>,
-MutableArtistAliasEndDateEntity<ArtistAliasEndDate>{
+public interface MutableArtistAliasEntity<K extends ArtistAlias<K>> extends ArtistAliasEntity<K>
+{
+	void setArtistAlias(K k);
 }

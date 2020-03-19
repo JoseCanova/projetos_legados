@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.entities.MutableLengthEntity;
 
 @MappedSuperclass
-public abstract class LengthyBase<K extends LengthyBase<?,L>,L extends Serializable> extends SequenceLongBase<K> implements MutableLengthEntity<L>{
+public abstract class LengthyBase<K extends LengthyBase<K,L>,L extends Serializable> 
+extends SequenceLongBase<K> implements MutableLengthEntity<L>{
 	private static final long serialVersionUID = 266384916289553935L;
 //TODO: Check the question mark by what it implements.
 	

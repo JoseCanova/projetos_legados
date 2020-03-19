@@ -1,26 +1,25 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.entities.BaseArtistAliasEntity;
 import org.nanotek.entities.MutableArtistAliasEntity;
-import org.nanotek.entities.MutableArtistAliasTypeEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistAliasType")
-public class ArtistAliasType<K extends Serializable> extends BaseType<ArtistAlias<?>> implements  
-																		  BaseArtistAliasTypeEntity<ArtistAlias<?>>  {
+public class ArtistAliasType<K extends ArtistAliasType<K,A> , A extends ArtistAlias<A>> extends 
+BaseType<K> 
+implements  
+BaseArtistAliasTypeEntity<K>,
+MutableArtistAliasEntity<A>{
 
 	private static final long serialVersionUID = 430998067473248669L;
 	
 	@OneToOne(mappedBy = "artistAliasType" , optional = false)
-	public ArtistAlias<?> artistAlias;
+	public A artistAlias;
 
 	public ArtistAliasType() {
 	}
@@ -34,12 +33,12 @@ public class ArtistAliasType<K extends Serializable> extends BaseType<ArtistAlia
 	}
 
 	@Override
-	public ArtistAlias<?> getArtistAlias() {
+	public A getArtistAlias() {
 		return artistAlias;
 	}
 
 	@Override
-	public void setArtistAlias(ArtistAlias<?> k) {
+	public void setArtistAlias(A k) {
 		this.artistAlias = k;
 	}
 

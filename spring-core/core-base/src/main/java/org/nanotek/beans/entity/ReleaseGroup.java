@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,15 +11,20 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.entities.BaseReleaseGroupEntity;
+import org.nanotek.entities.MutableArtistCreditEntity;
 import org.nanotek.entities.MutableReleaseGroupIdEntity;
+import org.nanotek.entities.MutableReleaseGroupPrimaryTypeEntity;
 
 @Entity
 @Table(name="release_group",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-public class ReleaseGroup<E extends Serializable> extends LongIdGidName<ReleaseGroup<?>,String,E> implements BaseReleaseGroupEntity, 
-																											MutableReleaseGroupIdEntity<Long>{
+public class ReleaseGroup<E extends ReleaseGroup<E>> extends LongIdGidName<E,String,String> 
+implements BaseReleaseGroupEntity, 
+MutableReleaseGroupIdEntity<Long>,
+MutableArtistCreditEntity<ArtistCredit<?>>,
+MutableReleaseGroupPrimaryTypeEntity<ReleaseGroupPrimaryType<?>>{
 
 	private static final long serialVersionUID = 7603390865547084527L;
 	
@@ -32,36 +35,36 @@ public class ReleaseGroup<E extends Serializable> extends LongIdGidName<ReleaseG
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY , optional = false)
 	@JoinColumn(name="artist_credit_id")
-	private ArtistCredit artistCredit; 
+	private ArtistCredit<?> artistCredit; 
 	
 	@ManyToOne(fetch = FetchType.LAZY , optional = true)
 	@JoinColumn(name = "type_id")
-	private ReleaseGroupPrimaryType type;
+	private ReleaseGroupPrimaryType<?> releaseGroupPrimaryType;
 	
 	public ReleaseGroup() {}
 	
-	public ReleaseGroup(@NotNull Long id, @NotBlank String gid, @NotBlank String name, @NotNull ArtistCredit artistCredit,
-			ReleaseGroupPrimaryType type) {
+	public ReleaseGroup(@NotNull Long id, @NotBlank String gid, @NotBlank String name, @NotNull ArtistCredit<?> artistCredit,
+			ReleaseGroupPrimaryType<?> type) {
 		super(gid,name);
 		this.artistCredit = artistCredit;
-		this.type = type;
+		this.releaseGroupPrimaryType = type;
 		this.releaseGroupId = id;
 	}
 
-	public ArtistCredit getArtistCredit() {
+	public ArtistCredit<?> getArtistCredit() {
 		return artistCredit;
 	}
 
-	public void setArtistCredit(ArtistCredit artistCredit) {
+	public void setArtistCredit(ArtistCredit<?> artistCredit) {
 		this.artistCredit = artistCredit;
 	}
 
-	public ReleaseGroupPrimaryType getType() {
-		return type;
+	public ReleaseGroupPrimaryType<?> getReleaseGroupPrimaryType() {
+		return releaseGroupPrimaryType;
 	}
 
-	public void setType(ReleaseGroupPrimaryType type) {
-		this.type = type;
+	public void setReleaseGroupPrimaryType(ReleaseGroupPrimaryType<?> type) {
+		this.releaseGroupPrimaryType = type;
 	}
 
 	public Long getReleaseGroupId() {
@@ -71,44 +74,5 @@ public class ReleaseGroup<E extends Serializable> extends LongIdGidName<ReleaseG
 	public void setReleaseGroupId(Long releaseGroupId) {
 		this.releaseGroupId = releaseGroupId;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((releaseGroupId == null) ? 0 : releaseGroupId.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ReleaseGroup other = (ReleaseGroup) obj;
-		if (releaseGroupId == null) {
-			if (other.releaseGroupId != null)
-				return false;
-		} else if (!releaseGroupId.equals(other.releaseGroupId))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ReleaseGroup [releaseGroupId=" + releaseGroupId + ", artistCredit=" + artistCredit + ", type=" + type
-				+ ", gid=" + gid + ", name=" + name + ", id=" + id + "]";
-	}
-
-	
 	
 }

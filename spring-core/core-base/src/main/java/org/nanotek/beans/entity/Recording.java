@@ -1,6 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,7 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.BaseEntity;
 import org.nanotek.entities.BaseRecordingEntity;
 import org.nanotek.entities.MutableRecordingIdEntity;
 
@@ -25,7 +23,7 @@ import org.nanotek.entities.MutableRecordingIdEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording<E extends Recording<?>> extends LongIdGidName<E,String,String> implements MutableRecordingIdEntity<Long> , BaseRecordingEntity{
+public class Recording<E extends Recording<E>> extends LongIdGidName<E,String,String> implements MutableRecordingIdEntity<Long> , BaseRecordingEntity{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 

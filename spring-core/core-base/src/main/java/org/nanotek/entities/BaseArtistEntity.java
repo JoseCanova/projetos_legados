@@ -14,13 +14,13 @@ import org.nanotek.beans.entity.Gender;
 
 
 public interface BaseArtistEntity<K extends Serializable> extends 
-BaseEntity,
+BaseEntity<Artist<?>>,
 MutableArtistIdEntity<Long>,
 MutableArtistSortNameEntity<ArtistSortName<?>>,
 MutableArtistCommentEntity<ArtistComment<?>>,
 MutableArtistBeginDateEntity<ArtistBeginDate>,
 MutableArtistEndDateEntity<ArtistEndDate>,
-MutableArtistTypeEntity<ArtistType<Artist<?>>>,
+MutableArtistTypeEntity<ArtistType<?>>,
 MutableGenderEntity<Gender>,
 MutableAreaEntity<Area<Artist<?>>>,
 MutableArtistBeginAreaEntity<Area<Artist<?>>>{

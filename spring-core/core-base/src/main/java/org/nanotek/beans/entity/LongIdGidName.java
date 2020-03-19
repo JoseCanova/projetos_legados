@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.entities.MutableGidEntity;
 
 @MappedSuperclass
-public abstract class LongIdGidName<K extends LongIdGidName<?,?,?>, G extends Serializable ,E extends Serializable> 
+public abstract class LongIdGidName<K extends LongIdGidName<K,G,E>, G extends Serializable ,E extends Serializable> 
 extends LongIdName<K> 
 implements MutableGidEntity<G>{
 

@@ -1,12 +1,11 @@
-package org.nanotek.repository.jpa;
+package org.nanotek.repository.jpa.projections;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.entities.MutableRecordingIdEntity;
 
-public interface RecordingBaseRepository<K extends MutableRecordingIdEntity<?>, ID extends Serializable> {
-	Optional<MutableRecordingIdEntity<ID>> findByRecordingId(@NotNull ID recordingId);
+public interface RecordingBaseProjection<K extends MutableRecordingIdEntity<?>> {
+	Optional<K> findByRecordingId(@NotNull K recordingId);
 }

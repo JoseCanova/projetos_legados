@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.Recording;
 
-public class RecordingBean  extends Result<RecordingBean,Recording<RecordingBean>>{
+public class RecordingBean  extends Result<RecordingBean,Recording<?>>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	

@@ -4,5 +4,7 @@ import org.nanotek.beans.entity.ReleasePackaging;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReleasePackagingRepository extends  LongIdGidNameEntityRepository<ReleasePackaging> , ReleasePackagingBaseRepository<ReleasePackaging,Long>{
+public interface ReleasePackagingRepository 
+extends  IdBaseRepository<ReleasePackaging> ,
+ReleasePackagingBaseRepository<ReleasePackaging,Long>{
 }

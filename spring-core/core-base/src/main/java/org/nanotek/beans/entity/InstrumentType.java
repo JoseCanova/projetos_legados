@@ -1,6 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-public class InstrumentType<K extends Serializable> extends BaseType<K> {
+public class InstrumentType<K extends InstrumentType<K>> extends BaseType<K> {
 
 	
 	private static final long serialVersionUID = 1526958848784766177L;
@@ -30,10 +29,6 @@ public class InstrumentType<K extends Serializable> extends BaseType<K> {
 		super(name);
 	}
 
-	@Override
-	public String toString() {
-		return "InstrumentType [name=" + name + ", description=" + description + ", gid=" + gid + ", id=" + id + "]";
-	}
 
 	public Set<Instrument<?>> getInstruments() {
 		return instruments;

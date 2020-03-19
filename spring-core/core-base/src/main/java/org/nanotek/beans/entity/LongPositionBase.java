@@ -10,7 +10,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.entities.BaseLongPositionBaseEntity;
 import org.nanotek.entities.MutablePositionEntity;
 
 @Entity
@@ -25,8 +24,9 @@ indexes= {
 	    name = "class_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LongPositionBase<K extends LongPositionBase<?>> extends PositionEntityBase<K> implements BaseLongPositionBaseEntity,
-																									  MutablePositionEntity<Long>{
+public class LongPositionBase<K extends LongPositionBase<K>> 
+extends PositionEntityBase<K> 
+implements MutablePositionEntity<Long>{
 
 	private static final long serialVersionUID = 2610811597922933992L;
 

@@ -7,7 +7,7 @@ import org.nanotek.IdBase;
 import org.nanotek.repository.jpa.IdBaseRepository;
 import org.nanotek.service.jpa.BasePersistenceService;
 
-public abstract class LongIdNameEntityService <O extends IdBase<O,Long> , R extends IdBaseRepository<O,Long>>
+public abstract class LongIdNameEntityService <O extends IdBase<?,Long> , R extends IdBaseRepository<O>>
 									extends BasePersistenceService<O, R>  {
 
 	public LongIdNameEntityService(R rep) {
@@ -15,5 +15,5 @@ public abstract class LongIdNameEntityService <O extends IdBase<O,Long> , R exte
 	}
 
 	@Transactional
-	public abstract Iterable<O> findByNameContainingIgnoreCase(@NotNull String name) ;
+	public abstract Iterable<O> findByNameContainingIgnoreCase(@NotNull String name);
 }

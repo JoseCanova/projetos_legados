@@ -1,14 +1,14 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseArtistCreditNameJoinPhraseEntity;
 import org.nanotek.entities.MutableArtistCreditNameEntity;
 
-public class ArtistCreditNameJoinPhrase<K extends Serializable> 
-																	extends JoinPhraseBase<String,ArtistCreditNameJoinPhrase<?>> 
-																	implements MutableArtistCreditNameEntity<ArtistCreditName<?>> {
+public class ArtistCreditNameJoinPhrase<K extends ArtistCreditNameJoinPhrase<K>> 
+extends JoinPhraseBase<String,ArtistCreditNameJoinPhrase<?>> 
+implements BaseArtistCreditNameJoinPhraseEntity,
+MutableArtistCreditNameEntity<ArtistCreditName<?>> {
 
 	private static final long serialVersionUID = 5258524420279200258L;
 	

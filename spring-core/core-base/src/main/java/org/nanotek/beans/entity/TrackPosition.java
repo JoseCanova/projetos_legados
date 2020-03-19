@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue(value = "TrackPosition")
-public class TrackPosition<K extends TrackPosition<?>> extends LongPositionBase<K> {
+public class TrackPosition<K extends TrackPosition<K>> extends LongPositionBase<K> {
 
 	private static final long serialVersionUID = 6747130680556082235L;
 	

@@ -3,7 +3,7 @@ package org.nanotek.beans.csv;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.ReleaseGroup;
 
-public class ReleaseGroupBean extends Result<ReleaseGroupBean,ReleaseGroup<ReleaseGroupBean>> {
+public class ReleaseGroupBean extends Result<ReleaseGroupBean,ReleaseGroup<?>> {
 
 	private static final long serialVersionUID = -1119657398190391884L;
 

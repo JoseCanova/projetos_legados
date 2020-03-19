@@ -3,7 +3,7 @@ package org.nanotek.beans.csv;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.ArtistAlias;
 
-public class ArtistAliasBean  extends Result<ArtistAliasBean,ArtistAlias<ArtistAliasBean>> {
+public class ArtistAliasBean  extends Result<ArtistAliasBean,ArtistAlias<?>> {
 
 	private static final long serialVersionUID = -2745888243978330408L;
 	

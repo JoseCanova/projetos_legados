@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +11,7 @@ import org.nanotek.collections.StreamableArtistEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistType")
-public class ArtistType<K extends Serializable> extends BaseType<Artist<?>> {
+public class ArtistType<K extends ArtistType<K>> extends BaseType<K> {
 
 	private static final long serialVersionUID = 962190613873549033L;
 	
