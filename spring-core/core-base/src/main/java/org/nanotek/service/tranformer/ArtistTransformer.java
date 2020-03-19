@@ -11,12 +11,7 @@ public class ArtistTransformer implements Transformer<ArtistBean , Artist>{
 
 	@Override
 	public Artist transform(ArtistBean i) {
-		Artist artistName = new Artist();
-		artistName.setArtistId(i.getId());
-		artistName.setName(i.getName());
-		artistName.setGid(i.getGid());
-		artistName.setSortName(new ArtistSortName(i.getSortName()));
-		return artistName;
+		return null;
 	}
 
 }

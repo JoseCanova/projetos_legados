@@ -77,7 +77,7 @@ public class BaseParser extends CSVParser implements InitializingBean , Closeabl
 		return baseMapColumnStrategy;
 	}
 
-	public BaseMap<?> getBaseMap(){
+	public BaseMap<?,?> getBaseMap(){
 		return baseMapColumnStrategy.getBaseMap();
 	}
 	

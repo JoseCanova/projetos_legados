@@ -14,11 +14,6 @@ public final class TrackBeanParser  extends BaseParser {
 	@Qualifier("TrackBeanBaseMap")
 	private TrackBeanBaseMap trackBeanBaseMap; 
 	
-	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
-		return trackBeanBaseMap;
-	}
-
 	public TrackBeanBaseMap getTrackBeanBaseMap() {
 		return trackBeanBaseMap;
 	}

@@ -7,7 +7,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class ConfigurableBaseParser<T extends Base> extends BaseParser {
 
-	private BaseMapColumnStrategy<T> baseMap;
+	private BaseMapColumnStrategy<?,?> baseMapColumnStrategy;
 	
 	public ConfigurableBaseParser() {
 	}
@@ -16,13 +16,13 @@ public class ConfigurableBaseParser<T extends Base> extends BaseParser {
 		super(csvReader);
 	}
 	
-	public ConfigurableBaseParser(BaseMapColumnStrategy<T> baseMap) {
-		this.baseMap = baseMap;
+	public ConfigurableBaseParser(BaseMapColumnStrategy<?,?> baseMapColumnStrategy) {
+		this.baseMapColumnStrategy = baseMapColumnStrategy;
 	}
 	
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
-		return baseMap;
+	public BaseMapColumnStrategy<?,?> getBaseMapColumnStrategy() {
+		return baseMapColumnStrategy;
 	}
 
 }

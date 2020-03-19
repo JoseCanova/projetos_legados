@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
-public class ResponseBase<T extends Base> extends ResponseEntity<T> {
+public class ResponseBase<T extends Base<?>> extends ResponseEntity<T> {
 
 	public ResponseBase(HttpStatus status) {
 		super(status);
@@ -29,11 +29,11 @@ public class ResponseBase<T extends Base> extends ResponseEntity<T> {
 		this(body.get(), status);
 	}
 
-	public static <B extends Base>  ResponseBase<B> fromEntity(B t , HttpStatus s) {
+	public static <B extends Base<?>>  ResponseBase<B> fromEntity(B t , HttpStatus s) {
 		return new ResponseBase<B>(t, s);
 	}
 	
-	public static  <B extends Base> ResponseBase<B>  fromEntity(Optional<B> t , HttpStatus s) {
+	public static  <B extends Base<?>> ResponseBase<B>  fromEntity(Optional<B> t , HttpStatus s) {
 		return new ResponseBase<B>(t, s);
 	}
 }

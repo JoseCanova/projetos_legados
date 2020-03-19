@@ -1,7 +1,7 @@
 package org.nanotek.service.parser;
 
 import org.nanotek.base.maps.ArtistCreditNameBaseMap;
-import org.nanotek.base.maps.BaseMapColumnStrategy;
+import org.nanotek.opencsv.BaseMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.DependsOn;
@@ -19,8 +19,8 @@ public class ArtistCreditNameParser extends BaseParser{
 	
 	
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
-		return artistCreditNameBaseMap;
+	public BaseMap<?,?> getBaseMap() {
+		return artistCreditNameBaseMap.getBaseMap();
 	}
 
 

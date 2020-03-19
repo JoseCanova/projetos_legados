@@ -3,7 +3,7 @@ package org.nanotek.controller.entity;
 import java.util.Optional;
 
 import org.nanotek.EntityBase;
-import org.nanotek.controller.response.EntityResponseBase;
+import org.nanotek.controller.response.IdBaseResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.BasePersistenceService;
 import org.springframework.http.HttpStatus;
@@ -18,11 +18,11 @@ public interface EntityResponseController < E extends EntityBase<Long> , S exten
 	BasePersistenceService<E,?> getBaseService();
 
 	@GetMapping("/{id}")
-	default EntityResponseBase<E> get(@PathVariable(value="id") Long  id)  {
+	default IdBaseResponseBase<E> get(@PathVariable(value="id") Long  id)  {
 		Optional<E> opt = getBaseService().findById(id);
 		HttpStatus status =  opt.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 		E body = opt.isPresent() ? opt.get() : null;
-		return EntityResponseBase.fromEntity(body , status);
+		return IdBaseResponseBase.fromEntity(body , status);
 	}
 	
 	@GetMapping("/findAll")
@@ -31,9 +31,9 @@ public interface EntityResponseController < E extends EntityBase<Long> , S exten
 	}
 	
 	@PostMapping("/add")
-	default EntityResponseBase<E> post(@RequestBody E e){ 
+	default IdBaseResponseBase<E> post(@RequestBody E e){ 
 		E ei = getBaseService().saveAndFlush(e);
-		return EntityResponseBase.fromEntity(ei ,  HttpStatus.OK );
+		return IdBaseResponseBase.fromEntity(ei ,  HttpStatus.OK );
 	}
 	
 }

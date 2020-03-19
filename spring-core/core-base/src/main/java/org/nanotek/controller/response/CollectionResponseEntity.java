@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
-public class CollectionResponseEntity<T extends Collection<K>, K extends Base> extends ResponseEntity<T> {
+public class CollectionResponseEntity<T extends Collection<K>, K extends Base<?>> extends ResponseEntity<T> {
 
 	public CollectionResponseEntity(HttpStatus status) {
 		super(status);
@@ -25,7 +25,7 @@ public class CollectionResponseEntity<T extends Collection<K>, K extends Base> e
 		super(body, headers, status);
 	}
 
-	public static <T extends Collection<K>, K extends Base> CollectionResponseEntity<T,K> fromCollection(T e, HttpStatus status){ 
+	public static <T extends Collection<K>, K extends Base<?>> CollectionResponseEntity<T,K> fromCollection(T e, HttpStatus status){ 
 		return new CollectionResponseEntity<>(e,status);
 	}
 	

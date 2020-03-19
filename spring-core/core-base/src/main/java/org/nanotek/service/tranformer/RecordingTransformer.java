@@ -25,16 +25,8 @@ public class RecordingTransformer implements EntityBaseTransformer<RecordingBean
 	
 	@Override
 	public Recording transform(RecordingBean i) {
-		Recording recording = new Recording();
-		recording.setRecordingId(i.getId());
-		recording.setGid(i.getGid());
-		recording.setName(i.getName());
-		Optional<ArtistCredit> ac = findArtistCredit(i.getArtistCredit());
-		ArtistCredit artistCredit = ac.isPresent() ? ac.get() : null;
-		recording.setArtistCredit(artistCredit);
-		Optional<RecordingLength> optRl =  verifyRecordingLength(recording , i.getLength());
-		if (optRl.isPresent()) recording.setRecordingLenght(optRl.get());
-		return recording;
+		
+		return null;
 	}
 
 	private Optional<RecordingLength> verifyRecordingLength(Recording recording , Long length) {

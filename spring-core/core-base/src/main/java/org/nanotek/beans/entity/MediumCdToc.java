@@ -1,7 +1,6 @@
 package org.nanotek.beans.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,11 +8,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.nanotek.LongBase;
-import org.nanotek.apachemq.listener.StringBaseIdListener;
 
 @SuppressWarnings("serial")
 @Entity
-@EntityListeners(value = {StringBaseIdListener.class})
 @Table(name="medium_cd_toc")
 public class MediumCdToc implements LongBase<MediumCdToc>{
 

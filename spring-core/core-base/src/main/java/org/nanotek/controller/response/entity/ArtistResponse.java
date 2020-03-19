@@ -1,11 +1,11 @@
 package org.nanotek.controller.response.entity;
 
 import org.nanotek.beans.entity.Artist;
-import org.nanotek.controller.response.EntityResponseBase;
+import org.nanotek.controller.response.IdBaseResponseBase;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;
 
-public class ArtistResponse extends EntityResponseBase<Artist>{
+public class ArtistResponse extends IdBaseResponseBase<Artist>{
 	public ArtistResponse(HttpStatus status) {
 		super(status);
 	}

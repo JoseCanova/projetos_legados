@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.nanotek.Base;
 import org.nanotek.JsonMessage;
+import org.nanotek.Kong;
+import org.nanotek.Result;
 import org.nanotek.base.maps.BaseMapColumnStrategy;
 import org.nanotek.beans.csv.AreaBean;
 import org.nanotek.beans.entity.Area;
@@ -12,12 +14,12 @@ import org.nanotek.beans.entity.AreaBeginDate;
 import org.nanotek.beans.entity.AreaComment;
 import org.nanotek.beans.entity.AreaEndDate;
 import org.nanotek.beans.entity.AreaType;
-import org.nanotek.opencsv.BaseMap;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaBeginDateRepository;
 import org.nanotek.repository.jpa.AreaCommentRepository;
 import org.nanotek.repository.jpa.AreaEndDateRepository;
 import org.nanotek.repository.jpa.AreaRepository;
+import org.nanotek.repository.jpa.IdBaseRepository;
 import org.nanotek.service.jpa.AreaJpaService;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
@@ -151,10 +153,10 @@ public class AreaIntegrationConfiguration {
 	}
 	
 	@Service
-	class AreaProcessor extends CsvBaseProcessor<AreaBean, BaseMapParser<AreaBean,Long>>{
+	class AreaProcessor<A,B,C> extends CsvBaseProcessor{
 
 		public AreaProcessor
-		(@Autowired @Qualifier("areaParser") BaseMapParser<AreaBean,Long> parser,
+		(@Autowired @Qualifier("areaParser") BaseMapParser<?,?> parser,
 				@Autowired @Qualifier("areaCsvToBean") CsvToBean<AreaBean> csvToBean) {
 			super(parser, csvToBean);
 		} 
@@ -178,7 +180,7 @@ public class AreaIntegrationConfiguration {
 		public void handleMessage(Message<?> message) throws MessagingException {
 			try { 
 				processor.reopenFile();
-				AreaBean area = null; 
+				Result<?,?> area = null; 
 				responseChannel.send(message);
 				do{ 
 					area = processor.next();
@@ -201,6 +203,9 @@ public class AreaIntegrationConfiguration {
 		AreaJpaService service;
 		
 		@Autowired
+		IdBaseRepository<?> idRep;
+		
+		@Autowired
 		AreaBeginDateRepository dRep;
 		
 		@Autowired
@@ -212,9 +217,9 @@ public class AreaIntegrationConfiguration {
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
 			AreaHolder holder = (AreaHolder) message.getPayload();
-			Area transientArea = holder.getArea();
+			Area<?> transientArea = holder.getArea();
 			if (transientArea.getAreaBeginDate() !=null) {
-				AreaBeginDate bd = dRep.save(transientArea.getAreaBeginDate());
+				AreaBeginDate bd = idRep.save(transientArea.getAreaBeginDate());
 				transientArea.setAreaBeginDate(bd);
 			}
 			if(transientArea.getAreaEndDate() !=null) {
@@ -240,15 +245,24 @@ public class AreaIntegrationConfiguration {
 		
 		@Override
 		public AreaHolder transform(AreaBean source) {
-			Area area = null;
-			Optional <Area> optArea = areaRep.findByAreaId(source.getId());
-			if (optArea.isPresent()) 
-			 area = optArea.get();
-			 else
-				 area = new Area(source.getId(),source.getName(),source.getGid());
+			Area<?> area = null;
+			Optional <Area<?>> optArea = areaRep.findByAreaId(source.getAreaId());
 			if(source.getType() == null)
 				throw new MessagingException("No Areatype found for bean " + source.toJson());
-			Optional<AreaType> optType = service.findByTypeId(source.getType());
+			Optional<AreaType<?>> optType = service.findByTypeId(source.getType());
+			
+			optType.ifPresent(t ->{
+				t.compute((p) ->{
+					area = new Area(source.getAreaId(),source.getName(),source.getGid(),t);
+					Kong.get(area).ifPresent(a -> {});
+					return true;
+				});
+			});
+			
+			if (optArea.isPresent()) 
+				area = optArea.get();
+			 else
+				 area = new Area(source.getId(),source.getName(),source.getGid());
 			area.setType(optType.get());
 			if (source.getBeginDateYear() !=null) { 
 				AreaBeginDate eDate  = new AreaBeginDate(source.getBeginDateYear(), source.getBeginDateMonth(), source.getBeginDateDay());

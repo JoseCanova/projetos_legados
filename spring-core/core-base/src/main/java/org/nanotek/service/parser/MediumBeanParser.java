@@ -17,7 +17,7 @@ public class MediumBeanParser extends BaseParser{
 	public MediumBeanParser() {}
 
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
+	public BaseMapColumnStrategy<?,?> getBaseMapColumnStrategy() {
 		return mediumBeanBaseMap;
 	}
 

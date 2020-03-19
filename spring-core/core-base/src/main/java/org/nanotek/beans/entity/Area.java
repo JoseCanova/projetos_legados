@@ -29,8 +29,8 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 															MutableAreaIdEntity<Long>,		
 															TypeEntity<AreaType<?>>,
 															MutableAreaCommentEntity<AreaComment<Area<?>>>,
-															MutableAreaBeginDateEntity<AreaBeginDate>,
-															MutableAreaEndDateEntity<AreaEndDate>	{
+															MutableAreaBeginDateEntity<AreaBeginDate<?>>,
+															MutableAreaEndDateEntity<AreaEndDate<?>>	{
 
 	private static final long serialVersionUID = -7073321340141567106L;
 	
@@ -47,14 +47,14 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 			  name = "area_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	public AreaBeginDate areaBeginDate; 
+	public AreaBeginDate<?> areaBeginDate; 
 	
 	@OneToOne
 	@JoinTable(
 			  name = "area_end_date_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	public AreaEndDate areaEndDate;
+	public AreaEndDate<?> areaEndDate;
 	
 
 	@OneToOne
@@ -86,24 +86,24 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	}
 
 	@Override
-	public AreaBeginDate getAreaBeginDate() {
+	public AreaBeginDate<?> getAreaBeginDate() {
 		// TODO Auto-generated method stub
 		return areaBeginDate;
 	}
 
 	@Override
-	public AreaEndDate getAreaEndDate() {
+	public AreaEndDate<?> getAreaEndDate() {
 		// TODO Auto-generated method stub
 		return areaEndDate;
 	}
 
 	@Override
-	public void setAreaEndDate(AreaEndDate k) {
+	public void setAreaEndDate(AreaEndDate<?> k) {
 		this.areaEndDate = k;
 	}
 
 	@Override
-	public void setAreaBeginDate(AreaBeginDate k) {
+	public void setAreaBeginDate(AreaBeginDate<?> k) {
 		this.areaBeginDate = k;
 	}
 

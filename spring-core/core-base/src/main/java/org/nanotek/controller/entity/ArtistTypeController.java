@@ -3,7 +3,7 @@ package org.nanotek.controller.entity;
 import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistType;
-import org.nanotek.controller.response.EntityResponseBase;
+import org.nanotek.controller.response.IdBaseResponseBase;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.ArtistTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ public class ArtistTypeController  implements  EntityResponseController<ArtistTy
 	}
 
 	@RequestMapping("/type_id/{type_id}")
-	public EntityResponseBase<ArtistType> findByTypeId(@PathVariable(value="type_id") Long  id) {
+	public IdBaseResponseBase<ArtistType> findByTypeId(@PathVariable(value="type_id") Long  id) {
 		Optional<ArtistType> it = getBaseService().findByTypeId(id);
-		return EntityResponseBase.fromEntityBase(it, HttpStatus.OK);
+		return IdBaseResponseBase.fromEntityBase(it, HttpStatus.OK);
 	}
 	
 	public ArtistTypeService getBaseService() {

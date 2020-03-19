@@ -20,7 +20,7 @@ public class BaseMapParser<K extends BaseMapColumnStrategy<?,?>, I extends Seria
 		this.baseMapColumnStrategy = baseMapColumnStrategy;
 	}
 
-	public BaseMap<?> getBaseMap() {
+	public BaseMap<?,?> getBaseMap() {
 		return baseMapColumnStrategy.getBaseMap();
 	}
 

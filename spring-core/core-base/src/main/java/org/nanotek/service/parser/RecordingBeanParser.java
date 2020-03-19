@@ -17,7 +17,7 @@ public class RecordingBeanParser extends BaseParser{
 	public RecordingBeanParser() {}
 
 	@Override
-	public BaseMapColumnStrategy<?> getBaseMap() {
+	public BaseMapColumnStrategy<?,?> getBaseMapColumnStrategy() {
 		return recordingBeanBaseMap;
 	}
 
