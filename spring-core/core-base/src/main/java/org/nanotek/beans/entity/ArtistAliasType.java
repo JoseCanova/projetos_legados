@@ -6,6 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+import org.nanotek.entities.BaseArtistAliasTypeEntity;
 import org.nanotek.entities.MutableArtistAliasEntity;
 
 @Entity

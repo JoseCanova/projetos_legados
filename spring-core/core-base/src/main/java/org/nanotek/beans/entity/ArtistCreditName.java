@@ -22,12 +22,14 @@ import org.nanotek.entities.MutatbleArtistCreditNameIdEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName<E extends Serializable> extends LongIdName<ArtistCreditName<?>> implements  BaseArtistCreditNameEntity,
-															 		MutatbleArtistCreditNameIdEntity<Long>, 
-															 		MutableArtistCreditEntity<ArtistCredit<?>>,
-															 		MutableArtistEntity<Artist<?>>,
-															 		MutablePositionEntity<ArtistCreditNamePosition<?>>,
-															 		MutableArtistCreditNameJoinPhraseEntity<String>{
+public class ArtistCreditName<E extends Serializable> 
+extends LongIdName<ArtistCreditName<?>> 
+implements  BaseArtistCreditNameEntity,
+MutatbleArtistCreditNameIdEntity<Long>, 
+MutableArtistCreditEntity<ArtistCredit<?>>,
+MutableArtistEntity<Artist<?>>,
+MutablePositionEntity<ArtistCreditNamePosition<?>>,
+MutableArtistCreditNameJoinPhraseEntity<String>{
 
 	private static final long serialVersionUID = -5124525598245692335L;
 
