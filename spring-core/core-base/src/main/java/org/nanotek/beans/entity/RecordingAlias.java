@@ -10,11 +10,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.nanotek.RecordingAliasIdBase;
+import org.nanotek.MutableRecordingAliasIdEntity;
 
 @Entity
 @DiscriminatorValue(value = "RecordingAlias")
-public class RecordingAlias extends LongIdSortName<RecordingAlias> implements RecordingAliasIdBase<Long>{
+public class RecordingAlias<K extends RecordingAlias<K>> extends LongIdSortName<K> 
+implements MutableRecordingAliasIdEntity<Long>{
 
 	private static final long serialVersionUID = -1952011326249338518L;
 
@@ -32,7 +33,7 @@ public class RecordingAlias extends LongIdSortName<RecordingAlias> implements Re
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="recording_type_id")
-	private RecordingAliasType type;
+	private RecordingAliasType<?> type;
 
     @Column(name="begin_date_year")
 	private Integer beginDateYear ;
@@ -72,134 +73,15 @@ public class RecordingAlias extends LongIdSortName<RecordingAlias> implements Re
 		this.endDateDay = endDateDay;
 	}
 
-	public String getLocale() {
-		return locale;
-	}
-
-	public void setLocale(String locale) {
-		this.locale = locale;
-	}
-
-
-	public String getSortName() {
-		return sortName;
-	}
-
-	public void setSortName(String sortName) {
-		this.sortName = sortName;
-	}
-
-	public Integer getBeginDateYear() {
-		return beginDateYear;
-	}
-
-	public void setBeginDateYear(Integer beginDateYear) {
-		this.beginDateYear = beginDateYear;
-	}
-
-	public Integer getBeginDateMonth() {
-		return beginDateMonth;
-	}
-
-	public void setBeginDateMonth(Integer beginDateMonth) {
-		this.beginDateMonth = beginDateMonth;
-	}
-
-	public Integer getBeginDateDay() {
-		return beginDateDay;
-	}
-
-	public void setBeginDateDay(Integer beginDateDay) {
-		this.beginDateDay = beginDateDay;
-	}
-
-	public Integer getEndDateYear() {
-		return endDateYear;
-	}
-
-	public void setEndDateYear(Integer endDateYear) {
-		this.endDateYear = endDateYear;
-	}
-
-	public Integer getEndDateMonth() {
-		return endDateMonth;
-	}
-
-	public void setEndDateMonth(Integer endDateMonth) {
-		this.endDateMonth = endDateMonth;
-	}
-
-	public Integer getEndDateDay() {
-		return endDateDay;
-	}
-
-	public void setEndDateDay(Integer endDateDay) {
-		this.endDateDay = endDateDay;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((recording == null) ? 0 : recording.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RecordingAlias other = (RecordingAlias) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (recording == null) {
-			if (other.recording != null)
-				return false;
-		} else if (!recording.equals(other.recording))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ReleaseAlias [name=" + name + ", locale=" + locale + ", release=" + recording + ", type=" + type
-				+ ", sortName=" + sortName + ", beginDateYear=" + beginDateYear + ", beginDateMonth=" + beginDateMonth
-				+ ", beginDateDay=" + beginDateDay + ", endDateYear=" + endDateYear + ", endDateMonth=" + endDateMonth
-				+ ", endDateDay=" + endDateDay + ", id=" + id + "]";
-	}
-
-	public Recording getRecording() {
-		return recording;
-	}
-
-	public void setRecording(Recording recording) {
-		this.recording = recording;
-	}
-
-	public RecordingAliasType getType() {
-		return type;
-	}
-
-	public void setType(RecordingAliasType type) {
-		this.type = type;
-	}
-
 	@Override
 	public Long getRecordingAliasId() {
+		// TODO Auto-generated method stub
 		return recordingAliasId;
 	}
 
 	@Override
-	public void setRecordingAliasId(Long id) {
+	public void setRecordingAliasId(@NotNull Long id) {
 		this.recordingAliasId = id;
 	}
-	
+
 }

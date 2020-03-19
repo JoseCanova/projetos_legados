@@ -6,8 +6,8 @@ import org.nanotek.repository.jpa.projections.RecordingBaseProjection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecordingRepository extends 
-IdBaseRepository<Recording<?>> , 
-RecordingBaseProjection<Recording<?>>,
-NameBaseProjection<Recording<?>>{
+public interface RecordingRepository<K extends Recording<K>> extends 
+IdBaseRepository<K> , 
+RecordingBaseProjection<K>,
+NameBaseProjection<K,String>{
 }

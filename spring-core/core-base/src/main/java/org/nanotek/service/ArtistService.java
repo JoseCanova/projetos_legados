@@ -19,36 +19,36 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtistService {
 
 	@Autowired
-	private ArtistJpaService artistJpaService;
+	private ArtistJpaService<?> artistJpaService;
 
 	@Autowired 
-	private ArtistCreditJpaService artistCreditJpaService;
+	private ArtistCreditJpaService<?> artistCreditJpaService;
 	
 	@Autowired
-	private ArtistCreditNameJpaService artistCreditNameJpaService;
+	private ArtistCreditNameJpaService<?> artistCreditNameJpaService;
 	
 	@Transactional
-	public Optional<Artist> findArtistById(Long id){ 
+	public Optional<?> findArtistById(Long id){ 
 		return artistJpaService.findById(id);
 	}
 	
 	@Transactional
-	public Optional<ArtistCredit> findArtistCreditById(Long id){ 
+	public Optional<?> findArtistCreditById(Long id){ 
 		return artistCreditJpaService.findById(id);
 	}
 	
 	@Transactional
-	public Optional<ArtistCreditName> findArtistCreditNameById(Long id){ 
+	public Optional<?> findArtistCreditNameById(Long id){ 
 		return artistCreditNameJpaService.findById(id);
 	}
 	
 	@Transactional 
-	public ArtistCreditName saveArtistCreditName(ArtistCreditName val) { 
+	public ArtistCreditName<?> saveArtistCreditName(ArtistCreditName<?> val) { 
 		return artistCreditNameJpaService.save(val);
 	}
 	
 	@Transactional 
-	public Optional<ArtistCredit> findByArtistCreditId(Long id) { 
+	public <K extends ArtistCredit<K>> Optional<K> findByArtistCreditId(Long id) { 
 		Optional<ArtistCredit> artistCredit = artistCreditJpaService.findById(id);
 		return artistCredit;
 	}

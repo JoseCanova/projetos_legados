@@ -4,5 +4,5 @@ import org.nanotek.beans.entity.InstrumentComment;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InstrumentCommentRepository extends CommentBaseRepository<InstrumentComment> {
+public interface InstrumentCommentRepository<K extends InstrumentComment<K>> extends CommentBaseRepository<K> {
 }

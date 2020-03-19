@@ -18,12 +18,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 @Service
-public class InstrumentJpaService extends BasePersistenceService<Instrument , InstrumentRepository> {
+public class InstrumentJpaService<K extends Instrument<K>, C extends InstrumentComment<C>> 
+extends BasePersistenceService<K , InstrumentRepository<K>> {
 
 	
 	@Autowired
-	InstrumentCommentRepository commentRepository;
+	InstrumentCommentRepository<C> commentRepository;
 	
+	//TODO: verify why description is not generic.
 	@Autowired
 	InstrumentDescriptionRepository<InstrumentDescription> descriptionRepository;
 	
@@ -31,17 +33,17 @@ public class InstrumentJpaService extends BasePersistenceService<Instrument , In
 		super();
 	}
 
-	public InstrumentJpaService(@Autowired InstrumentRepository baseRepository) {
+	public InstrumentJpaService(@Autowired InstrumentRepository<K> baseRepository) {
 		super(baseRepository);
 	}
 
 	@Transactional
-	public Optional<Instrument> findByInstrumentId(@Validated @Valid @NotNull Long instrumentId){ 
+	public Optional<K> findByInstrumentId(@Validated @Valid @NotNull Long instrumentId){ 
 		return baseRepository.findByInstrumentId(instrumentId);
 	}
 	
 	@Transactional
-	public InstrumentComment saveComment(@Validated @Valid @NotBlank InstrumentComment entity) { 
+	public C saveComment(@Validated @Valid @NotBlank C entity) { 
 		return commentRepository.save(entity);
 	}
 	
