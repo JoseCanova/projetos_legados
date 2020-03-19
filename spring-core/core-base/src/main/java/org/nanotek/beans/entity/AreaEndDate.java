@@ -8,7 +8,7 @@ import org.nanotek.entities.BaseAreaEndDateEntity;
 
 @Entity
 @DiscriminatorValue("AreaEndDate")
-public class AreaEndDate extends DatableBase<Integer,Integer,Integer> implements BaseAreaEndDateEntity{
+public class AreaEndDate<K extends AreaEndDate<K>> extends DatableBase<K,Integer,Integer,Integer> implements BaseAreaEndDateEntity{
 
 	private static final long serialVersionUID = -8963127006492095677L;
 

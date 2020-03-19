@@ -4,5 +4,5 @@ import org.nanotek.beans.entity.AreaBeginDate;
 import org.springframework.stereotype.Repository;
 
 @Repository	
-public interface AreaBeginDateRepository extends DatableBaseRepository<AreaBeginDate>{
+public interface AreaBeginDateRepository<K extends AreaBeginDate<K>> extends DatableBaseRepository<K>{
 }

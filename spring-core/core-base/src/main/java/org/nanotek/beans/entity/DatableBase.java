@@ -21,7 +21,8 @@ import org.nanotek.entities.MutableDatableBaseEntity;
 )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "class_name" ,  columnDefinition = "VARCHAR NOT NULL")
-public class DatableBase <Y extends Serializable , M extends Serializable , D extends Serializable> extends SequenceLongBase<DatableBase<?,?,?>>  implements MutableDatableBaseEntity<Y , M , D> {
+public class DatableBase <K extends DatableBase<K,Y,M,D>, Y extends Serializable , M extends Serializable , D extends Serializable>
+extends SequenceLongBase<K>  implements MutableDatableBaseEntity<Y , M , D> {
 
 
 	private static final long serialVersionUID = -4544159118931690162L;

@@ -4,6 +4,6 @@ import org.nanotek.beans.entity.ArtistAliasBeginDate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistAliasBeginDateRepository extends 
-IdBaseRepository<ArtistAliasBeginDate>{
+public interface ArtistAliasBeginDateRepository<K extends ArtistAliasBeginDate<K>> extends 
+IdBaseRepository<K>{
 }

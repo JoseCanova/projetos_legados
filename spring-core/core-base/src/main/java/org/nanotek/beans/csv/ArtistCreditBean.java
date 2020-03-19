@@ -74,4 +74,12 @@ public class ArtistCreditBean extends Result<ArtistCreditBean,ArtistCredit>{
 		this.editsPending = editsPending;
 	}
 
+	public Long getArtistCreditId() {
+		return artistCreditId;
+	}
+
+	public void setArtistCreditId(Long artistCreditId) {
+		this.artistCreditId = artistCreditId;
+	}
+
 }

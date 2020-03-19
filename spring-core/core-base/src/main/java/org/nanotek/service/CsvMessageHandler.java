@@ -14,10 +14,10 @@ public class CsvMessageHandler implements MessageHandler{
 
 	private MessageChannel replyChannel;
 
-	private CsvBaseProcessor<?,?> processor;
+	private CsvBaseProcessor<?,?,?> processor;
 
 	public CsvMessageHandler(MessageChannel dispatcherChannel, MessageChannel replyChannel,
-			CsvBaseProcessor<?, ?> processor) {
+			CsvBaseProcessor<?, ?,?> processor) {
 		super();
 		this.dispatcherChannel = dispatcherChannel;
 		this.replyChannel = replyChannel;

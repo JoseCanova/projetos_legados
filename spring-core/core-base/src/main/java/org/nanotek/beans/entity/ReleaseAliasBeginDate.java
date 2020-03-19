@@ -8,7 +8,7 @@ import org.nanotek.entities.BaseReleaseAliasBeginDateEntity;
 
 @Entity
 @DiscriminatorValue(value = "ReleaseAliasBeginDate")
-public class ReleaseAliasBeginDate extends DatableBase<Integer,Integer,Integer> implements BaseReleaseAliasBeginDateEntity{
+public class ReleaseAliasBeginDate<K extends ReleaseAliasBeginDate<K>> extends DatableBase<K,Integer,Integer,Integer> implements BaseReleaseAliasBeginDateEntity{
 
 	private static final long serialVersionUID = -3004596106076682952L;
 	

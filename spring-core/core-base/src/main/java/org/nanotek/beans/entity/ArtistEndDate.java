@@ -7,7 +7,7 @@ import org.nanotek.entities.BaseArtistEndDateEntity;
 
 @Entity
 @DiscriminatorValue("ArtistEndDate")
-public class ArtistEndDate extends DatableBase<Integer,Integer,Integer> implements BaseArtistEndDateEntity{
+public class ArtistEndDate<K extends ArtistEndDate<K>> extends DatableBase<K,Integer,Integer,Integer> implements BaseArtistEndDateEntity{
 
 	private static final long serialVersionUID = 5843448446493083180L;
 

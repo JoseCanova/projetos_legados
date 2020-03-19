@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ReleaseAliasTypeJpaService extends BaseTypePersistenceService<ReleaseAliasType,ReleaseAliasTypeRepository> {
+public class ReleaseAliasTypeJpaService  {
 
-	public ReleaseAliasTypeJpaService(@Autowired ReleaseAliasTypeRepository rep) {
-		super(rep);
+	@Autowired ReleaseAliasTypeRepository rep;
+	
+	public ReleaseAliasTypeJpaService() {
 	}
 	
 	@Transactional
 	public Optional<ReleaseAliasType> findByTypeId(Long typeId) { 
-		return baseRepository.findByTypeId(typeId);
+		return rep.findByTypeId(typeId);
 	}
 }

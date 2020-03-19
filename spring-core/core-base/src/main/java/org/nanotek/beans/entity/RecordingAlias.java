@@ -17,71 +17,144 @@ import org.nanotek.MutableRecordingAliasIdEntity;
 public class RecordingAlias<K extends RecordingAlias<K>> extends LongIdSortName<K> 
 implements MutableRecordingAliasIdEntity<Long>{
 
-	private static final long serialVersionUID = -1952011326249338518L;
+	public static final long serialVersionUID = -1952011326249338518L;
 
 	@NotNull
 	@Column(name = "recording_alias_id")
-	private Long recordingAliasId;
+	public Long recordingAliasId;
 	
 	@Column(name="locale", length=1000)
-	private String locale; 
+	public String locale; 
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "recording_id")
-	private Recording<?> recording; 
+	public Recording<?> recording; 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="recording_type_id")
-	private RecordingAliasType<?> type;
+	public RecordingAliasType<?> type;
 
     @Column(name="begin_date_year")
-	private Integer beginDateYear ;
+	public Integer beginDateYear ;
     
     @Column(name="begin_date_month")
-	private Integer beginDateMonth    ;
+	public Integer beginDateMonth    ;
 	
     @Column(name="begin_date_day")
-	private Integer beginDateDay      ;
+	public Integer beginDateDay      ;
 
     @Column(name="end_date_year")
-	private Integer endDateYear       ;
+	public Integer endDateYear       ;
     
     @Column(name="end_date_month")
-	private Integer endDateMonth      ;
+	public Integer endDateMonth      ;
     
     @Column(name="end_date_day")
-	private Integer endDateDay        ; 
+	public Integer endDateDay        ; 
 	
 	public RecordingAlias() {
 	}
 
-	public RecordingAlias(@NotNull Long id, @NotBlank @Size(min = 1, max = 1000) String name, String locale, @NotNull Recording<?> recording,
-			RecordingAliasType type, @NotNull @Size(min = 0, max = 1000) String sortName, Integer beginDateYear,
-			Integer beginDateMonth, Integer beginDateDay, Integer endDateYear, Integer endDateMonth,
-			Integer endDateDay) {
-		this.name = name;
-		this.locale = locale;
-		this.recording = recording;
-		this.type = type;
-		this.sortName = sortName;
-		this.beginDateYear = beginDateYear;
-		this.beginDateMonth = beginDateMonth;
-		this.beginDateDay = beginDateDay;
-		this.endDateYear = endDateYear;
-		this.endDateMonth = endDateMonth;
-		this.endDateDay = endDateDay;
-	}
 
 	@Override
 	public Long getRecordingAliasId() {
-		// TODO Auto-generated method stub
 		return recordingAliasId;
 	}
 
 	@Override
-	public void setRecordingAliasId(@NotNull Long id) {
+	public void setRecordingAliasId(Long id) {
 		this.recordingAliasId = id;
+	}
+
+
+	public String getLocale() {
+		return locale;
+	}
+
+
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+
+
+	public Recording<?> getRecording() {
+		return recording;
+	}
+
+
+	public void setRecording(Recording<?> recording) {
+		this.recording = recording;
+	}
+
+
+	public RecordingAliasType<?> getType() {
+		return type;
+	}
+
+
+	public void setType(RecordingAliasType<?> type) {
+		this.type = type;
+	}
+
+
+	public Integer getBeginDateYear() {
+		return beginDateYear;
+	}
+
+
+	public void setBeginDateYear(Integer beginDateYear) {
+		this.beginDateYear = beginDateYear;
+	}
+
+
+	public Integer getBeginDateMonth() {
+		return beginDateMonth;
+	}
+
+
+	public void setBeginDateMonth(Integer beginDateMonth) {
+		this.beginDateMonth = beginDateMonth;
+	}
+
+
+	public Integer getBeginDateDay() {
+		return beginDateDay;
+	}
+
+
+	public void setBeginDateDay(Integer beginDateDay) {
+		this.beginDateDay = beginDateDay;
+	}
+
+
+	public Integer getEndDateYear() {
+		return endDateYear;
+	}
+
+
+	public void setEndDateYear(Integer endDateYear) {
+		this.endDateYear = endDateYear;
+	}
+
+
+	public Integer getEndDateMonth() {
+		return endDateMonth;
+	}
+
+
+	public void setEndDateMonth(Integer endDateMonth) {
+		this.endDateMonth = endDateMonth;
+	}
+
+
+	public Integer getEndDateDay() {
+		return endDateDay;
+	}
+
+
+	public void setEndDateDay(Integer endDateDay) {
+		this.endDateDay = endDateDay;
 	}
 
 }

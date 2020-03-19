@@ -6,7 +6,6 @@ import org.nanotek.repository.jpa.projections.NameBaseProjection;
 
 public interface ReleaseAliasTypeRepository extends 
 IdBaseRepository<ReleaseAliasType> , 
-BaseTypeProjection<ReleaseAliasType> , 
-NameBaseProjection<ReleaseAliasType>{
+BaseTypeProjection<ReleaseAliasType> {
 
 }

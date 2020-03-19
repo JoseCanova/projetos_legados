@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class ArtistCreditBeanTransformerImpl implements ArtistCreditBeanTransformer {
 
     @Override
-    public ArtistCredit transform(ArtistCreditBean i) {
+    public ArtistCredit<?> transform(ArtistCreditBean i) {
         if ( i == null ) {
             return null;
         }
 
         ArtistCredit artistCredit = new ArtistCredit();
 
-        artistCredit.setArtistCreditId(i.getId() );
+        artistCredit.setArtistCreditId(i.getArtistCreditId()  );
         artistCredit.setName( i.getName() );
 		/*
 		 * if ( i.getArtistCount() != null ) { artistCredit.setArtistCount(

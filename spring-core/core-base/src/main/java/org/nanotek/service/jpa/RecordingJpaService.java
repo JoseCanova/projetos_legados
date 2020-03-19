@@ -2,14 +2,17 @@ package org.nanotek.service.jpa;
 
 import org.nanotek.beans.entity.Recording;
 import org.nanotek.repository.jpa.RecordingRepository;
-import org.nanotek.service.LongIdGidNameEntityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecordingJpaService extends LongIdGidNameEntityService<Recording, RecordingRepository>{
+public class RecordingJpaService<K extends Recording<K>> {
 
-	public RecordingJpaService(RecordingRepository rep) {
-		super(rep);
+	@Autowired
+	RecordingRepository<K> rep;
+	
+	public RecordingJpaService() {
+		super();
 	}
 
 //	@Override

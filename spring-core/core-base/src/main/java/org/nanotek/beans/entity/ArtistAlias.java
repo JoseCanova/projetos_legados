@@ -20,7 +20,7 @@ uniqueConstraints= {
 @UniqueConstraint(name="uk_artist_alias_id",columnNames={"artist_alias_id"})
 })
 public class ArtistAlias<K extends ArtistAlias<K>>  extends 
-LongIdName<ArtistAlias<K>>  
+LongIdName<K>  
 implements BaseArtistAliasEntity<K>{
 
 	private static final long serialVersionUID = -6829974720983757034L;

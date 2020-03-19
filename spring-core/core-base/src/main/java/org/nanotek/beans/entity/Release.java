@@ -13,13 +13,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.nanotek.entities.MutableReleaseIdEntity;
+
 
 @Entity
 @Table(name="release",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_id",columnNames={"release_id"})
 })
-public class Release extends LongIdGidName<Release,String,String> implements ReleaseBase<Long> {
+public class Release extends LongIdGidName<Release,String,String> implements MutableReleaseIdEntity<Long> {
 
 	private static final long serialVersionUID = 8526436903189806951L;
 		

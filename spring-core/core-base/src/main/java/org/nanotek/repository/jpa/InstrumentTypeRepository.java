@@ -6,8 +6,8 @@ import org.nanotek.repository.jpa.projections.NameBaseProjection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InstrumentTypeRepository  extends 
-IdBaseRepository<InstrumentType<?>>,
-BaseTypeProjection<InstrumentType<?>>,
-NameBaseProjection<InstrumentType<?>>{
+public interface InstrumentTypeRepository<K extends InstrumentType<K>>  extends 
+IdBaseRepository<K>,
+BaseTypeProjection<K>,
+NameBaseProjection<K,String>{
 }

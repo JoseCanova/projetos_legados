@@ -4,5 +4,5 @@ import org.nanotek.beans.entity.ArtistEndDate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistEndDateRespository extends DatableBaseRepository<ArtistEndDate>{
+public interface ArtistEndDateRespository<K extends ArtistEndDate<K>> extends DatableBaseRepository<K>{
 }

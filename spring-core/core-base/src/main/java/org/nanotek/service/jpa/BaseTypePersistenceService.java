@@ -9,7 +9,7 @@ import org.nanotek.repository.jpa.IdBaseRepository;
 import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class BaseTypePersistenceService<O extends BaseType<?> , B extends IdBaseRepository<O>> extends LongIdNameEntityService<O, B> {
+public abstract class BaseTypePersistenceService<O extends BaseType<O> , B extends IdBaseRepository<O>> extends LongIdNameEntityService<O, B> {
 
 	public BaseTypePersistenceService(B rep) {
 		super(rep);

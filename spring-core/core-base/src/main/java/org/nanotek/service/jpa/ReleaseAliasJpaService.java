@@ -4,18 +4,21 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ReleaseAlias;
 import org.nanotek.repository.jpa.ReleaseAliasJpaRepository;
-import org.nanotek.service.LongIdNameEntityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReleaseAliasJpaService extends LongIdNameEntityService<ReleaseAlias,ReleaseAliasJpaRepository> {
+public class ReleaseAliasJpaService {
 
+	@Autowired 
+	ReleaseAliasJpaRepository rep; 
+	
 	public ReleaseAliasJpaService(ReleaseAliasJpaRepository rep) {
-		super(rep);
+		super();
 	}
 	
     public Optional<ReleaseAlias> findByReleaseAliasId(Long id){ 
-    	return baseRepository.findByReleaseAliasId(id);
+    	return rep.findByReleaseAliasId(id);
     }
 
 }

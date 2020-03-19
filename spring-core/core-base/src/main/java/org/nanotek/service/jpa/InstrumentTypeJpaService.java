@@ -1,22 +1,30 @@
 package org.nanotek.service.jpa;
 
+import java.util.Optional;
+
 import org.nanotek.beans.entity.InstrumentType;
-import org.nanotek.configuration.csv.AreaIntegrationConfiguration;
 import org.nanotek.repository.jpa.InstrumentTypeRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
-public class InstrumentTypeJpaService extends BaseTypePersistenceService<InstrumentType, InstrumentTypeRepository> {
+public class InstrumentTypeJpaService<K extends InstrumentType<K>> 
+extends BaseTypePersistenceService<K, InstrumentTypeRepository<K>> {
 
-	private final Logger logger = LoggerFactory.getLogger(AreaIntegrationConfiguration.class);
-	
-	public InstrumentTypeJpaService(@Autowired InstrumentTypeRepository rep) {
+	public InstrumentTypeJpaService(@Autowired InstrumentTypeRepository<K> rep) {
 		super(rep);
+	}
+
+	@Override
+	public Optional<K> findByTypeId(Long typeId) {
+		return baseRepository.findByTypeId(typeId);
+	}
+
+	@Override
+	public Iterable<K> findByNameContainingIgnoreCase(String name) {
+		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	

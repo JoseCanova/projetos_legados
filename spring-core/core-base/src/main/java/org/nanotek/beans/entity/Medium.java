@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Table(uniqueConstraints= {
 		@UniqueConstraint(name="uk_medium_id",columnNames={"medium_id"})
 		})
-public class Medium extends LongIdName{
+public class Medium<K extends Medium<K>> extends LongIdName<K>{
 
 	private static final long serialVersionUID = 6669274101742169443L;
 	

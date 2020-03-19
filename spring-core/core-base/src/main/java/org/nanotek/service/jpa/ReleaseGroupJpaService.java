@@ -9,14 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReleaseGroupJpaService  extends LongIdGidNameEntityService<ReleaseGroup,ReleaseGroupRepository> {
+public class ReleaseGroupJpaService<K extends ReleaseGroup<K>>  extends LongIdGidNameEntityService<K,ReleaseGroupRepository<K>> {
 
-	public ReleaseGroupJpaService(@Autowired ReleaseGroupRepository rep) {
+	public ReleaseGroupJpaService(@Autowired ReleaseGroupRepository<K> rep) {
 		super(rep);
 	}
 
-	public Optional<ReleaseGroup> findByReleaseGrouId(Long releaseGroupId){
+	public Optional<K> findByReleaseGroupId(Long releaseGroupId){
 		return baseRepository.findByReleaseGroupId(releaseGroupId);
+	}
+
+	@Override
+	public Iterable<K> findByNameContainingIgnoreCase(String name) {
+		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 }
