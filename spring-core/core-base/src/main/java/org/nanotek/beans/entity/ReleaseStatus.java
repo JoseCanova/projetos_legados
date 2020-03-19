@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_status_id",columnNames={"release_status_id"})
 })
-public class ReleaseStatus extends LongIdGidName {
+public class ReleaseStatus extends LongIdGidName<ReleaseStatus,String,String> {
 
 	private static final long serialVersionUID = 4793056857806342212L;
 	

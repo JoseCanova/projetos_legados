@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseRecordingEntity;
 import org.nanotek.entities.MutableRecordingIdEntity;
 
 @Entity
@@ -24,7 +25,7 @@ import org.nanotek.entities.MutableRecordingIdEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording<E extends Serializable> extends LongIdGidName<String,E> implements MutableRecordingIdEntity<Long> , BaseEntity{
+public class Recording<E extends Recording<?>> extends LongIdGidName<E,String,String> implements MutableRecordingIdEntity<Long> , BaseRecordingEntity{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 
@@ -35,7 +36,7 @@ public class Recording<E extends Serializable> extends LongIdGidName<String,E> i
 	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="artist_credit_id" , referencedColumnName="id")
-	public ArtistCredit artistCredit; 
+	public ArtistCredit<?> artistCredit; 
 	
 	@OneToMany(mappedBy="recording" , fetch=FetchType.LAZY)
 	public Set<Track> tracks;

@@ -11,7 +11,7 @@ import org.nanotek.entities.MutableSortNameEntity;
 
 @Entity
 @DiscriminatorValue(value = "LongIdSortNameEntity")
-public class LongIdSortName<K extends Serializable> extends LongIdName<String> implements MutableSortNameEntity<String> {
+public class LongIdSortName<K extends Serializable> extends LongIdName<LongIdSortName<?>> implements MutableSortNameEntity<String> {
 
 	private static final long serialVersionUID = -3442197714885490996L;
 

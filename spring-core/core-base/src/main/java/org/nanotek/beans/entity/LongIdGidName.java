@@ -10,7 +10,9 @@ import javax.validation.constraints.NotNull;
 import org.nanotek.entities.MutableGidEntity;
 
 @MappedSuperclass
-public abstract class LongIdGidName<K extends Serializable,E extends Serializable> extends LongIdName<String> implements MutableGidEntity<K>{
+public abstract class LongIdGidName<K extends LongIdGidName<?,?,?>, G extends Serializable ,E extends Serializable> 
+extends LongIdName<K> 
+implements MutableGidEntity<G>{
 
 	
 	
@@ -18,7 +20,7 @@ public abstract class LongIdGidName<K extends Serializable,E extends Serializabl
 	
 	@NotNull
 	@Column(name="gid", nullable=false , columnDefinition = "VARCHAR(50) NOT NULL")
-	protected K gid;
+	protected G gid;
 
 	
 	public LongIdGidName() {
@@ -31,19 +33,19 @@ public abstract class LongIdGidName<K extends Serializable,E extends Serializabl
 	
 
 	public LongIdGidName(
-								@NotNull  K gid, 
+								@NotNull  G gid, 
 								@NotBlank String name) {
 		super(name);
 		this.gid = gid;
 	}
 
 
-	public void setGid(K gid) {
+	public void setGid(G gid) {
 		this.gid = gid;
 	}
 
 	@Override
-	public K getGid() {
+	public G getGid() {
 		return gid;
 	}
 	

@@ -16,7 +16,7 @@ import org.nanotek.entities.MutableReleaseAliasEntity;
 
 @Entity
 @Table(name = "release_alias")
-public class ReleaseAlias extends LongIdName<String> implements BaseReleaseAliasEntity,
+public class ReleaseAlias extends LongIdName<ReleaseAlias> implements BaseReleaseAliasEntity,
 																MutableReleaseAliasEntity
 																{
 

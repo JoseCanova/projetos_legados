@@ -13,7 +13,7 @@ import org.nanotek.entities.MutableAreaEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaType")
-public class AreaType<E extends Serializable> extends BaseType<Area<?>> implements BaseEntity,
+public class AreaType<E extends Serializable> extends BaseType<Area<?>> implements BaseEntity<AreaType<?>>,
 																				   MutableAreaEntity<Area<?>>{
 
 	private static final long serialVersionUID = 5334032717060542549L;

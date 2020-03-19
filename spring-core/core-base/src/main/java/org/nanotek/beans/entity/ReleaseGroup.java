@@ -12,6 +12,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseReleaseGroupEntity;
 import org.nanotek.entities.MutableReleaseGroupIdEntity;
 
 @Entity
@@ -19,7 +20,8 @@ import org.nanotek.entities.MutableReleaseGroupIdEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-public class ReleaseGroup<E extends Serializable> extends LongIdGidName<String,E> implements MutableReleaseGroupIdEntity<Long>{
+public class ReleaseGroup<E extends Serializable> extends LongIdGidName<ReleaseGroup<?>,String,E> implements BaseReleaseGroupEntity, 
+																											MutableReleaseGroupIdEntity<Long>{
 
 	private static final long serialVersionUID = 7603390865547084527L;
 	

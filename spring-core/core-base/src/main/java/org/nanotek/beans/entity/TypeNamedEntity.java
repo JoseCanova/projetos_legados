@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @MappedSuperclass
-public abstract class TypeNamedEntity<E extends Serializable> extends LongIdGidName<String,String> {
+public abstract class TypeNamedEntity<E extends TypeNamedEntity<?>> extends LongIdGidName<E , String,String> {
 
 	private static final long serialVersionUID = -5235727515178240574L;
 

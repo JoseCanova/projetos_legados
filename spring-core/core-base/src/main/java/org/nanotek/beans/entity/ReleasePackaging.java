@@ -14,7 +14,7 @@ import org.nanotek.ReleasePackagingBase;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_pack_id",columnNames={"release_packaging_id"})
 })
-public class ReleasePackaging extends LongIdGidName implements ReleasePackagingBase<Long>{
+public class ReleasePackaging extends LongIdGidName<ReleasePackaging,String,String> implements ReleasePackagingBase<Long>{
 
 	private static final long serialVersionUID = 5351338443793025420L;
 

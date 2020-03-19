@@ -25,7 +25,7 @@ import org.nanotek.entities.MutableAreaIdEntity;
 uniqueConstraints= {
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
 		})
-public class Area<K extends Serializable> extends LongIdGidName<String,String> implements 
+public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,String> implements 
 															MutableAreaIdEntity<Long>,		
 															TypeEntity<AreaType<Area<?>>>,
 															MutableAreaCommentEntity<AreaComment<Area<?>>>,
