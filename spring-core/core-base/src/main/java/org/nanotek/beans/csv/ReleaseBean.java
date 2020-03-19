@@ -1,14 +1,17 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Release;
+
 /**
  * 
  * @author josecanova
  *
  */
-public class ReleaseBean extends HolderBaseBean<ReleaseBean,Long>{
+public class ReleaseBean extends Result<ReleaseBean,Release>{
 
 	private static final long serialVersionUID = -11618084576388817L;
-	private Long id; 
+	private Long releaseId; 
 	private String gid; 
 	private String name;
 	private Long artistCreditId; 
@@ -26,12 +29,7 @@ public class ReleaseBean extends HolderBaseBean<ReleaseBean,Long>{
 	
 	public ReleaseBean() {}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public String getGid() {
 		return gid;
 	}
@@ -99,14 +97,6 @@ public class ReleaseBean extends HolderBaseBean<ReleaseBean,Long>{
 		this.lastUpdated = lastUpdated;
 	}
 
-	@Override
-	public String toString() {
-		return "ReleaseBean [id=" + id + ", gid=" + gid + ", name=" + name + ", artistCreditId=" + artistCreditId
-				+ ", releaseGroup=" + releaseGroup + ", status=" + status + ", packaging=" + packaging + ", language="
-				+ language + ", script=" + script + ", barcode=" + barcode + ", comment=" + comment + ", editsPending="
-				+ editsPending + ", quality=" + quality + ", lastUpdated=" + lastUpdated + "]";
-	}
-
 	public Long getPackaging() {
 		return packaging;
 	}
@@ -121,6 +111,16 @@ public class ReleaseBean extends HolderBaseBean<ReleaseBean,Long>{
 
 	public void setLanguage(Long language) {
 		this.language = language;
+	}
+
+
+	public Long getReleaseId() {
+		return releaseId;
+	}
+
+
+	public void setReleaseId(Long releaseId) {
+		this.releaseId = releaseId;
 	} 
 	
 }

@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class ReleaseGroupPrimaryTypeBean extends HolderBaseBean<ReleaseGroupPrimaryTypeBean,Long> {
+import org.nanotek.Result;
+import org.nanotek.beans.entity.ReleaseGroupPrimaryType;
+
+public class ReleaseGroupPrimaryTypeBean extends Result<ReleaseGroupPrimaryTypeBean,ReleaseGroupPrimaryType> {
 
 	private static final long serialVersionUID = -4792229013963888593L;
 
-	private Long id; 
+	private Long ReleaseGroupPrimaryTypeId; 
 	private String name; 
 	private Long parent; 
 	private Integer childOrder; 
@@ -12,14 +15,6 @@ public class ReleaseGroupPrimaryTypeBean extends HolderBaseBean<ReleaseGroupPrim
 	private String gid;
 	
 	public ReleaseGroupPrimaryTypeBean() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -60,6 +55,14 @@ public class ReleaseGroupPrimaryTypeBean extends HolderBaseBean<ReleaseGroupPrim
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+	public Long getReleaseGroupPrimaryTypeId() {
+		return ReleaseGroupPrimaryTypeId;
+	}
+
+	public void setReleaseGroupPrimaryTypeId(Long releaseGroupPrimaryTypeId) {
+		ReleaseGroupPrimaryTypeId = releaseGroupPrimaryTypeId;
 	}
 
 }

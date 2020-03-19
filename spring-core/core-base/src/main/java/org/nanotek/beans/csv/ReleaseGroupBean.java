@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class ReleaseGroupBean extends HolderBaseBean<ReleaseGroupBean,Long> {
+import org.nanotek.Result;
+import org.nanotek.beans.entity.ReleaseGroup;
+
+public class ReleaseGroupBean extends Result<ReleaseGroupBean,ReleaseGroup<ReleaseGroupBean>> {
 
 	private static final long serialVersionUID = -1119657398190391884L;
 
-	private Long id; 
+	private Long releaseGroupId; 
 	private String gid; 
 	private String name; 
 	private Long artistCredit; 
@@ -18,14 +21,6 @@ public class ReleaseGroupBean extends HolderBaseBean<ReleaseGroupBean,Long> {
 	}
 	
 	
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getGid() {
 		return gid;
@@ -75,12 +70,6 @@ public class ReleaseGroupBean extends HolderBaseBean<ReleaseGroupBean,Long> {
 		this.lastUpdated = lastUpdated;
 	}
 
-	@Override
-	public String toString() {
-		return "ReleaseGroupBean [id=" + id + ", gid=" + gid + ", name=" + name + ", artistCredit=" + artistCredit
-				+ ", type=" + type + ", comment=" + comment + ", editsPending=" + editsPending + ", lastUpdated="
-				+ lastUpdated + "]";
-	}
 
 	public Long getType() {
 		return type;
@@ -88,6 +77,18 @@ public class ReleaseGroupBean extends HolderBaseBean<ReleaseGroupBean,Long> {
 
 	public void setType(Long type) {
 		this.type = type;
+	}
+
+
+
+	public Long getReleaseGroupId() {
+		return releaseGroupId;
+	}
+
+
+
+	public void setReleaseGroupId(Long releaseGroupId) {
+		this.releaseGroupId = releaseGroupId;
 	}
 
 }

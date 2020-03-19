@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class TrackBean extends HolderBaseBean<TrackBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Track;
+
+public class TrackBean extends Result<TrackBean,Track>{
 
 	private static final long serialVersionUID = 7327347644746001993L;
 	
-	private Long id; 
+	private Long trackId; 
 	private String gid; 
 	private Long recordingId; 
 	private Long medium; 
@@ -19,12 +22,6 @@ public class TrackBean extends HolderBaseBean<TrackBean,Long>{
 	
 	public TrackBean() {}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getGid() {
 		return gid;
 	}
@@ -91,12 +88,13 @@ public class TrackBean extends HolderBaseBean<TrackBean,Long>{
 	public void setIsDataTrack(String isDataTrack) {
 		this.isDataTrack = isDataTrack;
 	}
-	@Override
-	public String toString() {
-		return "TrackBean [id=" + id + ", gid=" + gid + ", recordingId=" + recordingId + ", medium=" + medium
-				+ ", position=" + position + ", number=" + number + ", name=" + name + ", artistCreditId="
-				+ artistCreditId + ", length=" + length + ", editsPending=" + editsPending + ", lastUpdate="
-				+ lastUpdate + ", isDataTrack=" + isDataTrack + "]";
+
+	public Long getTrackId() {
+		return trackId;
+	}
+
+	public void setTrackId(Long trackId) {
+		this.trackId = trackId;
 	} 
 	
 }

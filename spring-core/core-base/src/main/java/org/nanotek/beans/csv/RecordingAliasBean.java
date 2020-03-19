@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class RecordingAliasBean extends HolderBaseBean<RecordingAliasBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.RecordingAlias;
+
+public class RecordingAliasBean extends Result<RecordingAliasBean,RecordingAlias>{
 
 	private static final long serialVersionUID = 4772995387500387928L;
 
-	private Long id; 
+	private Long resultId;
 	private Long recording; 
 	private String name; 
 	private String locale; 
@@ -22,14 +25,6 @@ public class RecordingAliasBean extends HolderBaseBean<RecordingAliasBean,Long>{
 	private String ended;
 	
 	public RecordingAliasBean() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Long getRecording() {
@@ -150,6 +145,14 @@ public class RecordingAliasBean extends HolderBaseBean<RecordingAliasBean,Long>{
 
 	public void setEnded(String ended) {
 		this.ended = ended;
+	}
+
+	public Long getResultId() {
+		return resultId;
+	}
+
+	public void setResultId(Long resultId) {
+		this.resultId = resultId;
 	}
 
 }

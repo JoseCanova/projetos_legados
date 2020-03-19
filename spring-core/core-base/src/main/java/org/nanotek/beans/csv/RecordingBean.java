@@ -2,24 +2,16 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-public class RecordingBean  extends HolderBaseBean<RecordingBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Recording;
+
+public class RecordingBean  extends Result<RecordingBean,Recording<RecordingBean>>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	
-	/**
-	 *  id                  SERIAL,
-    gid                 UUID NOT NULL,
-    name                VARCHAR NOT NULL,
-    artist_credit       INTEGER NOT NULL, -- references artist_credit.id
-    length              INTEGER CHECK (length IS NULL OR length > 0),
-    comment             VARCHAR(255) NOT NULL DEFAULT '',
-    edits_pending       INTEGER NOT NULL DEFAULT 0 CHECK (edits_pending >= 0),
-    last_updated        TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    video               BOOLEAN NOT NULL DEFAULT FALSE
-	 */
 	
 	@NotNull
-	private Long id;
+	private Long recordingId;
 	@NotNull
 	private String gid;
 	@NotNull
@@ -34,13 +26,6 @@ public class RecordingBean  extends HolderBaseBean<RecordingBean,Long>{
     
     public RecordingBean() {}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getGid() {
 		return gid;

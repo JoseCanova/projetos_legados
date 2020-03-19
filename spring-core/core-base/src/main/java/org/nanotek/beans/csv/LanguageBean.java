@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class LanguageBean extends HolderBaseBean<LanguageBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.Language;
+
+public class LanguageBean extends Result<LanguageBean,Language<LanguageBean>>{
 
 	private static final long serialVersionUID = 2997501833949969600L;
 
-	private Long id; 
+	private Long laguageId; 
 	private String isoCode2t; 
 	private String isoCode2b; 
 	private String isoCode1; 
@@ -16,16 +19,8 @@ public class LanguageBean extends HolderBaseBean<LanguageBean,Long>{
 	public LanguageBean() {
 	}
 
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
+	
 
 	public String getIsoCode2t() {
 		return isoCode2t;
@@ -87,10 +82,17 @@ public class LanguageBean extends HolderBaseBean<LanguageBean,Long>{
 	}
 
 
-	@Override
-	public String toString() {
-		return "LanguageBean [id=" + id + ", isoCode2t=" + isoCode2t + ", isoCode2b=" + isoCode2b + ", isoCode1="
-				+ isoCode1 + ", name=" + name + ", frequency=" + frequency + ", isoCode3=" + isoCode3 + "]";
+
+
+	public Long getLaguageId() {
+		return laguageId;
+	}
+
+
+
+
+	public void setLaguageId(Long laguageId) {
+		this.laguageId = laguageId;
 	}
 
 

@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
-public class MediumFormatBean extends HolderBaseBean<MediumFormatBean,Long>{
+import org.nanotek.Result;
+import org.nanotek.beans.entity.MediumFormat;
+
+public class MediumFormatBean extends Result<MediumFormatBean,MediumFormat>{
 
 	private static final long serialVersionUID = 6169777855661430422L;
 
-	private Long id; 
+	private Long mediumFormatId;
 	private String name; 
 	private Long parent; 
 	private Long childOrder; 
@@ -14,14 +17,6 @@ public class MediumFormatBean extends HolderBaseBean<MediumFormatBean,Long>{
 	private String gid;
 	
 	public MediumFormatBean() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -78,6 +73,14 @@ public class MediumFormatBean extends HolderBaseBean<MediumFormatBean,Long>{
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+	public Long getMediumFormatId() {
+		return mediumFormatId;
+	}
+
+	public void setMediumFormatId(Long mediumFormatId) {
+		this.mediumFormatId = mediumFormatId;
 	}
 
 }
