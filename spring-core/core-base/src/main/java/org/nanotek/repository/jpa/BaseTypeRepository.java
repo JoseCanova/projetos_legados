@@ -4,12 +4,11 @@ import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.beans.entity.AreaType;
 import org.nanotek.beans.entity.BaseType;
-import org.nanotek.repository.jpa.projections.NameBaseProjection;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BaseTypeRepository<T extends BaseType> extends LongIdNameEntityRepository<T> ,  NameBaseProjection<T> {
+public interface BaseTypeRepository<T extends BaseType<?>> extends JpaRepository<T,Long> {
 	Optional<T> findByTypeId(@NotNull Long typeId);
 }
