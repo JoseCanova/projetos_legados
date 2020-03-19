@@ -11,19 +11,19 @@ import org.springframework.validation.annotation.Validated;
 //TODO: Create support for ExampleMathcers
 @Service
 @Validated
-public class AreaTypeJpaService extends BaseTypePersistenceService<AreaType<?> , AreaTypeRepository> {
+public class AreaTypeJpaService<K extends AreaType<K>> extends BaseTypePersistenceService<K , AreaTypeRepository<K>> {
 	
-	public AreaTypeJpaService(@Autowired AreaTypeRepository rep) {
+	public AreaTypeJpaService(@Autowired AreaTypeRepository<K> rep) {
 		super(rep);
 	}
 
 	@Override
-	public Iterable<AreaType<?>> findByNameContainingIgnoreCase( String name) {
+	public Iterable<K> findByNameContainingIgnoreCase( String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	@Override
-	public Optional<AreaType<?>> findByTypeId(Long typeId) {
+	public Optional<K> findByTypeId(Long typeId) {
 		return baseRepository.findByTypeId(typeId);
 	}
 

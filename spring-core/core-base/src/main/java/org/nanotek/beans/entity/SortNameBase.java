@@ -26,7 +26,7 @@ import org.nanotek.entities.MutableSortNameEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class SortNameBase<K extends Serializable> extends SequenceLongBase<SortNameBase<K>> implements MutableSortNameEntity<String>{
+public class SortNameBase<K extends SortNameBase<K>> extends SequenceLongBase<K> implements MutableSortNameEntity<String>{
 
 	private static final long serialVersionUID = -950822256693332353L;
 

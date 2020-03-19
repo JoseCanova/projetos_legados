@@ -17,22 +17,22 @@ import org.springframework.validation.annotation.Validated;
 //TODO: Create support for ExampleMathcers
 @Service
 @Validated
-public class ArtistJpaService extends BasePersistenceService<Artist,ArtistRepository> {
+public class ArtistJpaService<K extends Artist<K>> extends BasePersistenceService<K,ArtistRepository<K>> {
 
 	@Autowired
-	private ArtistRepository artistRepository;
+	private ArtistRepository<K> artistRepository;
 	
 	@Autowired
 	ArtistBaseProjection baseProjection;
 	
 
 	@Transactional
-	public  Optional<Artist> findByArtistId(Long artistId) {
+	public  Optional<K> findByArtistId(Long artistId) {
 		return artistRepository.findByArtistId(artistId);
 	}
 	
 	@Transactional
-	public Iterable<Artist> findByNameContaining(@NotNull @NotEmpty String name){ 
+	public Iterable<K> findByNameContaining(@NotNull @NotEmpty String name){ 
 		return artistRepository.findByNameContainingIgnoreCase(name);
 	}
 	

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ReleaseRepository 
 extends IdBaseRepository<Release> , 
 ReleaseBaseRepository<Release,Long>,
-NameBaseProjection<Release>,
-GidBaseProjection<Release>{
+NameBaseProjection<Release,String>,
+GidBaseProjection<Release,String>{
 }

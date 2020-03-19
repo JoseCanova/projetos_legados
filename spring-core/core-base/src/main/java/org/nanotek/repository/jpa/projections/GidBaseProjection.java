@@ -1,9 +1,9 @@
 package org.nanotek.repository.jpa.projections;
+import java.io.Serializable;
 import java.util.Optional;
 
-import org.nanotek.IdBase;
 import org.nanotek.entities.MutableGidEntity;
 
-public interface GidBaseProjection<K extends MutableGidEntity<?>> {
-   Optional<K> findByGid();
+public interface GidBaseProjection<K extends MutableGidEntity<TID>, TID extends Serializable> {
+   Optional<K> findByGid(TID id);
 }

@@ -4,30 +4,23 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistSortName;
 import org.nanotek.repository.jpa.ArtistSortNameRepository;
-import org.nanotek.service.EntityBasePersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistSortNameJpaService extends EntityBasePersistenceService<ArtistSortName , ArtistSortNameRepository,Long> {
+public class ArtistSortNameJpaService<K extends ArtistSortName<K>> extends BasePersistenceService<K , ArtistSortNameRepository<K>> {
 
-	protected ArtistSortNameRepository artistSortNameRepository;
 	
-	public ArtistSortNameJpaService(@Autowired ArtistSortNameRepository artistSortNameRepository) {
-		this.artistSortNameRepository = artistSortNameRepository;
+	public ArtistSortNameJpaService(@Autowired ArtistSortNameRepository<K> artistSortNameRepository) {
+		super(artistSortNameRepository);
 	}
 
-	public Optional<ArtistSortName> findById(Long k) {
-		return artistSortNameRepository.findById(k);
+	public Optional<K> findById(Long k) {
+		return baseRepository.findById(k);
 	}
 
-	public Iterable<ArtistSortName> findByNameContaining(String name){
-		return artistSortNameRepository.findBySortNameContainingIgnoreCase(name);
+	public Iterable<K> findByNameContaining(String name){
+		return baseRepository.findBySortNameContainingIgnoreCase(name);
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		baseRepository = artistSortNameRepository;
-	}
-	
 }

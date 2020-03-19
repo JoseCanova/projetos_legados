@@ -11,14 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistRepository extends IdBaseRepository<Artist<?>>,
-NameBaseProjection<Artist<?>>,
-GidBaseProjection<Artist<?>>{
+public interface ArtistRepository<K extends Artist<K>> extends IdBaseRepository<K>,
+NameBaseProjection<K,String>,
+GidBaseProjection<K,String>{
 	
-	Optional<Artist<?>> findByArtistId(Long artistId);
+	Optional<K> findByArtistId(Long artistId);
 	
 	@Query("select new org.nanotek.beans.entity.Artist(a.id , a.name , a.gid) "
 			+ "from Artist a where UPPER(a.name) like %:name% order by a.name")
-	List<Artist<?>> findByNameEspec(@Param("name")String name);
+	List<K> findByNameEspec(@Param("name")String name);
 
 }

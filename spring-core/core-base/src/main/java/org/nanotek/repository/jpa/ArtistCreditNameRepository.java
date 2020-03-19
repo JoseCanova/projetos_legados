@@ -3,12 +3,14 @@ package org.nanotek.repository.jpa;
 import java.util.List;
 
 import org.nanotek.beans.entity.ArtistCreditName;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.nanotek.repository.jpa.projections.ArtistCreditNameIdProjection;
+import org.nanotek.repository.jpa.projections.NameBaseProjection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistCreditNameRepository extends JpaRepository<ArtistCreditName<?>,Long> {
-	
-	public List<ArtistCreditName<?>> findByArtistCreditId(Long id);
-	
+public interface ArtistCreditNameRepository<K extends ArtistCreditName<K>> 
+extends  IdBaseRepository<K>,
+ArtistCreditNameIdProjection<K , Long>,
+NameBaseProjection<K,String>{
+	public List<K> findByArtistCreditId(Long id);
 }

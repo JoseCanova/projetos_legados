@@ -12,20 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistAliasJpaService   extends LongIdNameEntityService<ArtistAlias<?>,ArtistAliasRepository>{
+public class ArtistAliasJpaService<K extends ArtistAlias<K>>   extends LongIdNameEntityService<K,ArtistAliasRepository<K>>{
 	
 	public ArtistAliasJpaService(@Autowired
-			ArtistAliasRepository rep) {
+			ArtistAliasRepository<K> rep) {
 		super(rep);
 	}
 
 	@Transactional
-	public Optional<ArtistAlias<?>> findByAliasId(@NotNull Long aliasId) {
+	public Optional<K> findByAliasId(@NotNull Long aliasId) {
 		return baseRepository.findByAliasId(aliasId);
 	}
 
 	@Override
-	public Iterable<ArtistAlias<?>> findByNameContainingIgnoreCase( String name) {
+	public Iterable<K> findByNameContainingIgnoreCase( String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 

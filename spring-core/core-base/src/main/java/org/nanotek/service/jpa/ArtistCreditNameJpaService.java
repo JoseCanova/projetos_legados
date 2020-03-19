@@ -1,6 +1,7 @@
 package org.nanotek.service.jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistCreditName;
 import org.nanotek.repository.jpa.ArtistCreditNameRepository;
@@ -9,20 +10,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ArtistCreditNameJpaService extends BasePersistenceService<ArtistCreditName,ArtistCreditNameRepository> {
+public class ArtistCreditNameJpaService<K extends ArtistCreditName<K>> extends BasePersistenceService<K,ArtistCreditNameRepository<K>> {
 
-	@Autowired
-	private ArtistCreditNameRepository repository;
-	
-	
+	public ArtistCreditNameJpaService(@Autowired  ArtistCreditNameRepository<K> baseRepository) {
+		super(baseRepository);
+	}
+
 	@Transactional
-	public ArtistCreditName save(ArtistCreditName a) { 
-		   return repository.save(a);
+	public List<K> findByArtistCreditId(Long id){ 
+		return baseRepository.findByArtistCreditId(id);
 	}
 	
 	@Transactional
-	public List<ArtistCreditName> findByArtistCreditId(Long id){ 
-		return repository.findByArtistCreditId(id);
+	public Optional<K> findByArtistCreditNameId(Long id){
+		return baseRepository.findByArtistCreditNameId(id);
 	}
 
 }

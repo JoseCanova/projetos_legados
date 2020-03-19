@@ -23,7 +23,7 @@ import org.nanotek.entities.BaseArtistEntity;
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<K extends Serializable> extends LongIdGidName<Artist<?>,String,String> implements BaseArtistEntity<K>{
+public class Artist<K extends Artist<K>> extends LongIdGidName<K,String,String> implements BaseArtistEntity<K>{
 	
 	private static final long serialVersionUID = -932806802235346847L;
 

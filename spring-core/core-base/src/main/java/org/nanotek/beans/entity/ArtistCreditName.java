@@ -22,9 +22,9 @@ import org.nanotek.entities.MutatbleArtistCreditNameIdEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName<E extends Serializable> 
-extends LongIdName<ArtistCreditName<?>> 
-implements  BaseArtistCreditNameEntity,
+public class ArtistCreditName<E extends ArtistCreditName<E>> 
+extends LongIdName<E> 
+implements  BaseArtistCreditNameEntity<E>,
 MutatbleArtistCreditNameIdEntity<Long>, 
 MutableArtistCreditEntity<ArtistCredit<?>>,
 MutableArtistEntity<Artist<?>>,

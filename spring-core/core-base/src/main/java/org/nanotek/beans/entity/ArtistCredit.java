@@ -43,17 +43,20 @@ import org.nanotek.entities.MutableArtistCreditRefCountEntity;
 					subgraphs = @NamedSubgraph(name = "recordings", 
 					attributeNodes = {@NamedAttributeNode(value="recordingLenght" , subgraph = "recordingLenght")}
 ))
-public class ArtistCredit<K extends Serializable> extends LongIdName<ArtistCredit<?>> implements  BaseArtistCreditEntity,
-																  MutableArtistCreditIdEntity<Long>,	
-																  MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
-																  MutableArtistCreditRefCountEntity<ArtistCreditRefCount> 
-																  {
+public class ArtistCredit<K extends ArtistCredit<K>> extends 
+LongIdName<K> implements  
+BaseArtistCreditEntity,
+MutableArtistCreditIdEntity<Long>,	
+MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
+MutableArtistCreditRefCountEntity<ArtistCreditRefCount> {
 	
 	private static final long serialVersionUID = -3086006757943654550L;
 	
 	@NotNull
 	@Column(name="artist_credit_id" , nullable=false)
 	public Long artistCreditId;
+	
+	
 	
 	@NotNull
 	@OneToOne(optional=false)

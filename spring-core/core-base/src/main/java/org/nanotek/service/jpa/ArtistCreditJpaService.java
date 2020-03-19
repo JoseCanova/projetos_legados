@@ -12,27 +12,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 //<O extends ArtistCredit , R extends LongIdNameEntityRepository> 
 @Service
-public class ArtistCreditJpaService extends LongIdNameEntityService<ArtistCredit<?>, ArtistCreditRepository>  {
+public class ArtistCreditJpaService<K extends ArtistCredit<K>> extends LongIdNameEntityService<K, ArtistCreditRepository<K>>  {
 
 
-	public ArtistCreditJpaService(@Autowired ArtistCreditRepository rep) {
+	public ArtistCreditJpaService(@Autowired ArtistCreditRepository<K> rep) {
 		super(rep);
 	}
 
 	@Transactional
-	public Optional<ArtistCredit<?>> findByArtistCreditId(Long artistCreditId){ 
+	public Optional<K> findByArtistCreditId(Long artistCreditId){ 
 		return baseRepository.findByArtistCreditId(artistCreditId);
 	}
 	
 	@Transactional
 //	@Cacheable(cacheNames="credits", key="#id")
-	public  ArtistCredit<?> findArtistCreditRecordingsById(Long id) {
-		Optional<ArtistCredit<?>>  opt = baseRepository.findArtistCreditRecordingsById(id);
+	public  K findArtistCreditRecordingsById(Long id) {
+		Optional<K>  opt = baseRepository.findArtistCreditRecordingsById(id);
 		return opt.isPresent() ? opt.get() : null;
 	}
 
 	@Override
-	public Iterable<ArtistCredit<?>> findByNameContainingIgnoreCase(String name) {
+	public Iterable<K> findByNameContainingIgnoreCase(String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 
