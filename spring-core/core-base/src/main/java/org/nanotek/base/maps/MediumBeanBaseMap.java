@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "MediumBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "mediumbean")
-public class MediumBeanBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,MediumBean>{
+public class MediumBeanBaseMap<K extends BaseMap<K,Class<MediumBean>>> extends BaseMapColumnStrategy<K,MediumBean>{
 	
 	private static final long serialVersionUID = 2075887298895102837L;
 

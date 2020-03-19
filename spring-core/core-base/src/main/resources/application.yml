@@ -51,8 +51,6 @@ entitymanager:
 artist:
   fileLocation: /opt/mbdump
   fileName: artist
-  id: ArtistBean
-  type: org.nanotek.beans.csv.ArtistBean
   baseMapColumnStrategy:
     artistId: 0
     gid: 1
@@ -78,8 +76,6 @@ artist:
 artistalias:
   fileLocation: /opt/mbdump
   fileName: artist_alias
-  id: ArtistAliasBean
-  type: org.nanotek.beans.csv.ArtistAliasBean
   baseMapColumnStrategy:  
     artistAliasId: 0
     artistId: 1
@@ -101,8 +97,6 @@ artistalias:
 artistcredit:
   fileLocation: /opt/mbdump
   fileName: artist_credit1
-  id: ArtistCreditBean
-  type: org.nanotek.beans.csv.ArtistCreditBean
   baseMapColumnStrategy:  
     artistCreditId: 0
     name: 1
@@ -114,8 +108,6 @@ artistcredit:
 artistcreditname:
   fileLocation: /opt/mbdump
   fileName: artist_credit_name
-  id: ArtistCreditName
-  type: org.nanotek.beans.entity.ArtistCreditName
   baseMapColumnStrategy:  
     artistCreditId: 0
     position: 1            
@@ -126,8 +118,6 @@ artistcreditname:
 artistcreditnamebean:
   fileLocation: /opt/mbdump
   fileName: artist_credit_name
-  id: ArtistCreditNameBean
-  type: org.nanotek.beans.csv.ArtistCreditNameBean
   baseMapColumnStrategy:  
     artistCreditId: 0
     position: 1            
@@ -138,8 +128,6 @@ artistcreditnamebean:
 releasebean: 
   fileLocation: /opt/mbdump/release_cut
   fileName: release_ah
-  id: ReleaseBean
-  type: org.nanotek.beans.csv.ReleaseBean 
   baseMapColumnStrategy: 
     releaseId: 0 
     gid: 1 
@@ -159,8 +147,6 @@ releasebean:
 releasegroup: 
   fileLocation: /opt/mbdump
   fileName: release_group
-  id: ReleaseGroupBean
-  type: org.nanotek.beans.csv.ReleaseGroupBean 
   baseMapColumnStrategy:   
     releaseGroupId: 0 
     gid: 1 
@@ -174,8 +160,6 @@ releasegroup:
 recordingbean: 
   fileLocation: /opt/mbdump/recording_split
   fileName: recaa
-  id: RecordingBean
-  type: org.nanotek.beans.csv.RecordingBean 
   baseMapColumnStrategy:   
     recordingId: 0
     gid: 1
@@ -190,8 +174,6 @@ recordingbean:
 trackbean: 
   fileLocation: /opt/mbdump
   fileName: track
-  id: TrackBean
-  type: org.nanotek.beans.csv.TrackBean 
   baseMapColumnStrategy:    
     trackId: 0 
     gid: 1 
@@ -209,8 +191,6 @@ trackbean:
 mediumbean: 
   fileLocation: /opt/mbdump
   fileName: medium
-  id: MediumBean
-  type: org.nanotek.beans.csv.MediumBean 
   baseMapColumnStrategy:     
     mediumId: 0
     release: 1 
@@ -224,8 +204,6 @@ mediumbean:
 artisttype: 
   fileLocation: /opt/mbdump
   fileName: artist_type
-  id: ArtistTypeBean
-  type: org.nanotek.beans.csv.ArtistTypeBean 
   baseMapColumnStrategy:     
     artistTypeId: 0
     name: 1
@@ -237,8 +215,6 @@ artisttype:
 artistaliastype: 
   fileLocation: /opt/mbdump
   fileName: artist_alias_type
-  id: ArtistAliasTypeBean
-  type: org.nanotek.beans.csv.ArtistAliasTypeBean 
   baseMapColumnStrategy:     
     artistAliasTypeId: 0
     name: 1
@@ -250,8 +226,6 @@ artistaliastype:
 instrumenttype:
   fileLocation: /opt/mbdump
   fileName: instrument_type
-  id: InstrumentTypeBean
-  type: org.nanotek.beans.csv.InstrumentTypeBean 
   baseMapColumnStrategy:     
     instrumentTypeId: 0
     name: 1
@@ -263,8 +237,6 @@ instrumenttype:
 instrument:
   fileLocation: /opt/mbdump
   fileName: instrument
-  id: InstrumentBean
-  type: org.nanotek.beans.csv.InstrumentBean 
   baseMapColumnStrategy:     
     instrumentId: 0
     gid: 1
@@ -278,8 +250,6 @@ instrument:
 releasegroupprimarytype:
   fileLocation: /opt/mbdump
   fileName: release_group_primary_type
-  id: ReleaseGroupPrimaryTypeBean
-  type: org.nanotek.beans.csv.ReleaseGroupPrimaryTypeBean
   baseMapColumnStrategy:  
       releaseGroupPrimaryTypeId: 0 
       name: 1 
@@ -291,8 +261,6 @@ releasegroupprimarytype:
 releasestatus:
   fileLocation: /opt/mbdump
   fileName: release_status
-  id: ReleaseStatusBean
-  type: org.nanotek.beans.csv.ReleaseStatusBean
   baseMapColumnStrategy:  
       releaseStatusId: 0 
       name: 1 
@@ -304,8 +272,6 @@ releasestatus:
 releasepackaging:
   fileLocation: /opt/mbdump
   fileName: release_packaging
-  id: ReleasePackagingBean
-  type: org.nanotek.beans.csv.ReleasePackagingBean
   baseMapColumnStrategy:  
       releasePackagingId: 0 
       name: 1 
@@ -317,8 +283,6 @@ releasepackaging:
 language:
   fileLocation: /opt/mbdump
   fileName: language
-  id: LanguageBean
-  type: org.nanotek.beans.csv.LanguageBean
   baseMapColumnStrategy:  
       languageId: 0 
       isoCode2t: 1 
@@ -331,8 +295,6 @@ language:
 areatype: 
   fileLocation: /opt/mbdump
   fileName: area_type
-  id: AreaTypeBean
-  type: org.nanotek.beans.csv.AreaTypeBean 
   baseMapColumnStrategy:     
     areaTypeId: 0
     name: 1
@@ -344,8 +306,6 @@ areatype:
 gendertype: 
   fileLocation: /opt/mbdump
   fileName: gender
-  id: GenderBean
-  type: org.nanotek.beans.csv.GenderBean 
   baseMapColumnStrategy:     
     genderTypeId: 0
     name: 1
@@ -357,8 +317,6 @@ gendertype:
 releasealiastype: 
   fileLocation: /opt/mbdump
   fileName: release_alias_type
-  id: ReleaseAliasTypeBean
-  type: org.nanotek.beans.csv.ReleaseAliasTypeBean 
   baseMapColumnStrategy:     
     releaseAliasTypeId: 0
     name: 1
@@ -370,8 +328,6 @@ releasealiastype:
 recordingaliastype:
   fileLocation: /opt/mbdump
   fileName: recording_alias_type
-  id: RecordingAliasTypeBean
-  type: org.nanotek.beans.csv.RecordingAliasTypeBean 
   baseMapColumnStrategy:     
     recordingAliasTypeId: 0
     name: 1
@@ -383,8 +339,6 @@ recordingaliastype:
 area: 
   fileLocation: /opt/mbdump
   fileName: area
-  id: AreaBean
-  type: org.nanotek.beans.csv.AreaBean 
   baseMapColumnStrategy:     
     areaId: 0 
     gid: 1 
@@ -404,8 +358,6 @@ area:
 releasealias: 
   fileLocation: /opt/mbdump
   fileName: release_alias
-  id: ReleaseAliasBean
-  type: org.nanotek.beans.csv.ReleaseAliasBean 
   baseMapColumnStrategy:     
     releaseAliasId: 0 
     release: 1 
@@ -427,8 +379,6 @@ releasealias:
 recordingalias: 
   fileLocation: /opt/mbdump
   fileName: recording_alias
-  id: RecordingAliasBean
-  type: org.nanotek.beans.csv.RecordingAliasBean 
   baseMapColumnStrategy:     
     recordingAliasId: 0 
     release: 1 
@@ -450,8 +400,6 @@ recordingalias:
 mediumformat: 
   fileLocation: /opt/mbdump
   fileName: medium_format
-  id: MediumFormatBean
-  type: org.nanotek.beans.csv.MediumFormatBean 
   baseMapColumnStrategy:     
     mediumFormatId: 0
     name: 1

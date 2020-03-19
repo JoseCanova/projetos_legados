@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "RecordingBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "recordingbean")
-public class RecordingBeanBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,RecordingBean>{
+public class RecordingBeanBaseMap<K extends BaseMap<K,Class<RecordingBean>>> extends BaseMapColumnStrategy<K,RecordingBean>{
 	private static final long serialVersionUID = 5152789565432261772L;
 
 	public RecordingBeanBaseMap() { 

@@ -153,4 +153,12 @@ public class ArtistBean extends Result<ArtistBean,Artist> {
 		this.endArea = endArea;
 	}
 
+	public Long getArtistId() {
+		return artistId;
+	}
+
+	public void setArtistId(Long artistId) {
+		this.artistId = artistId;
+	}
+
 }

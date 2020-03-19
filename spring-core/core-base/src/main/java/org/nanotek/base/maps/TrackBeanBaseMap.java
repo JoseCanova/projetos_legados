@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "TrackBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "trackbean")
-public class TrackBeanBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,TrackBean> {
+public class TrackBeanBaseMap<K extends BaseMap<K,Class<TrackBean>>> extends BaseMapColumnStrategy<K,TrackBean> {
 
 	private static final long serialVersionUID = -3892873557227957848L;
 

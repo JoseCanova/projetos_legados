@@ -1,12 +1,14 @@
 package org.nanotek.opencsv;
 
+import java.io.Serializable;
+
 import org.nanotek.IdBase;
 import org.nanotek.IdBaseMap;
 import org.springframework.beans.factory.InitializingBean;
 
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
-public class MapColumnStrategy<T extends BaseMap<T>, I extends IdBase<I,Long>> extends  ColumnPositionMappingStrategy<T> implements InitializingBean  {
+public class MapColumnStrategy<T extends BaseMap<?,?>> extends  ColumnPositionMappingStrategy<T> implements InitializingBean  {
 
 	protected T baseMap; 
 	

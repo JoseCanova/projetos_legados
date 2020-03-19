@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "ReleaseGroupBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "releasegroup")
-public class ReleaseGroupBeanBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,ReleaseGroupBean>{
+public class ReleaseGroupBeanBaseMap<K extends BaseMap<K,Class<ReleaseGroupBean>>> extends BaseMapColumnStrategy<K,ReleaseGroupBean>{
 	private static final long serialVersionUID = -5112114045536709618L;
 
 	public ReleaseGroupBeanBaseMap() { 

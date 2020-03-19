@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Qualifier(value = "ArtistCreditNameBeanBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "artistcreditnamebean")
-public class ArtistCreditNameBeanBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,ArtistCreditNameBean> {
+public class ArtistCreditNameBeanBaseMap<K extends BaseMap<K,Class<ArtistCreditNameBean>>> extends BaseMapColumnStrategy<K,ArtistCreditNameBean> {
 
 	private static final long serialVersionUID = 6188640277899291092L;
 

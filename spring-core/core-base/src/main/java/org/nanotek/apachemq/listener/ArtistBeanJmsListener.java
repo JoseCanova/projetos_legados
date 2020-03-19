@@ -7,6 +7,7 @@ import javax.jms.Session;
 import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
+import org.nanotek.IdBase;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.beans.entity.ArtistComment;
@@ -53,7 +54,7 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 
 	
 	private void validateAndSave(@Valid ArtistBean artistBean) { 
-		Optional<Artist> optArtist = artistJpaService.findById(artistBean.getId());
+		Optional<Artist> optArtist = artistJpaService.findByArtistId(artistBean.getArtistId());
 		if (optArtist.isPresent()) { 
 			verifyArtistComment(optArtist.get() , artistBean);
 		}else { 
@@ -86,7 +87,7 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 		return comment == null || "\\N".equalsIgnoreCase(comment);
 	}
 
-	private Artist save(Artist artist) {
+	private  IdBase<?,?> save(IdBase<?,?> artist) {
 		return artistJpaService.save(artist);
 	}
 }

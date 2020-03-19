@@ -8,7 +8,7 @@ import org.nanotek.StringBase;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_count")
-public class TrackCount implements StringBase<TrackCount> {
+public class TrackCount implements StringBase<TrackCount,String> {
 
 	private String id; 
 	private String trackCount; 

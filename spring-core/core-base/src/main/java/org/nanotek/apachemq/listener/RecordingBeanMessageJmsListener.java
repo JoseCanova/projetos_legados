@@ -24,7 +24,8 @@ import com.google.gson.Gson;
 @Service
 @Validated
 @Qualifier(value="RecordingBeanMessageJmsListener")
-public class RecordingBeanMessageJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage> , Transformer<RecordingBean,Recording>{
+public class RecordingBeanMessageJmsListener 
+implements SessionAwareMessageListener<ActiveMQBytesMessage> , Transformer<RecordingBean,Recording>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	

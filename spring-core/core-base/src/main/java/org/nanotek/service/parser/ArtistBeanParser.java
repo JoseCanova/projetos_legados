@@ -24,9 +24,4 @@ public class ArtistBeanParser extends BaseParser {
 		this.artistBaseMap = artisBaseMap;
 	}
 
-	@Override
-	public BaseMap<?> getBaseMap() {
-		return artistBaseMap;
-	}
-	
 }

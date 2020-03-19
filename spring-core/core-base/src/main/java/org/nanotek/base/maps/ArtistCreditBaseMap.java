@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "ArtistCreditBaseMap")
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "artistcredit")
-public class ArtistCreditBaseMap<K extends BaseMap<K>> extends BaseMapColumnStrategy<K,ArtistCreditBean>{
+public class ArtistCreditBaseMap<K extends BaseMap<K,Class<ArtistCreditBean>>>extends BaseMapColumnStrategy<K,ArtistCreditBean>{
 
 	private static final long serialVersionUID = 477274629795560373L;
 

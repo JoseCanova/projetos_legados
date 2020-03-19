@@ -1,14 +1,19 @@
 package org.nanotek.base.maps;
 
+import java.io.Serializable;
+
 import org.nanotek.IdBase;
 import org.nanotek.opencsv.BaseMap;
 import org.nanotek.opencsv.MapColumnStrategy;
 
 
-public class BaseMapColumnStrategy<T extends BaseMap<T> , ID extends IdBase<ID, Long>> extends MapColumnStrategy<T,ID> implements IdBase<T,String>{
+public class BaseMapColumnStrategy<T extends BaseMap<T,Class<ID>> , ID extends IdBase<?, ?>> 
+extends MapColumnStrategy<T> implements IdBase<T,Class<ID>>{
 
 	private static final long serialVersionUID = -7318639218365616230L;
 
+	public Class<ID> id;
+	
 	public String fileLocation; 
 	
 	public String fileName;
@@ -33,8 +38,8 @@ public class BaseMapColumnStrategy<T extends BaseMap<T> , ID extends IdBase<ID, 
 	}
 
 	@Override
-	public String getId() {
-		return fileName;
+	public Class<ID> getId() {
+		return id;
 	}
 
 }
