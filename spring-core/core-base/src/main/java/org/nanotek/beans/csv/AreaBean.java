@@ -3,7 +3,7 @@ package org.nanotek.beans.csv;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.Area;
 
-public class AreaBean extends Result<AreaBean,Area>{
+public class AreaBean extends Result<AreaBean,Area<?>>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	

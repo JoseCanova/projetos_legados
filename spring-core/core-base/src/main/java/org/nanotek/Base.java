@@ -12,7 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.google.gson.Gson;
 
-public interface Base<K extends Base<K>> extends Kong<K> , Serializable , KongSupplier<K>{
+public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 
 	static String hash = "35454B055CC325EA1AF2126E27707052";
 
@@ -69,6 +69,14 @@ public interface Base<K extends Base<K>> extends Kong<K> , Serializable , KongSu
 			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+	
+	default <KID extends Base<ID> , ID extends Base<?>> Optional<K> newInstance(Class<K> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
+		try {
+			return Base.newInstance(clazz, new Base[] {Base.newInstance(idClazz).get()},idClazz);
+		} catch (Exception e) {
 			throw new BaseInstantiationException(e);
 		}
 	}
