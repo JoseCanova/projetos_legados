@@ -7,6 +7,8 @@ public class AreaBean extends Result<AreaBean,Area<?>>{
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
+	public Area<?> id;
+	
 	private Long areaId; 
 	private String gid; 
 	private String name; 
@@ -23,6 +25,11 @@ public class AreaBean extends Result<AreaBean,Area<?>>{
 	private String comment; 
 
 
+	public AreaBean() {}
+	
+	public AreaBean(Area<?> clazz) { 
+		this.id = clazz;
+	}
 
 	public String getGid() {
 		return gid;

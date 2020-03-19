@@ -17,7 +17,8 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements 
 	@NotNull
 	private ID id = null;
 
-	public Result() {}
+	public Result() {
+	}
 	
 	public Result(K immutable) { 
 		this.immutable = immutable;

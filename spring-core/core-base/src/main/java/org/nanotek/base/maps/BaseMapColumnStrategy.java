@@ -6,7 +6,7 @@ import org.nanotek.opencsv.MapColumnStrategy;
 
 
 public class BaseMapColumnStrategy<T extends BaseMap<T,Class<ID>> , ID extends IdBase<?, ?>> 
-extends MapColumnStrategy<T> implements IdBase<T,Class<ID>>{
+extends MapColumnStrategy<T> implements   IdBase<T,Class<ID>>{
 
 	private static final long serialVersionUID = -7318639218365616230L;
 
