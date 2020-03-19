@@ -14,7 +14,8 @@ import org.nanotek.entities.MutableBase;
  * @param <T>
  */
 @SuppressWarnings("serial")
-public class BaseMap<T extends IdBase<?,ID>, ID extends Serializable> extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
+public class BaseMap<T extends IdBase<?,ID>, ID extends Serializable> 
+extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
 
 	//works fine with the "Bean Name";
 	protected ID id;
