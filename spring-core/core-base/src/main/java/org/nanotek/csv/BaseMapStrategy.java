@@ -9,11 +9,12 @@ import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
 
 @FunctionalInterface
-public interface BaseMapStrategy<K extends WrappedBaseClass<K,ID>, ID extends IdBase<ID,?>> extends Base<K>{
+public interface BaseMapStrategy<K extends WrappedBaseClass<J,?>, ID extends IdBase<ID,?> , J extends ID>  extends Base<J>{
 
-    Optional<Result<K,?>> findProperty(Predicate<Class<ID>> evaluator);
+    Optional<Result<ID,?>> findProperty(Predicate<Class<ID>> evaluator , String property);
+    
 
-    default  Optional<K> createBean(Class<K> k , Class<ID> id){ 
+    default  Optional<J> createBean(Class<J> k , Class<ID> id){ 
     	return this.newInstance (k , id);
     }
 	
