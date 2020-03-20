@@ -1,26 +1,19 @@
 package org.nanotek.opencsv;
 
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
 import java.util.Optional;
 
-import org.nanotek.Base;
 import org.nanotek.BaseException;
-import org.nanotek.Holder;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
-import org.nanotek.beans.csv.ArtistBean;
-import org.nanotek.beans.entity.Artist;
 
 
-public class MapStrategyIdBase<W extends WrappedBaseClass<W,ID>,
-K extends IdBase<K,ID> , 
+public class MapStrategyIdBase
+<K extends WrappedBaseClass<K,ID>, 
 ID extends IdBase<ID,?> , 
-J extends ResultHolderBaseMap<W,ID,K>, 
-B extends Holder<K,ID>> 
-implements MapStrategy<W,ID,K,?>{
+J extends IdBase<K,ID> , 
+B extends ResultHolderBaseMap<ID,ID,K>> 
+implements MapStrategy<K,ID,J,B>{
 	
 	Optional<J> optionalIdBaseMap;
 	
@@ -31,7 +24,7 @@ implements MapStrategy<W,ID,K,?>{
 	Optional<ID> identityClass;
 	
 
-	public MapStrategyIdBase(Class<W> w , Class<K> k , Class<ID> i , Class<J> j , Class<B> b) {
+	public MapStrategyIdBase(Class<K> k, Class<ID> i , Class<J> j , Class<B> b) {
 		
 		optionalIdBaseMap = createIdBaseClass(j, i);
 		optionalWrapperBean = createWrappedBaseClass(k, i);
@@ -72,37 +65,6 @@ implements MapStrategy<W,ID,K,?>{
 
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) { 
-		Optional<BaseMap> map = Base.newInstance(BaseMap.class);
-		map.get().setId(new Artist());
-		System.out.println(map.get().getId());
-		
-		Optional<BaseMap> ms = Base.newInstance(BaseMap.class, 
-												new Serializable[] {new Artist()},
-												Serializable.class);
-		System.out.println(ms.get().getId());
-		
-	
-		Constructor[] constructors  = MapStrategyIdBase.class.getDeclaredConstructors();
-		
-		for (Constructor c : constructors) { 
-			Parameter[] parameters = c.getParameters();
-			for (Parameter p : parameters) { 
-				System.out.println(p.getType().getTypeName());
-			}
-		}
-		
-		MapStrategyIdBase strategy = new MapStrategyIdBase(WrappedBaseClass.class,
-														Artist.class,
-														BaseMap.class,
-														ArtistBean.class);
-		
-//		Optional<?> opt = Base.newInstance(MapStrategy.class, 
-//								new Serializable[] {BaseMap.class,Artist.class,ArtistBean.class,WrappedBaseClass.class},
-//								Class.class,Class.class,Class.class,Class.class);
-		
-		
-		
-		System.out.println("the halt");
 	}
 
 }
