@@ -2,7 +2,7 @@ package org.nanotek;
 
 import java.util.Optional;
 
-import org.nanotek.csv.PredicateBase;
+import org.nanotek.opencsv.PredicateBase;
 
 @FunctionalInterface
 public interface Holder<K extends IdBase<K,ID> , ID extends IdBase<?,?>>{

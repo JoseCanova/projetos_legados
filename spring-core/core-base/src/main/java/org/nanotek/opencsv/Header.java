@@ -1,4 +1,4 @@
-package org.nanotek.csv;
+package org.nanotek.opencsv;
 
 public interface Header {
 

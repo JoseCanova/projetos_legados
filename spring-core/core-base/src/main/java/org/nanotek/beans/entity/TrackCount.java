@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.nanotek.IdBase;
-import org.nanotek.StringBase;
 
 @SuppressWarnings("serial")
 @Entity

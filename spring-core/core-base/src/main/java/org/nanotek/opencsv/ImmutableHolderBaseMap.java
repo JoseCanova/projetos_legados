@@ -6,7 +6,6 @@ import org.nanotek.BaseException;
 import org.nanotek.BooleanBase;
 import org.nanotek.Holder;
 import org.nanotek.IdBase;
-import org.nanotek.csv.PredicateBase;
 
 public class ImmutableHolderBaseMap<K extends IdBase<K,ID> , ID extends IdBase<?,?>> 
 extends HolderBaseMap<K,ID> 

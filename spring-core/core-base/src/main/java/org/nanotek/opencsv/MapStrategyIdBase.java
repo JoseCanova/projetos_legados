@@ -1,4 +1,4 @@
-package org.nanotek.csv;
+package org.nanotek.opencsv;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -7,16 +7,20 @@ import java.util.Optional;
 
 import org.nanotek.Base;
 import org.nanotek.BaseException;
+import org.nanotek.Holder;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.entity.Artist;
-import org.nanotek.opencsv.BaseMap;
 
 
-public class MapStrategyIdBase<K extends WrappedBaseClass<J,ID>,ID extends IdBase<ID,?> , J extends BaseMap<J,ID>, B extends Result<J,ID>> 
-implements MapStrategy<K,ID,J,B>{
+public class MapStrategyIdBase<W extends WrappedBaseClass<W,ID>,
+K extends IdBase<K,ID> , 
+ID extends IdBase<ID,?> , 
+J extends ResultHolderBaseMap<W,ID,K>, 
+B extends Holder<K,ID>> 
+implements MapStrategy<W,ID,K,?>{
 	
 	Optional<J> optionalIdBaseMap;
 	
@@ -27,7 +31,7 @@ implements MapStrategy<K,ID,J,B>{
 	Optional<ID> identityClass;
 	
 
-	public MapStrategyIdBase(Class<K> k , Class<ID> i , Class<J> j , Class<B> b) {
+	public MapStrategyIdBase(Class<W> w , Class<K> k , Class<ID> i , Class<J> j , Class<B> b) {
 		
 		optionalIdBaseMap = createIdBaseClass(j, i);
 		optionalWrapperBean = createWrappedBaseClass(k, i);

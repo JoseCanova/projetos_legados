@@ -1,14 +1,15 @@
-package org.nanotek.csv;
+package org.nanotek.opencsv;
 
 import java.util.Optional;
 
 import org.nanotek.Base;
+import org.nanotek.Holder;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
 
 public interface MapStrategy<K extends WrappedBaseClass<J,ID>, ID extends IdBase<ID,?> , 
-J extends IdBase<J,ID> , B extends Result<J,ID>>  
+J extends IdBase<J,ID> , B extends Holder<J,ID>>  
 {
 
 	Optional<Result<ID,?>> findProperty(String property);
