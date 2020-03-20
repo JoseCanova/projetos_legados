@@ -1,6 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
 import java.util.stream.Stream;
 
 import javax.persistence.Column;
@@ -13,14 +12,15 @@ import javax.validation.constraints.Size;
 
 import org.nanotek.entities.MutableLanguageEntity;
 import org.nanotek.entities.immutables.BaseLanguageEntity;
-import org.nanotek.stream.KongStream;
 
 @SuppressWarnings("rawtypes")
 @Entity
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language<K extends Serializable> extends  LongIdName<Language<?>> implements  BaseLanguageEntity<Language<?>>, MutableLanguageEntity<Language<?>> {
+public class Language<K extends Language<K>> extends  LongIdName<Language<?>>
+implements  BaseLanguageEntity<Language>, 
+MutableLanguageEntity<Language> {
 
 	private static final long serialVersionUID = 3416483640256915L;
 	

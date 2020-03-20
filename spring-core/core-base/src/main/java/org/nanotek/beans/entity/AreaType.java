@@ -6,7 +6,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.BaseEntity;
 import org.nanotek.entities.BaseAreaTypeEntity;
 import org.nanotek.entities.MutableAreaEntity;
 

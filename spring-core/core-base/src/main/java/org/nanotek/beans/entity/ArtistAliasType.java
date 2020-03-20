@@ -11,8 +11,8 @@ import org.nanotek.entities.MutableArtistAliasEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistAliasType")
-public class ArtistAliasType<K extends ArtistAliasType<K,A> , A extends ArtistAlias<A>> extends 
-BaseType<K> 
+public class ArtistAliasType<K extends ArtistAliasType<K,A> , A extends ArtistAlias<A>> 
+extends  BaseType<K> 
 implements  
 BaseArtistAliasTypeEntity<K>,
 MutableArtistAliasEntity<A>{

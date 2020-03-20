@@ -23,7 +23,8 @@ import org.nanotek.entities.MutableRecordingIdEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_recording_id",columnNames={"recording_id"})
 })
-public class Recording<E extends Recording<E>> extends LongIdGidName<E,String,String> implements MutableRecordingIdEntity<Long> , BaseRecordingEntity{
+public class Recording<E extends Recording<E>> extends LongIdGidName<E> implements 
+MutableRecordingIdEntity<Long> , BaseRecordingEntity<E>{
 
 	private static final long serialVersionUID = 1795844351898160253L;
 

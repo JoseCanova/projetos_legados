@@ -71,14 +71,14 @@ MutableArtistBeginAreaEntity<Area<?>>{
 			  name = "artist_begin_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id") )
-	public ArtistBeginDate artistBeginDate; 
+	public ArtistBeginDate<?> artistBeginDate; 
 	
 	@OneToOne
 	@JoinTable(
 			  name = "artist_end_date_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "date_id",referencedColumnName = "id"))
-	public ArtistEndDate artistEndDate;
+	public ArtistEndDate<?> artistEndDate;
 	
 	@NotNull
 	@ManyToOne(optional = false)
@@ -157,22 +157,22 @@ MutableArtistBeginAreaEntity<Area<?>>{
 	}
 
 	@Override
-	public void setArtistBeginDate(ArtistBeginDate k) {
+	public void setArtistBeginDate(ArtistBeginDate<?> k) {
 		this.artistBeginDate = k;
 	}
 
 	@Override
-	public ArtistBeginDate getArtistBeginDate() {
+	public ArtistBeginDate<?> getArtistBeginDate() {
 		return this.artistBeginDate;
 	}
 
 	@Override
-	public void setArtistEndDate(ArtistEndDate k) {
+	public void setArtistEndDate(ArtistEndDate<?> k) {
 		this.artistEndDate = k;
 	}
 
 	@Override
-	public ArtistEndDate getArtistEndDateEntity() {
+	public ArtistEndDate<?> getArtistEndDateEntity() {
 		return this.artistEndDate;
 	}
 

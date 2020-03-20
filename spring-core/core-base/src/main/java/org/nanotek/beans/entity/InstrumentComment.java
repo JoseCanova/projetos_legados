@@ -12,8 +12,8 @@ import org.nanotek.entities.MutableInstrumentEntity;
 
 @Entity
 @DiscriminatorValue("InstrumentComment")
-public class InstrumentComment<E extends InstrumentComment<E>> extends CommentBase<String,InstrumentComment<?>> implements 
-																					BaseInstrumentCommentEntity,
+public class InstrumentComment<K extends InstrumentComment<K>> extends CommentBase<K> implements 
+																					BaseInstrumentCommentEntity<K>,
 																					MutableInstrumentEntity<Instrument<?>> , 
 																					MutableCommentEntity<String>{
 	

@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> extends KongSupplier<IdBase<K,ID>>  , IdBase<K,ID> {
+public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> extends KongSupplier<K>  , IdBase<K,ID> {
 
 	default UUID getUUID() { 
 		return withUUID();

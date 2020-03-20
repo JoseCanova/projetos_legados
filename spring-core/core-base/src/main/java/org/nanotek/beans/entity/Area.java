@@ -12,11 +12,11 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.TypeEntity;
 import org.nanotek.entities.MutableAreaBeginDateEntity;
 import org.nanotek.entities.MutableAreaCommentEntity;
 import org.nanotek.entities.MutableAreaEndDateEntity;
 import org.nanotek.entities.MutableAreaIdEntity;
+import org.nanotek.entities.MutableTypeEntity;
 
 @Entity
 @Table(name="area" , 
@@ -25,7 +25,7 @@ uniqueConstraints= {
 		})
 public class Area<K extends Area<K>> extends LongIdGidName<K> implements 
 															MutableAreaIdEntity<Long>,		
-															TypeEntity<K>,
+															MutableTypeEntity<AreaType<?>>,
 															MutableAreaCommentEntity<AreaComment<?>>,
 															MutableAreaBeginDateEntity<AreaBeginDate<?>>,
 															MutableAreaEndDateEntity<AreaEndDate<?>>	{
@@ -118,6 +118,11 @@ public class Area<K extends Area<K>> extends LongIdGidName<K> implements
 	@Override
 	public void setAreaId(Long k) {
 		this.areaId = k;
+	}
+
+	@Override
+	public void setType(AreaType<?> k) {
+			areaType = k;
 	}
 
 }

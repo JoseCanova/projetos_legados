@@ -1,8 +1,6 @@
 package org.nanotek.entities;
 
-import java.io.Serializable;
-
-public interface MutableMediumFomatEntity<K extends Serializable> extends 
+public interface MutableMediumFomatEntity<K> extends 
 MutableNameEntity<String>,
 MutableParentEntity<Long>,
 MutableYearEntity<Integer>,

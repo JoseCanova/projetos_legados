@@ -1,4 +1,4 @@
 package org.nanotek.entities;
 
-public interface BaseArtistCreditNameEntity<KO>{
+public interface BaseArtistCreditNameEntity<K>{
 }

@@ -2,5 +2,5 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface SortBase<K extends IdBase<K,ID> , ID extends  Serializable> extends EntityBase<K,ID>{
+public interface SortBase<K extends SortBase<K,ID> , ID extends  Serializable> extends EntityBase<K,ID>{
 }

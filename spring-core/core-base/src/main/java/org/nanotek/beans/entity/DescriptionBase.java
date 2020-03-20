@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class DescriptionBase<K extends DescriptionBase<K>> extends SequenceLongBase<K>  {
+public abstract class DescriptionBase<K extends DescriptionBase<K>> extends SequenceLongBase<K,Long>  {
 
 	private static final long serialVersionUID = -4976009864905272762L;
 

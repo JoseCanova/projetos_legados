@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 import org.nanotek.IdBase;
 
-public interface Mutables<K extends IdBase<K,ID>,ID extends Serializable>  extends  MutableBase<ID>{
+public interface Mutables<K extends Mutables<K,ID>,ID extends Serializable>  extends  MutableBase<ID>{
 }

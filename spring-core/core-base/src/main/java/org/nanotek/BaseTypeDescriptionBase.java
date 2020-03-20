@@ -2,7 +2,7 @@ package org.nanotek;
 
 import java.io.Serializable;
 
-public interface BaseTypeDescriptionBase<K extends IdBase<K,ID>,D extends Serializable , ID extends Serializable> extends BaseDescriptionBase<K,K, ID> , ImmutableGid<K>{
+public interface BaseTypeDescriptionBase<K extends BaseTypeDescriptionBase<K,D,ID>,D extends Serializable , ID extends Serializable> extends BaseDescriptionBase<K,K, ID> , ImmutableGid<K>{
 	
 	ID getTypeId();
 	

@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
 import org.nanotek.entities.BaseSequenceLongBaseEntity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

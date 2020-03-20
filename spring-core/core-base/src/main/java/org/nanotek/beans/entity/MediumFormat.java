@@ -11,9 +11,9 @@ import org.nanotek.entities.MutableMediumFomatEntity;
 
 @Entity
 @Table(name="medium_format")
-public class MediumFormat extends SequenceLongBase<MediumFormat> implements 
-																  BaseMediumFormatEntity,
-																  MutableMediumFomatEntity<MediumFormat>{
+public class MediumFormat<K extends MediumFormat<K>> extends SequenceLongBase<K,Long> implements 
+																  BaseMediumFormatEntity<K>,
+																  MutableMediumFomatEntity<K>{
 
 	private static final long serialVersionUID = 8104913204474210789L;
 	

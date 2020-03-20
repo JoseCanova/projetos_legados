@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -12,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseLocaleBaseEntity;
 import org.nanotek.entities.MutableLocaleEntity;
 
 @Entity
@@ -26,7 +24,8 @@ import org.nanotek.entities.MutableLocaleEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase<K extends LocaleBase<K>> extends SequenceLongBase<K> implements 
+public class LocaleBase<K extends LocaleBase<K>> extends SequenceLongBase<K,Long> implements 
+																		BaseLocaleBaseEntity<K>,
 																		MutableLocaleEntity<String> {
 
 	private static final long serialVersionUID = -6664969453930737424L;

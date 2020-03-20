@@ -10,7 +10,7 @@ import org.nanotek.entities.MutableJoinPhraseEntity;
 
 @MappedSuperclass
 public class JoinPhraseBase<K extends Serializable , J extends JoinPhraseBase<K,J>> 
-extends SequenceLongBase<J> 
+extends SequenceLongBase<J,Long> 
 implements MutableJoinPhraseEntity<K>
 {
 

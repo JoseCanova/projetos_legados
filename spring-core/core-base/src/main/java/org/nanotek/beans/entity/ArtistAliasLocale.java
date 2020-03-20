@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -11,8 +9,8 @@ import org.nanotek.entities.BaseArtistAliasLocaleEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistAliasLocale")
-public class ArtistAliasLocale<K extends Serializable> extends LocaleBase<ArtistAliasLocale<?>> implements 
-															 BaseArtistAliasLocaleEntity {
+public class ArtistAliasLocale<K extends ArtistAliasLocale<K>> extends LocaleBase<K> implements 
+															 BaseArtistAliasLocaleEntity<K> {
 
 	private static final long serialVersionUID = -6819342630275200151L;
 
