@@ -1,31 +1,45 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistAlias;
 
-public class ArtistAliasBean  extends Result<ArtistAliasBean,ArtistAlias<?>> {
+public class ArtistAliasBean<K extends ArtistAliasBean<K,ID>, ID extends ArtistAlias<?>>  
+implements  ImmutableBase<K,ID> 
+{
 
 	private static final long serialVersionUID = -2745888243978330408L;
 	
-	private Long artistAliasId; 
-	private Long artistId; 
-	private String name; 
-	private String locale; 
-	private Integer editsPending;
-	private String lastUpdated; 
-	private Long type; 
-	private String sortName;
-	private Integer beginDateYear; 
-	private Integer beginDateMonth;
-	private Integer beginDateDay;
-	private Integer endDateYear; 
-	private Integer endDateMonth;
-	private Integer endDateDay;
-	private String primaryForLocale;
-	private String ended;
+	private ID id; 
+	
+	@Override
+	public ID getId(){ 
+		return id;
+	}
+	
+	public Long artistAliasId; 
+	public Long artistId; 
+	public String name; 
+	public String locale; 
+	public Integer editsPending;
+	public String lastUpdated; 
+	public Long type; 
+	public String sortName;
+	public Integer beginDateYear; 
+	public Integer beginDateMonth;
+	public Integer beginDateDay;
+	public Integer endDateYear; 
+	public Integer endDateMonth;
+	public Integer endDateDay;
+	public String primaryForLocale;
+	public String ended;
 	
 	
 	public ArtistAliasBean() {
+	}
+
+	public ArtistAliasBean(ID id) {
+		super();
+		this.id = id;
 	}
 
 	public Long getArtistId() {

@@ -12,7 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.nanotek.BarCodeEntityBase;
+import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseBarCodeBaseEntity;
 import org.nanotek.entities.MutableBarCodeEntity;
 
 @Entity
@@ -26,7 +27,9 @@ indexes= {
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public abstract class BarCodeBase extends SequenceLongBase<BarCodeBase> implements MutableBarCodeEntity<String>{
+public abstract class BarCodeBase<K extends BaseEntity<K,Long> ,PK extends Serializable> 
+extends SequenceLongBase<K,Long> 
+implements BaseBarCodeBaseEntity<K,Long>, MutableBarCodeEntity<String>{
 
 	private static final long serialVersionUID = 3988946185099694426L;
 
@@ -48,36 +51,6 @@ public abstract class BarCodeBase extends SequenceLongBase<BarCodeBase> implemen
 
 	public void setBarCode(String barCode) {
 		this.barCode = barCode;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((barCode == null) ? 0 : barCode.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BarCodeBase other = (BarCodeBase) obj;
-		if (barCode == null) {
-			if (other.barCode != null)
-				return false;
-		} else if (!barCode.equals(other.barCode))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "BarCodeBase [barCode=" + barCode + ", id=" + id + "]";
 	}
 	
 }

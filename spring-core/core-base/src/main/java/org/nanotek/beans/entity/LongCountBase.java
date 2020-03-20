@@ -10,6 +10,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseLongCountBaseEntity;
+
 @Entity
 @Table(name="long_count_base",
 				indexes= {
@@ -21,7 +23,7 @@ import javax.validation.constraints.NotNull;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LongCountBase extends CountBase<Long> {
+public class LongCountBase<K extends LongCountBase<K>> extends CountBase<K> implements BaseLongCountBaseEntity<K>{
 
 	private static final long serialVersionUID = 7485578978795549390L;
 	

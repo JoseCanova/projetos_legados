@@ -45,7 +45,7 @@ import org.nanotek.entities.MutableArtistCreditRefCountEntity;
 ))
 public class ArtistCredit<K extends ArtistCredit<K>> extends 
 LongIdName<K> implements  
-BaseArtistCreditEntity,
+BaseArtistCreditEntity<K>,
 MutableArtistCreditIdEntity<Long>,	
 MutableArtistCreditCountEntity<ArtistCreditCount<?>>, 
 MutableArtistCreditRefCountEntity<ArtistCreditRefCount> {

@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,11 +9,16 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseBarCodeBaseEntity;
+import org.nanotek.entities.BaseReleaseBarCodeEntity;
 import org.nanotek.entities.MutableReleaseEntity;
 
 @Entity
 @DiscriminatorValue(value = "ReleaseBarCode")
-public class ReleaseBarCode extends BarCodeBase implements MutableReleaseEntity<Release>{
+public class ReleaseBarCode<K extends BaseEntity<K,Long>> 
+extends BarCodeBase<K,Long> 
+implements BaseReleaseBarCodeEntity<K,Long> ,  MutableReleaseEntity<Release>{
 
 	private static final long serialVersionUID = 2946106607354210235L;
 

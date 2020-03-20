@@ -11,7 +11,8 @@ import org.nanotek.entities.MutableCommentEntity;
 
 @Entity
 @DiscriminatorValue(value = "AreaComment")
-public class AreaComment<E extends AreaComment<?>> extends CommentBase<String, AreaComment<E>> implements  MutableCommentEntity<String>,BaseAreaCommentEntity{
+public class AreaComment<K extends AreaComment<K>> 
+extends CommentBase<K> implements  BaseAreaCommentEntity<K> , MutableCommentEntity<String>{
 
 	private static final long serialVersionUID = -68821965634755841L;
 	

@@ -15,13 +15,32 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.collections.MutableArtistCreditList;
 import org.nanotek.entities.BaseArtistEntity;
+import org.nanotek.entities.MutableAreaEntity;
+import org.nanotek.entities.MutableArtistBeginAreaEntity;
+import org.nanotek.entities.MutableArtistBeginDateEntity;
+import org.nanotek.entities.MutableArtistCommentEntity;
+import org.nanotek.entities.MutableArtistEndDateEntity;
+import org.nanotek.entities.MutableArtistIdEntity;
+import org.nanotek.entities.MutableArtistSortNameEntity;
+import org.nanotek.entities.MutableArtistTypeEntity;
+import org.nanotek.entities.MutableGenderEntity;
 
 @Entity
 @Table(name="artist" , 
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<K extends Artist<K>> extends LongIdGidName<K,String,String> implements BaseArtistEntity<K>{
+public class Artist<K extends Artist<?>> extends 
+LongIdGidName<Artist<?>> implements BaseArtistEntity<K>,
+MutableArtistIdEntity<Long>,
+MutableArtistSortNameEntity<ArtistSortName<?>>,
+MutableArtistCommentEntity<ArtistComment<?>>,
+MutableArtistBeginDateEntity<ArtistBeginDate<?>>,
+MutableArtistEndDateEntity<ArtistEndDate<?>>,
+MutableArtistTypeEntity<ArtistType<?>>,
+MutableGenderEntity<Gender>,
+MutableAreaEntity<Area<?>>,
+MutableArtistBeginAreaEntity<Area<?>>{
 	
 	private static final long serialVersionUID = -932806802235346847L;
 

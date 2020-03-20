@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -13,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseSortNameEntity;
 import org.nanotek.entities.MutableSortNameEntity;
 
 @Entity
@@ -26,7 +25,9 @@ import org.nanotek.entities.MutableSortNameEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class SortNameBase<K extends SortNameBase<K>> extends SequenceLongBase<K> implements MutableSortNameEntity<String>{
+public class SortNameBase<K extends SortNameBase<K>> extends SequenceLongBase<K,Long> implements 
+BaseSortNameEntity<K>,
+MutableSortNameEntity<String>{
 
 	private static final long serialVersionUID = -950822256693332353L;
 

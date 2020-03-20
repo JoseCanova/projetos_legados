@@ -8,12 +8,13 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseArtistCreditCountEntity;
 import org.nanotek.entities.MutableArtistCreditEntity;
 
 @Entity
 @DiscriminatorValue(value = "ArtistCreditCount")
-public class ArtistCreditCount<E extends Serializable> extends LongCountBase 
-													   implements BaseEntity , 
+public class ArtistCreditCount<K extends ArtistCreditCount<K>> extends LongCountBase<K> 
+													   implements BaseArtistCreditCountEntity<K> , 
 													   			  MutableArtistCreditEntity<ArtistCredit<?>>{
 
 	private static final long serialVersionUID = 2246716928420528795L;

@@ -5,13 +5,14 @@ import org.springframework.beans.factory.InitializingBean;
 
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
+//TODO: review implementation of MapColumnStrategy
 public class MapColumnStrategy<T extends BaseMap<?,ID>, ID extends IdBase<ID,?>> 
 extends  ColumnPositionMappingStrategy<T> 
 implements InitializingBean {
 
 	private static final long serialVersionUID = -4017791440568493951L;
 
-	public ID id;
+	private ID id;
 	
 	protected T baseMap; 
 	
@@ -32,7 +33,6 @@ implements InitializingBean {
 		this.baseMap = baseMap;
 	}
 	
-	@Override
 	public ID getId() {
 		return id;
 	}

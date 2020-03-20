@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -20,11 +18,13 @@ import org.nanotek.entities.MutableArtistEntity;
 import org.nanotek.entities.MutablePositionEntity;
 import org.nanotek.entities.MutatbleArtistCreditNameIdEntity;
 
+import com.sun.xml.bind.v2.model.core.ID;
+
 @Entity
 @DiscriminatorValue(value="ArtistCreditName")
-public class ArtistCreditName<E extends ArtistCreditName<E>> 
-extends LongIdName<E> 
-implements  BaseArtistCreditNameEntity<E>,
+public class ArtistCreditName<K extends BaseEntity<K,ID>> 
+extends LongIdName<ArtistCreditName<?>,Long> 
+implements  BaseArtistCreditNameEntity<ArtistCreditName<?>>,
 MutatbleArtistCreditNameIdEntity<Long>, 
 MutableArtistCreditEntity<ArtistCredit<?>>,
 MutableArtistEntity<Artist<?>>,

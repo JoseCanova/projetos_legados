@@ -1,18 +1,20 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
+import org.nanotek.entities.BaseMutableGidEntity;
 import org.nanotek.entities.MutableGidEntity;
 
 @MappedSuperclass
-public abstract class LongIdGidName<K extends LongIdGidName<K,G,E>, G extends Serializable ,E extends Serializable> 
+public abstract class LongIdGidName<K extends LongIdName<K>> 
 extends LongIdName<K> 
-implements MutableGidEntity<G>{
+implements  
+BaseMutableGidEntity<K>
+, MutableGidEntity<String>{
 
 	
 	
@@ -20,7 +22,7 @@ implements MutableGidEntity<G>{
 	
 	@NotNull
 	@Column(name="gid", nullable=false , columnDefinition = "VARCHAR(50) NOT NULL")
-	protected G gid;
+	protected String gid;
 
 	
 	public LongIdGidName() {
@@ -33,19 +35,19 @@ implements MutableGidEntity<G>{
 	
 
 	public LongIdGidName(
-								@NotNull  G gid, 
+								@NotNull  String gid, 
 								@NotBlank String name) {
 		super(name);
 		this.gid = gid;
 	}
 
 
-	public void setGid(G gid) {
+	public void setGid(String gid) {
 		this.gid = gid;
 	}
 
 	@Override
-	public G getGid() {
+	public String getGid() {
 		return gid;
 	}
 	

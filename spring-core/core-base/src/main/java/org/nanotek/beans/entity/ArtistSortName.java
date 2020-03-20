@@ -12,7 +12,8 @@ import org.nanotek.entities.MutableArtistEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistSortName")
-public class ArtistSortName<K extends ArtistSortName<K>> extends SortNameBase<K> implements MutableArtistEntity<Artist<?>> {
+public class ArtistSortName<K extends ArtistSortName<K>> extends SortNameBase<K> 
+implements MutableArtistEntity<Artist<?>> {
 
 	private static final long serialVersionUID = 492175239931176224L;
 

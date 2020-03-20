@@ -3,13 +3,12 @@ package org.nanotek.beans.entity;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.nanotek.BaseEntity;
 import org.nanotek.entities.BaseArtistAliasEndDateEntity;
 
 @Entity
 @DiscriminatorValue("ArtistAliasEndDate")
 public class ArtistAliasEndDate<K extends ArtistAliasEndDate<K>> extends DatableBase<K,Integer,Integer,Integer>
-								implements BaseArtistAliasEndDateEntity{
+								implements BaseArtistAliasEndDateEntity<K>{
 
 	private static final long serialVersionUID = 7987268027913627678L;
 

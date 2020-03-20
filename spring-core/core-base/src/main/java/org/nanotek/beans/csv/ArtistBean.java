@@ -2,11 +2,14 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
+
 import org.nanotek.IdBase;
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Artist;
 
-public class ArtistBean extends  Result<ArtistBean,Artist>{
+public class ArtistBean<K extends IdBase<K,ID> , ID extends Artist<ID,?>> 
+implements ImmutableBase<K, ID>
+{
 
 	private static final long serialVersionUID = 2864330060600897052L;
 

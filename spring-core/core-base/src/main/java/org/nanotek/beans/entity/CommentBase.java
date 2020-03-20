@@ -1,33 +1,35 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseCommentBaseEntity;
+
 @MappedSuperclass
-public class CommentBase<K extends Serializable , E extends Serializable> extends SequenceLongBase<CommentBase<K,E>>  {
+public class CommentBase<K extends CommentBase<K>> 
+extends SequenceLongBase<K,Long>  
+implements BaseCommentBaseEntity<K>{
 
 	private static final long serialVersionUID = -3239637365262870832L;
 	
 	@NotNull
 	@Column(name="comment", columnDefinition = "VARCHAR NOT NULL"  , nullable=false)
-	protected K comment;
+	protected String comment;
 
 	public CommentBase() {
 	}
 	
-	public CommentBase(@NotBlank K comment) {
+	public CommentBase(@NotBlank String comment) {
 		this.comment = comment;
 	}
 
-	public K getComment() {
+	public String getComment() {
 		return comment;
 	}
 
-	public void setComment(K k) {
+	public void setComment(String k) {
 		this.comment = k;
 	}
 

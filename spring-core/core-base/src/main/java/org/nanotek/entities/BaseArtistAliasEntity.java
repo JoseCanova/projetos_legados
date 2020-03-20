@@ -9,8 +9,8 @@ import org.nanotek.beans.entity.ArtistAliasLocale;
 import org.nanotek.beans.entity.ArtistAliasSortName;
 import org.nanotek.beans.entity.ArtistAliasType;
 
-public interface BaseArtistAliasEntity<K extends ArtistAlias<K>> 
-extends BaseEntity<K>,
+public interface BaseArtistAliasEntity<K> 
+extends 
 MutableAliasIdEntity<Long>,
 MutableArtistAliasSortNameEntity<ArtistAliasSortName<?>>,
 MutableArtistEntity<Artist<?>> , 

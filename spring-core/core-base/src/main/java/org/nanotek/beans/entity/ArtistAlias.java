@@ -12,7 +12,10 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.entities.BaseArtistAliasEntity;
+
+import com.sun.xml.bind.v2.model.core.ID;
 
 @Entity
 @Table(name="artist_alias", 

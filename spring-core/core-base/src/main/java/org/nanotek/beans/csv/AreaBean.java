@@ -1,29 +1,34 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Base;
-import org.nanotek.IdBase;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Area;
 
-public class AreaBean<K extends AreaBean<K,ID>,ID extends Area<?>> implements IdBase<K,ID> {
+public class AreaBean
+<K extends AreaBean<K,ID>,ID extends Area<?>> 
+implements ImmutableBase<K,ID> {
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
-	public ID id;
+	private ID id;
+
+	public ID getId() { 
+		return id;
+	}
 	
-	private Long areaId; 
-	private String gid; 
-	private String name; 
-	private Long type; 
-	private Integer editsPending; 
-	private String lastUpdated; 
-	private Integer beginDateYear; 
-	private Integer beginDateMonth; 
-	private Integer beginDateDay; 
-	private Integer endDateYead; 
-	private Integer endDateMonth; 
-	private Integer endDateDay;
-	private String ended; 
-	private String comment; 
+	public Long areaId; 
+	public String gid; 
+	public String name; 
+	public Long type; 
+	public Integer editsPending; 
+	public String lastUpdated; 
+	public Integer beginDateYear; 
+	public Integer beginDateMonth; 
+	public Integer beginDateDay; 
+	public Integer endDateYead; 
+	public Integer endDateMonth; 
+	public Integer endDateDay;
+	public String ended; 
+	public String comment; 
 
 
 	public AreaBean() {}
@@ -32,10 +37,6 @@ public class AreaBean<K extends AreaBean<K,ID>,ID extends Area<?>> implements Id
 		this.id =   area;
 	}
 
-	public ID getId() { 
-		return id;
-	}
-	
 	public String getGid() {
 		return gid;
 	}

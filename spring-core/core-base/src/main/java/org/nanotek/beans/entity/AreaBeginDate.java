@@ -7,7 +7,7 @@ import org.nanotek.entities.BaseAreaBeginDateEntity;
 
 @Entity
 @DiscriminatorValue("AreaBeginDate")
-public class AreaBeginDate<K extends AreaBeginDate<K>> extends DatableBase<K,Integer,Integer,Integer> implements  BaseAreaBeginDateEntity {
+public class AreaBeginDate<K extends AreaBeginDate<K>> extends DatableBase<K,Integer,Integer,Integer> implements  BaseAreaBeginDateEntity<K> {
 
 	private static final long serialVersionUID = 4640549011512215583L;
 
