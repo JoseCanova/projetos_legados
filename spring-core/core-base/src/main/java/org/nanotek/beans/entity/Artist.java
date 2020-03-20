@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -79,7 +77,7 @@ public class Artist<K extends Artist<K>> extends LongIdGidName<K,String,String> 
 			  name = "artist_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	public Area<Artist<?>> area;
+	public Area<?> area;
 
 	
 	@ManyToOne
@@ -87,14 +85,14 @@ public class Artist<K extends Artist<K>> extends LongIdGidName<K,String,String> 
 			  name = "artist_begin_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	public Area<Artist<?>> beginArea;
+	public Area<?> beginArea;
 	
 	@ManyToOne
 	@JoinTable(
 			  name = "artist_end_area_join", 
 			  joinColumns = @JoinColumn(name = "artist_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "area_id",referencedColumnName = "id"))
-	public Area<Artist<?>> endArea;
+	public Area<?> endArea;
 	
 	public Artist() {
 		artistCredits = new MutableArtistCreditList<ArtistCredit<?>>();
@@ -180,12 +178,12 @@ public class Artist<K extends Artist<K>> extends LongIdGidName<K,String,String> 
 	}
 
 	@Override
-	public void setArea(Area<Artist<?>> k) {
+	public void setArea(Area<?> k) {
 		this.area = k;
 	}
 
 	@Override
-	public Area<Artist<?>> getArea() {
+	public Area<?> getArea() {
 		return this.area;
 	}
 

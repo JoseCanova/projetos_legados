@@ -66,6 +66,14 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 		}
 	}
 
+	default <KID extends Base<ID> , ID extends Base<?>> Optional<K> newInstance(Class<K> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
+		try {
+			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},idClazz);
+		} catch (Exception e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+	
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
@@ -75,13 +83,6 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 		}
 	}
 	
-	default <KID extends Base<ID> , ID extends Base<?>> Optional<K> newInstance(Class<K> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
-		try {
-			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},idClazz);
-		} catch (Exception e) {
-			throw new BaseInstantiationException(e);
-		}
-	}
 
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Serializable[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
 		try {

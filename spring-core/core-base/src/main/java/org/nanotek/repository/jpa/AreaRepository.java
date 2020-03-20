@@ -8,7 +8,7 @@ import org.nanotek.beans.entity.Area;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AreaRepository extends  
-	LongIdGidNameEntityRepository<Area<?>>{
+public interface AreaRepository<K extends Area<K>> extends  
+	LongIdGidNameEntityRepository<K>{
 	Optional<Area<?>> findByAreaId(@NotNull Long areaId);
 }

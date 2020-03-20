@@ -19,15 +19,13 @@ extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
 
 	//works fine with the "Bean Name";
 	protected ID id;
-	protected Integer targetSize; 
 	
 	public BaseMap() {
 	}
 	
-	public BaseMap(ID id,  Integer targetSize) {
+	public BaseMap(ID id) {
 		super();
 		this.id = id;
-		this.targetSize = targetSize;
 	}
 
 	@Override
@@ -39,9 +37,4 @@ extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
 	public void setId(ID id) {
 		this.id = id;
 	}
-	
-	public Integer getTargetSize() {
-		return size();
-	}
-	
 }

@@ -18,11 +18,11 @@ BaseEntity<Artist<?>>,
 MutableArtistIdEntity<Long>,
 MutableArtistSortNameEntity<ArtistSortName<?>>,
 MutableArtistCommentEntity<ArtistComment<?>>,
-MutableArtistBeginDateEntity<ArtistBeginDate>,
-MutableArtistEndDateEntity<ArtistEndDate>,
+MutableArtistBeginDateEntity<ArtistBeginDate<?>>,
+MutableArtistEndDateEntity<ArtistEndDate<?>>,
 MutableArtistTypeEntity<ArtistType<?>>,
 MutableGenderEntity<Gender>,
-MutableAreaEntity<Area<Artist<?>>>,
-MutableArtistBeginAreaEntity<Area<Artist<?>>>{
+MutableAreaEntity<Area<?>>,
+MutableArtistBeginAreaEntity<Area<?>>{
 
 }

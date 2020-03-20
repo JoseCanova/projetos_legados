@@ -1,8 +1,10 @@
 package org.nanotek.csv;
 
 import java.beans.PropertyDescriptor;
+import java.io.Serializable;
 import java.util.Optional;
 
+import org.nanotek.Base;
 import org.nanotek.BaseException;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
@@ -13,17 +15,25 @@ import org.nanotek.opencsv.BaseMap;
 import org.nanotek.opencsv.MapColumnStrategy;
 
 
-public class MapStrategy<K extends WrappedBaseClass<J,?>,ID extends IdBase<ID,?> , J extends ID, B extends BaseMap<J,?>> 
+public class MapStrategy<K extends WrappedBaseClass<J,ID>,ID extends IdBase<ID,?> , J extends BaseMap<J,ID>, B extends Result<J,ID>> 
 implements BaseMapStrategy<K,ID,J>{
 	
-	MapColumnStrategy<B> mapColumnStrategy;
+	MapColumnStrategy<J,ID> mapColumnStrategy;
 	
-	Optional<J> baseMapClass;
+	Optional<J> optResultBean;
 
 	private static final long serialVersionUID = 1L;
 
 	public MapStrategy(Class<J> j , Class<ID> i) {
-		baseMapClass = createBean(j,i);
+		
+		optResultBean = createBean(j,i);
+		
+		optResultBean.ifPresent(baseMap -> {
+			 Optional<MapColumnStrategy> opt =  Base.newInstance
+					 							(MapColumnStrategy.class , 
+					 									new Serializable[] {baseMap , baseMap.getId()},new Class<?>[] {j , i});
+		});
+		
 	}
 
 	@Override
@@ -31,7 +41,7 @@ implements BaseMapStrategy<K,ID,J>{
 		try { 
 				Optional<PropertyDescriptor> descriptor = findDescriptor(property);
 				descriptor.ifPresent(d ->{
-					baseMapClass.get().getId();
+					optResultBean.get().getId();
 				});
 		}catch(Exception ex) { 
 			throw new BaseException(ex);
@@ -50,8 +60,15 @@ implements BaseMapStrategy<K,ID,J>{
 
 	@SuppressWarnings("unchecked")
 	public static void main (String[] args) { 
-		MapStrategy<?,?,?,?> ms = new MapStrategy(AreaBean.class,Area.class);
+		Optional<BaseMap> map = Base.newInstance(BaseMap.class, new Serializable[] {BaseMap.class}, Serializable.class);
+//		BaseMapStrategy<?,?,?> ms = new MapStrategy(BaseMap.class,Area.class);
+		
 		System.out.println("the halt");
+	}
+
+	@Override
+	public J getBaseMapClass() {
+		return null;
 	}
 	
 }

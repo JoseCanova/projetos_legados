@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AreaJpaService extends LongIdGidNameEntityService<Area<?> , AreaRepository>  {
+public class AreaJpaService<K extends Area<K>> extends LongIdGidNameEntityService<K, AreaRepository<K>>  {
 	
-	public AreaJpaService (@Autowired AreaRepository rep){ 
+	public AreaJpaService (@Autowired AreaRepository<K> rep){ 
 		super(rep);
 	}
 
 	@Override
-	public Iterable<Area<?>> findByNameContainingIgnoreCase(String name) {
+	public Iterable<K> findByNameContainingIgnoreCase(String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}
 	

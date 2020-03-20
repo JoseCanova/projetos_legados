@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,10 +23,10 @@ import org.nanotek.entities.MutableAreaIdEntity;
 uniqueConstraints= {
 		@UniqueConstraint(name="uk_area_id",columnNames={"area_id"})
 		})
-public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,String> implements 
+public class Area<K extends Area<K>> extends LongIdGidName<K, String,String> implements 
 															MutableAreaIdEntity<Long>,		
 															TypeEntity<AreaType<?>>,
-															MutableAreaCommentEntity<AreaComment<Area<?>>>,
+															MutableAreaCommentEntity<AreaComment<?>>,
 															MutableAreaBeginDateEntity<AreaBeginDate<?>>,
 															MutableAreaEndDateEntity<AreaEndDate<?>>	{
 
@@ -62,7 +60,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 			  name = "area_comment_join", 
 			  joinColumns = @JoinColumn(name = "area_id" , referencedColumnName = "id"), 
 			  inverseJoinColumns = @JoinColumn(name = "comment_id",referencedColumnName = "id") )
-	private AreaComment<Area<?>> areaComment;
+	private AreaComment<?> areaComment;
 	
 	public Area() {}
 	
@@ -80,7 +78,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	}
 
 	@Override
-	public AreaComment<Area<?>> getAreaComment() {
+	public AreaComment<?> getAreaComment() {
 		// TODO Auto-generated method stub
 		return areaComment;
 	}
@@ -108,7 +106,7 @@ public class Area<K extends Serializable> extends LongIdGidName<Area<?>, String,
 	}
 
 	@Override
-	public void setAreaComment(AreaComment<Area<?>> k) {
+	public void setAreaComment(AreaComment<?> k) {
 		this.areaComment = k;
 	}
 
