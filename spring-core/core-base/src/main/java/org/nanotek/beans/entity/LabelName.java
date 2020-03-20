@@ -3,7 +3,7 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.nanotek.LongIdEntityBase;
+import org.nanotek.entities.immutables.LongIdEntityBase;
 
 @SuppressWarnings("serial")
 @Entity

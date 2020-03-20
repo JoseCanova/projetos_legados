@@ -3,12 +3,13 @@ package org.nanotek.beans.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.nanotek.IdBase;
 import org.nanotek.StringBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="track_count")
-public class TrackCount implements StringBase<TrackCount,String> {
+public class TrackCount implements IdBase<TrackCount,String> {
 
 	private String id; 
 	private String trackCount; 

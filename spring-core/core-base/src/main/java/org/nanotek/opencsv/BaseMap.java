@@ -3,11 +3,11 @@ package org.nanotek.opencsv;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import org.nanotek.Holder;
 import org.nanotek.IdBase;
 import org.nanotek.entities.MutableBase;
 
 /**
- * TODO: Change the class to "create a equivalence validator" on Target Class - and the Map class. 
  * 
  * @author josecanovamauger.
  *
@@ -15,9 +15,8 @@ import org.nanotek.entities.MutableBase;
  */
 @SuppressWarnings("serial")
 public class BaseMap<T extends IdBase<?,ID>, ID extends Serializable> 
-extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
+	extends HashMap<String,Integer> {
 
-	//works fine with the "Bean Name";
 	protected ID id;
 	
 	public BaseMap() {
@@ -28,13 +27,4 @@ extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
 		this.id = id;
 	}
 
-	@Override
-	public ID getId() {
-		return this.id;
-	}
-
-	@Override
-	public void setId(ID id) {
-		this.id = id;
-	}
 }

@@ -1,22 +1,37 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.AreaType;
+import org.nanotek.opencsv.ImmutableHolderBaseMap; 
 
-public class AreaTypeBean extends Result<AreaTypeBean,AreaType> {
+public class AreaTypeBean<K extends AreaTypeBean<K,ID> , ID extends AreaType<?>> 
+extends ImmutableHolderBaseMap<K,ID> 
+implements  ImmutableBase<K,ID> {
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	
-	private Long areaTypeId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid;
+	public Long areaTypeId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid;
 	
 	public AreaTypeBean() {
 	}
+	
+	public AreaTypeBean(K immutable, ID id) {
+		super(immutable, id);
+	}
 
+	public AreaTypeBean(K k) {
+		super(k);
+	}
+	
+	@Override
+	public ID getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
@@ -76,5 +91,4 @@ public class AreaTypeBean extends Result<AreaTypeBean,AreaType> {
 		this.areaTypeId = areaTypeId;
 	}
 
-	
 }

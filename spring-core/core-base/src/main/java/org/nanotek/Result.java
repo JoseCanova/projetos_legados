@@ -8,11 +8,11 @@ import org.nanotek.csv.PredicateBase;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements BooleanBase<K,ID>  , Holder<K, ID> {
+public abstract class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements BooleanBase<K,ID> {
 
 	private static final long serialVersionUID = -307344888633306177L;
  
-	private K immutable;
+	protected K immutable;
 	
 	@NotNull
 	protected ID id = null;
@@ -28,15 +28,10 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements 
 		this.immutable = immutable;
 		this.id = id;
 	}
-	
-	@Override
-	public ID getId() {
-		return Optional.ofNullable(id).orElseThrow(BaseException::new);
-	}
 
 	@Override
-	public Optional<ID> on(PredicateBase<K, ID> predicate) {
-		return predicate.evaluate(immutable);
-	}
-    
+	public abstract Optional<ID> on(PredicateBase<K, ID> predicate);
+
+	@Override
+	public abstract Optional<ID> compute(PredicateBase<K, ID> predicate);
 }

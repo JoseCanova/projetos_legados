@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.nanotek.LongIdEntityBase;
+import org.nanotek.entities.immutables.LongIdEntityBase;
 
 @SuppressWarnings("serial")
 @Entity

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.CommentEntity;
+import org.nanotek.entities.immutables.CommentEntity;
 
 public interface MutableCommentEntity<K extends Serializable> extends CommentEntity<K>{
 

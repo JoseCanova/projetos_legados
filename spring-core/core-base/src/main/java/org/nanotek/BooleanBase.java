@@ -1,4 +1,14 @@
 package org.nanotek;
 
-public interface BooleanBase<K extends IdBase<K,ID> , ID extends IdBase<?,?>> extends  ImmutableBase<K,ID> {
+import java.util.Optional;
+
+import org.nanotek.csv.PredicateBase;
+
+public interface BooleanBase<K extends IdBase<K,ID> , ID extends IdBase<?,?>> extends  Holder<K,ID> {
+	Optional<ID> compute (PredicateBase<K, ID>  predicate);
+	
+	@Override
+	default Optional<ID> on(PredicateBase<K, ID> predicate) {
+		return compute(predicate);
+	}
 }

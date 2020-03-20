@@ -1,13 +1,13 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.IdBase;
 import org.nanotek.beans.entity.Area;
 
-public class AreaBean extends Result<AreaBean,Area<?>> {
+public class AreaBean<K extends AreaBean<K,ID>,ID extends Area<?>> implements IdBase<K,ID> {
 
 	private static final long serialVersionUID = 1708381486272333902L;
 	
-	public Area<?> id;
+	public ID id;
 	
 	private Long areaId; 
 	private String gid; 
@@ -27,14 +27,17 @@ public class AreaBean extends Result<AreaBean,Area<?>> {
 
 	public AreaBean() {}
 	
-	public AreaBean(Area<?> clazz) { 
-		this.id = clazz;
+	public AreaBean(ID area) { 
+		this.id = area;
 	}
 
+	public ID getId() { 
+		return id;
+	}
+	
 	public String getGid() {
 		return gid;
 	}
-
 
 	public void setGid(String gid) {
 		this.gid = gid;

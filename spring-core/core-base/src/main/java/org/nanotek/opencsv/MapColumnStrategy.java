@@ -7,7 +7,7 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
 public class MapColumnStrategy<T extends BaseMap<?,ID>, ID extends IdBase<ID,?>> 
 extends  ColumnPositionMappingStrategy<T> 
-implements InitializingBean ,  IdBase<T,ID> {
+implements InitializingBean {
 
 	private static final long serialVersionUID = -4017791440568493951L;
 

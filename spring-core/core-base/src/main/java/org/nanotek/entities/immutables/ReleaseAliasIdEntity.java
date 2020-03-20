@@ -1,4 +1,4 @@
-package org.nanotek;
+package org.nanotek.entities.immutables;
 
 public interface ReleaseAliasIdEntity<K> {
 
