@@ -20,8 +20,8 @@ import org.nanotek.entities.MutableReleaseGroupPrimaryTypeEntity;
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_group_id",columnNames={"release_group_id"})
 })
-public class ReleaseGroup<E extends ReleaseGroup<E>> extends LongIdGidName<E,String,String> 
-implements BaseReleaseGroupEntity, 
+public class ReleaseGroup<E extends ReleaseGroup<E>> extends LongIdGidName<E> 
+implements BaseReleaseGroupEntity<E>, 
 MutableReleaseGroupIdEntity<Long>,
 MutableArtistCreditEntity<ArtistCredit<?>>,
 MutableReleaseGroupPrimaryTypeEntity<ReleaseGroupPrimaryType<?>>{

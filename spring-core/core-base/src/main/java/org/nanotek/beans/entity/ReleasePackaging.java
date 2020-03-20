@@ -8,13 +8,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.ReleasePackagingBase;
+import org.nanotek.entities.BaseReleasePackagingEntity;
 
 @Entity
 @Table(name="release_packaging",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_pack_id",columnNames={"release_packaging_id"})
 })
-public class ReleasePackaging extends LongIdGidName<ReleasePackaging,String,String> implements ReleasePackagingBase<Long>{
+public class ReleasePackaging<K extends ReleasePackaging<K>> extends LongIdGidName<K> 
+implements BaseReleasePackagingEntity<K>,
+ReleasePackagingBase<Long>{
 
 	private static final long serialVersionUID = 5351338443793025420L;
 

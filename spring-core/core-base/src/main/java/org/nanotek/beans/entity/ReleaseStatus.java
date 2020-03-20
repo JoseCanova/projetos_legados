@@ -7,12 +7,16 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseReleaseStatusEntity;
+
 @Entity
 @Table(name="release_status",
 uniqueConstraints= {
 @UniqueConstraint(name="uk_release_status_id",columnNames={"release_status_id"})
 })
-public class ReleaseStatus extends LongIdGidName<ReleaseStatus,String,String> {
+public class ReleaseStatus<K extends ReleaseStatus<K>> extends 
+LongIdGidName<K> 
+implements BaseReleaseStatusEntity<K>{
 
 	private static final long serialVersionUID = 4793056857806342212L;
 	

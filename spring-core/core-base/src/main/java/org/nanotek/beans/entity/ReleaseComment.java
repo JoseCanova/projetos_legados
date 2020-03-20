@@ -1,7 +1,5 @@
 package org.nanotek.beans.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +13,10 @@ import org.nanotek.entities.MutableReleaseEntity;
 
 @Entity
 @DiscriminatorValue(value="ReleaseComment")
-public class ReleaseComment<E extends Serializable> extends CommentBase<String,ReleaseComment<?>> implements BaseReleaseCommentEntity, MutableCommentEntity<String> , MutableReleaseEntity<Release> {
+public class ReleaseComment<E extends ReleaseComment<E>> extends CommentBase<E> 
+implements BaseReleaseCommentEntity<E>,
+MutableCommentEntity<String> , 
+MutableReleaseEntity<Release> {
 
 	private static final long serialVersionUID = 4978743759627354208L;
 	

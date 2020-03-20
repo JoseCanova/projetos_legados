@@ -10,9 +10,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.entities.BaseTrackEntity;
+
 @Entity
 @Table(name="track")
-public class Track extends LongIdGidName<Track,String,String> {
+public class Track<K extends Track<K>> extends LongIdGidName<K>
+implements BaseTrackEntity<K>{
 
 	private static final long serialVersionUID = 8642862162010029043L;
 

@@ -9,7 +9,7 @@ import org.nanotek.entities.BaseReleaseGroupPrimaryTypeEntity;
 @Entity
 @Table(name="release_group_primary_type")
 public class ReleaseGroupPrimaryType<K extends ReleaseGroupPrimaryType<K>> 
-extends LongIdGidName<K,String,String> 
+extends LongIdGidName<K> 
 implements BaseReleaseGroupPrimaryTypeEntity{
 
 	private static final long serialVersionUID = 3855412565715717271L;

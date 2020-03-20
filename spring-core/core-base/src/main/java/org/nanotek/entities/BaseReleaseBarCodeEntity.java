@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 import org.nanotek.BaseEntity;
 
-public interface BaseReleaseBarCodeEntity<K extends BaseEntity<K,PK>,PK extends Serializable> {
+public interface BaseReleaseBarCodeEntity<K> {
 
 }

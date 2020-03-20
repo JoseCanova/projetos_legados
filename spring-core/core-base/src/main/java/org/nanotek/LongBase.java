@@ -1,4 +1,4 @@
 package org.nanotek;
 
-public interface LongBase<K extends IdBase<K,Long>> extends EntityBase<K,Long>{
+public interface LongBase<K extends EntityBase<K,Long>> extends EntityBase<K,Long>{
 }
