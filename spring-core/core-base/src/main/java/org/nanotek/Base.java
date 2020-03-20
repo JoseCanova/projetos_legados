@@ -66,9 +66,18 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 		}
 	}
 
+	
+	static <KID extends Base<?> , ID extends Base<?>> Optional<KID> newInstance(Class<KID> clazz , Class<ID> idClazz, ID instance) throws BaseInstantiationException { 
+		try {
+			return Base.newInstance(clazz, new Serializable[] {instance},idClazz);
+		} catch (Exception e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+	
 	static <KID extends Base<?> , ID extends Base<?>> Optional<KID> newInstance(Class<KID> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
 		try {
-			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},Serializable.class);
+			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},idClazz);
 		} catch (Exception e) {
 			throw new BaseInstantiationException(e);
 		}
@@ -84,6 +93,15 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 	}
 	
 
+	static <K extends Base<?>> Optional<K> newWrappedInstance(Class<K> s) throws BaseInstantiationException { 
+		try {
+			return Optional.of(new WrappedBaseClass(s));
+		} catch ( SecurityException e) {
+			throw new BaseInstantiationException(e);
+		}
+	}
+
+	
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Serializable[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));

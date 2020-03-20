@@ -1,5 +1,6 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.Base;
 import org.nanotek.IdBase;
 import org.nanotek.beans.entity.Area;
 
@@ -28,7 +29,7 @@ public class AreaBean<K extends AreaBean<K,ID>,ID extends Area<?>> implements Id
 	public AreaBean() {}
 	
 	public AreaBean(ID area) { 
-		this.id = area;
+		this.id =   area;
 	}
 
 	public ID getId() { 

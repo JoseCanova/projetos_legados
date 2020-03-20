@@ -8,7 +8,7 @@ import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
 
 public interface MapStrategy
-<K extends WrappedBaseClass<K,ID>, 
+<K extends IdBase<K,ID>, 
 ID extends IdBase<ID,?> , 
 J extends IdBase<K,ID> , 
 B extends ResultHolderBaseMap<ID,ID,K>>  
@@ -16,8 +16,12 @@ B extends ResultHolderBaseMap<ID,ID,K>>
 
 	Optional<Result<ID,?>> findProperty(String property);
 
-	default Optional<K> createWrappedBaseClass(Class<K> k , Class<ID> id){ 
-		return Base.newInstance (k , id);
+	default Optional<B> resultHolderBaseMap(Class<ID> ci, ID i){
+		return  Optional.of(new ResultHolderBaseMap(i,ci));
+	}
+	
+	default Optional<ID> createWrappedBaseClass(Class<ID> clazz){ 
+		return Base.newWrappedInstance(clazz);
 	}
 
 	default  Optional<J> createIdBaseClass(Class<J> k , Class<ID> id){ 

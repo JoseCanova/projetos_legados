@@ -6,6 +6,8 @@ import org.nanotek.BaseException;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
+import org.nanotek.beans.csv.AreaBean;
+import org.nanotek.beans.entity.Area;
 
 
 public class MapStrategyIdBase
@@ -17,21 +19,34 @@ implements MapStrategy<K,ID,J,B>{
 	
 	Optional<J> optionalIdBaseMap;
 	
-	Optional<K> optionalWrapperBean;
-	
-	Optional<B> resultBean;
+	Optional<ID> optionalWrapperBean;
 	
 	Optional<ID> identityClass;
 	
+	Optional<B> resultBean;
+	
+	
+	
 
+
+	@SuppressWarnings("unchecked")
+	public static void main (String[] args) { 
+		MapStrategyIdBase midBase = new MapStrategyIdBase(WrappedBaseClass.class , Area.class , AreaBean.class ,ResultHolderBaseMap.class );
+	}
+	
 	public MapStrategyIdBase(Class<K> k, Class<ID> i , Class<J> j , Class<B> b) {
 		
 		optionalIdBaseMap = createIdBaseClass(j, i);
-		optionalWrapperBean = createWrappedBaseClass(k, i);
 		identityClass = createIdentityClass(i);
+		optionalWrapperBean = createWrappedBaseClass(i);
+		resultBean= resultHolderBaseMap(i, identityClass.get());
 		optionalIdBaseMap.ifPresent(id ->{
 			resultBean.ifPresent(result ->{
-				
+				try {
+					result.afterPropertiesSet();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
 		});;
 
@@ -63,8 +78,5 @@ implements MapStrategy<K,ID,J,B>{
 //		}
 //	}
 
-	@SuppressWarnings("unchecked")
-	public static void main (String[] args) { 
-	}
 
 }
