@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistRepository<K extends Artist<K>> extends IdBaseRepository<K>,
+public interface ArtistRepository<K extends Artist<K>> extends IdBaseRepository<ArtistRepository<K>,K>,
 NameBaseProjection<K,String>,
 GidBaseProjection<K,String>{
 	

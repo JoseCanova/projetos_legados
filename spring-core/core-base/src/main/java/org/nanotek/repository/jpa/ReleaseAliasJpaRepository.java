@@ -3,10 +3,9 @@ package org.nanotek.repository.jpa;
 import java.util.Optional;
 
 import org.nanotek.beans.entity.ReleaseAlias;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReleaseAliasJpaRepository extends IdBaseRepository<ReleaseAlias>{
-	Optional<ReleaseAlias> findByReleaseAliasId(Long id);
+public interface ReleaseAliasJpaRepository<K extends ReleaseAlias<K>> extends IdBaseRepository<ReleaseAliasJpaRepository<K>,K>{
+	Optional<K> findByReleaseAliasId(Long id);
 }

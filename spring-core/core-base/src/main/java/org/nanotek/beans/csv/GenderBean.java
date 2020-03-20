@@ -1,18 +1,34 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Gender;
 
-public class GenderBean extends Result<GenderBean,Gender>{
+public class GenderBean
+<K extends GenderBean<K,ID>, ID extends Gender<ID>> 
+implements ImmutableBase<K,ID>{
 
-	private static final long serialVersionUID = -1492542566677551150L;
-	private Long genderId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid;
 	
+	private ID id;
+	
+	public ID getId() {
+		return id;
+	}
+	
+	public static final long serialVersionUID = -1492542566677551150L;
+	public Long genderId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid;
+	
+	
+	public GenderBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+
 	public GenderBean() {
 	}
 

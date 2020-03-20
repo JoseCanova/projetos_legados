@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistCreditRepository<K extends ArtistCredit<K>> 
-extends IdBaseRepository<K>, 
+extends IdBaseRepository<ArtistCreditRepository<K>,K>, 
 NameBaseProjection<K,String> {	
 	
 	@EntityGraph(value="fetch.ArtistCredit.recordings")

@@ -4,12 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Base;
 import org.nanotek.entities.BaseLongIdNameEntity;
 import org.nanotek.entities.MutableNameEntity;
 
 @MappedSuperclass
-public class LongIdName<K extends SequenceLongBase<K,Long>> 
+public class LongIdName<K extends LongIdName<K>> 
 extends SequenceLongBase<K,Long> 
 implements BaseLongIdNameEntity<K>,
 MutableNameEntity<String>{

@@ -1,23 +1,33 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistType;
 
-public class ArtistTypeBean extends Result<ArtistTypeBean,ArtistType> {
+public class ArtistTypeBean<K extends ArtistTypeBean<K,ID> , ID extends ArtistType<ID>>
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	
-	private Long artistTypeId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid;
+	private ID id;
+	
+	public ID getId() {
+		return id;
+	};
+	
+	public Long artistTypeId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid;
 	
 	public ArtistTypeBean() {
 	}
 
-
+	public ArtistTypeBean(ID id) {
+		super();
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

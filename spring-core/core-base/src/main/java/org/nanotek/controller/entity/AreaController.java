@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/area")
-public class AreaController  implements  EntityNameBaseResponseController<Area> {
+public class AreaController<K extends Area<K>>  implements  EntityNameBaseResponseController<K> {
 
 
 	@Autowired

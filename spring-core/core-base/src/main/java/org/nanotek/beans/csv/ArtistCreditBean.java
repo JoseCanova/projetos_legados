@@ -2,12 +2,19 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistCredit;
 
 @SuppressWarnings("serial")
-public class ArtistCreditBean extends Result<ArtistCreditBean,ArtistCredit>{
+public class ArtistCreditBean< K extends ArtistCreditBean<K , ID> , ID extends ArtistCredit<ID>> 
+implements ImmutableBase<K, ID>{
 
+	ID id;
+	
+	public ID getId() { 
+		return id;
+	}
+	
 	@NotNull
 	Long artistCreditId; 
 	@NotNull
@@ -23,6 +30,13 @@ public class ArtistCreditBean extends Result<ArtistCreditBean,ArtistCredit>{
 	
 	public ArtistCreditBean(){}
 	
+	
+	public ArtistCreditBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+
 	public ArtistCreditBean(Long artistCreditId, String name, Integer artistCount, Integer refCount, String created,
 			Integer editsPending) {
 		super();

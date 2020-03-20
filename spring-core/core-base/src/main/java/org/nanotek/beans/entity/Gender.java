@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @DiscriminatorValue(value="Gender")
-public class Gender extends BaseType<Gender> {
+public class Gender<K extends Gender<K>> extends BaseType<K> {
 
 	private static final long serialVersionUID = 1628032460585953186L;
 

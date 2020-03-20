@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecordingAliasTypeRepository<K extends RecordingAliasType<K>> extends 
-IdBaseRepository<K>,
+IdBaseRepository<RecordingAliasTypeRepository<K>,K>,
 BaseTypeProjection<K>,
 NameBaseProjection<K,String>{
 }

@@ -4,6 +4,6 @@ import org.nanotek.beans.entity.Gender;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GenderRepository extends 
-IdBaseRepository<Gender>{
+public interface GenderRepository <K extends Gender<K>>extends 
+IdBaseRepository<GenderRepository<K>,K>{
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstrumentTypeRepository<K extends InstrumentType<K>>  extends 
-IdBaseRepository<K>,
+IdBaseRepository<InstrumentTypeRepository<K>,K>,
 BaseTypeProjection<K>,
 NameBaseProjection<K,String>{
 }

@@ -1,9 +1,11 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistCreditName;
 
-public class ArtistCreditNameBean  extends Result<ArtistCreditNameBean,ArtistCreditName> {
+public class ArtistCreditNameBean
+<K extends ArtistCreditNameBean<K,ID> , ID extends ArtistCreditName<ID>>  
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = -625201514069517695L;
 
@@ -16,6 +18,17 @@ public class ArtistCreditNameBean  extends Result<ArtistCreditNameBean,ArtistCre
 	private String name; 
 	
 	private String joinPhrase;
+
+	
+	
+	public ArtistCreditNameBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+	public ArtistCreditNameBean() {
+		super();
+	}
 
 	public Long getArtistCreditId() {
 		return artistCreditId;
@@ -55,6 +68,13 @@ public class ArtistCreditNameBean  extends Result<ArtistCreditNameBean,ArtistCre
 
 	public void setJoinPhrase(String joinPhrase) {
 		this.joinPhrase = joinPhrase;
+	}
+
+	ID id; 
+	
+	@Override
+	public ID getId() {
+		return id;
 	}
 
 	

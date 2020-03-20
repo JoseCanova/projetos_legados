@@ -28,7 +28,7 @@ public class CsvMessageHandler implements MessageHandler{
 	public void handleMessage(Message<?> message) throws MessagingException {
 		try { 
 			processor.reopenFile();
-			Base itBean = null; 
+			Object itBean = null; 
 			if (replyChannel.send(message)){
 				do{ 
 					itBean = processor.next();

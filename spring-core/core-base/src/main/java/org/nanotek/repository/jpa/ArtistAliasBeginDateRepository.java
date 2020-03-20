@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistAliasBeginDateRepository<K extends ArtistAliasBeginDate<K>> extends 
-IdBaseRepository<K>{
+IdBaseRepository<ArtistAliasBeginDateRepository<K>,K>{
 }

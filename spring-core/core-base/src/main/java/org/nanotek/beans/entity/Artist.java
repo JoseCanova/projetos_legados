@@ -30,8 +30,8 @@ import org.nanotek.entities.MutableGenderEntity;
 		uniqueConstraints= {
 		@UniqueConstraint(name="uk_artist_id",columnNames={"artist_id"})
 		})
-public class Artist<K extends Artist<?>> extends 
-LongIdGidName<Artist<?>> implements BaseArtistEntity<K>,
+public class Artist<K extends Artist<K>> extends 
+LongIdGidName<K> implements BaseArtistEntity<K>,
 MutableArtistIdEntity<Long>,
 MutableArtistSortNameEntity<ArtistSortName<?>>,
 MutableArtistCommentEntity<ArtistComment<?>>,

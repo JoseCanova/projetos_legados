@@ -3,14 +3,14 @@ package org.nanotek.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import org.nanotek.IdBase;
+import org.nanotek.Base;
 import org.nanotek.repository.jpa.IdBaseRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends IdBaseRepository<O>>  {
+public abstract class BasePersistenceService<B extends Base<B>, R extends IdBaseRepository<R,B>>  {
 
 	protected R  baseRepository;
 	
@@ -24,22 +24,22 @@ public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends
 	}
 
 
-	public List<O> findAll() {
+	public List<B> findAll() {
 		return baseRepository.findAll();
 	}
 
 	
-	public List<O> findAll(Sort sort) {
+	public List<B> findAll(Sort sort) {
 		return baseRepository.findAll(sort);
 	}
 
 	
-	public List<O> findAllById(Iterable<Long> ids) {
+	public List<B> findAllById(Iterable<Long> ids) {
 		return baseRepository.findAllById(ids);
 	}
 
 	
-	public  List<O> saveAll(Iterable<O> entities) {
+	public  List<B> saveAll(Iterable<B> entities) {
 		return baseRepository.saveAll(entities);
 	}
 
@@ -49,12 +49,12 @@ public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends
 	}
 
 	
-	public  O saveAndFlush(O entity) {
+	public  B saveAndFlush(B entity) {
 		return baseRepository.saveAndFlush(entity);
 	}
 
 	
-	public void deleteInBatch(Iterable<O> entities) {
+	public void deleteInBatch(Iterable<B> entities) {
 		baseRepository.deleteInBatch(entities);
 	}
 
@@ -64,28 +64,28 @@ public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends
 	}
 
 	
-	public  List<O> findAll(Example<O> example) {
+	public  List<B> findAll(Example<B> example) {
 		return baseRepository.findAll(example);
 	}
 
 	
-	public  List<O> findAll(Example<O> example, Sort sort) {
+	public  List<B> findAll(Example<B> example, Sort sort) {
 		return findAll(example,sort);
 	}
 
-	public  O save(O entity) {
+	public  B save(B entity) {
 		return baseRepository.save(entity);
 	}
 
-	public  Optional<O> findOne(Example<O> example) {
+	public  Optional<B> findOne(Example<B> example) {
 		return baseRepository.findOne(example);
 	}
 
-	public Page<O> findAll(Pageable pageable) {
+	public Page<B> findAll(Pageable pageable) {
 		return baseRepository.findAll(pageable);
 	}
 
-	public Optional<O> findById(Long id) {
+	public Optional<B> findById(Long id) {
 		return baseRepository.findById(id);
 	}
 
@@ -93,19 +93,19 @@ public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends
 		return baseRepository.existsById(id);
 	}
 
-	public  Page<O> findAll(Example<O> example, Pageable pageable) {
+	public  Page<B> findAll(Example<B> example, Pageable pageable) {
 		return baseRepository.findAll(example, pageable);
 	}
 
-	public O getOne(Long id) {
+	public B getOne(Long id) {
 		return baseRepository.getOne(id);
 	}
 
-	public  long count(Example<O> example) {
+	public  long count(Example<B> example) {
 		return baseRepository.count(example);
 	}
 
-	public  boolean exists(Example<O> example) {
+	public  boolean exists(Example<B> example) {
 		return baseRepository.exists(example);
 	}
 
@@ -117,11 +117,11 @@ public abstract class BasePersistenceService<O extends IdBase<O,Long>, R extends
 		baseRepository.deleteById(id);
 	}
 
-	public void delete(O entity) {
+	public void delete(B entity) {
 		baseRepository.delete(entity);
 	}
 
-	public void deleteAll(Iterable<? extends O> entities) {
+	public void deleteAll(Iterable<? extends B> entities) {
 		baseRepository.deleteAll(entities);
 	}
 
