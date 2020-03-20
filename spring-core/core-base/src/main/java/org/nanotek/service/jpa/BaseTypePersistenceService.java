@@ -5,14 +5,18 @@ import java.util.Optional;
 import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.BaseType;
-import org.nanotek.repository.jpa.IdBaseRepository;
-import org.nanotek.service.LongIdNameEntityService;
+import org.nanotek.repository.jpa.LongIdNameEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class BaseTypePersistenceService<O extends BaseType<O> , B extends IdBaseRepository<O>> extends LongIdNameEntityService<O, B> {
+public abstract class BaseTypePersistenceService
+<O extends BaseType<O> , B extends LongIdNameEntityRepository<O>> 
+implements LongIdNameEntityRepository<O> {
 
+	@Autowired 
+	B rep;
+	
 	public BaseTypePersistenceService(B rep) {
-		super(rep);
 	}
 	
 	@Transactional

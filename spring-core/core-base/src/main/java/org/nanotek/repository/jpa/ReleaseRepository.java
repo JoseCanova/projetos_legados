@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Qualifier(value="ReleaseRepository")
 public interface ReleaseRepository<K extends ReleaseRepository<K,O>, O extends Release<O>>
-extends IdBaseRepository<K,O> , 
+extends SequenceLongBaseRepository<K,O> , 
 ReleaseBaseRepository<O,Long>,
 NameBaseProjection<O,String>,
 GidBaseProjection<O,String>{

@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistAliasTypeJpaService<K extends ArtistAliasType<K,?>> extends 
-BaseTypePersistenceService<K, ArtistAliasTypeRepository<K>> {
+public class ArtistAliasTypeJpaService<K extends ArtistAliasType<K,?>>   {
 	
-	public ArtistAliasTypeJpaService(@Autowired ArtistAliasTypeRepository<K> rep) {
-		super(rep);
+	
+	@Autowired 
+	ArtistAliasTypeRepository<K> baseRepository; 
+	
+	public ArtistAliasTypeJpaService() {
 	}
 
 	public Optional<K> findByTypeId(Long typeId) {
 		return baseRepository.findByTypeId(typeId);
 	}
 
-	@Override
 	public Iterable<K> findByNameContainingIgnoreCase(String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}

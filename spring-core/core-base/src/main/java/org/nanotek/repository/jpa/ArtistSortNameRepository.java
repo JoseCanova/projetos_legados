@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArtistSortNameRepository <K extends ArtistSortName<K>> 
 extends  
-IdBaseRepository<ArtistSortNameRepository<K>,K>,
+SequenceLongBaseRepository<ArtistSortNameRepository<K>,K>,
 SortNameProjection<K>{
 }

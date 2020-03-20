@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistCredit;
 import org.nanotek.repository.jpa.ArtistCreditRepository;
-import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 //<O extends ArtistCredit , R extends LongIdNameEntityRepository> 
 @Service
-public class ArtistCreditJpaService<K extends ArtistCredit<K>> extends LongIdNameEntityService<K, ArtistCreditRepository<K>>  {
+public class ArtistCreditJpaService<K extends ArtistCredit<K>> {
 
 
-	public ArtistCreditJpaService(@Autowired ArtistCreditRepository<K> rep) {
-		super(rep);
+	@Autowired ArtistCreditRepository<K> baseRepository;
+	
+	public ArtistCreditJpaService() {
 	}
 
 	@Transactional
@@ -31,7 +31,6 @@ public class ArtistCreditJpaService<K extends ArtistCredit<K>> extends LongIdNam
 		return opt.isPresent() ? opt.get() : null;
 	}
 
-	@Override
 	public Iterable<K> findByNameContainingIgnoreCase(String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}

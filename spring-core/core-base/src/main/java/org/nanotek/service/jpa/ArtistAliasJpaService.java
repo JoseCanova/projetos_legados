@@ -7,16 +7,17 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.beans.entity.ArtistAlias;
 import org.nanotek.repository.jpa.ArtistAliasRepository;
-import org.nanotek.service.LongIdNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArtistAliasJpaService<K extends ArtistAlias<K>>   extends LongIdNameEntityService<K,ArtistAliasRepository<K>>{
+public class ArtistAliasJpaService<K extends ArtistAlias<K>>  {
 	
-	public ArtistAliasJpaService(@Autowired
-			ArtistAliasRepository<K> rep) {
-		super(rep);
+	
+	@Autowired
+	ArtistAliasRepository<K> baseRepository;
+	
+	public ArtistAliasJpaService() {
 	}
 
 	@Transactional
@@ -24,7 +25,6 @@ public class ArtistAliasJpaService<K extends ArtistAlias<K>>   extends LongIdNam
 		return baseRepository.findByAliasId(aliasId);
 	}
 
-	@Override
 	public Iterable<K> findByNameContainingIgnoreCase( String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}

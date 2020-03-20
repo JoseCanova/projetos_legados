@@ -10,19 +10,18 @@ import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
-public class InstrumentTypeJpaService<K extends InstrumentType<K>> 
-extends BaseTypePersistenceService<K, InstrumentTypeRepository<K>> {
+public class InstrumentTypeJpaService<K extends InstrumentType<K>> {
 
-	public InstrumentTypeJpaService(@Autowired InstrumentTypeRepository<K> rep) {
-		super(rep);
+	
+	@Autowired InstrumentTypeRepository<K> baseRepository;
+	
+	public InstrumentTypeJpaService() {
 	}
 
-	@Override
 	public Optional<K> findByTypeId(Long typeId) {
 		return baseRepository.findByTypeId(typeId);
 	}
 
-	@Override
 	public Iterable<K> findByNameContainingIgnoreCase(String name) {
 		return baseRepository.findByNameContainingIgnoreCase(name);
 	}

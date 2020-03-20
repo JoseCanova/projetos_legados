@@ -4,7 +4,7 @@ import org.nanotek.beans.entity.ReleaseAliasType;
 import org.nanotek.repository.jpa.projections.BaseTypeProjection;
 
 public interface ReleaseAliasTypeRepository<K extends ReleaseAliasType<K>> extends 
-IdBaseRepository<ReleaseAliasTypeRepository<K> , K> , 
+SequenceLongBaseRepository<ReleaseAliasTypeRepository<K> , K> , 
 BaseTypeProjection<K> {
 
 }

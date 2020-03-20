@@ -8,6 +8,8 @@ import org.nanotek.service.LongIdGidNameEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+//TODO: implement Service.
 @Service
 public class ReleaseGroupJpaService<K extends ReleaseGroup<K>>  extends LongIdGidNameEntityService<K,ReleaseGroupRepository<K>> {
 
@@ -16,12 +18,11 @@ public class ReleaseGroupJpaService<K extends ReleaseGroup<K>>  extends LongIdGi
 	}
 
 	public Optional<K> findByReleaseGroupId(Long releaseGroupId){
-		return baseRepository.findByReleaseGroupId(releaseGroupId);
+		return Optional.empty();
 	}
 
-	@Override
 	public Iterable<K> findByNameContainingIgnoreCase(String name) {
-		return baseRepository.findByNameContainingIgnoreCase(name);
+		return null;
 	}
 
 }

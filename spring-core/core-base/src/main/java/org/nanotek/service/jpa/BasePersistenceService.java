@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.Base;
-import org.nanotek.repository.jpa.IdBaseRepository;
+import org.nanotek.beans.entity.SequenceLongBase;
+import org.nanotek.repository.jpa.SequenceLongBaseRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class BasePersistenceService<B extends Base<B>, R extends IdBaseRepository<R,B>>  {
+public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>, R extends SequenceLongBaseRepository<R,B>>  {
 
 	protected R  baseRepository;
 	

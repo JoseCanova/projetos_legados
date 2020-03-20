@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Qualifier(value="AreaTypeRepository")
 public interface AreaTypeRepository<K extends AreaType<K>> extends  
 BaseTypeProjection<K> ,  
-IdBaseRepository<AreaTypeRepository<K>,K> , 
+SequenceLongBaseRepository<AreaTypeRepository<K>,K> , 
 NameBaseProjection<K,String>{ 
 }
