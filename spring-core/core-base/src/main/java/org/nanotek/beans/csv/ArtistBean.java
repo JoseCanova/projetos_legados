@@ -7,12 +7,17 @@ import org.nanotek.IdBase;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Artist;
 
-public class ArtistBean<K extends IdBase<K,ID> , ID extends Artist<ID,?>> 
+public class ArtistBean<K extends ArtistBean<K,ID> , ID extends Artist<ID>> 
 implements ImmutableBase<K, ID>
 {
 
 	private static final long serialVersionUID = 2864330060600897052L;
 
+	ID id; 
+	
+	public ID  getId() { 
+		return id;
+	}
 
 	@NotNull
 	private Long artistId;
@@ -42,8 +47,8 @@ implements ImmutableBase<K, ID>
 
 	public ArtistBean() {}
 
-	public ArtistBean(Artist id) {
-		super(id);
+	public ArtistBean(ID id) {
+		this.id = id;
 	}
 
 	
