@@ -1,18 +1,25 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseGroupPrimaryType;
 
-public class ReleaseGroupPrimaryTypeBean extends Result<ReleaseGroupPrimaryTypeBean,ReleaseGroupPrimaryType> {
+public class ReleaseGroupPrimaryTypeBean <K extends ReleaseGroupPrimaryTypeBean<K,ID>,ID extends ReleaseGroupPrimaryType<ID>> 
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = -4792229013963888593L;
 
-	private Long ReleaseGroupPrimaryTypeId; 
-	private String name; 
-	private Long parent; 
-	private Integer childOrder; 
-	private String description; 
-	private String gid;
+	private ID id; 
+	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long ReleaseGroupPrimaryTypeId; 
+	public String name; 
+	public Long parent; 
+	public Integer childOrder; 
+	public String description; 
+	public String gid;
 	
 	public ReleaseGroupPrimaryTypeBean() {
 	}

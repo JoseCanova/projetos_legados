@@ -1,23 +1,38 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Instrument;
 
-public class InstrumentBean extends Result<InstrumentBean,Instrument>{
+public class InstrumentBean<K extends InstrumentBean<K , ID> , ID extends Instrument<ID>>
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = -6916258778573566572L;
 	
-	private Long instrumentId; 
-	private String gid; 
-	private String name; 
-	private Long type; 
-	private Integer editsPending; 
-	private String lastUpdatead; 
-	private String comment; 
-	private String description;
+	private ID id;
+	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long instrumentId; 
+	public String gid; 
+	public String name; 
+	public Long type; 
+	public Integer editsPending; 
+	public String lastUpdatead; 
+	public String comment; 
+	public String description;
 	
 	public InstrumentBean() {
 	}
+
+	
+
+	public InstrumentBean(ID id) {
+		super();
+		this.id = id;
+	}
+
 
 
 	public String getGid() {

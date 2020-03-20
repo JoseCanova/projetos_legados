@@ -1,28 +1,41 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Medium;
 
-public class MediumBean extends  Result<MediumBean,Medium>{
+public class MediumBean<K extends MediumBean<K,ID>,ID extends Medium<ID>>
+implements ImmutableBase<K,ID>{
 
 	private static final long serialVersionUID = -8141072962299778762L;
 
-	private Long mediumId;
+	private ID id;
 	
-	private Long release; 
+	public ID getId() { 
+		return id;
+	}
 	
-	private Long position;
+	public Long mediumId;
 	
-	private Long format; 
+	public Long release; 
 	
-	private String name; 
+	public Long position;
 	
-	private String editsPending; 
+	public Long format; 
 	
-	private String lastUpdated; 
+	public String name; 
 	
-	private Integer trackCount; 
+	public String editsPending; 
 	
+	public String lastUpdated; 
+	
+	public Integer trackCount; 
+	
+	
+	public MediumBean(ID id) {
+		super();
+		this.id = id;
+	}
+
 	public MediumBean() {
 		super();
 	}

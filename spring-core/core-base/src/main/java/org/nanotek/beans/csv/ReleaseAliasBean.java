@@ -1,31 +1,47 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseAlias;
 
-public class ReleaseAliasBean extends Result<ReleaseAliasBean,ReleaseAlias>{
+public class ReleaseAliasBean <K extends ReleaseAliasBean<K,ID>,ID extends ReleaseAlias<ID>>
+implements ImmutableBase<K,ID>{
 
 	private static final long serialVersionUID = 3986721500454057322L;
 	
-	private Long releaseAliasId; 
-	private Long release; 
-	private String name; 
-	private String locale; 
-	private Integer editsPending; 
-	private String lastUpdated; 
-	private Long type; 
-	private String sortName;
-	private Integer beginDateYear ;
-	private Integer beginDateMonth;
-	private Integer beginDateDay;
-	private Integer endDateYear;
-	private Integer endDateMonth;
-	private Integer endDateDay; 
-	private String primaryForLocale;
-	private String ended;
+	private ID id; 
+	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long releaseAliasId; 
+	public Long release; 
+	public String name; 
+	public String locale; 
+	public Integer editsPending; 
+	public String lastUpdated; 
+	public Long type; 
+	public String sortName;
+	public Integer beginDateYear ;
+	public Integer beginDateMonth;
+	public Integer beginDateDay;
+	public Integer endDateYear;
+	public Integer endDateMonth;
+	public Integer endDateDay; 
+	public String primaryForLocale;
+	public String ended;
 
 	
 	
+	
+	public ReleaseAliasBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+
+
+
 	public ReleaseAliasBean() {
 	}
 

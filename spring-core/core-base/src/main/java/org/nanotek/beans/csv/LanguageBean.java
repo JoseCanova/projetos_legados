@@ -1,25 +1,38 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Language;
 
-public class LanguageBean extends Result<LanguageBean,Language<LanguageBean>>{
+public class LanguageBean< K extends LanguageBean<K,ID>, ID extends Language<ID>>
+implements ImmutableBase<K,ID>{
 
 	private static final long serialVersionUID = 2997501833949969600L;
 
-	private Long laguageId; 
-	private String isoCode2t; 
-	private String isoCode2b; 
-	private String isoCode1; 
-	private String name; 
-	private Long frequency;
-	private String isoCode3;
+	private ID id;
+	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long laguageId; 
+	public String isoCode2t; 
+	public String isoCode2b; 
+	public String isoCode1; 
+	public String name; 
+	public Long frequency;
+	public String isoCode3;
 	
 	
-	public LanguageBean() {
+	
+	
+	public LanguageBean(ID id) {
+		super();
+		this.id = id;
 	}
 
-	
+
+	public LanguageBean() {
+	}
 	
 
 	public String getIsoCode2t() {

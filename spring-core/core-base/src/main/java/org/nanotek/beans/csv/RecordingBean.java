@@ -2,12 +2,17 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-import org.nanotek.Result;
 import org.nanotek.beans.entity.Recording;
 
-public class RecordingBean  extends Result<RecordingBean,Recording<?>>{
+public class RecordingBean  <K extends RecordingBean<K,ID>,ID extends Recording<ID>>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
+	
+	private ID id;
+	
+	public ID getId() { 
+		return id;
+	}
 	
 	
 	@NotNull
@@ -24,7 +29,12 @@ public class RecordingBean  extends Result<RecordingBean,Recording<?>>{
     private String lastUpdated;
     private String  video;
     
-    public RecordingBean() {}
+    public RecordingBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+	public RecordingBean() {}
 
 
 	public String getGid() {

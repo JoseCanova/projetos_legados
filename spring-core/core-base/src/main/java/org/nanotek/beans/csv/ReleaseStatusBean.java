@@ -1,20 +1,34 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseStatus;
 
-public class ReleaseStatusBean extends Result<ReleaseStatusBean,ReleaseStatus>{
+public class ReleaseStatusBean <K extends ReleaseStatusBean<K , ID>, ID extends ReleaseStatus<ID>>
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = -1032984444131323024L;
 	
-	private Long releaseStatusId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid; 
+	private ID id; 
+	
+	public ID getId() { 
+		return id; 
+	}
 	
 	
+	public Long releaseStatusId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid; 
+	
+	
+	public ReleaseStatusBean(ID id) {
+		super();
+		this.id = id;
+	}
+
+
 	public ReleaseStatusBean() {
 	}
 

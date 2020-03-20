@@ -1,19 +1,30 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
 import org.nanotek.beans.entity.RecordingAliasType;
 
-public class RecordingAliasTypeBean extends Result<RecordingAliasTypeBean,RecordingAliasType>{
+public class RecordingAliasTypeBean <K extends RecordingAliasTypeBean<K,ID>,ID extends RecordingAliasType<ID>>{
 
 	private static final long serialVersionUID = 2632943505939712312L;
 	
-	private Long recordingAliasTypeId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid;
+	private ID id;
 	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long recordingAliasTypeId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid;
+	
+	
+
+	public RecordingAliasTypeBean(ID id) {
+		super();
+		this.id = id;
+	}
 
 	public RecordingAliasTypeBean() {
 	}

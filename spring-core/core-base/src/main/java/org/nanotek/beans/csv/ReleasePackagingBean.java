@@ -1,28 +1,33 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleasePackaging;
 
-public class ReleasePackagingBean extends Result<ReleasePackagingBean,ReleasePackaging>{
+public class ReleasePackagingBean <K extends ReleasePackagingBean<K,ID>, ID extends ReleasePackaging<ID>>
+implements ImmutableBase<K , ID>{
 
 	private static final long serialVersionUID = -6068518463159348252L;
-	/**
-	 * 
-	 * id                  SERIAL,
-    name                VARCHAR(255) NOT NULL,
-    parent              INTEGER, -- references release_packaging.id
-    child_order         INTEGER NOT NULL DEFAULT 0,
-    description         TEXT,
-    gid                 uuid NOT NULL
-	 */
+
+
+	private ID id; 
 	
-	private Long releasePackagingId; 
-	private String name; 
-	private Long parent; 
-	private Long childOrder; 
-	private String description; 
-	private String gid;
+	public ID getId() { 
+		return id;
+	}
 	
+	
+	public Long releasePackagingId; 
+	public String name; 
+	public Long parent; 
+	public Long childOrder; 
+	public String description; 
+	public String gid;
+	
+	public ReleasePackagingBean(ID id) {
+		super();
+		this.id = id;
+	}
+
 	public ReleasePackagingBean() {
 	}
 
@@ -64,6 +69,14 @@ public class ReleasePackagingBean extends Result<ReleasePackagingBean,ReleasePac
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+	public Long getReleasePackagingId() {
+		return releasePackagingId;
+	}
+
+	public void setReleasePackagingId(Long releasePackagingId) {
+		this.releasePackagingId = releasePackagingId;
 	}
 
 

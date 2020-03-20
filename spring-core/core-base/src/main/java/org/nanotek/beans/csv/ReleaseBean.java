@@ -1,6 +1,6 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Release;
 
 /**
@@ -8,25 +8,41 @@ import org.nanotek.beans.entity.Release;
  * @author josecanova
  *
  */
-public class ReleaseBean extends Result<ReleaseBean,Release>{
+public class ReleaseBean <K extends ReleaseBean<K,ID>,ID extends Release<ID>>
+implements ImmutableBase<K , ID>{
 
+	
+	
+	
 	private static final long serialVersionUID = -11618084576388817L;
-	private Long releaseId; 
-	private String gid; 
-	private String name;
-	private Long artistCreditId; 
-	private Long releaseGroup; 
-	private Long status; 
-	private Long  packaging; 
-	private Long  language; 
-	private Integer script;
-	private String barcode; 
-	private String comment; 
-	private Integer editsPending; 
-	private Integer quality; 
-	private String lastUpdated;
+	
+	private ID id; 
+	
+	public ID getId() { 
+		return id;
+	}
+	
+	public Long releaseId; 
+	public String gid; 
+	public String name;
+	public Long artistCreditId; 
+	public Long releaseGroup; 
+	public Long status; 
+	public Long  packaging; 
+	public Long  language; 
+	public Integer script;
+	public String barcode; 
+	public String comment; 
+	public Integer editsPending; 
+	public Integer quality; 
+	public String lastUpdated;
 	
 	
+	public ReleaseBean(ID id) {
+		super();
+		this.id = id;
+	}
+
 	public ReleaseBean() {}
 	
 	

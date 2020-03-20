@@ -1,25 +1,38 @@
 package org.nanotek.beans.csv;
 
-import org.nanotek.Result;
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Track;
 
-public class TrackBean extends Result<TrackBean,Track>{
+public class TrackBean <K extends TrackBean<K,ID>,ID extends Track<ID>>
+implements ImmutableBase<K,ID>{
 
 	private static final long serialVersionUID = 7327347644746001993L;
 	
-	private Long trackId; 
-	private String gid; 
-	private Long recordingId; 
-	private Long medium; 
-	private Integer position; 
-	private String number; 
-	private String name; 
-	private Long artistCreditId; 
-	private Long length; 
-	private Long editsPending; 
-	private String lastUpdate;
-	private String isDataTrack;
+	private ID id; 
 	
+	public ID getId() { 
+		return id; 
+	}
+	
+	public Long trackId; 
+	public String gid; 
+	public Long recordingId; 
+	public Long medium; 
+	public Integer position; 
+	public String number; 
+	public String name; 
+	public Long artistCreditId; 
+	public Long length; 
+	public Long editsPending; 
+	public String lastUpdate;
+	public String isDataTrack;
+	
+	
+	public TrackBean(ID id) {
+		super();
+		this.id = id;
+	}
+
 	public TrackBean() {}
 	
 	public String getGid() {
