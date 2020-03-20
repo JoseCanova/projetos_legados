@@ -11,11 +11,11 @@ import org.springframework.validation.annotation.Validated;
 public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements BooleanBase<K,ID>  , Holder<K, ID> {
 
 	private static final long serialVersionUID = -307344888633306177L;
-
+ 
 	private K immutable;
 	
 	@NotNull
-	private ID id = null;
+	protected ID id = null;
 
 	public Result() {
 	}
@@ -24,6 +24,11 @@ public class Result<K extends IdBase<K,ID> , ID extends IdBase<?,?>> implements 
 		this.immutable = immutable;
 	}
 
+	public Result(K immutable,ID id) { 
+		this.immutable = immutable;
+		this.id = id;
+	}
+	
 	@Override
 	public ID getId() {
 		return Optional.ofNullable(id).orElseThrow(BaseException::new);

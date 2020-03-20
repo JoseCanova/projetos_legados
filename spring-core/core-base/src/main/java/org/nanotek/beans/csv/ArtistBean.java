@@ -2,10 +2,11 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.beans.entity.Artist;
 
-public class ArtistBean extends Result<ArtistBean,Artist> {
+public class ArtistBean extends  Result<ArtistBean,Artist>{
 
 	private static final long serialVersionUID = 2864330060600897052L;
 
@@ -38,6 +39,11 @@ public class ArtistBean extends Result<ArtistBean,Artist> {
 
 	public ArtistBean() {}
 
+	public ArtistBean(Artist id) {
+		super(id);
+	}
+
+	
 	public String getGid() {
 		return gid;
 	}

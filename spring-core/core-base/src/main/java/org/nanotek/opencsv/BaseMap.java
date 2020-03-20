@@ -30,7 +30,7 @@ extends HashMap<String,Integer> implements IdBase<T , ID> , MutableBase<ID>{
 
 	@Override
 	public ID getId() {
-		return id;
+		return this.id;
 	}
 
 	@Override

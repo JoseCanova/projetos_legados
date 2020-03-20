@@ -66,9 +66,9 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 		}
 	}
 
-	default <KID extends Base<ID> , ID extends Base<?>> Optional<K> newInstance(Class<K> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
+	static <KID extends Base<?> , ID extends Base<?>> Optional<KID> newInstance(Class<KID> clazz , Class<ID> idClazz) throws BaseInstantiationException { 
 		try {
-			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},idClazz);
+			return Base.newInstance(clazz, new Serializable[] {Base.newInstance(idClazz).get()},Serializable.class);
 		} catch (Exception e) {
 			throw new BaseInstantiationException(e);
 		}
