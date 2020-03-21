@@ -1,8 +1,10 @@
 package org.nanotek;
 
-@FunctionalInterface
-public interface Sender<T,I> {
+import java.util.stream.Stream;
 
-	public I send(T t);
+@FunctionalInterface
+public interface Sender<K> {
+
+	public Stream<?> send(K t);
 	
 }

@@ -1,13 +1,16 @@
 package org.nanotek.apachemq;
 
+import java.util.stream.Stream;
+
 import javax.jms.Queue;
 
-import org.nanotek.Holder;
 import org.nanotek.IdBase;
 import org.nanotek.Sender;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
-public abstract class JmsMessageSender <K extends IdBase<K,?> , I extends Holder<K,K>>  implements Sender<K,I>{
+public abstract class JmsMessageSender <K extends IdBase<K,?>, T extends Ticket<K,T>>  implements Sender<K> , Ticket<K, T>{
+
+	private static final long serialVersionUID = -5447828989965356991L;
 
 	protected JmsMessagingTemplate jmsMessagingTemplate;
  
@@ -18,9 +21,9 @@ public abstract class JmsMessageSender <K extends IdBase<K,?> , I extends Holder
 		this.queue = queue;
 	}
 	
-	public I send(K message){
+	public Stream<?> send(K message){
 		jmsMessagingTemplate.convertAndSend(this.queue, message);
-		return message;
+		return withTicket(message);
 	}
 
 	public JmsMessagingTemplate getJmsMessagingTemplate() {
