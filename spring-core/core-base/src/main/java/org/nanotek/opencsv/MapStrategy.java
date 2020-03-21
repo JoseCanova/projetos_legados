@@ -21,8 +21,10 @@ B extends ResultHolderBaseMap<J,K>>
 		return  BaseBean.newInstance(j);
 	}
 	
-	default Optional<ID> createWrappedBaseClass(Class<ID> clazz){ 
-		return Base.newWrappedInstance(clazz);
+	default Object createWrappedBaseClass(Class<J> clazz,Class<ID> i){ 
+		ID in = createIdBaseClass(i).get();
+		J jon = BaseBean.newInstance(clazz, new Object[] {in}, i).get();
+		return WrappedEntityBase.newBaseBeanInstance(clazz);
 	}
 
 	default Optional<ID> createIdBaseClass(Class<ID> id){ 

@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.nanotek.Base;
 import org.nanotek.BaseException;
-import org.nanotek.WrappedBaseClass;
 import org.nanotek.WrappedEntityBase;
 import org.nanotek.beans.csv.AreaBean;
 import org.nanotek.beans.csv.BaseBean;
@@ -78,9 +77,9 @@ extends HolderBaseMap<I> implements ColumnMapHolder<I> {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Optional<WrappedBaseClass> wbc = Base.newInstance(WrappedBaseClass.class, new Serializable[] {AreaBean.class}, Class.class);
-		ResultHolderBaseMap map = new ResultHolderBaseMap(Area.class,wbc);
-		map.afterPropertiesSet();
+//		Optional<WrappedBaseClass> wbc = Base.newInstance(WrappedBaseClass.class, new Serializable[] {AreaBean.class}, Class.class);
+//		ResultHolderBaseMap map = new ResultHolderBaseMap(Area.class,wbc);
+//		map.afterPropertiesSet();
 	}
 	
 }

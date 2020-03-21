@@ -1,8 +1,10 @@
-package org.nanotek;
+package org.nanotek.opencsv;
 
 import org.apache.commons.beanutils.WrapDynaBean;
+import org.nanotek.Id;
+import org.nanotek.WrappedEntityBase;
+import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.csv.BaseBean;
-import org.nanotek.beans.entity.Artist;
 
 public class WrappedBaseClass <K extends BaseBean<?>> extends WrapDynaBean implements WrappedEntityBase<K> , Id<K>{
 
@@ -11,17 +13,18 @@ public class WrappedBaseClass <K extends BaseBean<?>> extends WrapDynaBean imple
 	K id;
 	
 	public WrappedBaseClass(Class<K> clazz) {
-		super(WrappedEntityBase.newInstance(clazz));
+		super(WrappedEntityBase.newBaseBeanInstance(clazz));
 	}
 
+	
 	@Override
 	public K getId() {
 		return id;
 	}
 
 	public static void main(String[] args) {
-		WrappedBaseClass w = new WrappedBaseClass(Artist.class);
-		System.out.println(w.getId());
+		WrappedBaseClass w = new WrappedBaseClass(ArtistBean.class);
+		System.out.println(w.getInstance());
 	}
 	
 }

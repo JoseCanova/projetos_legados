@@ -85,7 +85,7 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 	
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz) throws BaseInstantiationException { 
 		try {
-			return Optional.of(clazz.getDeclaredConstructor(null).newInstance());
+			return Optional.of(clazz.getDeclaredConstructor().newInstance());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			throw new BaseInstantiationException(e);
