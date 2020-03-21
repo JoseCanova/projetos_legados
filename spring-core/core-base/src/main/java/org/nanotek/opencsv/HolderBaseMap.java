@@ -5,24 +5,22 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import org.nanotek.BaseException;
-import org.nanotek.IdBase;
+import org.nanotek.Id;
+import org.nanotek.beans.csv.BaseBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public abstract class HolderBaseMap<K extends IdBase<K,ID>, ID extends IdBase<?,?>> 
-extends BaseMap<K, ID> implements InitializingBean{
+public abstract class HolderBaseMap<K extends BaseBean<?>> 
+extends BaseMap<K> implements InitializingBean{
 
 	private static final long serialVersionUID = 8945888004557753179L;
 
 	protected K immutable;
 	
-	public HolderBaseMap(K immutable , ID id) {
-		super(id);
+	public HolderBaseMap(K immutable) {
+		super(immutable);
 		this.immutable = immutable;
 	}
 	
-	public HolderBaseMap(K immutable ) {
-		this.immutable = immutable;
-	}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -34,4 +32,6 @@ extends BaseMap<K, ID> implements InitializingBean{
 		Optional.ofNullable(keySet().contains("immutable")).orElseThrow(BaseException::new);
 	}
 
+	
+	
 }

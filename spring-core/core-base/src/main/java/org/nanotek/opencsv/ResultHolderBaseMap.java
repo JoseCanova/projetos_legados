@@ -1,13 +1,18 @@
 package org.nanotek.opencsv;
 
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.Set;
 
 import org.nanotek.Base;
 import org.nanotek.BaseException;
-import org.nanotek.IdBase;
+import org.nanotek.WrappedBaseClass;
+import org.nanotek.WrappedEntityBase;
 import org.nanotek.beans.csv.AreaBean;
+import org.nanotek.beans.csv.BaseBean;
 import org.nanotek.beans.entity.Area;
+
+import com.sun.xml.bind.v2.model.core.ID;
 
 /**
  * this bean will god to spring. it holds the reference of the configuration of the beans 
@@ -17,8 +22,8 @@ import org.nanotek.beans.entity.Area;
  * @param <ID>
  * @param <I>
  */
-public class ResultHolderBaseMap<I extends IdBase<I,?>, ID extends IdBase<?,?>, K extends IdBase<K,ID>> 
-extends HolderBaseMap<K, ID> implements ColumnMapHolder<I> {
+public class ResultHolderBaseMap<I extends BaseBean<?>, K extends WrappedEntityBase<I>> 
+extends HolderBaseMap<I> implements ColumnMapHolder<I> {
 
 	private static final long serialVersionUID = -1565015302783229070L;
 
@@ -26,16 +31,24 @@ extends HolderBaseMap<K, ID> implements ColumnMapHolder<I> {
 
 	private Class<I> clazz;
 	
+	private Class<K> wrapperClass;
+	
 
-	public ResultHolderBaseMap(K immutable) {
+	public ResultHolderBaseMap(I immutable) {
 		super(immutable);
 	}
 	
-	public ResultHolderBaseMap(K immutable,Class<I> clazz) {
+	public ResultHolderBaseMap(I immutable,Class<I> clazz) {
 		super(immutable);
 		this.clazz = clazz;
 	}
 
+	public ResultHolderBaseMap(Class<I> clazz,Optional<I> wrappedBasedClass) {
+		super(wrappedBasedClass.get());
+		this.clazz = clazz;
+		this.wrapperClass = wrapperClass;
+	}
+	
 	public ResultHolderBaseMap() {
 		super(null);
 	}
@@ -57,7 +70,7 @@ extends HolderBaseMap<K, ID> implements ColumnMapHolder<I> {
 				columnMapping[get(k)] = k;
 			});
 		});
-		return Base.newInstance(Optional.ofNullable(clazz).orElseThrow(BaseException::new));
+		return BaseBean.newInstance(Optional.ofNullable(clazz).orElseThrow(BaseException::new));
 	}
 
 	public Optional<String[]> getColumnMapping() {
@@ -65,7 +78,8 @@ extends HolderBaseMap<K, ID> implements ColumnMapHolder<I> {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ResultHolderBaseMap map = new ResultHolderBaseMap(new AreaBean(),Area.class);
+		Optional<WrappedBaseClass> wbc = Base.newInstance(WrappedBaseClass.class, new Serializable[] {AreaBean.class}, Class.class);
+		ResultHolderBaseMap map = new ResultHolderBaseMap(Area.class,wbc);
 		map.afterPropertiesSet();
 	}
 	

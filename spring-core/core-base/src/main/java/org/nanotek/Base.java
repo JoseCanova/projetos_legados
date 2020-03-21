@@ -93,15 +93,6 @@ public interface Base<K extends Base<?>> extends Serializable , KongSupplier<K>{
 	}
 	
 
-	static <K extends Base<?>> Optional<K> newWrappedInstance(Class<K> s) throws BaseInstantiationException { 
-		try {
-			return Optional.of(new WrappedBaseClass(s));
-		} catch ( SecurityException e) {
-			throw new BaseInstantiationException(e);
-		}
-	}
-
-	
 	static <K extends Base<?>> Optional<K> newInstance(Class<K> clazz , Serializable[] args , Class<?>... classArgs  ) throws BaseInstantiationException { 
 		try {
 			return Optional.of(clazz.getDeclaredConstructor(classArgs).newInstance(args));

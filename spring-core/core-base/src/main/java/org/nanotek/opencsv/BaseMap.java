@@ -1,9 +1,8 @@
 package org.nanotek.opencsv;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
-import org.nanotek.IdBase;
+import org.nanotek.beans.csv.BaseBean;
 
 /**
  * 
@@ -12,17 +11,18 @@ import org.nanotek.IdBase;
  * @param <T>
  */
 @SuppressWarnings("serial")
-public class BaseMap<T extends IdBase<?,ID>, ID extends Serializable> 
+public class BaseMap<T extends BaseBean<?>> 
 	extends HashMap<String,Integer> {
 
-	protected ID id;
+	protected T immutable;
 	
 	public BaseMap() {
 	}
 	
-	public BaseMap(ID id) {
+	public BaseMap(T immutable) {
 		super();
-		this.id = id;
+		this.immutable = immutable;
 	}
-
+ 
+	
 }

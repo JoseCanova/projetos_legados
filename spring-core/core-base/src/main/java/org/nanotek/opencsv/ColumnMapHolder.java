@@ -2,8 +2,8 @@ package org.nanotek.opencsv;
 
 import java.util.Optional;
 
-import org.nanotek.IdBase;
+import org.nanotek.beans.csv.BaseBean;
 
-public interface ColumnMapHolder<K extends IdBase<K,?>>{
+public interface ColumnMapHolder<K extends BaseBean<?>>{
      Optional<K> verifyConfiguration();
 }

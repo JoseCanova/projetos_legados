@@ -8,15 +8,15 @@ import org.nanotek.BaseException;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
-import org.nanotek.beans.csv.AreaBean;
-import org.nanotek.beans.entity.Area;
+import org.nanotek.WrappedEntityBase;
+import org.nanotek.beans.csv.BaseBean;
 import org.nanotek.stream.KongStream;
 
 
 public class MapStrategyIdBase
-<K extends WrappedBaseClass<K,ID>, 
+<K extends WrappedEntityBase<J>, 
 ID extends IdBase<ID,?> , 
-J extends IdBase<K,ID> , 
+J extends BaseBean<J,ID> , 
 B extends ResultHolderBaseMap<ID,ID,K>> 
 implements MapStrategy<K,ID,J,B>{
 	
