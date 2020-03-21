@@ -33,6 +33,10 @@ public class SequenceLongBase<K extends SequenceLongBase<K,ID>, ID extends Seria
 
 	public SequenceLongBase() {}
 	
+	public SequenceLongBase(ID id) {
+		this.id = id;
+	}
+	
 	public ID getId() {
 		return this.id;
 	}
