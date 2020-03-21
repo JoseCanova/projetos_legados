@@ -9,7 +9,7 @@ import org.nanotek.Base;
 import org.nanotek.BaseException;
 import org.nanotek.beans.entity.Area;
 
-public class KongStream<K extends Base<?>> implements KongStreamBuilder<K> {
+public class KongStream<K extends Base<K>> implements KongStreamBuilder<K> {
 	
 	Class<K> clazz;
 	
@@ -18,7 +18,7 @@ public class KongStream<K extends Base<?>> implements KongStreamBuilder<K> {
 	@Override
 	public void accept(K value) {
 		Class<?> classe = clazz;
-		Optional.ofNullable(value).filter(v -> value.getClass().equals(classe)).orElseThrow(BaseException::new);
+		Optional.ofNullable(value).filter(v -> value.getClass().equals(classe.asSubclass(clazz))).orElseThrow(BaseException::new);
 		iterable.add(value);
 	}
 
@@ -38,13 +38,13 @@ public class KongStream<K extends Base<?>> implements KongStreamBuilder<K> {
 		this.clazz = clazz;
 	}
 
-	public static  <K extends Base<?>> KongStream<K> of(Class<K> clazz) {
+	public static  <K extends Base<K>> KongStream<K> of(Class<K> clazz) {
 		return new KongStream<K>(clazz);
 	}
 	
 	public static void main (String[] args) {
 		Area area = new Area();
-		KongStream.of(Area.class).add(area).build().forEach(a -> System.out.println(a.withUUID().toString()));;
+		KongStream.of(Area.class).add(area).build().forEach(a -> a.toString());;
 	}
 }
 

@@ -1,8 +1,10 @@
 package org.nanotek;
 
-@FunctionalInterface
-public interface ReturnableDispatcher<K extends Base>  {
+import java.util.concurrent.Future;
 
-	 <I> I dispatch (K bean);
+@FunctionalInterface
+public interface ReturnableDispatcher<K extends Base<?>, ID extends Future<ID>>  {
+
+	 ID dispatch (K bean);
 	
 }

@@ -2,9 +2,11 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Recording;
 
-public class RecordingBean  <K extends RecordingBean<K,ID>,ID extends Recording<ID>>{
+public class RecordingBean  <K extends RecordingBean<K,ID>,ID extends Recording<ID>>
+implements ImmutableBase<K, ID>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	

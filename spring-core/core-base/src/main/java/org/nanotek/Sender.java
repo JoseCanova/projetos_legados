@@ -1,8 +1,8 @@
 package org.nanotek;
 
 @FunctionalInterface
-public interface Sender<T> {
+public interface Sender<T,I> {
 
-	public T send(T t);
+	public I send(T t);
 	
 }

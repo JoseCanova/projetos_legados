@@ -2,11 +2,12 @@ package org.nanotek.apachemq;
 
 import javax.jms.Queue;
 
-import org.nanotek.Base;
+import org.nanotek.Holder;
+import org.nanotek.IdBase;
 import org.nanotek.Sender;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
-public abstract class JmsMessageSender <K extends Base>  implements Sender<K>{
+public abstract class JmsMessageSender <K extends IdBase<K,?> , I extends Holder<K,K>>  implements Sender<K,I>{
 
 	protected JmsMessagingTemplate jmsMessagingTemplate;
  
@@ -17,7 +18,7 @@ public abstract class JmsMessageSender <K extends Base>  implements Sender<K>{
 		this.queue = queue;
 	}
 	
-	public K send(K message){
+	public I send(K message){
 		jmsMessagingTemplate.convertAndSend(this.queue, message);
 		return message;
 	}

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecordingBeanDispatcherService implements ReturnableDispatcher<RecordingBean>{ 
+public class RecordingBeanDispatcherService implements ReturnableDispatcher<RecordingBean<?,?>>{ 
 
 	@Autowired
 	private RecordingBeanMessageSender sender;

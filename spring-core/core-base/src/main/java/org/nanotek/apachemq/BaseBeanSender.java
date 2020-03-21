@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BaseBeanSender<K extends Base> extends JmsMessageSender<K> {
+public class BaseBeanSender<K extends Base<?> , ID extends JmsMessageSender<K,ID>> extends JmsMessageSender<K> {
 
 	public BaseBeanSender(@Autowired JmsMessagingTemplate jmsTemplate , @Autowired @Qualifier("baseQueue") Queue queue ) {
 		super(jmsTemplate,queue);
