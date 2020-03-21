@@ -12,8 +12,8 @@ public class WrappedBaseClass <K extends BaseBean<?>> extends WrapDynaBean imple
 
 	K id;
 	
-	public WrappedBaseClass(Class<K> clazz) {
-		super(WrappedEntityBase.newBaseBeanInstance(clazz));
+	public WrappedBaseClass(K instance) {
+		super(instance);
 	}
 
 	
@@ -23,8 +23,7 @@ public class WrappedBaseClass <K extends BaseBean<?>> extends WrapDynaBean imple
 	}
 
 	public static void main(String[] args) {
-		WrappedBaseClass w = new WrappedBaseClass(ArtistBean.class);
-		System.out.println(w.getInstance());
+//		WrappedBaseClass w = new WrappedBaseClass(ArtistBean.class);
 	}
 	
 }
