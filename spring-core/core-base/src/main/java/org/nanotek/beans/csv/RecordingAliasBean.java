@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.RecordingAlias;
 
 public class RecordingAliasBean <K extends RecordingAliasBean<K,ID>,ID extends RecordingAlias<ID>>
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = 4772995387500387928L;
 

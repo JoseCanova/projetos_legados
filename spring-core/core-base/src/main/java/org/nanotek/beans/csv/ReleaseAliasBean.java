@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseAlias;
 
 public class ReleaseAliasBean <K extends ReleaseAliasBean<K,ID>,ID extends ReleaseAlias<ID>>
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = 3986721500454057322L;
 	

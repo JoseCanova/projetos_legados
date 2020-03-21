@@ -5,7 +5,7 @@ import org.nanotek.beans.entity.AreaType;
 
 public class AreaTypeBean
 <K extends AreaTypeBean<K,ID> , ID extends AreaType<?>> 
-implements  ImmutableBase<K,ID> {
+implements  ImmutableBase<K,ID> , BaseBean<K>{
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	

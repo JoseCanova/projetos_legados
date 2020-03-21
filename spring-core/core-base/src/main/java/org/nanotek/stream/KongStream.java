@@ -5,41 +5,42 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 
-import org.nanotek.Base;
 import org.nanotek.BaseException;
+import org.nanotek.IdBase;
+import org.nanotek.Kong;
 import org.nanotek.beans.entity.Area;
 
-public class KongStream<K extends Base<K>> implements KongStreamBuilder<K> {
+public class KongStream<S extends K, K extends Kong<?>> implements KongStreamBuilder<S,K> {
 	
-	Class<K> clazz;
+	Class<S> clazz;
 	
-	ArrayList<K> iterable;
+	ArrayList<S> iterable;
 	
 	@Override
-	public void accept(K value) {
+	public void accept(S value) {
 		Class<?> classe = clazz;
 		Optional.ofNullable(value).filter(v -> value.getClass().equals(classe.asSubclass(clazz))).orElseThrow(BaseException::new);
 		iterable.add(value);
 	}
 
 	@Override
-	public Builder<K> add(K t) {
+	public Builder<S> add(S t) {
 		 accept(t);
 		 return this;
 	}
 	
 	@Override
-	public Stream<K> build() {
+	public Stream<S> build() {
 		return iterable.stream();
 	}
 	
-	private KongStream(Class<K> clazz) {
-		iterable = new  ArrayList<K>();
+	private KongStream(Class<S> clazz) {
+		iterable = new  ArrayList<S>();
 		this.clazz = clazz;
 	}
 
-	public static  <K extends Base<K>> KongStream<K> of(Class<K> clazz) {
-		return new KongStream<K>(clazz);
+	public static  <S extends K, K extends Kong<?>> KongStream<S,K> of(Class<S> clazz) {
+		return new KongStream<S,K>(clazz);
 	}
 	
 	public static void main (String[] args) {

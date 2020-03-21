@@ -1,8 +1,10 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.RecordingAliasType;
 
-public class RecordingAliasTypeBean <K extends RecordingAliasTypeBean<K,ID>,ID extends RecordingAliasType<ID>>{
+public class RecordingAliasTypeBean <K extends RecordingAliasTypeBean<K,ID>,ID extends RecordingAliasType<ID>>
+implements ImmutableBase<K, ID> , BaseBean<K>{
 
 	private static final long serialVersionUID = 2632943505939712312L;
 	

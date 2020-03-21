@@ -2,5 +2,7 @@ package org.nanotek.stream;
 
 import java.util.stream.Stream;
 
-public interface KongStreamBuilder<K> extends Stream.Builder<K> {
+import org.nanotek.Kong;
+
+public interface KongStreamBuilder<S extends K, K extends Kong<?>> extends Stream.Builder<S> {
 }

@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseStatus;
 
 public class ReleaseStatusBean <K extends ReleaseStatusBean<K , ID>, ID extends ReleaseStatus<ID>>
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = -1032984444131323024L;
 	

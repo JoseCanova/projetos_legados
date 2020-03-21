@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Language;
 
 public class LanguageBean< K extends LanguageBean<K,ID>, ID extends Language<ID>>
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = 2997501833949969600L;
 

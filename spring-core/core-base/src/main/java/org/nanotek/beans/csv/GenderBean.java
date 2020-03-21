@@ -5,7 +5,7 @@ import org.nanotek.beans.entity.Gender;
 
 public class GenderBean
 <K extends GenderBean<K,ID>, ID extends Gender<ID>> 
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	
 	private ID id;

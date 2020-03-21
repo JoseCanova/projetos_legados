@@ -9,7 +9,7 @@ import org.nanotek.beans.entity.Release;
  *
  */
 public class ReleaseBean <K extends ReleaseBean<K,ID>,ID extends Release<ID>>
-implements ImmutableBase<K , ID>{
+implements ImmutableBase<K , ID>,BaseBean<K>{
 
 	
 	

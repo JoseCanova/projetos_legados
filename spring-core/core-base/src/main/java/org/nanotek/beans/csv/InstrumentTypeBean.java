@@ -5,7 +5,7 @@ import org.nanotek.beans.entity.InstrumentType;
 
 public class InstrumentTypeBean 
 <K extends InstrumentTypeBean<K,ID> ,ID extends InstrumentType<ID>>
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 	
 
 	private static final long serialVersionUID = 245355432039730928L;

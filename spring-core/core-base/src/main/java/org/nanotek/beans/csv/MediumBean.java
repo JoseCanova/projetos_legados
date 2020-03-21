@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Medium;
 
 public class MediumBean<K extends MediumBean<K,ID>,ID extends Medium<ID>>
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = -8141072962299778762L;
 

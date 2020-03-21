@@ -6,7 +6,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Recording;
 
 public class RecordingBean  <K extends RecordingBean<K,ID>,ID extends Recording<ID>>
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	

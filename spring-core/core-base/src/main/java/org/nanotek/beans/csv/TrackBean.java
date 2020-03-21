@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Track;
 
 public class TrackBean <K extends TrackBean<K,ID>,ID extends Track<ID>>
-implements ImmutableBase<K,ID>{
+implements ImmutableBase<K,ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = 7327347644746001993L;
 	

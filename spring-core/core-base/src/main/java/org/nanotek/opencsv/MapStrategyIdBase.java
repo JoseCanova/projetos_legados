@@ -1,13 +1,16 @@
 package org.nanotek.opencsv;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
+import org.nanotek.Base;
 import org.nanotek.BaseException;
 import org.nanotek.IdBase;
 import org.nanotek.Result;
 import org.nanotek.WrappedBaseClass;
 import org.nanotek.beans.csv.AreaBean;
 import org.nanotek.beans.entity.Area;
+import org.nanotek.stream.KongStream;
 
 
 public class MapStrategyIdBase
@@ -26,14 +29,30 @@ implements MapStrategy<K,ID,J,B>{
 	Optional<B> resultBean;
 	
 	
-	
-
-
-	@SuppressWarnings("unchecked")
-	public static void main (String[] args) { 
-		MapStrategyIdBase midBase = new MapStrategyIdBase(WrappedBaseClass.class , Area.class , AreaBean.class ,ResultHolderBaseMap.class );
+	public <S extends J> J asIdBean(Class<J> j) { 
+		Optional<J> instance = Base.newInstance(j.asSubclass(j));
+		Stream<J> sj =  KongStream.of(j).add(instance.get()).build();
+		return sj.findFirst().get(); 
 	}
+
 	
+	static <KK extends K,  
+				K extends WrappedBaseClass<KK,IID> , 
+				IID extends ID,
+				ID extends IdBase<IID , ?>,
+				JJ extends J, 
+				J extends IdBase<JJ,ID>,
+				BB extends B, 
+				B extends ResultHolderBaseMap<IID,IID,KK>>
+				MapStrategyIdBase<KK,IID,JJ,BB> withClasses(Class<KK> k, Class<IID> i , Class<JJ> j , Class<BB> b) {
+		
+		
+		return new MapStrategyIdBase(k , i , j , b);
+		
+	}
+
+	
+
 	public MapStrategyIdBase(Class<K> k, Class<ID> i , Class<J> j , Class<B> b) {
 		
 		optionalIdBaseMap = createIdBaseClass(j, i);

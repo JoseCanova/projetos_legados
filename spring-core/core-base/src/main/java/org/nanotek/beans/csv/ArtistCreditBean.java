@@ -7,7 +7,7 @@ import org.nanotek.beans.entity.ArtistCredit;
 
 @SuppressWarnings("serial")
 public class ArtistCreditBean< K extends ArtistCreditBean<K , ID> , ID extends ArtistCredit<ID>> 
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 
 	ID id;
 	

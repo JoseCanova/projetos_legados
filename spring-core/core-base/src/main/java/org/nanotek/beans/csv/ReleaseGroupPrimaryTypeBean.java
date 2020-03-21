@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseGroupPrimaryType;
 
 public class ReleaseGroupPrimaryTypeBean <K extends ReleaseGroupPrimaryTypeBean<K,ID>,ID extends ReleaseGroupPrimaryType<ID>> 
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = -4792229013963888593L;
 

@@ -5,7 +5,7 @@ import org.nanotek.beans.entity.ArtistCreditName;
 
 public class ArtistCreditNameBean
 <K extends ArtistCreditNameBean<K,ID> , ID extends ArtistCreditName<ID>>  
-implements ImmutableBase<K, ID>{
+implements ImmutableBase<K, ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = -625201514069517695L;
 

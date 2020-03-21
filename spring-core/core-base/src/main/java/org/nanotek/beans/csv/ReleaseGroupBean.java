@@ -5,7 +5,7 @@ import org.nanotek.beans.entity.ReleaseGroup;
 
 public class ReleaseGroupBean 
 <K extends ReleaseGroupBean<K,ID>,ID extends ReleaseGroup<ID>> 
-implements ImmutableBase<K , ID>{
+implements ImmutableBase<K , ID>,BaseBean<K>{
 
 	private static final long serialVersionUID = -1119657398190391884L;
 

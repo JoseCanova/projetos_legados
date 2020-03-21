@@ -4,7 +4,7 @@ import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistAlias;
 
 public class ArtistAliasBean<K extends ArtistAliasBean<K,ID>, ID extends ArtistAlias<?>>  
-implements  ImmutableBase<K,ID> 
+implements  ImmutableBase<K,ID>,BaseBean<K> 
 {
 
 	private static final long serialVersionUID = -2745888243978330408L;

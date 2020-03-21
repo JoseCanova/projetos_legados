@@ -24,7 +24,7 @@ B extends ResultHolderBaseMap<ID,ID,K>>
 		return Base.newWrappedInstance(clazz);
 	}
 
-	default  Optional<J> createIdBaseClass(Class<J> k , Class<ID> id){ 
+	default <JJ extends J , IID extends ID> Optional<JJ> createIdBaseClass(Class<JJ> k , Class<IID> id){ 
 		return Base.newInstance (k , id);
 	}
 	

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 import org.nanotek.Base;
-import org.nanotek.Holder;
+import org.nanotek.IdBase;
 import org.nanotek.JsonMessage;
 import org.nanotek.Kong;
 import org.nanotek.Result;
@@ -15,12 +15,14 @@ import org.nanotek.beans.entity.AreaBeginDate;
 import org.nanotek.beans.entity.AreaComment;
 import org.nanotek.beans.entity.AreaEndDate;
 import org.nanotek.beans.entity.AreaType;
+import org.nanotek.beans.entity.SequenceLongBase;
+import org.nanotek.opencsv.BaseMap;
 import org.nanotek.processor.csv.CsvBaseProcessor;
 import org.nanotek.repository.jpa.AreaBeginDateRepository;
 import org.nanotek.repository.jpa.AreaCommentRepository;
 import org.nanotek.repository.jpa.AreaEndDateRepository;
 import org.nanotek.repository.jpa.AreaRepository;
-import org.nanotek.repository.jpa.IdBaseRepository;
+import org.nanotek.repository.jpa.SequenceLongBaseRepository;
 import org.nanotek.service.jpa.AreaJpaService;
 import org.nanotek.service.jpa.AreaTypeJpaService;
 import org.nanotek.service.parser.BaseMapParser;
@@ -60,8 +62,22 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 @EnableIntegration
 @EnableConfigurationProperties
 @IntegrationComponentScan(basePackageClasses = {AreaIntegrationConfiguration.class})
-public class AreaIntegrationConfiguration {
+public class AreaIntegrationConfiguration<K extends SequenceLongBaseRepository<K,B>, B extends SequenceLongBase<B,Long>> {
 
+	
+	@Autowired
+	AreaJpaService service;
+	
+	@Autowired
+	SequenceLongBaseRepository<?,?> idRep;
+	
+	@Autowired
+	AreaEndDateRepository<?> eRep;
+	
+	@Autowired
+	AreaCommentRepository cRep;
+	
+			
 	private final Logger logger = LoggerFactory.getLogger(AreaIntegrationConfiguration.class);
 
 	@Value("${server.port}")
@@ -116,8 +132,8 @@ public class AreaIntegrationConfiguration {
 	@Bean
 	@ConfigurationProperties(prefix = "area")
 	@Qualifier(value="areaMapStrategy")
-	BaseMapColumnStrategy<?,?> areaMapStrategy(){ 
-		return   Base.newInstance(BaseMapColumnStrategy.class).get();
+	<K extends BaseMap<?,ID> , ID extends IdBase<ID,?>>BaseMapColumnStrategy<K,ID> areaMapStrategy(){ 
+		return   Base.newInstance(BaseMapColumnStrategy.class.asSubclass(BaseMapColumnStrategy.class)).get();
 	}
 
 	@Bean
@@ -200,30 +216,15 @@ public class AreaIntegrationConfiguration {
 
 
 	@MessageEndpoint
-	class AreaHandler implements MessageHandler{ 
-		
-		@Autowired
-		AreaJpaService service;
-		
-		@Autowired
-		IdBaseRepository<?> idRep;
-		
-		@Autowired
-		AreaBeginDateRepository dRep;
-		
-		@Autowired
-		AreaEndDateRepository eRep;
-		
-		@Autowired
-		AreaCommentRepository cRep;
+	class AreaHandler<S extends Area<S>,C extends AreaComment<C>> implements MessageHandler{ 
 		
 
 		@Override
 		public void handleMessage(Message<?> message) throws MessagingException {
-			AreaHolder holder = (AreaHolder) message.getPayload();
-			Area<?> transientArea = holder.getArea();
+			AreaHolder<S,C> holder = (AreaHolder<S,C>) message.getPayload();
+			S transientArea = holder.getArea();
 			if (transientArea.getAreaBeginDate() !=null) {
-				AreaBeginDate bd = idRep.save(transientArea.getAreaBeginDate());
+				AreaBeginDate<?> bd = idRep.save(transientArea.getAreaBeginDate());
 				transientArea.setAreaBeginDate(bd);
 			}
 			if(transientArea.getAreaEndDate() !=null) {
@@ -256,13 +257,6 @@ public class AreaIntegrationConfiguration {
 				throw new MessagingException("No Areatype found for bean " + source.toJson());
 			Optional<AreaType<?>> optType = service.findByTypeId(source.getType());
 			
-			optType.ifPresent(t ->{
-				t.compute((p) ->{
-					area = new Area(source.getAreaId(),source.getName(),source.getGid(),t);
-					Kong.get(area).ifPresent(a->  );
-					return true;
-				});
-			});
 			
 			if (optArea.isPresent()) 
 				area = optArea.get();
@@ -289,25 +283,25 @@ public class AreaIntegrationConfiguration {
 		} 
 	}
 	
-	class AreaHolder implements Serializable{ 
+	class AreaHolder< S extends Area<S> , C extends AreaComment<C>>  implements Serializable{ 
 		
 		private static final long serialVersionUID = -544891655711717670L;
 
-		private Area area; 
+		private S area; 
 		
-		private AreaComment areaComment;
+		private C areaComment;
 
-		public AreaHolder(Area area, AreaComment areaComment) {
+		public AreaHolder(S area, C areaComment) {
 			super();
 			this.area = area;
 			this.areaComment = areaComment;
 		}
 
-		public Area getArea() {
+		public S getArea() {
 			return area;
 		}
 
-		public AreaComment getAreaComment() {
+		public C getAreaComment() {
 			return areaComment;
 		}
 		

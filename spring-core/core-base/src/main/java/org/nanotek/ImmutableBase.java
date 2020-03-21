@@ -13,7 +13,7 @@ public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> 
 		return withUUID();
 	}
 
-	static <K extends ImmutableBase<K,ID> , ID extends Serializable> Optional<K> newImmutableBase(Class<K> class1) throws BaseInstantiationException { 
+	static <S extends K , K extends ImmutableBase<S,ID> , ID extends Serializable> Optional<K> newImmutableBase(Class<S> class1) throws BaseInstantiationException { 
 		try {
 			return Optional.of(class1.getDeclaredConstructor().newInstance());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
