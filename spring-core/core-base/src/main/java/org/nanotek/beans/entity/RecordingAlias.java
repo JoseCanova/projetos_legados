@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.nanotek.MutableRecordingAliasIdEntity;
+import org.nanotek.entities.MutableRecordingAliasIdEntity;
 
 @Entity
 @DiscriminatorValue(value = "RecordingAlias")
