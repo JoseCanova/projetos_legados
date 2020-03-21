@@ -1,6 +1,7 @@
 package org.nanotek.apachemq;
 
 import java.util.concurrent.Future;
+import java.util.stream.Stream;
 
 import javax.jms.Queue;
 
@@ -13,7 +14,9 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TrackBeanMessageSender extends JmsMessageSender<TrackBean> {
+public class TrackBeanMessageSender<K extends TrackBean<K,?>, ID extends TrackBeanMessageSender<K,ID>> extends JmsMessageSender<K , ID> {
+
+	private static final long serialVersionUID = 7034507517032906130L;
 
 	public TrackBeanMessageSender(@Autowired JmsMessagingTemplate jmsMessagingTemplate,
 									@Autowired @Qualifier("trackBeanQueue") Queue queue) {
@@ -21,12 +24,12 @@ public class TrackBeanMessageSender extends JmsMessageSender<TrackBean> {
 	}
 	
 	@Async("threadPoolTaskExecutor")
-	public Future<TrackBean> sendAsync(TrackBean tb) { 
-		return new AsyncResult<TrackBean> (send(tb));
+	public Future<?> sendAsync(K tb) { 
+		return new AsyncResult<> (send(tb));
 	}
 	
 	@Override
-	public TrackBean send (TrackBean message) { 
+	public Stream<?> send (K message) { 
 		return super.send(message);
 	}
 

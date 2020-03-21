@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 
 public class MessageListenerHelper {
 
-	public static <K extends Base> K processMessage(ActiveMQBytesMessage message , Gson gson , Class<K> clazz){ 
+	public static <K extends Base<K>> K processMessage(ActiveMQBytesMessage message , Gson gson , Class<K> clazz){ 
 		Message innerMessage = message.getMessage();
 		ByteSequence sequence = innerMessage.getContent();
 		String payload = new String (sequence.data);

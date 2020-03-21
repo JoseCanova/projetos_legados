@@ -5,11 +5,9 @@ import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.nanotek.Mediator;
-import org.nanotek.apachemq.listener.ArtistCreditJmsListener;
+import org.nanotek.IdBase;
 import org.nanotek.apachemq.listener.ArtistCreditNameBeanJmsListener;
 import org.nanotek.apachemq.listener.JmsListener;
-import org.nanotek.beans.csv.ArtistCreditBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -128,25 +126,10 @@ public class ApacheMqConfiguration {
 	
 	@Bean
 	@Qualifier(value = "ArtistCreditBeanMessageSender")
-	AsyncBaseSender <?> artistCreditBeanSender(@Autowired JmsMessagingTemplate jmsMessagingTemplate 
+	<K extends IdBase<K,?> , ID extends AsyncBaseSender<K,ID> >AsyncBaseSender <?,?> artistCreditBeanSender(@Autowired JmsMessagingTemplate jmsMessagingTemplate 
 						, @Autowired  @Qualifier("artistCreditQueue") Queue queue){ 
-		return new AsyncBaseSender<> (jmsMessagingTemplate , queue);
+		return new AsyncBaseSender<K,ID> (jmsMessagingTemplate , queue);
 	}
 
-	@Bean
-	@Qualifier(value="ArtistCreditListener")
-	ArtistCreditJmsListener artistCreditListener(@Autowired @Qualifier("ArtistCreditMediator") Mediator<ArtistCreditBean> mediator) { 
-		return new ArtistCreditJmsListener(mediator);
-	}
 	
-	@Bean
-	public DefaultMessageListenerContainer listenerContainer5(@Autowired ConnectionFactory connectionFactory , 
-															 @Autowired @Qualifier("ArtistCreditListener") ArtistCreditJmsListener jmsListener) {
-		DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
-		container.setConnectionFactory(connectionFactory);
-		container.setMaxConcurrentConsumers(10);
-		container.setDestinationName("musicbrainz.artist_credit_queue");
-		container.setMessageListener(jmsListener);
-		return container;
-	}
 }

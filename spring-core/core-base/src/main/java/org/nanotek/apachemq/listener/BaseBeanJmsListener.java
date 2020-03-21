@@ -4,7 +4,7 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
-import org.nanotek.Base;
+import org.nanotek.IdBase;
 import org.nanotek.Mediator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.google.gson.Gson;
 
-public class BaseBeanJmsListener <K extends Base> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
+public class BaseBeanJmsListener <K extends IdBase<K,?>, T extends BaseBeanJmsListener<K , T>> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
     
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 	
@@ -24,8 +24,8 @@ public class BaseBeanJmsListener <K extends Base> implements SessionAwareMessage
 	
 	private Class<K> clazz;
 	
-	public BaseBeanJmsListener(Mediator<K> mediator , Class<K> clazz) {
-		this.mediator = mediator;
+	public BaseBeanJmsListener(Mediator<K> mediator2 , Class<K> clazz) {
+		this.mediator = mediator2;
 		this.clazz = clazz;
 	}
 	

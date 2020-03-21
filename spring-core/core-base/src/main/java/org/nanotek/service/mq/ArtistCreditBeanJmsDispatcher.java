@@ -6,18 +6,18 @@ import org.nanotek.beans.csv.ArtistCreditBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class ArtistCreditBeanJmsDispatcher implements Dispatcher<ArtistCreditBean>{
+public class ArtistCreditBeanJmsDispatcher<K extends ArtistCreditBean<K,?>> implements Dispatcher<K>{
 
 	@Autowired
 	@Qualifier("ArtistCreditBeanMessageSender")
-	AsyncBaseSender<ArtistCreditBean> sender;
+	AsyncBaseSender<K,?> sender;
 	
 	public ArtistCreditBeanJmsDispatcher() {
 	}
 
-	@Override
-	public void dispatch(ArtistCreditBean bean) {
+	public void dispatch(K bean) {
 		sender.sendAsync(bean);
 	}
+
 
 }

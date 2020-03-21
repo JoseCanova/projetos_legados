@@ -7,7 +7,7 @@ import javax.jms.Session;
 import javax.validation.Valid;
 
 import org.apache.activemq.command.ActiveMQBytesMessage;
-import org.nanotek.IdBase;
+import org.nanotek.BaseException;
 import org.nanotek.beans.csv.ArtistBean;
 import org.nanotek.beans.entity.Artist;
 import org.nanotek.beans.entity.ArtistComment;
@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 @Service
 @Validated
 @Qualifier(value="ArtistBeanJmsListener")
-public class ArtistBeanJmsListener implements SessionAwareMessageListener<ActiveMQBytesMessage>{
+public class ArtistBeanJmsListener<K extends Artist<K>> implements SessionAwareMessageListener<ActiveMQBytesMessage>{
 
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -36,7 +36,7 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 	private Gson gson;
 
 	@Autowired
-	private ArtistJpaService artistJpaService;
+	private ArtistJpaService<K> artistJpaService;
 	
 	@Autowired
 	private ArtistCommentJpaService artistCommentJpaService;
@@ -54,17 +54,12 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 
 	
 	private void validateAndSave(@Valid ArtistBean artistBean) { 
-		Optional<Artist> optArtist = artistJpaService.findByArtistId(artistBean.getArtistId());
+		Optional<K> optArtist = artistJpaService.findByArtistId(artistBean.getArtistId());
 		if (optArtist.isPresent()) { 
 			verifyArtistComment(optArtist.get() , artistBean);
 		}else { 
-			save (artistBean);
+			throw new BaseException();
 		}
-	}
-
-	private void save(ArtistBean artistBean) {
-		Artist artist = new Artist();
-		save(artist);
 	}
 
 	@Transactional
@@ -87,7 +82,7 @@ public class ArtistBeanJmsListener implements SessionAwareMessageListener<Active
 		return comment == null || "\\N".equalsIgnoreCase(comment);
 	}
 
-	private  IdBase<?,?> save(IdBase<?,?> artist) {
+	private  K save(K artist) {
 		return artistJpaService.save(artist);
 	}
 }

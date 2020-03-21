@@ -1,6 +1,7 @@
 package org.nanotek.apachemq;
 
 import java.util.concurrent.Future;
+import java.util.stream.Stream;
 
 import javax.jms.Queue;
 
@@ -13,7 +14,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecordingBeanMessageSender extends JmsMessageSender<RecordingBean> {
+public class RecordingBeanMessageSender<K extends RecordingBean<K,?>, ID extends RecordingBeanMessageSender<K,ID>> extends JmsMessageSender<K,ID> {
 
 	public RecordingBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate , 
 										@Autowired @Qualifier("recordingQueue")Queue queue) { 
@@ -21,12 +22,12 @@ public class RecordingBeanMessageSender extends JmsMessageSender<RecordingBean> 
 	}
 	
 	@Async("threadPoolTaskExecutor")
-	public Future<RecordingBean> sendAsync(RecordingBean rb) { 
-		return new AsyncResult<RecordingBean> (send(rb));
+	public Future<?> sendAsync(K rb) { 
+		return new AsyncResult<> (send(rb));
 	}
 	
 	@Override
-	public RecordingBean send (RecordingBean message) { 
+	public Stream<?> send (K message) { 
 		return super.send(message);
 	}
 	
