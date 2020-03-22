@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReleaseCommentRepository extends JpaRepository<ReleaseComment, Long> {
+public interface ReleaseCommentRepository<K extends ReleaseComment<K>> extends 
+BrainzBaseRepository<K> {
 }

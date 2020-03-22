@@ -9,12 +9,13 @@ import org.nanotek.entities.BaseReleaseAliasLocaleEntity;
 
 @Entity
 @DiscriminatorValue("ReleaseAliasLocale")
-public class ReleaseAliasLocale extends LocaleBase<ReleaseAliasLocale> implements BaseReleaseAliasLocaleEntity{
+public class ReleaseAliasLocale<K extends ReleaseAliasLocale<K>> extends LocaleBase<K> implements 
+BaseReleaseAliasLocaleEntity<K>{
 
 	private static final long serialVersionUID = -5609249998157622354L;
 	
 	@OneToOne(mappedBy = "locale")
-	private ReleaseAlias releaseAlias;
+	private ReleaseAlias<?> releaseAlias;
 
 	public ReleaseAliasLocale() {
 	}
@@ -23,11 +24,11 @@ public class ReleaseAliasLocale extends LocaleBase<ReleaseAliasLocale> implement
 		super(locale);
 	}
 
-	public ReleaseAlias getReleaseAlias() {
+	public ReleaseAlias<?> getReleaseAlias() {
 		return releaseAlias;
 	}
 
-	public void setReleaseAlias(ReleaseAlias releaseAlias) {
+	public void setReleaseAlias(ReleaseAlias<?> releaseAlias) {
 		this.releaseAlias = releaseAlias;
 	}
 	

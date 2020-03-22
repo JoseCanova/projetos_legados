@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistAliasRepository<K extends ArtistAlias<K>> 
-extends SequenceLongBaseRepository<ArtistAliasRepository<K>,K> , NameBaseProjection<K,String>{
+extends BrainzBaseRepository<K> , NameBaseProjection<K,String>{
 	Optional<K> findByAliasId(@NotNull Long aliasId);
 }

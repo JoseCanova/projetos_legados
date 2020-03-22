@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstrumentRepository<K extends Instrument<K>> 
-extends SequenceLongBaseRepository<InstrumentRepository<K>,K>{
+extends BrainzBaseRepository<K>{
 	Optional<K> findByInstrumentId(@NotNull Long instrumentId);
 }

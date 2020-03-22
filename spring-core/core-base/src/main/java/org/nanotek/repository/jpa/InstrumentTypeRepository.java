@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstrumentTypeRepository<K extends InstrumentType<K>>  extends 
-SequenceLongBaseRepository<InstrumentTypeRepository<K>,K>,
+BrainzBaseRepository<K>,
 BaseTypeProjection<K>,
 NameBaseProjection<K,String>{
 }

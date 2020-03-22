@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AreaRepository<K extends Area<K>> extends  
-	SequenceLongBaseRepository<AreaRepository<K>,K>,
+	BrainzBaseRepository<K>,
 	NameBaseProjection<K, String>{
 	Optional<Area<?>> findByAreaId(@NotNull Long areaId);
 }

@@ -5,6 +5,7 @@ import org.nanotek.repository.jpa.projections.NameBaseProjection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MediumRepository<K extends Medium<K>> extends SequenceLongBaseRepository<MediumRepository<K>,K>
+public interface MediumRepository<K extends Medium<K>> 
+extends BrainzBaseRepository<K>
 ,NameBaseProjection<K, String>{
 }

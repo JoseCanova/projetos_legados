@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LongIdNameRepository<K extends LongIdName<K>> 
-extends SequenceLongBaseRepository<LongIdNameRepository<K>, K>, 
+extends BrainzBaseRepository<K>, 
 MutableNameEntity<String>{
 
 }

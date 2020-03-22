@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier(value="ReleaseRepository")
-public interface ReleaseRepository<K extends ReleaseRepository<K,O>, O extends Release<O>>
-extends SequenceLongBaseRepository<K,O> , 
+public interface ReleaseRepository<O extends Release<O>>
+extends BrainzBaseRepository<O> , 
 ReleaseBaseRepository<O,Long>,
 NameBaseProjection<O,String>,
 GidBaseProjection<O,String>{

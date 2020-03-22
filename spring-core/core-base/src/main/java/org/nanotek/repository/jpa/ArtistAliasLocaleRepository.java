@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArtistAliasLocaleRepository extends JpaRepository<ArtistAliasLocale, Long> {
+public interface ArtistAliasLocaleRepository<K extends ArtistAliasLocale<K>> extends BrainzBaseRepository<K> {
 }

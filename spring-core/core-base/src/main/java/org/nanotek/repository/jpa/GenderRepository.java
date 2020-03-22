@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GenderRepository <K extends Gender<K>>extends 
-SequenceLongBaseRepository<GenderRepository<K>,K>{
+BrainzBaseRepository<K>{
 }

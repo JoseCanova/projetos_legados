@@ -18,7 +18,7 @@ import org.nanotek.entities.immutables.BaseLanguageEntity;
 @Table(name="language", uniqueConstraints= {
 		@UniqueConstraint(name="uk_language_id",columnNames={"language_id"})
 		})
-public class Language<K extends Language<K>> extends  LongIdName<Language<?>>
+public class Language<K extends Language<K>> extends  LongIdName<K>
 implements  BaseLanguageEntity<Language>, 
 MutableLanguageEntity<Language> {
 

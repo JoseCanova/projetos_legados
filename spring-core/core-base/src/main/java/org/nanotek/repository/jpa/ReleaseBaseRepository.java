@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.nanotek.entities.MutableReleaseIdEntity;
 
-public interface ReleaseBaseRepository<T extends MutableReleaseIdEntity<ID> , ID extends Serializable> {
+public interface ReleaseBaseRepository
+<T extends MutableReleaseIdEntity<ID> , ID extends Serializable> {
 	Optional<T> findByReleaseId(@NotNull ID releaseId);
 }

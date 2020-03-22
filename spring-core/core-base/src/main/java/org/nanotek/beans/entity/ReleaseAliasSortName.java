@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.nanotek.entities.BaseReleaseAliasSortNameEntity;
+
 @Entity
 @DiscriminatorValue(value = "ReleaseAliasSortName")
-public class ReleaseAliasSortName extends SortNameBase{
+public class ReleaseAliasSortName<K extends ReleaseAliasSortName<K>> extends SortNameBase<K> implements BaseReleaseAliasSortNameEntity<K>
+{
 
 	private static final long serialVersionUID = -7823743704784694617L;
 	

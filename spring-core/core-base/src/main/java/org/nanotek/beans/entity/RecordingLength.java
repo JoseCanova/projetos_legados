@@ -27,8 +27,8 @@ import org.nanotek.entities.MutableRecordingEntity;
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
 @DiscriminatorValue(value="RecordingLength")
-public class RecordingLength extends LongLengthyBase<RecordingLength> implements 
-BaseRecordingLengthEntity,
+public class RecordingLength<K extends RecordingLength<K>> extends LongLengthyBase<K> implements 
+BaseRecordingLengthEntity<K>,
 MutableRecordingEntity<Recording<?>>{
 	
 	private static final long serialVersionUID = -8708909035267715010L;

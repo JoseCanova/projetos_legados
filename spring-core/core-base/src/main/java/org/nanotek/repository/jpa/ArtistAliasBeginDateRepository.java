@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistAliasBeginDateRepository<K extends ArtistAliasBeginDate<K>> extends 
-SequenceLongBaseRepository<ArtistAliasBeginDateRepository<K>,K>{
+BrainzBaseRepository<K>{
 }
