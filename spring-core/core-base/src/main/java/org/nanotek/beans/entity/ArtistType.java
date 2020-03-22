@@ -1,5 +1,7 @@
 package org.nanotek.beans.entity;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +9,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-import org.nanotek.collections.StreamableArtistEntity;
 
 @Entity
 @DiscriminatorValue(value="ArtistType")
@@ -16,7 +17,7 @@ public class ArtistType<K extends ArtistType<K>> extends BaseType<K> {
 	private static final long serialVersionUID = 962190613873549033L;
 	
 	@OneToMany(mappedBy = "artistType",orphanRemoval = false,fetch = FetchType.LAZY)
-	public StreamableArtistEntity<Artist<?>> artists;
+	public List<Artist<?>> artists;
 
 	public ArtistType() {
 		super();
