@@ -20,7 +20,7 @@ import javax.persistence.Table;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class StringNumberBase extends NumberBase<String> {
+public class StringNumberBase<K extends StringNumberBase<K>> extends NumberBase<K,String> {
 
 	private static final long serialVersionUID = -773476453892134913L;
 

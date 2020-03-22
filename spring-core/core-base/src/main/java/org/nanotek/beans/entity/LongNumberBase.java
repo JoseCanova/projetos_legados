@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LongNumberBase extends NumberBase<Long> {
+public class LongNumberBase<K extends LongNumberBase<K>> extends NumberBase<K,Long> {
 
 	private static final long serialVersionUID = 6726812273313773460L;
 	
