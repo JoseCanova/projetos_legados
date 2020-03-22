@@ -2,14 +2,15 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
-
-import org.nanotek.IdBase;
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Artist;
 
-public class ArtistBean<K extends ArtistBean<K,ID> , ID extends Artist<ID>> 
-implements ImmutableBase<K, ID>,BaseBean<K>
-{
+public class ArtistBean
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = 2864330060600897052L;
 
@@ -45,10 +46,12 @@ implements ImmutableBase<K, ID>,BaseBean<K>
 	private Long endArea;
 
 
-	public ArtistBean() {}
+	public ArtistBean() {
+		super(Artist.class);
+	}
 
-	public ArtistBean(ID id) {
-		this.id = id;
+	public ArtistBean(Class<ID> id) {
+		super(id);
 	}
 
 	

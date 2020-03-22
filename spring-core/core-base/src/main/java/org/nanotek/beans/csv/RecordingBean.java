@@ -2,11 +2,14 @@ package org.nanotek.beans.csv;
 
 import javax.validation.constraints.NotNull;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Recording;
 
-public class RecordingBean  <K extends RecordingBean<K,ID>,ID extends Recording<ID>>
-implements ImmutableBase<K, ID>,BaseBean<K>{
+public class RecordingBean  
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = 2926594064752891481L;
 	
@@ -31,13 +34,13 @@ implements ImmutableBase<K, ID>,BaseBean<K>{
     private String lastUpdated;
     private String  video;
     
-    public RecordingBean(ID id) {
-		super();
-		this.id = id;
+    public RecordingBean(Class<ID> id) {
+		super(id);
 	}
 
-	public RecordingBean() {}
-
+	public RecordingBean() {
+		super(Recording.class);
+	}
 
 	public String getGid() {
 		return gid;

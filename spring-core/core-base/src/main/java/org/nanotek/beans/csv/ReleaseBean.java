@@ -1,5 +1,6 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Release;
 
@@ -8,8 +9,11 @@ import org.nanotek.beans.entity.Release;
  * @author josecanova
  *
  */
-public class ReleaseBean <K extends ReleaseBean<K,ID>,ID extends Release<ID>>
-implements ImmutableBase<K , ID>,BaseBean<K>{
+public class ReleaseBean 
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	
 	
@@ -38,12 +42,13 @@ implements ImmutableBase<K , ID>,BaseBean<K>{
 	public String lastUpdated;
 	
 	
-	public ReleaseBean(ID id) {
-		super();
-		this.id = id;
+	public ReleaseBean(Class<ID> id) {
+		super(id);
 	}
 
-	public ReleaseBean() {}
+	public ReleaseBean() {
+		super(Release.class);
+	}
 	
 	
 	public String getGid() {

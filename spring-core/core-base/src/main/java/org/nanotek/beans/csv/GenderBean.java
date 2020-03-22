@@ -1,11 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Gender;
 
 public class GenderBean
-<K extends GenderBean<K,ID>, ID extends Gender<ID>> 
-implements ImmutableBase<K,ID>,BaseBean<K>{
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	
 	private ID id;
@@ -23,13 +26,13 @@ implements ImmutableBase<K,ID>,BaseBean<K>{
 	public String gid;
 	
 	
-	public GenderBean(ID id) {
-		super();
-		this.id = id;
+	public GenderBean(Class<ID> id) {
+		super(id);
 	}
 
 
 	public GenderBean() {
+		super(Gender.class);
 	}
 
 

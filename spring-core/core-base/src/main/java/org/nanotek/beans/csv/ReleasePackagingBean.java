@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleasePackaging;
 
-public class ReleasePackagingBean <K extends ReleasePackagingBean<K,ID>, ID extends ReleasePackaging<ID>>
-implements ImmutableBase<K , ID>,BaseBean<K>{
+public class ReleasePackagingBean
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = -6068518463159348252L;
 
@@ -23,12 +26,12 @@ implements ImmutableBase<K , ID>,BaseBean<K>{
 	public String description; 
 	public String gid;
 	
-	public ReleasePackagingBean(ID id) {
-		super();
-		this.id = id;
+	public ReleasePackagingBean(Class<ID> id) {
+		super(id);
 	}
 
 	public ReleasePackagingBean() {
+		super(ReleasePackaging.class);
 	}
 
 	public String getName() {

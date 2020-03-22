@@ -1,10 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Instrument;
 
-public class InstrumentBean<K extends InstrumentBean<K , ID> , ID extends Instrument<ID>>
-implements ImmutableBase<K, ID>,BaseBean<K>{
+public class InstrumentBean
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = -6916258778573566572L;
 	
@@ -24,13 +28,13 @@ implements ImmutableBase<K, ID>,BaseBean<K>{
 	public String description;
 	
 	public InstrumentBean() {
+		super(Instrument.class);
 	}
 
 	
 
-	public InstrumentBean(ID id) {
-		super();
-		this.id = id;
+	public InstrumentBean(Class<ID> id) {
+		super(id);
 	}
 
 

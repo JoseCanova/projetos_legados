@@ -1,10 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.RecordingAlias;
 
-public class RecordingAliasBean <K extends RecordingAliasBean<K,ID>,ID extends RecordingAlias<ID>>
-implements ImmutableBase<K,ID>,BaseBean<K>{
+public class RecordingAliasBean 
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = 4772995387500387928L;
 
@@ -33,12 +37,12 @@ implements ImmutableBase<K,ID>,BaseBean<K>{
 	
 	
 	
-	public RecordingAliasBean(ID id) {
-		super();
-		this.id = id;
+	public RecordingAliasBean(Class<ID> id) {
+		super(id);
 	}
 
 	public RecordingAliasBean() {
+		super(RecordingAlias.class);
 	}
 
 	public Long getRecording() {

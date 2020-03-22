@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseStatus;
 
-public class ReleaseStatusBean <K extends ReleaseStatusBean<K , ID>, ID extends ReleaseStatus<ID>>
-implements ImmutableBase<K, ID>,BaseBean<K>{
+public class ReleaseStatusBean 
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = -1032984444131323024L;
 	
@@ -23,13 +26,13 @@ implements ImmutableBase<K, ID>,BaseBean<K>{
 	public String gid; 
 	
 	
-	public ReleaseStatusBean(ID id) {
-		super();
-		this.id = id;
+	public ReleaseStatusBean(Class<ID> id) {
+		super(id);
 	}
 
 
 	public ReleaseStatusBean() {
+		super(ReleaseStatus.class);
 	}
 
 

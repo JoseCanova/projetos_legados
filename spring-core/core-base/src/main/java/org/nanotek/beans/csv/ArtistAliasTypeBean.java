@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ArtistAliasType;
 
-public class ArtistAliasTypeBean<K extends ArtistAliasTypeBean<K,ID>, ID extends ArtistAliasType<ID,?>> 
-implements ImmutableBase<K,ID> ,BaseBean<K>{
+public class ArtistAliasTypeBean
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = 901207660901713562L;
 	
@@ -22,11 +25,11 @@ implements ImmutableBase<K,ID> ,BaseBean<K>{
 	public String gid;
 	
 	public ArtistAliasTypeBean() {
+		super(ArtistAliasType.class);
 	}
 
-	public ArtistAliasTypeBean(ID id) {
+	public ArtistAliasTypeBean(Class<ID> id) {
 		super();
-		this.id = id;
 	}
 
 

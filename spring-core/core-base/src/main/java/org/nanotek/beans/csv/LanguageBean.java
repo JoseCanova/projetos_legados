@@ -1,10 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Language;
 
-public class LanguageBean< K extends LanguageBean<K,ID>, ID extends Language<ID>>
-implements ImmutableBase<K,ID>,BaseBean<K>{
+public class LanguageBean
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = 2997501833949969600L;
 
@@ -23,15 +27,12 @@ implements ImmutableBase<K,ID>,BaseBean<K>{
 	public String isoCode3;
 	
 	
-	
-	
-	public LanguageBean(ID id) {
-		super();
-		this.id = id;
+	public LanguageBean(Class<ID> id) {
+		super(id);
 	}
 
-
 	public LanguageBean() {
+		super(Language.class);
 	}
 	
 

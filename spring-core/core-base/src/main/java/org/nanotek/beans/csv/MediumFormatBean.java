@@ -1,11 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.MediumFormat;
 
 public class MediumFormatBean 
-<K extends MediumFormatBean<K,ID>, ID extends MediumFormat<ID>>
-implements ImmutableBase<K, ID>, BaseBean<K>{
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = 6169777855661430422L;
 
@@ -26,12 +29,12 @@ implements ImmutableBase<K, ID>, BaseBean<K>{
 	
 	
 	
-	public MediumFormatBean(ID id) {
-		super();
-		this.id = id;
+	public MediumFormatBean(Class<ID> id) {
+		super(id);
 	}
 
 	public MediumFormatBean() {
+		super(MediumFormat.class);
 	}
 
 	public String getName() {

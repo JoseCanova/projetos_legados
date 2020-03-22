@@ -1,11 +1,13 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.AreaType; 
 
 public class AreaTypeBean
-<K extends AreaTypeBean<K,ID> , ID extends AreaType<?>> 
-implements  ImmutableBase<K,ID> , BaseBean<K>{
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = -6271568961378072618L;
 	
@@ -26,6 +28,7 @@ implements  ImmutableBase<K,ID> , BaseBean<K>{
 	public String gid;
 	
 	public AreaTypeBean() {
+		super(AreaType.class);
 	}
 
 	public AreaTypeBean(ID id) {

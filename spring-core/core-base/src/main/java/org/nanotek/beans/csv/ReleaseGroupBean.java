@@ -1,11 +1,14 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.ReleaseGroup;
 
 public class ReleaseGroupBean 
-<K extends ReleaseGroupBean<K,ID>,ID extends ReleaseGroup<ID>> 
-implements ImmutableBase<K , ID>,BaseBean<K>{
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
+
 
 	private static final long serialVersionUID = -1119657398190391884L;
 
@@ -24,14 +27,13 @@ implements ImmutableBase<K , ID>,BaseBean<K>{
 	public String editsPending;
 	public String lastUpdated;
 	
-	public ReleaseGroupBean(ID id) {
-		super();
-		this.id = id;
+	public ReleaseGroupBean(Class<ID> id) {
+		super(id);
 	}
 
 
 	public ReleaseGroupBean() { 
-		super();
+		super(ReleaseGroup.class);
 	}
 	
 	

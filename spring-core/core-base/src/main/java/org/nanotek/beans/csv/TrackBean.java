@@ -1,10 +1,13 @@
 package org.nanotek.beans.csv;
 
+import org.nanotek.BaseEntity;
 import org.nanotek.ImmutableBase;
 import org.nanotek.beans.entity.Track;
 
-public class TrackBean <K extends TrackBean<K,ID>,ID extends Track<ID>>
-implements ImmutableBase<K,ID>,BaseBean<K>{
+public class TrackBean 
+<ID extends BaseEntity<?,?>, K extends ImmutableBase<K,ID>> 
+extends CsvBaseBean<ID>
+implements BaseBean<K,ID>{
 
 	private static final long serialVersionUID = 7327347644746001993L;
 	
@@ -26,14 +29,14 @@ implements ImmutableBase<K,ID>,BaseBean<K>{
 	public Long editsPending; 
 	public String lastUpdate;
 	public String isDataTrack;
-	
-	
-	public TrackBean(ID id) {
-		super();
-		this.id = id;
+
+	public TrackBean(Class<ID> id) {
+		super(id);
 	}
 
-	public TrackBean() {}
+	public TrackBean() {
+		super(Track.class);
+	}
 	
 	public String getGid() {
 		return gid;
