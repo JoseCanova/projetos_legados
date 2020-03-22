@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.nanotek.beans.csv.BaseBean;
+
 public interface ImmutableBase <K extends IdBase<K,ID>,ID extends Serializable> extends KongSupplier<K>  , IdBase<K,ID> {
 
 	default UUID getUUID() { 

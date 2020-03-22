@@ -21,7 +21,7 @@ import com.sun.xml.bind.v2.model.core.ID;
  * @param <ID>
  * @param <I>
  */
-public class ResultHolderBaseMap<I extends BaseBean<?>, K extends WrappedEntityBase<I>> 
+public class ResultHolderBaseMap<I extends BaseBean<?,?>, K extends WrappedEntityBase<I>> 
 extends HolderBaseMap<I> implements ColumnMapHolder<I> {
 
 	private static final long serialVersionUID = -1565015302783229070L;
@@ -69,7 +69,7 @@ extends HolderBaseMap<I> implements ColumnMapHolder<I> {
 				columnMapping[get(k)] = k;
 			});
 		});
-		return BaseBean.newInstance(Optional.ofNullable(clazz).orElseThrow(BaseException::new));
+		return BaseBean.newBaseBeanInstance(Optional.ofNullable(clazz).orElseThrow(BaseException::new));
 	}
 
 	public Optional<String[]> getColumnMapping() {

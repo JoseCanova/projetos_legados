@@ -11,7 +11,7 @@ import org.nanotek.beans.csv.BaseBean;
  * @param <T>
  */
 @SuppressWarnings("serial")
-public class BaseMap<T extends BaseBean<?>> 
+public class BaseMap<T extends BaseBean<?,?>> 
 	extends HashMap<String,Integer> {
 
 	protected T immutable;

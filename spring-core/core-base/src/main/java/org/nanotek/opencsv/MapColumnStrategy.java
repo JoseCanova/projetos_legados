@@ -6,7 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
 //TODO: review implementation of MapColumnStrategy
-public class MapColumnStrategy<T extends BaseMap<?,ID>, ID extends IdBase<ID,?>> 
+public class MapColumnStrategy<T extends BaseMap<?>, ID extends IdBase<ID,?>> 
 extends  ColumnPositionMappingStrategy<T> 
 implements InitializingBean {
 

@@ -26,8 +26,6 @@ public class IdBaseIdentiyTest {
 		Optional<SequenceLongBase> opt = BaseEntity.newBaseEntityInstance(SequenceLongBase.class , Long.TYPE);
 		System.out.println(opt);
 		Id<?> t = opt.get().asId();
-		Optional<AreaBean> bb = BaseBean.newBaseBeanInstance(AreaBean.class, Arrays.array(IdBase.prepareBeanInstance(Area.class)),Area.class);
-		Optional<?> optw = WrappedEntityBase.newBaseBeanInstance(bb.get());
 		print(t.getId());
 	}
 

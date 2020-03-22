@@ -9,7 +9,7 @@ import org.nanotek.Id;
 import org.nanotek.beans.csv.BaseBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public abstract class HolderBaseMap<K extends BaseBean<?>> 
+public abstract class HolderBaseMap<K extends BaseBean<?,?>> 
 extends BaseMap<K> implements InitializingBean{
 
 	private static final long serialVersionUID = 8945888004557753179L;

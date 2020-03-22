@@ -36,6 +36,10 @@ implements IdBase<K,ID>{
 	public AreaBean() {
 		super(Area.class);
 	}
+
+	public AreaBean(Class<ID>id) {
+		super(id);
+	}
 	
 //	public AreaBean(ID area) { 
 //		super(area);
