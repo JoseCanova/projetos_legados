@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecordingJpaService<K extends Recording<K>> extends IdBasePersistenceService<K, RecordingRepository<K>>{
+public class RecordingJpaService<K extends Recording<K>> extends BrainzPersistenceService<K>{
 
 	
 	public RecordingJpaService(@Autowired RecordingRepository<K> rep) {

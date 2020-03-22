@@ -13,33 +13,41 @@ import org.nanotek.beans.entity.InstrumentDescription;
 import org.nanotek.repository.jpa.InstrumentCommentRepository;
 import org.nanotek.repository.jpa.InstrumentDescriptionRepository;
 import org.nanotek.repository.jpa.InstrumentRepository;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 @Service
-public class InstrumentJpaService<K extends Instrument<K>, C extends InstrumentComment<C>> 
-extends BasePersistenceService<K , InstrumentRepository<K>> {
+public class InstrumentJpaService<K extends Instrument<K>, C extends InstrumentComment<C> , D extends InstrumentDescription<D,?>> 
+extends BasePersistenceService<K> implements InitializingBean{
 
+	@Autowired InstrumentRepository<K> abaseRepository;
 	
 	@Autowired
 	InstrumentCommentRepository<C> commentRepository;
 	
 	//TODO: verify why description is not generic.
 	@Autowired
-	InstrumentDescriptionRepository<InstrumentDescription> descriptionRepository;
+	InstrumentDescriptionRepository<D> descriptionRepository;
 	
 	public InstrumentJpaService() {
 		super();
 	}
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.baseRepository = abaseRepository;
+	}
+	
 	public InstrumentJpaService(@Autowired InstrumentRepository<K> baseRepository) {
-		super(baseRepository);
+		super();
 	}
 
+	
 	@Transactional
 	public Optional<K> findByInstrumentId(@Validated @Valid @NotNull Long instrumentId){ 
-		return baseRepository.findByInstrumentId(instrumentId);
+		return abaseRepository.findByInstrumentId(instrumentId);
 	}
 	
 	@Transactional
@@ -48,7 +56,7 @@ extends BasePersistenceService<K , InstrumentRepository<K>> {
 	}
 	
 	@Transactional
-	public InstrumentDescription saveDescription(@Validated @Valid @NotBlank InstrumentDescription entity) { 
+	public D saveDescription(@Validated @Valid @NotBlank D entity) { 
 		return descriptionRepository.save(entity);
 	}
 }

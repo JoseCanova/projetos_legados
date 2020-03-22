@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class LanguageJpaService {
+public class LanguageJpaService<K extends Language<K>> {
 
 	@Autowired
-	LanguageRepository repository;
+	LanguageRepository<K> repository;
 	
 	public LanguageJpaService() {
 	}
 
 	@Transactional
-	public Language save(Language bean) { 
+	public K save(K bean) { 
 		return repository.save(bean);
 	}
 	

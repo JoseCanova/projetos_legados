@@ -1,20 +1,22 @@
 package org.nanotek.service.jpa;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistType;
 import org.nanotek.repository.jpa.ArtistTypeRepository;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+//TODO: implements the transactional.
 @Service
-public class ArtistTypeService<K extends ArtistType<K>> extends BasePersistenceService<K, ArtistTypeRepository<K>>  {
+public class ArtistTypeService<K extends ArtistType<K>> extends BasePersistenceService<K>  implements InitializingBean{
 
+	@Autowired ArtistTypeRepository<K> abaseRepository;
 	
-	public ArtistTypeService(@Autowired ArtistTypeRepository<K> baseRepository) { 
-		super(baseRepository);
+	public ArtistTypeService() { 
+		super();
 	}
 
 	@Override
@@ -23,20 +25,19 @@ public class ArtistTypeService<K extends ArtistType<K>> extends BasePersistenceS
 		return baseRepository.findById(k);
 	} 
 	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		baseRepository = abaseRepository;
+	}
+	
 	@Transactional
 	public Iterable<K> findByNameContainingIgnoreCase(String name){ 
-		return baseRepository.findByNameContainingIgnoreCase(name);
+		return abaseRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	@Transactional
 	public Optional<K> findByTypeId(Long id) {
-		return baseRepository.findByTypeId(id);
+		return abaseRepository.findByTypeId(id);
 	}
-	
-	@Override
-	@Transactional
-	public List<K> findAll() {
-		return baseRepository.findAll();
-	}
-	
+		
 }

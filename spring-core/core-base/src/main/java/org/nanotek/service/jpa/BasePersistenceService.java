@@ -3,28 +3,29 @@ package org.nanotek.service.jpa;
 import java.util.List;
 import java.util.Optional;
 
-import org.nanotek.Base;
-import org.nanotek.beans.entity.SequenceLongBase;
-import org.nanotek.repository.jpa.SequenceLongBaseRepository;
+import org.nanotek.beans.entity.BrainzBaseEntity;
+import org.nanotek.repository.jpa.BrainzBaseRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>, R extends SequenceLongBaseRepository<R,B>>  {
+public class BasePersistenceService<B extends BrainzBaseEntity<B>>    {
 
-	protected R  baseRepository;
+	public BrainzBaseRepository<B>  baseRepository;
 	
 	public BasePersistenceService() {
 		super();
 	}
 
-	public BasePersistenceService(R baseRepository) {
+	public BasePersistenceService(BrainzBaseRepository<B>  baseRepository) {
 		super();
 		this.baseRepository = baseRepository;
 	}
 
 
+	
+	
 	public List<B> findAll() {
 		return baseRepository.findAll();
 	}
@@ -40,9 +41,6 @@ public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>,
 	}
 
 	
-	public  List<B> saveAll(Iterable<B> entities) {
-		return baseRepository.saveAll(entities);
-	}
 
 	
 	public void flush() {
@@ -65,22 +63,11 @@ public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>,
 	}
 
 	
-	public  List<B> findAll(Example<B> example) {
-		return baseRepository.findAll(example);
-	}
-
-	
-	public  List<B> findAll(Example<B> example, Sort sort) {
-		return findAll(example,sort);
-	}
 
 	public  B save(B entity) {
 		return baseRepository.save(entity);
 	}
 
-	public  Optional<B> findOne(Example<B> example) {
-		return baseRepository.findOne(example);
-	}
 
 	public Page<B> findAll(Pageable pageable) {
 		return baseRepository.findAll(pageable);
@@ -94,20 +81,9 @@ public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>,
 		return baseRepository.existsById(id);
 	}
 
-	public  Page<B> findAll(Example<B> example, Pageable pageable) {
-		return baseRepository.findAll(example, pageable);
-	}
 
 	public B getOne(Long id) {
 		return baseRepository.getOne(id);
-	}
-
-	public  long count(Example<B> example) {
-		return baseRepository.count(example);
-	}
-
-	public  boolean exists(Example<B> example) {
-		return baseRepository.exists(example);
 	}
 
 	public long count() {
@@ -129,7 +105,42 @@ public abstract class BasePersistenceService<B extends SequenceLongBase<B,Long>,
 	public void deleteAll() {
 		baseRepository.deleteAll();
 	}
-	
-	
 
+	
+	public <S extends B> List<S> saveAll(Iterable<S> entities) {
+		return baseRepository.saveAll(entities);
+	}
+
+	
+	public <S extends B> List<S> findAll(Example<S> example) {
+		return baseRepository.findAll(example);
+	}
+
+	
+	public <S extends B> List<S> findAll(Example<S> example, Sort sort) {
+		return baseRepository.findAll(example,sort);
+	}
+
+	
+	public <S extends B> Optional<S> findOne(Example<S> example) {
+		return baseRepository.findOne(example);
+	}
+
+	
+	public <S extends B> Page<S> findAll(Example<S> example, Pageable pageable) {
+		return baseRepository.findAll(example, pageable);
+	}
+
+	
+	public <S extends B> long count(Example<S> example) {
+		return baseRepository.count(example);
+	}
+
+	
+	public <S extends B> boolean exists(Example<S> example) {
+		return baseRepository.exists(example);
+	}
+
+
+	
 }

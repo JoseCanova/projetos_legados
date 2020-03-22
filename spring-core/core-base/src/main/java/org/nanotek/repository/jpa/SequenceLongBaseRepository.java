@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SequenceLongBaseRepository<K extends SequenceLongBaseRepository<K,B> , B extends SequenceLongBase<B,Long>> extends  JpaRepository<B, Long> {
+public interface SequenceLongBaseRepository<K extends SequenceLongBaseRepository<K,B> , 
+B extends SequenceLongBase<B,Long>> extends  JpaRepository<B, Long> {
 }

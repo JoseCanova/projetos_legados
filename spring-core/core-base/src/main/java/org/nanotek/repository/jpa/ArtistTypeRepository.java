@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArtistTypeRepository<K extends ArtistType<K>> extends 
 BaseTypeProjection<K> , 
-SequenceLongBaseRepository<ArtistTypeRepository<K>,K> , 
+BrainzBaseRepository<K>, 
 NameBaseProjection<K,String>{
 }

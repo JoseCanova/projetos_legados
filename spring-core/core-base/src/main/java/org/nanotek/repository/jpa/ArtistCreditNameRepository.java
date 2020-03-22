@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArtistCreditNameRepository<K extends ArtistCreditName<K>> 
-extends  SequenceLongBaseRepository<ArtistCreditNameRepository<K>,K>,
+extends  BrainzBaseRepository<K>,
 ArtistCreditNameIdProjection<K , Long>,
 NameBaseProjection<K,String>{
 	public List<K> findByArtistCreditId(Long id);

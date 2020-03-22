@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DescriptionBaseRepository<K extends DescriptionBase<K>> 
-extends BaseDescriptionBaseProjection<K,String>{
+extends BaseDescriptionBaseProjection<K,String> , BrainzBaseRepository<K>{
 }

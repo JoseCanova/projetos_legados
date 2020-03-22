@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("InstrumentDescription")
-public class InstrumentDescription<K extends InstrumentDescription<K>> extends DescriptionBase<K>{
+public class InstrumentDescription<K extends InstrumentDescription<K,I>,I extends Instrument<I>> extends DescriptionBase<K>{
 
 	private static final long serialVersionUID = 8312961172730412162L;
 
@@ -22,14 +22,6 @@ public class InstrumentDescription<K extends InstrumentDescription<K>> extends D
 		super(description);
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((instrument == null) ? 0 : instrument.hashCode());
-		return result;
-	}
-
 	public Instrument getInstrument() {
 		return instrument;
 	}

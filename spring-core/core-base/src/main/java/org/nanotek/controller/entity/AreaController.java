@@ -1,5 +1,6 @@
 package org.nanotek.controller.entity;
 
+import org.checkerframework.checker.units.qual.K;
 import org.nanotek.beans.entity.Area;
 import org.nanotek.controller.response.IterableResponseEntity;
 import org.nanotek.service.jpa.AreaJpaService;
@@ -14,18 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AreaController<K extends Area<K>>  implements  EntityNameBaseResponseController<K> {
 
 
-	@Autowired
-	private AreaJpaService baseService;
-	
 
-	@RequestMapping("/name/{name}")
-	public IterableResponseEntity<Iterable<Area>, Area> findByNameContainingIgnoreCase(@PathVariable(value="name") String  name) {
-		Iterable<Area> it = getBaseService().findByNameContainingIgnoreCase(name);
-		return IterableResponseEntity.fromIterable(it, HttpStatus.OK);
-	}
-
-	public AreaJpaService getBaseService() {
-		return baseService;
-	}
 	
 }

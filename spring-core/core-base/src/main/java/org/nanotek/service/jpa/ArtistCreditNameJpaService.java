@@ -5,25 +5,34 @@ import java.util.Optional;
 
 import org.nanotek.beans.entity.ArtistCreditName;
 import org.nanotek.repository.jpa.ArtistCreditNameRepository;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ArtistCreditNameJpaService<K extends ArtistCreditName<K>> extends BasePersistenceService<K,ArtistCreditNameRepository<K>> {
+public class ArtistCreditNameJpaService<K extends ArtistCreditName<K>> extends BasePersistenceService<K>
+implements InitializingBean{
 
-	public ArtistCreditNameJpaService(@Autowired  ArtistCreditNameRepository<K> baseRepository) {
-		super(baseRepository);
+	@Autowired  ArtistCreditNameRepository<K> abaseRepository;
+	
+	public ArtistCreditNameJpaService() {
+		super();
 	}
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		baseRepository = abaseRepository;
+	}
+	
 	@Transactional
 	public List<K> findByArtistCreditId(Long id){ 
-		return baseRepository.findByArtistCreditId(id);
+		return abaseRepository.findByArtistCreditId(id);
 	}
 	
 	@Transactional
 	public Optional<K> findByArtistCreditNameId(Long id){
-		return baseRepository.findByArtistCreditNameId(id);
+		return abaseRepository.findByArtistCreditNameId(id);
 	}
 
 }
