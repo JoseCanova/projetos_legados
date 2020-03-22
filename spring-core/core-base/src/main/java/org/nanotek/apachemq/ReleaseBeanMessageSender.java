@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReleaseBeanMessageSender<K extends ReleaseBean<K,?>, ID extends ReleaseBeanMessageSender<K,ID>> extends JmsMessageSender<K,ID> {
+public class ReleaseBeanMessageSender<K extends ReleaseBean<?,?>, ID extends ReleaseBeanMessageSender<K,?>> extends JmsMessageSender<K,ID> {
 
 	public ReleaseBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate , 
 									@Autowired @Qualifier("releaseQueue")Queue queue) { 

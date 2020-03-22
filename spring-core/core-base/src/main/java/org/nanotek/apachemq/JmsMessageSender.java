@@ -8,7 +8,7 @@ import org.nanotek.IdBase;
 import org.nanotek.Sender;
 import org.springframework.jms.core.JmsMessagingTemplate;
 
-public abstract class JmsMessageSender <K extends IdBase<K,?>, T extends Ticket<K,T>>  implements Sender<K> , Ticket<K, T>{
+public abstract class JmsMessageSender <K extends IdBase<?,?>, T extends Ticket<?,?>>  implements Sender<K> , Ticket<K,T>{
 
 	private static final long serialVersionUID = -5447828989965356991L;
 

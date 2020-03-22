@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TrackBeanMessageSender<K extends TrackBean<K,?>, ID extends TrackBeanMessageSender<K,ID>> extends JmsMessageSender<K , ID> {
+public class TrackBeanMessageSender<K extends TrackBean<?,?>, ID extends TrackBeanMessageSender<K,ID>> extends JmsMessageSender<K , ID> {
 
 	private static final long serialVersionUID = 7034507517032906130L;
 

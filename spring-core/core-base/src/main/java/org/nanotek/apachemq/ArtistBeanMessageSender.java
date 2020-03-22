@@ -9,7 +9,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArtistBeanMessageSender<K extends ArtistBean<K,?> , ID extends ArtistBeanMessageSender<K,ID> > extends BaseBeanSender<K,ID>  {
+public class ArtistBeanMessageSender<K extends ArtistBean<?,?> , ID extends ArtistBeanMessageSender<K,ID> > extends JmsMessageSender<K,ID>  {
 
 	public ArtistBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate ,
 										@Autowired @Qualifier("artistNameQueue")Queue queue) {

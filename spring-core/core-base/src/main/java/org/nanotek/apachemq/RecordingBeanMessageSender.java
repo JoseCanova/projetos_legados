@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecordingBeanMessageSender<K extends RecordingBean<K,?>, ID extends RecordingBeanMessageSender<K,ID>> extends JmsMessageSender<K,ID> {
+public class RecordingBeanMessageSender<K extends RecordingBean<?,?>, ID extends RecordingBeanMessageSender<?,?>> extends JmsMessageSender<K,ID> {
 
 	public RecordingBeanMessageSender(@Autowired JmsMessagingTemplate jmsTemplate , 
 										@Autowired @Qualifier("recordingQueue")Queue queue) { 
