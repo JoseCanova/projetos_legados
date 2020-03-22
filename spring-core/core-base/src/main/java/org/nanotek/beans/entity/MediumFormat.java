@@ -11,7 +11,8 @@ import org.nanotek.entities.MutableMediumFomatEntity;
 
 @Entity
 @Table(name="medium_format")
-public class MediumFormat<K extends MediumFormat<K>> extends SequenceLongBase<K,Long> implements 
+public class MediumFormat<K extends MediumFormat<K>> 
+extends BrainzBaseEntity<K> implements 
 																  BaseMediumFormatEntity<K>,
 																  MutableMediumFomatEntity<K>{
 

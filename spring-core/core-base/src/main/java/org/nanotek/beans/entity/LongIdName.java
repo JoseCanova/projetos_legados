@@ -10,7 +10,7 @@ import org.nanotek.entities.MutableNameEntity;
 
 @MappedSuperclass
 public class LongIdName<K extends LongIdName<K>> 
-extends SequenceLongBase<K,Long> 
+extends BrainzBaseEntity<K> 
 implements BaseLongIdNameEntity<K>,
 MutableNameEntity<String>{
 

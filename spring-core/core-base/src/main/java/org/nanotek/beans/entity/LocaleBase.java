@@ -24,7 +24,8 @@ import org.nanotek.entities.MutableLocaleEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class LocaleBase<K extends LocaleBase<K>> extends SequenceLongBase<K,Long> implements 
+public class LocaleBase<K extends LocaleBase<K>> 
+extends BrainzBaseEntity<K> implements 
 																		BaseLocaleBaseEntity<K>,
 																		MutableLocaleEntity<String> {
 

@@ -9,7 +9,7 @@ import org.nanotek.entities.BaseCommentBaseEntity;
 
 @MappedSuperclass
 public class CommentBase<K extends CommentBase<K>> 
-extends SequenceLongBase<K,Long>  
+extends BrainzBaseEntity<K>  
 implements BaseCommentBaseEntity<K>{
 
 	private static final long serialVersionUID = -3239637365262870832L;

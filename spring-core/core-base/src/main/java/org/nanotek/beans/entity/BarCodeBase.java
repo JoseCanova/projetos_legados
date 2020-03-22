@@ -28,7 +28,7 @@ indexes= {
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
 public abstract class BarCodeBase<K extends BarCodeBase<K>> 
-extends SequenceLongBase<K,Long> 
+extends BrainzBaseEntity<K> 
 implements BaseBarCodeBaseEntity<K>, MutableBarCodeEntity<String>{
 
 	private static final long serialVersionUID = 3988946185099694426L;

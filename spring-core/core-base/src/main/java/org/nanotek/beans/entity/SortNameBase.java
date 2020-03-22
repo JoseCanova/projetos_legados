@@ -25,7 +25,8 @@ import org.nanotek.entities.MutableSortNameEntity;
 	    name = "table_id",
 	    columnDefinition = "VARCHAR NOT NULL"
 	)
-public class SortNameBase<K extends SortNameBase<K>> extends SequenceLongBase<K,Long> implements 
+public class SortNameBase<K extends SortNameBase<K>> 
+extends BrainzBaseEntity<K> implements 
 BaseSortNameEntity<K>,
 MutableSortNameEntity<String>{
 
