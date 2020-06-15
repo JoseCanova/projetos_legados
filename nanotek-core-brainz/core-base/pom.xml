@@ -16,7 +16,7 @@
 		<org.junit.version>4.9</org.junit.version>
 		<appengine.target.version>1.9.7</appengine.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
+		<org.springframework.version>5.2.7.RELEASE</org.springframework.version>
 		<org.springframework.batch.version>3.0.7.RELEASE</org.springframework.batch.version>
 		<org.springframework.integration.version>4.3.2.RELEASE</org.springframework.integration.version>
 		<org.hibernate.version>5.2.2.Final</org.hibernate.version>
