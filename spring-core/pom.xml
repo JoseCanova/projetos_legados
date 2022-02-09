@@ -11,7 +11,7 @@
 		<org.springframework.version>4.3.3.RELEASE</org.springframework.version>
 		<org.springframework.batch.version>3.0.7.RELEASE</org.springframework.batch.version>
 		<org.springframework.integration.version>4.3.2.RELEASE</org.springframework.integration.version>
-		<org.hibernate.version>4.3.10.Final</org.hibernate.version>
+		<org.hibernate.version>5.4.24.Final</org.hibernate.version>
 		<org.lucene.version>4.8.0</org.lucene.version>
 		<org.datanucleus.version>4.0.0-release</org.datanucleus.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
